@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TempRiskTplCollectiveView">
+  <collections>
+    <collection name="TempRisk" type="Sistran.Core.Application.Temporary.Entities.TempRisk, 
+                Core.Temporary.Entities"></collection>
+    <collection name="CoTempRisk" type="Sistran.Core.Application.Temporary.Entities.CoTempRisk, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskVehicle" type="Sistran.Core.Application.Temporary.Entities.TempRiskVehicle, 
+                Core.Temporary.Entities"></collection>
+    <collection name="CoTempRiskVehicle" type="Sistran.Core.Application.Temporary.Entities.CoTempRiskVehicle, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskBeneficiary" type="Sistran.Core.Application.Temporary.Entities.TempRiskBeneficiary, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskClause" type="Sistran.Core.Application.Temporary.Entities.TempRiskClause, 
+                Core.Temporary.Entities"></collection>
+    <collection name="MassiveCollectiveDetail" type="Sistran.Core.Application.Massive.Entities.MassiveCollectiveDetail, 
+                Core.Massive.Entities"></collection>  
+    <collection name="TempRiskCoverDetail" type="Sistran.Core.Application.Temporary.Entities.TempRiskCoverDetail, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskDetail" type="Sistran.Core.Application.Temporary.Entities.TempRiskDetail, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskDetailAccessory" type="Sistran.Core.Application.Temporary.Entities.TempRiskDetailAccessory, 
+                Core.Temporary.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="TempRisk" destination="CoTempRisk" name="TempRiskCoTempRisk" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskVehicle" name="TempRiskTempRiskVehicle" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="CoTempRiskVehicle" name="TempRiskCoTempRiskVehicle" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskBeneficiary" name="TempRiskTempRiskBeneficiary" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskClause" name="TempRiskTempRiskClause" type="Left">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="MassiveCollectiveDetail" name="TempRiskMassiveCollectiveDetail" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="IdRisk"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskCoverDetail" name="TempRiskTempRiskCoverDetail" type="Left">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRiskCoverDetail" destination="TempRiskDetail" name="TempRiskCoverDetailTempRiskDetail" type="Left">
+      <property left="RiskDetailId" type="Equal" right="RiskDetailId"></property>
+    </relation>
+    <relation source="TempRiskCoverDetail" destination="TempRiskDetailAccessory" name="TempRiskCoverDetailTempRiskDetailAccessory" type="Left">
+      <property left="RiskDetailId" type="Equal" right="RiskDetailId"></property>
+    </relation>
+  </relations>
+</view>

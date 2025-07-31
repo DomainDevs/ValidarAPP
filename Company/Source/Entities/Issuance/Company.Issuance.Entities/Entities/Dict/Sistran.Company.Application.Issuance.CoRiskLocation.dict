@@ -1,0 +1,114 @@
+<map version="2.0" type="class" name="CoRiskLocation" namespace="Sistran.Company.Application.Issuance" file-version="1.0" description="RISK_LOCATION_ENTITY">
+  <properties>
+    <property name="RiskId" type="Integer" key="true" description="RISK_ID_PROPERTY" />
+    <property name="ConstructionCategoryCode" type="Integer" description="CONSTRUCTION_CATEGORY_CODE_PROPERTY" />
+    <property name="RiskDangerousnessCode" type="Integer" description="RISK_DANGEROUSNESS_CODE_PROPERTY" />
+    <property name="EmlPercentage" type="Decimal" precision="7" scale="4" description="EML_PERCENTAGE_PROPERTY" />
+    <property name="AddressTypeCode" type="Integer" description="ADDRESS_TYPE_CODE_PROPERTY" />
+    <property name="StreetTypeCode" type="Integer" description="STREET_TYPE_CODE_PROPERTY" />
+    <property name="CountryCode" type="Integer" description="COUNTRY_CODE_PROPERTY" />
+    <property name="StateCode" type="Integer" description="STATE_CODE_PROPERTY" />
+    <property name="Street" type="String" size="180" description="STREET_PROPERTY" />
+    <property name="CityCode" type="Integer" nullable="true" description="CITY_CODE_PROPERTY" />
+    <property name="HouseNumber" type="Integer" nullable="true" description="HOUSE_NUMBER_PROPERTY" />
+    <property name="Floor" type="String" size="3" nullable="true" description="FLOOR_PROPERTY" />
+    <property name="Apartment" type="String" size="5" nullable="true" description="APARTMENT_PROPERTY" />
+    <property name="ZipCode" type="String" size="10" nullable="true" description="ZIP_CODE_PROPERTY" />
+    <property name="Urbanization" type="String" size="60" nullable="true" description="URBANIZATION_PROPERTY" />
+    <property name="CrestaZoneCode" type="Integer" nullable="true" description="CRESTA_ZONE_CODE_PROPERTY" />
+    <property name="IsMain" type="Boolean" description="IS_MAIN_PROPERTY" />
+    <property name="EconomicActivityCode" type="Integer" nullable="true" description="ECONOMIC_ACTIVITY_CODE_PROPERTY" />
+    <property name="HousingTypeCode" type="Integer" nullable="true" description="HOUSING_TYPE_CODE_PROPERTY" />
+    <property name="OccupationTypeCode" type="Integer" nullable="true" description="OCCUPATION_TYPE_CODE_PROPERTY" />
+    <property name="CommRiskClassCode" type="Integer" nullable="true" description="COMM_RISK_CLASS_CODE_PROPERTY" />
+    <property name="RiskCommercialTypeCode" type="Integer" nullable="true" description="RISK_COMMERCIAL_TYPE_CODE_PROPERTY" />
+    <property name="RiskCommSubtypeCode" type="Integer" nullable="true" description="RISK_COMM_SUBTYPE_CODE_PROPERTY" />
+    <property name="AdditionalStreet" type="String" size="255" nullable="true" description="ADDITIONAL_STREET_PROPERTY" />
+    <property name="Block" type="String" size="20" nullable="true" description="BLOCK_PROPERTY" />
+    <property name="LocationCode" type="Integer" nullable="true" description="LOCATION_CODE_PROPERTY" />
+    <property name="DeclarativePeriodCode" type="Integer" nullable="true" description="DECLARATIVE_PERIOD_CODE_PROPERTY" />
+    <property name="PremiumAdjustmentPeriodCode" type="Integer" nullable="true" description="PREMIUM_ADJUSTMENT_PERIOD_CODE_PROPERTY" />
+    <property name="RiskTypeCode" type="Integer" nullable="true" description="RISK_TYPE_CODE_PROPERTY" />
+    <property name="RiskAge" type="Integer" nullable="true" description="RISK_AGE_PROPERTY" />
+    <property name="IsRetention" type="Boolean" nullable="true" description="IS_RETENTION_PROPERTY" />
+    <property name="InspectionRecomendation" type="Boolean" nullable="true" description="INSPECTION_RECOMENDATION_PROPERTY" />
+    <property name="InsuranceModeCode" type="Integer" nullable="true" description="INSURANCE_MODE_CODE_PROPERTY" />
+    <property name="BuildYear" type="Integer" nullable="true" description="BUILD_YEAR_PROPERTY" />
+    <property name="LevelZone" type="Integer" nullable="true" description="LEVEL_ZONE_PROPERTY" />
+    <property name="CurrentPrivateZone" type="Integer" nullable="true" description="CURRENT_PRIVATE_ZONE_PROPERTY" />
+    <property name="IsResidential" type="Boolean" nullable="true" description="IS_RESIDENTIAL_PROPERTY" />
+    <property name="IsOutCommunity" type="Boolean" nullable="true" description="IS_OUT_COMMUNITY_PROPERTY" />
+    <property name="District" type="Integer" nullable="true" description="DISTRICT_PROPERTY" />
+    <property name="RiskTypeEqCode" type="Decimal" precision="2" scale="5" nullable="true" description="RISK_TYPE_EQ_CODE_PROPERTY" />
+    <property name="IndemnificationLimit" type="Decimal" precision="18" scale="2" nullable="true" description="INDEMNIFICATION_LIMIT_PROPERTY" />
+    <property name="ConstructionYearEarthquake" type="Decimal" precision="4" scale="5" nullable="true" description="CONSTRUCTION_YEAR_EARTHQUAKE_PROPERTY" />
+    <property name="LongitudeEarthquake" type="Decimal" precision="15" scale="12" nullable="true" description="LONGITUDE_EARTHQUAKE_PROPERTY" />
+    <property name="LatitudeEarthquake" type="Decimal" precision="15" scale="12" nullable="true" description="LATITUDE_EARTHQUAKE_PROPERTY" />
+    <property name="FloorNumberEarthquake" type="Decimal" precision="3" scale="5" nullable="true" description="FLOOR_NUMBER_EARTHQUAKE_PROPERTY" />
+    <property name="RiskUseCode" type="Decimal" precision="2" scale="5" nullable="true" description="RISK_USE_CODE_PROPERTY" />
+    <property name="StructureCode" type="Decimal" precision="2" scale="5" nullable="true" description="STRUCTURE_CODE_PROPERTY" />
+    <property name="IrregularCode" type="Decimal" precision="2" scale="5" nullable="true" description="IRREGULAR_CODE_PROPERTY" />
+    <property name="IrregularHeightCode" type="Decimal" precision="2" scale="5" nullable="true" description="IRREGULAR_HEIGHT_CODE_PROPERTY" />
+    <property name="PreviousDamageCode" type="Decimal" precision="2" scale="5" nullable="true" description="PREVIOUS_DAMAGE_CODE_PROPERTY" />
+    <property name="RepairedCode" type="Decimal" precision="2" scale="5" nullable="true" description="REPAIRED_CODE_PROPERTY" />
+    <property name="ReinforcedStructureTypeCode" type="Decimal" precision="2" scale="5" nullable="true" description="REINFORCED_STRUCTURE_TYPE_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="RISK_LOCATION" schema="ISS" alias="RISK_LOCATION" update="true">
+      <columns>
+        <column name="RISK_ID" type="Int32" property="RiskId" key="true" />
+        <column name="CONSTRUCTION_CATEGORY_CD" type="Byte" property="ConstructionCategoryCode" allowNull="false" />
+        <column name="RISK_DANGEROUSNESS_CD" type="Byte" property="RiskDangerousnessCode" allowNull="false" />
+        <column name="EML_PCT" type="Decimal" property="EmlPercentage" allowNull="false" size="19" precision="7" scale="4" />
+        <column name="ADDRESS_TYPE_CD" type="Byte" property="AddressTypeCode" allowNull="false" />
+        <column name="STREET_TYPE_CD" type="Byte" property="StreetTypeCode" allowNull="false" />
+        <column name="COUNTRY_CD" type="Int16" property="CountryCode" allowNull="false" />
+        <column name="STATE_CD" type="Int16" property="StateCode" allowNull="false" />
+        <column name="STREET" type="String" property="Street" allowNull="false" size="180" />
+        <column name="CITY_CD" type="Int16" property="CityCode" />
+        <column name="HOUSE_NUMBER" type="Int32" property="HouseNumber" />
+        <column name="FLOOR" type="String" property="Floor" size="3" />
+        <column name="APARTMENT" type="String" property="Apartment" size="5" />
+        <column name="ZIP_CODE" type="String" property="ZipCode" size="10" />
+        <column name="URBANIZATION" type="String" property="Urbanization" size="60" />
+        <column name="CRESTA_ZONE_CD" type="Byte" property="CrestaZoneCode" />
+        <column name="IS_MAIN" type="Boolean" property="IsMain" allowNull="false" />
+        <column name="ECONOMIC_ACTIVITY_CD" type="Int16" property="EconomicActivityCode" />
+        <column name="HOUSING_TYPE_CD" type="Byte" property="HousingTypeCode" />
+        <column name="OCCUPATION_TYPE_CD" type="Byte" property="OccupationTypeCode" />
+        <column name="COMM_RISK_CLASS_CD" type="Int32" property="CommRiskClassCode" />
+        <column name="RISK_COMMERCIAL_TYPE_CD" type="Byte" property="RiskCommercialTypeCode" />
+        <column name="RISK_COMM_SUBTYPE_CD" type="Byte" property="RiskCommSubtypeCode" />
+        <column name="ADDITIONAL_STREET" type="String" property="AdditionalStreet" size="255" />
+        <column name="BLOCK" type="String" property="Block" size="20" />
+        <column name="LOCATION_CD" type="Byte" property="LocationCode" />
+        <column name="DECLARATIVE_PERIOD_CD" type="Byte" property="DeclarativePeriodCode" />
+        <column name="PREMIUM_ADJUSTMENT_PERIOD_CD" type="Byte" property="PremiumAdjustmentPeriodCode" />
+        <column name="RISK_TYPE_CD" type="Int32" property="RiskTypeCode" />
+        <column name="RISK_AGE" type="Int16" property="RiskAge" />
+        <column name="IS_RETENTION" type="Boolean" property="IsRetention" />
+        <column name="INSPECTION_RECOMENDATION" type="Boolean" property="InspectionRecomendation" />
+        <column name="INSURANCE_MODE_CD" type="Byte" property="InsuranceModeCode" />
+        <column name="BUILD_YEAR" type="Int32" property="BuildYear" />
+        <column name="LEVEL_ZONE" type="Int32" property="LevelZone" />
+        <column name="CURRENT_PRIVATE_ZONE" type="Int32" property="CurrentPrivateZone" />
+        <column name="IS_RESIDENTIAL" type="Boolean" property="IsResidential" />
+        <column name="IS_OUT_COMMUNITY" type="Boolean" property="IsOutCommunity" />
+        <column name="DISTRICT" type="Int32" property="District" />
+        <column name="RISK_TYPE_EQ_CD" type="Decimal" property="RiskTypeEqCode" size="19" precision="2" />
+        <column name="INDEMNIFICATION_LIMIT" type="Decimal" property="IndemnificationLimit" size="19" precision="18" scale="2" />
+        <column name="CONSTRUCTION_YEAR_EARTHQUAKE" type="Decimal" property="ConstructionYearEarthquake" size="19" precision="4" />
+        <column name="LONGITUDE_EARTHQUAKE" type="Decimal" property="LongitudeEarthquake" size="19" precision="15" scale="12" />
+        <column name="LATITUDE_EARTHQUAKE" type="Decimal" property="LatitudeEarthquake" size="19" precision="15" scale="12" />
+        <column name="FLOOR_NUMBER_EARTHQUAKE" type="Decimal" property="FloorNumberEarthquake" size="19" precision="3" />
+        <column name="RISK_USE_CD" type="Decimal" property="RiskUseCode" size="19" precision="2" />
+        <column name="STRUCTURE_CD" type="Decimal" property="StructureCode" size="19" precision="2" />
+        <column name="IRREGULAR_CD" type="Decimal" property="IrregularCode" size="19" precision="2" />
+        <column name="IRREGULAR_HEIGHT_CD" type="Decimal" property="IrregularHeightCode" size="19" precision="2" />
+        <column name="PREVIOUS_DAMAGE_CD" type="Decimal" property="PreviousDamageCode" size="19" precision="2" />
+        <column name="REPAIRED_CD" type="Decimal" property="RepairedCode" size="19" precision="2" />
+        <column name="REINFORCED_STRUCTURE_TYPE_CD" type="Decimal" property="ReinforcedStructureTypeCode" size="19" precision="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

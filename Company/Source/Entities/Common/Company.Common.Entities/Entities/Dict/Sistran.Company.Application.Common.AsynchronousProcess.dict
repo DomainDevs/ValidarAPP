@@ -1,0 +1,38 @@
+<map version="2.0" type="class" name="AsynchronousProcess" namespace="Sistran.Company.Application.Common" file-version="1.0" description="ASYNCHRONOUS_PROCESS_ENTITY">
+  <properties>
+    <property name="ProcessId" type="Integer" key="true" description="PROCESS_ID_PROPERTY" autonumber="id" />
+    <property name="Description" type="String" size="255" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="BeginDate" type="DateTime" nullable="true" description="BEGIN_DATE_PROPERTY" />
+    <property name="EndDate" type="DateTime" nullable="true" description="END_DATE_PROPERTY" />
+    <property name="UserId" type="Integer" nullable="true" description="USER_ID_PROPERTY" />
+    <property name="HasError" type="Boolean" nullable="true" description="HAS_ERROR_PROPERTY" />
+    <property name="ErrorDescription" type="String" size="1000" nullable="true" description="ERROR_DESCRIPTION_PROPERTY" />
+    <!--<property name="Active" type="Boolean" nullable="true" description="ACTIVE_PROPERTY" />
+    <property name="StatusId" type="Integer" nullable="true" description="STATUS_ID_PROPERTY" />-->
+  </properties>
+  <tables>
+    <table name="ASYNCHRONOUS_PROCESS" schema="COMM" alias="ASYNCHRONOUS_PROCESS" update="true">
+      <columns>
+        <column name="PROCESS_ID" type="Int32" property="ProcessId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" size="255" />
+        <column name="BEGIN_DATE" type="DateTime" property="BeginDate" />
+        <column name="END_DATE" type="DateTime" property="EndDate" />
+        <column name="USER_ID" type="Int32" property="UserId" />
+        <column name="HAS_ERROR" type="Boolean" property="HasError" />
+        <column name="ERROR_DESCRIPTION" type="String" property="ErrorDescription" size="1000" />
+        <!--<column name="ACTIVE" type="Boolean" property="Active" />
+        <column name="STATUS_ID" type="Int32" property="StatusId" />-->
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="2131" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

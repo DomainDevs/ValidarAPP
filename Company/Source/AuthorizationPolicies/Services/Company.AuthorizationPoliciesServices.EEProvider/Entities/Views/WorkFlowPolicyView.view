@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="WorkFlowPolicyView">
+  <collections>
+    <collection name="CoEventAuthorization" type="Sistran.Core.Application.Events.Entities.CoEventAuthorization, 
+                Core.Events.Entities">
+    </collection>
+    <!--<collection name="UniqueUsers" type="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers,
+                Core.UniqueUser.Entities">
+    </collection>-->
+    <collection name="EndorsementWorkFlow" type="Sistran.Core.Application.Issuance.Entities.EndorsementWorkFlow, 
+                Core.Issuance.Entities">
+    </collection>
+    <!--<collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, 
+                Core.Issuance.Entities">
+    </collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities">
+    </collection>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, 
+                Core.Common.Entities">
+    </collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                Core.Common.Entities">
+    </collection>-->
+  </collections>
+  <relations>
+    <relation source="CoEventAuthorization" destination="EndorsementWorkFlow" name="CoEventAuthorizationEndorsementWorkFlow" type="Inner">
+      <property left="Operation2Id" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <!--<relation source="CoEventAuthorization" destination="UniqueUser" name="CoEventAuthorizationUniqueUsers" type="Inner">
+      <property left="EventUserId" type="Equal" right="UserId"></property>
+    </relation>
+    <relation source="EndorsementWorkFlow" destination="Endorsement" name="EndorsementWorkFlowEndorsement" type="Inner">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="EndorsementWorkFlow" destination="Policy" name="EndorsementWorkFlowPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Policy" destination="Branch" name="PolicyBranch" type="Inner">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="Policy" destination="Prefix" name="PolicyPrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>-->
+  </relations>
+</view>

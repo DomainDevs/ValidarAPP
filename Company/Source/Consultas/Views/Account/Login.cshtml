@@ -1,0 +1,132 @@
+﻿@model Sistran.Query.Service.Models.LoginModel
+
+@{
+    ViewBag.Title = "Ingresar";
+}
+
+@section Styles{
+<style>
+    body {
+        height: 100%;
+        background: url("@Url.Content("~/Images/background.png")");
+        background-size:cover;
+    }
+
+    .field-validation-error {
+  color: #fff;
+  font-weight: 300;
+  font-size: 85%;
+  background-color: #ff0000;
+  padding: 3px 12px;
+  width: 100%;
+  display: inline-block;
+}
+
+.validation-summary-errors  ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+
+    .login-background {
+        width: 100%;
+        position: absolute;
+    }
+
+    .login-wrapper {
+        width: 325px;
+        height: 300px;
+        display: block;
+        text-align: center;
+        margin: 0 auto;
+        position: absolute;
+        top: 7%;
+        left: 50%;
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+        opacity: 0.9;
+    }
+
+        .login-wrapper img {
+            padding: 33px 0 20px;
+            margin: 0 auto;
+        }
+
+        .login-wrapper .form-wrapper {
+            background: #f6f6f6;
+            border-radius: 2px;
+            padding: 30px 20px;
+            box-shadow: 2px 2px 30px -1px rgba(0, 0, 0, 0.2);
+        }
+
+            .login-wrapper .form-wrapper form {
+                text-align: left;
+            }
+
+        .login-wrapper .form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-wrapper input {
+            height: 36px;
+            border-color: #dbdce0;
+        }
+
+        .login-wrapper .btn-main {
+            width: 100%;
+            line-height: 25px;
+        }
+    .btn-default{
+    heigth:300px;
+    }
+    </style>    
+    
+}
+    <div class="login-wrapper">
+        <img src="http://launcher.azurewebsites.net/Lib/framework/build/layout/default/images/logo.png" alt="" />
+        <div class="form-wrapper">
+            @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+            {
+                @Html.ValidationSummary(true);
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "Usuario", @class="form-control" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div><!-- /form-group -->
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "Contraseña", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div><!-- /form-group -->
+                <input type="submit" class="btn btn-default btn-main" value="INGRESAR">
+            }
+        </div>
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        (function ($) {
+            $.fn.alertDismiss = function (settings) {
+                var config = {
+                };
+                if (settings) { $.extend(config, settings); }
+                return this.each(function () {
+                    $(this).addClass('alert alert-warning');
+                    $(this).prepend('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>');
+                });
+            };
+        })(jQuery);
+
+        $(document).ready(function () {
+            $('.validation-summary-errors').each(function () {
+                $(this).alertDismiss();
+            });
+        });
+    </script>
+}

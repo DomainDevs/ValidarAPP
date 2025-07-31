@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="AuthorizationPersonRiskListView">
+  <collections>
+    <collection name="CoEventAuthorization" type="Sistran.Core.Application.Events.Entities.CoEventAuthorization, 
+                Core.Events.Entities">
+    </collection>
+    <collection name="CoEventCompany" type="Sistran.Core.Application.Events.Entities.CoEventCompany, 
+                Core.Events.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="CoEventCompany" destination="CoEventAuthorization" name="CoGroupEventAuthorization" type="Inner">
+      <property left="GroupEventId" type="Equal" right="GroupEventId"></property>
+    </relation>
+
+    <relation source="CoEventCompany" destination="CoEventAuthorization" name="CoEventAuthorization" type="Inner">
+      <property left="EventId" type="Equal" right="EventId"></property>
+    </relation>
+    
+  </relations>
+</view>

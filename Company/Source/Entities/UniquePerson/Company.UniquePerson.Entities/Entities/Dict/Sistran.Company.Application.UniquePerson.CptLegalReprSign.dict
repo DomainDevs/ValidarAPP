@@ -1,0 +1,23 @@
+<map version="2.0" type="class" name="CptLegalReprSign" namespace="Sistran.Company.Application.UniquePerson" file-version="1.0" description="CPT_LEGAL_REPR_SIGN_ENTITY">
+  <properties>
+    <property name="CiaCode" type="Decimal" precision="5" scale="1" key="true" description="CIA_CODE_PROPERTY" />
+    <property name="BranchTypeCode" type="Decimal" precision="5" scale="2" key="true" description="BRANCH_TYPE_CODE_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" key="true" description="CURRENT_FROM_PROPERTY" />
+    <property name="LegalRepresentative" type="String" size="200" description="LEGAL_REPRESENTATIVE_PROPERTY" />
+    <property name="PathSignatureImg" type="String" size="200" description="PATH_SIGNATURE_IMG_PROPERTY" />
+    <property name="SignatureImg" type="Binary" size="2147483647" description="SIGNATURE_IMG_PROPERTY" />
+    <property name="UserId" type="String" size="100" nullable="true" description="USER_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CPT_LEGAL_REPR_SIGN" schema="COMM" alias="CPT_LEGAL_REPR_SIGN" update="true">
+      <columns><column name="CIA_CD" type="Decimal" property="CiaCode" key="true" precision="5" scale="1" />
+      <column name="BRANCH_TYPE_CD" type="Decimal" property="BranchTypeCode" key="true" size="4" precision="5" scale="2" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" key="true" />
+        <column name="LEGAL_REPRESENTATIVE" type="String" property="LegalRepresentative" allowNull="false" size="200" />
+        <column name="PATH_SIGNATURE_IMG" type="String" property="PathSignatureImg" allowNull="false" size="200" />
+        <column name="SIGNATURE_IMG" type="String" property="SignatureImg" allowNull="false" size="2147483647" />
+        <column name="USER_ID" type="String" property="UserId" size="100" />
+      </columns>
+    </table>
+  </tables>
+</map>

@@ -1,0 +1,38 @@
+<map version="2.0" type="class" name="AutomaticQuota" namespace="Sistran.Company.Application.AutomaticQuota.Entities" file-version="1.0" description="AUTOMATIC_QUOTA_ENTITY">
+  <properties>
+    <property name="AutomaticQuotaCode" type="Integer" key="true" description="AUTOMATIC_QUOTA_CODE_PROPERTY" autonumber="Identity"/>
+    <property name="IndividualId" type="Integer" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="CustomerTypeCode" type="Integer" description="CUSTOMER_TYPE_CODE_PROPERTY" />
+    <property name="SuggestedQuota" type="Decimal" precision="18" scale="2" description="SUGGESTED_QUOTA_PROPERTY" />
+    <property name="QuotaReconsideration" type="Decimal" precision="18" scale="2" nullable="true" description="QUOTA_RECONSIDERATION_PROPERTY" />
+    <property name="LegalizedQuota" type="Decimal" precision="18" scale="2" description="LEGALIZED_QUOTA_PROPERTY" />
+    <property name="CurrentQuota" type="Decimal" precision="18" scale="2" description="CURRENT_QUOTA_PROPERTY" />
+    <property name="CurrentCluster" type="Decimal" precision="18" scale="2" description="CURRENT_CLUSTER_PROPERTY" />
+    <property name="QuotaDate" type="DateTime" description="QUOTA_DATE_PROPERTY" />
+    <property name="RequestedBy" type="Integer" description="REQUESTED_BY_PROPERTY" />
+    <property name="PreparedBy" type="Integer" description="PREPARED_BY_PROPERTY" />
+    <property name="GuaranteeTypeCode" type="Integer" description="GUARANTEE_TYPE_CODE_PROPERTY" />
+    <property name="GuaranteeStatusCode" type="Integer" nullable="true" description="GUARANTEE_STATUS_CODE_PROPERTY" />
+    <property name="Observation" type="String" size="2147483647" description="OBSERVATION_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="AUTOMATIC_QUOTA" schema="AQ" alias="AUTOMATIC_QUOTA" update="true">
+      <columns>
+        <column name="AUTOMATIC_QUOTA_CD" type="Int32" property="AutomaticQuotaCode" key="true" identity="true"/>
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" allowNull="false" />
+        <column name="CUSTOMER_TYPE_CD" type="Int32" property="CustomerTypeCode" allowNull="false" />
+        <column name="SUGGESTED_QUOTA" type="Decimal" property="SuggestedQuota" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="QUOTA_RECONSIDERATION" type="Decimal" property="QuotaReconsideration" size="19" precision="18" scale="2" />
+        <column name="LEGALIZED_QUOTA" type="Decimal" property="LegalizedQuota" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="CURRENT_QUOTA" type="Decimal" property="CurrentQuota" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="CURRENT_CLUSTER" type="Decimal" property="CurrentCluster" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="QUOTA_DATE" type="DateTime" property="QuotaDate" allowNull="false" />
+        <column name="REQUESTED_BY" type="Int32" property="RequestedBy" allowNull="false" />
+        <column name="PREPARED_BY" type="Int32" property="PreparedBy" allowNull="false" />
+        <column name="GUARANTEE_TYPE_CD" type="Int32" property="GuaranteeTypeCode" allowNull="false" />
+        <column name="GUARANTEE_STATUS_CD" type="Int32" property="GuaranteeStatusCode" />
+        <column name="OBSERVATION" type="String" property="Observation" allowNull="false" size="2147483647" />
+      </columns>
+    </table>
+  </tables>
+</map>

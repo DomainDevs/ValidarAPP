@@ -1,0 +1,42 @@
+<map version="2.0" type="class" name="MinPremiumRelation" namespace="Sistran.Company.Application.Common" file-version="1.0" description="MIN_PREMIUM_RELATION_ENTITY">
+  <properties>
+    <property name="EndoTypeCode" type="Integer" description="ENDO_TYPE_CODE_PROPERTY" />
+    <property name="Key2" type="Decimal" nullable="true" description="KEY2_PROPERTY" />
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="SubsMinPremium" type="Decimal" precision="18" scale="2" nullable="true" description="SUBS_MIN_PREMIUM_PROPERTY" />
+    <property name="MinPremiumRelId" type="Integer" key="true" description="MIN_PREMIUM_REL_ID_PROPERTY" autonumber="id" />
+    <property name="BranchCode" type="Integer" nullable="true" description="BRANCH_CODE_PROPERTY" />
+    <property name="RiskMinPremium" type="Decimal" precision="18" scale="2" nullable="true" description="RISK_MIN_PREMIUM_PROPERTY" />
+    <property name="Key1" type="Decimal" nullable="true" description="KEY1_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+    <property name="CalculateProrate" type="Boolean" description="CALCULATE_PRORATE_PROPERTY" nullable="true"/>
+    <property name="ValidityType" type="Integer" description="VALIDITY_TYPE_CD_PROPERTY" nullable="true"/>
+  </properties>
+  <tables>
+    <table name="MIN_PREMIUM_RELATION" schema="COMM" alias="MIN_PREMIUM_RELATION" update="true">
+      <columns>
+        <column name="ENDO_TYPE_CD" type="Decimal" property="EndoTypeCode" allowNull="false" />
+        <column name="BRANCH_CD" type="Decimal" property="BranchCode" />
+        <column name="MIN_PREMIUM_REL_ID" type="Decimal" property="MinPremiumRelId" key="true" />
+        <column name="KEY1" type="Decimal" property="Key1" />
+        <column name="PREFIX_CD" type="Decimal" property="PrefixCode" allowNull="false" />
+        <column name="KEY2" type="Decimal" property="Key2" />
+        <column name="RISK_MIN_PREMIUM" type="Decimal" property="RiskMinPremium" />
+        <column name="SUBS_MIN_PREMIUM" type="Decimal" property="SubsMinPremium" />
+        <column name="CURRENCY_CD" type="Decimal" property="CurrencyCode" allowNull="false" />
+        <column name="CALCULATE_PRORATE" type="Boolean" property="CalculateProrate" allowNull="true" />
+        <column name="VALIDITY_TYPE_CD" type="Decimal" property="ValidityType" allowNull="true" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id"  table="parameter" column="number_parameter" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="2113" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

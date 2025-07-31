@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="CoInfringement" namespace="Sistran.Company.Application.Common" file-version="1.0" description="CO_INFRINGEMENT_ENTITY">
+  <properties>
+    <property name="InfringementCode" type="Integer" key="true" autonumber="Identity" description="INFRINGEMENT_CODE_PROPERTY" nullable="false" />
+    <property name="InfringementNewCode" type="String" size="10" description="INFRINGEMENT_NEW_CODE_PROPERTY" />
+    <property name="InfringementPreviousCode" type="Integer" nullable="true" description="INFRINGEMENT_PREVIOUS_CODE_PROPERTY" />
+    <property name="Description" type="String" size="1000" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="GroupInfringementCode" type="Integer" nullable="true" description="GROUP_INFRINGEMENT_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CO_INFRINGEMENT" schema="COMM" alias="CO_INFRINGEMENT" update="true">
+      <columns>
+        <column name="INFRINGEMENT_CD" type="Int32" property="InfringementCode" key="true" allownull="false" identity="true"/>
+        <column name="INFRINGEMENT_NEW_CD" type="String" property="InfringementNewCode" allowNull="false" size="4" />
+        <column name="INFRINGEMENT_PREVIOUS_CD" type="Int32" property="InfringementPreviousCode" />
+        <column name="DESCRIPTION" type="String" property="Description" size="1000" />
+        <column name="GROUP_INFRINGEMENT_CD" type="Int32" property="GroupInfringementCode" />
+      </columns>
+    </table>
+  </tables>
+</map>

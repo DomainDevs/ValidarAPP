@@ -1,0 +1,34 @@
+<map version="2.0" type="class" name="CoRequest" namespace="Sistran.Company.Application.Request" file-version="1.0" description="CO_REQUEST_ENTITY">
+  <properties>
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="RequestId" type="Integer" key="true" autonumber="id" description="REQUEST_ID_PROPERTY" />
+    <property name="BillingGroupCode" type="Integer" description="BILLING_GROUP_CODE_PROPERTY" />
+    <property name="RequestDate" type="DateTime" description="REQUEST_DATE_PROPERTY" />
+    <property name="Description" type="String" size="120" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="BusinessTypeCode" type="Integer" nullable="true" description="BUSINESS_TYPE_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CO_REQUEST" schema="REQ" alias="CO_REQUEST" update="true">
+      <columns>
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" allowNull="false" />
+        <column name="REQUEST_ID" type="Int32" property="RequestId" key="true" />
+        <column name="REQUEST_DATE" type="DateTime" property="RequestDate" allowNull="false" />
+        <column name="BILLING_GROUP_CD" type="Int32" property="BillingGroupCode" allowNull="false" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" allowNull="false" />
+        <column name="DESCRIPTION" type="String" property="Description" size="120" />
+        <column name="BUSINESS_TYPE_CD" type="Byte" property="BusinessTypeCode" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" table="co_parameter" column="number_parameter" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="1023" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

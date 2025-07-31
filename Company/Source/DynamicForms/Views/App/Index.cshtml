@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Dynamic Forms";
+    Layout = "~/Views/Shared/_LayoutForms.cshtml";
+}
+
+<div id="app"></div>
+
+@section Scripts {
+<script>
+        var dynamicFormManager = new DynamicFormManager({
+            element: document.getElementById('app'),
+            endpoint: "@Url.Content("~/api/DynamicForms")" /*'http://localhost:53908/graphql/'*/
+        });
+</script>
+}
+

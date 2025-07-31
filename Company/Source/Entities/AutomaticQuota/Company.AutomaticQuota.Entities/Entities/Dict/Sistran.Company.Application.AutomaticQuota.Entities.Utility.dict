@@ -1,0 +1,24 @@
+<map version="2.0" type="class" name="Utility" namespace="Sistran.Company.Application.AutomaticQuota.Entities" file-version="1.0" description="UTILITY_ENTITY">
+  <properties>
+    <property name="UtilityCode" type="Integer" key="true" description="UTILITY_CODE_PROPERTY" autonumber="Identity"/>
+    <property name="AutomaticQuotaCode" type="Integer" description="AUTOMATIC_QUOTA_CODE_PROPERTY"/>
+    <property name="UtilityDetailsCode" type="Integer" description="UTILITY_DETAILS_CODE_PROPERTY" />
+    <property name="StartValue" type="Decimal" precision="18" scale="2" description="START_VALUE_PROPERTY" />
+    <property name="EndValue" type="Decimal" precision="18" scale="2" description="END_VALUE_PROPERTY" />
+    <property name="AbsoluteValue" type="Decimal" precision="18" scale="2" description="ABSOLUTE_VALUE_PROPERTY" />
+    <property name="RelativeValue" type="Decimal" precision="18" scale="2" description="RELATIVE_VALUE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="UTILITY" schema="AQ" alias="UTILITY" update="true">
+      <columns>
+        <column name="UTILITY_CD" type="Int32" property="UtilityCode" key="true" identity="true"/>
+        <column name="AUTOMATIC_QUOTA_CD" type="Int32" property="AutomaticQuotaCode"/>
+        <column name="UTILITY_DETAILS_CD" type="Int32" property="UtilityDetailsCode" allowNull="false" />
+        <column name="START_VALUE" type="Decimal" property="StartValue" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="END_VALUE" type="Decimal" property="EndValue" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="ABSOLUTE_VALUE" type="Decimal" property="AbsoluteValue" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="RELATIVE_VALUE" type="Decimal" property="RelativeValue" allowNull="false" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

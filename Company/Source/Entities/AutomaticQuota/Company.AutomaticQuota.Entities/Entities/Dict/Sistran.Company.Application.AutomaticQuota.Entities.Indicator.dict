@@ -1,0 +1,23 @@
+<map version="2.0" type="class" name="Indicator" namespace="Sistran.Company.Application.AutomaticQuota" file-version="1.0" description="INDICATOR_ENTITY">
+  <properties>
+    <property name="IndicatorCode" type="Integer" key="true" description="INDICATOR_CODE_PROPERTY" />
+    <property name="IndicatorConceptCode" type="Integer" description="INDICATOR_CONCEPT_CODE_PROPERTY" />
+    <property name="AutomaticQuotaCode" type="Integer" description="AUTOMATIC_QUOTA_CODE_PROPERTY" />
+    <property name="StartValue" type="Decimal" precision="18" scale="2" description="START_VALUE_PROPERTY" />
+    <property name="EndValue" type="Decimal" precision="18" scale="2" description="END_VALUE_PROPERTY" />
+    <property name="Observation" type="String" size="2147483647" nullable="true" description="OBSERVATION_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="INDICATOR" schema="AQ" alias="INDICATOR" update="true">
+      <columns>
+        <column name="INDICATOR_CD" type="Int32" property="IndicatorCode" key="true" />
+        <column name="INDICATOR_CONCEPT_CD" type="Int32" property="IndicatorConceptCode" allowNull="false" />
+        <column name="AUTOMATIC_QUOTA_CD" type="Int32" property="AutomaticQuotaCode" allowNull="false" />
+        <column name="START_VALUE" type="Decimal" property="StartValue" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="END_VALUE" type="Decimal" property="EndValue" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="OBSERVATION" type="String" property="Observation" size="2147483647" />
+      </columns>
+    </table>
+  </tables>
+</map>
+
