@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CoRequestCoinsuranceAssigned">
+  <collections>
+    <collection name="CoRequestCoinsuranceAssigned" type="Sistran.Core.Application.Request.Entities.CoRequestCoinsuranceAssigned, 
+                Core.Request.Entities"></collection>
+    <collection name="CoInsuranceCompany" type="Sistran.Core.Application.Common.Entities.CoInsuranceCompany, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="CoRequestCoinsuranceAssigned" destination="CoInsuranceCompany" name="CoRequestCoInsuranceCompany" type="Inner">
+      <property left="InsuranceCompanyId" type="Equal" right="InsuranceCompanyId"></property>
+    </relation>
+  </relations>
+</view>

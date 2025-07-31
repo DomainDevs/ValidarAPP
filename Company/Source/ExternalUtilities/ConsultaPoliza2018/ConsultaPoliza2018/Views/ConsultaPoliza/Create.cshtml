@@ -1,0 +1,134 @@
+﻿@model ConsultaPoliza2018.Models.Entities.SearchModel
+    @using ConsultaPoliza2018.Models.Entities;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <title>Create</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Comparacion de Poliza </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.DOCUMENT_NUM, htmlAttributes: new { @class = "control-label" })
+                                <div class="">
+                                    @Html.EditorFor(model => model.DOCUMENT_NUM, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DOCUMENT_NUM, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.DOCUMENT_NUM_CompareTo, htmlAttributes: new { @class = "control-label" })
+                                <div class="">
+                                    @Html.EditorFor(model => model.DOCUMENT_NUM_CompareTo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DOCUMENT_NUM_CompareTo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.BRANCH_CD, htmlAttributes: new { @class = "control-label" })
+                                <div class="">
+                                    @Html.EditorFor(model => model.BRANCH_CD, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.BRANCH_CD, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                                
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.PREFIX_CD, htmlAttributes: new { @class = "control-label" })
+                                <div class="">
+                                    @Html.EditorFor(model => model.PREFIX_CD, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PREFIX_CD, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+        if (Model != null)
+        {
+
+            if (Model.Itero)
+            {
+
+                CustomResult listaOne = ViewBag.customOne;
+                CustomResult listaTwo = ViewBag.customTwo;
+                for (int i = 0; i < listaOne.COMMBRANCH.Count && i < listaTwo.COMMBRANCH.Count; i++)
+                {
+                    if (listaOne.COMMBRANCH[i].BRANCH_CD == listaTwo.COMMBRANCH[i].BRANCH_CD)
+                    {
+                        <div class="col-md-12">
+                            <label>@listaOne.COMMBRANCH[i].BRANCH_CD</label>
+                        </div>
+                        <div class="col-md-12">
+                            <label>@listaTwo.COMMBRANCH[i].BRANCH_CD</label>
+                        </div>
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+                for (int i = 0; i < listaOne.COMMPREFIX.Count && listaTwo.COMMPREFIX.Count < i; i++)
+                {
+                    if (listaOne.COMMPREFIX[i].DESCRIPTION == listaTwo.COMMPREFIX[i].DESCRIPTION)
+                    {
+                        <div class="col-md-6">  
+                            <label>si es igual</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6">
+                            <label>no es igual</label>
+                        </div>
+                    }
+                }
+            }
+        }
+        else
+        {
+            <div class="col-md-6">
+                <label>Error</label>
+            </div>
+        }
+
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

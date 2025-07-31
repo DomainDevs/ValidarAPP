@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="http://infocomercial.cifin.asobancaria.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://dto.infocomercial.cifin.asobancaria.com" xmlns:impl="http://infocomercial.cifin.asobancaria.com" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://infocomercial.cifin.asobancaria.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://dto.infocomercial.cifin.asobancaria.com">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="ParametrosConsultaDTO">
+        <xsd:sequence>
+          <xsd:element name="numeroIdentificacion" nillable="true" type="soapenc:string" />
+          <xsd:element name="motivoConsulta" nillable="true" type="soapenc:string" />
+          <xsd:element name="tipoIdentificacion" nillable="true" type="soapenc:string" />
+          <xsd:element name="codigoInformacion" nillable="true" type="soapenc:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="consultaXmlRequest">
+    <wsdl:part name="parametrosConsulta" type="tns1:ParametrosConsultaDTO" />
+  </wsdl:message>
+  <wsdl:message name="consultaXmlResponse">
+    <wsdl:part name="consultaXmlReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="consultaPlanoRequest">
+    <wsdl:part name="parametrosConsulta" type="tns1:ParametrosConsultaDTO" />
+  </wsdl:message>
+  <wsdl:message name="consultaPlanoResponse">
+    <wsdl:part name="consultaPlanoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="cambioPasswordRequest">
+    <wsdl:part name="nuevoPassword" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="cambioPasswordResponse">
+    <wsdl:part name="cambioPasswordReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:portType name="InformacionComercialWS">
+    <wsdl:operation name="consultaXml" parameterOrder="parametrosConsulta">
+      <wsdl:input name="consultaXmlRequest" message="impl:consultaXmlRequest" />
+      <wsdl:output name="consultaXmlResponse" message="impl:consultaXmlResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultaPlano" parameterOrder="parametrosConsulta">
+      <wsdl:input name="consultaPlanoRequest" message="impl:consultaPlanoRequest" />
+      <wsdl:output name="consultaPlanoResponse" message="impl:consultaPlanoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="cambioPassword" parameterOrder="nuevoPassword">
+      <wsdl:input name="cambioPasswordRequest" message="impl:cambioPasswordRequest" />
+      <wsdl:output name="cambioPasswordResponse" message="impl:cambioPasswordResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InformacionComercialSoapBinding" type="impl:InformacionComercialWS">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="consultaXml">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="consultaXmlRequest">
+        <wsdlsoap:body use="encoded" namespace="http://infocomercial.cifin.asobancaria.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="consultaXmlResponse">
+        <wsdlsoap:body use="encoded" namespace="http://infocomercial.cifin.asobancaria.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaPlano">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="consultaPlanoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://infocomercial.cifin.asobancaria.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="consultaPlanoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://infocomercial.cifin.asobancaria.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cambioPassword">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="cambioPasswordRequest">
+        <wsdlsoap:body use="encoded" namespace="http://infocomercial.cifin.asobancaria.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="cambioPasswordResponse">
+        <wsdlsoap:body use="encoded" namespace="http://infocomercial.cifin.asobancaria.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InformacionComercialWSService">
+    <wsdl:port name="InformacionComercial" binding="impl:InformacionComercialSoapBinding">
+      <wsdlsoap:address location="http://cifinpruebas.asobancaria.com/InformacionComercialWS/services/InformacionComercial" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

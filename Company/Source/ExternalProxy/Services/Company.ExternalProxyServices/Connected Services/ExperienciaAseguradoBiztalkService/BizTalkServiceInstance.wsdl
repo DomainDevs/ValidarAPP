@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://axacolpatria.co/Servicios/Utilidad/ExperienciaAsegurado" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BizTalkServiceInstance" targetNamespace="http://axacolpatria.co/Servicios/Utilidad/ExperienciaAsegurado" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+    <CreationInfo Created="2017-06-30 09:50:22Z" />
+  </wsdl:documentation>
+  <wsdl:types>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/Message" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/Message" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="MessageBody">
+        <xs:sequence>
+          <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://axacolpatria.co/Servicios/Utilidad/ExperienciaAsegurado/Imports" targetNamespace="http://axacolpatria.co/Servicios/Utilidad/ExperienciaAsegurado/Imports" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoPolizas/1.0" />
+      <xs:import namespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoPolizasResponse/1.0" />
+      <xs:import namespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoSiniestros/1.0" />
+      <xs:import namespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoSiniestrosResponse/1.0" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoPolizas/1.0" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" elementFormDefault="qualified" targetNamespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoPolizas/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="HistoricoPolizas">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="placa" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="tipoDocumento" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoPolizasResponse/1.0" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" elementFormDefault="qualified" targetNamespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoPolizasResponse/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="HistoricoPolizasResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="HistoricoPolizasResult" type="tns:ArrayOfHistoricoPolizaCexper" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="ArrayOfHistoricoPolizaCexper">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="HistoricoPolizaCexper" nillable="true" type="tns:HistoricoPolizaCexper" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="HistoricoPolizaCexper">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="CodigoCompania" type="xs:short" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NombreCompania" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NumeroPoliza" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Orden" type="xs:long" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Placa" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Motor" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Chasis" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FechaVigencia" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FechaFinVigencia" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Vigente" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="CodigoGuia" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Marca" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Clase" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Tipo" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Modelo" type="xs:short" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Servicio" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TipoDocumentoAsegurado" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NumeroDocumento" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Asegurado" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ValorAsegurado" type="xs:double" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PTD" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PPD" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PH" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PPH" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="RC" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TipoCruce" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoSiniestros/1.0" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" elementFormDefault="qualified" targetNamespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoSiniestros/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="HistoricoSiniestros">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="placa" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="tipoDocumento" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoSiniestrosResponse/1.0" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" elementFormDefault="qualified" targetNamespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoSiniestrosResponse/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="HistoricoSiniestrosResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="HistoricoSiniestrosResult" type="tns:ArrayOfHistoricoSiniestroCexper" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="ArrayOfHistoricoSiniestroCexper">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="HistoricoSiniestroCexper" nillable="true" type="tns:HistoricoSiniestroCexper" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="HistoricoSiniestroCexper">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="CodigoCompania" type="xs:short" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NombreCompania" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NumeroSiniestro" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NumeroPoliza" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Orden" type="xs:long" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Placa" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Motor" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Chasis" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FechaSiniestro" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="CodigoGuia" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Marca" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Clase" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Tipo" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Modelo" type="xs:short" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TipoDocumentoAsegurado" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NumeroDocumento" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Asegurado" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ValorAsegurado" type="xs:double" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TipoCruce" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Amparos" type="tns:ArrayOfAmparoCexper" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfAmparoCexper">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="AmparoCexper" nillable="true" type="tns:AmparoCexper" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AmparoCexper">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="CodigoCompania" type="xs:short" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NumeroSiniestro" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FechaSiniestro" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Placa" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Estado" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NombreAmparado" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ValorReclamaAmparo" type="xs:long" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ValorPagadoAmparo" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ExperienciaAsegurado_ConsultarHistorialPolizas_InputMessage">
+    <wsdl:part xmlns:q1="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoPolizas/1.0" name="part" element="q1:HistoricoPolizas" />
+  </wsdl:message>
+  <wsdl:message name="ExperienciaAsegurado_ConsultarHistorialPolizas_OutputMessage">
+    <wsdl:part xmlns:q2="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoPolizasResponse/1.0" name="part" element="q2:HistoricoPolizasResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExperienciaAsegurado_ConsultarHistorialSiniestros_InputMessage">
+    <wsdl:part xmlns:q3="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoSiniestros/1.0" name="part" element="q3:HistoricoSiniestros" />
+  </wsdl:message>
+  <wsdl:message name="ExperienciaAsegurado_ConsultarHistorialSiniestros_OutputMessage">
+    <wsdl:part xmlns:q4="http://axacolpatria.co/MensajeNegocio/DominioPersona/HistoricoSiniestrosResponse/1.0" name="part" element="q4:HistoricoSiniestrosResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ExperienciaAsegurado">
+    <wsdl:documentation />
+    <wsdl:operation name="ConsultarHistorialPolizas">
+      <wsdl:documentation />
+      <wsdl:input message="tns:ExperienciaAsegurado_ConsultarHistorialPolizas_InputMessage" />
+      <wsdl:output message="tns:ExperienciaAsegurado_ConsultarHistorialPolizas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarHistorialSiniestros">
+      <wsdl:documentation />
+      <wsdl:input message="tns:ExperienciaAsegurado_ConsultarHistorialSiniestros_InputMessage" />
+      <wsdl:output message="tns:ExperienciaAsegurado_ConsultarHistorialSiniestros_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITwoWayAsync" type="tns:ExperienciaAsegurado">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultarHistorialPolizas">
+      <wsdl:documentation />
+      <soap:operation soapAction="ConsultarHistorialPolizas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarHistorialSiniestros">
+      <wsdl:documentation />
+      <soap:operation soapAction="ConsultarHistorialSiniestros" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BizTalkServiceInstance">
+    <wsdl:port name="BasicHttpBinding_ITwoWayAsync" binding="tns:BasicHttpBinding_ITwoWayAsync">
+      <soap:address location="http://win-opiibdjuur5/AXAColpatria/Utilidad/ExperienciaAsegurado/ExperienciaAsegurado.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

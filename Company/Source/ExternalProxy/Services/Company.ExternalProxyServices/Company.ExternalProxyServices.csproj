@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3AA11A22-DFA0-4FE3-85EA-D50892029249}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Company.Application.ExternalProxyServices</RootNamespace>
+    <AssemblyName>Company.ExternalProxyServices</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\ConsultaCexper\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ConsultaSisa\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\DatacreditoBizTalkService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ExperienciaAseguradoBiztalkService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\InfraccionesBizTalkService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\SisaFasecoldaBizTalkService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\ErrorBiztalkDataCredit.cs" />
+    <Compile Include="IExternalProxyService.cs" />
+    <Compile Include="Models\CalcGoodExpYearsDTO.cs" />
+    <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\ExternalInformationLogDTO.cs" />
+    <Compile Include="Models\PaymentDocument.cs" />
+    <Compile Include="Models\RequestCexper.cs" />
+    <Compile Include="Models\RequestDocumentPayments.cs" />
+    <Compile Include="Models\RequestFasecoldaSISA.cs" />
+    <Compile Include="Models\RequestGoodExperienceYear.cs" />
+    <Compile Include="Models\RequestInfringement.cs" />
+    <Compile Include="Models\RequestPolicyPayment.cs" />
+    <Compile Include="Models\RequestReinsurance.cs" />
+    <Compile Include="Models\ResponseAddress.cs" />
+    <Compile Include="Models\ResponseBankTransfer.cs" />
+    <Compile Include="Models\ResponseCexper.cs" />
+    <Compile Include="Models\ResponseClaims.cs" />
+    <Compile Include="Models\ResponseCompany.cs" />
+    <Compile Include="Models\ResponseDocumentPayments.cs" />
+    <Compile Include="Models\ResponseDocumentType.cs" />
+    <Compile Include="Models\ResponseEmail.cs" />
+    <Compile Include="Models\ResponseFasecoldaSISA.cs" />
+    <Compile Include="Models\ResponseGoodExperienceYear.cs" />
+    <Compile Include="Models\ExternalInfrigement.cs" />
+    <Compile Include="Models\ResponseGuideInfo.cs" />
+    <Compile Include="Models\ResponseHistoricalSinister.cs" />
+    <Compile Include="Models\ResponseIdentificationDocument.cs" />
+    <Compile Include="Models\ResponseInfringement.cs" />
+    <Compile Include="Models\ResponsePerson.cs" />
+    <Compile Include="Models\ResponsePhone.cs" />
+    <Compile Include="Models\ResponsePoliciesHistorical.cs" />
+    <Compile Include="Models\ResponsePoliciesInfo.cs" />
+    <Compile Include="Models\ResponsePolicyPayment.cs" />
+    <Compile Include="Models\ResponseProtection.cs" />
+    <Compile Include="Models\ResponseProtectionCexper.cs" />
+    <Compile Include="Models\ResponseProvider.cs" />
+    <Compile Include="Models\ResponseProviderPaymentConcept.cs" />
+    <Compile Include="Models\ResponseReinsurance.cs" />
+    <Compile Include="Models\ResponseScoreCredit.cs" />
+    <Compile Include="Models\RequestScoreCredit.cs" />
+    <Compile Include="Models\ResponseSimitSISA.cs" />
+    <Compile Include="Models\ResponseSinisterInfo.cs" />
+    <Compile Include="Models\ResponseTax.cs" />
+    <Compile Include="Models\ResponseVINVerification.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ConsultaCexper\Cexper.wsdl" />
+    <None Include="Connected Services\ConsultaCexper\Sistran.Company.Application.ExternalProxyServices.ConsultaCexper.HistoricoPolizaCexper.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaCexper\Sistran.Company.Application.ExternalProxyServices.ConsultaCexper.HistoricoPolizaCexperV201306.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaCexper\Sistran.Company.Application.ExternalProxyServices.ConsultaCexper.HistoricoPolizasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaCexper\Sistran.Company.Application.ExternalProxyServices.ConsultaCexper.HistoricoPolizasV201306Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaCexper\Sistran.Company.Application.ExternalProxyServices.ConsultaCexper.HistoricoSiniestroCexper.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaCexper\Sistran.Company.Application.ExternalProxyServices.ConsultaCexper.HistoricoSiniestroCexperV201306.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaCexper\Sistran.Company.Application.ExternalProxyServices.ConsultaCexper.HistoricoSiniestrosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaCexper\Sistran.Company.Application.ExternalProxyServices.ConsultaCexper.HistoricoSiniestrosV201306Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sisa.wsdl" />
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.clsCargueFasecolda.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.ComparendoSIMIT.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.ComparendoSIMITV201401.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.ConsultaExternaSIMITResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.ConsultaExternaSIMITV201401Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.ConsultaMasivaSIMITResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.GuiaSisa.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.HistoricoPolizaSisa.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.HistoricoPolizaSisaV201306.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.HistoricoPolizasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.HistoricoPolizasV201306Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.HistoricoSiniestroSisa.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.HistoricoSiniestroSisaV201306.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.HistoricoSiniestrosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.HistoricoSiniestrosV201306Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.InformacionCodigosWMIResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.InformacionGuiasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.ObtenerArchivosSIMITResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ConsultaSisa\Sistran.Company.Application.ExternalProxyServices.ConsultaSisa.WMISisa.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DatacreditoBizTalkService\BizTalkServiceInstance.wsdl" />
+    <None Include="Connected Services\DatacreditoBizTalkService\Sistran.Company.Application.ExternalProxyServices.DatacreditoBizTalkService.ConsultaRiesgoRespType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DatacreditoBizTalkService\Sistran.Company.Application.ExternalProxyServices.DatacreditoBizTalkService.ConsultarRiesgoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ExperienciaAseguradoBiztalkService\BizTalkServiceInstance.wsdl" />
+    <None Include="Connected Services\InfraccionesBizTalkService\BizTalkServiceInstance.wsdl" />
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\sisa.wsdl" />
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.clsCargueFasecolda.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.ComparendoSIMIT.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.ComparendoSIMITV201401.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.ConsultaExternaSIMITResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.ConsultaMasivaSIMITResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.GuiaSisa.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.HistoricoPolizaSisa.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.HistoricoPolizaSisaV201306.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.HistoricoPolizasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.HistoricoPolizasV201306Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.HistoricoSiniestroSisa.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.HistoricoSiniestroSisaV201306.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.HistoricoSiniestrosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.HistoricoSiniestrosV201306Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.InformacionCodigosWMIResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.InformacionGuiasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.ObtenerArchivosSIMITResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Sistran.Company.Application.ExternalProxyServices.SisaFasecoldaBizTalkService.WMISisa.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ConsultaCexper\" />
+    <WCFMetadataStorage Include="Connected Services\ConsultaSisa\" />
+    <WCFMetadataStorage Include="Connected Services\DatacreditoBizTalkService\" />
+    <WCFMetadataStorage Include="Connected Services\ExperienciaAseguradoBiztalkService\" />
+    <WCFMetadataStorage Include="Connected Services\InfraccionesBizTalkService\" />
+    <WCFMetadataStorage Include="Connected Services\SisaFasecoldaBizTalkService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DatacreditoBizTalkService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DatacreditoBizTalkService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DatacreditoBizTalkService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ExperienciaAseguradoBiztalkService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ExperienciaAseguradoBiztalkService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ExperienciaAseguradoBiztalkService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\InfraccionesBizTalkService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\InfraccionesBizTalkService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\InfraccionesBizTalkService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\sisa.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SisaFasecoldaBizTalkService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ConsultaSisa\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ConsultaSisa\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ConsultaSisa\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ConsultaCexper\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ConsultaCexper\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ConsultaCexper\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Company\ExternalProxy\ExternalProxyServices\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

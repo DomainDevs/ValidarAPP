@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://fasecolda.org.co/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://fasecolda.org.co/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://fasecolda.org.co/">
+      <s:element name="HistoricoPolizas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tipoDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HistoricoPolizasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HistoricoPolizasResult" type="tns:ArrayOfHistoricoPolizaCexper" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfHistoricoPolizaCexper">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HistoricoPolizaCexper" nillable="true" type="tns:HistoricoPolizaCexper" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HistoricoPolizaCexper">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CodigoCompania" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreCompania" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroPoliza" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Orden" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Motor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Chasis" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaVigencia" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaFinVigencia" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vigente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoGuia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Marca" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Clase" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Modelo" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="Servicio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoDocumentoAsegurado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroDocumento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Asegurado" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValorAsegurado" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="PTD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PPD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PPH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoCruce" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UsuarioHeader" type="tns:UsuarioHeader" />
+      <s:complexType name="UsuarioHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Clave" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="HistoricoPolizasV201306">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tipoDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HistoricoPolizasV201306Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HistoricoPolizasV201306Result" type="tns:ArrayOfHistoricoPolizaCexperV201306" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfHistoricoPolizaCexperV201306">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HistoricoPolizaCexperV201306" nillable="true" type="tns:HistoricoPolizaCexperV201306" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HistoricoPolizaCexperV201306">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CodigoCompania" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreCompania" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroPoliza" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Orden" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Motor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Chasis" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaVigencia" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaFinVigencia" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vigente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoGuia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Marca" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Clase" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Modelo" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="Servicio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoDocumentoAsegurado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroDocumento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Asegurado" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValorAsegurado" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="PTD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PPD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PPH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoCruce" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Color" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClasePoliza" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="HistoricoSiniestros">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tipoDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HistoricoSiniestrosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HistoricoSiniestrosResult" type="tns:ArrayOfHistoricoSiniestroCexper" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfHistoricoSiniestroCexper">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HistoricoSiniestroCexper" nillable="true" type="tns:HistoricoSiniestroCexper" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HistoricoSiniestroCexper">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CodigoCompania" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreCompania" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroSiniestro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroPoliza" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Orden" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Motor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Chasis" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaSiniestro" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoGuia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Marca" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Clase" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Modelo" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoDocumentoAsegurado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroDocumento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Asegurado" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValorAsegurado" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoCruce" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Amparos" type="tns:ArrayOfAmparoCexper" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAmparoCexper">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AmparoCexper" nillable="true" type="tns:AmparoCexper" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AmparoCexper">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CodigoCompania" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroSiniestro" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaSiniestro" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreAmparado" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValorReclamaAmparo" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValorPagadoAmparo" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="HistoricoSiniestrosV201306">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tipoDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HistoricoSiniestrosV201306Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HistoricoSiniestrosV201306Result" type="tns:ArrayOfHistoricoSiniestroCexperV201306" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfHistoricoSiniestroCexperV201306">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HistoricoSiniestroCexperV201306" nillable="true" type="tns:HistoricoSiniestroCexperV201306" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HistoricoSiniestroCexperV201306">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CodigoCompania" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreCompania" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroSiniestro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroPoliza" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Orden" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Motor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Chasis" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaSiniestro" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoGuia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Marca" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Clase" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Modelo" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoDocumentoAsegurado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroDocumento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Asegurado" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValorAsegurado" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoCruce" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Amparos" type="tns:ArrayOfAmparoCexper" />
+          <s:element minOccurs="0" maxOccurs="1" name="Color" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SucursalSin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClasePoliza" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdentificacionConductor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreConductor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Placa1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Servicio" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HistoricoPolizasSoapIn">
+    <wsdl:part name="parameters" element="tns:HistoricoPolizas" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoPolizasSoapOut">
+    <wsdl:part name="parameters" element="tns:HistoricoPolizasResponse" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoPolizasUsuarioHeader">
+    <wsdl:part name="UsuarioHeader" element="tns:UsuarioHeader" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoPolizasV201306SoapIn">
+    <wsdl:part name="parameters" element="tns:HistoricoPolizasV201306" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoPolizasV201306SoapOut">
+    <wsdl:part name="parameters" element="tns:HistoricoPolizasV201306Response" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoPolizasV201306UsuarioHeader">
+    <wsdl:part name="UsuarioHeader" element="tns:UsuarioHeader" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoSiniestrosSoapIn">
+    <wsdl:part name="parameters" element="tns:HistoricoSiniestros" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoSiniestrosSoapOut">
+    <wsdl:part name="parameters" element="tns:HistoricoSiniestrosResponse" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoSiniestrosUsuarioHeader">
+    <wsdl:part name="UsuarioHeader" element="tns:UsuarioHeader" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoSiniestrosV201306SoapIn">
+    <wsdl:part name="parameters" element="tns:HistoricoSiniestrosV201306" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoSiniestrosV201306SoapOut">
+    <wsdl:part name="parameters" element="tns:HistoricoSiniestrosV201306Response" />
+  </wsdl:message>
+  <wsdl:message name="HistoricoSiniestrosV201306UsuarioHeader">
+    <wsdl:part name="UsuarioHeader" element="tns:UsuarioHeader" />
+  </wsdl:message>
+  <wsdl:portType name="CexperSoap">
+    <wsdl:operation name="HistoricoPolizas">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio con información de pólizas CEXPER</wsdl:documentation>
+      <wsdl:input message="tns:HistoricoPolizasSoapIn" />
+      <wsdl:output message="tns:HistoricoPolizasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HistoricoPolizasV201306">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio con información de pólizas CEXPER Versión de Junio del 2013</wsdl:documentation>
+      <wsdl:input message="tns:HistoricoPolizasV201306SoapIn" />
+      <wsdl:output message="tns:HistoricoPolizasV201306SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HistoricoSiniestros">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio con información de siniestros CEXPER</wsdl:documentation>
+      <wsdl:input message="tns:HistoricoSiniestrosSoapIn" />
+      <wsdl:output message="tns:HistoricoSiniestrosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HistoricoSiniestrosV201306">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio con información de siniestros CEXPER Versión Junio de 2013</wsdl:documentation>
+      <wsdl:input message="tns:HistoricoSiniestrosV201306SoapIn" />
+      <wsdl:output message="tns:HistoricoSiniestrosV201306SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CexperSoap" type="tns:CexperSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HistoricoPolizas">
+      <soap:operation soapAction="http://fasecolda.org.co/HistoricoPolizas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:HistoricoPolizasUsuarioHeader" part="UsuarioHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HistoricoPolizasV201306">
+      <soap:operation soapAction="http://fasecolda.org.co/HistoricoPolizasV201306" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:HistoricoPolizasV201306UsuarioHeader" part="UsuarioHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HistoricoSiniestros">
+      <soap:operation soapAction="http://fasecolda.org.co/HistoricoSiniestros" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:HistoricoSiniestrosUsuarioHeader" part="UsuarioHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HistoricoSiniestrosV201306">
+      <soap:operation soapAction="http://fasecolda.org.co/HistoricoSiniestrosV201306" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:HistoricoSiniestrosV201306UsuarioHeader" part="UsuarioHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CexperSoap12" type="tns:CexperSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HistoricoPolizas">
+      <soap12:operation soapAction="http://fasecolda.org.co/HistoricoPolizas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:HistoricoPolizasUsuarioHeader" part="UsuarioHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HistoricoPolizasV201306">
+      <soap12:operation soapAction="http://fasecolda.org.co/HistoricoPolizasV201306" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:HistoricoPolizasV201306UsuarioHeader" part="UsuarioHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HistoricoSiniestros">
+      <soap12:operation soapAction="http://fasecolda.org.co/HistoricoSiniestros" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:HistoricoSiniestrosUsuarioHeader" part="UsuarioHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HistoricoSiniestrosV201306">
+      <soap12:operation soapAction="http://fasecolda.org.co/HistoricoSiniestrosV201306" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:HistoricoSiniestrosV201306UsuarioHeader" part="UsuarioHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Cexper">
+    <wsdl:port name="CexperSoap" binding="tns:CexperSoap">
+      <soap:address location="https://consultas.fasecolda.com/wscexpernew/Cexper.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CexperSoap12" binding="tns:CexperSoap12">
+      <soap12:address location="https://consultas.fasecolda.com/wscexpernew/Cexper.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

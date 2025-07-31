@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CoRequestView">
+  <collections>
+    <collection name="CoRequest" type="Sistran.Company.Application.Request.Entities.CoRequest,
+                Company.Request.Entities"></collection>
+    <collection name="CoRequestEndorsement" type="Sistran.Company.Application.Request.Entities.CoRequestEndorsement,
+                Company.Request.Entities"></collection>
+    <collection name="CoRequestEndorsementAgent" type="Sistran.Company.Application.Request.Entities.CoRequestEndorsementAgent,
+                Company.Request.Entities"></collection>
+    <collection name="CoRequestAgent" type="Sistran.Company.Application.Request.Entities.CoRequestAgent,
+                Company.Request.Entities"></collection>
+    <collection name="Agent" type="Sistran.Core.Application.UniquePerson.Entities.Agent,
+                Core.UniquePerson.Entities"></collection>
+    <collection name="BillingGroup" type="Sistran.Core.Application.Issuance.Entities.BillingGroup, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="CoRequest" destination="CoRequestEndorsement" name="CoRequestCoRequestEndorsement" type="Inner">
+      <property left="RequestId" type="Equal" right="RequestId"></property>
+    </relation>
+    <relation source="CoRequestEndorsement" destination="CoRequestEndorsementAgent" name="CoRequestEndorsementCoRequestEndorsementAgent" type="Inner">
+      <property left="RequestEndorsementId" type="Equal" right="RequestEndorsementId"></property>
+    </relation>
+    <relation source="CoRequestEndorsementAgent" destination="CoRequestAgent" name="CoRequestEndorsementAgentCoRequestAgent" type="Inner">
+      <property left="RequestAgentId" type="Equal" right="RequestAgentId"></property>
+    </relation>    
+    <relation source="CoRequestAgent" destination="Agent" name="CoRequestAgentAgent" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="CoRequest" destination="BillingGroup" name="CoRequestBillingGroup" type="Inner">
+      <property left="BillingGroupCode" type="Equal" right="BillingGroupCode"></property>
+    </relation>
+  </relations>
+</view>

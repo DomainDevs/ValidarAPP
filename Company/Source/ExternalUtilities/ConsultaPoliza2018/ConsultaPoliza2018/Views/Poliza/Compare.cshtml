@@ -1,0 +1,39 @@
+﻿@model Domain.Models.Entities.ResultCompare
+@{
+    ViewBag.Title = "Comparador";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var texto1 = "Póliza " + Model.polizaNum.ToString();
+    var texto2 = "Póliza " + Model.polizaNum2.ToString();
+    var texto3 = string.Format("Resumen de la Comparación(Diferencias entre {0} vs {1})", Model.polizaNum, Model.polizaNum2);
+}
+
+
+
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-offset-10 col-md-10">
+                    @Html.ActionLink("Ir a Index", "Index", "default", new { Model }, null)
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.poliza, texto1)
+                    <pre style="height:200px">@Html.DisplayFor(model => model.poliza)</pre>
+                </div>
+                @if (Model.poliza2.Equals(string.Empty)) { }
+                else
+                {<div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.poliza2, texto2)
+                        <pre style="height:200px">@Html.DisplayFor(model => model.poliza2)</pre>
+                    </div>
+                }
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(model => model.resume, texto3)
+                    <pre style="height:300px">@Html.DisplayFor(model => model.resume)</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CoPrefixRequest">
+  <collections>
+    <collection name="AgentPrefix" type="Sistran.Core.Application.UniquePerson.Entities.AgentPrefix, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                Core.Common.Entities"></collection>
+    <collection name="CoPrefixRequest" type="Sistran.Company.Application.Request.Entities.CoPrefixRequest, 
+                Company.Request.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Prefix" destination="CoPrefixRequest" name="PrefixRequest" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="Prefix" destination="AgentPrefix" name="AgentPrefixPrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+  </relations>
+</view>

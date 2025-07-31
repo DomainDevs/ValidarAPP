@@ -1,0 +1,2431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://axacolpatria.co/Servicios/Utilidad/Infraccion" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BizTalkServiceInstance" targetNamespace="http://axacolpatria.co/Servicios/Utilidad/Infraccion" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+    <CreationInfo Created="2017-07-05 10:39:21Z" />
+  </wsdl:documentation>
+  <wsdl:types>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/Message" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/Message" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="MessageBody">
+        <xs:sequence>
+          <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://axacolpatria.co/Servicios/Utilidad/Infraccion/Imports" targetNamespace="http://axacolpatria.co/Servicios/Utilidad/Infraccion/Imports" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Base/EncabezadosSOA/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/xsd/base/direccion" />
+      <xs:import namespace="http://axacolpatria.co/xsd/base/contacto" />
+      <xs:import namespace="http://axacolpatria.co/Servicios/Negocio/Persona" />
+      <xs:import namespace="http://axacolpatria.co/xsd/base" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Infracciones/2017/06/22" />
+      <xs:import namespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/consultarInfraccionesReq/1.0" />
+      <xs:import namespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/consultarInfraccionesResp/1.0" />
+    </xs:schema>
+    <xs:schema xmlns="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Vehiculo_TYPE" type="Vehiculo_TYPE" />
+      <xs:complexType name="Vehiculo_TYPE">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Placa" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NumeroMotor" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="NumeroChasis" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Marca" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Linea" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Modelo" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Color" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Precio" type="xs:float" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Cilindraje" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TienePoliza" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Uso" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Version" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="FasecoldaCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/DPW/Servicios/Base/EncabezadosSOA/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" targetNamespace="http://axacolpatria.co/DPW/Servicios/Base/EncabezadosSOA/2017/03/31">
+      <xsd:element name="EncabezadoEntrada" type="EncabezadoEntrada" />
+      <xsd:complexType name="EncabezadoEntrada">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="canal" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Canal consumidor del servicio</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idCorrelacionConsumidor" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador de la transacción del sistema consumidor</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="idTransaccion" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador de la transacción</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="peticionFecha" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:documentation>Fecha y hora en la que el canal lanzó la petición</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="usuario" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Usuario que realiza la petición</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="EncabezadoSalida" type="EncabezadoSalida" />
+      <xsd:complexType name="EncabezadoSalida">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="criticidad" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Criticidad de la respuesta: Info, Error, Warning</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idCorrelacionConsumidor" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador de la transacción del sistema consumidor</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idTransaccion" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador de la transacción</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="rtaCodCanal" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Código de respuesta hacia el canal</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="rtaCodHost" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Código de respuesta del backend</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="rtaDescCanal" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Mensaje de respuesta hacia el canal</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="rtaDescHost" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Mensaje de respuesta del backend</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="metodo" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Mensaje de respuesta del backend</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="proceso" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Mensaje de respuesta del backend</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="categoria" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Mensaje de respuesta del backend</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="flagException" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/xsd/base/direccion" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:com="http://axacolpatria.co/xsd/base" targetNamespace="http://axacolpatria.co/xsd/base/direccion">
+      <xsd:import namespace="http://axacolpatria.co/xsd/base" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <references xmlns="http://schemas.microsoft.com/BizTalk/2003">
+            <reference targetNamespace="http://axacolpatria.co/xsd/base" />
+            <reference targetNamespace="http://axacolpatria.co/xsd/base/direccion" />
+            <reference targetNamespace="http://axacolpatria.co/xsd/base/contacto" />
+            <reference targetNamespace="http://axacolpatria.co/Servicios/Negocio/Persona" />
+          </references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="Direccion_TYPE" type="Direccion_TYPE" />
+      <xsd:complexType name="Direccion_TYPE">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <xsd:element minOccurs="0" maxOccurs="1" name="barrio" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="calle" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="carrera" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="casaNr" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="construccionNr" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="interior" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="lineaDireccion1" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="lineaDireccion2" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="localidad" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="ciudad" type="com:Ciudad_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="geolocalizacion" type="Geolocalizacion_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Geolocalizacion_TYPE" type="Geolocalizacion_TYPE" />
+      <xsd:complexType name="Geolocalizacion_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="Localizacion_TYPE">
+            <xsd:sequence />
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Localizacion_TYPE" type="Localizacion_TYPE" />
+      <xsd:complexType name="Localizacion_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="latitud" type="xsd:float" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="longitud" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="tipoLocalizacion" type="TipoLocalizacion_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="TipoLocalizacion_TYPE">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="APPROXIMATE" />
+          <xsd:enumeration value="GEOMETRIC_CENTER" />
+          <xsd:enumeration value="RANGE_INTERPOLATED" />
+          <xsd:enumeration value="ROOFTOP" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/xsd/base/contacto" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" targetNamespace="http://axacolpatria.co/xsd/base/contacto">
+      <xsd:element name="PuntoContacto_TYPE" type="PuntoContacto_TYPE" />
+      <xsd:complexType name="PuntoContacto_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="esAutorizado" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="esPreferido" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Telefono_TYPE" type="Telefono_TYPE" />
+      <xsd:complexType name="Telefono_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="PuntoContacto_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="indicador" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="numero" type="xsd:float" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Email_TYPE" type="Email_TYPE" />
+      <xsd:complexType name="Email_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="PuntoContacto_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="email" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Web_TYPE" type="Web_TYPE" />
+      <xsd:complexType name="Web_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="PuntoContacto_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="1" maxOccurs="1" name="web" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="SocialMedia_TYPE" type="SocialMedia_TYPE" />
+      <xsd:complexType name="SocialMedia_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="PuntoContacto_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="1" maxOccurs="1" name="nombreUsuario" type="xsd:string" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="redSocial" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Contacto_TYPE" type="Contacto_TYPE" />
+      <xsd:complexType name="Contacto_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Este concepto de negocio hace referencia a la información de la persona natural que es el contacto de una persona jurídica. Las personas jurídicas pueden tener un listado de personas naturales de contacto. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="telefonoLaboral" type="Telefono_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="telefonoPersonal" type="Telefono_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="celularPersonal" type="Telefono_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="celularLaboral" type="Telefono_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fax" type="Telefono_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="email" type="Email_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="web" type="Web_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="socialMedia" type="SocialMedia_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/Servicios/Negocio/Persona" xmlns:dir="http://axacolpatria.co/xsd/base/direccion" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:com="http://axacolpatria.co/xsd/base" xmlns:cnt="http://axacolpatria.co/xsd/base/contacto" targetNamespace="http://axacolpatria.co/Servicios/Negocio/Persona">
+      <xsd:import namespace="http://axacolpatria.co/xsd/base/direccion" />
+      <xsd:import namespace="http://axacolpatria.co/xsd/base/contacto" />
+      <xsd:import namespace="http://axacolpatria.co/xsd/base" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base/direccion" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base/contacto" />
+            <b:reference targetNamespace="http://axacolpatria.co/Servicios/Negocio/Persona" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="PersonaNatural_TYPE" type="PersonaNatural_TYPE" />
+      <xsd:complexType name="PersonaNatural_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que describe a un individuo que tiene algún tipo de vinculación con AXA COLPATRIA con derechos o deberes jurídicos. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="Persona_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="cantidadHijos" type="xsd:int">
+                <xsd:annotation>
+                  <xsd:documentation>Número de hijos que tenga la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="eps" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>EPS a la que está afiliada la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="esAutoEmpleado" type="xsd:boolean">
+                <xsd:annotation>
+                  <xsd:documentation>1: La persona es autoempleado
+0: La persona no es autoempleado</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="estadoCivil" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Estado civil de la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="estrato" type="xsd:int">
+                <xsd:annotation>
+                  <xsd:documentation>Estrato de la vivienda de la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaExpedicionDocumento" type="xsd:date">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha en que expidió el documento de identificación nacional</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaNacimiento" type="xsd:date">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha de nacimiento de la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="genero" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Género: Masculino, Femenino</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="idioma" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Lengua materna de la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="ingresosAnuales" type="xsd:float">
+                <xsd:annotation>
+                  <xsd:documentation>Ingresos brutos anuales</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="nacionalidad" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Nacionalidad de la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="nivelEstudio" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Nivel máximo de estudio alcanzado por la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="profesion" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Profesión que desempeña la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="tipoVivienda" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Tipo de vivienda: Propia, Arriendada, Familiar</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="1" maxOccurs="1" name="datosBasicos" type="DatosBasicosPersonaNatural_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Ocupacion_TYPE" type="Ocupacion_TYPE" />
+      <xsd:complexType name="Ocupacion_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa la información laboral de una persona natural. Información de sueldo, tipo de contrato, empresa donde trabaja, entre otros campos. Esta información se requiere especialmente en contratos de producto ARL. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombreEmpresa" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ocupacionDescripcion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ocupacionId" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="salario" type="xsd:float" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Educacion_TYPE" type="Educacion_TYPE" />
+      <xsd:complexType name="Educacion_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Información educativa de la persona natural</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nivelEducacion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="nivelEducacionId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PersonaJuridica_TYPE" type="PersonaJuridica_TYPE" />
+      <xsd:complexType name="PersonaJuridica_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de Negocio que representa una organización con derechos y obligaciones, pero no como individuo, sino como institución y que es creada por una o más personas físicas para cumplir un objetivo social que puede ser con o sin ánimo de lucro. Organización que tiene algún tipo de relación con AXA COLPATRIA. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="Persona_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="accionista" type="Persona_TYPE">
+                <xsd:annotation>
+                  <xsd:documentation>Accionistas que tienen participación en la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="actividadEconomica" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Código CIIU que representa la actividad principal de la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="costos" type="xsd:float">
+                <xsd:annotation>
+                  <xsd:documentation>Costos anuales de la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="1" maxOccurs="1" name="digitoVerificacion" type="xsd:int">
+                <xsd:annotation>
+                  <xsd:documentation>Dígito de verificación que acompaña el NIT</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaConstitucion" type="xsd:date">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha en que se constituyó la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaDisolucion" type="xsd:date">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha en que se disolvió la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="ingresos" type="xsd:float">
+                <xsd:annotation>
+                  <xsd:documentation>Ingresos brutos anuales de la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="personaContacto" type="Persona_TYPE">
+                <xsd:annotation>
+                  <xsd:documentation>Persona de contacto dentro de la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="representanteLegal" type="Persona_TYPE">
+                <xsd:annotation>
+                  <xsd:documentation>Representante legal de la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="tipoEmpresa" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Tipo de empresa: SA,SAS,LTDA</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="totalEmpleados" type="xsd:int">
+                <xsd:annotation>
+                  <xsd:documentation>Cantidad total de empleados</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="1" maxOccurs="1" name="datosBasicos" type="DatosBasicosPersonaJuridica_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="RepresentanteLegal_TYPE" type="RepresentanteLegal_TYPE" />
+      <xsd:complexType name="RepresentanteLegal_TYPE">
+        <xsd:sequence />
+      </xsd:complexType>
+      <xsd:element name="InformacionFinanciera_TYPE" type="InformacionFinanciera_TYPE" />
+      <xsd:complexType name="InformacionFinanciera_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que corresponde a toda la información financiera de una persona. Este concepto encierra toda la información que se solicita a las personas para SARLAF: Ingresos, Egresos, Productos en el Exterior, Administración de Dinero Público, entre otros. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="actividadesMonedaExxtranjera" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="activos" type="xsd:float" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="administraRecursosPublicos" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="cuentasMonedaExtranjera" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="declaracionTributariaOtrosPaises" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="egresos" type="xsd:float" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ejerceCargoPoderPublico" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ingresos" type="xsd:float" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="otrosIngresos" type="xsd:float" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="pasivos" type="xsd:float" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="productosFinancierosExterior" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="reconocimientoPublico" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="operacionesInternacionales" type="OperacionInternacional_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="productosFinancierosExtranjero" type="ProductoFinancieroExterior_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="actividadEconomica" type="ActividadEconomica_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PersonaDetalle_TYPE" type="PersonaDetalle_TYPE" />
+      <xsd:complexType name="PersonaDetalle_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="PersonaRol_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="ocupacion" type="Ocupacion_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="educacion" type="Educacion_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="informacionFinanciera" type="InformacionFinanciera_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="ActividadEconomica_TYPE" type="ActividadEconomica_TYPE" />
+      <xsd:complexType name="ActividadEconomica_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Actividad económica dado por los codigos CIIU de la superintendencia financiera de colombia</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="descripcion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="IdentificacionPersona_TYPE" type="IdentificacionPersona_TYPE" />
+      <xsd:complexType name="IdentificacionPersona_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Identificador único de la persona</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="identificacion" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Número de identificación de la persona</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="tipoIdentificacion" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Tipo de identificación de la persona</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="DatosBasicosPersonaJuridica_TYPE" type="DatosBasicosPersonaJuridica_TYPE" />
+      <xsd:complexType name="DatosBasicosPersonaJuridica_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Nombres que identifican a la persona jurídica, se coloca como un TYPE para ser utilizado como filtros de busqueda como un conjunto de llaves</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombreComercial" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Nombre comercial de la empresa</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="razonSocial" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Razón social de la empresa</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="DatosBasicosPersonaNatural_TYPE" type="DatosBasicosPersonaNatural_TYPE" />
+      <xsd:complexType name="DatosBasicosPersonaNatural_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="primerApellido" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="primerNombre" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="segundoApellido" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="segundoNombre" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="InformacionLaboral_TYPE" type="InformacionLaboral_TYPE" />
+      <xsd:complexType name="InformacionLaboral_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="cargo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nombreEmpresa" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="salario" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Persona_TYPE" type="Persona_TYPE" />
+      <xsd:complexType name="Persona_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que describe a una persona, ya sea natural o jurídica, que tenga algún tipo de relación con AXA COLPATRIA. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="personaId" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador único de persona. Este identificador es sólo de uso técnico y representa el id de una persona dentro de una base de datos o de un sistema particular.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="identificacion" type="IdentificacionPersona_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="OperacionInternacional_TYPE" type="OperacionInternacional_TYPE" />
+      <xsd:complexType name="OperacionInternacional_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Operaciones Internacionales</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Nombre" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ProductoFinancieroExterior_TYPE" type="ProductoFinancieroExterior_TYPE" />
+      <xsd:complexType name="ProductoFinancieroExterior_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Productos ajenos a AXA Colpatria que tenga asociado el cliente en el exterior</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="entidadBancaria" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="moneda" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="montoProducto" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="NumeroProducto" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="paisProducto" type="com:Pais_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="tipoProducto" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PersonaRol_TYPE" type="PersonaRol_TYPE" />
+      <xsd:complexType name="PersonaRol_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que describe a una persona, ya sea natural o jurídica, que tenga algún tipo de relación con AXA COLPATRIA. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="contactoPrincipal" type="cnt:Contacto_TYPE">
+            <xsd:annotation>
+              <xsd:documentation>Información de contacto principal de la persona</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="direccionPrincipal" type="dir:Direccion_TYPE">
+            <xsd:annotation>
+              <xsd:documentation>Dirección principal de la persona</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:choice minOccurs="1" maxOccurs="1">
+            <xsd:element minOccurs="0" maxOccurs="1" name="persona" type="PersonaNatural_TYPE" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="empresa" type="PersonaJuridica_TYPE" />
+          </xsd:choice>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/xsd/base" xmlns:dir="http://axacolpatria.co/xsd/base/direccion" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:cnt="http://axacolpatria.co/xsd/base/contacto" xmlns:per="http://axacolpatria.co/Servicios/Negocio/Persona" targetNamespace="http://axacolpatria.co/xsd/base">
+      <xsd:import namespace="http://axacolpatria.co/Servicios/Negocio/Persona" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <references xmlns="http://schemas.microsoft.com/BizTalk/2003">
+            <reference targetNamespace="http://axacolpatria.co/xsd/base" />
+            <reference targetNamespace="http://axacolpatria.co/xsd/base/direccion" />
+            <reference targetNamespace="http://axacolpatria.co/xsd/base/contacto" />
+            <reference targetNamespace="http://axacolpatria.co/Servicios/Negocio/Persona" />
+          </references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="Monto_TYPE" type="Monto_TYPE" />
+      <xsd:complexType name="Monto_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto común para representar movimientos financieros</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="moneda" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Código de moneda en la que se realizó el movimiento financiero</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="monto" type="xsd:float">
+            <xsd:annotation>
+              <xsd:documentation>Monto total del movimiento financiero</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Pago_TYPE" type="Pago_TYPE" />
+      <xsd:complexType name="Pago_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que corresponde a los pagos que realiza Colpatria a otras personas, ya sean naturales o jurídicas. 
+Pagos a Proveedores: Pago a los proveedores por prestar diferentes servicios requeridos por un siniestro. 
+Pagos a Clientes Directos o Indirectos: Pago de prestaciones económicas requeridas por un siniestro. Por ejemplo una pensión por una pérdida de capacidad debido a un accidente laboral (ARL). 
+Pagos a Clientes Directos por Devolución: Devoluciones de dinero al cliente directo. 
+Pagos de Contratos de Capitalización: Cuando el contrato finaliza, se entrega al cliente el capital más los intereses. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="beneficiarioPago_TYPE" type="per:Persona_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcion" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="estadoPago" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="fechaPago" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idPago" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="tipoPago" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="valorPagado" type="Monto_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="beneficiarioPago" type="per:PersonaRol_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Ciudad_TYPE" type="Ciudad_TYPE" />
+      <xsd:complexType name="Ciudad_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nombre" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="departamento" type="Departamento_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Departamento_TYPE" type="Departamento_TYPE" />
+      <xsd:complexType name="Departamento_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nombre" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="pais" type="Pais_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Pais_TYPE" type="Pais_TYPE" />
+      <xsd:complexType name="Pais_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nombre" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31">
+      <xsd:element name="IdentificacionProducto_TYPE" type="IdentificacionProducto_TYPE" />
+      <xsd:complexType name="IdentificacionProducto_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idProducto" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador único técnico del producto</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="idProductoPublico" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador único comercial del producto</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="IdentificacionSubProducto_TYPE" type="IdentificacionSubProducto_TYPE" />
+      <xsd:complexType name="IdentificacionSubProducto_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idSubProducto" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador único técnico del subproducto</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="idSubProductoPublico" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador único comercial del subproducto</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="IdentificacionLOB_TYPE" type="IdentificacionLOB_TYPE" />
+      <xsd:complexType name="IdentificacionLOB_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idLOB" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador único técnico de la linea de negocio</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="idLOBPublico" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador único comercial de la linea de negocio</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="LOB_TYPE" type="LOB_TYPE" />
+      <xsd:complexType name="LOB_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que permite agrupar los diferentes productos que ofrece AXA COLPATRIA. Por ejemplo, Línea de Negocio en Salud. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombreLob" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Nombre de la línea de negocio</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="identificacionLOB" type="IdentificacionLOB_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Producto_TYPE" type="Producto_TYPE" />
+      <xsd:complexType name="Producto_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa los diferentes productos que ofrece AXA COLPATRIA a sus clientes. Por ejemplo, para la línea de salud, existen 2 productos: Medicina Prepagada, y H y C. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombreProducto" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Nombre del producto</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="lob" type="LOB_TYPE" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="identificacionProducto" type="IdentificacionProducto_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="SubProducto_TYPE" type="SubProducto_TYPE" />
+      <xsd:complexType name="SubProducto_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa los planes específicos que existen para cada uno de los productos que ofrece AXA COLPATRIA a sus clientes. Por ejemplo, para el producto de Medicina Prepagada se tiene el subproducto Fesalud. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombreSubProducto" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Nombre del subproducto</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="producto" type="Producto_TYPE" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="identificacionSubProducto" type="IdentificacionSubProducto_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/DPW/xsd/base/2017/03/31" xmlns:dir="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:cnt="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" xmlns:per="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31">
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="Monto_TYPE" type="Monto_TYPE" />
+      <xsd:complexType name="Monto_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto común para representar movimientos financieros</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="moneda" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Código de moneda en la que se realizó el movimiento financiero</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="monto" type="xsd:float">
+            <xsd:annotation>
+              <xsd:documentation>Monto total del movimiento financiero</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Vigencia_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Vigencia del contrato</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="diasDuracion" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaEstimadaInicio" type="xsd:date">
+            <xsd:annotation>
+              <xsd:documentation>Fecha en la que se estima que inicie el contrato</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaFinal" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:documentation>Fecha en la que finaliza el contrato</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaInicio" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:documentation>Fecha efectiva de inicio de contrato</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaRenovacion" type="xsd:dateTime" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="identificacionVigencia" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Pago_TYPE" type="Pago_TYPE" />
+      <xsd:complexType name="Pago_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que corresponde a los pagos que realiza Colpatria a otras personas, ya sean naturales o jurídicas. 
+Pagos a Proveedores: Pago a los proveedores por prestar diferentes servicios requeridos por un siniestro. 
+Pagos a Clientes Directos o Indirectos: Pago de prestaciones económicas requeridas por un siniestro. Por ejemplo una pensión por una pérdida de capacidad debido a un accidente laboral (ARL). 
+Pagos a Clientes Directos por Devolución: Devoluciones de dinero al cliente directo. 
+Pagos de Contratos de Capitalización: Cuando el contrato finaliza, se entrega al cliente el capital más los intereses. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="beneficiarioPago_TYPE" type="per:Persona_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcion" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="estadoPago" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="fechaPago" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idPago" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="tipoPago" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="valorPagado" type="Monto_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="beneficiarioPago" type="per:PersonaRol_TYPE" />
+          <xsd:element minOccurs="0" name="mora">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="saldoMora" type="xsd:double" />
+                <xsd:element name="fechaDesdeMora" type="xsd:string" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="ultimaFechaPago" type="xsd:string" />
+          <xsd:element minOccurs="0" name="fechaProximoPago" type="xsd:string" />
+          <xsd:element minOccurs="0" name="valorTotalPagar" type="xsd:string" />
+          <xsd:element minOccurs="0" name="frecuenciaPago" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Ciudad_TYPE" type="Ciudad_TYPE" />
+      <xsd:complexType name="Ciudad_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nombre" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="departamento" type="Departamento_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Departamento_TYPE" type="Departamento_TYPE" />
+      <xsd:complexType name="Departamento_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nombre" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="pais" type="Pais_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Pais_TYPE" type="Pais_TYPE" />
+      <xsd:complexType name="Pais_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nombre" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Consulta_Type" type="Consulta_Type" />
+      <xsd:complexType name="Consulta_Type">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="Tipo" type="xsd:short" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Mensaje_TYPE" type="Mensaje_TYPE" />
+      <xsd:complexType name="Mensaje_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="parametersBodyEmail" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="idEvento" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:com="http://axacolpatria.co/DPW/xsd/base/2017/03/31" targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31">
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="Direccion_TYPE" type="Direccion_TYPE" />
+      <xsd:complexType name="Direccion_TYPE">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <xsd:element minOccurs="0" maxOccurs="1" name="barrio" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="calle" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="carrera" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="casaNr" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="construccionNr" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="interior" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="lineaDireccion1" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="lineaDireccion2" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="localidad" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="ciudad" type="com:Ciudad_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="geolocalizacion" type="Geolocalizacion_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Geolocalizacion_TYPE" type="Geolocalizacion_TYPE" />
+      <xsd:complexType name="Geolocalizacion_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="Localizacion_TYPE">
+            <xsd:sequence />
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Localizacion_TYPE" type="Localizacion_TYPE" />
+      <xsd:complexType name="Localizacion_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="latitud" type="xsd:float" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="longitud" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="tipoLocalizacion" type="TipoLocalizacion_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="TipoLocalizacion_TYPE">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="APPROXIMATE" />
+          <xsd:enumeration value="GEOMETRIC_CENTER" />
+          <xsd:enumeration value="RANGE_INTERPOLATED" />
+          <xsd:enumeration value="ROOFTOP" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" xmlns:dir="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:com="http://axacolpatria.co/DPW/xsd/base/2017/03/31" xmlns:per="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31">
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:simpleType name="TipoServicio_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Tipo de servicio: Asistencia, Procedimiento Medico y Servicio Siniestro</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Asistencia" />
+          <xsd:enumeration value="Procedimiento Medico" />
+          <xsd:enumeration value="Servicio Siniestro" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Autorizacion_TYPE" type="Autorizacion_TYPE" />
+      <xsd:complexType name="Autorizacion_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa la aprobación de un Servicio. Normalmente las autorizaciones se utilizan en los productos de Salud, para garantizar que los servicios que se realicen, estén dentro de la cobertura del contrato. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="descripcionAutorizacion" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idAutorizacion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Servicio_TYPE" type="Servicio_TYPE" />
+      <xsd:complexType name="Servicio_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa los diversos servicios que ofrece AXA COLPATRIA asociados a sus productos o resultado de un servicio ofrecido en un siniestro. Los Servicios se clasifican en: Servicios de Siniestro, Asistencias y Procedimientos Técnicos. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ServicioId_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="1" maxOccurs="1" name="descripcion" type="xsd:string" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="estadoServicio" type="xsd:string" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="fechaCreacion" type="xsd:date" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaFin" type="xsd:date" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ultimaActualizacion" type="xsd:date" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="servicioRelacionado" type="Servicio_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="evento" type="Evento_TYPE" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="tipoServicio" type="TipoServicio_TYPE" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="autorizacion" type="Autorizacion_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="encuestaSatisfaccion" type="EncuestaSatisfaccion_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="pagosAsociados" type="com:Pago_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="involucrado" type="InvolucradoServicio_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Evento_TYPE" type="Evento_TYPE" />
+      <xsd:complexType name="Evento_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa todas las actividades involucradas en la prestación de un servicio, o actividades vinculadas a una solicitud. Por ejemplo: Notificación al Cliente, Entrega de Documentos, Compra de Partes, Entrega del Vehículo, Entrada del Vehículo al Taller, entre otras. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="descripcionEvento" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="estadoEvento" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="fechaEvento" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idEvento" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nombreEvento" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="tipoEvento" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ubicacionEvento" type="dir:Direccion_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="EncuestaSatisfaccion_TYPE" type="EncuestaSatisfaccion_TYPE" />
+      <xsd:complexType name="EncuestaSatisfaccion_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa una encuesta de satisfacción que diligencia una persona para evaluar un servicio particular con AXA COLPATRIA o en general la atención al cliente frente a un siniestro. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idEncuesta" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ServicioId_TYPE" type="ServicioId_TYPE" />
+      <xsd:complexType name="ServicioId_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idServicio" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="idServicioPublico" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="InvolucradoServicio_TYPE" type="InvolucradoServicio_TYPE" />
+      <xsd:complexType name="InvolucradoServicio_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="tercero" type="per:PersonaRol_TYPE" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="rolInvolucradoServicio" type="RolInvolucradoServicio_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="RolInvolucradoServicio_TYPE">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Beneficiario" />
+          <xsd:enumeration value="Proveedor" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema xmlns:cnt="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" xmlns:com="http://axacolpatria.co/DPW/xsd/base/2017/03/31" xmlns:per="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" xmlns:ser="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" xmlns:dir="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31">
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="EcuestaSatisfaccion_TYPE" type="EcuestaSatisfaccion_TYPE" />
+      <xsd:complexType name="EcuestaSatisfaccion_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idEncuesta" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Concepto de negocio que representa una encuesta de satisfacción que diligencia una persona para evaluar un servicio particular con AXA COLPATRIA o en general la atención al cliente frente a un siniestro. </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="SiniestroDetalle_TYPE" type="SiniestroDetalle_TYPE" />
+      <xsd:complexType name="SiniestroDetalle_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="Siniestro_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="notificacionSiniestro" type="AvisoSiniestro_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="coberturaAfectada" type="Cobertura_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="servicioSiniestro" type="ser:Servicio_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="encuestaSatisfaccion" type="EcuestaSatisfaccion_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="valorEstimado" type="com:Monto_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="reserva" type="com:Monto_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="InvolucradoSiniestro_TYPE" type="InvolucradoSiniestro_TYPE" />
+      <xsd:complexType name="InvolucradoSiniestro_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="involucrado" type="per:PersonaRol_TYPE" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="rolInvolucradoSiniestro" type="RolInvolucradoSiniestro_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="RolInvolucradoSiniestro_TYPE">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Notificante" />
+          <xsd:enumeration value="Afectado" />
+          <xsd:enumeration value="Reclamante" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Siniestro_TYPE" type="Siniestro_TYPE" />
+      <xsd:complexType name="Siniestro_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa la materialización del Riesgo asociado a un contrato con AXA COLPATRIA. Es cuando sucede lo que se está amparado en la póliza o contrato y es motivo de indemnización. Por ejemplo, un robo, un choque, una enfermedad o accidente, un incendio, entre otros. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="SiniestroId_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="descripcion" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaAviso" type="xsd:date" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaCierre" type="xsd:date" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaCreacion" type="xsd:date" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaEstado" type="xsd:date" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="fechaPerdidaSiniestro" type="xsd:date" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="tipoSiniestro" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ubicacionSiniestro" type="dir:Direccion_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="estadoSiniestro" type="EstadoSiniestro_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="involucrados" type="per:PersonaRol_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="involucrado" type="InvolucradoSiniestro_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="SiniestroId_TYPE" type="SiniestroId_TYPE" />
+      <xsd:complexType name="SiniestroId_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Identificación única del siniestro</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idSiniestro" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="idSiniestroPublico" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="EstadoSiniestro_TYPE" type="EstadoSiniestro_TYPE" />
+      <xsd:complexType name="EstadoSiniestro_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Estado del siniestro</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcionEstado" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="idEstado" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="AvisoSiniestro_TYPE" type="AvisoSiniestro_TYPE" />
+      <xsd:complexType name="AvisoSiniestro_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa la notificación que realiza una persona natural para registrar la ocurrencia de un siniestro asociado a un contrato que se tiene con AXA COLPATRIA. El aviso de siniestro puede ser notificado por cualquier persona, no necesariamente debe ser el cliente directo o indirecto. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaNotificacion" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="idNotificacion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="perdidaMaterializada" type="PerdidaSiniestro_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PerdidaSiniestro_TYPE" type="PerdidaSiniestro_TYPE" />
+      <xsd:complexType name="PerdidaSiniestro_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Materialización del siniestro</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaPerdida" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="horaPerdida" type="xsd:time" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="tipoPerdida" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ubicacionPerdida" type="dir:Direccion_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Cobertura_TYPE" type="Cobertura_TYPE" />
+      <xsd:complexType name="Cobertura_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Este concepto de negocio especifica el alcance de los riesgos que se cubren con el contrato. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="idCobertura" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="deducible" type="com:Monto_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="limite" type="com:Monto_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:com="http://axacolpatria.co/DPW/xsd/base/2017/03/31" targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31">
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="MetodoPago_TYPE" type="MetodoPago_TYPE" />
+      <xsd:complexType name="MetodoPago_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="estado" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Cuenta_TYPE" type="Cuenta_TYPE" />
+      <xsd:complexType name="Cuenta_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="banco" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="estadoCuenta" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="idCuenta" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="moneda" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="oficina" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="pais" type="com:Pais_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="MetodoTarjetaCredito_TYPE" type="MetodoTarjetaCredito_TYPE" />
+      <xsd:complexType name="MetodoTarjetaCredito_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="MetodoPago_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="autorizacionId" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="numeroTarjeta" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="MetodoEfectivo_TYPE" type="MetodoEfectivo_TYPE" />
+      <xsd:complexType name="MetodoEfectivo_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="MetodoPago_TYPE">
+            <xsd:sequence />
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="MetodoTransferencia_TYPE" type="MetodoTransferencia_TYPE" />
+      <xsd:complexType name="MetodoTransferencia_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="MetodoPago_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="cuenta" type="Cuenta_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="MetodoTarjetaDebito_TYPE" type="MetodoTarjetaDebito_TYPE" />
+      <xsd:complexType name="MetodoTarjetaDebito_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="MetodoPago_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaCreacion" type="xsd:date" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ultimoDebito" type="xsd:date" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="cuenta" type="Cuenta_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="MetodoFinanciamiento_TYPE" type="MetodoFinanciamiento_TYPE" />
+      <xsd:complexType name="MetodoFinanciamiento_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="MetodoPago_TYPE">
+            <xsd:sequence />
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" xmlns:dir="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:cnt="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" xmlns:per="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31">
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="Cliente_TYPE" type="Cliente_TYPE" />
+      <xsd:complexType name="Cliente_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Persona, ya sea natural o jurídica, que tenga una relación (rol de cliente) con un contrato vigente de AXA COLPATRIA.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="per:PersonaRol_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="personaDetalle">
+                <xsd:complexType>
+                  <xsd:complexContent mixed="false">
+                    <xsd:extension base="per:PersonaDetalle_TYPE" />
+                  </xsd:complexContent>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns:met="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" xmlns:sin="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" xmlns:com="http://axacolpatria.co/DPW/xsd/base/2017/03/31" xmlns:per="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" xmlns:cli="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" xmlns:ser="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" xmlns:prd="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:ns0="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" xmlns="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" xmlns:dir="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31">
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="ClienteContrato_TYPE" type="ClienteContrato_TYPE" />
+      <xsd:complexType name="ClienteContrato_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="cliente" type="cli:Cliente_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="rolClienteContrato" type="RolClienteContrato_TYPE" />
+          <xsd:element minOccurs="0" name="vigenciaClienteContrato" type="Vigencia_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Contrato_TYPE" type="Contrato_TYPE" />
+      <xsd:complexType name="Contrato_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa el contrato que realiza un cliente directo con AXA COLPATRIA, para la adquisición de los servicios de un producto específico. El contrato tiene validez legal y garantiza que el cliente tiene un producto con la empresa. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ContratoId_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="descripcionRiesgo" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Describe los riesgos sobre el bien que se va a cubrir</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaCancelacion" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha de cancelación del contrato</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaCreacion" type="xsd:date">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha de creación del contrato</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaRehabilitacion" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha de rehabilitación del contrato</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="subProducto" type="prd:SubProducto_TYPE">
+                <xsd:annotation>
+                  <xsd:documentation>Subproducto asociado al contrato</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="ultimaAccion" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Última modificación del contrato</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="tipoContrato" type="TipoContrato_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="vigenciaContrato" type="Vigencia_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="estadoContrato" type="EstadoContrato_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="impuestos" type="com:Monto_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="valorTotal" type="com:Monto_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="clienteContrato" type="ClienteContrato_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="tercero" type="TerceroContrato_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="idSurcursal" type="xsd:string" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="nombreSurcursal" type="xsd:string" />
+              <xsd:element ref="Regional_TYPE" />
+              <xsd:element minOccurs="0" name="Pago" type="com:Pago_TYPE" />
+              <xsd:element minOccurs="0" name="Asociativo" type="Asociativo_TYPE" />
+              <xsd:element minOccurs="0" name="numUsuarios" type="xsd:string" />
+              <xsd:element minOccurs="0" name="numSubContratantes" type="xsd:string" />
+              <xsd:element minOccurs="0" name="nombrePlan" type="xsd:string" />
+              <xsd:element minOccurs="0" name="Cuota" type="Cuota_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:simpleType name="TipoContrato_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que corresponde al tipo de contrato. En este concepto se especifica si es un “Contrato Colectivo” o si es un “Contrato Familiar”. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Familiar" />
+          <xsd:enumeration value="Colectivo" />
+          <xsd:enumeration value="Agrupadora" />
+          <xsd:enumeration value="Codigo Asociativo" />
+          <xsd:enumeration value="Individual" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Vigencia_TYPE" type="Vigencia_TYPE" />
+      <xsd:complexType name="Vigencia_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Vigencia del contrato</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaEstimadaInicio" type="xsd:date">
+            <xsd:annotation>
+              <xsd:documentation>Fecha en la que se estima que inicie el contrato</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaFinal" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:documentation>Fecha en la que finaliza el contrato</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaInicio" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:documentation>Fecha efectiva de inicio de contrato</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaCreacion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaRehabilitacion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="DetalleContrato_TYPE" type="DetalleContrato_TYPE" />
+      <xsd:complexType name="DetalleContrato_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Información adicional del contrato</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="Contrato_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="metodoPago" type="FormaPago_TYPE" />
+              <xsd:choice minOccurs="0" maxOccurs="1">
+                <xsd:element minOccurs="0" maxOccurs="1" name="acuerdoPago" type="Financiacion_TYPE" />
+                <xsd:element minOccurs="0" maxOccurs="1" name="contratoFinanciacion" type="DetalleContrato_TYPE" />
+              </xsd:choice>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="servicioTecnico" type="ser:Servicio_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="inspeccion" type="Inspeccion_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="novedad" type="Novedad_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="cobertura" type="Cobertura_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="pagos" type="com:Pago_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="recaudos" type="Recaudo_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="siniestro" type="sin:Siniestro_TYPE" />
+              <xsd:element name="Vehiculo" type="ns0:Vehiculo_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="endoso" type="Endoso_TYPE" />
+              <xsd:element minOccurs="0" name="Vigencia_TYPE" type="Capitalizacion_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Inspeccion_TYPE" type="Inspeccion_TYPE" />
+      <xsd:complexType name="Inspeccion_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que corresponde a la inspección inicial que se realiza a los bienes asociados al riesgo, durante la suscripción antes de emitir el contrato para adquirir un producto. Resultado de esta inspección se obtiene un diagnóstico con el detalle de los riesgos identificados que tendría el contrato. Esta inspección es la base para generar la cotización o valor del producto. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcionInspeccion" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idInspeccion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="RolClienteContrato_TYPE">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Afianzado" />
+          <xsd:enumeration value="Empleado" />
+          <xsd:enumeration value="Asegurado" />
+          <xsd:enumeration value="Beneficiario" />
+          <xsd:enumeration value="Empleador" />
+          <xsd:enumeration value="Suscriptor" />
+          <xsd:enumeration value="SubContratante" />
+          <xsd:enumeration value="Contratante" />
+          <xsd:enumeration value="Tomador" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="TerceroContrato_TYPE" type="TerceroContrato_TYPE" />
+      <xsd:complexType name="TerceroContrato_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="tercero" type="per:Persona_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="rolTerceroContrato" type="RolTerceroContrato_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Recaudo_TYPE" type="Recaudo_TYPE" />
+      <xsd:complexType name="Recaudo_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que corresponde a los pagos que finalmente recauda AXA COLPATRIA por sus productos. Transacciones de dinero que AXA COLPATRIA recibe de sus clientes, como pago de los contratos: efectivo, acuerdo de pago o financiado. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaEfectiva" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechavencimiento" type="xsd:date" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idRecaudo" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="valorRecaudado" type="com:Monto_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="cuotaAsociada" type="Cuota_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="impuestosRecaudo" type="com:Monto_TYPE" />
+          <xsd:element minOccurs="0" name="FechaUltimoRecaudo" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="EstadoContrato_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Estado del contrato</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Renovado" />
+          <xsd:enumeration value="Embargado" />
+          <xsd:enumeration value="Abandonado" />
+          <xsd:enumeration value="Cancelado" />
+          <xsd:enumeration value="Vigente" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Novedad_TYPE" type="Novedad_TYPE" />
+      <xsd:complexType name="Novedad_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Este concepto corresponde a una modificación que afecta directamente las condiciones iniciales del contrato. Por ejemplo: Incluir un nuevo beneficiario, cambio de vehículo, cambio en la cobertura del contrato entre otras. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcionNovedad" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idNovedad" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="RolTerceroContrato_TYPE">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Distribuidor" />
+          <xsd:enumeration value="Broker" />
+          <xsd:enumeration value="Reasegurador" />
+          <xsd:enumeration value="Coasegurador" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="FormaPago_TYPE" type="FormaPago_TYPE" />
+      <xsd:complexType name="FormaPago_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Métodos de pago</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="debito" type="met:MetodoTarjetaDebito_TYPE" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="efectivo" type="met:MetodoEfectivo_TYPE" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="financiamiento" type="met:MetodoFinanciamiento_TYPE" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="tarjetaCredito" type="met:MetodoTarjetaCredito_TYPE" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="transferencia" type="met:MetodoTransferencia_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Financiacion_TYPE" type="Financiacion_TYPE" />
+      <xsd:complexType name="Financiacion_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Figura financiera cuando el cliente concreta un acuerdo de pago con AXA Colpatria para el pago del valor total del contrato.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="periodicidad" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="recaudo" type="Cuota_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Cuota_TYPE" type="Cuota_TYPE" />
+      <xsd:complexType name="Cuota_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio utilizado cuando el cliente realiza un acuerdo de pago o adquiere un producto de financiación con AXA COLPATRIA para que el pago de su contrato se realice por cuotas. El concepto de negocio cuota, especifica la información de cada una de las cuotas que se compromete el cliente a pagar. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+          <xsd:element minOccurs="1" maxOccurs="1" name="estadoCuota" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idCuota" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="cuotasPagadas" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="cuotasTranscurridas" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="valorUltimaCuota" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="valorProximaCuota" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="valorCuota" type="xsd:decimal" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Cobertura_TYPE" type="Cobertura_TYPE" />
+      <xsd:complexType name="Cobertura_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Este concepto de negocio especifica el alcance de los riesgos que se cubren con el contrato. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="idCobertura" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="tipoCobertura" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="limite" type="com:Monto_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="deducible" type="com:Monto_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="clausula" type="Clausula_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcionRiesgo" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Clausula_TYPE" type="Clausula_TYPE" />
+      <xsd:complexType name="Clausula_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Clausulas y condiciones del contrato</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcionClausula" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="idClausula" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ContratoId_TYPE" type="ContratoId_TYPE" />
+      <xsd:complexType name="ContratoId_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Identificadores únicos que representan el contrato de forma técnica y comercial</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idContrato" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador único del contrato</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="idContratoPublico" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Alias del identificador único del contrato</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Regional_TYPE">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="RegionalID">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="CodigoRegional" type="xsd:string" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Endoso_TYPE" type="Endoso_TYPE" />
+      <xsd:complexType name="Endoso_TYPE">
+        <xsd:sequence>
+          <xsd:element name="Nro_endoso" type="xsd:string" />
+          <xsd:element name="Desc_endoso" type="xsd:string" />
+          <xsd:element name="Fec_emi" type="xsd:date" />
+          <xsd:element name="Fec_vig_desde" type="xsd:date" />
+          <xsd:element name="Fec_vig_hasta" type="xsd:date" />
+          <xsd:element name="Vlr_Aseg_Endoso" type="xsd:float" />
+          <xsd:element name="Vlr_prima_endoso" type="xsd:float" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Capitalizacion_TYPE" type="Capitalizacion_TYPE" />
+      <xsd:complexType name="Capitalizacion_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa el contrato que realiza un cliente directo con AXA COLPATRIA, para la adquisición de los servicios de un producto específico. El contrato tiene validez legal y garantiza que el cliente tiene un producto con la empresa. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="Vigencia_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="NumeroTitulo" type="xsd:int" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="NumeroConsecutivo" type="xsd:string" />
+              <xsd:element minOccurs="0" name="DigitoChequeo" type="xsd:string" />
+              <xsd:element minOccurs="0" name="NumeroEmision" type="xsd:string" />
+              <xsd:element minOccurs="0" name="DescripcionTitulo" type="xsd:string" />
+              <xsd:element minOccurs="0" name="PosicionUltimoSorteo" type="xsd:string" />
+              <xsd:element minOccurs="0" name="ValorAhorro" type="xsd:double" />
+              <xsd:element minOccurs="0" name="ValorDisponible" type="xsd:double" />
+              <xsd:element minOccurs="0" name="ValorPrestado" type="xsd:double" />
+              <xsd:element minOccurs="0" name="SaldoPrestamo" type="xsd:double" />
+              <xsd:element minOccurs="0" name="Estado" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Asociativo_TYPE" type="Asociativo_TYPE" />
+      <xsd:complexType name="Asociativo_TYPE">
+        <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+          <xsd:element name="codAsociativo" type="xsd:int" />
+          <xsd:element name="nombreAsociativo" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns:cnt="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" xmlns:prd="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" xmlns:sin="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" xmlns:per="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" xmlns:con="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" xmlns:dir="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31">
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="Documento_TYPE" type="Documento_TYPE" />
+      <xsd:complexType name="Documento_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="descripcionDocumento" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="empresa" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="estadoDocumento" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="extension" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="fechaCreacion" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="identificacionContrato" type="con:ContratoId_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="identificacionSiniestro" type="sin:Siniestro_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="leido" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="subProducto" type="prd:SubProducto_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="tipoDocumento" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="tituloDocumento" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="identificacionDocumento" type="identificacionDocumento_TYPE" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="contenido" type="DocumentoFisico_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="cliente" type="per:PersonaRol_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="password" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="idExterno" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="versionDocumento" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="url" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="textoMarcaDeAgua" type="xsd:string" />
+          <xsd:element name="vigencia" type="con:Vigencia_TYPE" />
+          <xsd:element name="detalle">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="ruta" type="xsd:string" />
+                <xsd:element name="esTemporal" type="xsd:string" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="identificacionDocumento_TYPE" type="identificacionDocumento_TYPE" />
+      <xsd:complexType name="identificacionDocumento_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idDocumento" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="DocumentoFisico_TYPE" type="DocumentoFisico_TYPE" />
+      <xsd:complexType name="DocumentoFisico_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="documento" type="xsd:base64Binary" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:ns1="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31">
+      <xsd:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="PuntoContacto_TYPE" type="PuntoContacto_TYPE" />
+      <xsd:complexType name="PuntoContacto_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="esAutorizado" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="esPreferido" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Telefono_TYPE" type="Telefono_TYPE" />
+      <xsd:complexType name="Telefono_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="PuntoContacto_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="indicador" type="xsd:string" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="numero" type="xsd:float" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Email_TYPE" type="Email_TYPE" />
+      <xsd:complexType name="Email_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="PuntoContacto_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="1" maxOccurs="1" name="email" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Web_TYPE" type="Web_TYPE" />
+      <xsd:complexType name="Web_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="PuntoContacto_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="1" maxOccurs="1" name="web" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="SocialMedia_TYPE" type="SocialMedia_TYPE" />
+      <xsd:complexType name="SocialMedia_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="PuntoContacto_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="1" maxOccurs="1" name="nombreUsuario" type="xsd:string" />
+              <xsd:element minOccurs="1" maxOccurs="1" name="redSocial" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Contacto_TYPE" type="Contacto_TYPE" />
+      <xsd:complexType name="Contacto_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Este concepto de negocio hace referencia a la información de la persona natural que es el contacto de una persona jurídica. Las personas jurídicas pueden tener un listado de personas naturales de contacto. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="telefonoLaboral" type="Telefono_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="telefonoPersonal" type="Telefono_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="celularPersonal" type="Telefono_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="celularLaboral" type="Telefono_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fax" type="Telefono_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="email" type="Email_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="web" type="Web_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="socialMedia" type="SocialMedia_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" xmlns:dir="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:com="http://axacolpatria.co/DPW/xsd/base/2017/03/31" xmlns:cnt="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31">
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+      <xsd:import namespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+      <xsd:annotation>
+        <xsd:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+          </b:references>
+        </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:element name="PersonaNatural_TYPE" type="PersonaNatural_TYPE" />
+      <xsd:complexType name="PersonaNatural_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que describe a un individuo que tiene algún tipo de vinculación con AXA COLPATRIA con derechos o deberes jurídicos. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="Persona_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="1" name="cantidadHijos" type="xsd:int">
+                <xsd:annotation>
+                  <xsd:documentation>Número de hijos que tenga la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="eps" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>EPS a la que está afiliada la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="esAutoEmpleado" type="xsd:boolean">
+                <xsd:annotation>
+                  <xsd:documentation>1: La persona es autoempleado
+0: La persona no es autoempleado</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="estadoCivil" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Estado civil de la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="estrato" type="xsd:int">
+                <xsd:annotation>
+                  <xsd:documentation>Estrato de la vivienda de la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaExpedicionDocumento" type="xsd:date">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha en que expidió el documento de identificación nacional</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaNacimiento" type="xsd:date">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha de nacimiento de la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="genero" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Género: Masculino, Femenino</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="idioma" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Lengua materna de la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="ingresosAnuales" type="xsd:float">
+                <xsd:annotation>
+                  <xsd:documentation>Ingresos brutos anuales</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="nacionalidad" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Nacionalidad de la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="nivelEstudio" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Nivel máximo de estudio alcanzado por la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="profesion" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Profesión que desempeña la persona</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="tipoVivienda" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Tipo de vivienda: Propia, Arriendada, Familiar</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="1" maxOccurs="1" name="datosBasicos" type="DatosBasicosPersonaNatural_TYPE" />
+              <xsd:element minOccurs="0" name="edad" type="xsd:string" />
+              <xsd:element minOccurs="0" name="relacion" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Ocupacion_TYPE" type="Ocupacion_TYPE" />
+      <xsd:complexType name="Ocupacion_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que representa la información laboral de una persona natural. Información de sueldo, tipo de contrato, empresa donde trabaja, entre otros campos. Esta información se requiere especialmente en contratos de producto ARL. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombreEmpresa" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ocupacionDescripcion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ocupacionId" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="salario" type="xsd:float" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Educacion_TYPE" type="Educacion_TYPE" />
+      <xsd:complexType name="Educacion_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Información educativa de la persona natural</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nivelEducacion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="nivelEducacionId" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PersonaJuridica_TYPE" type="PersonaJuridica_TYPE" />
+      <xsd:complexType name="PersonaJuridica_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de Negocio que representa una organización con derechos y obligaciones, pero no como individuo, sino como institución y que es creada por una o más personas físicas para cumplir un objetivo social que puede ser con o sin ánimo de lucro. Organización que tiene algún tipo de relación con AXA COLPATRIA. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="Persona_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="accionista" type="Persona_TYPE">
+                <xsd:annotation>
+                  <xsd:documentation>Accionistas que tienen participación en la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="actividadEconomica" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Código CIIU que representa la actividad principal de la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="costos" type="xsd:float">
+                <xsd:annotation>
+                  <xsd:documentation>Costos anuales de la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="1" maxOccurs="1" name="digitoVerificacion" type="xsd:int">
+                <xsd:annotation>
+                  <xsd:documentation>Dígito de verificación que acompaña el NIT</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaConstitucion" type="xsd:date">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha en que se constituyó la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="fechaDisolucion" type="xsd:date">
+                <xsd:annotation>
+                  <xsd:documentation>Fecha en que se disolvió la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="ingresos" type="xsd:float">
+                <xsd:annotation>
+                  <xsd:documentation>Ingresos brutos anuales de la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="personaContacto" type="Persona_TYPE">
+                <xsd:annotation>
+                  <xsd:documentation>Persona de contacto dentro de la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="representanteLegal" type="RepresentanteLegal_TYPE">
+                <xsd:annotation>
+                  <xsd:documentation>Representante legal de la empresa</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="tipoEmpresa" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Tipo de empresa: SA,SAS,LTDA</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="totalEmpleados" type="xsd:int">
+                <xsd:annotation>
+                  <xsd:documentation>Cantidad total de empleados</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="1" maxOccurs="1" name="datosBasicos" type="DatosBasicosPersonaJuridica_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="ValorNomina" type="xsd:double" />
+              <xsd:element name="Direccion">
+                <xsd:complexType>
+                  <xsd:complexContent mixed="false">
+                    <xsd:extension base="dir:Direccion_TYPE" />
+                  </xsd:complexContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element minOccurs="0" maxOccurs="1" name="SectorEmpresarial" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="RepresentanteLegal_TYPE" type="RepresentanteLegal_TYPE" />
+      <xsd:complexType name="RepresentanteLegal_TYPE">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <xsd:element name="Respresentante" type="PersonaDetalle_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="InformacionFinanciera_TYPE" type="InformacionFinanciera_TYPE" />
+      <xsd:complexType name="InformacionFinanciera_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que corresponde a toda la información financiera de una persona. Este concepto encierra toda la información que se solicita a las personas para SARLAF: Ingresos, Egresos, Productos en el Exterior, Administración de Dinero Público, entre otros. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="actividadesMonedaExxtranjera" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="activos" type="xsd:float" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="administraRecursosPublicos" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="cuentasMonedaExtranjera" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="declaracionTributariaOtrosPaises" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="egresos" type="xsd:float" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ejerceCargoPoderPublico" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ingresos" type="xsd:float" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="otrosIngresos" type="xsd:float" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="pasivos" type="xsd:float" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="productosFinancierosExterior" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="reconocimientoPublico" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="operacionesInternacionales" type="OperacionInternacional_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="productosFinancierosExtranjero" type="ProductoFinancieroExterior_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="actividadEconomica" type="ActividadEconomica_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="puntajeCrediticio" type="PuntajeCrediticio_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PersonaDetalle_TYPE" type="PersonaDetalle_TYPE" />
+      <xsd:complexType name="PersonaDetalle_TYPE">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="PersonaRol_TYPE">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="ocupacion" type="Ocupacion_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="unbounded" name="educacion" type="Educacion_TYPE" />
+              <xsd:element minOccurs="0" maxOccurs="1" name="informacionFinanciera" type="InformacionFinanciera_TYPE" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="ActividadEconomica_TYPE" type="ActividadEconomica_TYPE" />
+      <xsd:complexType name="ActividadEconomica_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Actividad económica dado por los codigos CIIU de la superintendencia financiera de colombia</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="descripcion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PuntajeCrediticio_TYPE" type="PuntajeCrediticio_TYPE" />
+      <xsd:complexType name="PuntajeCrediticio_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Puntaje Crediticio calculado por las entidades de riesgo bancarias.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="tipo" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="puntaje" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="clasificacion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="razones" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="IdentificacionPersona_TYPE" type="IdentificacionPersona_TYPE" />
+      <xsd:complexType name="IdentificacionPersona_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Identificador único de la persona</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="identificacion" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Número de identificación de la persona</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="tipoIdentificacion" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Tipo de identificación de la persona</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="DatosBasicosPersonaJuridica_TYPE" type="DatosBasicosPersonaJuridica_TYPE" />
+      <xsd:complexType name="DatosBasicosPersonaJuridica_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Nombres que identifican a la persona jurídica, se coloca como un TYPE para ser utilizado como filtros de busqueda como un conjunto de llaves</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombreComercial" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Nombre comercial de la empresa</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="razonSocial" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Razón social de la empresa</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="DatosBasicosPersonaNatural_TYPE" type="DatosBasicosPersonaNatural_TYPE" />
+      <xsd:complexType name="DatosBasicosPersonaNatural_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="nombreCompleto" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="primerApellido" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="primerNombre" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="segundoApellido" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="segundoNombre" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="InformacionLaboral_TYPE" type="InformacionLaboral_TYPE" />
+      <xsd:complexType name="InformacionLaboral_TYPE">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="cargo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nombreEmpresa" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="salario" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Persona_TYPE" type="Persona_TYPE" />
+      <xsd:complexType name="Persona_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que describe a una persona, ya sea natural o jurídica, que tenga algún tipo de relación con AXA COLPATRIA. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="personaId" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>Identificador único de persona. Este identificador es sólo de uso técnico y representa el id de una persona dentro de una base de datos o de un sistema particular.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" name="identificacion" type="IdentificacionPersona_TYPE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="OperacionInternacional_TYPE" type="OperacionInternacional_TYPE" />
+      <xsd:complexType name="OperacionInternacional_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Operaciones Internacionales</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Nombre" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ProductoFinancieroExterior_TYPE" type="ProductoFinancieroExterior_TYPE" />
+      <xsd:complexType name="ProductoFinancieroExterior_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Productos ajenos a AXA Colpatria que tenga asociado el cliente en el exterior</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="entidadBancaria" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="moneda" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="montoProducto" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="NumeroProducto" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="paisProducto" type="com:Pais_TYPE" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="tipoProducto" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PersonaRol_TYPE" type="PersonaRol_TYPE" />
+      <xsd:complexType name="PersonaRol_TYPE">
+        <xsd:annotation>
+          <xsd:documentation>Concepto de negocio que describe a una persona, ya sea natural o jurídica, que tenga algún tipo de relación con AXA COLPATRIA. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="contactoPrincipal" type="cnt:Contacto_TYPE">
+            <xsd:annotation>
+              <xsd:documentation>Información de contacto principal de la persona</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="1" name="direccionPrincipal" type="dir:Direccion_TYPE">
+            <xsd:annotation>
+              <xsd:documentation>Dirección principal de la persona</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:choice minOccurs="1" maxOccurs="1">
+            <xsd:element minOccurs="0" name="empresa" type="PersonaJuridica_TYPE" />
+            <xsd:element minOccurs="0" name="persona" type="PersonaNatural_TYPE" />
+          </xsd:choice>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xs:schema xmlns:ve="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" xmlns:per="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" xmlns:mo="http://axacolpatria.co/xsd/base" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Infracciones/2017/06/22" targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Infracciones/2017/06/22" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/xsd/base" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+      <xs:annotation>
+        <xs:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/Servicios/Negocio/Persona" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base/direccion" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base/contacto" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+          </b:references>
+        </xs:appinfo>
+      </xs:annotation>
+      <xs:element name="InfraccionInfo_TYPE" nillable="true" type="InfraccionInfo_TYPE" />
+      <xs:complexType name="InfraccionInfo_TYPE">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="IdentificacionInfraccion" type="IdentificacionInfraccion_TYPE" />
+          <xs:element minOccurs="0" maxOccurs="1" name="EstadoComparendo" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="FechaComparendo" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Secretaria" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Vehiculo" type="ve:Vehiculo_TYPE" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Monto" type="mo:Monto_TYPE" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IdentificacionComparendo" type="IdentificacionComparendo_TYPE" />
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:element name="Persona" type="per:PersonaNatural_TYPE" />
+            <xs:element name="Empresa" type="per:PersonaJuridica_TYPE" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="IdentificacionInfraccion_TYPE" type="IdentificacionInfraccion_TYPE" />
+      <xs:complexType name="IdentificacionInfraccion_TYPE">
+        <xs:sequence>
+          <xs:element name="Codigo" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="IdentificacionComparendo_TYPE" type="IdentificacionComparendo_TYPE" />
+      <xs:complexType name="IdentificacionComparendo_TYPE">
+        <xs:sequence>
+          <xs:element name="IdComparendo" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:veh="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" xmlns:per="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" xmlns:inf="http://General.Esquemas.DPW.DPW_Infracciones" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:ns0="http://axacolpatria.co/MensajeNegocio/DominioPersona/consultarInfraccionesReq/1.0" xmlns="http://AXAColpatria.InfraccionAutosTercerosPersona.Esquemas.consultarInfraccionesReq" xmlns:enc="http://axacolpatria.co/DPW/Servicios/Base/EncabezadosSOA/2017/03/31" targetNamespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/consultarInfraccionesReq/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Base/EncabezadosSOA/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Infracciones/2017/06/22" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+      <xs:annotation>
+        <xs:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/Servicios/Negocio/Persona" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Infracciones/2017/06/22" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Base/EncabezadosSOA/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base/direccion" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base/contacto" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+          </b:references>
+        </xs:appinfo>
+      </xs:annotation>
+      <xs:element name="consultarInfraccionesReq">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="HEADER" type="enc:EncabezadoEntrada" />
+            <xs:element minOccurs="1" maxOccurs="1" name="BODY" type="per:Persona_TYPE" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns="http://axacolpatria.co/MensajeNegocio/DominioPersona/consultarInfraccionesResp/1.0" xmlns:enc="http://axacolpatria.co/DPW/Servicios/Base/EncabezadosSOA/2017/03/31" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:ns0="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Infracciones/2017/06/22" targetNamespace="http://axacolpatria.co/MensajeNegocio/DominioPersona/consultarInfraccionesResp/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Base/EncabezadosSOA/2017/03/31" />
+      <xs:import namespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Infracciones/2017/06/22" />
+      <xs:annotation>
+        <xs:appinfo>
+          <b:references>
+            <b:reference targetNamespace="http://axacolpatria.co/Servicios/Negocio/Persona" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Contrato/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/direccion/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Documento/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Infracciones/2017/06/22" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Servicios/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Persona/Cliente/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/contacto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/metodopago/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Base/EncabezadosSOA/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Producto/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Vehiculo/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base/direccion" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/xsd/base/2017/03/31" />
+            <b:reference targetNamespace="http://axacolpatria.co/xsd/base/contacto" />
+            <b:reference targetNamespace="http://axacolpatria.co/DPW/Servicios/Negocio/Siniestro/2017/03/31" />
+          </b:references>
+        </xs:appinfo>
+      </xs:annotation>
+      <xs:element name="consultarInfraccionesResp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="HEADER" type="enc:EncabezadoSalida" />
+            <xs:element minOccurs="0" maxOccurs="1" name="BODY">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="1" maxOccurs="unbounded" name="Infraccion" type="ns0:InfraccionInfo_TYPE" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="Infraccion_ConsultarInfraccion_InputMessage">
+    <wsdl:part xmlns:q1="http://axacolpatria.co/MensajeNegocio/DominioPersona/consultarInfraccionesReq/1.0" name="part" element="q1:consultarInfraccionesReq" />
+  </wsdl:message>
+  <wsdl:message name="Infraccion_ConsultarInfraccion_OutputMessage">
+    <wsdl:part xmlns:q2="http://axacolpatria.co/MensajeNegocio/DominioPersona/consultarInfraccionesResp/1.0" name="part" element="q2:consultarInfraccionesResp" />
+  </wsdl:message>
+  <wsdl:portType name="Infraccion">
+    <wsdl:documentation />
+    <wsdl:operation name="ConsultarInfraccion">
+      <wsdl:documentation />
+      <wsdl:input message="tns:Infraccion_ConsultarInfraccion_InputMessage" />
+      <wsdl:output message="tns:Infraccion_ConsultarInfraccion_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITwoWayAsync" type="tns:Infraccion">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultarInfraccion">
+      <wsdl:documentation />
+      <soap:operation soapAction="ConsultarInfraccion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BizTalkServiceInstance">
+    <wsdl:port name="BasicHttpBinding_ITwoWayAsync" binding="tns:BasicHttpBinding_ITwoWayAsync">
+      <soap:address location="http://win-opiibdjuur5/AXAColpatria/Utilidad/Infraccion/Infraccion.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

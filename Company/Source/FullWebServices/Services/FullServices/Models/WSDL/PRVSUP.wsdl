@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sistran.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://sistran.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sistran.com/">
+      <s:element name="SearchPerson">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="resquestSearch" type="tns:ResquestSearch" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResquestSearch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cod_Rol" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="idRol" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nro_documento" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="tipo_doc" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ID_user" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchPersonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchPersonResult" type="tns:ArrayOfResponseSearch" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfResponseSearch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ResponseSearch" nillable="true" type="tns:ResponseSearch" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ResponseSearch">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Identity" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdRol" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Rol" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Codigo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdPersona" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoDoc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Documento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreRS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoPersona" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CodAbona" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CodTipoDoc" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Activo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Apellido1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Apellido2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CodigoCiiu" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AuthenticationSup" type="tns:AuthenticationSup" />
+      <s:complexType name="AuthenticationSup">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IdAplication" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="KeyAplication" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SearchPersonSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchPerson" />
+  </wsdl:message>
+  <wsdl:message name="SearchPersonSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchPersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchPersonAuthenticationSup">
+    <wsdl:part name="AuthenticationSup" element="tns:AuthenticationSup" />
+  </wsdl:message>
+  <wsdl:portType name="PRVSUPSoap">
+    <wsdl:operation name="SearchPerson">
+      <wsdl:input message="tns:SearchPersonSoapIn" />
+      <wsdl:output message="tns:SearchPersonSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PRVSUPHttpGet" />
+  <wsdl:portType name="PRVSUPHttpPost" />
+  <wsdl:binding name="PRVSUPSoap" type="tns:PRVSUPSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SearchPerson">
+      <soap:operation soapAction="http://sistran.com/SearchPerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SearchPersonAuthenticationSup" part="AuthenticationSup" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PRVSUPSoap12" type="tns:PRVSUPSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SearchPerson">
+      <soap12:operation soapAction="http://sistran.com/SearchPerson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SearchPersonAuthenticationSup" part="AuthenticationSup" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PRVSUPHttpGet" type="tns:PRVSUPHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="PRVSUPHttpPost" type="tns:PRVSUPHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="PRVSUP">
+    <wsdl:port name="PRVSUPSoap" binding="tns:PRVSUPSoap">
+      <soap:address location="http://servidor/linea/FullWebServices/SUP/PRVSUP.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PRVSUPSoap12" binding="tns:PRVSUPSoap12">
+      <soap12:address location="http://servidor/linea/FullWebServices/SUP/PRVSUP.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PRVSUPHttpGet" binding="tns:PRVSUPHttpGet">
+      <http:address location="http://servidor/linea/FullWebServices/SUP/PRVSUP.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PRVSUPHttpPost" binding="tns:PRVSUPHttpPost">
+      <http:address location="http://servidor/linea/FullWebServices/SUP/PRVSUP.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
