@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TempRiskVehiclePrintingView">
+  <collections>
+    <collection name="TempRisk" type="Sistran.Core.Application.Temporary.Entities.TempRisk, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskVehicle" type="Sistran.Core.Application.Temporary.Entities.TempRiskVehicle, 
+                Core.Temporary.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="TempRisk" destination="TempRiskVehicle" name="TempRiskTempRiskVehicle" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+  </relations>
+</view>

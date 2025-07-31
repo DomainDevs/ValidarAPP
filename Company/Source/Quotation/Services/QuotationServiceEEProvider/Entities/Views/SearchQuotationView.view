@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="SearchQuotationView">
+  <collections>
+    <collection name="TempSubscription" type="Sistran.Core.Application.Temporary.Entities.TempSubscription, 
+                 Core.Temporary.Entities"></collection>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, 
+                 Core.Common.Entities"></collection>
+    <collection name="Product" type="Sistran.Core.Application.Product.Entities.Product, 
+                 Core.Product.Entities"></collection>
+    <collection name="TempRiskCoverage" type="Sistran.Core.Application.Temporary.Entities.TempRiskCoverage, 
+                 Core.Temporary.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                 Core.Common.Entities"></collection>
+    <collection name="TempPayerComponent" type="Sistran.Core.Application.Temporary.Entities.TempPayerComponent, 
+                 Core.Temporary.Entities"></collection>
+    <collection name="TempRiskVehicle" type="Sistran.Core.Application.Temporary.Entities.TempRiskVehicle, 
+                 Core.Temporary.Entities"></collection>
+  </collections>
+  
+  
+  
+  <relations>
+    <relation source="Branch" destination="TempSubscription" name="TempSubscriptionBranch" type="Inner">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="Product" destination="TempSubscription" name="ProductTempSubscription" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="TempRiskCoverage" destination="TempSubscription" name="TempRiskCoverageTempSubscription" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+    </relation>
+    <relation source="Prefix" destination="TempSubscription" name="PrefixTempSubscription" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="TempPayerComponent" destination="TempSubscription" name="TempPayerComponentTempSubscription" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+    </relation>
+    <relation source="TempRiskVehicle" destination="TempSubscription" name="TempRiskVehicleTempSubscription" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+    </relation>
+  </relations>
+</view>

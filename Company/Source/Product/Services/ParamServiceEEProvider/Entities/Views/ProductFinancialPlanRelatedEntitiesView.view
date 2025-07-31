@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ProductFinancialPlanRelatedEntitiesView">
+	<collections>
+		<collection name="ProductFinancialPlan" type="Sistran.Core.Application.Product.Entities.ProductFinancialPlan, Core.Product.Entities"></collection>
+		<collection name="FinancialPlan" type="Sistran.Core.Application.Product.Entities.FinancialPlan, Core.Product.Entities"></collection>
+		<collection name="PaymentMethod" type="Sistran.Core.Application.Common.Entities.PaymentMethod, Core.Common.Entities"></collection>
+		<collection name="PaymentSchedule" type="Sistran.Core.Application.Product.Entities.PaymentSchedule, Core.Product.Entities"></collection>
+		<collection name="Currency" type="Sistran.Core.Application.Common.Entities.Currency, Core.Common.Entities"></collection>
+	</collections>
+	<relations>
+		<relation source="ProductFinancialPlan" destination="FinancialPlan" name="ProductFinancialPlanFinancialPlan" type="Inner">
+			<property left="FinancialPlanId" type="Equal" right="FinancialPlanId"></property>
+		</relation>
+		<relation source="FinancialPlan" destination="Currency" name="FinancialPlanCurrency" type="Inner">
+			<property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+		</relation>
+		<relation source="FinancialPlan" destination="PaymentMethod" name="PaymentMethodFinancialPlan" type="Inner">
+			<property left="PaymentMethodCode" type="Equal" right="PaymentMethodCode"></property>
+		</relation>
+		<relation source="FinancialPlan" destination="PaymentSchedule" name="PaymentScheduleFinancialPlan" type="Inner">
+			<property left="PaymentScheduleId" type="Equal" right="PaymentScheduleId"></property>
+		</relation>
+
+	</relations>
+</view>

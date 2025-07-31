@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskVehiclePrintingView">
+  <collections>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskVehicle" type="Sistran.Core.Application.Issuance.Entities.RiskVehicle, 
+                Core.Issuance.Entities"></collection>
+
+  </collections>
+  <relations>
+    <relation source="EndorsementRisk" destination="RiskVehicle" name="EndorsementRiskVehicle" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+
+  </relations>
+</view>

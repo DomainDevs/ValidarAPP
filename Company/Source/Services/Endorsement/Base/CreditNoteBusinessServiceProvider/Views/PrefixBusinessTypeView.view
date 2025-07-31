@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PrefixBusinessTypeView">
+  <collections>
+    <collection name="PrefixBusinessType" type="Sistran.Core.Application.Common.Entities.PrefixBusinessType, 
+                Core.Common.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="PrefixBusinessType" destination="Policy" name="PrefixBusinessTypePolicy" type="Left">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+      <property left="BusinessTypeCode" type="Equal" right="BusinessTypeCode"></property>
+    </relation>
+  </relations>
+</view>

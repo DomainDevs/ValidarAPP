@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="UtilitysDetailsView">
+  <collections>
+    <collection name="UtilityDetails" type="Sistran.Company.Application.Parameters.Entities.UtilityDetails, 
+                Company.Parameters.Entities"></collection>
+    <collection name="UtilitySummary" type="Sistran.Company.Application.Parameters.Entities.UtilitySummary, 
+                Company.Parameters.Entities"></collection>
+    <collection name="UtilityType" type="Sistran.Company.Application.Parameters.Entities.UtilityType, 
+                Company.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="UtilityDetails" destination="UtilitySummary" name="UtilityDetailsSummary" type="Left">
+      <property left="UtilitySummaryCode" type="Equal" right="UtilitySummaryCode"></property>
+    </relation>
+    <relation source="UtilityDetails" destination="UtilityType" name="UtilityDetailsType" type="Left">
+      <property left="UtilityTypeCode" type="Equal" right="UtilityTypeCode"></property>
+    </relation>
+  </relations>
+</view>

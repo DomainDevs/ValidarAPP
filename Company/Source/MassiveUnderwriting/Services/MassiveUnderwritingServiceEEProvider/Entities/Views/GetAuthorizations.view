@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CompanyMassiveUnderwritingGetAuthorizations">
+  <collections>
+
+    <collection name="AutorizarionRequest" type="Sistran.Core.Application.AuthorizationPolicies.Entities.AuthorizationRequest, 
+                Core.AuthorizationPolicies.Entities"></collection>
+
+    <collection name="AutorizarionAnswer" type="Sistran.Core.Application.AuthorizationPolicies.Entities.AuthorizationAnswer, 
+                Core.AuthorizationPolicies.Entities"></collection>
+
+    <collection name="Policies" type="Sistran.Core.Application.AuthorizationPolicies.Entities.Policies, 
+                Core.AuthorizationPolicies.Entities"></collection>
+
+    <collection name="Users" type="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, 
+                Core.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="AutorizarionRequest" destination="AutorizarionAnswer" name="AutorizarionRequest_AutorizarionAnswer" type="Left">
+      <property left="AuthorizationRequestId" type="Equal" right="AuthorizationRequestId"></property>
+    </relation>
+    <relation source="AutorizarionRequest" destination="Policies" name="AutorizarionRequest_Policies" type="Left">
+      <property left="PoliciesId" type="Equal" right="PoliciesId"></property>
+    </relation>
+
+    <relation source="AutorizarionAnswer" destination="Users" name="AutorizarionAnswer_Users" type="Left">
+      <property left="UserAnswerId" type="Equal" right="UserId"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,18 @@
+﻿using Sistran.Company.Application.BaseEndorsementService;
+using Sistran.Company.Application.CommonServices;
+using Sistran.Company.Application.UnderwritingServices;
+using Sistran.Core.Application.RulesScriptsServices;
+using Sistran.Core.Framework.SAF;
+using Sistran.Core.Services.UtilitiesServices;
+
+namespace Sistran.Company.CancellationEndorsement.EEProvider
+{
+    public class DelegateService
+    {
+        internal static IBaseCiaEndorsementService baseEndorsementService = ServiceProvider.Instance.getServiceManager().GetService<IBaseCiaEndorsementService>();
+        internal static IUnderwritingService underwritingService = ServiceProvider.Instance.getServiceManager().GetService<IUnderwritingService>();
+        internal static ICommonService commonService = ServiceProvider.Instance.getServiceManager().GetService<ICommonService>();
+        internal static IRulesService rulesService = ServiceProvider.Instance.getServiceManager().GetService<IRulesService>();
+        internal static IUtilitiesServiceCore utilitiesServiceCore = ServiceProvider.Instance.getServiceManager().GetService<IUtilitiesServiceCore>();
+    }
+}
