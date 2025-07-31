@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ClaimRiskLocationView">
+  <collections>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, 
+                Core.Issuance.Entities"></collection>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Risk" type="Sistran.Core.Application.Issuance.Entities.Risk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskLocation" type="Sistran.Core.Application.Issuance.Entities.RiskLocation, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Country" type="Sistran.Core.Application.Common.Entities.Country, 
+                Core.Common.Entities"></collection>
+    <collection name="State" type="Sistran.Core.Application.Common.Entities.State, 
+                Core.Common.Entities"></collection>
+    <collection name="City" type="Sistran.Core.Application.Common.Entities.City, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Policy" destination="Endorsement" name="PolicyEndorsement" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="Endorsement" name="EndorsementRiskEndorsement" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="Risk" name="EndorsementRiskRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskLocation" destination="Risk" name="RiskLocationRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskLocation" destination="Country" name="RiskLocationCountry" type="Inner">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+    </relation>
+    <relation source="RiskLocation" destination="State" name="RiskLocationState" type="Inner">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+      <property left="StateCode" type="Equal" right="StateCode"></property>
+    </relation>
+    <relation source="RiskLocation" destination="City" name="RiskLocationCity" type="Inner">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+      <property left="StateCode" type="Equal" right="StateCode"></property>
+      <property left="CityCode" type="Equal" right="CityCode"></property>
+    </relation>
+  </relations>
+</view>

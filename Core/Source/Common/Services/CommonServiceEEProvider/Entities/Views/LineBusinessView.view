@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="LineBusinessView">
+  <collections>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, 
+                 Core.Common.Entities"></collection>
+    <collection name="PrefixLineBusiness" type="Sistran.Core.Application.Common.Entities.PrefixLineBusiness, 
+                 Core.Common.Entities"></collection>
+    <collection name="PerilLineBusiness" type="Sistran.Core.Application.Quotation.Entities.PerilLineBusiness, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="InsObjLineBusiness" type="Sistran.Core.Application.Quotation.Entities.InsObjLineBusiness, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="ClauseLevel" type="Sistran.Core.Application.Quotation.Entities.ClauseLevel, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="Peril" type="Sistran.Core.Application.Quotation.Entities.Peril, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="Clause" type="Sistran.Core.Application.Quotation.Entities.Clause, 
+                 Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="LineBusiness" destination="PrefixLineBusiness" name="LineBusinessPrefixLineBusiness" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="LineBusiness" destination="PerilLineBusiness" name="LineBusinessPerilLineBusiness" type="Left">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="LineBusiness" destination="InsObjLineBusiness" name="LineBusinessInsObjLineBusiness" type="Left">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="LineBusiness" destination="ClauseLevel" name="LineBusinessClauseLevel" type="Left">
+      <property left="LineBusinessCode" type="Equal" right="ConditionLevelId"></property>
+    </relation>
+    <relation source="PerilLineBusiness" destination="Peril" name="PerilPerilLineBusiness" type="Left">
+      <property left="PerilCode" type="Equal" right="PerilCode"></property>
+    </relation>
+    <relation source="InsObjLineBusiness" destination="InsuredObject" name="InsuredObjectInsObjLineBusinesss" type="Left">
+      <property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+    </relation>
+    <relation source="ClauseLevel" destination="Clause" name="ClauseClauseLevel" type="Left">
+      <property left="ClauseId" type="Equal" right="ClauseId"></property>
+    </relation>
+  </relations>
+</view>

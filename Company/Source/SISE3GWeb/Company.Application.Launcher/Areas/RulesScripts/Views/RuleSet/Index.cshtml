@@ -1,0 +1,178 @@
+﻿@section Title{
+    <div class="row main-title">
+        <div class="column">
+            @Resources.Language.Rules
+        </div>
+        <div class="column-30 even">
+            <input class="uif-input-search" type="text" placeholder="@Resources.Language.SearchForRule" id="SearchRule" />
+            <button class="btn btn-default" id="btnSearchAdvRules"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+
+<form class="form without-space">
+    <div class="row">
+        <div class="uif-col-4 no-padding" id="panelRules">
+            <div id="RuleSetList" class="uif-listview">
+            </div>
+        </div>
+        <div class="uif-col-4 no-padding" id="contentRules">
+            <div id="RulesList" class="uif-listview">
+            </div>
+        </div>
+        <div class="uif-col-4 no-padding" id="contentCondicionesAcciones">
+            <div id="ConditionList" class="uif-listview">
+            </div>
+            <div id="ActionList" class="uif-listview">
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="uif-col-3" id="contentEditCA">
+            <div class="row">
+                <div class="uif-modal" id="contentEditCondition">
+                    <div class="uif-modalbody">
+                        <!-- start Condition -->
+                        @Html.Partial("~/Areas/RulesScripts/Views/RuleSet/PartialCondition.cshtml")
+                        <!-- end Condition-->
+                    </div>
+                    <div class="uif-modalbuttons width-save">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnExit">
+                            @Resources.Language.ButtonClose
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btnRecordCondition" disabled="disabled">
+                            @Resources.Language.ButtonSave
+                        </button>
+                    </div>
+                </div>
+
+                <div class="uif-modal" id="contentEditAction">
+                    <div class="uif-modalbody">
+                        <!-- start Action -->
+                        @Html.Partial("~/Areas/RulesScripts/Views/RuleSet/PartialAction.cshtml")
+                        <!-- end Action-->
+                    </div>
+                    <div class="uif-modalbuttons width-save">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnExit">
+                            @Resources.Language.ButtonClose
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btnRecordAction">
+                            @Resources.Language.ButtonSave
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+<!-- start template -->
+<script id="template-RuleSetList" type="text/template">
+
+    <div>
+        Id <strong>{{RuleSetId}}</strong>
+        <br>
+        Descripcion <strong>{{Description}}</strong>
+        <br>
+        Nivel <strong>{{Level.Description}}</strong>
+        <br>
+        Modulo <strong>{{Package.Description}}</strong>
+    </div>
+    <div class="text-right vertical-center">
+    </div>
+
+</script>
+
+<script id="template-RulesList" type="text/template">
+
+    <div>
+        @*@Html.Hidden("{{RuleNameId}}")*@
+        {{RuleName}}
+    </div>
+    <div class="text-right vertical-center"></div>
+</script>
+
+<script id="template-Condition" type="text/template">
+
+    <div>
+        {{Expression}}
+    </div>
+    <div class="text-right vertical-center"></div>
+
+</script>
+
+<script id="template-Action" type="text/template">
+
+    <div>
+        {{Expression}}
+    </div>
+    <div class="text-right vertical-center"></div>
+</script>
+<!-- end template -->
+@section Modals
+{
+    <form id="FormModalRule" class="form">
+        <div class="uif-modal" id="ModalRule">
+            <div class="uif-modalbody">
+                @Html.Partial("ModalRule")
+            </div>
+            <div class="uif-modalbuttons width-saveRule">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonCancel</button>
+                <button type="button" id="addRule" class="btn btn-primary">@Resources.Language.ButtonAccept</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="FormModalRuleSet" class="form">
+        <div class="uif-modal" id="ModalRuleSet">
+            <div class="uif-modalbody">
+                @Html.Partial("ModalRuleSet")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonCancel</button>
+                <button type="button" id="addRuleSet" class="btn btn-primary" onclick="return false">@Resources.Language.ButtonAccept</button>
+            </div>
+        </div>
+    </form>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div class="app-header">
+            <div class="row">
+                <div class="uif-col-12">
+                    <div id="buttonsUnderwriting" class="pull-right">
+                        <button type="button" class="btn btn-default" id="btnExitRuleSet">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.ButtonExit</span>
+                        </button>
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0619"))
+                        {
+                            <button type="button" class="btn btn-primary" id="btnRecordRule">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+                            </button>
+                        }
+                            
+                        </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+}
+<!-- end footer -->
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/SearchCombo/Obj.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/Rules/RuleSet.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/SearchCombo/SearchCombo.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/Rules/Conditions.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/Rules/Actions.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/Rules/AdvancedSearch.js")"></script>
+}

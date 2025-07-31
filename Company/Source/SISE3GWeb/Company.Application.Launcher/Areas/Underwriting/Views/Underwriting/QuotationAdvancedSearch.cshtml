@@ -1,0 +1,75 @@
+﻿<script id="advancedSearchQuotationTemplate" type="text/template">
+    <div>
+        @Resources.Language.Quotation: <strong>{{Endorsement.QuotationId}}</strong>
+        @Resources.Language.LabelVersion: {{Endorsement.QuotationVersion}}          
+        {{Branch.Description}} - {{Prefix.Description}}
+        <strong>@Resources.Language.LabelDate: </strong>{{IssueDate}} 
+    </div>
+    <br />
+    <div>
+        {{Holder.IdentificationDocument.Number}} <strong>{{Holder.Name}}</strong>
+        {{Agencies.[0].FullName}}
+    </div>
+    <br />
+    <div>
+        @Resources.Language.LabelTableTotalPremium: <strong class="danger">{{Summary.FullPremium}}</strong>
+         {{#if DocumentNumber}}
+          @Resources.Language.LabelPolicyNumber: <strong class="danger">{{DocumentNumber}}</strong>
+        {{/if}}
+    </div>   
+</script>
+<div class="uif-alert" id="alertAdvSearchQuotation"></div>
+<form class="form" id="formAdvancedQuotation">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.ConsultationQuotation</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.NoQuotation</label>
+            <input type="text" name="Id" id="idAdvQuotation" maxlength="10" value=""/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-8">
+            <label>@Resources.Language.NoDocumentHolder</label>
+            <input type="text" value="" id="holderAdvQuotation"maxlength="10" name="HolderName" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelUser</label>
+            <input type="text" name="UserId" value="" id="userIdAdvQuotation" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.DateQuotationFrom</label>
+            <input type="text" name="IssueFrom" id="dateIssueFromQuotation" class="uif-datepicker"/>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.DateQuotationTo</label>
+            <input type="text" name="IssueTo" id="dateIssueToQuotation" class="uif-datepicker"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <button type="button" name="name" id="btnSearchAdvQuot" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listVSearchAdvancedQuot">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchAdvQuot" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoadAdvQuot" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+

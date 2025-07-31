@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="EndorsementCompanyView">
+  <collections>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, 
+                Core.Issuance.Entities"></collection>    
+    <collection name="Product" type="Sistran.Core.Application.Product.Entities.Product,
+                Core.Product.Entities"></collection>
+    <collection name="CoEndorsement" type="Sistran.Core.Application.Issuance.Entities.CoEndorsement, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Policy" destination="Endorsement" name="PolicyEndorsement" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Policy" destination="Product" name="PolicyProduct" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="CoEndorsement" destination="Endorsement" name="CoEndorsementEndorsement" type="Inner">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+  </relations>
+</view>

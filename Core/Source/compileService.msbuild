@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="gitHooks;RemoveDir;BatchBuild;AfterBuild">
+	<Import Project="$(MSBuildProjectDirectory)\Solutions.msbuild" />
+	<Target Name="gitHooks" Condition=" '$(WriteLogEntry)'!='false' ">
+	  <Exec Command="git config core.hooksPath .githooks " />
+	  <Exec Command="git config commit.template .githooks\templates\message_template.txt" />
+	  <Exec Command="git config --global core.safecrlf false" />
+	</Target>
+	<Target Name="RemoveDir">
+		<PropertyGroup>
+          <CoreBin>$(MSBuildProjectDirectory)\..\Bin\Services</CoreBin> 
+		  <CoreBinApplication>$(MSBuildProjectDirectory)\..\Bin\Application</CoreBinApplication>
+          <CoreDeploy>$(MSBuildProjectDirectory)\..\Bin\CoreDeploy</CoreDeploy>
+        </PropertyGroup>
+        <RemoveDir Directories="$(CoreBinApplication)" />
+        <RemoveDir Directories="$(CoreBin)" />
+        <RemoveDir Directories="$(CoreDeploy)" />
+		
+		<Exec Command='"$(MSBuildProjectDirectory)\..\.githooks\build\tools\Nuget\nuget.exe" sources' ConsoleToMSBuild="true">
+			<Output TaskParameter="ConsoleOutput" PropertyName="UpdateSourceNuget" />
+		</Exec>
+		<Exec Condition="!($(UpdateSourceNuget.Contains('CDE.Deployments')))" Command='"$(MSBuildProjectDirectory)\..\.githooks\build\tools\Nuget\nuget.exe" sources Add -Name "CDE.Deployments" -Source "http://arbutfs02:8080/tfs/Colombia/_packaging/CDE.Deployments/nuget/v3/index.json" -username "tfs_autom" -password "Kan$ha2019*"'/>
+		<Exec Condition="!($(UpdateSourceNuget.Contains('NugetRepository')))" Command='"$(MSBuildProjectDirectory)\..\.githooks\build\tools\Nuget\nuget.exe" sources Add -Name "NugetRepository" -Source "\\COBOALMREP1\NugetRepositories"'/>
+	</Target>
+    <Target Name="BatchBuild" Inputs="@Solution" Outputs="%(Solution.Identity)">
+        <Exec Command='msbuild %(Solution.Identity) /p:ContinueOnError=false,StopOnFirstFailure=true,RunCodeAnalysis=false /clp:ErrorsOnly'/>
+    </Target>
+	<Target Name="AfterBuild">
+	<PropertyGroup>
+		<PowerShellExe Condition=" '$(PowerShellExe)'=='' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
+		<ScriptLocation Condition=" '$(ScriptLocation)'=='' ">$(MSBuildProjectDirectory)\..\.gitHooks\build\after-build.ps1</ScriptLocation>
+	</PropertyGroup>
+		<Exec Command="$(PowerShellExe) -NonInteractive -executionpolicy Unrestricted -command &quot;&amp; invoke-command -scriptblock { $(ScriptLocation) } &quot;"/>  
+    </Target>
+</Project>

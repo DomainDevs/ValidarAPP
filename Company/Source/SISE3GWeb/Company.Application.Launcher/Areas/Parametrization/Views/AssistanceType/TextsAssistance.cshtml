@@ -1,0 +1,101 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.AssistanceTextModel
+@{
+    Layout = null;
+}
+<script id="AssistanceTextTemplate" type="text/template">
+    <div>
+        {{#ifCond Status "==" 2}}
+            <strong class="success">{{Text}}</strong> 
+        {{else ifCond Status "==" 3}}
+            <strong class="warning">{{Text}}</strong> 
+        {{else}}
+            <strong>{{Text}}</strong> 
+        {{/ifCond}}
+    </div>
+    <div class="hidden">        
+        <strong>{{AssistanceTextId}}</strong>
+    </div>
+    <div>        
+        Clásula: <strong>{{ClauseDescription}}</strong>
+    </div>
+    <div class="hidden">
+        <br>
+        <strong>{{ClauseCd3G}}</strong>
+    </div>
+    <div class="hidden">
+        <br>
+        <strong>{{AssistanceCd}}</strong>
+    </div>
+    <div class="hidden">
+        <br>
+        <strong>{{PrefixCd}}</strong>
+    </div>    
+    <strong>{{EnabledDescription}}</strong>
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.TitleAssistanceType
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsPrefix" class="footerModule">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+<form id="formAssistanceText" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+            </div><div class="row">
+                <div class="uif-col-7">
+                    <label class="field-required">@Resources.Language.LabelText</label>
+                    @Html.TextBoxFor(model => model.Text, new { id = "inputDescriptionText"})
+                    @Html.ValidationMessageFor(model => model.Text)
+                </div>
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <input type="checkbox" id="rdEnabledText" />
+                        <label for="rdEnabledText">@Resources.Language.Enabled</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-7">
+                    <label class="field-required">@Resources.Language.LabelClauses</label>
+                    @Html.TextBoxFor(model => model.ClauseDescription, new { id = "inputTextClause", @class = "uif-input-search" })
+                    @Html.ValidationMessageFor(model => model.ClauseDescription )
+                   
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listViewAssistanceText" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row" style="margin-left:-5px">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewAssistanceText">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAcceptAssistanceText">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

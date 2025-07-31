@@ -1,0 +1,52 @@
+<map version="2.0" type="class" name="AccountingAccount" namespace="Sistran.Core.Application.GeneralLedger" file-version="1.0" description="ACCOUNTING_ACCOUNT_ENTITY">
+  <properties>
+    <property name="AccountingAccountId" type="Integer" key="true" description="ACCOUNTING_ACCOUNT_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="AccountNumber" type="String" size="20" description="ACCOUNT_NUMBER_PROPERTY" />
+    <property name="AccountName" type="String" size="120" description="ACCOUNT_NAME_PROPERTY" />
+    <property name="AccountingNature" type="Integer" description="ACCOUNTING_NATURE_PROPERTY" />
+    <property name="AccountingAccountParentId" type="Integer" description="ACCOUNTING_ACCOUNT_PARENT_ID_PROPERTY" />
+    <property name="DefaultCurrencyCode" type="Integer" nullable="true" description="DEFAULT_CURRENCY_CODE_PROPERTY" />
+    <property name="DefaultBranchCode" type="Integer" nullable="true" description="DEFAULT_BRANCH_CODE_PROPERTY" />
+    <property name="RequireCostCenter" type="Boolean" description="REQUIRE_COST_CENTER_PROPERTY" />
+    <property name="RequireAnalysis" type="Boolean" description="REQUIRE_ANALYSIS_PROPERTY" />
+    <property name="AnalysisId" type="Integer" nullable="true" description="ANALYSIS_ID_PROPERTY" />
+    <property name="IsMulticurrency" type="Boolean" description="IS_MULTICURRENCY_PROPERTY" />
+    <property name="IsMultibranch" type="Boolean" description="IS_MULTIBRANCH_PROPERTY" />
+    <property name="IsOfficialNomenclature" type="Boolean" description="IS_OFFICIAL_NOMENCLATURE_PROPERTY" />
+    <property name="AccountTypeId" type="Integer" nullable="true" description="ACCOUNT_TYPE_ID_PROPERTY" />
+    <property name="AccountApplication" type="Integer" description="ACCOUNT_APPLICATION_PROPERTY" />
+    <property name="Comments" type="String" size="120" nullable="true" description="COMMENTS_PROPERTY" />
+    <property name="IsReclassify" type="Boolean" description="IS_RECLASSIFY_PROPERTY" />
+    <property name="RecAccounting" type="String" size="20" nullable="true" description="REC_ACCOUNTING_PROPERTY" />
+    <property name="IsRevalue" type="Boolean" description="IS_REVALUE_PROPERTY" />
+    <property name="RevAcountingPos" type="String" size="20" nullable="true" description="REV_ACOUNTING_POS_PROPERTY" />
+    <property name="RevAcountingNeg" type="String" size="20" nullable="true" description="REV_ACOUNTING_NEG_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="ACCOUNTING_ACCOUNT" schema="GL" alias="ACCOUNTING_ACCOUNT" update="true">
+      <columns>
+        <column name="ACCOUNTING_ACCOUNT_ID" type="Int32" property="AccountingAccountId" key="true" identity ="true" />
+        <column name="ACCOUNT_NUMBER" type="String" property="AccountNumber" allowNull="false" size="20" />
+        <column name="ACCOUNT_NAME" type="String" property="AccountName" allowNull="false" size="120" />
+        <column name="ACCOUNTING_NATURE" type="Int32" property="AccountingNature" allowNull="false" />
+        <column name="ACCOUNTING_ACCOUNT_PARENT_ID" type="Int32" property="AccountingAccountParentId" allowNull="false" />
+        <column name="DEFAULT_CURRENCY_CD" type="Int32" property="DefaultCurrencyCode" />
+        <column name="DEFAULT_BRANCH_CD" type="Int32" property="DefaultBranchCode" />
+        <column name="REQUIRE_COST_CENTER" type="Boolean" property="RequireCostCenter" allowNull="false" />
+        <column name="REQUIRE_ANALYSIS" type="Boolean" property="RequireAnalysis" allowNull="false" />
+        <column name="ANALYSIS_ID" type="Int32" property="AnalysisId" />
+        <column name="IS_MULTICURRENCY" type="Boolean" property="IsMulticurrency" allowNull="false" />
+        <column name="IS_MULTIBRANCH" type="Boolean" property="IsMultibranch" allowNull="false" />
+        <column name="IS_OFFICIAL_NOMENCLATURE" type="Boolean" property="IsOfficialNomenclature" allowNull="false" />
+        <column name="ACCOUNT_TYPE_ID" type="Int32" property="AccountTypeId" />
+        <column name="ACCOUNT_APPLICATION" type="Int32" property="AccountApplication" allowNull="false" />
+        <column name="COMMENTS" type="String" property="Comments" size="120" />
+        <column name="IS_RECLASSIFY" type="Boolean" property="IsReclassify" allowNull="false" />
+        <column name="REC_ACCOUNTING" type="String" property="RecAccounting" size="20" />
+        <column name="IS_REVALUE" type="Boolean" property="IsRevalue" allowNull="false" />
+        <column name="REV_ACOUNTING_POS" type="String" property="RevAcountingPos" size="20" />
+        <column name="REV_ACOUNTING_NEG" type="String" property="RevAcountingNeg" size="20" />
+      </columns>
+    </table>
+  </tables>
+</map>

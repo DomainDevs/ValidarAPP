@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="section cols primary">
+    <div>
+      <h2>Póliza: {{poliza.[0].DOCUMENT_NUM}} / {{poliza.[0].ENDORSEMENT_TYPE}}</h2>
+      <table>
+        <tr>
+          <td>
+            Sucursal:
+          </td>
+          <td>
+            <span class = "info">{{poliza.[0].BRANCH}}</span> Ramo: <span class="info">{{poliza.[0].PREFIX}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Endoso:
+          </td>
+          <td>
+            <span class="info">{{poliza.[0].ENDORSEMENT_NUM}}</span>      
+          </td>
+        </tr>      
+        <tr>
+          <td>
+            Tomador:
+          </td>
+          <td>
+            <span class="info">{{poliza.[0].ID_HOLDER}} / {{poliza.[0].HOLDER_NAME}}</span>      
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Moneda:   
+          </td>
+          <td>
+            <span class="info">{{poliza.[0].CURRENCY}}</span>  
+          </td>
+        </tr>      
+      </table>
+    </div>
+    <div>
+      <h2> </h2>
+      <table>
+        <tr>
+          <td>
+            Fecha de Emisión:
+          </td>
+          <td>
+            <span class="info">{{formatDate poliza.[0].ISSUE_DATE}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Vigencia:
+          </td>  
+          <td>
+            <span class="info">{{formatDate  poliza.[0].CURRENT_FROM}}</span> - <span class="info">{{formatDate poliza.[0].CURRENT_TO}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Asegurado:
+          </td>
+          <td>
+            <span class="info">{{poliza.[0].HOLDER_NAME}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Suma Asegura:      
+          </td>
+          <td>
+            <span class="info">{{formatNumber poliza.[0].LIMIT_AMT}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Prima:      
+          </td>
+          <td>
+            <span class="info">{{formatNumber poliza.[0].PREMIUM_AMT}}</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="section rows primary">
+    <h3>Riesgos</h3>
+		<table class="table">
+		  <tr>
+				<th style="text-align: center">Nro.</th>
+				<th style="text-align: center">Giro del Negocio</th>
+				<th style="text-align: center">Asegurado</th>
+				<th style="text-align: center">Suma Asegurada</th>
+				<th style="text-align: center">Prima</th>
+				<th style="text-align: center">Facultativo</th>
+				<th style="text-align: center">Estado</th>
+		  </tr>
+		  {{#each riesgos}}
+			<tr class="risk__row" data-riskid={{RISK_ID}} style="cursor:pointer;">
+			  <td>{{RISK_NUM}}</td>
+			  <td style="text-align: left">{{BUSINNES_TURN}}</td>
+			  <td style="text-align: left">{{INSURED_NAME}}</td>
+			  <td style="text-align: right">{{formatNumber LIMIT_AMT minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+			  <td style="text-align: right">{{formatNumber PREMIUM_AMT minimumFractionDigits="2" maximumFractionDigits="5"}}</td>
+			  <td style="text-align: left">{{FACULTATIVE}}</td>
+			  <td style="text-align: left">{{RISK_STATUS}}</td>
+			<tr>
+		  {{/each}}
+	  </table>
+	</div>
+  <sise-tabs>
+    <sise-tab title="Textos y Observaciones">
+      <div class="section cols primary">
+        <div>
+          <textarea rows="10" cols="200" style="width: 100%; height: 150px; padding: 12px 20px;  box-sizing: border-box;  border: 2px solid #ccc;  border-radius: 4px;  background-color: #f8f8f8;  font-size: 16px;  resize: none;">{{textEndorsement.[0].TEXT_ENDORSEMENT}}</textarea>
+        </div>  
+      </div>
+    </sise-tab>
+    <sise-tab title="Datos del Negocio">
+  		<div class="section cols primary">
+  		  <div>
+    			<h2>Datos del Negocio</h2>
+    			<p>Tipo de Endoso: <span class = "info">{{endorsementDetail.[0].ENDORSEMENT_TYPE}}</span></p>
+    			<p>Tipo de Negocio: <span class = "info">{{endorsementDetail.[0].BUSINESS_TYPE}}</span></p>
+    			<p>Tipo de Póliza: <span class = "info">{{endorsementDetail.[0].POLICY_TYPE}}</span></p>
+  		  </div>
+  		  <div>
+    			<h2>Datos de Facturación</h2>
+    			<p>Plan de Pagos: <span class = "info">{{endorsementDetail.[0].SCHEDULE_PAYMENT}}</span></p>
+    			<p>tipo de Calculo: <span class = "info">{{endorsementDetail.[0].CALCULATION_TYPE}}</span></p>
+  		  </div>
+  		  <div>
+    			<h2>Fechas y Horas</h2>
+    			<p>Fecha y Hora de  Emisión: <span class="info">{{endorsementDetail.[0].ISSUE_HOUR_POLICY}}</span></p>
+    			<p>Ini. Vig. Endoso: <span class="info">{{formatDate endorsementDetail.[0].CURRENT_FROM day="numeric" month="long" year="numeric"}}</span></p>
+    			<p>Fin Vig. Endoso: <span class="info">{{formatDate endorsementDetail.[0].CURRENT_TO day="numeric" month="long" year="numeric"}}</span></p>
+    			<p>Fecha de Emisión Endoso: <span class="info">{{formatDate endorsementDetail.[0].ISSUE_DATE day="numeric" month="long" year="numeric"}}</span></p>
+    			<p>Fecha de Tarifación: <span class="info">{{formatDate endorsementDetail.[0].ISSUE_DATE day="numeric" month="long" year="numeric"}}</span></p>
+  		  </div> 
+  		</div>
+  	</sise-tab>
+  	<sise-tab title="Intermediarios">
+    	<div class="section rows primary">
+    	  <table class="table">
+    		<tr>
+    		  <th style="text-align: center">Tipo Agente</th>
+    		  <th style="text-align: center">Código</th>
+    		  <th style="text-align: center">Agente</th>
+    		  <th style="text-align: center">% Partic.</th>
+    		  <th style="text-align: center">Comision</th>
+    		</tr>
+    		{{#each agents}}
+    		  <tr class="client__row" data-agentid={{AGENT_ID}} style="cursor:pointer;">
+    			<td>{{AGENT_TYPE}}</td>
+    			<td style="text-align: left">{{AGENT_CD}}</td>
+    			<td style="text-align: left">{{AGENT_NAME}}</td>
+    			<td style="text-align: right">{{formatNumber AGENT_PART_PCT minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+    			<td style="text-align: right">{{formatNumber COMISSION_AGENT minimumFractionDigits="2" maximumFractionDigits="5"}}</td>
+    		  <tr>
+    		{{/each}}
+    	  </table>
+    	</div>
+    </sise-tab>
+  </sise-tabs>
+</div>

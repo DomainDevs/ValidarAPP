@@ -1,0 +1,69 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.AssistanceTypeModel
+<script id="searchAssistanceTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+        <strong class="success">{{Description}}</strong> 
+    {{else ifCond Status "==" 3}}
+        <strong class="warning">{{Description}}</strong> (<strong>{{AssistanceCode}}</strong>)    
+    {{else}}
+        <strong>{{Description}}</strong> (<strong>{{AssistanceCode}}</strong>)    
+    {{/ifCond}}
+    <div>
+        Ramo: <strong>{{PrefixDescription}}</strong>
+    </div>
+</script>
+
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.Description</label><br />
+            @Html.TextBoxFor(model => model.Description, new { id = "inputDescriptionAdv", placeholder = @Resources.Language.Description })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+    <div id="panelSearchAssistance">
+        <div class="row">
+            <div class="uif-col-4">
+                <label >@Resources.Language.AssistanceCode</label>
+                @Html.TextBoxFor(model => model.AssistanceCode, new { @class = "form-control", id = "inputAssistanceCodeAdv", placeholder = @Resources.Language.AssistanceCode })
+                @Html.ValidationMessageFor(model => model.AssistanceCode)
+            </div>
+            <div class="uif-col-8">
+                <label >@Resources.Language.LabelPrefixType</label>
+                <select class="uif-select form-control" id="ddlBusinessTypeAdv" data-id="Id" data-native="false" data-name="Description" name="BusinessType"
+                        data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"></select>
+                @Html.ValidationMessageFor(model => model.PrefixCode)
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="without-label">
+                    <button class="btn btn-primary-Co width-container" id="btnsearchAssistanceAdv" type="button">
+                        <span aria-hidden="true"></span>
+                        @Resources.Language.search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listviewSearchAssistance">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchAssistance" type="button">@Resources.Language.Cancel</button>
+                <button class="btn btn-primary" id="btnLoadAssistance" type="button">@Resources.Language.Accept</button>
+            </div>
+
+        </div>
+    </div>
+</form>

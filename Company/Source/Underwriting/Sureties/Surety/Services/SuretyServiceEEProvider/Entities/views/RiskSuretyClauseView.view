@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskSuretyClauseView">
+  <collections>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskClause" type="Sistran.Core.Application.Issuance.Entities.RiskClause,
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="RiskClause" destination="EndorsementRisk" name="RiskClauseEndorsementRisk" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+  </relations>
+</view>

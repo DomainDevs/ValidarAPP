@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{55DC1589-0EAD-483B-A110-47E0F3399F19}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Company.Application.UnderwritingParamApplicationService</RootNamespace>
+    <AssemblyName>Company.UnderwritingParamApplicationService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Company.UnderwritingServices">
+      <HintPath>..\..\..\..\Bin\Services\Company\Underwriting\UnderwritingServices\Company.UnderwritingServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Company.Utilities">
+      <HintPath>..\..\..\..\Bin\Application\Company\Utilities\Company.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTOs\BaseTaxDTO.cs" />
+    <Compile Include="DTOs\ConditionTextDTO.cs" />
+    <Compile Include="DTOs\ConditionTextLevelDTO.cs" />
+    <Compile Include="DTOs\ConditionTextLevelTypeDTO.cs" />
+    <Compile Include="DTOs\ConditionTextQueryDTO.cs" />
+    <Compile Include="DTOs\EconomicActivityDTO.cs" />
+    <Compile Include="DTOs\LineBusinnessDTO.cs" />
+    <Compile Include="DTOs\QueryAllyCoverageDTO.cs" />
+    <Compile Include="DTOs\QueryCoverageDTO.cs" />
+    <Compile Include="DTOs\RateTypeDTO.cs" />
+    <Compile Include="DTOs\TaxAttributeDTO.cs" />
+    <Compile Include="DTOs\TaxCategoryDTO.cs" />
+    <Compile Include="DTOs\TaxCategoryQueryDTO.cs" />
+    <Compile Include="DTOs\TaxComponentDTO.cs" />
+    <Compile Include="DTOs\TaxConditionDTO.cs" />
+    <Compile Include="DTOs\TaxConditionQueryDTO.cs" />
+    <Compile Include="DTOs\TaxDTO.cs" />
+    <Compile Include="DTOs\TaxPeriodRateDTO.cs" />
+    <Compile Include="DTOs\TaxQueryDTO.cs" />
+    <Compile Include="DTOs\TaxRateDTO.cs" />
+    <Compile Include="DTOs\TaxRateQueryDTO.cs" />
+    <Compile Include="DTOs\TaxRoleDTO.cs" />
+    <Compile Include="DTOs\TaxStateDTO.cs" />
+    <Compile Include="DTOs\VehicleTypeDTO.cs" />
+    <Compile Include="DTOs\VehicleBodyDTO.cs" />
+    <Compile Include="DTOs\CoverageDTO.cs" />
+    <Compile Include="DTOs\CoCoverageValueDTO.cs" />
+    <Compile Include="DTOs\CoCoverageValueQueryDTO.cs" />
+    <Compile Include="DTOs\MinPremiunRangeDTO.cs" />
+    <Compile Include="DTOs\GroupCoverageDTO.cs" />
+    <Compile Include="DTOs\ProductDTO.cs" />
+    <Compile Include="DTOs\PrefixDTO.cs" />
+    <Compile Include="DTOs\BranchDTO.cs" />
+    <Compile Include="DTOs\EndosermentTypeDTO.cs" />
+    <Compile Include="DTOs\CurrencyDTO.cs" />
+    <Compile Include="DTOs\MinPremiunRelationQueryDTO.cs" />
+    <Compile Include="DTOs\MinPremiunRelationDTO.cs" />
+    <Compile Include="DTOs\AllyCoverageDTO.cs" />
+    <Compile Include="DTOs\AllyCoverageQueryDTO.cs" />
+    <Compile Include="ICompanyUnderwritingParamApplicationService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enums\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Company\Underwriting\UnderwritingParamApplicationService\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

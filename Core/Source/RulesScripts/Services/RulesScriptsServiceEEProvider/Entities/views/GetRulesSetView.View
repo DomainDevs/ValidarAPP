@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="GetRulesSetView">
+  <collections>    
+    <collection name="RuleSet" type="Sistran.Core.Application.RulesScriptsServices.EEProvider.Entities.RuleSet, 
+                Core.RulesScriptsServices.EEProvider"></collection>    
+    <collection name="Package" type="Sistran.Core.Application.RulesScriptsServices.EEProvider.Entities.Package, 
+                Core.RulesScriptsServices.EEProvider"></collection>    
+    <collection name="Level" type="Sistran.Core.Application.RulesScriptsServices.EEProvider.Entities.Level, 
+                Core.RulesScriptsServices.EEProvider"></collection>
+  </collections>
+  <relations>
+    <relation source="RuleSet" destination="Package" name="RuleSetPackage" type="Inner">
+      <property left="PackageId" type="Equal" right="PackageId"></property>
+    </relation>
+    <relation source="RuleSet" destination="Level" name="RuleSetLevel" type="Inner">
+      <property left="LevelId" type="Equal" right="LevelId"></property>
+      <property left="PackageId" type="Equal" right="PackageId"></property>
+    </relation>
+  </relations>
+</view>

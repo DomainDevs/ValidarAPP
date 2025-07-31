@@ -1,0 +1,44 @@
+﻿@Html.AntiForgeryToken()
+@Html.Hidden("CurrentDateCoInsurer", DateTime.Now.ToShortDateString())
+<div class="row">
+    <div class="uif-col-12">
+        <form id="formBasicInformationCoInsurer">
+            <div class="row">
+                <div class="uif-col-4">
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.codePerson</label>
+                    <input type="text" class="rightAlign" id="codPersonCoInsurer" name="IndividualId" style="color: red" disabled />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.CodeCoInsurer</label>
+                    <input type="text" class="rightAlign" id="codeCoInsurer" name="Id" style="color: red" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.DateCreate</label>
+                    <input type="text" id="dateCreationDate" class="uif-datepicker" name="CreationDate" disabled />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.DateModifid</label>
+                    <input type="text" id="dateModificationDate" class="uif-datepicker" name="ModificationDate" disabled />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.LabelDateLow</label>
+                    <input type="text" id="dateDeclinationDate" class="uif-datepicker" name="DeclinationDate" disabled />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.LabelReasonLow</label>
+                    <select class="uif-select" id="coInsurerDeclinedTypes" data-id="Id" data-name="Description" name="CoInsurerDeclinedTypeId"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.LanguagePerson.LabelObservations</label>
+                    @Html.TextArea("Observation", new { id = "inputObservationCoInsurer", cols = "12", rows = "10", @class = "textarea" })
+                </div>
+            </div>
+        </form>
+    </div>
+</div>  

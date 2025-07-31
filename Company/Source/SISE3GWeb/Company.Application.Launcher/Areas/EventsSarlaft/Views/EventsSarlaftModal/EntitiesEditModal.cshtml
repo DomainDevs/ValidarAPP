@@ -1,0 +1,154 @@
+﻿@{
+    Layout = null;
+}
+<form id="formEntitiesEdit" class="form">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>ID Entidad</label>
+                    <input class="text" type="text" id="inputIdEntitie" name="Id" data-val="true" data-id="Id" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <input type="text" name="Index" id="indexEntity" hidden />
+                <input type="text" name="GroupByInd" id="GroupByInd" hidden />
+                
+                <div class="uif-col-4">
+                    <label class="field-required">Nombre Entidad</label>
+                    @*onkeypress="return event.charCode == 32 "*@
+                    <input type="text" id="inputNameEntitie" name="EntityDescription" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetNameEntity", "EventsSarlaft")" data-val-required="@Resources.Language.ErrorEmptyRequiredFields" data-displaykey="Description" data-id="Id" data-val="true" required />
+                    <span class="text-danger" data-valmsg-for="EntityDescription" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">Tipo de Consulta</label>
+                    <select class="uif-select form-control" id="selectTypeConsult" name="selectTypeConsultId" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" required></select>
+                    <span class="text-danger" data-valmsg-for="selectTypeConsultId" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">Nivel</label>
+                    <select class="uif-select form-control" id="selectLevel" name="selectLevelId" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" required></select>
+                    <span class="text-danger" data-valmsg-for="selectLevelId" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>Tabla origen</label>
+                    <input type="text" id="inputOriginTable" name="SourceTable" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetTables", "EventsSarlaft")"
+                           data-displaykey="Description" data-id="Id" data-val="true"/>
+                </div>
+                <div class="uif-col-4">
+                    <label>Codigo de la tabla origen</label>
+                    @*<input class="text" type="text" id="inputCodeTableOrigin" name="CodeTableOrigin" data-val="true" data-id="Id">*@
+                    <select class="uif-select form-control" id="selectCodeTableOrigin" name="selectJoinTable" data-val="true" data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>Descripción de la tabla origen</label>
+                    @*<input class="text" type="text" id="inputDescriptionTableOrigin" name="DescriptionTableOrigin" data-val="true" data-id="Id">*@
+                    <select class="uif-select form-control" id="selectDescriptionTableOrigin" name="selectSourceDescription" data-val="true" data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>Tabla Unión (Join)</label>
+                    <input type="text" id="inputJoinTable" name="JoinTable" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetTables", "EventsSarlaft")"
+                           data-displaykey="Description" data-id="Id" data-val="true"/>
+                </div>
+                <div class="uif-col-4">
+                    <label>Código Tabla Origen para Unión</label>
+                    @*<input class="text" type="text" id="inputTableCodeUnion" name="TableCodeUnion" data-val="true" data-id="Id">*@
+                    <select class="uif-select form-control" id="selectTableCodeUnion" name="selectJoinSourceField" data-val="true" data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>Código Unión</label>
+                    @*<input class="text" type="text" id="inputCodeUnion" name="CodeUnion" data-val="true" data-id="Id">*@
+                    <select class="uif-select form-control" id="selectCodeUnion" name="selectJoinTargetField" data-val="true" data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>Condición de la Unión (Where)</label>
+                    <input class="text" type="text" id="inputDescriptionTableOrigin" name="ConditionJoinWhere" data-val="true" data-id="Id">
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">Tipo de Validación</label>
+                    <select class="uif-select form-control" id="selectTypeValidation" name="selectValidationTypeCode" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" required></select>
+                    <span class="text-danger" data-valmsg-for="selectValidationTypeCode" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4">
+                    <label>Procedimiento Almacenado</label>
+                    <input type="text" id="inputStoredProcedure" name="ValidationProcedure" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetStoreProcedures", "EventsSarlaft")"
+                           data-displaykey="Description" data-id="Id" data-val="true"/>
+                </div>
+                <div class="uif-col-4">
+                    <label>Tabla de Validación</label>
+                    <input type="text" id="inputValidationsTables" name="ValidationTable" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetTables", "EventsSarlaft")"
+                           data-displaykey="Description" data-id="Id" data-val="true"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">Codigo de Tipo de Dato de Clave</label>
+                    <select class="uif-select form-control" id="selectCodeTypeKey" name="selectDataKeyCode" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" required></select>
+                    <span class="text-danger" data-valmsg-for="selectDataKeyCode" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4">
+                    <label>Llave Validación 1</label>
+                    @*<input class="text" type="text" id="inputValidationKeyOne" name="ValidationKeyOne" data-val="true" data-id="Id">*@
+                    <select class="uif-select form-control" id="selectValidationKeyOne" name="selectKey1Field" data-val="true" data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>Llave Validación 2</label>
+                    @*<input class="text" type="text" id="inputValidationKeyTwo" name="ValidationKeyTwo" data-val="true" data-id="Id">*@
+                    <select class="uif-select form-control" id="selectValidationKeyTwo" name="selectKey2Field" data-val="true" data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>Llave Validación 3</label>
+                    @*<input class="text" type="text" id="inputValidationKeyThree" name="ValidationKeyThree" data-val="true" data-id="Id">*@
+                    <select class="uif-select form-control" id="selectValidationKeyThree" name="selectKey3Field" data-val="true" data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>Llave Validación 4</label>
+                    @*<input class="text" type="text" id="inputValidationKeyFour" name="ValidationKeyFour" data-val="true" data-id="Id">*@
+                    <select class="uif-select form-control" id="selectValidationKeyFour" name="selectKey4Field" data-val="true" data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>Campo a validar</label>
+                    @*<input class="text" type="text" id="inputValidateField" name="ValidateField" data-val="true" data-id="Id">*@
+                    <select class="uif-select form-control" id="selectValidateField" name="selectValidationField" data-val="true" data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">Tipo de dato</label>
+                    <select class="uif-select form-control" id="selectDataType" name="selectDataTypeCode" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" required></select>
+                    <span class="text-danger" data-valmsg-for="selectDataType" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4">
+                    <label>Condición (Where)</label>
+                    <input class="text" type="text" id="inputCondition" name="ConditionWhere" data-val="true" data-id="Id">
+                </div>
+                <div class="uif-col-4 without-label">
+                    <input type="checkbox" id="chkGroup" name="GroupByInd" />
+                    <label for="chkGroup">Agrupar</label>
+                </div>
+            </div>
+            <div class="uif-modalbuttons width-save">
+                <button type="button" class="btn btn-default" id="btnCancel" data-dismiss="modal">@Resources.Language.ButtonExit</button>
+                <button type="button" class="btn btn-primary" id="btnSaveEntity">@Resources.Language.ButtonSave</button>
+                <button type="button" class="btn btn-primary" id="btnExportarEntity">
+                    <span class="" aria-hidden="true"></span>@Resources.Language.ButtonExport
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

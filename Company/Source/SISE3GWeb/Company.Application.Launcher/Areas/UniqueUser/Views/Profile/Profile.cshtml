@@ -1,0 +1,182 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.ProfileModelsView
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.Profiles
+    </div>
+    <div class="column-30 even">
+         @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputSearch", @placeholder = @Resources.Language.SearchProfile })
+        <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsProfile" class="footerProfile">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0676"))
+        {
+            <button type="button" class="btn btn-default" id="btnNewProfile">
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.NewProfile
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0675"))
+        {
+            <button class="btn btn-default" id="btnSendExcel">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ExportXLS
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0674"))
+        {
+            <button class="btn btn-primary" id="btnSaveProfile">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">@Resources.Language.SaveProfile</span>
+            </button>
+        }
+
+    </div>
+</script>
+<div class="uif-modal" id="modalAccess">
+    <div class="uif-modalbody">
+        @Html.Partial("AccessProfile", new Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.AccessTypeModelsView())
+    </div>
+    <div class="uif-modalbuttons width-saveRule" id="buttonsAccess">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnAccessClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0667"))
+        {
+            <button type="button" class="btn btn-primary" id="btnAccessSave">@Resources.Language.ButtonSave</button>
+        }
+    </div>
+</div>
+<div class="uif-modal" id="modalCopy">
+    <div class="uif-modalbody">
+        @Html.Partial("CopyProfile")
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonsCopy">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCopyClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0669"))
+        {
+            <button type="button" class="btn btn-primary" id="btnCopySave">@Resources.Language.Copy</button>
+        }
+
+    </div>
+</div>
+
+<div class="uif-modal" id="modalProfileAccessPermissions">
+    <div class="uif-modalbody">
+        @Html.Partial("ProfileContextPermissions", new Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.UserContextPermissionsModelsView())
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonsPermissions">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnPermissionsClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0670"))
+        {
+            <button type="button" class="btn btn-primary" id="btnPermissionsSave">@Resources.Language.ButtonSave</button>
+        }
+
+    </div>
+</div>
+
+<div class="uif-modal" id="modalGuaranteeStatus">
+    <div class="uif-modalbody">
+        @Html.Partial("GuaranteeStatus", new Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.GuaranteeStatusModelsView())
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonsGuarantee">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnStatusGuaranteeClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0673"))
+        {
+            <button type="button" class="btn btn-primary" id="btnStatusGuaranteeSave">@Resources.Language.ButtonSave</button>
+        }
+
+    </div>
+</div>
+
+<div class="uif-modal" id="modalDefaultSearch">
+    <div class="uif-modalbody">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="active">
+                    <table class="uif-table" data-title="" data-selectiontype="none" id="tableResults" data-filter="false" data-paginate="true">
+                        <thead>
+                            <tr>
+                                <th data-property="Id">@Resources.Language.LabelId</th>
+                                <th data-property="Description">@Resources.Language.LabelDescription</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    @*<div class="uif-listview" id="listViewSearchAdvanced">
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uif-modal" id="modalDefaultSearch">
+    <div class="uif-modalbody">
+    </div>
+</div>
+<form id="formProfile" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id, new { id = "hiddenId" })
+    <div class="row">
+        <div class="uif-col-9 fit-col-main">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.ProfileName</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "InputDescription", placeholder = @Resources.Language.PlaceHolderKeyName })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="chkDisabled" name="Disabled" />
+                        <label for="chkDisabled">@Resources.Language.Disabled</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-3 fit-col-secondary">
+            <div class="uif-right-bar" id="panelButtonsRight">
+                <ul>
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0666"))
+                    {
+                        <li>
+                            <a href="#" id="btnAssignedAccesses">@Resources.Language.AccessBlocked</a>
+                            <p id="selectedAssignedAccesses"></p>
+                        </li>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0668"))
+                    {
+                        <li>
+                            <a href="#" id="btnCopyProfile">@Resources.Language.CopyProfile</a>
+                            <p id="selectedCopyProfile"></p>
+                        </li>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0672"))
+                    {
+                        <li id="liProfileContextPermissions">
+                            <a href="#" id="btnProfileContextPermissions">@Resources.Language.ContextPermission</a>
+                            <p id="selectedPermissions"></p>
+                        </li>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0671"))
+                    {
+
+                        <li>
+                            <a href="#" id="btnProfileGuaranteeStatus">@Resources.Language.GuaranteeStatus</a>
+                            <p id="selectedGuaranteeStatus"></p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>

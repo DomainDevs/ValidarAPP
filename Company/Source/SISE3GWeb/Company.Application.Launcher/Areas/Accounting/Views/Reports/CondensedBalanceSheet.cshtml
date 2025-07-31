@@ -1,0 +1,113 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.CondensedBalanceSheet;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.AccountingReports</li>
+        <li>@Global.AccountingLable</li>
+        <li class="active">@Global.CondensedBalanceSheet</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="COBSReportCancel" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Clean
+            </button>
+            <button id="COBSReportGenerate" class="btn btn-primary" role="button">
+                <i class="glyphicon glyphicon-play"></i>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+@section modals{
+    <div class="modal fade" id="modalMassiveTotRecordsCOBS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.GeneralLedgerReport</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="COBSReportModal">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<form id="COBSReportForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("COBSReportBranch", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+           data_id = "Id",
+           data_name = "Description",
+           data_selectedid = @ViewBag.BranchDefault,
+           data_val = "true"
+       })
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Month
+            </label>
+            @Html.DropDownList("COBSReportMonth", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Accounting/Common/GetYearMonths"),
+           data_id = "Id",
+           data_name = "Description",
+           data_val = "true",
+           data_native = "true",
+           data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="COBSReportMonth" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Year</label>
+            <input class="form-control" placeholder='@Global.ExampleYear' data-val="true" data-val-required="@Global.RequiredField"
+                   id="COBSReportYear" name="COBSReportYear" type="text" onkeypress="return JustNumbers(event, this);" maxlength="4" min="1900" />
+            <span class="text-danger" data-valmsg-for="COBSReportYear" data-valmsg-replace="true"></span>
+        </div>
+
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertCobs"></div>
+        </div>
+    </div>
+
+</form>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/CondensedBalanceSheet")
+}

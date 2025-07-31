@@ -1,0 +1,171 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AccountingAccountConsult;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.AccountingReports</li>
+        <li>@Global.Accounts</li>
+        <li class="active">@Global.AccountingAccountConsult</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="CancelAccountingAccount" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Cancel
+            </button>
+            <button id="MassiveAccountingAccount" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+<form id="ReportFormAccountingAccount" onsubmit=" return false ">
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+        
+            <label>@Global.DateFrom</label>
+            @Html.TextBox("StartDateAccountingAccount", "", new
+               {
+                   @class = "uif-datepicker",
+                   style = "text-align: left",
+                   data_mask = "99/99/9999",
+                   data_val = "true",
+                   data_val_required = @Global.RequiredField
+               })
+            <span class="text-danger" data-valmsg-for="StartDateAccountingAccount" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            
+            <label>@Global.DateTo</label>
+            @Html.TextBox("EndDateAccountingAccount", "", new
+               {
+                   @class = "uif-datepicker",
+                   style = "text-align: left",
+                   data_mask = "99/99/9999",
+                   data_val = "true",
+                   data_val_required = @Global.RequiredField
+               })
+            <span class="text-danger" data-valmsg-for="EndDateAccountingAccount" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="AccountingNumberFromAccountingAccount">
+                @Global.AccountFrom
+            </label>
+               <input class="uif-autocomplete" type="text"
+                   data-source="@Url.Action("GetAccountintAccountByNumber", "Parameters")"
+                   data-displaykey="AccountingNumber" placeholder='@Global.EnterNumberAccount' id="AccountingNumberFromAccountingAccount"
+                   name="AccountingNumberFromAccountingAccount" onkeypress="return JustNumbers(event, this);" />
+            <span class="text-danger" data-valmsg-for="AccountingNumberFromAccountingAccount" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="AccountingNumberToAccountingAccount">
+                @Global.AccountTo
+            </label>
+            <input class="uif-autocomplete" type="text"
+                   data-source="@Url.Action("GetAccountintAccountByNumber", "Parameters")"
+                   data-displaykey="AccountingNumber" placeholder='@Global.EnterNumberAccount' id="AccountingNumberToAccountingAccount"
+                   name="AccountingNumberToAccountingAccount" onkeypress="return JustNumbers(event, this);" />
+            <span class="text-danger" data-valmsg-for="AccountingNumberToAccountingAccount" data-valmsg-replace="true">
+            </span>
+        </div>
+    </div>
+    
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="AutomaticEntries" value="1" checked> @Global.AutomaticEntries
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="ManualEntries" value="2"> @Global.ManualEntries
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="All" value="3"> @Global.All
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+
+        @section modals{
+
+            @*VENTANAS MODALES DE CONFIRMACION*@
+            <!-- Modal Confirma proceso de masivos reaseguros -->
+            <div class="modal fade" id="modalMassiveTotRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title"><b>@Global.AccountingAccountConsult</b></h4>
+                        </div>
+                        <div class="modal-body">
+                            <b id="pnlModalTotRecords"></b>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btnModalAccountingAccount">@Global.Yes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalMassiveNo">@Global.No</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <!-- Modal Confirmacion del Proceso Masivo de cada reporte -->
+            <div class="modal fade" id="modalMassiveReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title"><b>@Global.AccountingAccountConsult</b></h4>
+                        </div>
+                        <div class="modal-body">
+                            @Global.ConfirmMessageProcess
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btnModalMassiveProcessReport">@Global.Yes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+
+        @section scripts
+    {
+            @Scripts.Render("~/accounting/bundles/AccountingAccount")
+        }
+
+</form>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>

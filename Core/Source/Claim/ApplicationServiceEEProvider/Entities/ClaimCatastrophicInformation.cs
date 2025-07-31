@@ -1,0 +1,316 @@
+﻿using Sistran.Core.Framework;
+using Sistran.Core.Framework.DAF;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sistran.Core.Application.ClaimServices.EEProvider.Entities
+
+{
+    /// <summary>
+    /// Definición de entidad ClaimCatastrophicInformation.
+    /// </summary>
+    [
+    PersistentClass("Sistran.Core.Application.ClaimServices.EEProvider.ClaimCatastrophicInformation.dict"),
+    Serializable(),
+    DescriptionKey("CLAIM_CATASTROPHIC_INFORMATION_ENTITY"),
+    TableMap(TableName = "CLAIM_CATASTROPHIC_INFORMATION", Schema = "CLM"),
+    ]
+    public partial class ClaimCatastrophicInformation :
+        BusinessObject2
+    {
+        #region static
+        /// <summary>
+        /// Propiedades públicas de la entidad.
+        /// </summary>
+        public static class Properties
+        {
+            public static readonly string ClaimCode = "ClaimCode";
+            public static readonly string Datetimefrom = "Datetimefrom";
+            public static readonly string Datetimeto = "Datetimeto";
+            public static readonly string Address = "Address";
+            public static readonly string CityCode = "CityCode";
+            public static readonly string StateCode = "StateCode";
+            public static readonly string CountryCode = "CountryCode";
+            public static readonly string CatastropheCode = "CatastropheCode";
+            public static readonly string Description = "Description";
+        }
+
+        /// <summary>
+        /// Crea una clave primaria para una clase concreta.
+        /// </summary>
+        /// <param name="concreteClass">Clase concreta.</param>
+        /// <param name="claimCode">Propiedad clave ClaimCode.</param>
+        /// <returns>Clave primaria.</returns>
+        protected static PrimaryKey InternalCreatePrimaryKey<T>(int claimCode)
+        {
+            Dictionary<string, object> keys = new Dictionary<string, object>();
+            keys.Add(Properties.ClaimCode, claimCode);
+
+            return new PrimaryKey<T>(keys);
+        }
+
+        /// <summary>
+        /// Crea una clave primaria para esta clase.
+        /// </summary>
+        /// <param name="claimCode">Propiedad clave ClaimCode.</param>
+        public static PrimaryKey CreatePrimaryKey(int claimCode)
+        {
+            return InternalCreatePrimaryKey<ClaimCatastrophicInformation>(claimCode);
+        }
+        #endregion
+
+        //*** Object Attributes ********************************
+
+        /// <summary>
+        /// Atributo para la propiedad Datetimefrom.
+        /// </summary>
+        private DateTime? _datetimefrom = null;
+        /// <summary>
+        /// Atributo para la propiedad Datetimeto.
+        /// </summary>
+        private DateTime? _datetimeto = null;
+        /// <summary>
+        /// Atributo para la propiedad Address.
+        /// </summary>
+        private string _address = null;
+        /// <summary>
+        /// Atributo para la propiedad CityCode.
+        /// </summary>
+        private int? _cityCode = null;
+        /// <summary>
+        /// Atributo para la propiedad StateCode.
+        /// </summary>
+        private int? _stateCode = null;
+        /// <summary>
+        /// Atributo para la propiedad CountryCode.
+        /// </summary>
+        private int? _countryCode = null;
+        /// <summary>
+        /// Atributo para la propiedad CatastropheCode.
+        /// </summary>
+        private int? _catastropheCode = null;
+        /// <summary>
+        /// Atributo para la propiedad Description.
+        /// </summary>
+        private string _description = null;
+        //*** Object Constructors ********************************
+
+        /// <summary>
+        /// Constructor de instancia de la clase en base a las propiedades claves.
+        /// </summary>
+        /// <param name="claimCode">ClaimCode key property.</param>
+        public ClaimCatastrophicInformation(int claimCode) :
+            this(ClaimCatastrophicInformation.CreatePrimaryKey(claimCode), null)
+        {
+        }
+
+        /// <summary>
+        /// Constructor de instancia de la clase en base a una clave primaria y a valores iniciales.
+        /// </summary>
+        /// <param name="key">
+        /// Identificador de la instancia de la entidad.
+        /// </param>
+        /// <param name="initialValues">
+        /// Valores para establecer el estado de la instancia.
+        /// </param>
+        public ClaimCatastrophicInformation(PrimaryKey key, IDictionary initialValues) :
+            base(key, initialValues)
+        {
+        }
+
+        /*** Object Properties ********************************/
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad ClaimCode.
+        /// </summary>
+        /// <value>Propiedad ClaimCode.</value>
+        [
+        DescriptionKey("CLAIM_CODE_PROPERTY"),
+        PersistentProperty(IsKey = true),
+        ColumnMap(ColumnName = "CLAIM_CD", DbType = System.Data.DbType.String),
+        ]
+        public int ClaimCode
+        {
+            get
+            {
+                return (int)this._primaryKey[Properties.ClaimCode];
+            }
+            set
+            {
+                this._primaryKey[Properties.ClaimCode] = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad Datetimefrom.
+        /// </summary>
+        /// <value>Propiedad Datetimefrom.</value>
+        [
+        DescriptionKey("DATETIMEFROM_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "DATETIMEFROM", DbType = System.Data.DbType.String),
+        ]
+        public DateTime? Datetimefrom
+        {
+            get
+            {
+                return this._datetimefrom;
+            }
+            set
+            {
+                this._datetimefrom = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad Datetimeto.
+        /// </summary>
+        /// <value>Propiedad Datetimeto.</value>
+        [
+        DescriptionKey("DATETIMETO_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "DATETIMETO", DbType = System.Data.DbType.String),
+        ]
+        public DateTime? Datetimeto
+        {
+            get
+            {
+                return this._datetimeto;
+            }
+            set
+            {
+                this._datetimeto = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad Address.
+        /// </summary>
+        /// <value>Propiedad Address.</value>
+        [
+        DescriptionKey("ADDRESS_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "ADDRESS", DbType = System.Data.DbType.String),
+        ]
+        public string Address
+        {
+            get
+            {
+                return this._address;
+            }
+            set
+            {
+                this._address = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad CityCode.
+        /// </summary>
+        /// <value>Propiedad CityCode.</value>
+        [
+        DescriptionKey("CITY_CODE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "CITY_CD", DbType = System.Data.DbType.String),
+        ]
+        public int? CityCode
+        {
+            get
+            {
+                return this._cityCode;
+            }
+            set
+            {
+                this._cityCode = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad StateCode.
+        /// </summary>
+        /// <value>Propiedad StateCode.</value>
+        [
+        DescriptionKey("STATE_CODE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "STATE_CD", DbType = System.Data.DbType.String),
+        ]
+        public int? StateCode
+        {
+            get
+            {
+                return this._stateCode;
+            }
+            set
+            {
+                this._stateCode = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad CountryCode.
+        /// </summary>
+        /// <value>Propiedad CountryCode.</value>
+        [
+        DescriptionKey("COUNTRY_CODE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "COUNTRY_CD", DbType = System.Data.DbType.String),
+        ]
+        public int? CountryCode
+        {
+            get
+            {
+                return this._countryCode;
+            }
+            set
+            {
+                this._countryCode = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad CatastropheCode.
+        /// </summary>
+        /// <value>Propiedad CatastropheCode.</value>
+        [
+        DescriptionKey("CATASTROPHE_CODE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "CATASTROPHE_CD", DbType = System.Data.DbType.String),
+        ]
+        public int? CatastropheCode
+        {
+            get
+            {
+                return this._catastropheCode;
+            }
+            set
+            {
+                this._catastropheCode = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad Description.
+        /// </summary>
+        /// <value>Propiedad Description.</value>
+        [
+        DescriptionKey("DESCRIPTION_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "DESCRIPTION", DbType = System.Data.DbType.String),
+        ]
+        public string Description
+        {
+            get
+            {
+                return this._description;
+            }
+            set
+            {
+                this._description = value;
+            }
+        }
+
+    }
+}

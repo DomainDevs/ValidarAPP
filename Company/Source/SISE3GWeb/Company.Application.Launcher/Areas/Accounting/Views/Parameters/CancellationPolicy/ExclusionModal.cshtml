@@ -1,0 +1,82 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = "ExclusionModal";
+}
+
+<div class="uif-panel">
+    <div class="uif-row" id="Divbranch">
+        <div class="uif-col-6">
+            <label>Sucursal</label>
+            <br />
+            <select class="uif-select form-control" id="BranchCancellation" name="BranchCancellation" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/Accounting/Common/GetBranchs")' data-id="Id"
+                    data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="BranchCancellation" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row" id="DivPolicy">
+        <div class="uif-col-6">
+            <label>Ramo</label>
+            <br />
+            <select class="uif-select form-control" id="PrefixCancellation" name="PrefixCancellation" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/Accounting/Common/GetPrefixes")' data-id="Id"
+                    data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="PrefixCancellation" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.Policy</label>
+            <br />
+            <input class="form-control" placeholder='Ej.: Ingrese el número de Póliza' data-val="true" data-val-required="@Global.RequiredField"
+                   id="PolicyCancellationNumber" name="PolicyCancellationNumber" type="text" onkeypress="return JustNumbers(event, this)" maxlength="12" />
+            <span class="text-danger" data-valmsg-for="PolicyCancellationNumber" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="uif-row" id="DivAgent">
+        <div class="uif-col-6">
+            <label>@Global.DocumentNumber</label>
+            <br />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetAgentByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' id="CancellAgentDocumentNumber"
+                   name="CancellAgentDocumentNumber" hidden="hidden" required="" data-val="true"
+                   data-val-required='@Global.ValidationRequired' />
+            <span class="text-danger" data-valmsg-for="CancellAgentDocumentNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.CoverageClaimDialog_names</label>
+            <br />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetAgentByName", "Common")"
+                   data-displaykey="Name" placeholder='@Global.EnterName' id="CancellAgentName" maxlength="100"
+                   name="CancellAgentName" hidden="hidden" required="" data-val="true"
+                   data-val-required='@Global.ValidationRequired' />
+            <span class="text-danger" data-valmsg-for="CancellAgentName" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row" id="DivInsured">
+        <div class="uif-col-6">
+            <label>@Global.DocumentNumber</label>
+            <br />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' id="CancellInsuredDocumentNumber"
+                   name="CancellInsuredDocumentNumber" hidden="hidden" required="" data-val="true"
+                   data-val-required='@Global.ValidationRequired' />
+            <span class="text-danger" data-valmsg-for="CancellInsuredDocumentNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.CoverageClaimDialog_names</label>
+            <br />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetInsuredByInsuredName", "Common")"
+                   data-displaykey="Name" placeholder='@Global.EnterName' id="CancellInsuredName" maxlength="100"
+                   name="CancellInsuredName" hidden="hidden" required="" data-val="true"
+                   data-val-required='@Global.ValidationRequired' />
+            <span class="text-danger" data-valmsg-for="CancellInsuredName" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertExclusionModal"></div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,175 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @Global.SearchTaxesRetention;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.OutcomeReports</li>
+        <li class="active">@Global.SearchTaxesRetention</li>
+    </ol>
+}
+
+@section modals{
+    <div class="modal fade" id="modalMassiveTotRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.CurrentPolicies</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="TRLReportModal">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="TRLReportForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Branch </label>
+            <select class="uif-select form-control" id="TRLReportBranch"
+                    data-source='@Url.Content("~/Accounting/Common/GetListBranchesbyUserName")'
+                    data-id="Id" data-selectedid="@ViewBag.BranchDefault" data-name="Description"
+                    data-native="true"></select>
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Currency</label>
+            <select class="uif-select form-control required" id="TRLReportCurrency" name="TRLReportCurrency"
+                    data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id"
+                    data-name="Description" data-val="true"
+                    data-val-required='@Global.RequiredField' data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="TRLReportCurrency" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label"> @Global.PaymentOrder </label>
+            <input type="text" id="TRLPaymentOrder" name="TRLPaymentOrder" onkeypress="return JustNumbers(event, this);" maxlength="20" />
+        </div>
+    </div>
+    <div class="uif-row">
+       <div class="uif-col-4">
+            <label class="control-label">@Global.Depositor / @Global.Beneficiary</label>
+            @Html.DropDownList("TRLBeneficiary", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Accounting/Common/GetPersonTypeByPaymentOrderEnable"),
+           data_id = "Id",
+           data_name = "Description",
+           data_native = "true",
+       })
+            
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.DocumentNumber:
+            </label>
+            <br />
+            <div id="BeneficiaryDocumentNumberData">
+                <input type="text" id="BeneficiaryDocumentNumber" name="BeneficiaryDocumentNumber" disabled />
+            </div>
+            @*Campos Ocultos*@
+
+            <input class="uif-autocomplete"
+                   type="text" 
+                   data-source="@Url.Action("GetSuppliersByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber"
+                   onkeypress=" return JustNumbers(event, this); " 
+                   maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' 
+                   id="SearchSuppliersByDocumentNumberRequest"
+                   name="SearchSuppliersByDocumentNumberRequest" 
+                   hidden="hidden"/>
+            <input class="uif-autocomplete"
+                   type="text" 
+                   data-source="@Url.Action("GetEmployeeByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber"
+                   onkeypress=" return JustNumbers(event, this); " 
+                   maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' 
+                   id="SearchEmployeeByDocumentNumberRequest"
+                   name="SearchEmployeeByDocumentNumberRequest" 
+                   hidden="hidden"/>
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.FullName</label>
+            <br />
+            <div id="BeneficiaryNameData">
+                <input type="text" id="BeneficiaryName" name="SearchPayerNamePaymentOrder" disabled />
+            </div>
+            @*Campos Ocultos*@
+
+            <input class="uif-autocomplete"
+                   type="text" 
+                   data-source="@Url.Action("GetSuppliersByName", "Common")"
+                   data-displaykey="Name"
+                   placeholder='@Global.EnterName'
+                   id="SearchSuppliersByNameRequest" 
+                   maxlength="60"
+                   name="SearchSuppliersByNameRequest" 
+                   hidden="hidden" />
+            <input class="uif-autocomplete"
+                   type="text" 
+                   data-source="@Url.Action("GetEmployeeByName", "Common")"
+                   data-displaykey="Name"
+                   placeholder='@Global.EnterName'
+                   id="SearchEmployeeByNameRequest" 
+                   maxlength="60"/>
+        </div>
+
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Tax - @Global.Retention</label>
+            <select class="uif-select form-control" id="TRLTaxes"
+                    data-source='@Url.Content("~/GeneralLedger/Base/GetTaxes")' data-id="Id"
+                    data-name="Description" name="AccountingNatureCd"></select>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertFormTrl"></div>
+        </div>
+    </div>
+
+    @section Toolbar
+{
+        <footer>
+            <button id="TRLReportClean" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-remove"></span>  @Global.Clean
+            </button>
+            <button id="TRLeportGenerate" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        </footer>
+    }
+</form>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDefault" value="@ViewBag.BranchDefault" />
+<input type="hidden" id="ViewBagSupplierCodeMainOther" value="@ViewBag.SupplierCode" />
+<input type="hidden" id="ViewBagProducerCodeMainOther" value="@ViewBag.ProducerCode" />
+<input type="hidden" id="ViewBagEmployeeCodMainOther" value="@ViewBag.EmployeeCode" />
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/TaxRetentionList")
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>

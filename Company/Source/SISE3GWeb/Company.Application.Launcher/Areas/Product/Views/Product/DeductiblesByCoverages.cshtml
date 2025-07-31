@@ -1,0 +1,70 @@
+﻿<div>
+    <form>
+        <script id="DeductiblesByPrefixTemplate" type="text/template">
+            <div>
+                <label>
+                    <strong>Id: {{Id}}</strong><br />{{Description}}
+                </label>
+            </div>
+        </script>
+        <script id="DeductiblesByPrefixAsignedTemplate" type="text/template">
+            <div>
+                <label>
+                    <strong>Id: {{Id}}</strong><br />
+                    {{Description}}
+                </label>
+            </div>
+            <div>
+                <label class="font-highlight">
+                    {{IsDefaultDescription}}
+                </label>
+            </div>
+        </script>
+        <div class="uif-alert" id="alert"></div>
+        <div class="row">
+            <div class="uif-col-12">
+
+                <div class="uif-tab-content">
+                    <div id="tabPersonalInformation" class="active">
+                        <div class="row">
+                            <div class="uif-col-6">
+                                <label>@Resources.Language.LabelGroupCoverage</label>
+                                <input type="text" id="inputGroupCoverageDC" maxlength="2" disabled />
+                            </div>
+                            <div class="uif-col-6">
+                                <label>@Resources.Language.LabelObjectOfTheInsurance</label>
+                                <input type="text" id="inputObjectInsuranceDC" maxlength="2" disabled />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-6">
+                                <label>@Resources.Language.LabelTitleCoverage</label>
+                                <input type="text" id="inputCoverageDC" maxlength="2" class="pull-left" disabled />
+                            </div>
+                            <div class="uif-col-6">
+                                <label>@Resources.Language.LabelBeneficiaryType</label>
+                                <select class="uif-select form-control" id="selectModalBeneficiaryTypeDC" data-val="true"
+                                        data-id="Id" data-name="SmallDescription" name="BeneficiaryTypeDC"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-12">
+                                <table class="uif-table" id="tableDeductibleBycoverage" data-source="" data-exporttocsv="false" data-exportname="cultura" data-add="false" data-edit="false" data-delete="false" data-filter="true" data-selectiontype="none" data-sort="false">
+                                    <thead>
+                                        <tr>
+                                            <th data-property="IsSelected" data-type="boolean" style="width: 10% !important;">@Resources.Language.LabelDeductByCoverageAssigned</th>
+                                            <th data-property="Id" style="width: 10% !important;">@Resources.Language.LabelDeductByCoverageCod</th>
+                                            <th data-property="Description" style="width: auto !important;">@Resources.Language.LabelDeductByCoverageDesc</th>
+                                            <th data-property="IsDefault" data-type="boolean" style="width: 10% !important;">@Resources.Language.LabelDeductByCoverageIsDefault</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

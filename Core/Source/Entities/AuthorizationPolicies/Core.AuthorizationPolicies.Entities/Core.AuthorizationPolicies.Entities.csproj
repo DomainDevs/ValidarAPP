@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{54D17C15-9587-4844-94CC-5072FA6E818D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.AuthorizationPolicies</RootNamespace>
+    <AssemblyName>Core.AuthorizationPolicies.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Sistran.Core.Framework">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\AuthorizationAnswer.cs" />
+    <Compile Include="Entities\AuthorizationFunction.cs" />
+    <Compile Include="Entities\AuthorizationRequest.cs" />
+    <Compile Include="Entities\ConceptDescription.cs" />
+    <Compile Include="Entities\ConceptDescriptionValue.cs" />
+    <Compile Include="Entities\GroupPolicies.cs" />
+    <Compile Include="Entities\Parameters.cs" />
+    <Compile Include="Entities\Policies.cs" />
+    <Compile Include="Entities\Reasign.cs" />
+    <Compile Include="Entities\RejectionCauses.cs" />
+    <Compile Include="Entities\Status.cs" />
+    <Compile Include="Entities\TypePolicies.cs" />
+    <Compile Include="Entities\UserAuthorization.cs" />
+    <Compile Include="Entities\UserNotification.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.AuthorizationAnswer.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.AuthorizationFunction.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.AuthorizationRequest.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.ConceptDescription.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.ConceptDescriptionValue.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.GroupPolicies.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.Parameters.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.Policies.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.Reasign.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.RejectionCauses.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.Status.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.TypePolicies.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.UserAuthorization.dict" />
+    <None Include="Entities\Dict\Sistran.Core.Application.AuthorizationPolicies.UserNotification.dict" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Application\Core\Entities\AuthorizationPolicies\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

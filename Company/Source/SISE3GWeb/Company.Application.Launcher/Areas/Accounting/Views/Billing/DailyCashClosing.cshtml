@@ -1,0 +1,151 @@
+﻿    @using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = Global.DailyClosingCashTabSubtitle;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.Billing</li>
+        <li class="active">@Global.DailyClosingCashTabSubtitle</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="ExportExcelCollectItems" class="btn btn-primary" role="button" hidden="hidden">
+            <span class="fa fa-file-excel-o"></span>  @Global.PendingValues
+        </button>
+        <button type="submit" onclick="return false" id="SaveClosure" class="btn btn-primary" role="button">
+            <i class="fa fa-save"></i>  @Global.Accept
+        </button>
+    </footer>
+}
+
+@section Modals{
+
+    <div class="uif-modal" id="SaveDailyCloseSuccessDialog">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Html.Partial("../Billing/DailyCashClosingDialog")
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="submit" class="btn btn-primary" id="AcceptDialog" 
+                                  onclick="return AcceptDialog(event, 'SaveDailyCloseSuccessDialog')">@Global.Accept</button>
+        </div>
+    </div>
+}
+
+<form id="DailyCloseForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Branch</label>
+
+            @Html.DropDownList("BranchDrop", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/Billing/GetBranchByOpenStatus"),
+                data_id = "Id",
+                data_name = "Description",
+                data_selectedid = @ViewBag.BranchDefault,
+                data_val = "true",
+                data_native = "true",
+                data_val_required = Global.RequiredField
+            })
+            @Html.ValidationMessage("BranchDrop")
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.BalanceCashier</label>
+
+            @Html.DropDownList("CashierDrop", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_id = "Id",
+                data_name = "Nick",
+                data_val = "true",
+                data_native = "true",
+                data_val_required = Global.RequiredField
+            })
+            @Html.ValidationMessage("CashierDrop")
+
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.AccountingDate</label>
+            <br />
+            <input type="text" id="CurrentDate" name="CurrentDate" style="text-align: left" value="@ViewBag.DateAccounting" disabled="disabled" />
+            <input type="hidden" id="CurrencyCode" name="CurrencyCode" value="0" />
+            <input type="hidden" id="RegisterDate" name="RegisterDate" />
+            <input type="hidden" id="CashMessage" name="CashMessage" />
+            <input type="hidden" id="CardMessage" name="CardMessage" />
+        </div>
+    </div>
+</form>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="BalanceInquieriesTable" data-exporttocsv="false" data-edit="false" data-delete="false"
+               data-filter="false" data-paginate="false" data-selectiontype="none"
+               data-title="@Global.SummaryPendingTheProceeds">
+            <thead>
+                <tr>
+                    <th data-property="PaymentMethodTypeCode" data-visible="false">PaymentMethodTypeCode</th>
+                    <th data-property="PaymentDescription" style="text-align:left">@Global.PaymentType</th>
+                    <th data-property="CurrencyCode" data-visible="false" >CurrencyCode</th>
+                    <th data-property="CurrencyDescription" style="text-align:left">@Global.Currency</th>
+                    <th data-property="IncomeAmount" style="text-align:left">@Global.BalanceAmount</th>
+                    <th data-property="Amount" style="text-align:left">@Global.BalanceTotal</th>
+                    <th data-property="BranchCode" data-visible="false">BranchCode</th>
+                    <th data-property="BranchDescription" data-visible="false">BranchDescription</th>
+                    <th data-property="UserId" data-visible="false" >UserId</th>
+                    <th data-property="RegisterDate" data-visible="false" >RegisterDate</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertForm"></div>
+    </div>
+</div>
+<div id="pnlBillingClosure" class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="BillingClosureTable" data-exporttocsv="false" data-edit="false"
+                   data-delete="false" data-source="null" data-filter="false" data-paginate="false">
+                <thead>
+                <tr>
+                    <th data-property="Id">Id</th>
+                    <th data-property="IdPaymentMethod">IdPaymentMethod</th>
+                    <th data-property="PaymentMethods">@Global.PaymentType</th>
+                    <th data-property="TotalAdmitted">@Global.BillingTotalAdmitted</th>
+                    <th data-property="TotalReceived">@Global.BillingTotalReceived</th>
+                    <th data-property="TotalDifference">@Global.BillingTotalDifference</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBillControlId" value="@ViewBag.idBillControl" />
+<input type="hidden" id="ViewBagBranchId" value="@ViewBag.idBranch" />
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagDateAccounting" value="@ViewBag.DateAccounting" />
+<input type="hidden" id="ViewBagBranchDefault" value="@ViewBag.BranchDefault" />
+<input type="hidden" id="ViewBagMainBillingLink" value="@Url.Content(Global.MainBillingLink)" />
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/DailyCashClosing")
+}

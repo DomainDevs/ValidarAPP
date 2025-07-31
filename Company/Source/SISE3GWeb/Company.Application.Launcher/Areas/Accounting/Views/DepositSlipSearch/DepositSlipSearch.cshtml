@@ -1,0 +1,164 @@
+﻿@using System.Web.Mvc.Html
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.DepositSlipSearch;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.CheckAdministration</li>
+        <li>@Global.SearchLabel @Global.InternalBallot</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-default" id="cancelSlip">
+            <i class="fa fa-remove"></i> @Global.Annul
+        </button>
+        <button class="btn btn-primary" id="editSlip">
+            <i class="fa fa-edit"></i> @Global.Edit
+        </button>
+    </footer>
+}
+
+@section modals
+{
+    @*MODAL DE DETALLES*@
+    <div class="uif-modal" id="checkDetailsModal">
+        <div class="uif-modalbody">
+            @Html.Partial("CheckDetailsModal")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+        </div>
+    </div>
+
+    @*MODAL DE EDICION*@
+    <div class="uif-modal" id="editModal">
+        <div class="uif-modalbody">
+            @Html.Partial("DepositSlipEditModal")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="editDepositSlip"
+                    onclick=" return EditDepositSlip('editModal')">@Global.Save
+            </button>
+        </div>
+    </div>
+
+    @*MODAL DE SUCCESS*@
+    <div class="uif-modal" id="successModal">
+        <div class="uif-modalbody">
+            @Html.Partial("DepositSlipSuccessModal")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="printDepositSlip"
+                   onclick=" return PrintDepositSlip('successModal')" >@Global.BallotPrint</button>
+        </div>
+    </div>
+
+    @*MODAL DE ANULACIÓN*@
+    <div class="uif-modal" id="modalDeleteBallot">
+        <div class="form">
+            <div class="uif-modalbody" id="deleteMessageModal">
+                <p>@Global.InternalBallotCancelationQuestion</p>
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+                <i class="fa fa-remove"></i> @Global.Cancel
+            </button>
+            <button type="button" class="btn btn-primary" id="DeleteModal"
+                    onclick=" return DeleteModalBallot('modalDeleteBallot')">
+                <i class="fa fa-check"></i> @Global.Accept
+            </button>
+        </div>
+    </div>
+}
+
+<h3>@Global.SearchCriteria</h3>
+<form id="depositSlipSearchForm">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.Bank</label>
+            <input class="uif-autocomplete" type="text" id="Bank" name="Bank" required="" 
+                   data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value" placeholder="@Global.Bank"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="Bank" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.DateFrom</label>
+            <input type="text" id="StartDate" name="StartDate" class="uif-datepicker" data-mask="99/99/9999" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.DateTo</label>
+            <input type="text" id="EndDate" name="EndDate" class="uif-datepicker" data-mask="99/99/9999" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.InternalBallotNumber</label>
+            <input type="text" id="InternalBallotNumber" name="InternalBallotNumber" onkeypress=" return JustNumbers(event, this); " maxlength="10" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0526"))
+                {
+                    <a class="btn btn-default" role="button" id="clear"><i class="fa fa-paint-brush"></i>@Global.Clean</a>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0526"))
+                {
+                    <a class="btn btn-primary" role="button" id="SearchDepositSlip" onclick=" return false "><i class="fa fa-search"></i>@Global.Search</a>
+                }
+            </div>
+        </div>
+    </div>
+</form>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+
+<div class="uif-row"></div>
+<table class="uif-table" data-title="@Global.InternalDepositSlip" data-source="null" id="SearchBallotsTable" data-add="false" data-edit="true" data-delete="false" data-selectiontype="single" data-paginate="true">
+    <thead>
+        <tr>
+            <th data-property="PaymentTicketCode">@Global.InternalBallotNumber</th>
+            <th data-property="BankCode" data-visible="false">BankCode</th>
+            <th data-property="BankDescription">@Global.ReceivingBank</th>
+            <th data-property="AccountNumber">@Global.ReceivingBankAccountNumber</th>
+            <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+            <th data-property="CurrencyDescription">@Global.Currency</th>
+            <th data-property="CashAmount">@Global.CashAmount</th>
+            <th data-property="Amount">@Global.CheckAmount</th>
+            <th data-property="Status" data-visible="false">Status</th>
+            <th data-property="StatusDescription">@Global.Status</th>
+            <th data-property="RegisterDate">@Global.Date</th>
+            <th data-property="UserId" data-visible="false">UserId</th>
+            <th data-property="User">@Global.User</th>
+            <th data-property="PaymentBallotNumber">@Global.DepositBallotNumber</th>
+            <th data-property="DespositDate">@Global.DepositDate</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<div class="uif-row">
+</div>
+
+<script src="@Url.Content("~/Scripts/common-validations.js")"></script>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagParamPaymentMethodCash" value="@ViewBag.ParamPaymentMethodCash" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/DepositSlipSearch")
+}

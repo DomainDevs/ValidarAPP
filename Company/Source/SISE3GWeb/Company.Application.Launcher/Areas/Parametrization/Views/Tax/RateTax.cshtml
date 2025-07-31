@@ -1,0 +1,213 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.RateTaxViewModel
+
+<script id="title-template" type="text/template">
+    <div class="column column-100">
+        <div class="uif-col-3">
+            <label>@Resources.Language.TaxRate</label>
+        </div>
+        <div class="uif-col-9">
+            <label id="titleTax"></label>
+        </div>
+    </div>
+
+</script>
+
+
+
+<table id="RateTaxTable" class="uif-table" data-paginate="true" @*data-source="/Tax/GetRecords"*@
+       data-exporttocsv="false" @*data-exportname="TaxRateDataTable"*@
+       data-add="false" data-edit="true" data-delete="false" data-filter="false" data-selectiontype="none"
+       data-paginate="false" data-pagesize="20">
+    <thead>
+        <tr>
+            <th data-property="TaxPeriodRate.CurrentFrom">Fecha</th>
+            <th data-property="TaxCondition.Description">Condicion Impositiva</th>
+            <th data-property="TaxCategory.Description">Categoria</th>
+            <th data-property="EconomicActivity.Description">Actividad Economica</th>
+            <th data-property="TaxState.DescriptionCountry">País</th>
+            <th data-property="TaxState.DescriptionState">Departamento</th>
+            <th data-property="TaxState.DescriptionCity">Ciudad</th>
+            <th data-property="LineBusiness.Description">Ramo Técnico</th>
+            <th data-property="Branch.Description">Sucursal</th>
+            <th data-property="Coverage.Description">Cobertura</th>
+            <th data-property="TaxPeriodRate.Rate">Tasa</th>
+            <th data-property="TaxPeriodRate.AdditionalRate">Tasa Adicional</th>
+            <th data-property="TaxPeriodRate.MinTaxAMT">Impuesto Mínimo</th>
+            <th data-property="TaxPeriodRate.MinAdditionalTaxAMT">Impuesto Mínimo Adicional</th>
+            <th data-property="TaxPeriodRate.BaseTaxAdditional">Impuesto base incluido en adicional</th>
+            <th data-property="TaxPeriodRate.MinBaseAMT">Mínima Base Imponible</th>
+            <th data-property="TaxPeriodRate.MinAdditionalBaseAMT">Mínima Base Imponible Adicional</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<div class="uif-modal" id="modalDialogTest">
+    <div class="uif-modalheader"></div>
+
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-2">
+                <label>@Resources.Language.TaxRate</label>
+            </div>
+            <div class="uif-col-8">
+                
+            </div>
+            @*<div class="uif-col-1">
+                    <button class="btn background-dark" id="AdvSearchRateTax"><i class="fa fa-angle-down"></i></button>
+                </div>*@
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <form id="formRateTax" class="form">
+                    <div class="row">
+                        <div class="uif-col-3">
+                            @Html.LabelFor(model => model.CurrentFrom, htmlAttributes: new { @class = "control-label field-required" })
+                            @Html.TextBoxFor(model => model.CurrentFrom, htmlAttributes: new { @class = "uif-datepicker", data_min_date = System.DateTime.Now.Date })
+                            @Html.ValidationMessageFor(model => model.CurrentFrom)
+                        </div>
+                        <div class="uif-col-2">
+                            @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "control-label field-required" })
+                            @Html.TextBoxFor(model => model.Rate, htmlAttributes: new { @class = "form-control", @maxlength = 5 })
+                            @Html.ValidationMessageFor(model => model.Rate)
+                        </div>
+                        <div class="uif-col-4">
+                            @Html.LabelFor(model => model.MinimumTaxableBase, htmlAttributes: new { @class = "control-label field-required" })
+                            @Html.TextBoxFor(model => model.MinimumTaxableBase, htmlAttributes: new { @class = "form-control", @maxlength = 5 })
+                            @Html.ValidationMessageFor(model => model.MinimumTaxableBase)
+                        </div>
+                        <div class="uif-col-3">
+                            @Html.LabelFor(model => model.Minimum, htmlAttributes: new { @class = "control-label field-required" })
+                            @Html.TextBoxFor(model => model.Minimum, htmlAttributes: new { @class = "form-control", @maxlength = 5 })
+                            @Html.ValidationMessageFor(model => model.Minimum)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-3">
+                            <label>@string.Empty</label>
+                            <div class="row-space-adjusted">
+                                <input type="checkbox" id="BasicTaxIncludedAdditionalBase" name="BasicTaxIncludedAdditionalBase" />
+                                @Html.LabelFor(model => model.BasicTaxIncludedAdditionalBase, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                        </div>
+                        <div class="uif-col-2">
+                            @Html.LabelFor(model => model.RateAdditional, htmlAttributes: new { @class = "control-label field-required" })
+                            @Html.TextBoxFor(model => model.RateAdditional, htmlAttributes: new { @class = "form-control", @maxlength = 5 })
+                            @Html.ValidationMessageFor(model => model.RateAdditional)
+                        </div>
+                        <div class="uif-col-4">
+                            @Html.LabelFor(model => model.MinimumAdditionalTaxableBase, htmlAttributes: new { @class = "control-label field-required" })
+                            @Html.TextBoxFor(model => model.MinimumAdditionalTaxableBase, htmlAttributes: new { @class = "form-control", @maxlength = 5 })
+                            @Html.ValidationMessageFor(model => model.MinimumAdditionalTaxableBase)
+                        </div>
+                        <div class="uif-col-3">
+                            @Html.LabelFor(model => model.AdditionalMinimum, htmlAttributes: new { @class = "control-label field-required" })
+                            @Html.TextBoxFor(model => model.AdditionalMinimum, htmlAttributes: new { @class = "form-control", @maxlength = 5 })
+                            @Html.ValidationMessageFor(model => model.AdditionalMinimum)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-4" id="TaxRateConditionDiv">
+                            @Html.LabelFor(model => model.TaxCondition, htmlAttributes: new { @class = "control-label field-required" })
+                            <select data-filter="true" data-native="false" class="uif-select form-control" id="TaxCondition" name="TaxCondition"
+                                    data-id="Id" data-name="DescriptionLong"
+                                    data-val="true"
+                                    data-val-required=""></select>
+                            <span class="text-danger" data-valmsg-for="TaxCondition" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4" id="TaxRateCategoryDiv">
+                            @Html.LabelFor(model => model.TaxCategory, htmlAttributes: new { @class = "control-label field-required" })
+                            <select data-filter="true" data-native="false" class="uif-select form-control" id="TaxCategory" name="TaxCategory"
+                                    data-id="Id" data-name="DescriptionLong"
+                                    data-val="true"
+                                    data-val-required=""></select>
+                            <span class="text-danger" data-valmsg-for="TaxCategory" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="uif-col-4" id="TaxRateCountryDiv">
+                            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label field-required" })
+                            <select data-filter="true" data-native="false" class="uif-select form-control" id="Country" name="Country"
+                                    data-id="Id" data-name="DescriptionLong"
+                                    data-val="true"
+                                    data-val-required=""></select>
+                            <span class="text-danger" data-valmsg-for="Country" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4" id="TaxRateStateDiv">
+                            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label field-required" })
+                            <select data-filter="true" data-native="false" class="uif-select form-control" id="State" name="State"
+                                    data-id="Id" data-name="DescriptionLong"
+                                    data-val="true"
+                                    data-val-required=""></select>
+                            <span class="text-danger" data-valmsg-for="State" data-valmsg-replace="true"></span>
+                        </div>
+
+                        <div class="uif-col-4" id="TaxRateCityDiv">
+                            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label field-required" })
+                            <select data-filter="true" data-native="false" class="uif-select form-control" id="City" name="City"
+                                    data-id="IdC" data-name="DescriptionLong"
+                                    data-val="true"
+                                    data-val-required=""></select>
+                            <span class="text-danger" data-valmsg-for="City" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-4" id="TaxRateEconomicActivityDiv">
+                            @Html.LabelFor(model => model.EconomicActivity, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.EconomicActivity, htmlAttributes: new { @class = "uif-autocomplete", data_source = @Url.Content("~/Tax/GetEconomicActivities"),
+                                                    data_displaykey = "DescriptionLong", value = "Id", data_displayrecords = "3", data_minlenght = "1" })
+                            @Html.ValidationMessageFor(model => model.EconomicActivity)
+                        </div>
+                        <div class="uif-col-4" id="TaxRateLineBusinessDiv">
+                            @Html.LabelFor(model => model.LineBusiness, htmlAttributes: new { @class = "control-label field-required" })
+                            <select data-filter="true" data-native="false" class="uif-select form-control" id="LineBusiness" name="LineBusiness"
+                                    data-id="Id" data-name="DescriptionLong"
+                                    data-val="true"
+                                    data-val-required=""></select>
+                            <span class="text-danger" data-valmsg-for="LineBusiness" data-valmsg-replace="true"></span>
+                        </div>
+                       
+                        <div class="uif-col-4" id="TaxRateCoverageDiv">
+                            @Html.LabelFor(model => model.Coverage, htmlAttributes: new { @class = "control-label field-required" })
+                            <select data-filter="true" data-native="false" class="uif-select form-control" id="Coverage" name="Coverage"
+                                    data-id="Id" data-name="Description"
+                                    data-val="true"
+                                    data-val-required=""></select>
+                            <span class="text-danger" data-valmsg-for="Coverage" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-4" id="TaxRateTechnicalBranchDiv">
+                            @Html.LabelFor(model => model.TechnicalBranch, htmlAttributes: new { @class = "control-label field-required" })
+                            <select data-filter="true" data-native="false" class="uif-select form-control" id="TechnicalBranch" name="TechnicalBranch"
+                                    data-id="Id" data-name="DescriptionLong"
+                                    data-val="true"
+                                    data-val-required=""></select>
+                            <span class="text-danger" data-valmsg-for="TechnicalBranch" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-modalbuttons">
+        <input type="button" id="btnClose" name="testModalButton1" value="@Resources.Language.ButtonClose" class="btn btn-default" />
+        <input type="button" id="btnSave" name="testModalButton2" value="@Resources.Language.ButtonSave" class="btn btn-primary" />
+    </div>
+
+
+</div>
+
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="ExitRate">
+            <i class="fa fa-times"></i> @Resources.Language.ButtonClose
+        </button>
+        <button type="button" class="btn btn-primary" id="addTaxRateModal">
+            <i class="fa fa-plus"></i> @Resources.Language.Add
+        </button>
+    </div>
+</script>

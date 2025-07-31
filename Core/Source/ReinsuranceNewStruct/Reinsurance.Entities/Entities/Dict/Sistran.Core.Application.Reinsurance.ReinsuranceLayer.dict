@@ -1,0 +1,42 @@
+<map version="2.0" type="class" name="ReinsuranceLayer" namespace="Sistran.Core.Application.Reinsurance" file-version="1.0" description="REINSURANCE_LAYER_ENTITY">
+  <properties>
+    <property name="ReinsuranceLayerId" type="Integer" key="true" description="REINSURANCE_LAYER_ID_PROPERTY" nullable = "false" autonumber="Identity" />
+    <property name="PolicyId" type="Integer" description="POLICY_ID_PROPERTY" />
+    <property name="EndorsementId" type="Integer" description="ENDORSEMENT_ID_PROPERTY" />
+    <property name="ReinsuranceNumber" type="Integer" description="REINSURANCE_NUMBER_PROPERTY" />
+    <property name="LayerNumber" type="Integer" description="LAYER_NUMBER_PROPERTY" />
+    <property name="LayerPercentage" type="Decimal" precision="12" scale="2" description="LAYER_PERCENTAGE_PROPERTY" />
+    <property name="SumAmount" type="Decimal" precision="18" scale="2" nullable="true" description="SUM_AMOUNT_PROPERTY" />
+    <property name="PremiumPercentage" type="Decimal" precision="12" scale="2" description="PREMIUM_PERCENTAGE_PROPERTY" />
+    <property name="PremiumAmount" type="Decimal" precision="18" scale="2" nullable="true" description="PREMIUM_AMOUNT_PROPERTY" />
+    <property name="ProcessDate" type="DateTime" nullable="true" description="PROCESS_DATE_PROPERTY" />
+    <property name="ReinsuranceIssueDate" type="DateTime" description="REINSURANCE_ISSUE_DATE_PROPERTY" />
+    <property name="ReinsuranceValidityFrom" type="DateTime" description="REINSURANCE_VALIDITY_FROM_PROPERTY" />
+    <property name="ReinsuranceValidityTo" type="DateTime" description="REINSURANCE_VALIDITY_TO_PROPERTY" />
+    <property name="CancellationNumberAssociation" type="Integer" nullable="true" description="CANCELLATION_NUMBER_ASSOCIATION_PROPERTY" />
+    <property name="IsAutomatic" type="Boolean" nullable="true" description="IS_AUTOMATIC_PROPERTY" />
+    <property name="UserId" type="Integer" nullable="true" description="USER_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="REINSURANCE_LAYER" schema="REINS" alias="REINSURANCE_LAYER" update="true">
+      <columns>
+        <column name="REINSURANCE_LAYER_ID" type="Int32" property="ReinsuranceLayerId" key="true" identity ="true" />
+        <column name="POLICY_ID" type="Int32" property="PolicyId" allowNull="false" />
+        <column name="ENDORSEMENT_ID" type="Int32" property="EndorsementId" allowNull="false" />
+        <column name="REINSURANCE_NUMBER" type="Int32" property="ReinsuranceNumber" allowNull="false" />
+        <column name="LAYER_NUMBER" type="Int32" property="LayerNumber" allowNull="false" />
+        <column name="LAYER_PERCENTAGE" type="Decimal" property="LayerPercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="SUM_AMOUNT" type="Decimal" property="SumAmount" size="19" precision="18" scale="2" />
+        <column name="PREMIUM_PERCENTAGE" type="Decimal" property="PremiumPercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="PREMIUM_AMOUNT" type="Decimal" property="PremiumAmount" size="19" precision="18" scale="2" />
+        <column name="PROCESS_DATE" type="DateTime" property="ProcessDate" />
+        <column name="REINSURANCE_ISSUE_DATE" type="DateTime" property="ReinsuranceIssueDate" allowNull="false" />
+        <column name="REINSURANCE_VALIDITY_FROM" type="DateTime" property="ReinsuranceValidityFrom" allowNull="false" />
+        <column name="REINSURANCE_VALIDITY_TO" type="DateTime" property="ReinsuranceValidityTo" allowNull="false" />
+        <column name="CANCELLATION_NUMBER_ASSOCIATION" type="Int32" property="CancellationNumberAssociation" />
+        <column name="IS_AUTOMATIC" type="Boolean" property="IsAutomatic" />
+        <column name="USER_ID" type="Int32" property="UserId" />
+      </columns>
+    </table>
+  </tables>
+</map>

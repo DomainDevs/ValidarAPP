@@ -1,0 +1,136 @@
+﻿@{
+    Layout = null;
+}
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="col-lg-12">
+        @Resources.Language.LabelReportPolicies
+    </div>
+</script>
+
+<form id="formReportPolicies" class="form without-space">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelPolicyReportDateStar</label>
+                    <input type="datetime" class="uif-datepicker" name="dateIniPolicy" id="dateIniPolicy" value="@DateTime.Now.ToString("dd/MM/yyy")" data-max-date="@DateTime.Now.ToString("dd/MM/yyy")" required />
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelPolicyReportDateEnd</label>
+                    <input type="datetime" class="uif-datepicker" name="dateEndPolicy" id="dateEndPolicy" value="@DateTime.Now.ToString("dd/MM/yyy")" data-max-date="@DateTime.Now.ToString("dd/MM/yyy")" required />
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelPolicyReportState</label>
+                    <select class="uif-select" name="IdStatus" id="IdStatus" data-id="Id" data-name="Description" multiple="multiple" data-val-required="@Resources.Language.OptionSelect" required></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0657"))
+                    {
+                        <button type="button" id="SearchReportPolicies" class="btn btn-default"> @Resources.Language.ButtonSearch</button>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="uif-col-12 ">
+        <table data-paginate="true" class="uif-table" id="TableRequests" data-filter="true" data-selectiontype="single">
+            <thead>
+                <tr>
+                    <th data-property="DescriptionGroup">Grupo de politicas</th>
+                    <th data-property="DescriptionPolicie">Politica</th>
+                    <th data-property="Reference">Referencia</th>
+                    <th data-property="DateRequest">Fecha de solicitud</th>
+                    <th data-property="DescriptionRequest">Motivo de solicitud</th>
+                    <th data-property="Count">Cantidad</th>
+                    <th data-property="StatusDescription">Estado</th>
+                    <th data-property="ProcessDescription">Proceso</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+    </div>
+</div>
+@*Modales*@
+<div class="uif-modal" id="modalRequestDitails">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div id="divTableRequestsDetails" class="uif-col-12 ">
+                <table data-paginate="true" data-hiddencolumns="[0]" class="uif-table" id="tableRequestsDetails" data-filter="true" data-selectiontype="single">
+                    <thead>
+                    <tr>
+                        <th data-property="AuthorizationRequestId"></th>
+                        <th data-property="Count">Cantidad</th>
+                        <th data-property="DescriptionRequest">Descripcion</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <div id="divTableAnswers" class="uif-col-12 ">
+                <table data-paginate="true" class="uif-table" id="tableAnswers" data-filter="true" data-selectiontype="none">
+                    <thead>
+                        <tr>
+                            <th data-property="UserAnswer.AccountName">Autorizador</th>
+                            <th data-property="HierarchyAnswer.Description">Jerarquia</th>
+                            <th data-property="StatusDescription">Estado</th>
+                            <th data-property="DateAnswer">Fecha de respuesta</th>
+                            <th data-property="DescriptionAnswer">Descripcion</th>
+                            <th data-property="RejectionCausesDescription">Motivo de rechazo</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button class="btn btn-defauld cancel" data-dismiss="modal">
+            @Resources.Language.ButtonClose
+        </button>
+        <button class="btn btn-primary" id="btnBack">
+            @Resources.Language.ButtonPreview
+        </button>
+        <button class="btn btn-primary" id="btnSearchDetailsAnswer">
+            @Resources.Language.LabelDetails
+        </button>
+    </div>
+</div>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitPolicyReport">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0658"))
+        {
+            <button class="btn btn-primary cancel" id="btnSearchDetails">
+                <i class="" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.LabelDetails
+            </button>
+        }
+
+        @*<button class="btn btn-default" id="btnExportPolicyReport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>*@
+    </div>
+</script>

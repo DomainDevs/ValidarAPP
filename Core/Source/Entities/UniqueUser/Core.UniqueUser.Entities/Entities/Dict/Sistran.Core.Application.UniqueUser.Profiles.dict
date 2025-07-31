@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="Profiles" namespace="Sistran.Core.Application.UniqueUser" file-version="1.0" description="PROFILES_ENTITY">
+  <properties>
+    <property name="ProfileId" type="Integer" key="true" description="PROFILE_ID_PROPERTY" autonumber="id" />
+    <property name="Description" type="String" size="30" description="DESCRIPTION_PROPERTY" />
+    <property name="Enabled" type="Boolean" description="ENABLED_PROPERTY" />
+    <property name="Static" type="Boolean" description="STATIC_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PROFILES" schema="UU" alias="PROFILES" update="true">
+      <columns>
+        <column name="PROFILE_ID" type="Int16" property="ProfileId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="30" />
+        <column name="ENABLED" type="Boolean" property="Enabled" allowNull="false" />
+        <column name="STATIC" type="Boolean" property="Static" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="5" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

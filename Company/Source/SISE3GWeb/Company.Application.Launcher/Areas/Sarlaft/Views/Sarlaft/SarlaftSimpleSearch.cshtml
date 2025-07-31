@@ -1,0 +1,79 @@
+﻿
+@model Sistran.Core.Framework.UIF.Web.Areas.Sarlaft.Models.SarlaftSearchModelView
+<script id="advancedSearchTemplate" type="text/template">
+    <div>
+        Núm documento:<strong> {{DocumentNumber}}</strong>
+    </div>
+    <div>
+        Tipo documento: {{DocumentTypeId}} |
+    </div>
+    @*<div>
+        Actividad económica: {{EconomicActivityId}} |
+    </div>
+    <div>
+        Descripción de act. {{EconomicActivityDesc}} |
+    </div>*@
+    <div>
+        IndividualId: {{IndividualId}} |
+    </div>
+    <div>
+        Descripcion: {{Name}} |
+    </div>
+    @*<div>
+        Tipo persona: {{PersonType}} |
+    </div>*@
+    
+</script>
+<div class="uif-alert" id="alertAdvanced"></div>
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelPrefixCommercial</label>
+            <select class="uif-select form-control" id="selectPrefixCommercialAdvanced" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"
+                    data-id="Id" data-name="Description" name="PrefixId" data-filter="true" data-native="false"></select>
+            @Html.ValidationMessageFor(model => model.PrefixId)
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelDescriptionProduct</label>
+            @Html.TextBoxFor(model => model.Description, new { id = "inputDescriptionAdvanced", placeholder = @Resources.Language.ProductName, maxlength = "50" })
+        </div>
+    </div>*@
+    @*<div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelCurrentDate</label>
+            <input type="text" name="name" value="" id="inputFromIssueDate" class="uif-datepicker" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelDisabledDate</label>
+            <input type="text" name="name" value="" id="inputToIssueDate" class="uif-datepicker" />
+        </div>
+        <div class="uif-col-4">
+            <div class="without-label">
+                <button type="button" name="name" id="btnAdvancedSearch" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+            </div>
+        </div>
+    </div>*@
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listViewSearchAdvanced">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchAdv" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoadSarlaft" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+

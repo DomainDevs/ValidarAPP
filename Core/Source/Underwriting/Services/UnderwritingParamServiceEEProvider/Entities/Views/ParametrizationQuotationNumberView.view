@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ParametrizationQuotationNumberView">
+  <collections>
+    <collection name="QuotationNumber" type="Sistran.Core.Application.Quotation.Entities.QuotationNumber, 
+                Core.Quotation.Entities"></collection>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, 
+                Core.Common.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                Core.Common.Entities"></collection>
+    <collection name="Quotation" type="Sistran.Core.Application.Quotation.Entities.Quotation, 
+                Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="QuotationNumber" destination="Branch" name="QuotationNumberBranch" type="Inner">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="QuotationNumber" destination="Prefix" name="QuotationNumberPrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="QuotationNumber" destination="Quotation" name="QuotationNumberQuotation" type="Left">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+      <property left="QuotNumber" type="Equal" right="DocumentNum"></property>
+    </relation>
+  </relations>
+</view>

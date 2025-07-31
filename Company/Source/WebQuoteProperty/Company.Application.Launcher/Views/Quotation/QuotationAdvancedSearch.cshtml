@@ -1,0 +1,74 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Models.QuotationViewModel
+<script id="advancedSearchQuotationTemplate" type="text/template">
+    <div>
+        @Resources.Language.LabelQuotation:<strong>{{Policy.Endorsement.QuotationId}} </strong>{{Policy.Product.Description}}
+        <strong> @Resources.Language.Date :</strong> {{Policy.CurrentFrom}}
+    </div>
+    <div>
+        {{Policy.Holder.IdentificationDocument.DocumentType.SmallDescription}}  {{Policy.Holder.IdentificationDocument.Number}} -
+        <strong> {{Policy.Holder.Name}}</strong>
+    </div>
+    <div>
+        <strong>@Resources.Language.SumInsured:{{Policy.Summary.AmountInsured}}   @Resources.Language.LabelInsuredObjectPremium:</strong>
+        <strong class="danger">{{Policy.Summary.FullPremium}}</strong>
+    </div>
+
+</script>
+<div class="uif-alert" id="alertAdvSearchQuotation"></div>
+<form class="form" id="formAdvancedQuotation">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.ConsultationQuotation</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.ClientDocumentNum</label>
+            <input type="text" name="PersonName" value="" id="inputSearchDocumentNumber" class="uif-input" />
+            @*@Html.ValidationMessageFor(model => model.TradeName)*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-8">
+            <label>@Resources.Language.LabelProduct</label>
+            <select class="uif-select form-control" id="selectSearchProduct" data-id="Id" data-name="Description" name="ProductId"
+                    data-val="true"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.User</label>
+            <input type="text" name="AccountName" value="" id="inputName" class="uif-input" />
+            @Html.ValidationMessageFor(model => model.Names)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.DateFrom</label>
+            <input type="text" name="IssueFrom" id="dateIssueFromQuotation" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.DateTo</label>
+            <input type="text" name="IssueTo" id="dateIssueToQuotation" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <button type="button" name="name" id="btnSearchAdvQuot" class="btn btn-primary-Co width-container">@Resources.Language.Search</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listVSearchAdvancedQuot">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchAdvQuot" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoadAdvQuot" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+

@@ -1,0 +1,30 @@
+<map version="2.0" type="class" name="Provider" namespace="Sistran.Core.Application.UniquePersonV1" file-version="1.0" description="PROVIDER_ENTITY">
+  <properties>
+    <property name="ProviderCode" type="Integer" key="true" description="PROVIDER_CODE_PROPERTY" autonumber="Identity" />
+    <property name="IndividualId" type="Integer" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="ProviderTypeCode" type="Integer" description="PROVIDER_TYPE_CODE_PROPERTY" />
+    <property name="OriginTypeCode" type="Integer" description="ORIGIN_TYPE_CODE_PROPERTY" />
+    <property name="ProviderDeclinedTypeCode" type="Integer" nullable="true" description="PROVIDER_DECLINED_TYPE_CODE_PROPERTY" />
+    <property name="CreationDate" type="DateTime" description="CREATION_DATE_PROPERTY" />
+    <property name="ModificationDate" type="DateTime" nullable="true" description="MODIFICATION_DATE_PROPERTY" />
+    <property name="DeclinationDate" type="DateTime" nullable="true" description="DECLINATION_DATE_PROPERTY" />
+    <property name="Observation" type="String" size="254" nullable="true" description="OBSERVATION_PROPERTY" />
+    <property name="SpecialityDefault" type="Integer" nullable="true" description="SPECIALITY_DEFAULT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PROVIDER" schema="UP" alias="PROVIDER" update="true">
+      <columns>
+        <column name="PROVIDER_CD" type="Int32" property="ProviderCode" key="true" identity="true" />
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" allowNull="false" />
+        <column name="PROVIDER_TYPE_CD" type="Int32" property="ProviderTypeCode" allowNull="false" />
+        <column name="ORIGIN_TYPE_CD" type="Int32" property="OriginTypeCode" allowNull="false" />
+        <column name="PROVIDER_DECLINED_TYPE_CD" type="Int32" property="ProviderDeclinedTypeCode" />
+        <column name="CREATION_DATE" type="DateTime" property="CreationDate" allowNull="false" />
+        <column name="MODIFICATION_DATE" type="DateTime" property="ModificationDate" />
+        <column name="DECLINATION_DATE" type="DateTime" property="DeclinationDate" />
+        <column name="OBSERVATION" type="String" property="Observation" size="254" />
+        <column name="SPECIALITY_DEFAULT" type="Byte" property="SpecialityDefault" />
+      </columns>
+    </table>
+  </tables>
+</map>

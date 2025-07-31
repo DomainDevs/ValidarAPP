@@ -1,0 +1,2489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://microsoft.com/wsdl/types/" />
+  <xs:element name="QuoteVehicle">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="requestQuoteVehicle" type="tns:QuoteVehicleRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="QuoteVehicleRequest">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TemporalId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="QuotationId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PrefixId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="GroupCoverageId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UserId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CustomerId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CustomerTypeId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Plate" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FasecoldaCode" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MakeId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ModelId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="VersionId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TypeId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UseId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Year" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Rate" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RatingZoneId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QuoteVehicleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="QuoteVehicleResult" type="tns:QuoteVehicleResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="QuoteVehicleResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TemporalId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="QuotationId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Premium" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Taxes" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Expenses" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Quotate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="quoteVehiclePolicyRequest" type="tns:QuoteVehiclePolicyRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="QuoteVehiclePolicyRequest">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TemporalId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QuotateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="QuotateResult" type="tns:QuoteVehiclePolicyResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="QuoteVehiclePolicyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateQuotation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="quoteVehiclePolicyRequest" type="tns:QuoteVehiclePolicyRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateQuotationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="CreateQuotationResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreatePolicy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="temporalId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreatePolicyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="CreatePolicyResult" type="tns:Policy" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Policy">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BasePolicy">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Text" type="tns:Text" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Clauses" type="tns:ArrayOfClause" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Agencies" type="tns:ArrayOfIssuanceAgency" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Prefix" type="tns:Prefix" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Product" type="tns:Product" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Branch" type="tns:Branch" />
+          <xs:element minOccurs="0" maxOccurs="1" name="CoInsuranceCompanies" type="tns:ArrayOfIssuanceCoInsuranceCompany" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Holder" type="tns:Holder" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PaymentPlan" type="tns:PaymentPlan" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ExchangeRate" type="tns:ExchangeRate" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PolicyType" type="tns:PolicyType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Request" type="tns:Request" />
+          <xs:element minOccurs="0" maxOccurs="1" name="BillingGroup" type="tns:BillingGroup" />
+          <xs:element minOccurs="0" maxOccurs="1" name="DefaultBeneficiaries" type="tns:ArrayOfBeneficiary" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PayerComponents" type="tns:ArrayOfPayerComponent" />
+          <xs:element minOccurs="0" maxOccurs="1" name="DynamicProperties" type="tns:ArrayOfDynamicConcept" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Summary" type="tns:Summary" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Endorsement" type="tns:Endorsement" />
+          <xs:element minOccurs="0" maxOccurs="1" name="InfringementPolicies" type="tns:ArrayOfPoliciesAut" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Risk" type="tns:Risk" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BasePolicy">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DocumentNumber" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IssueDate" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrentFrom" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrentTo" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="BusinessTypeDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="UserId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CalculateMinPremium" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="BeginDate" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="EffectPeriod" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TimeHour" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TimeMinutes" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsPersisted" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="SubEndorsementType" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="HasTotalLoss" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="SinisterQuantity" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PortfolioBalance" type="xs:decimal" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TemporalTypeDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="BusinessType" nillable="true" type="tns:BusinessType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="TemporalType" nillable="true" type="tns:TemporalType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Extension">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ExtendedProperties" type="tns:ArrayOfExtendedProperty" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfExtendedProperty">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ExtendedProperty" nillable="true" type="tns:ExtendedProperty" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExtendedProperty">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BaseEndorsement">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrentFrom" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrentTo" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PolicyId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="TemporalId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="QuotationId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="QuotationVersion" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="EndorsementTypeDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="EndorsementReasonId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ReferenceEndorsementId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsCurrent" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Number" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CancellationTypeId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsUnderIdenticalConditions" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="EndorsementDays" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsMassive" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="EndorsementType" nillable="true" type="tns:EndorsementType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="EndorsementReasonDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExchangeRate" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="BeginDate" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CapacityOfCode" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CommitDate" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IssueDate" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PrintedDate" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="SubscriptionReqId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="UserId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CancelationCurrentFrom" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CancelationCurrentTo" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="EndorsementType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Emission" />
+          <xs:enumeration value="Modification" />
+          <xs:enumeration value="Cancellation" />
+          <xs:enumeration value="Nominative_cancellation" />
+          <xs:enumeration value="Rehabilitation" />
+          <xs:enumeration value="EffectiveExtension" />
+          <xs:enumeration value="Renewal" />
+          <xs:enumeration value="Rebill" />
+          <xs:enumeration value="WithoutPremiumMovement" />
+          <xs:enumeration value="ClaimExclusion" />
+          <xs:enumeration value="RestaTMPENt" />
+          <xs:enumeration value="PremiumAmount" />
+          <xs:enumeration value="AutomaticCancellation" />
+          <xs:enumeration value="AutomaticRehabilitation" />
+          <xs:enumeration value="IncrementPremiumMovement" />
+          <xs:enumeration value="DecrementPremiumMovement" />
+          <xs:enumeration value="ClaimCancellation" />
+          <xs:enumeration value="ProrrateRehabilitation" />
+          <xs:enumeration value="TableRehabilitation" />
+          <xs:enumeration value="WithoutRecalculationRehabilitation" />
+          <xs:enumeration value="RequestDateCancellation" />
+          <xs:enumeration value="RequestBalanceCancellation" />
+          <xs:enumeration value="LastEndorsementCancellation" />
+          <xs:enumeration value="DeclarationEndorsement" />
+          <xs:enumeration value="AdjustmentEndorsement" />
+          <xs:enumeration value="CreditNoteEndorsement" />
+          <xs:enumeration value="ChangeTermEndorsement" />
+          <xs:enumeration value="ChangeAgentEndorsement" />
+          <xs:enumeration value="ChangePolicyHolderEndorsement" />
+          <xs:enumeration value="ChangeConsolidationEndorsement" />
+          <xs:enumeration value="ChangeCoinsuranceEndorsement" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:complexType name="Endorsement">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEndorsement">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Text" type="tns:Text" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Prefix" type="tns:BasePrefix" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Branch" type="tns:BaseBranch" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Risk" type="tns:RiskChangeText" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Text">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseText" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseText">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TextTitle" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TextBody" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Observations" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BasePrefix">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TinyDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="HasDetailedCommission" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PrefixTypeCode" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Status" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LineBusinessId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="UserId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Prefix">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BasePrefix">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="PrefixType" type="tns:PrefixType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="LineBusiness" type="tns:ArrayOfLineBusiness" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PrefixType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BasePrefixType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BasePrefixType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfLineBusiness">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LineBusiness" nillable="true" type="tns:LineBusiness" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LineBusiness">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseLineBusiness">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="ListInsurectObjects" type="tns:ArrayOfInt" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseLineBusiness">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ShortDescription" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TyniDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ReportLineBusiness" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IdLineBusinessbyRiskType" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Status" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfInt">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="int" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BaseBranch">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsDefault" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Branch">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseBranch">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="SalePoints" type="tns:ArrayOfSalePoint" />
+          <xs:element minOccurs="1" maxOccurs="1" name="GroupBranchId" nillable="true" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfSalePoint">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SalePoint" nillable="true" type="tns:SalePoint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SalePoint">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseSalePoint" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseSalePoint">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsDefault" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsEnabled" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RiskChangeText">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="RiskId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="InsuredId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CoveredRiskTypeCode" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ConditionText" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RatingZoneCode" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CoverGroupId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsFacultative" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NameNum" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AddressId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PhoneId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RiskCommercialClassCode" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RiskCommercialTypeCode" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SecondaryInsuredId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BaseRiskActivity">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RiskActivityTypeId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RiskActivity">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRiskActivity" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseUserNotification">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Default" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="UserNotification">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseUserNotification">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Policies" type="tns:PoliciesAut" />
+          <xs:element minOccurs="0" maxOccurs="1" name="User" type="tns:User" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Hierarchy" type="tns:CoHierarchyAssociation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PoliciesAut">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BasePoliciesAut">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="GroupPolicies" type="tns:GroupPolicies" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Type" type="tns:TypePolicies" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ConceptsDescription" type="tns:ArrayOfConceptDescription" />
+          <xs:element minOccurs="0" maxOccurs="1" name="UserAuthorization" type="tns:ArrayOfUserAuthorization" />
+          <xs:element minOccurs="0" maxOccurs="1" name="UserNotification" type="tns:ArrayOfUserNotification" />
+          <xs:element minOccurs="0" maxOccurs="1" name="RuleSet" type="tns:_RuleSet" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BasePoliciesAut">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="IdPolicies" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Position" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IdHierarchyPolicy" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IdHierarchyAut" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="NumberAut" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Message" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Enabled" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GroupPolicies">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseGroupPolicies">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Module" type="tns:Module" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SubModule" type="tns:SubModule" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Package" type="tns:_Package" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseGroupPolicies">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="IdGroupPolicies" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Key" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="EntityDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Module">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseModule">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="SubModules" type="tns:ArrayOfModule" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseModule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsEnabled" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="EnabledDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="VirtualFolder" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Status" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfModule">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Module" nillable="true" type="tns:Module" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SubModule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseSubModule">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Module" type="tns:Module" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseSubModule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsEnabled" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="EnabledDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="VirtualFolder" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ParentModuleId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ParentSubModuleId" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Status" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="_Package">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="PackageId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TypePolicies">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Notification" />
+      <xs:enumeration value="Restrictive" />
+      <xs:enumeration value="Authorization" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfConceptDescription">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConceptDescription" nillable="true" type="tns:ConceptDescription" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConceptDescription">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseConceptDescription">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Policies" type="tns:PoliciesAut" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Concept" type="tns:_Concept" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ConceptDescriptionValue" type="tns:ConceptDescriptionValue" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseConceptDescription">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Order" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="_Concept">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ConceptId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Entity" type="tns:Entity" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ConceptName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ConceptType" type="tns:ConceptType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="KeyOrder" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsStatic" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ConceptControlType" type="tns:ConceptControlType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsReadOnly" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsVisible" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsNulleable" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsPersistible" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ConceptDependences" type="tns:ArrayOf_ConceptDependence" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HasError" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ErrorDescription" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Entity">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="EntityId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EntityName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LevelId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PackageId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ConfigFile" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PropertySearch" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BusinessView" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ConceptType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Basic" />
+      <xs:enumeration value="Range" />
+      <xs:enumeration value="List" />
+      <xs:enumeration value="Reference" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ConceptControlType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TextBox" />
+      <xs:enumeration value="NumberEditor" />
+      <xs:enumeration value="DateEditor" />
+      <xs:enumeration value="ListBox" />
+      <xs:enumeration value="SearchCombo" />
+      <xs:enumeration value="RichTextEditor" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOf_ConceptDependence">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="_ConceptDependence" nillable="true" type="tns:_ConceptDependence" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="_ConceptDependence">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="DependsConcept" type="tns:_Concept" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Order" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ColumnName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConceptDescriptionValue">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseConceptDescriptionValue">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Concept" type="tns:_Concept" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseConceptDescriptionValue">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="TableName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Fields" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Filter" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfUserAuthorization">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserAuthorization" nillable="true" type="tns:UserAuthorization" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UserAuthorization">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseUserAuthorization">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Policies" type="tns:PoliciesAut" />
+          <xs:element minOccurs="0" maxOccurs="1" name="User" type="tns:User" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Hierarchy" type="tns:CoHierarchyAssociation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseUserAuthorization">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Default" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Required" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="User">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Profiles" type="tns:ArrayOfProfile" />
+          <xs:element minOccurs="0" maxOccurs="1" name="UniqueUsersLogin" type="tns:UniqueUserLogin" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Hierarchies" type="tns:ArrayOfCoHierarchyAssociation" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Branch" type="tns:ArrayOfBranch" />
+          <xs:element minOccurs="0" maxOccurs="1" name="IndividualsRelation" type="tns:ArrayOfIndividualRelationApp" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Prefixes" type="tns:ArrayOfPrefix" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseUser">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="UserId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CreatedUserId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ModifiedUserId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PersonId" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="AccountName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CreationDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LastModificationDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LockDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DisableDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="UserDomain" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsDisabledDateNull" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsExpirationDateNull" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsLockDateNull" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LockPassword" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AuthenticationTypeCode" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="StatusDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AuthenticationType" type="tns:AuthenticationType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="AuthenticationType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Integrated" />
+          <xs:enumeration value="Standard" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfProfile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Profile" nillable="true" type="tns:Profile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Profile">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseProfile">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="profileAccesses" type="tns:ArrayOfAccessProfile" />
+          <xs:element minOccurs="0" maxOccurs="1" name="guaranteeProfileStatus" type="tns:ArrayOfProfileGuaranteeStatus" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseProfile">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsEnabled" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Static" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="HasAccess" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="EnabledDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAccessProfile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AccessProfile" nillable="true" type="tns:AccessProfile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AccessProfile">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="ProfileId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AccessId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DatabaseId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsExpirationDateNull" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Enabled" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Assigned" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="InDatabase" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AccessObjectId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AccessType" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfProfileGuaranteeStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProfileGuaranteeStatus" nillable="true" type="tns:ProfileGuaranteeStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProfileGuaranteeStatus">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="StatusId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ProfileId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Enabled" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UniqueUserLogin">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="UserId" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Password" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExpirationsDays" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="MustChangePassword" nillable="true" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfCoHierarchyAssociation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CoHierarchyAssociation" nillable="true" type="tns:CoHierarchyAssociation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CoHierarchyAssociation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseCoHierarchyAssociation">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Module" type="tns:Module" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SubModule" type="tns:SubModule" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseCoHierarchyAssociation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExclusionayInd" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="EnabledInd" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LimitInsuredAmt" nillable="true" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfBranch">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Branch" nillable="true" type="tns:Branch" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfIndividualRelationApp">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IndividualRelationApp" nillable="true" type="tns:IndividualRelationApp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IndividualRelationApp">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIndividualRelationApp">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Agency" type="tns:UserAgency" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIndividualRelationApp">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IndividualId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RelationTypeId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="UserAgency">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseUserAgency">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Agent" type="tns:UserAgent" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseUserAgency">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FullName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DateDeclined" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UserAgent">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="IndividualId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FullName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DateDeclined" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AgentType" type="tns:AgentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AgentType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseGeneric" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseGeneric">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfPrefix">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Prefix" nillable="true" type="tns:Prefix" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfUserNotification">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserNotification" nillable="true" type="tns:UserNotification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="_RuleSet">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="RuleSetId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Level" type="tns:_Level" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Package" type="tns:_Package" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CurrentFrom" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CurrentTo" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RuleSetVer" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsEvent" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Rules" type="tns:ArrayOf_Rule" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Type" type="tns:RuleBaseType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HasError" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ActiveType" nillable="true" type="tns:ActiveRuleSetType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Active" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FileExceptions" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="_Level">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LevelId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOf_Rule">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="_Rule" nillable="true" type="tns:_Rule" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="_Rule">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="RuleId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Parameters" type="tns:ArrayOf_Parameter" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Conditions" type="tns:ArrayOf_Condition" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Actions" type="tns:ArrayOf_Action" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HasError" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ErrorDescription" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOf_Parameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="_Parameter" nillable="true" type="tns:_Parameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="_Parameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Type" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOf_Condition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="_Condition" nillable="true" type="tns:_Condition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="_Condition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Concept" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Comparator" type="tns:_Comparator" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ComparatorType" type="tns:ComparatorType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Expression" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HasError" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ErrorDescription" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="_Comparator">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:OperatorConditionType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Symbol" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="OperatorConditionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Equals" />
+      <xs:enumeration value="LessThan" />
+      <xs:enumeration value="LessThanOrEquals" />
+      <xs:enumeration value="GreaterThan" />
+      <xs:enumeration value="GreaterThanOrEquals" />
+      <xs:enumeration value="Distinct" />
+      <xs:enumeration value="Null" />
+      <xs:enumeration value="NotNull" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ComparatorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ConstantValue" />
+      <xs:enumeration value="ConceptValue" />
+      <xs:enumeration value="ExpressionValue" />
+      <xs:enumeration value="TemporalyValue" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOf_Action">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="_Action" nillable="true" type="tns:_Action" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="_Action">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="AssignType" type="tns:AssignType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Expression" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HasError" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ErrorDescription" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AssignType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ConceptAssign" />
+      <xs:enumeration value="InvokeAssign" />
+      <xs:enumeration value="TemporalAssign" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RuleBaseType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Sequence" />
+      <xs:enumeration value="Option" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ActiveRuleSetType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="User" />
+      <xs:enumeration value="system" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BaseLimitRc">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsDefault" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="LimitUnique" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Limit1" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Limit2" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Limit3" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LimitSum" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LimitRc">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseLimitRc" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseRatingZone">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RatingZone">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRatingZone">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Prefix" type="tns:Prefix" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseGroupCoverage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsMandatory" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsSelected" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Number" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RuleSetId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PosRuleSetId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="MainCoverageId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="SublimitPercentage" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ScriptId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CoveredRiskType" nillable="true" type="tns:CoveredRiskType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="CoveredRiskType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Vehicle" />
+      <xs:enumeration value="Location" />
+      <xs:enumeration value="Surety" />
+      <xs:enumeration value="Transport" />
+      <xs:enumeration value="Aircraft" />
+      <xs:enumeration value="Aeronavigation" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="GroupCoverage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseGroupCoverage">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Product" type="tns:Product" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Coverage" type="tns:Coverage" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Coverages" type="tns:ArrayOfCoverage" />
+          <xs:element minOccurs="0" maxOccurs="1" name="InsuredObjects" type="tns:ArrayOfInsuredObject" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Product">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseProduct">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="CoveredRisk" type="tns:CoveredRisk" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Prefix" type="tns:Prefix" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseProduct">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ScriptId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RuleSetId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PreRuleSetId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrentFrom" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrentTo" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsUse" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CalculateMinPremium" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsGreen" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsInteractive" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsCollective" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsMassive" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsFlatRate" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsRequest" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Version" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AdditionalCommissionPercentage" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="StdDiscountCommPercentage" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="StandardCommissionPercentage" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AdditDisCommissPercentage" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="SurchargeCommissionPercentage" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DecrementCommisionAdjustFactorPercentage" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IncrementCommisionAdjustFactorPercentage" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AdditCommissPercentage" nillable="true" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CoveredRisk">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseCoveredRisk" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseCoveredRisk">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="MaxRiskQuantity" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RuleSetId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PreRuleSetId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ScriptId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CoveredRiskType" nillable="true" type="tns:CoveredRiskType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="SubCoveredRiskType" nillable="true" type="tns:SubCoveredRiskType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SubCoveredRiskType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Vehicle" />
+      <xs:enumeration value="ThirdPartyLiability" />
+      <xs:enumeration value="Property" />
+      <xs:enumeration value="Liability" />
+      <xs:enumeration value="Surety" />
+      <xs:enumeration value="JudicialSurety" />
+      <xs:enumeration value="Transport" />
+      <xs:enumeration value="Lease" />
+      <xs:enumeration value="Marine" />
+      <xs:enumeration value="Fidelity" />
+      <xs:enumeration value="FidelityNewVersion" />
+      <xs:enumeration value="Aircraft" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Coverage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseCoverage">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="SubLineBusiness" type="tns:SubLineBusiness" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Text" type="tns:Text" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Clauses" type="tns:ArrayOfClause" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Deductible" type="tns:Deductible" />
+          <xs:element minOccurs="0" maxOccurs="1" name="DynamicProperties" type="tns:ArrayOfDynamicConcept" />
+          <xs:element minOccurs="0" maxOccurs="1" name="InsuredObject" type="tns:InsuredObject" />
+          <xs:element minOccurs="0" maxOccurs="1" name="CoverageAllied" type="tns:ArrayOfCoverage" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AllyCoverageId" nillable="true" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseCoverage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsMandatory" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsSelected" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Number" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrentFrom" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrentTo" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Rate" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="OriginalRate" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LimitAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="SubLimitAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PremiumAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AccumulatedPremiumAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="EndorsementLimitAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="EndorsementSublimitAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsDeclarative" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsMinPremiumDeposit" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="CoverStatusName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LimitOccurrenceAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AccumulatedSubLimitAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="MainCoverageId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsSublimit" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="MainCoveragePercentage" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CoverNum" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DeclaredAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ShortTermPercentage" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AccumulatedDeductAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AccumulatedLimitAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ContractAmountPercentage" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrencyCode" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LimitClaimantAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RuleSetId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PosRuleSetId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsVisible" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PercentageContract" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExcessLimit" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="MaxLiabilityAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="SublimitPercentage" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FlatRatePorcentage" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Days" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RiskCoverageId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="OriginalSubLimitAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="OriginalLimitAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DiffMinPremiumAmount" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ScriptId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsPrimary" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="EndorsementId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsImpression" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PrintDescription" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PrintDescriptionLimit" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsChild" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsAccMinPremium" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsAssistance" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="MinimumPremiumCoverage" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RateType" nillable="true" type="tns:RateType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CalculationType" nillable="true" type="tns:CalculationType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="EndorsementType" nillable="true" type="tns:EndorsementType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CoverStatus" nillable="true" type="tns:CoverageStatusType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CoverageOriginalStatus" nillable="true" type="tns:CoverageStatusType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FirstRiskType" nillable="true" type="tns:FirstRiskType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrentFromOriginal" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CurrentToOriginal" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DepositPremiumPercent" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CoveredRiskType" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsSeriousOffer" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ModificationTypeId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="RateType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Percentage" />
+          <xs:enumeration value="Permilage" />
+          <xs:enumeration value="FixedValue" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:simpleType name="CalculationType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Prorate" />
+          <xs:enumeration value="Direct" />
+          <xs:enumeration value="ShortTerm" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:simpleType name="CoverageStatusType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Original" />
+          <xs:enumeration value="Included" />
+          <xs:enumeration value="Excluded" />
+          <xs:enumeration value="Modified" />
+          <xs:enumeration value="NotModified" />
+          <xs:enumeration value="Cancelled" />
+          <xs:enumeration value="Rehabilitated" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:simpleType name="FirstRiskType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None" />
+          <xs:enumeration value="FirstLost" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:complexType name="SubLineBusiness">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseSubLineBusiness">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="LineBusiness" type="tns:LineBusiness" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseSubLineBusiness">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LineBusinessId" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Status" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="LineBusinessDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfClause">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Clause" nillable="true" type="tns:Clause" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Clause">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseClause">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="ConditionLevel" type="tns:ConditionLevel" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseClause">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Title" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Text" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsMandatory" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ConditionLevel">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseConditionLevel">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="EmissionLevel" type="tns:EmissionLevel" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Package" type="tns:Package" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseConditionLevel">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ConditionValue" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="EmissionLevel">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="General" />
+          <xs:enumeration value="Risk" />
+          <xs:enumeration value="Coverage" />
+          <xs:enumeration value="Component" />
+          <xs:enumeration value="Commission" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:complexType name="Package">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="PackageId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="NameSpace" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Disabled" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Deductible">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseDeductible">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="DeductibleSubject" type="tns:DeductibleSubject" />
+          <xs:element minOccurs="0" maxOccurs="1" name="DeductibleUnit" type="tns:DeductibleUnit" />
+          <xs:element minOccurs="0" maxOccurs="1" name="MaxDeductibleSubject" type="tns:DeductibleSubject" />
+          <xs:element minOccurs="0" maxOccurs="1" name="MaxDeductibleUnit" type="tns:DeductibleUnit" />
+          <xs:element minOccurs="0" maxOccurs="1" name="MinDeductibleSubject" type="tns:DeductibleSubject" />
+          <xs:element minOccurs="0" maxOccurs="1" name="MinDeductibleUnit" type="tns:DeductibleUnit" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Currency" type="tns:Currency" />
+          <xs:element minOccurs="0" maxOccurs="1" name="LineBusiness" type="tns:LineBusiness" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseDeductible">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Rate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DeductPremiumAmount" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AccDeductAmt" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DeductValue" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MaxDeductValue" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MinDeductValue" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsDefault" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RateType" type="tns:RateType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeductibleSubject">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseDeductibleSubject" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseDeductibleSubject">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeductibleUnit">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseDeductibleUnit" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseDeductibleUnit">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="HasSubject" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Currency">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseCurrency" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseCurrency">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TinyDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfDynamicConcept">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DynamicConcept" nillable="true" type="tns:DynamicConcept" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DynamicConcept">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="EntityId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="QuestionId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ValueType" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InsuredObject">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseInsuredObject" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseInsuredObject">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsDeclarative" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsMandatory" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Premium" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Amount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsSelected" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ParametrizationStatus" nillable="true" type="tns:ParametrizationStatus" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ParametrizationStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Original" />
+      <xs:enumeration value="Create" />
+      <xs:enumeration value="Update" />
+      <xs:enumeration value="Delete" />
+      <xs:enumeration value="Error" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfCoverage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Coverage" nillable="true" type="tns:Coverage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfInsuredObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InsuredObject" nillable="true" type="tns:InsuredObject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BaseRisk">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RiskId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Premium" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AmountInsured" type="xs:decimal" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsInsuredPayer" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Number" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsPersisted" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Status" nillable="true" type="tns:RiskStatusType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="OriginalStatus" nillable="true" type="tns:RiskStatusType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CoveredRiskType" nillable="true" type="tns:CoveredRiskType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsRetention" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsNational" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="RiskStatusType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Original" />
+          <xs:enumeration value="Included" />
+          <xs:enumeration value="Excluded" />
+          <xs:enumeration value="Rehabilitated" />
+          <xs:enumeration value="Modified" />
+          <xs:enumeration value="NotModified" />
+          <xs:enumeration value="Cancelled" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:complexType name="Risk">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRisk">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Text" type="tns:Text" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Clauses" type="tns:ArrayOfClause" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Beneficiaries" type="tns:ArrayOfBeneficiary" />
+          <xs:element minOccurs="0" maxOccurs="1" name="GroupCoverage" type="tns:GroupCoverage" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Coverages" type="tns:ArrayOfCoverage" />
+          <xs:element minOccurs="0" maxOccurs="1" name="MainInsured" type="tns:IssuanceInsured" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SecondInsured" type="tns:IssuanceInsured" />
+          <xs:element minOccurs="0" maxOccurs="1" name="RatingZone" type="tns:RatingZone" />
+          <xs:element minOccurs="0" maxOccurs="1" name="DynamicProperties" type="tns:ArrayOfDynamicConcept" />
+          <xs:element minOccurs="0" maxOccurs="1" name="LimitRc" type="tns:LimitRc" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Policy" type="tns:Policy" />
+          <xs:element minOccurs="0" maxOccurs="1" name="InfringementPolicies" type="tns:ArrayOfPoliciesAut" />
+          <xs:element minOccurs="0" maxOccurs="1" name="RiskActivity" type="tns:RiskActivity" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfBeneficiary">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Beneficiary" nillable="true" type="tns:Beneficiary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Beneficiary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseBeneficiary">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="BeneficiaryType" type="tns:BeneficiaryType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="CompanyName" type="tns:IssuanceCompanyName" />
+          <xs:element minOccurs="0" maxOccurs="1" name="IdentificationDocument" type="tns:IssuanceIdentificationDocument" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseBeneficiary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="IndividualId" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Participation" type="xs:decimal" />
+          <xs:element minOccurs="0" maxOccurs="1" name="BeneficiaryTypeDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CustomerType" type="tns:CustomerType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IndividualType" type="tns:IndividualType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CodeBeneficiary" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="CustomerType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Individual" />
+      <xs:enumeration value="Prospect" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IndividualType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Person" />
+      <xs:enumeration value="Company" />
+      <xs:enumeration value="ProspectNatural" />
+      <xs:enumeration value="ProspectLegal" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BeneficiaryType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseBeneficiaryType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseBeneficiaryType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TinyDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuanceCompanyName">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceCompanyName">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Address" type="tns:IssuanceAddress" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Phone" type="tns:IssuancePhone" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Email" type="tns:IssuanceEmail" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceCompanyName">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="NameNum" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="TradeName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsMain" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuanceAddress">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceAddress">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="City" type="tns:City" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceAddress">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="City">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseCity">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="State" type="tns:State" />
+          <xs:element minOccurs="0" maxOccurs="1" name="DANECode" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseCity">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="State">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseState">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Country" type="tns:Country" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Cities" type="tns:ArrayOfCity" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseState">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Country">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseCountry">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="States" type="tns:ArrayOfState" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseCountry">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfState">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="State" nillable="true" type="tns:State" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfCity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="City" nillable="true" type="tns:City" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IssuancePhone">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuancePhone" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuancePhone">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IssuanceEmail">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceEmail" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceEmail">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IssuanceIdentificationDocument">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceIdentificationDocument">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="DocumentType" type="tns:IssuanceDocumentType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceIdentificationDocument">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Number" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuanceDocumentType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceDocumentType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceDocumentType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuanceInsured">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceInsured">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="CompanyName" type="tns:IssuanceCompanyName" />
+          <xs:element minOccurs="0" maxOccurs="1" name="IdentificationDocument" type="tns:IssuanceIdentificationDocument" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PaymentMethod" type="tns:IssuancePaymentMethod" />
+          <xs:element minOccurs="0" maxOccurs="1" name="EconomicActivity" type="tns:IssuanceEconomicActivity" />
+          <xs:element minOccurs="0" maxOccurs="1" name="AssociationType" type="tns:IssuanceAssociationType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceInsured">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="IndividualId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="InsuredId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="OwnerRoleCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Surname" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SecondSurname" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="CustomerTypeDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="BirthDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Gender" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IndividualType" type="tns:IndividualType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CustomerType" type="tns:CustomerType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DeclinedDate" nillable="true" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuancePaymentMethod">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuancePaymentMethod" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuancePaymentMethod">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PaymentId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IssuanceEconomicActivity">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceEconomicActivity" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceEconomicActivity">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuanceAssociationType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceAssociationType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceAssociationType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Holder">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:IssuanceInsured">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="EmailId" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Email" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RegimeType" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="FiscalResponsibility" type="tns:ArrayOfInsuredFiscalResponsibility" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfInsuredFiscalResponsibility">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InsuredFiscalResponsibility" nillable="true" type="tns:InsuredFiscalResponsibility" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InsuredFiscalResponsibility">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IndividualId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="InsuredId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FiscalResponsabilityId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FiscalResponsabilityDescription" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfPoliciesAut">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PoliciesAut" nillable="true" type="tns:PoliciesAut" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BaseSummary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PolicyId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="TemporalId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="OperationId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RiskCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AmountInsured" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Premium" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Expenses" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Taxes" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Surcharges" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Discounts" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FullPremium" type="xs:decimal" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ProductDescription" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CoveredRiskType" nillable="true" type="tns:CoveredRiskType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExpensesLocal" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Summary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseSummary">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Risks" type="tns:ArrayOfRisk" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfRisk">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Risk" nillable="true" type="tns:Risk" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BaseComponent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ComponentType" nillable="true" type="tns:ComponentType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ComponentClass" nillable="true" type="tns:ComponentClassType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ComponentType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Premium" />
+          <xs:enumeration value="Expenses" />
+          <xs:enumeration value="Surcharges" />
+          <xs:enumeration value="Discounts" />
+          <xs:enumeration value="Taxes" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:simpleType name="ComponentClassType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="HardComponent" />
+          <xs:enumeration value="TaxComponent" />
+          <xs:enumeration value="Expenses" />
+          <xs:enumeration value="Discounts" />
+          <xs:enumeration value="Surcharges" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:complexType name="Component">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseComponent" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BasePayerComponent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Rate" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="BaseAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Amount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AmountExpense" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="TaxId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="TaxConditionId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="RateType" nillable="true" type="tns:RateType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CoverageId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="LineBusinessId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="SubLineBusinessId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AmountLocal" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PayerComponent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BasePayerComponent">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Component" type="tns:Component" />
+          <xs:element minOccurs="0" maxOccurs="1" name="DynamicProperties" type="tns:ArrayOfDynamicConcept" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Coverage" type="tns:Coverage" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseBillingGroup">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BillingGroup">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseBillingGroup" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="BillingGroupId" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Descripcion" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Request">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRequest" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BasePolicyType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Prefix" type="tns:Prefix" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsDefault" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsFloating" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PolicyType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BasePolicyType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseExchangeRate">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="RateDate" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="SellAmount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="BuyAmount" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ExchangeRate">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseExchangeRate">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Currency" type="tns:Currency" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseQuota">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Number" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDate" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Amount" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Percentage" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Quota">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseQuota" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BasePaymentPlan">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsDefault" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PaymentPlan">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BasePaymentPlan">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Quotas" type="tns:ArrayOfQuota" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfQuota">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Quota" nillable="true" type="tns:Quota" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceCoInsuranceCompany">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:decimal" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ParticipationPercentage" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ExpensesPercentage" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="ParticipationPercentageOwn" type="xs:decimal" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PolicyNumber" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="EndorsementNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuanceCoInsuranceCompany">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceCoInsuranceCompany" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseCommission">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Percentage" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PercentageAdditional" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="CalculateBase" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Amount" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuanceCommission">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseCommission">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="SubLineBusiness" type="tns:SubLineBusiness" />
+          <xs:element minOccurs="1" maxOccurs="1" name="AgentPercentage" nillable="true" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceAgentType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SmallDescription" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuanceAgentType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceAgentType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceAgent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="IndividualId" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="FullName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DateDeclined" nillable="true" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuanceAgent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceAgent">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="AgentType" type="tns:IssuanceAgentType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseIssuanceAgency">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Extension">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="FullName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DateDeclined" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsPrincipal" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Participation" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="IssuanceAgency">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseIssuanceAgency">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Agent" type="tns:IssuanceAgent" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Commissions" type="tns:ArrayOfIssuanceCommission" />
+          <xs:element minOccurs="0" maxOccurs="1" name="AgentType" type="tns:IssuanceAgentType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Branch" type="tns:Branch" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfIssuanceCommission">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IssuanceCommission" nillable="true" type="tns:IssuanceCommission" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="BusinessType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CompanyPercentage" />
+          <xs:enumeration value="Accepted" />
+          <xs:enumeration value="Assigned" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:simpleType name="TemporalType">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Quotation" />
+          <xs:enumeration value="Policy" />
+          <xs:enumeration value="Endorsement" />
+          <xs:enumeration value="TempQuotation" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfIssuanceAgency">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IssuanceAgency" nillable="true" type="tns:IssuanceAgency" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfIssuanceCoInsuranceCompany">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IssuanceCoInsuranceCompany" nillable="true" type="tns:IssuanceCoInsuranceCompany" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfPayerComponent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PayerComponent" nillable="true" type="tns:PayerComponent" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QuotateMassive">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="massiveLoadId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QuotateMassiveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="QuotateMassiveResult" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNodeRulSet">
+    <xs:complexType />
+  </xs:element>
+  <xs:complexType name="NodeRulesetStatus">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Node" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Guid" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CreationDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FinishDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfNodeRulesetStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NodeRulesetStatus" nillable="true" type="tns:NodeRulesetStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetNodeRulSetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetNodeRulSetResult" type="tns:ArrayOfNodeRulesetStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVersionHistory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="count" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="VersionHistory">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Guid" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UserId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="VersionDatetime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfVersionHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VersionHistory" nillable="true" type="tns:VersionHistory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetVersionHistoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetVersionHistoryResult" type="tns:ArrayOfVersionHistory" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCacheStatus">
+    <xs:complexType />
+  </xs:element>
+  <xs:complexType name="CacheStatus">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element xmlns:q1="http://microsoft.com/wsdl/types/" minOccurs="1" maxOccurs="1" name="Version" type="q1:guid" />
+      <xs:element minOccurs="1" maxOccurs="1" name="VersionDatetime" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Nodes" type="tns:ArrayOfNode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfNode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Node" nillable="true" type="tns:Node" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Node">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Hostname" type="xs:string" />
+      <xs:element xmlns:q2="http://microsoft.com/wsdl/types/" minOccurs="1" maxOccurs="1" name="Version" type="q2:guid" />
+      <xs:element minOccurs="1" maxOccurs="1" name="StartDateLoad" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="EndDateLoad" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetCacheStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetCacheStatusResult" type="tns:CacheStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="loadCacheByJson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="HistoryVersionJson" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="loadCacheByJsonResponse">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="AuditData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="body" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuditDataResponse">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="ReloadListRisksCache">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="userName" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReloadListRisksCacheResponse">
+    <xs:complexType />
+  </xs:element>
+</xs:schema>

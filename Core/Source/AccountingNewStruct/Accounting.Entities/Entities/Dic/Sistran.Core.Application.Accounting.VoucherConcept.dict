@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="VoucherConcept" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="VOUCHER_CONCEPT_ENTITY">
+  <properties>
+    <property name="VoucherConceptId" type="Integer" key="true" description="VOUCHER_CONCEPT_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="VoucherCode" type="Integer" nullable="true" description="VOUCHER_CODE_PROPERTY" />
+    <property name="AccountingConceptCode" type="Integer" nullable="true" description="ACCOUNTING_CONCEPT_CODE_PROPERTY" />
+    <property name="CostCenterCode" type="Integer" nullable="true" description="COST_CENTER_CODE_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" nullable="true" description="AMOUNT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="VOUCHER_CONCEPT" schema="ACC" alias="VOUCHER_CONCEPT" update="true">
+      <columns>
+        <column name="VOUCHER_CONCEPT_ID" type="Int32" property="VoucherConceptId" key="true" identity ="true"/>
+        <column name="VOUCHER_CD" type="Int32" property="VoucherCode" />
+        <column name="ACCOUNTING_CONCEPT_CD" type="Int32" property="AccountingConceptCode" />
+        <column name="COST_CENTER_CD" type="Int32" property="CostCenterCode" />
+        <column name="AMOUNT" type="Decimal" property="Amount" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

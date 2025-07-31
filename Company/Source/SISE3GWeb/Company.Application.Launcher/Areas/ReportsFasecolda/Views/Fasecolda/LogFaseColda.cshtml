@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-90">
+        <div id="Title">Log Fasecolda</div>
+    </div>
+    <div class="column-10"></div>
+</script>
+<script id="footer-template" type="text/template">
+    <button class="btn btn-default" id="btnExitLogFasecolda">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <span class="" aria-hidden="true"></span>
+        @Resources.Language.LabelQuit
+    </button>
+    <button class="btn btn-default" id="btnExportLogFasecolda">
+        <i class="fa fa-cloud-download" aria-hidden="true"></i>
+        <span class="" aria-hidden="true"></span>
+        @Resources.Language.ButtonExport
+    </button>
+</script>
+<form id="formLogFasecolda" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-12">
+            <br />
+            <div class="row">
+                <div class="uif-col-2">
+                    <label class="field-required">@Resources.Language.LabelCurrentDate</label>
+                    <input type="text" value="13/01/2017" class="uif-datepicker" id="dateStart" name="dateStart" required />
+                </div>
+                <div class="uif-col-2">
+                    <label class="field-required">@Resources.Language.LabelDateEnd</label>
+                    <input type="text" value="13/01/2017" class="uif-datepicker" id="dateEnd" name="dateEnd" required/>
+
+                </div>
+                <div class="uif-col-2">
+                    <button type="button" class="btn btn-default" id="btnSearchLogFasecolda">@Resources.Language.ButtonSearch</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div id="tabInfoPolice" class="form tab-pane">
+                <div class="row">
+                    <div class="uif-col-12">
+                        <table data-paginate="true" class="uif-table" id="TableLogFasecolda" data-filter="false">
+                            <thead>
+                                <tr>
+                                    <th data-property="RegistrationIdentifier">@Resources.Language.LabelRegistrationIdentifier</th>
+                                    <th data-property="Dateconsultation">@Resources.Language.LabelDateconsultation</th>
+                                    <th data-property="LabelTypeSearch">@Resources.Language.LabelTypeSearch</th>
+                                    <th data-property="IdOfUser">@Resources.Language.LabelIdOfUser</th>
+                                    <th data-property="TypeDocument">@Resources.Language.LabelTypeDocument</th>
+                                    <th data-property="NumberDocument">@Resources.Language.LabelNumberDocument</th>
+                                    <th data-property="FullName">@Resources.Language.LabelFullName</th>
+                                    <th data-property="Status">@Resources.Language.LabelStatus</th>
+                                    <th data-property="Email">@Resources.Language.Email</th>
+                                    <th data-property="PhoneNumber">@Resources.Language.LabelPhoneNumber</th>
+                                    <th data-property="Country">@Resources.Language.LabelCountry</th>
+                                    <th data-property="City">@Resources.Language.LabelCity</th>
+                                    <th data-property="LabelErrorgenerated">@Resources.Language.LabelErrorgenerated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot>
+
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+﻿@*Fields ListView*@
+<script id="detailTypeTemplate" type="text/template">
+    <div>
+        <label>
+            @Resources.Language.DetailType: {{Description}}
+        </label>
+    </div>
+</script>
+
+@*Fields ListView*@
+<script id="detailTypeTemplateAssign" type="text/template">
+
+    <div>
+        <label>
+            @Resources.Language.DetailType: {{Description}}
+            <br />
+            @Resources.Language.LabelCompositionType: {{CompositionTypeDescription}}
+        </label>
+    </div>    
+    <div>
+        <label>
+            {{#if IsMandatory}}
+                @Resources.Language.LabelMandatory: <strong>@Resources.Language.Yes</strong>
+            {{/if}}
+        </label>
+    </div>
+</script>
+
+
+
+
+@*Formulario Principal*@
+<form id="formDetailTypes" class="form">
+    <div class="uif-row" id="mainModalDetailTypes">
+        <div class="uif-col-12">
+            <div class="uif-row">
+                <div class="uif-col-5">
+                    <div class="uif-listview" id="listviewDetailTypes">
+                    </div>
+                </div>
+                <div class="uif-col-2">
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalDetailTypesAssignAll">
+                                <span class="" aria-hidden="true">>></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalDetailTypesDeallocateAll">
+                                <span class="" aria-hidden="true"><<</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalDetailTypesAssign">
+                                <span class="" aria-hidden="true">></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalDetailTypesDeallocate">
+                                <span class="" aria-hidden="true"><</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-col-5">
+                    <div class="uif-listview" id="listviewDetailTypesAssing">
+                    </div>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-5">
+                    <label>@Resources.Language.LabelCompositionType</label>
+                    <select class="uif-select form-control" id="selectCompositionType" data-id="Id" data-name="Description" name="CompositionTypeId" data-filter="true" data-native="false"></select>
+                </div>
+
+                <div class="uif-col-2">
+                </div>
+                <div class="uif-col-5">
+                    <div class="without-label">
+                        <button type="button" class="btn btn-default secondary-Colombia" id="btnAssignDetailTypeMandatory">
+                            <span class="" aria-hidden="true">@Resources.Language.LabelMandatory</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="AgentsView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="IndividualId">
+          <Column table-alias="Agent" name="IndividualId" />
+        </SelectValue>
+        <SelectValue alias="AgentTypeDescription">
+          <Column table-alias="AgentType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AgentTypeCode">
+          <Column table-alias="Agent" name="AgentTypeCode" />
+        </SelectValue>
+        <SelectValue alias="Name">
+          <Column table-alias="Person" name="Name" />
+        </SelectValue>
+        <SelectValue alias="MotherLastName">
+          <Column table-alias="Person" name="MotherLastName" />
+        </SelectValue>
+        <SelectValue alias="Surname">
+          <Column table-alias="Person" name="Surname" />
+        </SelectValue>
+        <SelectValue alias="IdCardNo">
+          <Column table-alias="Person" name="IdCardNo" />
+        </SelectValue>
+        <SelectValue alias="DocumentTypeCode">
+          <Column table-alias="Person" name="IdCardTypeCode" />
+        </SelectValue>
+        <SelectValue alias="AgentAgencyId">
+          <Column table-alias="AgentAgency" name="AgentAgencyId" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="AgentAgency" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="DeclinedDate">
+          <Column table-alias="AgentAgency" name="DeclinedDate" />
+        </SelectValue>
+        <SelectValue alias="IndividualTypeCode">
+          <Column table-alias="Individual" name="IndividualTypeCode" />
+        </SelectValue>
+      </values>
+      <table>
+		  <Join>
+			  <Join>
+				  <Join>
+					  <Join>
+						  <ClassNameTable name="Sistran.Core.Application.UniquePerson.Entities.Agent, Core.UniquePerson.Entities" alias="Agent" />
+						  <ClassNameTable name="Sistran.Core.Application.UniquePerson.Entities.Person, Core.UniquePerson.Entities" alias="Person" />
+						  <criteria>
+							  <BinaryCriterion type="Equal">
+								  <Column table-alias="Person" name="IndividualId" />
+								  <Column table-alias="Agent" name="IndividualId" />
+							  </BinaryCriterion>
+						  </criteria>
+					  </Join>
+					  <ClassNameTable name="Sistran.Core.Application.TempCommonServices.Provider.Entities.AgentType, Core.TempCommonServices.Provider" alias="AgentType" />
+					  <criteria>
+						  <BinaryCriterion type="Equal">
+							  <Column table-alias="AgentType" name="AgentTypeCode" />
+							  <Column table-alias="Agent" name="AgentTypeCode" />
+						  </BinaryCriterion>
+					  </criteria>
+				  </Join>
+				  <ClassNameTable name="Sistran.Core.Application.UniquePerson.Entities.AgentAgency, Core.UniquePerson.Entities" alias="AgentAgency" />
+				  <criteria>
+					  <BinaryCriterion type="Equal">
+						  <Column table-alias="AgentAgency" name="IndividualId" />
+						  <Column table-alias="Agent" name="IndividualId" />
+					  </BinaryCriterion>
+				  </criteria>
+			  </Join>
+			  <ClassNameTable name="Sistran.Core.Application.UniquePerson.Entities.Individual, Core.UniquePerson.Entities" alias="Individual" />
+			  <criteria>
+				  <BinaryCriterion type="Equal">
+					  <Column table-alias="Individual" name="IndividualId" />
+					  <Column table-alias="Agent" name="IndividualId" />
+				  </BinaryCriterion>
+			  </criteria>
+		  </Join>
+		 
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

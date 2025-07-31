@@ -1,0 +1,102 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.VehicleModelViewModel
+@{
+    Layout = null;
+}
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column">
+        @Resources.Language.Model
+    </div>
+    <div class="column column-30">
+        @Html.TextBox("inputVehicleModel", null, new { @class = "uif-input-search", id = "inputVehicleModel", @placeholder = @Resources.Language.LabelModel })
+        <button class="btn btn-default" id="btnShowAdvancedVehicleModel"><i class="fa fa-angle-down"></i></button>
+    </div>
+
+</script>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnDeleteVehicleModel">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonDelete
+        </button>
+        <button class="btn btn-default" id="btnNewVehicleModel">
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonNew
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ExportXLS
+        </button>
+        <button class="btn btn-primary" id="btnSaveModel">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+<form id="formVehicleModel" autocomplete="off" class="form without-space">
+    @*@Html.HiddenFor(model => model.VehicleMake.id, new { id = "VehicleMakeId" })*@
+    <div class="row fit-col-main">
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelMake</label>
+            <select class="uif-select form-control" id="MakeId_Id" name="MakeId_Id"
+                    data-source='@Url.Content("~/Parametrization/VehicleModel/GetMakes")'
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="Campo requerido"
+                    data-filter="true" data-native="false"></select>
+            @Html.ValidationMessageFor(model => model.MakeId_Id)
+        </div>
+
+        <div class="uif-col-2">
+            <label class="">@Resources.Language.LabelIdModel </label>
+            @Html.TextBoxFor(model => model.Id, new { disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.Id)
+        </div>
+        <div class="uif-col-4">
+            <label class="field-required">@Resources.Language.LabelLongDescription</label>
+            @Html.TextBoxFor(model => model.DescriptionModel)
+            @Html.ValidationMessageFor(model => model.DescriptionModel)
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelSmallDescription</label>
+            @Html.TextBoxFor(model => model.SmallDescriptionModel)
+            @Html.ValidationMessageFor(model => model.SmallDescriptionModel)
+        </div>
+    </div>
+</form>
+
+
+@section Scripts
+{
+    Scripts.Render("~/bundle/js/VehicleModel")
+}
+
+<div class="uif-modal" id="VehicleVersionConfirmationDeleteModal">
+
+    <div class="uif-modalbody">
+
+        <div class="uif-row">
+
+            <div class="uif-col-12">
+
+                @Resources.Language.ConfirmDelete
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Cancel</button>
+        <button type="submit" class="btn btn-primary" id="VehicleVersionAcceptDelete">@Resources.Language.Yes</button>
+    </div>
+</div>

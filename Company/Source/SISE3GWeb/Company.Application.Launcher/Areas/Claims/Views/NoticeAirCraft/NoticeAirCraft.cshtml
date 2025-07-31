@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+<form id="frmNoticeAirCraft" class="form form-space-adjusted" autocomplete="off">
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="accContactInformation">
+                <h5>
+                    <strong>@Resources.Language.ContactInformation</strong>
+                </h5>
+                @Html.Partial("../Notice/ContactInformationPartial")
+                <div>
+                    <h5>
+                        <strong>@Resources.Language.RiskAirCraftData</strong>
+                    </h5>
+                    <div class="row">
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.LabelNumberRegister</label>
+                            <input type="text" id="inputRegisterNumber" name="RegisterNumber" data-val="true" maxlength="50" />
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.Make</label>
+                            <select class="uif-select form-control" id="ddlAirCraftMake" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="AirCraftMake" data-filter="true" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="AirCraftMake" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.Model</label>
+                            <select class="uif-select form-control" id="ddlAirCraftModel" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="AirCraftModel" data-filter="true" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="AirCraftModel" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.LabelAircraftUse</label>
+                            <select class="uif-select form-control" id="ddlAirCraftUse" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="AirCraftUse" data-filter="true" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="AirCraftUse" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.labelEnrollment</label>
+                            <select class="uif-select form-control" id="ddlAirCraftRegister" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="AirCraftRegister" data-filter="true" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="AirCraftRegister" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.LabelAircraftOperator</label>
+                            <select class="uif-select form-control" id="ddlAirCraftOperator" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="AirCraftOperator" data-filter="true" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="AirCraftOperator" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="accPolicy">
+                @Html.Partial("../Notice/PolicyInformationPartial")
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="accClaimNotice">
+                @Html.Partial("../Notice/ClaimNotice")
+            </div>
+        </div>
+    </div>
+</form>
+
+@* // -- // Modales // -- // *@
+
+<div class="uif-modal" id="modalSearchbyInsured">
+    <div class="uif-modalbody">
+        @Html.Partial("../NoticeAirCraft/SearchPoliciesAirCraftDialog")
+    </div>
+</div>

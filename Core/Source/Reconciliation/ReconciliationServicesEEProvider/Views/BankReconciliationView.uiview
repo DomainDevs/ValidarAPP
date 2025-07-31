@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="BankReconciliationView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="ReconciliationCode">
+          <Column table-alias="Reconciliation" name="ReconciliationCode" />
+        </SelectValue>
+        <SelectValue alias="BankStatementCode">
+          <Column table-alias="BankStatement" name="BankStatementId" />
+        </SelectValue>
+        <SelectValue alias="BankAccountCompanyCode">
+          <Column table-alias="BankStatement" name="BankAccountCompanyCode" />
+        </SelectValue>
+        <SelectValue alias="BankReconciliationCode">
+          <Column table-alias="BankStatement" name="BankReconciliationCode" />
+        </SelectValue>
+        <SelectValue alias="ShortDescription">
+          <Column table-alias="BankReconciliation" name="ShortDescription" />
+        </SelectValue>
+        <SelectValue alias="VoucherNumber">
+          <Column table-alias="BankStatement" name="VoucherNumber" />
+        </SelectValue>
+        <SelectValue alias="MovementDate">
+          <Column table-alias="BankStatement" name="MovementDate" />
+        </SelectValue>
+        <SelectValue alias="LocalAmount">
+          <Column table-alias="BankStatement" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="BankStatement" name="Description" />
+        </SelectValue>
+        <SelectValue alias="ThirdDescription">
+          <Column table-alias="BankStatement" name="ThirdDescription" />
+        </SelectValue>
+        <SelectValue alias="SourceBranchCode">
+          <Column table-alias="BankStatement" name="SourceBranchCode" />
+        </SelectValue>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <ClassNameTable name="Sistran.Core.Application.ReconciliationServices.EEProvider.Entities.BankStatement, Core.ReconciliationServices.EEProvider" alias="BankStatement" />
+              <ClassNameTable name="Sistran.Core.Application.ReconciliationServices.EEProvider.Entities.Reconciliation, Core.ReconciliationServices.EEProvider" alias="Reconciliation" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="Reconciliation" name="BankStatementCode" />
+                  <Column table-alias="BankStatement" name="BankStatementId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedgerServices.Provider.Entities.BankReconciliation, Core.GeneralLedgerServices.Provider" alias="BankReconciliation" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="BankReconciliation" name="BankReconciliationId" />
+                <Column table-alias="BankStatement" name="BankReconciliationCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Branch" name="BranchCode" />
+              <Column table-alias="BankStatement" name="SourceBranchCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

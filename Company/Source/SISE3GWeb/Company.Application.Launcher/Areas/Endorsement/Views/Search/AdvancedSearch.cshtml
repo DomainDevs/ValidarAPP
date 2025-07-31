@@ -1,0 +1,102 @@
+﻿<script id="searchTemplate" type="text/template">
+    <div>
+        @Resources.Language.LabelPolicy: <strong>{{DocumentNumber}}</strong>
+       {{Branch.Description}}
+        - {{Prefix.Description}}
+      {{Endorsement.EndorsementTypeDescription}}
+       {{IssueDate}}
+    </div>
+    <br />
+    <div>
+       {{Holder.IdentificationDocument.Number}}
+       {{Holder.CompanyName}}
+        {{Holder.Name}} {{Holder.Surname}}
+        - {{Agencies.0.Agent.FullName}}
+    </div>
+    <br />
+    <div>
+        @Resources.Language.LabelTableTotalPremium: <strong class="danger">{{Summary.FullPremium}}</strong>
+    </div>
+</script>
+
+    
+
+<form class="form" id="formAdvSearchEndorsement">
+
+
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.PoliciesQuery</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelBranch</label>
+            <select class="uif-select form-control" id="advSelectBranch" data-val="true" @*data-source='@Url.Content("~/Endorsement/Search/GetBranches"*@)'
+                    data-val-required="@Resources.Language.ErrorDocumentBranch" data-native="false" data-id="Id" data-name="Description" name="advBranchId"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelPrefixCommercial</label>
+            <select class="uif-select form-control" id="advSelectPrefix" data-val="true" @*data-source='@Url.Content("~/Endorsement/Search/GetPrefixes"*@)'
+                    data-val-required="@Resources.Language.ErrorDocumentPrefix" data-id="Id" data-native="false" data-name="Description" name="advPrefixId"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelPolicy</label>
+            <input type="text" name="InputPolicy" value="" id="advInputPolicy" />
+        </div>
+		<div class="uif-col-4 hide dvAdvPlate">
+		<label>@Resources.Language.LabelPlate</label>
+		<input type="text" name="InputPlate" value="" min="3" id="advInputPlate" />
+		</div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-4 dvAdvPolicy">
+            <label>@Resources.Language.LabelPolicy</label>
+            <input type="text" name="InputPolicy" value="" id="advInputPolicy" />
+        </div>
+        <div class="uif-col-8">
+            <label>@Resources.Language.LabelHolder</label>
+            <input type="text" name="HolderName" value="" id="inputHolderAdvanced" class="uif-input-search" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelUser</label>
+            <input type="text" name="InputUser" value="" id="advInputUser" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelDateStart</label>
+            <input type="text" class="uif-datepicker" name="IssueFrom" id="dateIssueFrom" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelDateEnd</label>
+            <input type="text" class="uif-datepicker" name="IssueTo" id="dateIssueTo" />
+        </div>
+        <div class="without-label">
+            <button class="btn btn-primary-Co width-container" id="btnSearchAdv" type="button">
+                <span aria-hidden="true"></span>
+                @Resources.Language.search
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listAdvancedSearch">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCloseAdvSearch" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnAcceptAdvSearch" type="button">@Resources.Language.Accept</button>
+            </div>
+
+        </div>
+    </div>
+
+
+</form>
+

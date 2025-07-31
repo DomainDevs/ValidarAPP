@@ -1,0 +1,80 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Reports</a></li>
+        <li class="active">@Global.AuxiliaryLedgerSummary</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-primary " id="summaryEntryReport"><i class="fa fa-file-pdf-o"></i>@Global.BtnReport</button>
+        <button class="btn btn-primary " id="summaryEntryExcel"><i class="fa fa-file-excel-o"></i>@Global.GenerateExcel</button>
+    </footer>
+}
+
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-row">
+            <form id="formData">
+                <div class="uif-col-3">
+                    <label class=" checkbox">@Global.DateFrom</label>
+                    <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="summaryEntryDateFrom" name="summaryEntryDateFrom" data-val="true" data-val-required="@Global.RequiredField" />
+                    <span class="text-danger" data-valmsg-for="summaryEntryDateFrom" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-3">
+                    <label class=" checkbox">@Global.DateTo</label>
+                    <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="summaryEntryDateTo" name="summaryEntryDateTo" data-val="true" data-val-required="@Global.RequiredField" />
+                    <span class="text-danger" data-valmsg-for="summaryEntryDateTo" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-2">
+                    <label class="control-label">@Global.AllBranches</label>
+                    <div class="checkbox">
+                        <input type="checkbox" id="allBranchesSummary">
+                        <label for="allBranchesSummary"></label>
+                    </div>
+                </div>
+                <div class="uif-col-3 " id="divEntryBranches">
+                    <label class="checkbox">
+                        @Global.Select @Global.Branch
+                    </label>
+                    <select class="uif-col-12 uif-select form-control "
+                            id="ddlSummaryEntryBranches"
+                            data-id="Id"
+                            data-name="Description"
+                            name="ddlSummaryEntryBranches"
+                            data-val="true"
+                            data-val-required="@Global.RequiredField">
+                    </select>
+                    <span class="text-danger" data-valmsg-for="ddlSummaryEntryBranches" data-valmsg-replace="true" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <iframe src="" name="framePdf" id="framePdf" scrolling="auto" frameborder="no" width="100%" height="900px" style="margin: 0 0px 0 0;"></iframe>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagOptionId" value="AuxiliaryEntrySummary" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/AuxiliaryEntrySummary")
+}

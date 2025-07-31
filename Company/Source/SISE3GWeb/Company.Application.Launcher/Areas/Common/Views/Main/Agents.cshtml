@@ -1,0 +1,115 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.AgentModelsView
+
+<script id="agencyTemplate" type="text/template">
+    <div><strong>{{FullName}}</strong></div>
+    <div>@Resources.Language.LabelSalesPoint: <strong>{{BranchDescription}} / {{SalePoint}}</strong></div>
+    <div>@Resources.Language.Participation: <strong>{{Participation}}%</strong></div>
+    <div>@Resources.Language.LabelCommission: <strong class="warning">{{TotalPercentage}}%</strong> @Resources.Language.CommissionValue: {{TotalAmount}} </div>
+</script>
+<script id="agencyTemplateParticipation" type="text/template">
+    <div><strong>{{FullName}}</strong></div>
+    <div>@Resources.Language.Participation: <strong>{{Participation}}%</strong></div>
+</script>
+
+
+
+<form id="formAgents" class="form modal-Colombia">
+    @Html.HiddenFor(model => model.IsPrincipal, new { id = "hiddenIsPrincipal" })
+    <div class="row">
+        <div class="uif-col-6" id="AddAgent">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelAgent</label>
+                    @Html.TextBoxFor(model => model.AgencyName, new { id = "inputAgents", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderKeyName })
+                    @Html.ValidationMessageFor(model => model.AgencyName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.LabelSalesPoint</label>
+                    @Html.DropDownList("SalePointId", Enumerable.Empty<SelectListItem>(), new
+                   {
+                       id = "selectAgentSalesPoint",
+                       @class = "uif-select form-control",
+                       data_id = "Id",
+                       data_name = "Description",
+                       data_native = "true",
+                       data_val = "true",
+                       data_val_required = @Resources.Language.RequiredField
+                   })
+                    @Html.ValidationMessage("selectAgentSalesPoint")
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelParticipation</label>
+                    @Html.TextBoxFor(model => model.Participation, new { id = "inputAgentsParticipation", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Participation)
+                </div>
+                <div class="uif-col-4" id="PercentageCommission">
+                    <label>@Resources.Language.LabelPercentageCommission</label>
+                    @Html.TextBoxFor(model => model.Percentage, new { id = "inputAgentsPercentage", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Percentage)
+                </div>
+                <div class="uif-col-4" id="CommisionAdditional">
+                    <label>@Resources.Language.LabelCommisionAdditional</label>
+                    @Html.TextBoxFor(model => model.PercentageAdditional, new { id = "inputAgentsPercentageAdditional", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.PercentageAdditional)
+                </div>
+            </div>
+            <div class="row" id="checkboxIsPrincipal">
+                <div class="uif-col-3">
+                    <input type="checkbox" name="agentIsPrincipal" value=" " id="agentIsPrincipal" />
+                    <label for="agentIsPrincipal">@Resources.Language.LabelPrincipalCheckBox</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0267"))
+                        {
+                            <button type="button" class="btn btn-default secondary-Colombia" id="btnAgentsDetail">
+                                @Resources.Language.ButtonAgentsDetail
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6" id="listAgent">
+            <div id="listAgencies" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6" id="btnsAgent">
+            <div class="pull-right width-save">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0268"))
+                {
+                    <button type="button" class="btn btn-default" id="btnAgentsCancel">
+                        @Resources.Language.NewForm
+                    </button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0269"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnAgentsAccept">
+                        @Resources.Language.AddForm
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="uif-col-6" id="summaryAgent">
+            <div class="uif-summary">
+                <div class="items">
+                    <div class="item">
+                        <div>
+                            <div>
+                                @Resources.Language.LabelTotalParticipation
+                            </div>
+                            <div id="labelAgentsTotalParticipation">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

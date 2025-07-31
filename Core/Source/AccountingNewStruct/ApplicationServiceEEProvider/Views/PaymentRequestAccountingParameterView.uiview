@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PaymentRequestAccountingParameterView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PaymentRequestId">
+          <Column table-alias="PaymentRequest" name="PaymentRequestId" />
+        </SelectValue>
+        <SelectValue alias="Number">
+          <Column table-alias="Voucher" name="Number" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="PaymentRequest" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="ConceptSourceCode">
+          <Column table-alias="PaymentRequest" name="ConceptSourceCode" />
+        </SelectValue>
+        <SelectValue alias="BeneficiaryCode">
+          <Column table-alias="PaymentRequest" name="BeneficiaryCode" />
+        </SelectValue>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="PaymentRequest" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="AccountingDate">
+          <Column table-alias="PaymentRequest" name="AccountingDate" />
+        </SelectValue>
+        <SelectValue alias="AccountingConceptCode">
+          <Column table-alias="AccountingConcept" name="AccountingConceptCode" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="VoucherConcept" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="VoucherConceptId">
+          <Column table-alias="VoucherConcept" name="VoucherConceptId" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <Join>
+                <Join>                  
+                    <Join>
+                      <Join>
+                          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentRequest, Core.Accounting.Entities" alias="PaymentRequest" />
+                          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+                          <criteria>
+                            <BinaryCriterion type="Equal">
+                              <Column table-alias="Branch" name="BranchCode" />
+                              <Column table-alias="PaymentRequest" name="BranchCode" />
+                            </BinaryCriterion>
+                          </criteria>
+                        </Join>
+                      <ClassNameTable name="Sistran.Core.Application.Parameters.Entities.PersonType, Core.Parameters.Entities" alias="PersonType" />
+                      <criteria>
+                        <BinaryCriterion type="Equal">
+                          <Column table-alias="PersonType" name="PersonTypeCode" />
+                          <Column table-alias="PaymentRequest" name="PersonTypeCode" />
+                        </BinaryCriterion>
+                      </criteria>
+                    </Join>
+                    <ClassNameTable name="Sistran.Core.GeneralLedgerServices.Provider.Entities.ConceptSource, Core.Accounting.Entities" alias="ConceptSource" />
+                    <criteria>
+                      <BinaryCriterion type="Equal">
+                        <Column table-alias="ConceptSource" name="ConceptSourceCode" />
+                        <Column table-alias="PaymentRequest" name="ConceptSourceCode" />
+                      </BinaryCriterion>
+                    </criteria>
+                  </Join>       
+                <ClassNameTable name="Sistran.Core.Application.Common.Entities.Currency, Core.Common.Entities" alias="Currency" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Currency" name="CurrencyCode" />
+                    <Column table-alias="PaymentRequest" name="CurrencyCode" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Voucher, Core.Accounting.Entities" alias="Voucher" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="Voucher" name="PaymentRequestCode" />
+                  <Column table-alias="PaymentRequest" name="PaymentRequestId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.VoucherConcept, Core.Accounting.Entities" alias="VoucherConcept" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="VoucherConcept" name="VoucherCode" />
+                <Column table-alias="Voucher" name="VoucherId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AccountingConcept, Core.GeneralLedger.Entities" alias="AccountingConcept" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="AccountingConcept" name="AccountingConceptCode" />
+              <Column table-alias="VoucherConcept" name="AccountingConceptCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

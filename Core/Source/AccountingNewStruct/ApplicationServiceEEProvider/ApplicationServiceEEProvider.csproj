@@ -1,0 +1,717 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E50945BB-1CAA-4996-86E3-FA8674F436CD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.AccountingServices.EEProvider</RootNamespace>
+    <AssemblyName>Core.AccountingServices.EEProvider</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\Bin\lib\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Accounting.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Accounting\Core.Accounting.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AccountingGeneralLedgerServices">
+      <HintPath>..\..\..\Bin\Services\Core\AccountingGeneralLedger\ApplicationService\Core.AccountingGeneralLedgerServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AccountingIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\Integration\AccountingIntegrationService\Core.AccountingIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AccountingServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Services\Core\Accounting\ApplicationService\Core.AccountingServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AccountingServices.Resources">
+      <HintPath>..\..\..\Bin\Services\Core\Accounting\Resources\Core.AccountingServices.Resources.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AuthorizationPoliciesServices">
+      <HintPath>..\..\..\Bin\Services\Core\AuthorizationPolicies\AuthorizationPoliciesService\Core.AuthorizationPoliciesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Claims.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Claims\Core.Claims.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Common.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Common\Core.Common.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices">
+      <HintPath>..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions">
+      <HintPath>..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.GeneralLedger.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\GeneralLedger\Core.GeneralLedger.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.GeneralLedgerServices">
+      <HintPath>..\..\..\Bin\Services\Core\GeneralLedger\ApplicationService\Core.GeneralLedgerServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.GeneralLedgerServices.EEProvider">
+      <HintPath>..\..\..\Bin\Services\Core\GeneralLedger\ApplicationServiceEEProvider\Core.GeneralLedgerServices.EEProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Integration.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Integration\Core.Integration.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Issuance.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Issuance\Core.Issuance.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Parameters.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Parameters\Core.Parameters.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.TaxServices">
+      <HintPath>..\..\..\Bin\Services\Core\Tax\TaxServices\Core.TaxServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.TechnicalTransactionGeneratorIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\TechnicalTransaction\IntegrationService\Core.TechnicalTransactionGeneratorIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UnderwritingServices">
+      <HintPath>..\..\..\Bin\Services\Core\Underwriting\UnderwritingServices\Core.UnderwritingServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UndewritingIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\Integration\UndewritingIntegrationServices\Core.UndewritingIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePersonServices.V1">
+      <HintPath>..\..\..\Bin\Services\Core\UniquePerson\UniquePersonService\Core.UniquePersonServices.V1.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePersonV1.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\UniquePersonV1\Core.UniquePersonV1.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniqueUser.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\UniqueUser\Core.UniqueUser.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniqueUserServices">
+      <HintPath>..\..\..\Bin\Services\Core\UniqueUser\UniqueUserServices\Core.UniqueUserServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Utilities">
+      <HintPath>..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServices">
+      <HintPath>..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Co.Application.Data">
+      <HintPath>..\..\..\Bin\lib\Sistran.Co.Application.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.BAF">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.BAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF.Engine">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Queries">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.SAF">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.SAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.ServiceModel">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Transactions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Transactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Views, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountingAccountServiceEEProvider.cs" />
+    <Compile Include="AccountingAccountsPayableServiceEEProvider.cs" />
+    <Compile Include="AccountingAmortizationServiceEEProvider.cs" />
+    <Compile Include="AccountingApplicationServiceEEProvider.cs" />
+    <Compile Include="AccountingCollectControlServiceEEProvider.cs" />
+    <Compile Include="AccountingCollectServiceEEProvider.cs" />
+    <Compile Include="AccountingComponentDistributionService.cs" />
+    <Compile Include="AccountingCreditNoteServiceEEProvider.cs" />
+    <Compile Include="AccountingParameterServiceEEProvider.cs" />
+    <Compile Include="AccountingPaymentBallotServiceEEProvider.cs" />
+    <Compile Include="AccountingPaymentServiceEEProvider.cs" />
+    <Compile Include="AccountingPaymentTicketServiceEEProvider.cs" />
+    <Compile Include="AccountingRetentionServiceEEProvider.cs" />
+    <Compile Include="AccountingReversionServiceEEProvider.cs" />
+    <Compile Include="Assemblers\DTOAssembler.cs" />
+    <Compile Include="Assemblers\EntityAssembler.cs" />
+    <Compile Include="Assemblers\ModelDTOAssembler.cs" />
+    <Compile Include="Assemblers\OldDTOAssembler.cs" />
+    <Compile Include="Assemblers\ModelAssembler.cs" />
+    <Compile Include="Business\AccountingAccountBusiness.cs" />
+    <Compile Include="Business\AccountingPaymentBusiness.cs" />
+    <Compile Include="Business\AccountsPayableBusiness.cs" />
+    <Compile Include="Business\ApplicationBusiness.cs" />
+    <Compile Include="Business\ApplicationPremiumBusiness.cs" />
+    <Compile Include="Business\CollectBusiness.cs" />
+    <Compile Include="Business\CollectControlBusiness.cs" />
+    <Compile Include="Business\CommonBusiness.cs" />
+    <Compile Include="Business\IncomeBusiness.cs" />
+    <Compile Include="Business\Integration2GBusiness.cs" />
+    <Compile Include="Business\IntegrationBusiness.cs" />
+    <Compile Include="Business\JournalEntryBusiness.cs" />
+    <Compile Include="Business\CollectPaymentBusiness.cs" />
+    <Compile Include="Business\PaymentTicketBusiness.cs" />
+    <Compile Include="Business\TechnicalTransactionBusiness.cs" />
+    <Compile Include="Business\TempApplicationBusiness.cs" />
+    <Compile Include="DAOs\AccountingPaymentDAO.cs" />
+    <Compile Include="DAOs\Accounting\ActionTypeDAO.cs" />
+    <Compile Include="DAOs\Accounting\AgentCoinsuranceCheckingAccountDAO.cs" />
+    <Compile Include="DAOs\Accounting\AgentCommissionBalanceItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\AgentCommissionClosureDAO.cs" />
+    <Compile Include="DAOs\Accounting\AmortizationApplicationDAO.cs" />
+    <Compile Include="DAOs\Accounting\AmortizationDAO.cs" />
+    <Compile Include="DAOs\Accounting\ApplicationAccountingAnalysisDAO.cs" />
+    <Compile Include="DAOs\Accounting\ApplicationAccountingCostCenterDAO.cs" />
+    <Compile Include="DAOs\Accounting\ApplicationDAO.cs" />
+    <Compile Include="DAOs\Accounting\ApplicationDataDAO.cs" />
+    <Compile Include="DAOs\Accounting\ApplicationPremiumCommisionDAO.cs" />
+    <Compile Include="DAOs\Accounting\ApplicationPremiumComponentDAO.cs" />
+    <Compile Include="DAOs\Accounting\ApplicationPremiumItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\AutomaticDebitStatusDAO.cs" />
+    <Compile Include="DAOs\Accounting\BankAccountCompanyDAO.cs" />
+    <Compile Include="DAOs\Accounting\BankAccountPersonDAO.cs" />
+    <Compile Include="DAOs\Accounting\BankAccountTypeDAO.cs" />
+    <Compile Include="DAOs\Accounting\BankNetworkDAO.cs" />
+    <Compile Include="DAOs\Accounting\BankNetworkStatusDAO.cs" />
+    <Compile Include="DAOs\Accounting\BankStatementDAO.cs" />
+    <Compile Include="DAOs\Accounting\BrokerBalanceDAO.cs" />
+    <Compile Include="DAOs\Accounting\BrokerCheckingAccountTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\CancellationLimitDAO.cs" />
+    <Compile Include="DAOs\Accounting\CheckBookControlDAO.cs" />
+    <Compile Include="DAOs\Accounting\CheckPaymentOrderDAO.cs" />
+    <Compile Include="DAOs\Accounting\CheckPaymentOrderTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\AccountingAccountDAO.cs" />
+    <Compile Include="DAOs\Accounting\CoinsuranceBalanceDAO.cs" />
+    <Compile Include="DAOs\Accounting\CoinsuranceCheckingAccountTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\CollectConceptDAO.cs" />
+    <Compile Include="DAOs\Accounting\CollectControlDAO.cs" />
+    <Compile Include="DAOs\Accounting\CollectControlPaymentDAO.cs" />
+    <Compile Include="DAOs\Accounting\CollectDAO.cs" />
+    <Compile Include="DAOs\Accounting\CollectMassiveProcessDAO.cs" />
+    <Compile Include="DAOs\Accounting\CollectPaymentMethodTypeDAO.cs" />
+    <Compile Include="DAOs\Accounting\CommisionDAO.cs" />
+    <Compile Include="DAOs\Accounting\CompanyDAO.cs" />
+    <Compile Include="DAOs\Accounting\ComponentCollectionDAO.cs" />
+    <Compile Include="DAOs\Accounting\CouponStatusDAO.cs" />
+    <Compile Include="DAOs\Accounting\CreditCardTypeDAO.cs" />
+    <Compile Include="DAOs\Accounting\CurrencyDifferenceDAO.cs" />
+    <Compile Include="DAOs\Accounting\DailyAccountingAnalysisCodeDAO.cs" />
+    <Compile Include="DAOs\Accounting\DailyAccountingCostCenterDAO.cs" />
+    <Compile Include="DAOs\Accounting\DailyAccountingTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\DebitDesignDAO.cs" />
+    <Compile Include="DAOs\Accounting\DepositPremiumTransactionDAO.cs" />
+    <Compile Include="DAOs\Accounting\DiscountedCommissionDAO.cs" />
+    <Compile Include="DAOs\Accounting\ExchangePaymentDAO.cs" />
+    <Compile Include="DAOs\Accounting\ExclusionDAO.cs" />
+    <Compile Include="DAOs\Accounting\FormatDesignDAO.cs" />
+    <Compile Include="DAOs\Accounting\FormatDesignDetailDAO.cs" />
+    <Compile Include="DAOs\Accounting\JournalEntryDAO.cs" />
+    <Compile Include="DAOs\Accounting\LegalPaymentDAO.cs" />
+    <Compile Include="DAOs\Accounting\LogBankResponseDAO.cs" />
+    <Compile Include="DAOs\Accounting\LogSpecialProcessDAO.cs" />
+    <Compile Include="DAOs\Accounting\OtherPaymentsRequestDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentAuthorizationDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentBallotDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentLogDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentMethodAccountTypeDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentMethodBankNetworkDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentOrderAuthorizationDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentOrderBrokerAccountDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentOrderDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentOrderTransferPaymentDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentRequestClaimDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentRequestDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentRequestNumberDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentTaxDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentTicketBallotDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentTicketDAO.cs" />
+    <Compile Include="DAOs\Accounting\PaymentTicketItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\PolicyCancellationDAO.cs" />
+    <Compile Include="DAOs\Accounting\PolicyComponentDistributionDAO.cs" />
+    <Compile Include="DAOs\Accounting\PrefixComponentCollectionDAO.cs" />
+    <Compile Include="DAOs\Accounting\PreLiquidationDAO.cs" />
+    <Compile Include="DAOs\Accounting\PremiumReceivableTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\RangeDAO.cs" />
+    <Compile Include="DAOs\Accounting\RegularizedPaymentDAO.cs" />
+    <Compile Include="DAOs\Accounting\ReinsuranceCheckingAccountTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\RejectedPaymentDAO.cs" />
+    <Compile Include="DAOs\Accounting\RejectionDAO.cs" />
+    <Compile Include="DAOs\Accounting\RetentionBaseDAO.cs" />
+    <Compile Include="DAOs\Accounting\RetentionConceptDAO.cs" />
+    <Compile Include="DAOs\Accounting\RetentionConceptPercentageDAO.cs" />
+    <Compile Include="DAOs\Accounting\Reversion\AplicationPremiumReversionDAO.cs" />
+    <Compile Include="DAOs\Accounting\Reversion\ReversionDAO.cs" />
+    <Compile Include="DAOs\Accounting\Reversion\TempApplicationPremiumReversionDAO.cs" />
+    <Compile Include="DAOs\Accounting\TemporalDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempApplicationAccountingAnalysisDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempApplicationAccountingCostCenterDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempApplicationAccountingDAO.cs" />
+    <Compile Include="DAOs\Accounting\ApplicationAccountingItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempApplicationAccountingItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempApplicationDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempApplicationPremiumComponentDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempApplicationPremiumDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempApplicationPremiumItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempBrokerCheckingAccountTransactionDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempBrokerCheckingAccountTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempClaimPaymentRequestDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempClaimsPaymentRequestTransactionDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempCoinsuranceCheckingAccountTransactionDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempCoinsuranceCheckingAccountTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempDailyAccountingAnalysisCodeDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempDailyAccountingCostCenterDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempDailyAccountingTransactionDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempDailyAccountingTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempJournalEntryDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempPaymentOrderDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempPaymentRequestClaimDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempPaymentRequestDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempPaymentRequestTransactionDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempPreLiquidationDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempPremiumReceivableTransactionDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempPremiumReceivableTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempReinsuranceCheckingAccountTransactionDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempReinsuranceCheckingAccountTransactionItemDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempUsedDepositPremiumDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempVoucherConceptDAO.cs" />
+    <Compile Include="DAOs\Accounting\TempVoucherDAO.cs" />
+    <Compile Include="DAOs\Accounting\TransferPaymentOrderDAO.cs" />
+    <Compile Include="DAOs\Accounting\UsedAmountDAO.cs" />
+    <Compile Include="DAOs\Accounting\VoucherConceptDAO.cs" />
+    <Compile Include="DAOs\Accounting\VoucherConceptTaxDAO.cs" />
+    <Compile Include="DAOs\Accounting\VoucherDAO.cs" />
+    <Compile Include="DAOs\Accounting\VoucherTypeDAO.cs" />
+    <Compile Include="DAOs\Integration2G\CollectApplicationControlDAO.cs" />
+    <Compile Include="DelegateService.cs" />
+    <Compile Include="Entities\Views\ApplicationPremiumComponentView.cs" />
+    <Compile Include="Entities\Views\TempApplicationPremiumComponentView.cs" />
+    <Compile Include="Enums\AccountingKeys.cs" />
+    <Compile Include="Enums\AccountingType.cs" />
+    <Compile Include="Enums\BankReconciliation.cs" />
+    <Compile Include="Enums\Components.cs" />
+    <Compile Include="Enums\EnumHelper.cs" />
+    <Compile Include="Enums\FormatTypes.cs" />
+    <Compile Include="Enums\FormatUsingTypes.cs" />
+    <Compile Include="Enums\TransferPaymentOrders.cs" />
+    <Compile Include="Enums\UnderwritingTypes.cs" />
+    <Compile Include="Models\AccountsPayables\CheckBookControl.cs" />
+    <Compile Include="Models\AccountsPayables\CheckPaymentOrder.cs" />
+    <Compile Include="Models\AccountsPayables\PaymentOrder.cs" />
+    <Compile Include="Models\AccountsPayables\PaymentRequest.cs" />
+    <Compile Include="Models\AccountsPayables\PaymentRequestNumber.cs" />
+    <Compile Include="Models\AccountsPayables\TransferPaymentOrder.cs" />
+    <Compile Include="Models\AccountsPayables\Voucher.cs" />
+    <Compile Include="Models\AccountsPayables\VoucherConcept.cs" />
+    <Compile Include="Models\AccountsPayables\VoucherConceptTax.cs" />
+    <Compile Include="Models\AccountsPayables\VoucherType.cs" />
+    <Compile Include="Models\ActionType.cs" />
+    <Compile Include="Models\Amortizations\Amortization.cs" />
+    <Compile Include="Models\Application\DebitsandCredits.cs" />
+    <Compile Include="Models\Application\DeleteTempApplication.cs" />
+    <Compile Include="Models\AutomaticDebits\AutomaticDebit.cs" />
+    <Compile Include="Models\AutomaticDebits\AutomaticDebitStatus.cs" />
+    <Compile Include="Models\AutomaticDebits\BankNetwork.cs" />
+    <Compile Include="Models\AutomaticDebits\BankNetworkStatus.cs" />
+    <Compile Include="Models\AutomaticDebits\Coupon.cs" />
+    <Compile Include="Models\AutomaticDebits\CouponStatus.cs" />
+    <Compile Include="Models\AutomaticDebits\Field.cs" />
+    <Compile Include="Models\AutomaticDebits\Format.cs" />
+    <Compile Include="Models\AutomaticDebits\PaymentMethodAccountType.cs" />
+    <Compile Include="Models\AutomaticDebits\PaymentMethodBankNetwork.cs" />
+    <Compile Include="Models\BillReport.cs" />
+    <Compile Include="Models\CancellationPolicies\CancellationLimit.cs" />
+    <Compile Include="Models\CancellationPolicies\CancellationPolicyType.cs" />
+    <Compile Include="Models\CancellationPolicies\Exclusion.cs" />
+    <Compile Include="Models\Claims\Catastrophe.cs" />
+    <Compile Include="Models\Claims\CatastrophicEvent.cs" />
+    <Compile Include="Models\Claims\Cause.cs" />
+    <Compile Include="Models\Claims\Claim.cs" />
+    <Compile Include="Models\Claims\ClaimCoverage.cs" />
+    <Compile Include="Models\Claims\ClaimEndorsement.cs" />
+    <Compile Include="Models\Claims\ClaimModify.cs" />
+    <Compile Include="Models\Claims\DamageResponsibility.cs" />
+    <Compile Include="Models\Claims\DamageType.cs" />
+    <Compile Include="Models\Claims\Driver.cs" />
+    <Compile Include="Models\Claims\Estimation.cs" />
+    <Compile Include="Models\Claims\EstimationType.cs" />
+    <Compile Include="Models\Claims\Inspection.cs" />
+    <Compile Include="Models\Claims\InternalStatus.cs" />
+    <Compile Include="Models\Claims\PaymentRequest\ClaimPaymentMethod.cs" />
+    <Compile Include="Models\Claims\PaymentRequest\ClaimPersonType.cs" />
+    <Compile Include="Models\Claims\PaymentRequest\MovementType.cs" />
+    <Compile Include="Models\Claims\PaymentRequest\PaymentRequest.cs" />
+    <Compile Include="Models\Claims\PaymentRequest\PaymentRequestType.cs" />
+    <Compile Include="Models\Claims\PaymentRequest\ConceptSource.cs" />
+    <Compile Include="Models\Claims\PaymentRequest\Voucher.cs" />
+    <Compile Include="Models\Claims\PaymentRequest\VoucherConcept.cs" />
+    <Compile Include="Models\Claims\PaymentRequest\VoucherConceptTax.cs" />
+    <Compile Include="Models\Claims\PaymentRequest\VoucherType.cs" />
+    <Compile Include="Models\Claims\Reason.cs" />
+    <Compile Include="Models\Claims\Status.cs" />
+    <Compile Include="Models\Claims\TextOperation.cs" />
+    <Compile Include="Models\Claims\ThirdAffected.cs" />
+    <Compile Include="Models\Claims\ThirdPartyVehicle.cs" />
+    <Compile Include="Models\Collect\Collect.cs" />
+    <Compile Include="Models\Collect\CollectApplication.cs" />
+    <Compile Include="Models\Collect\CollectConcept.cs" />
+    <Compile Include="Models\Collect\CollectControl.cs" />
+    <Compile Include="Models\Collect\CollectControlPayment.cs" />
+    <Compile Include="Models\Collect\Transaction.cs" />
+    <Compile Include="Models\BankAccounts\BankAccountCompany.cs" />
+    <Compile Include="Models\BankAccounts\BankAccountPerson.cs" />
+    <Compile Include="Models\BankAccounts\BankAccountType.cs" />
+    <Compile Include="Models\CreditNotes\CreditNote.cs" />
+    <Compile Include="Models\CreditNotes\CreditNoteItem.cs" />
+    <Compile Include="Models\Imputations\AccountingConcept.cs" />
+    <Compile Include="Models\Imputations\AnalysisCode.cs" />
+    <Compile Include="Models\Imputations\AnalysisConcept.cs" />
+    <Compile Include="Models\Imputations\AnalysisTreatment.cs" />
+    <Compile Include="Models\Imputations\Application.cs" />
+    <Compile Include="Models\Imputations\ApplicationAccounting.cs" />
+    <Compile Include="Models\Imputations\ApplicationAccountingAnalysis.cs" />
+    <Compile Include="Models\Imputations\ApplicationAccountingCostCenter.cs" />
+    <Compile Include="Models\Imputations\ApplicationAccountingTransaction.cs" />
+    <Compile Include="Models\Imputations\ApplicationItem.cs" />
+    <Compile Include="Models\Imputations\ApplicationPremium.cs" />
+    <Compile Include="Models\Imputations\ApplicationPremiumCommision.cs" />
+    <Compile Include="Models\Imputations\ApplicationPremiumComponent.cs" />
+    <Compile Include="Models\Imputations\ApplicationPremiumComponentLBSB.cs" />
+    <Compile Include="Models\Imputations\ApplicationPremiumTransaction.cs" />
+    <Compile Include="Models\Imputations\ApplicationPremiumTransactionItem.cs" />
+    <Compile Include="Models\Imputations\BookAccount.cs" />
+    <Compile Include="Models\Imputations\BrokerCheckingAccountItem.cs" />
+    <Compile Include="Models\Imputations\BrokersCheckingAccountTransaction.cs" />
+    <Compile Include="Models\Imputations\BrokersCheckingAccountTransactionItem.cs" />
+    <Compile Include="Models\Imputations\CheckingAccountConcept.cs" />
+    <Compile Include="Models\Imputations\CheckingAccountTransaction.cs" />
+    <Compile Include="Models\Imputations\ClaimsPaymentRequestTransaction.cs" />
+    <Compile Include="Models\Imputations\ClaimsPaymentRequestTransactionItem.cs" />
+    <Compile Include="Models\Imputations\CoInsuranceCheckingAccountItem.cs" />
+    <Compile Include="Models\Imputations\CoInsuranceCheckingAccountTransaction.cs" />
+    <Compile Include="Models\Imputations\CoInsuranceCheckingAccountTransactionItem.cs" />
+    <Compile Include="Models\Imputations\CollectPayer.cs" />
+    <Compile Include="Models\Imputations\Concept.cs" />
+    <Compile Include="Models\Imputations\CostCenter.cs" />
+    <Compile Include="Models\Imputations\CostCenterType.cs" />
+    <Compile Include="Models\Imputations\DailyAccountingAnalysisCode.cs" />
+    <Compile Include="Models\Imputations\DailyAccountingCostCenter.cs" />
+    <Compile Include="Models\Imputations\DailyAccountingTransaction.cs" />
+    <Compile Include="Models\Imputations\DailyAccountingTransactionItem.cs" />
+    <Compile Include="Models\Imputations\DepositPremiumTransaction.cs" />
+    <Compile Include="Models\Imputations\ImputationType.cs" />
+    <Compile Include="Models\Imputations\InsuredLoanTransaction.cs" />
+    <Compile Include="Models\Imputations\InsuredLoanTransactionItem.cs" />
+    <Compile Include="Models\Imputations\JournalEntry.cs" />
+    <Compile Include="Models\Imputations\LogMassiveDataPolicy.cs" />
+    <Compile Include="Models\Imputations\PaymentRequestTransaction.cs" />
+    <Compile Include="Models\Imputations\PaymentRequestTransactionItem.cs" />
+    <Compile Include="Models\Imputations\PreLiquidation.cs" />
+    <Compile Include="Models\Imputations\PremiumReceivableTransaction.cs" />
+    <Compile Include="Models\Imputations\PremiumReceivableTransactionItem.cs" />
+    <Compile Include="Models\Imputations\ReinsuranceCheckingAccountItem.cs" />
+    <Compile Include="Models\Imputations\ReInsuranceCheckingAccountTransaction.cs" />
+    <Compile Include="Models\Imputations\ReInsuranceCheckingAccountTransactionItem.cs" />
+    <Compile Include="Models\Imputations\TempApplication.cs" />
+    <Compile Include="Models\Imputations\TempApplicationPremiumComponent.cs" />
+    <Compile Include="Models\Imputations\TempApplicationPremium.cs" />
+    <Compile Include="Models\Imputations\TempApplicationPremiumCommiss.cs" />
+    <Compile Include="Models\Imputations\TransactionType.cs" />
+    <Compile Include="Models\Imputations\UpdTempApplicationPremiumComponent.cs" />
+    <Compile Include="Models\Integration2G\CollectApplicationControl.cs" />
+    <Compile Include="Models\JournalEntryReversionParameters.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\PaymentBallot.cs" />
+    <Compile Include="Models\PaymentReinsurance.cs" />
+    <Compile Include="Models\Payments\Cash.cs" />
+    <Compile Include="Models\Payments\Check.cs" />
+    <Compile Include="Models\Payments\ConsignmentCheck.cs" />
+    <Compile Include="Models\Payments\CreditCard.cs" />
+    <Compile Include="Models\Payments\CreditCardType.cs" />
+    <Compile Include="Models\Payments\CreditCardValidThru.cs" />
+    <Compile Include="Models\Payments\DepositVoucher.cs" />
+    <Compile Include="Models\Payments\Payment.cs" />
+    <Compile Include="Models\Payments\PaymentComponentModel.cs" />
+    <Compile Include="Models\Payments\PaymentMethod.cs" />
+    <Compile Include="Models\Payments\PaymentTax.cs" />
+    <Compile Include="Models\Payments\PaymentTicket.cs" />
+    <Compile Include="Models\Payments\PaymentTicketItem.cs" />
+    <Compile Include="Models\Payments\RetentionReceipt.cs" />
+    <Compile Include="Models\Payments\SaveBillParameter.cs" />
+    <Compile Include="Models\Payments\Transfer.cs" />
+    <Compile Include="Models\Range.cs" />
+    <Compile Include="Models\RangeItem.cs" />
+    <Compile Include="Models\RejectedPayment.cs" />
+    <Compile Include="Models\Rejection.cs" />
+    <Compile Include="Models\Retentions\RetentionBase.cs" />
+    <Compile Include="Models\Retentions\RetentionConcept.cs" />
+    <Compile Include="Models\Retentions\RetentionConceptPercentage.cs" />
+    <Compile Include="Models\Reversion\ReversionPremium.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseBeneficiary.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseBillingGroup.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseCommission.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseComponent.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseCoverage.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseEndorsement.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseInsuredObject.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuanceAddress.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuanceAgency.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuanceAgent.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuanceAgentType.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuanceCompanyName.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuanceDocumentType.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuanceEconomicActivity.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuanceEmail.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuanceIdentificationDocument.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuanceInsured.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuancePaymentMethod.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseIssuancePhone.cs" />
+    <Compile Include="Models\Underwriting\Base\BasePayerComponent.cs" />
+    <Compile Include="Models\Underwriting\Base\BasePaymentPlan.cs" />
+    <Compile Include="Models\Underwriting\Base\BasePolicy.cs" />
+    <Compile Include="Models\Underwriting\Base\BaseQuota.cs" />
+    <Compile Include="Models\Underwriting\Beneficiary.cs" />
+    <Compile Include="Models\Underwriting\BillingGroup.cs" />
+    <Compile Include="Models\Underwriting\Commission.cs" />
+    <Compile Include="Models\Underwriting\Component.cs" />
+    <Compile Include="Models\Underwriting\Coverage.cs" />
+    <Compile Include="Models\Underwriting\Endorsement.cs" />
+    <Compile Include="Models\Underwriting\Holder.cs" />
+    <Compile Include="Models\Underwriting\InsuredObject.cs" />
+    <Compile Include="Models\Underwriting\IssuanceAddress.cs" />
+    <Compile Include="Models\Underwriting\IssuanceAgency.cs" />
+    <Compile Include="Models\Underwriting\IssuanceAgent.cs" />
+    <Compile Include="Models\Underwriting\IssuanceAgentType.cs" />
+    <Compile Include="Models\Underwriting\IssuanceCompanyName.cs" />
+    <Compile Include="Models\Underwriting\IssuanceDocumentType.cs" />
+    <Compile Include="Models\Underwriting\IssuanceEconomicActivity.cs" />
+    <Compile Include="Models\Underwriting\IssuanceEmail.cs" />
+    <Compile Include="Models\Underwriting\IssuanceIdentificationDocument.cs" />
+    <Compile Include="Models\Underwriting\IssuanceInsured.cs" />
+    <Compile Include="Models\Underwriting\IssuancePaymentMethod.cs" />
+    <Compile Include="Models\Underwriting\IssuancePhone.cs" />
+    <Compile Include="Models\Underwriting\PayerComponent.cs" />
+    <Compile Include="Models\Underwriting\PaymentPlan.cs" />
+    <Compile Include="Models\Underwriting\Policy.cs" />
+    <Compile Include="Models\Underwriting\Quota.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Entities\Views\ApplicationPremiumComponentView.view" />
+    <None Include="Entities\Views\TempApplicationPremiumComponentView.view" />
+    <None Include="Views\AccountBankBeneficiaryView.uiview" />
+    <None Include="Views\AccountigParametersView.uiview" />
+    <None Include="Views\AccountingConceptCurrentView.uiview" />
+    <None Include="Views\AgentCommissionProrateView.uiview" />
+    <None Include="Views\AgentCommissionView.uiview" />
+    <None Include="Views\ApplicationParametersView.uiview" />
+    <None Include="Views\AppliedCreditNoteView.uiview" />
+    <None Include="Views\AppReceivablePremiumStatusSearchView.uiview" />
+    <None Include="Views\BalanceEnquiriesView.uiview" />
+    <None Include="Views\BallotDepositView.uiview" />
+    <None Include="Views\BrokerCheckAccountTransView.uiview" />
+    <None Include="Views\BrokerCheckingAccountView.uiview" />
+    <None Include="Views\CancelCheckPaymentOrderView.uiview" />
+    <None Include="Views\CancellationLimitPrefixView.uiview" />
+    <None Include="Views\CardsDepositView.uiview" />
+    <None Include="Views\CardVoucherView.uiview" />
+    <None Include="Views\CashPaymentCollectView.uiview" />
+    <None Include="Views\CheckBookControlBankView.uiview" />
+    <None Include="Views\CheckInformationView.uiview" />
+    <None Include="Views\ChecksDepositView.uiview" />
+    <None Include="Views\ChecksPaidView.uiview" />
+    <None Include="Views\ChecksView.uiview" />
+    <None Include="Views\CoinsuranceCheckingAccountView.uiview" />
+    <None Include="Views\CoinsuredAcceptedView.uiview" />
+    <None Include="Views\CoinsuredAssignedView.uiview" />
+    <None Include="Views\CollectCollectConceptView.uiview" />
+    <None Include="Views\CollectConceptControlView.uiview" />
+    <None Include="Views\CollectControlUniqueUsersView.uiview" />
+    <None Include="Views\CollectControlView.uiview">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Views\CollectingView.uiview" />
+    <None Include="Views\CollectListPersonView.uiview" />
+    <None Include="Views\CollectMassiveProcessView.uiview" />
+    <None Include="Views\CollectPaymentTicketView.uiview" />
+    <None Include="Views\CollectPaymentView.uiview" />
+    <None Include="Views\CollectView.uiview" />
+    <None Include="Views\CompaniesUserView.uiview" />
+    <None Include="Views\CompanyBankAccountView.uiview" />
+    <None Include="Views\CreditableDetailCardView.uiview" />
+    <None Include="Views\CreditableHeaderCardView.uiview" />
+    <None Include="Views\CreditNoteAutomaticProcessView.uiview" />
+    <None Include="Views\CurrencyDifferencesView.uiview" />
+    <None Include="Views\DepositPremiumTransactionCurrencyView.uiview" />
+    <None Include="Views\DetailCardsView.uiview" />
+    <None Include="Views\DetailChecksView.uiview" />
+    <None Include="Views\DetailPaymentTicketView.uiview" />
+    <None Include="Views\DetailReceiptView.uiview">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Views\EndorsementsPaymentsView.uiview" />
+    <None Include="Views\GetAppPaymentOrderSearchView.uiview" />
+    <None Include="Views\GetAppPrefixPremiumReceivableView.uiview" />
+    <None Include="Views\GetAppTemporaryItemSearchView.uiview" />
+    <None Include="Views\GetAppTempPremiumReceivableItemView.uiview">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Views\ImputationJournalEntryView.uiview" />
+    <None Include="Views\InsurancePolicyEndorsementView.uiview" />
+    <None Include="Views\InternalBallotView.uiview" />
+    <None Include="Views\InternalPaymentTicketView.uiview" />
+    <None Include="Views\IssueCoinsuranceAcceptedView.uiview" />
+    <None Include="Views\IssueCoinsuranceAssignedView.uiview" />
+    <None Include="Views\LogProcessCreditNoteView.uiview" />
+    <None Include="Views\MassiveProcessDataBillView.uiview" />
+    <None Include="Views\MassiveProcessDataBillView_.uiview">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Views\NotCreditableDetailCardView.uiview" />
+    <None Include="Views\NotCreditableHeaderCardView.uiview" />
+    <None Include="Views\OtherPaymentRequestDetailView.uiview" />
+    <None Include="Views\ParameterMulticompanyView.uiview" />
+    <None Include="Views\PayerOrderAuthorizedView.uiview" />
+    <None Include="Views\PayerOrderUnauthorizedView.uiview" />
+    <None Include="Views\PaymentBallotPaymentTicketView.uiview" />
+    <None Include="Views\PaymentBallotView.uiview" />
+    <None Include="Views\PaymentBankDocumentView.uiview" />
+    <None Include="Views\PaymentCheckDepositView.uiview" />
+    <None Include="Views\PaymentCollectControlView.uiview" />
+    <None Include="Views\PaymentCollectMethodTypeView.uiview" />
+    <None Include="Views\PaymentCreditCardTypeView.uiview" />
+    <None Include="Views\PaymentMethodTypeCollectView.uiview" />
+    <None Include="Views\PaymentTypeEnableView.uiview" />
+    <None Include="Views\PaymentOrderChecksView.uiview" />
+    <None Include="Views\PaymentOrderPersonTypeView.uiview" />
+    <None Include="Views\PaymentOrdersCommissionView.uiview" />
+    <None Include="Views\PaymentOrderTransferTypeView.uiview" />
+    <None Include="Views\PaymentRegularizePaymentView.uiview" />
+    <None Include="Views\PaymentRequestAccountingParameterView.uiview" />
+    <None Include="Views\PaymentRequestClaimPendientView.uiview" />
+    <None Include="Views\PaymentRequestDetailView.uiview" />
+    <None Include="Views\PaymentRequestHeaderView.uiview" />
+    <None Include="Views\PaymentRequestPersonTypeView.uiview" />
+    <None Include="Views\PaymentTaxView.uiview" />
+    <None Include="Views\PaymentTicketBallotView.uiview" />
+    <None Include="Views\PaymentTicketCashView.uiview" />
+    <None Include="Views\PaymentTicketCreditCardView.uiview" />
+    <None Include="Views\PaymentTicketDepositSlipView.uiview" />
+    <None Include="Views\PaymentTicketDetailView.uiview" />
+    <None Include="Views\PaymentTicketItemPaymentView.uiview" />
+    <None Include="Views\PaymentTicketItemView.uiview" />
+    <None Include="Views\PaymentTicketNotCreditCardView.uiview" />
+    <None Include="Views\PaymentTicketNotDepositedView.uiview" />
+    <None Include="Views\PaymentTicketPaymentBallotView.uiview" />
+    <None Include="Views\PaymentView.uiview" />
+    <None Include="Views\PercentagePayQuotaView.uiview" />
+    <None Include="Views\PersonBankAccountView.uiview" />
+    <None Include="Views\PolicyAmortizationView.uiview" />
+    <None Include="Views\PolicyPremiumReceivableTransView.uiview">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Views\PolicyPremiumReceivableView.uiview" />
+    <None Include="Views\PrefixComponentCollection.uiview" />
+    <None Include="Views\PrefixPremiumReceivableView.uiview" />
+    <None Include="Views\PreliquidationsView.uiview" />
+    <None Include="Views\PremiumReceivableBusinessView.uiview" />
+    <None Include="Views\PremiumReceivableTransCollectView.uiview" />
+    <None Include="Views\PremiumRecievableApplicationView.uiview" />
+    <None Include="Views\PremiumRecievableImputationView.uiview" />
+    <None Include="Views\PrimeComponentAmountView.uiview" />
+    <None Include="Views\PrimePrefixComponentView.uiview" />
+    <None Include="Views\PrimeTotalView.uiview" />
+    <None Include="Views\ReceivablePremiumStatusSearchView.uiview" />
+    <None Include="Views\ReinsuranceCheckingAccountView.uiview" />
+    <None Include="Views\RejectedLegalPaymentView.uiview" />
+    <None Include="Views\RejectedPaymentBankView.uiview" />
+    <None Include="Views\RejectedPaymentView.uiview" />
+    <None Include="Views\ShipmentAutomaticDebitStatusView.uiview" />
+    <None Include="Views\ShipmentCouponPrefixView.uiview" />
+    <None Include="Views\StatusPaymentCreditCardTypeView.uiview" />
+    <None Include="Views\StatusPaymentView.uiview" />
+    <None Include="Views\TaxCardView.uiview" />
+    <None Include="Views\TempBrokerCheckingAccountItemsView.uiview" />
+    <None Include="Views\TempBrokerCheckingAccTransView.uiview" />
+    <None Include="Views\TempClaimPaymentView.uiview" />
+    <None Include="Views\TempCoinsuranceCheckingAccountingView.uiview" />
+    <None Include="Views\TempCoinsuranceCheckingAccTransView.uiview" />
+    <None Include="Views\TempDailyAccountingTransView.uiview" />
+    <None Include="Views\TempJournalEntryItemView.uiview" />
+    <None Include="Views\TempPaymentOrderItemView.uiview" />
+    <None Include="Views\TempPaymentRequestItemsView.uiview" />
+    <None Include="Views\TempPremiumReceivableItemView.uiview" />
+    <None Include="Views\TempReinsuranceCheckAccountView.uiview" />
+    <None Include="Views\TempReinsuranceCheckingAccountItemsView.uiview" />
+    <None Include="Views\UniqueUsersCloseBoxView.uiview" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Condition="'$(BuildingInsideVisualStudio)' == 'true'" Include="..\packages\Sistran.Core.Analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IntegrationProviders\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\Accounting\ApplicationServiceEEProvider\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\ProjectDeployBranch.msbuild" />
+</Project>

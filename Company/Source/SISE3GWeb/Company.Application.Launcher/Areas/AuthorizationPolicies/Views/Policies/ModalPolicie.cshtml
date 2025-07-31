@@ -1,0 +1,76 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="uif-modal" id="modalPolicie">
+    <div class="uif-modalbody">
+        <input type="hidden" id="hdnModalPolicieIndex" />
+        <form class="form" id="formModalPolicie">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label class="field-required">Politica</label>
+                    <input type="text" id="txtNamePolicie" name="txtNamePolicie" required="required" maxlength="100" autocomplete="off"/>
+                    <span class="field-validation-valid" data-valmsg-for="txtNamePolicie" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label class="field-required">Mensaje</label>
+                    <input type="text" id="txtMessagePolicie" name="txtMessagePolicie" required maxlength="100" autocomplete="off"/>
+                    <span class="field-validation-valid" data-valmsg-for="txtMessagePolicie" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label class="field-required">Tipo de politica</label>
+                    <select id="ddlTypePolicies" name="ddlTypePolicies" data-val="true" data-id="IdTypePolicies" data-name="Description" required></select>
+                    <span class="field-validation-valid" data-valmsg-for="ddlTypePolicies" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">Nivel</label>
+                    <select id="ddlLevelPolicies" name="ddlLevelPolicies" data-val="true" data-id="Position" data-name="Description" required></select>
+                    <span class="field-validation-valid" data-valmsg-for="ddlLevelPolicies" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label class="">Jerarquia maxima de lanzado</label>
+                    <select id="ddlHierarchy" name="ddlHierarchy" data-val="true" data-id="Id" data-name="Description" required></select>
+                    <span class="field-validation-valid" data-valmsg-for="ddlHierarchy" data-valmsg-replace="true"></span>
+                </div>
+
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <input type="checkbox" id="chkEnabled" name="chkEnabled" />
+                    <label for="chkEnabled">Habilitado</label>
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>Paquete</label>
+                    <input type="text" id="txtPackageMain" name="txtPackageMain" disabled="disabled" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>Modulo</label>
+                    <input type="text" id="txtModuleMain" name="txtModuleMain" disabled="disabled" />
+                </div>
+                <div class="uif-col-6">
+                    <label>Submodulo</label>
+                    <input type="text" id="txtSubModuleMain" name="txtSubModuleMain" disabled="disabled" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-primary" id="btnSendPolicies">@Resources.Language.ButtonSave</button>
+    </div>
+</div>

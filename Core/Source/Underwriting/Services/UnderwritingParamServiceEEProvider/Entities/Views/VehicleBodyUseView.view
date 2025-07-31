@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="VehicleBodyUseView">
+  <collections>
+    <collection name="VehicleBody" type="Sistran.Core.Application.Common.Entities.VehicleBody, 
+                Core.Common.Entities"></collection>
+    <collection name="VehicleBodyUse" type="Sistran.Core.Application.Common.Entities.VehicleBodyUse, 
+                Core.Common.Entities"></collection>
+    <collection name="VehicleUse" type="Sistran.Core.Application.Common.Entities.VehicleUse, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="VehicleBody" destination="VehicleBodyUse" name="BodyVehicle" type="Left">
+      <property left="VehicleBodyCode" type="Equal" right="VehicleBodyCode"></property>
+    </relation>
+    <relation source="VehicleBodyUse" destination="VehicleUse" name="UseBodyVehicle" type="Left">
+      <property left="VehicleUseCode" type="Equal" right="VehicleUseCode"></property>
+    </relation>
+  </relations>
+</view>

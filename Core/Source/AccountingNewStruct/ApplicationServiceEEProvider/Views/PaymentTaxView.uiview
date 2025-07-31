@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PaymentTaxView">
+	<selection>
+		<SelectQuery>
+			<values>
+				<SelectValue alias="PaymentTaxCode">
+					<Column table-alias="PaymentTax" name="PaymentTaxCode" />
+				</SelectValue>
+				<SelectValue alias="PaymentCode">
+					<Column table-alias="PaymentTax" name="PaymentCode" />
+				</SelectValue>
+				<SelectValue alias="TaxCode">
+					<Column table-alias="Tax" name="TaxCode" />
+				</SelectValue>
+				<SelectValue alias="TaxRate">
+					<Column table-alias="PaymentTax" name="TaxRate" />
+				</SelectValue>
+				<SelectValue alias="TaxAmount">
+					<Column table-alias="PaymentTax" name="TaxAmount" />
+				</SelectValue>
+				<SelectValue alias="TaxBase">
+					<Column table-alias="PaymentTax" name="TaxBase" />
+				</SelectValue>
+				<SelectValue alias="Description">
+					<Column table-alias="Tax" name="Description" />
+				</SelectValue>
+			</values>
+			<table>
+				<Join>
+					<ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentTax, Core.Accounting.Entities" alias="PaymentTax" />
+					<ClassNameTable name="Sistran.Core.Application.Tax.Entities.Tax, Core.Tax.Entities" alias="Tax" />
+					<criteria>
+						<BinaryCriterion type="Equal">
+							<Column table-alias="Tax" name="TaxCode" />
+							<Column table-alias="PaymentTax" name="TaxCode" />
+						</BinaryCriterion>
+					</criteria>
+				</Join>
+			</table>
+		</SelectQuery>
+	</selection>
+</uiview>

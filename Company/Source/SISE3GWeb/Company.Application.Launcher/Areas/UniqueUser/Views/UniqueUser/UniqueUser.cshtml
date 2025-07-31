@@ -1,0 +1,335 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.UniqueUserModelsView
+@{
+    Layout = null;
+}
+
+<div class="uif-alert" id="alert"></div>
+
+<div class="uif-modal" id="modalHierarchy">
+    <div class="uif-modalbody">
+        @Html.Partial("Hierarchy", new Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.HierarchyModelsView())
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonsHierarchy">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnHierarchyClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0685"))
+        {
+            <button type="button" class="btn btn-primary" id="btnHierarchySave">@Resources.Language.ButtonSave</button>
+        }
+
+    </div>
+</div>
+<div class="uif-modal" id="modalBranch">
+    <div class="uif-modalbody">
+        @Html.Partial("Branch", new Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.BranchModelsView())
+    </div>
+    <div class="uif-modalbuttons width-width-saveRule" id="buttonsBranch">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnBranchClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0691"))
+        {
+            <button type="button" class="btn btn-default" id="btnRemoveAll">@Resources.Language.RemoveAllBranch</button>
+        }
+
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0690"))
+        {
+            <button type="button" class="btn btn-default" id="btnAssingAll">@Resources.Language.AssingAllBranch</button>
+        }
+
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0689"))
+        {
+            <button type="button" class="btn btn-primary" id="btnBranchSave">@Resources.Language.ButtonSave</button>
+        }
+
+    </div>
+</div>
+@*<div class="uif-modal" id="modalProduct">
+    <div class="uif-modalbody">
+        @Html.Partial("UserProduct", new Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.UserProductModelsView())
+    </div>
+    <div class="uif-modalbuttons width-width-saveRule" id="buttonsProducts">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnUserProdcutClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-default" id="btnRemoveAllProducts">@Resources.Language.RemoveAllProducts</button>
+        <button type="button" class="btn btn-default" id="btnAssingAllProducts">@Resources.Language.AssignAllProducts</button>
+        <button type="button" class="btn btn-primary" id="btnProductsSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>*@
+<div class="uif-modal" id="modalAgent">
+    <div class="uif-modalbody">
+        @Html.Partial("UserAgent", new Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.AgentModelsView())
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonsAgent">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnAgentClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0694"))
+        {
+            <button type="button" class="btn btn-primary" id="btnAgentSave">@Resources.Language.ButtonSave</button>
+        }
+
+    </div>
+</div>
+<div class="uif-modal" id="modalAlliedSalePoints">
+	<div class="uif-modalbody">
+		@Html.Partial("AlliedSalePoints", new Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.AlliedSalePointsModelsView())
+	</div>
+	<div class="uif-modalbuttons width-save" id="buttonsAlliedSalePoints">
+		<button type="button" class="btn btn-default" data-dismiss="modal" id="btnAlliedSalePointsClose">@Resources.Language.ButtonClose</button>
+		<button type="button" class="btn btn-default" style="width:auto" id="btnAlliedSalePointsUnAssignAll">@Resources.Language.LabelBtnAllySalePointsUnAssignAll</button>
+		<button type="button" class="btn btn-default" style="width:auto" id="btnAlliedSalePointsAssignAll">@Resources.Language.LabelBtnAllySalePointsAssignAll</button>
+		<button type="button" class="btn btn-primary" id="btnAlliedSalePointsSave">@Resources.Language.ButtonSave</button>
+	</div>
+</div>
+<div class="uif-modal" id="modalGroup">
+    <div class="uif-modalbody">
+        @Html.Partial("UserGroup", new Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.UserGroupModelsView())
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonsUserGroup">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnUserGroupClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnUserGroupSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+<div class="uif-modal" id="modalPermissions">
+    <div class="uif-modalbody">
+        @Html.Partial("UserContextPermissions", new Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.UserContextPermissionsModelsView())
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonsPermissions">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnPermissionsClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnPermissionsSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalDefaultSearch">
+    <div class="uif-modalbody">        
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="active">
+                    <table class="uif-table" data-title="" data-selectiontype="none" id="tableResults" data-filter="false" data-paginate="true">
+                        <thead>
+                            <tr>
+                                <th data-property="Id">@Resources.Language.LabelId</th>
+                                <th data-property="Code">@Resources.Language.LabelCode</th>
+                                <th data-property="Description">@Resources.Language.LabelDescription</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uif-modal" id="modalDefaultSearchAllyIntermediary">
+	<div class="uif-modalbody">		
+		<div class="uif-row">
+			<div class="uif-col-12">
+				<div class="active">
+					<table class="uif-table" data-title="" data-selectiontype="none" id="tableAllyIntermediary" data-filter="false" data-paginate="true">
+						<thead>
+							<tr>
+								<th data-property="Id">@Resources.Language.LabelIdAllyIntermediary</th>
+								<th data-property="Clave">@Resources.Language.LabelClaveAllyIntermediary</th>
+								<th data-property="Descripcion">@Resources.Language.LabelDescriptionAllyIntermediary</th>
+								<th data-property="CodigoAgencia">@Resources.Language.LabelAgencyCodeAllyIntermediary</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="uif-modal" id="modalPersonOnline">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/UniqueUser/Views/UniqueUser/PersonOnline.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalPrefixUser">
+    PrefixUser
+    <div class="uif-modalbody">
+        @Html.Partial("PrefixUser")
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonsHierarchy">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnPrefixUserClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnPrefixUserSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<script id="title-template" type="text/template">
+    <div class="column-75">
+        @Resources.Language.Users
+    </div>
+    <div class="column-25 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputUser", @placeholder = @Resources.Language.SearchUser })
+        <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsUniqueUser" class="footerUniqueUser">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button type="button" class="btn btn-default" id="btnNewUser">
+            <i class="fa fa-file-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.NewUser
+        </button>
+        <button class="btn btn-primary" id="btnSaveUser">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.SaveUser</span>
+        </button>
+    </div>
+</script>
+
+    @Html.AntiForgeryToken()
+    <div id="modalUser">
+        <div class="row">
+            <div class="uif-col-9 fit-col-main">
+                <form id="formUser" class="form without-space" autocomplete="off">
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.LoginName</label>
+                            @Html.TextBoxFor(model => model.AccountName, new { id = "LoginName", placeholder = @Resources.Language.PlaceHolderKeyName, maxlength = 30 })
+                            @Html.ValidationMessageFor(model => model.AccountName)
+                        </div>
+                        <div class="uif-col-6">
+                            <label class="field-required">@Resources.Language.NameSurname</label>
+                            @Html.TextBoxFor(model => model.PersonId, new { id = "NameSurname", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderNameSurname })
+                            @Html.ValidationMessageFor(model => model.PersonId)
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.CreationDate</label>
+                            @Html.TextBoxFor(model => model.CreationDate, new { id = "inputCreationDate", @class = "uif-datepicker" })
+                            @Html.ValidationMessageFor(model => model.CreationDate)
+                        </div>
+                    </div>
+
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.DateLastModified</label>
+                            @Html.TextBoxFor(model => model.LastModificationDate, new { id = "inputLastModificationDate", @class = "uif-datepicker" })
+                            @Html.ValidationMessageFor(model => model.LastModificationDate)
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.DateExpirationUser</label>
+                            @Html.TextBox("Id", null, new { id = "inputDateExpirationUser", @class = "uif-datepicker" })
+                        </div>
+                        <div class="uif-col-3">
+                            <div class="without-label">
+                                <input type="checkbox" id="chkDisabled" name="Disabled" />
+                                <label for="chkDisabled">@Resources.Language.Disabled</label>
+                            </div>
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.LabelDisabledDate</label>
+                            @Html.TextBoxFor(model => model.DisableDate, new { id = "InputDisabledDate", @class = "uif-datepicker" })
+                            @Html.ValidationMessageFor(model => model.DisableDate)
+                        </div>
+
+                    </div>
+
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <div class="without-label">
+                                <input type="checkbox" id="chkUpdatePassword" name="UpdatePassword" />
+                                <label for="chkUpdatePassword">@Resources.Language.ChangePasswordFirstLogin</label>
+                            </div>
+                        </div>
+                        <div class="uif-col-6">
+                            <label class="field-required">@Resources.Language.Profile</label>
+                            <div class="input-with-buttons">
+                                <select class="uif-select form-control" id="selectProfile" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlProfile"
+                                        data-id="Id" data-name="Description" name="ProfileId"
+                                        data-filter="true" data-native="false"></select>
+                                @Html.ValidationMessageFor(model => model.ProfileId)
+                                <button class="btn btn-default" id="btnShowProfiles" type="button" style="display:none"><i class="fa fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.DateExpirationPassword</label>
+                            @Html.TextBox("Id", null, new { id = "InputExpirationPasswordDate", @class = "uif-datepicker", data_min_date = DateTime.Now.AddDays(1).ToString("dd/MM/yyyy") })
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="uif-row">
+                    <form>
+                        <div class="uif-col-3">
+                            <div class="without-label">
+                                <input type="checkbox" id="chkBlocked" name="Blocked" />
+                                <label for="chkBlocked">@Resources.Language.Blocked</label>
+                            </div>
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.Password</label>
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.Confirmation</label>
+                            @Html.PasswordFor(model => model.Confirmation, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Confirmation)
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.ExpirationDays</label>
+                            @Html.TextBox("DiasVigencia", null, new { id = "ExpirationDays", placeholder = @Resources.Language.ExpirationOnDays, maxlength = 3 })
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+            <div class="uif-col-3 fit-col-secondary">
+                <div class="uif-right-bar" id="panelButtonsRight">
+                    <ul>
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0683"))
+                        {
+                            <li id="liHierarchy">
+                                <a href="#" id="btnHierarchy">@Resources.Language.Hierarchies</a>
+                                <p id="selectedHierarchy"></p>
+                            </li>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0683"))
+                        {
+                            <li id="liBranchSale">
+                                <a href="#" id="btnBranchSale">@Resources.Language.BranchandSalePoint</a>
+                                <p id="selectedBranchSale"></p>
+                            </li>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0692"))
+                        {
+                            <li id="liAgent">
+                                <a href="#" id="btnAgent">@Resources.Language.WorkWithIntermediary</a>
+                                <p id="selectedWork"></p>
+                            </li>
+                        }
+
+                        @*<li id="liProduct">
+            <a href="#" id="btnProduct">@Resources.Language.LabelProduct</a>
+            <p id="selectedProduct"></p>
+        </li>
+        <li id="liAlliedSalePoints">
+            <a href="#" id="btnAlliedSalePoints">@Resources.Language.AlliedSalePoints</a>
+            <p id="selectedAlliedSalePoints"></p>
+        </li>
+
+        <li id="liAlliedSalePoints">
+            <a href="#" id="btnPrefixUser">@Resources.Language.CommercialBouquet</a>
+            <p id="selectedAlliedSalePoints"></p>
+        </li>*@
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0695"))
+                        {
+                            <li id="liUserGroup">
+                                <a href="#" id="btnUserGroup">@Resources.Language.UserGroup</a>
+                                <p id="selectedGroup"></p>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

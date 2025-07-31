@@ -1,0 +1,105 @@
+﻿
+@{
+    Layout = null;
+}
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="google" content="notranslate" />
+    <title>SubscriptionSearchView</title>
+
+
+    <script id="title-template" type="text/template">
+        <div class="column-70">
+            @Resources.Language.SubscriptionSearch
+        </div>
+        <div class="column-10">
+            @Resources.Language.SearchBy
+        </div>
+        <div class="column-20 even">
+            <select class="uif-select form-control" id="selectSearchType" data-native="false" data-val="true" data-source='@Url.Content("~/Underwriting/SearchUnderwriting/GetSelectTypes")'
+                    data-val-required="@Resources.Language.ErrorDocumentPrefix" data-id="Value" data-name="Text" name="selectSearchType"></select>
+        </div>
+    </script>
+
+</head>
+<body class="notranslate">
+
+    <div class="uif-modal" id="modalUserSearch">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Underwriting/Views/SearchUnderwriting/UserResults.cshtml")
+        </div>
+    </div>
+
+    <div class="uif-modal" id="modalIndividualSearch">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Underwriting/Views/SearchUnderwriting/IndividualResults.cshtml")
+        </div>
+    </div>
+
+    <div class="uif-modal" id="modalDefaultSearch">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Underwriting/Views/SearchUnderwriting/DefaultResults.cshtml")
+        </div>
+    </div>
+
+    <div>
+        <div id="divSearchQuotation">
+            @Html.Partial("~/Areas/Underwriting/Views/SearchUnderwriting/QuotationSearchPartial.cshtml")
+        </div>
+        <div id="divSearchPolicy">
+            @Html.Partial("~/Areas/Underwriting/Views/SearchUnderwriting/PolicySearchPartial.cshtml")
+        </div>
+        <div id="divSearchTemporal">
+            @Html.Partial("~/Areas/Underwriting/Views/SearchUnderwriting/TemporalSearchPartial.cshtml")
+        </div>
+    </div>
+    <script id="footer-template" type="text/template">
+
+        <div id="footerQuotation">
+            <button class="btn btn-default" id="btnExportQuotations">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ExportXLS
+            </button>
+            <button class="btn btn-default" id="btnNewVersion">
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonNewVersion
+            </button>
+            @*<button class="btn btn-default" id="btnNewQuotation">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.Language.ButtonNewQuotation
+                </button>
+                <button class="btn btn-default" id="btnIssuanceCurrency">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.Language.LabelUseToIssuePolicy
+                </button>*@
+        </div>
+        <div id="footerPolicy">
+            @*<button class="btn btn-default cancel" id="btnSummary">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.Language.LabelSummary
+                </button>*@
+            <button class="btn btn-default" id="btnExportPolicies">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ExportXLS
+            </button>
+            @*<button class="btn btn-default" id="btnRechazar">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.Language.LabelSearchPolicy
+                </button>*@
+        </div>
+        <div id="footerTemporal">
+            @*<button class="btn btn-default" id="btnDeleteTemporal">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.Language.ButtonDeleteTemporal
+                </button>
+                <button class="btn btn-default" id="btnRecoverTemporal">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.Language.LabelRecoverTemporary
+                </button>*@
+        </div>
+    </script>
+</body>
+</html>

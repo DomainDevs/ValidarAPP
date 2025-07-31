@@ -1,0 +1,50 @@
+<map version="2.0" type="class" name="GetReceivablePremiumPolicy" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="GET_RECEIVABLE_PREMIUM_POLICY_ENTITY">
+  <properties>
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="BranchDescription" type="String" size="50" description="BRANCH_DESCRIPTION_PROPERTY" />
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="PrefixDescription" type="String" size="50" description="PREFIX_DESCRIPTION_PROPERTY" />
+    <property name="PolicyId" type="Integer" key="true" description="POLICY_ID_PROPERTY" />
+    <property name="PolicyDocumentNumber" type="Decimal" precision="12" scale="5" description="POLICY_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="EndorsementId" type="Integer" key="true" description="ENDORSEMENT_ID_PROPERTY" />
+    <property name="EndorsementDocumentNumber" type="Integer" description="ENDORSEMENT_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+    <property name="CurrencyDescription" type="String" size="50" description="CURRENCY_DESCRIPTION_PROPERTY" />
+    <property name="PaymentNum" type="Integer" key="true" description="PAYMENT_NUM_PROPERTY" />
+    <property name="PaymentAmount" type="Decimal" precision="38" scale="2" nullable="true" description="PAYMENT_AMOUNT_PROPERTY" />
+    <property name="PaymentExpirationDate" type="DateTime" description="PAYMENT_EXPIRATION_DATE_PROPERTY" />
+    <property name="InsuredIndividualId" type="Integer" nullable="true" description="INSURED_INDIVIDUAL_ID_PROPERTY" />
+    <property name="InsuredDocumentNumber" type="String" size="14" description="INSURED_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="InsuredName" type="String" size="8000" nullable="true" description="INSURED_NAME_PROPERTY" />
+    <property name="PolicyAgentIndividualId" type="Integer" key="true" description="POLICY_AGENT_INDIVIDUAL_ID_PROPERTY" />
+    <property name="PolicyAgentName" type="String" size="8000" nullable="true" description="POLICY_AGENT_NAME_PROPERTY" />
+    <property name="StandardCommissionPercentage" type="Decimal" precision="7" scale="4" description="STANDARD_COMMISSION_PERCENTAGE_PROPERTY" />
+    <property name="AgentComission" type="Decimal" precision="18" scale="2" nullable="true" description="AGENT_COMISSION_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="GET_RECEIVABLE_PREMIUM_POLICY" schema="ACC" alias="GET_RECEIVABLE_PREMIUM_POLICY" update="true">
+      <columns>
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" allowNull="false" />
+        <column name="BRANCH_DESCRIPTION" type="String" property="BranchDescription" allowNull="false" size="50" />
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" allowNull="false" />
+        <column name="PREFIX_DESCRIPTION" type="String" property="PrefixDescription" allowNull="false" size="50" />
+        <column name="POLICY_ID" type="Int32" property="PolicyId" key="true" />
+        <column name="POLICY_DOCUMENT_NUMBER" type="Decimal" property="PolicyDocumentNumber" allowNull="false" size="19" precision="12" />
+        <column name="ENDORSEMENT_ID" type="Int32" property="EndorsementId" key="true" />
+        <column name="ENDORSEMENT_DOCUMENT_NUMBER" type="Int32" property="EndorsementDocumentNumber" allowNull="false" />
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" allowNull="false" />
+        <column name="CURRENCY_DESCRIPTION" type="String" property="CurrencyDescription" allowNull="false" size="50" />
+        <column name="PAYMENT_NUM" type="Byte" property="PaymentNum" key="true" />
+        <column name="PAYMENT_AMOUNT" type="Decimal" property="PaymentAmount" size="19" precision="38" scale="2" />
+        <column name="PAYMENT_EXPIRATION_DATE" type="DateTime" property="PaymentExpirationDate" allowNull="false" />
+        <column name="INSURED_INDIVIDUAL_ID" type="Int32" property="InsuredIndividualId" />
+        <column name="INSURED_DOCUMENT_NUMBER" type="String" property="InsuredDocumentNumber" allowNull="false" size="14" />
+        <column name="INSURED_NAME" type="String" property="InsuredName" size="8000" />
+        <column name="POLICY_AGENT_INDIVIDUAL_ID" type="Int32" property="PolicyAgentIndividualId" key="true" />
+        <column name="POLICY_AGENT_NAME" type="String" property="PolicyAgentName" size="8000" />
+        <column name="STANDARD_COMMISSION_PERCENTAGE" type="Decimal" property="StandardCommissionPercentage" allowNull="false" size="19" precision="7" scale="4" />
+        <column name="AGENT_COMISSION" type="Decimal" property="AgentComission" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

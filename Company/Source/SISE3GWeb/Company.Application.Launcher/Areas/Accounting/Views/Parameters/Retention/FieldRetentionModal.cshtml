@@ -1,0 +1,56 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.Field
+
+@{
+    int selectedFormatTypeItem = 0;
+}
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Id</label>
+            <br />
+            <input type="text" data-pattern="000" class="uif-mask" id="IdRetencionConceptDetail" name="ColumnNumber"
+                   data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="ColumnNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.CurrentFrom</label>
+            <br />
+            <input type="text" id="ValidationSince" name="ValidationSince" data-val="true" data-val-required='@Global.RequiredField'
+                   class="uif-datepicker" data-mask-date="99/99/9999">
+            <span class="text-danger" data-valmsg-for="ValidationSince" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.CurrentTo</label>
+            <br />
+            <input type="text" id="ValidationUntil" name="ValidationUntil"
+                   data-val="true" class="uif-datepicker" data-mask-date="99/99/9999" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="ValidationUntil" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Percentage</label>
+            <br />
+            <input type="text" data-pattern="000" class="uif-mask" id="Percentage" name="Percentage"
+                   data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="Percentage" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.Codes</label>
+            <br />
+            <input type="text" id="Codes" data-val="true" class="uif-mask" data-pattern="000000">
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertFieldForm"></div>
+        </div>
+    </div>
+</div>
+
+
+

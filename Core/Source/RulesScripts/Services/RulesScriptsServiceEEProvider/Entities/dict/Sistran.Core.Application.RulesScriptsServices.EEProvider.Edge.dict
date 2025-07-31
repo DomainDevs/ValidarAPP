@@ -1,0 +1,32 @@
+<map version="2.0" type="class" name="Edge" namespace="Sistran.Core.Application.RulesScriptsServices.EEProvider" file-version="1.0" description="EDGE_ENTITY">
+  <properties>
+    <property name="EdgeId" type="Integer" key="true" autonumber="36" description="EDGE_ID_PROPERTY" />
+    <property name="NodeId" type="Integer" description="NODE_ID_PROPERTY" />
+    <property name="QuestionId" type="Integer" description="QUESTION_ID_PROPERTY" />
+    <property name="ScriptId" type="Integer" description="SCRIPT_ID_PROPERTY" />
+    <property name="IsDefault" type="Boolean" description="IS_DEFAULT_PROPERTY" />
+    <property name="NextNodeId" type="Integer" nullable="true" description="NEXT_NODE_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="EDGE" schema="SCR" alias="EDGE" update="true">
+      <columns>
+        <column name="EDGE_ID" type="Int32" property="EdgeId" key="true" />
+        <column name="NODE_ID" type="Int32" property="NodeId" allowNull="false" />
+        <column name="QUESTION_ID" type="Int32" property="QuestionId" allowNull="false" />
+        <column name="SCRIPT_ID" type="Int32" property="ScriptId" allowNull="false" />
+        <column name="IS_DEFAULT" type="Boolean" property="IsDefault" allowNull="false" />
+        <column name="NEXT_NODE_ID" type="Int32" property="NextNodeId" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="36" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Decimal" value="36" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

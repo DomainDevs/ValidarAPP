@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B0A07BBB-8855-4EE3-83BC-00AD8E6BDBB6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ApplicationServer</RootNamespace>
+    <AssemblyName>ApplicationServer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RabbitMQ.Client, Version=3.6.9.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Bin\lib\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Queues">
+      <HintPath>..\..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Queues.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Transactions">
+      <HintPath>..\..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Transactions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractQuee\TemplateQuee.cs" />
+    <Compile Include="ConcreteQuee\CreatePolicyQuee.cs" />
+    <Compile Include="ConcreteQuee\FailCreatePendingOperationQuee.cs" />
+    <Compile Include="ConcreteQuee\FailThirdPartiesLogQuee.cs" />
+    <Compile Include="ConcreteQuee\FailSaveQuotationQuee.cs" />
+    <Compile Include="ConcreteQuee\CreatePendingOperation.cs" />
+    <Compile Include="ConcreteQuee\FailUpdatePendingOperationQuee.cs" />
+    <Compile Include="ConcreteQuee\HistoricPoliciesRequestQuee.cs" />
+    <Compile Include="ConcreteQuee\HistoricPoliciesResponseQuee.cs" />
+    <Compile Include="ConcreteQuee\HistoricSinisterRequestQuee.cs" />
+    <Compile Include="ConcreteQuee\HistoricSinisterResponseQuee.cs" />
+    <Compile Include="ConcreteQuee\SaveQuotationQuee.cs" />
+    <Compile Include="ConcreteQuee\ScoreRequestQuee.cs" />
+    <Compile Include="ConcreteQuee\ScoreResponseQuee.cs" />
+    <Compile Include="ConcreteQuee\SimitRequestQuee.cs" />
+    <Compile Include="ConcreteQuee\SimitResponseQuee.cs" />
+    <Compile Include="ConcreteQuee\ThirdPartiesLogQuee.cs" />
+    <Compile Include="ConcreteQuee\UpdatePendingOperationQuee.cs" />
+    <Compile Include="Enums\MassiveLoadTypes.cs" />
+    <Compile Include="Helpers\QueueHelper.cs" />
+    <Compile Include="Helpers\XmlHelper.cs" />
+    <Compile Include="InitializerConsumers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\UnderwritingBrokerServiceReplica\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\UnderwritingBrokerService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="WrapperObjectQuee.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="app.config" />
+    <None Include="Service References\UnderwritingBrokerServiceReplica\ApplicationServer.UnderwritingBrokerServiceReplica.CreatePendingOperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\ApplicationServer.UnderwritingBrokerServiceReplica.CreatePendingOperationWithParentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\ApplicationServer.UnderwritingBrokerServiceReplica.ExecuteCreatePolicyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\ApplicationServer.UnderwritingBrokerServiceReplica.ProcessResponseFromScoreServiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\ApplicationServer.UnderwritingBrokerServiceReplica.ProcessResponseFromSimitServiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\ApplicationServer.UnderwritingBrokerServiceReplica.UpdateMassiveEmissionRowsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\ApplicationServer.UnderwritingBrokerServiceReplica.UpdatePendingOperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\ApplicationServer.UnderwritingBrokerServiceReplica.UpdatePOAndRecordEndorsementOperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\service.wsdl" />
+    <None Include="Service References\UnderwritingBrokerServiceReplica\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\ApplicationServer.UnderwritingBrokerService.CreatePendingOperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\ApplicationServer.UnderwritingBrokerService.CreatePendingOperationWithParentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\ApplicationServer.UnderwritingBrokerService.ExecuteCreatePolicyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\ApplicationServer.UnderwritingBrokerService.ProcessResponseFromExperienceServiceHistoricPoliciesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\ApplicationServer.UnderwritingBrokerService.ProcessResponseFromExperienceServiceHistoricSinisterResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\ApplicationServer.UnderwritingBrokerService.ProcessResponseFromScoreServiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\ApplicationServer.UnderwritingBrokerService.ProcessResponseFromSimitServiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\ApplicationServer.UnderwritingBrokerService.UpdateMassiveEmissionRowsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\ApplicationServer.UnderwritingBrokerService.UpdatePendingOperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\ApplicationServer.UnderwritingBrokerService.UpdatePOAndRecordEndorsementOperationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UnderwritingBrokerService\service.wsdl" />
+    <None Include="Service References\UnderwritingBrokerService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TestModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utiles\Utiles.csproj">
+      <Project>{f0c49db4-0dd0-42e9-9513-9770a3108b2a}</Project>
+      <Name>Utiles</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\UnderwritingBrokerServiceReplica\" />
+    <WCFMetadataStorage Include="Service References\UnderwritingBrokerService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UnderwritingBrokerService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UnderwritingBrokerService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UnderwritingBrokerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UnderwritingBrokerServiceReplica\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>..\WinServices\ConsumerQueue\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

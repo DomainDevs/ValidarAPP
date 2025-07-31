@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PaymentConceptBranchView">
+  <collections>
+    <collection name="PaymentConcept" type="Sistran.Core.Application.Parameters.Entities.PaymentConcept, 
+                Core.Parameters.Entities"></collection>
+    <collection name="BranchPaymentConcept" type="Sistran.Core.Application.Parameters.Entities.BranchPaymentConcept, 
+                Core.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="PaymentConcept" destination="BranchPaymentConcept" name="PaymentConceptBranchPaymentConcept" type="Inner">
+      <property left="PaymentConceptCode" type="Equal" right="PaymentConceptCode"></property>
+    </relation>
+  </relations>
+</view>

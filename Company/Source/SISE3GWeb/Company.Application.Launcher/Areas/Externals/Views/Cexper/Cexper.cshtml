@@ -1,0 +1,193 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Externals.Models.CexperViewModel
+
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.TitleCexperQuery
+    </div>
+    <div class="column-30 important">
+    </div>
+</script>
+
+
+<form id="formCexper" autocomplete="off" class="form form-space-adjusted">
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="row row-space-adjusted"></div>
+            <div class="row row-space-adjusted">
+
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelLicensePlate</label>
+                    @Html.TextBoxFor(model => model.LicensePlate, new { id = "inputLicensePlate", placeholder = @Resources.Language.LabelPlate })
+                    @Html.ValidationMessageFor(model => model.LicensePlate)
+                </div>
+
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelTypeDocument</label>
+                    <select class="uif-select form-control" id="DocumentType" data-id="Id" data-name="Description"
+                            name="Process_Type" data-val="true" data-filter="false" data-native="false" data-val-required="@Resources.Language.ErrorGetProcessType"></select>
+                    @Html.ValidationMessageFor(model => model.DocumentType)
+                </div>
+
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelDocumentNumber</label>
+                    @Html.TextBoxFor(model => model.DocumentNumber, new { id = "inputDocumentNumber", placeholder = @Resources.Language.LabelDocumentNumber })
+                    @Html.ValidationMessageFor(model => model.DocumentNumber)
+                </div>
+
+                @*<div class="uif-col-2">
+                        <label class="field-required">@Resources.Language.LabelCodValid</label>
+                        @Html.TextBox("txtName2", null, new { id = "inputVerificationCode", placeholder = @Resources.Language.LabelCodValid })
+
+                    </div>*@
+
+                @*<div class="uif-col-2">
+                        <div class="form-group" style="text-align:center"></div>
+                        <div class="form-group" style="text-align:center">
+                            <img style="height:30px; width:110px; padding-right:5px;" src="@Url.Content("~/Account/Captcha")" alt="Image" id="captchaImage" />
+                            <input type="button" class="btn btn-primary" id="btnReloadCaptcha">
+                        </div>
+                    </div>*@
+
+                <div class="uif-col-3">
+                    <div class="form-group" style="text-align:center"></div>
+                    <button type="button" class="btn btn-primary" id="btnSearch">
+                        <!-- Cexper -->
+                        @Resources.Language.search
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="uif-col col-md-12">
+        <ul class="nav nav-tabs uif-tab-pc" id="tabs">
+            <li class="tabGuarantee" id="optionPromissoryNote">
+                <a href="#tabPromissoryNote" id="linkPromissoryNote" data-toggle="tab" class=""> @Resources.Language.TitleHistoricalPolicy</a>
+            </li>
+            <li class="tabGuarantee" id="optionMortage">
+                <a href="#tabMortage" id="linkMortage" data-toggle="tab" class=""> @Resources.Language.TitleHistoricalSinisters</a>
+            </li>
+            <li class="tabGuarantee" id="optionSimit">
+                <a href="#tabSimit" id="linkSimit" data-toggle="tab" class=""> @Resources.Language.LabelSimit</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="tabPromissoryNote" class="tab-pane">
+                @Html.Partial("HistoricalPolicy", Model)
+            </div>
+
+            <div id="tabMortage" class="tab-pane">
+                @Html.Partial("~/Areas/Externals/Views/Cexper/HistoricalSinisters.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.PledgeViewModel())
+            </div>
+
+            <div id="tabSimit" class="tab-pane">
+                @Html.Partial("~/Areas/Externals/Views/Cexper/SimitSISA.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.MortageViewModel())
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div id="resultDiv" class="uif-row" style="display:none">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="row row-space-adjusted">
+                <div class="uif-col-5">
+                    <label>@Resources.Language.TitleHistoricalPolicy</label>
+                    <select class="uif-select login-form-control" id="TypeCrossing" data-val="true"
+                            data-id="Id" data-name="Description" data-native="false" name=""></select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="active">
+                <table class="uif-table" data-title="" data-selectiontype="single" id="tableResultsPolicies" data-filter="false" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="CompanyName">@Resources.Language.LabelCompany</th>
+                            <th data-property="PolicyNumber">@Resources.Language.LabelPolicyNumbers</th>
+                            <th data-property="Plate">@Resources.Language.LabelLicensePlate</th>
+                            <th data-property="Engine">@Resources.Language.LabelEngine</th>
+                            <th data-property="Chassis">@Resources.Language.LabelChassis</th>
+                            <th data-property="EffectiveDate" data-type="date">@Resources.Language.LabelEffectiveDate</th>
+                            <th data-property="EndEffectiveDate" data-type="date">@Resources.Language.LabelEndvalidity</th>
+                            <th data-property="Valid">@Resources.Language.LabelValid</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-modal" id="ModalPolicyCexperDetail">
+        <div class="uif-modalbody">
+            @Html.Partial("PolicyDetailCexper")
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-col-5">
+                <label>@Resources.Language.TitleHistoricalSinisters</label>
+                <select class="uif-select login-form-control" id="TypeCrossingSinister" data-val="true"
+                        data-id="Id" data-name="Description" data-native="false" name="IdentificationType"></select>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="active">
+                <table class="uif-table" data-title="" data-selectiontype="single" id="tableResultsSinister" data-filter="false" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="CompanyName">@Resources.Language.LabelCompany</th>
+                            <th data-property="SinisterNumber">@Resources.Language.LabelClaimsNumbers</th>
+                            <th data-property="Plate">@Resources.Language.LabelLicensePlate</th>
+                            <th data-property="Engine">@Resources.Language.LabelEngine</th>
+                            <th data-property="Chassis">@Resources.Language.LabelChassis</th>
+                            <th data-property="SinistereDate" data-type="date">@Resources.Language.LabelSinisterDate</th>
+                            <th data-property="Insured">@Resources.Language.LabelInsured</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-modal" id="ModalSinisterCexperDetail">
+        <div class="uif-modalbody">
+            @Html.Partial("SinisterDetailCexper")
+        </div>
+    </div>
+
+</div>*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnExitCexper">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExit
+            </span>
+        </button>
+    </div>
+</script>
+
+
+@section Scripts
+         {
+    @Scripts.Render("~/bundle/js/Cexper")
+}

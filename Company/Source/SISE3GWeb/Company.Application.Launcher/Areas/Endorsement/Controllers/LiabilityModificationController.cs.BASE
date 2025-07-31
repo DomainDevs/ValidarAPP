@@ -1,0 +1,293 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using AutoMapper;
+using Newtonsoft.Json;
+using Sistran.Core.Application.CommonService.Models;
+using Sistran.Core.Application.UnderwritingServices.Enums;
+using Sistran.Core.Application.UnderwritingServices.Models;
+using Sistran.Core.Framework.UIF.Web.Areas.Endorsement.Models;
+using Sistran.Core.Framework.UIF.Web.Helpers;
+using Sistran.Core.Framework.UIF.Web.Models;
+using Sistran.Core.Framework.UIF.Web.Services;
+using LIM = Sistran.Company.Application.Location.LiabilityServices.Models;
+using Sistran.Core.Application.UniquePersonService.Enums;
+using Sistran.Company.Application.UnderwritingServices.Models;
+using Sistran.Core.Application.CommonService.Enums;
+
+namespace Sistran.Core.Framework.UIF.Web.Areas.Endorsement.Controllers
+{
+    public class LiabilityModificationController : ModificationController
+    {
+        public ActionResult CreateTemporal(ModificationViewModel modificationModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    CompanyPolicy policy = new CompanyPolicy();
+                    List<LIM.CompanyLiabilityRisk> liabilityPolicy = new List<LIM.CompanyLiabilityRisk>();
+
+                    if (modificationModel.TemporalId.HasValue && modificationModel.TemporalId.Value > 0)
+                    {
+                        policy = DelegateService.underwritingService.GetCompanyPolicyByTemporalId(modificationModel.TemporalId.Value, false);
+                        policy.CurrentFrom = Convert.ToDateTime(modificationModel.CurrentFrom);
+                        policy.CurrentTo = Convert.ToDateTime(modificationModel.CurrentTo);
+                        policy.Endorsement.EndorsementReasonId = modificationModel.EndorsementReasonId;
+                        policy.Endorsement.Text = new CompanyText
+                        {
+                            TextBody = modificationModel.Text,
+                            Observations = modificationModel.Observations
+                        };
+
+                        Mapper.CreateMap(policy.GetType(), liabilityPolicy.GetType());
+                        Mapper.Map(policy, liabilityPolicy);
+
+                        liabilityPolicy = DelegateService.liabilityService.GetCompanyLiabilitiesByTemporalId(policy.Id);
+
+                    }
+                    else
+                    {
+                        policy = DelegateService.underwritingService.GetCompanyPolicyByEndorsementId(modificationModel.EndorsementId.Value);
+                        liabilityPolicy = DelegateService.liabilityService.GetCompanyLiebilitiesByPolicyId(modificationModel.PolicyId.Value);
+
+                        policy.UserId = SessionHelper.GetUserId();
+                        policy.UserId = policy.UserId;
+                        policy.CurrentFrom = Convert.ToDateTime(modificationModel.CurrentFrom);
+                        policy.CurrentTo = Convert.ToDateTime(modificationModel.CurrentTo);
+                        policy.EffectPeriod = DelegateService.commonService.GetExtendedParameterByParameterId(1027).NumberParameter.Value;
+                        policy.Endorsement.Text = new CompanyText
+                        {
+                            TextBody = modificationModel.Text,
+                            Observations = modificationModel.Observations
+                        };
+                        policy.Product = DelegateService.productService.GetCompanyProductByProductIdPrefixId(policy.Product.Id, policy.Prefix.Id);
+                        policy.Endorsement.EndorsementReasonId = modificationModel.EndorsementReasonId;
+                        policy.Endorsement.EndorsementType = EndorsementType.Modification;
+                        policy.Endorsement.EndorsementTypeDescription = EnumsHelper.GetItemName<EndorsementType>(policy.Endorsement.EndorsementType);
+                        policy.TemporalType = TemporalType.Endorsement;
+                        policy.TemporalTypeDescription = EnumsHelper.GetItemName<TemporalType>(policy.TemporalType);
+                        Mapper.CreateMap<Clause, CompanyClause>();
+                        policy.Clauses = Mapper.Map<List<Clause>, List<CompanyClause>>(DelegateService.underwritingService.GetClausesByEmissionLevelConditionLevelId(EmissionLevel.General, policy.Prefix.Id).Where(x => x.IsMandatory).ToList());
+
+                        Mapper.CreateMap(liabilityPolicy.GetType(), policy.GetType());
+                        Mapper.Map(liabilityPolicy, policy);
+
+                    }
+                    policy.Summary = new CompanySummary
+                    {
+                        RiskCount = 0
+                    };
+                    policy = DelegateService.underwritingService.CreatePolicyTemporal(policy, false);
+
+                    List<CompanyRisk> risks = new List<CompanyRisk>();
+
+                    foreach (LIM.CompanyLiabilityRisk item in liabilityPolicy)
+                    {
+                        LIM.CompanyLiabilityRisk liabilityRisk = item;
+                        liabilityRisk = GetDataModification(liabilityRisk, policy, CoverageStatusType.NotModified);
+
+                        liabilityRisk.Risk.Policy = policy;
+
+
+                        liabilityRisk = DelegateService.liabilityService.CreateLiabilityTemporal(liabilityRisk, false);
+
+                        CompanyRisk risk = new CompanyRisk();
+                        Mapper.CreateMap(liabilityRisk.GetType(), risk.GetType());
+                        Mapper.Map(liabilityRisk, risk);
+                        risks.Add(risk);
+                    }
+                    policy = CalculatePolicyAmounts(policy, risks);
+
+                    policy = DelegateService.underwritingService.CreatePolicyTemporal(policy, false);
+
+                    risks.ForEach(x => policy.InfringementPolicies.AddRange(x.InfringementPolicies));
+                    return new UifJsonResult(true, policy);
+                }
+                else
+                {
+                    string errorMessage = GetErrorMessages();
+                    return new UifJsonResult(false, errorMessage);
+                }
+            }
+            catch (Exception)
+            {
+                return new UifJsonResult(false, App_GlobalResources.Language.ErrorCreateTemporary);
+            }
+        }
+
+        private LIM.CompanyLiabilityRisk GetDataModification(LIM.CompanyLiabilityRisk companyLiability, CompanyPolicy companyPolicy, CoverageStatusType coverageStatusType)
+        {
+            if (companyLiability.Risk.Beneficiaries[0].IdentificationDocument == null)
+            {
+                foreach (CompanyBeneficiary beneficiary in companyLiability.Risk.Beneficiaries)
+                {
+                    Beneficiary dataBeneficiary = new Beneficiary();
+                    dataBeneficiary = DelegateService.underwritingService.GetBeneficiariesByDescription(beneficiary.IndividualId.ToString(), InsuredSearchType.IndividualId).FirstOrDefault();
+                    beneficiary.IdentificationDocument = dataBeneficiary.IdentificationDocument;
+                    beneficiary.Name = dataBeneficiary.Name;
+                }
+            }
+
+            if (companyLiability.Risk.RiskActivity != null)
+            {
+                companyLiability.Risk.RiskActivity = Mapper.Map<RiskActivity, CompanyRiskActivity>(DelegateService.underwritingService.GetRiskActivityByActivityId(companyLiability.Risk.RiskActivity.Id));
+            }
+
+            List<CompanyCoverage> coverages = DelegateService.underwritingService.GetCompanyCoveragesByProductIdGroupCoverageIdPrefixId(companyPolicy.Product.Id, companyLiability.Risk.GroupCoverage.Id, companyPolicy.Prefix.Id);
+
+            foreach (CompanyCoverage coverage in companyLiability.Risk.Coverages)
+            {
+                coverage.Description = coverages.First(x => x.Id == coverage.Id).Description;
+                coverage.CoverStatus = coverageStatusType;
+                coverage.CoverStatusName = EnumsHelper.GetItemName<CoverageStatusType>(coverage.CoverStatus);
+                coverage.EndorsementType = companyPolicy.Endorsement.EndorsementType;
+                coverage.AccumulatedPremiumAmount = 0;
+                coverage.FlatRatePorcentage = 0;
+                coverage.PremiumAmount = 0;
+                coverage.SubLineBusiness = coverages.First(x => x.Id == coverage.Id).SubLineBusiness;
+                coverage.Number = coverages.First(x => x.Id == coverage.Id).Number;
+                coverage.PosRuleSetId = coverages.FirstOrDefault(u => u.Id == coverage.Id).PosRuleSetId;
+                coverage.RuleSetId = coverages.FirstOrDefault(u => u.Id == coverage.Id).RuleSetId;
+                coverage.IsVisible = coverages.FirstOrDefault(u => u.Id == coverage.Id).IsVisible;
+                coverage.IsMandatory = coverages.FirstOrDefault(u => u.Id == coverage.Id).IsMandatory;
+                coverage.IsSelected = coverages.FirstOrDefault(u => u.Id == coverage.Id).IsSelected;
+                coverage.CurrentFrom = companyPolicy.CurrentFrom;
+                coverage.CurrentTo = companyPolicy.CurrentTo;
+            }
+
+            return companyLiability;
+        }
+
+        public ActionResult CreateTexts(ModificationViewModel modificationModel)
+        {
+            try
+            {
+                CompanyPolicy policy = new CompanyPolicy();
+                List<LIM.CompanyLiabilityRisk> liabilityPolicy = DelegateService.liabilityService.GetCompanyLiebilitiesByPolicyId(modificationModel.PolicyId.Value);
+                policy = DelegateService.underwritingService.GetCompanyPolicyByEndorsementId(modificationModel.EndorsementId.Value);
+                policy.UserId = SessionHelper.GetUserId();
+                policy.UserId = policy.UserId;
+                policy.CurrentFrom = Convert.ToDateTime(modificationModel.CurrentFrom);
+                policy.EffectPeriod = DelegateService.commonService.GetExtendedParameterByParameterId(1027).NumberParameter.Value;
+                policy.Text = new CompanyText
+                {
+                    TextBody = modificationModel.Text,
+                    Observations = modificationModel.Observations
+                };
+                policy.Endorsement.EndorsementType = EndorsementType.Modification;
+                policy.Endorsement.EndorsementTypeDescription = EnumsHelper.GetItemName<EndorsementType>(policy.Endorsement.EndorsementType);
+                policy.TemporalType = TemporalType.Endorsement;
+                policy.TemporalTypeDescription = EnumsHelper.GetItemName<TemporalType>(policy.TemporalType);
+                Mapper.CreateMap<Clause, CompanyClause>();
+                policy.Clauses = Mapper.Map<List<Clause>, List<CompanyClause>>(DelegateService.underwritingService.GetClausesByEmissionLevelConditionLevelId(EmissionLevel.General, policy.Prefix.Id).Where(x => x.IsMandatory).ToList());
+
+                policy.Product = DelegateService.productService.GetCompanyProductByProductIdPrefixId(policy.Product.Id, policy.Prefix.Id);
+
+                Mapper.CreateMap(liabilityPolicy.GetType(), policy.GetType());
+                Mapper.Map(liabilityPolicy, policy);
+
+
+                policy.Summary = new CompanySummary
+                {
+                    RiskCount = 0
+                };
+                policy = DelegateService.underwritingService.CreatePolicyTemporal(policy, false);
+                List<CompanyRisk> risks = new List<CompanyRisk>();
+                foreach (LIM.CompanyLiabilityRisk item in liabilityPolicy)
+                {
+                    LIM.CompanyLiabilityRisk liabilityRisk = item;
+                    liabilityRisk = GetDataModification(liabilityRisk, policy, CoverageStatusType.Modified);
+                    liabilityRisk.Risk.Status = RiskStatusType.Modified;
+                    CompanyRisk risk = new CompanyRisk();
+                    Mapper.CreateMap(liabilityRisk.GetType(), risk.GetType());
+                    Mapper.Map(liabilityRisk, risk);
+                    risks.Add(risk);
+
+
+                    liabilityRisk.Risk.Policy = policy;
+                    liabilityRisk = DelegateService.liabilityService.CreateLiabilityTemporal(liabilityRisk, false);
+                }
+
+
+                policy = CalculatePolicyAmounts(policy, risks);
+
+
+                policy = DelegateService.underwritingService.CreatePolicyTemporal(policy, false);
+
+                return CreateEndorsement(policy.Id, policy.DocumentNumber);
+            }
+            catch (Exception)
+            {
+
+                return new UifJsonResult(false, App_GlobalResources.Language.ErrorSavingTextsComments);
+            }
+
+        }
+        public ActionResult CreateClauses(ModificationViewModel modificationModel)
+        {
+            try
+            {
+                CompanyPolicy policy = new CompanyPolicy();
+                List<LIM.CompanyLiabilityRisk> liabilityPolicy = DelegateService.liabilityService.GetCompanyLiebilitiesByPolicyId(modificationModel.PolicyId.Value);
+                policy = DelegateService.underwritingService.GetCompanyPolicyByEndorsementId(modificationModel.EndorsementId.Value);
+                policy.UserId = SessionHelper.GetUserId();
+                policy.UserId = policy.UserId;
+                policy.CurrentFrom = Convert.ToDateTime(modificationModel.CurrentFrom);
+                policy.EffectPeriod = DelegateService.commonService.GetExtendedParameterByParameterId(1027).NumberParameter.Value;
+                policy.Endorsement.Text = new CompanyText
+                {
+                    TextBody = modificationModel.Text,
+                    Observations = modificationModel.Observations
+                };
+
+                policy.Endorsement.EndorsementType = EndorsementType.Modification;
+                policy.Endorsement.EndorsementTypeDescription = EnumsHelper.GetItemName<EndorsementType>(policy.Endorsement.EndorsementType);
+                policy.TemporalType = TemporalType.Endorsement;
+                policy.TemporalTypeDescription = EnumsHelper.GetItemName<TemporalType>(policy.TemporalType);
+                policy.Clauses = modificationModel.Clauses;
+                policy.Product = DelegateService.productService.GetCompanyProductByProductIdPrefixId(policy.Product.Id, policy.Prefix.Id);
+                Mapper.CreateMap(liabilityPolicy.GetType(), policy.GetType());
+                Mapper.Map(liabilityPolicy, policy);
+
+
+                policy.Summary = new CompanySummary
+                {
+                    RiskCount = 0
+                };
+                policy = DelegateService.underwritingService.CreatePolicyTemporal(policy, false);
+
+                List<CompanyRisk> risks = new List<CompanyRisk>();
+                foreach (LIM.CompanyLiabilityRisk item in liabilityPolicy)
+                {
+                    LIM.CompanyLiabilityRisk liabilityRisk = item;
+                    liabilityRisk = GetDataModification(liabilityRisk, policy, CoverageStatusType.Modified);
+                    liabilityRisk.Risk.Status = RiskStatusType.Modified;
+                    CompanyRisk risk = new CompanyRisk();
+                    Mapper.CreateMap(liabilityRisk.GetType(), risk.GetType());
+                    Mapper.Map(liabilityRisk, risk);
+                    risks.Add(risk);
+
+
+                    liabilityRisk.Risk.Policy = policy;
+                    liabilityRisk = DelegateService.liabilityService.CreateLiabilityTemporal(liabilityRisk, false);
+
+                }
+
+                policy = CalculatePolicyAmounts(policy, risks);
+
+
+                policy = DelegateService.underwritingService.CreatePolicyTemporal(policy, false);
+
+                return CreateEndorsement(policy.Id, policy.DocumentNumber);
+            }
+            catch (Exception)
+            {
+
+                return new UifJsonResult(false, App_GlobalResources.Language.ErrorSavingTextsComments);
+            }
+
+        }
+    }
+}

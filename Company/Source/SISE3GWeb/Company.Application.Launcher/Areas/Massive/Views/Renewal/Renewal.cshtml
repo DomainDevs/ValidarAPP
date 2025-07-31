@@ -1,0 +1,192 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Massive.Models.RenewalViewModel
+
+@section Title
+{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.MassiveRenovation
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputProcess", @placeholder = @Resources.Language.LabelProcess })
+            <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+            <button class="btn btn-default" id="btnRenewalPrint">
+                <i class="fa fa-print" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.LabelPrinter
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExport
+            </button>
+            <button class="btn btn-default" id="btnPayrollByAgent">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonPayrollByAgent
+            </button>
+            <button class="btn btn-default" id="btnDeleteProcess">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ProcessDelete
+            </button>
+            <button class="btn btn-primary" id="btnNew">
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.NewProcess
+            </button>
+            <button class="btn btn-primary" id="btnGenerateProcess">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.PreRenovate
+            </button>
+            <button class="btn btn-primary" id="btnRenovate">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonRenovate
+            </button>
+        </div>
+    </footer>
+}
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formRenewal" autocomplete="off" class="form">
+    <div class="row">
+        <div class="uif-col-4">
+            <label class="field-required">@Resources.Language.LabelPrefixCommercial</label>
+            <select class="uif-select form-control" id="selectPrefix" data-id="Id" data-name="Description" name="PrefixId"
+                data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial">
+            </select>
+            @Html.ValidationMessageFor(model => model.PrefixId)
+        </div>
+        <div class="uif-col-4">
+            <label class="field-required">@Resources.Language.DueDateFrom</label>
+            @Html.TextBoxFor(model => model.DueDateFrom, new { id = "inputDueDateFrom", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.DueDateFrom)
+        </div>
+        <div class="uif-col-4">
+            <label class="field-required">@Resources.Language.DueDateTo</label>
+            @Html.TextBoxFor(model => model.DueDateTo, new { id = "inputDueDateTo", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.DueDateTo)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.Agent</label>
+            @Html.TextBoxFor(model => model.AgencyName, new { id = "inputAgency", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderKeyName })
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelBranch</label>
+            <select class="uif-select form-control" id="selectBranch" data-id="Id" data-name="Description" name="BranchId">
+            </select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelHolder</label>
+            @Html.TextBoxFor(model => model.HolderName, new { id = "inputHolder", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelRequestGroup</label>
+            @Html.TextBoxFor(model => model.RequestGroupDescription, new { id = "inputRequestGroup", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderCodeName })
+        </div>
+        <div class="uif-col-8">
+            <div class="pull-right">
+                <br />
+                <button type="button" class="btn btn-primary" id="btnSearch">@Resources.Language.ButtonConsult</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12" id="divSearch">
+            <table data-paginate="true" data-selectiontype="multiple" class="uif-table" id="tableSearch" data-filter="true">
+                <thead>
+                    <tr>
+                        <th data-property="Branch.Description">@Resources.Language.LabelBranch</th>
+                        <th data-property="DocumentNumber">@Resources.Language.LabelNroPolicy</th>
+                        <th data-property="Holder.Name">@Resources.Language.LabelHolder</th>
+                        <th data-property="Agencies[0].FullName">@Resources.Language.Agent</th>
+                        <th data-property="Product.Description">@Resources.Language.LabelCommercialProduct</th>
+                        <th data-property="Endorsement.CurrentTo">@Resources.Language.LabelDueDate</th>
+                        <th data-property="Summary.Description">@Resources.Language.LabelRisks</th>
+                        <th data-property="Observations">@Resources.Language.LabelObservations</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="uif-col-12" id="divTemporals">
+            <table data-paginate="true" data-selectiontype="multiple" class="uif-table" id="tableTemporals" data-filter="false">
+                <thead>
+                    <tr>
+                        <th data-property="StatusDescription">@Resources.Language.LabelStatus</th>
+                        <th data-property="Policy.Id">@Resources.Language.LabelTemporal</th>
+                        <th data-property="Policy.Summary.Description">@Resources.Language.LabelRisks</th>
+                        <th data-property="Policy.Summary.AmountInsured">@Resources.Language.LabelSum</th>
+                        <th data-property="Policy.Summary.FullPremium">@Resources.Language.LabelPremium</th>
+                        <th data-property="Policy.Product.Description">@Resources.Language.LabelCommercialProduct</th>
+                        <th data-property="Policy.Branch.Description">@Resources.Language.LabelBranch</th>
+                        <th data-property="Policy.DocumentNumber">@Resources.Language.LabelNroPolicy</th>
+                        <th data-property="Policy.Holder.Name">@Resources.Language.LabelHolder</th>
+                        <th data-property="Policy.Agencies[0].FullName">@Resources.Language.Agent</th>
+                        <th data-property="Observations">@Resources.Language.LabelObservations</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="uif-col-12" id="divRenewals">
+            <table data-paginate="true" data-selectiontype="multiple" class="uif-table" id="tableRenewals" data-filter="false">
+                <thead>
+                    <tr>
+                        <th data-property="Observations">@Resources.Language.LabelObservations</th>
+                        <th data-property="Policy.Branch.Description">@Resources.Language.LabelBranch</th>
+                        <th data-property="Policy.DocumentNumber">@Resources.Language.LabelNroPolicy</th>
+                        <th data-property="Policy.Endorsement.Number">@Resources.Language.Endorsement</th>
+                        <th data-property="Policy.Holder.Name">@Resources.Language.LabelHolder</th>
+                        <th data-property="Policy.Agencies[0].FullName">@Resources.Language.Agent</th>
+                        <th data-property="Policy.Product.Description">@Resources.Language.LabelCommercialProduct</th>
+                        <th data-property="Policy.Summary.Description">@Resources.Language.LabelRisks</th>
+                        <th data-property="Policy.Summary.AmountInsured">@Resources.Language.LabelSum</th>
+                        <th data-property="Policy.Summary.FullPremium">@Resources.Language.LabelPremium</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+    
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Printer");  
+    @Scripts.Render("~/bundle/js/RenewalMassive");   
+}
+
+@section Modals
+{
+    <div class="uif-modal" id="modalDefaultSearch">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Underwriting/Views/Underwriting/DefaultResults.cshtml")
+        </div>
+    </div>
+}

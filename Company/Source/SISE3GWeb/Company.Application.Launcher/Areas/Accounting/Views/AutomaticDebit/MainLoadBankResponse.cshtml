@@ -1,0 +1,125 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.LoadBankResponse;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AutomaticDebit</li>
+        <li>@Global.LoadBankResponse</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="btnBankResponseCancel" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="btnBankResponseLoad" class="btn btn-primary" role="button">
+            <i class="fa fa-upload"></i>  @Global.Generate
+        </button>
+    </footer>
+}
+
+<form id="formBankResponse" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Net</label>
+            @Html.DropDownList("loadBankResponseSelectNet", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/Accounting/Common/GetNets"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField,
+                        data_native = "true"
+                    })
+            <span class="text-danger" data-valmsg-for="loadBankResponseSelectNet" data-valmsg-replace="true" />
+
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.SendDateTime</label>
+            <input type="text" value="@ViewBag.CurrentDate" class="uif-datepicker" data-mask="99/99/9999" id="loadBankResponseSendDateTime"
+                   name="loadBankResponseSendDateTime" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="loadBankResponseSendDateTime" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.LotNumber</label>
+            <select class="uif-select form-control" id="loadBankResponseSelectLotNumber" data-id="Id" data-name="Description" data-native="true"
+                    name="loadBankResponseSelectLotNumber" data-val="true" data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="loadBankResponseSelectLotNumber" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.FileType</label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="loadBankResponseOptionDebit" value="D" checked>
+                    @Global.Debit
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="loadBankResponseOptionNotification" value="N">
+                    @Global.PreNotifications
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-8">
+            <label>@Global.File</label>
+            <input type="file" id="loadBankResponseInputControlSingle" class="uif-inputfile" data-input="true" name="loadBankResponseInputControlSingle"
+                   data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="loadBankResponseInputControlSingle" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-9">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <div id="LoadBankResponseLoadingDiv">
+                <p><img src="@Url.Content("~/Images/loader.gif")" /> @Global.Processing</p>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableProcess" data-exporttocsv="false" data-edit="true" data-delete="false" data-selectiontype="single" data-filter="true"
+               data-paginate="true" data-title="@Global.PendingProcesses">
+            <thead>
+                <tr>
+                    <th data-property="Id">Id</th>
+                    <th data-property="Description">@Global.Description</th>
+                    <th data-property="BankNetworkId" data-visible="false">BankNetworkId</th>
+                    <th data-property="LotNumber">@Global.LotNumber</th>
+                    <th data-property="RecordsNumber">@Global.RecordsNumber</th>
+                    <th data-property="RecordsProcessed">@Global.ProcessedRecords</th>
+                    <th data-property="RecordsFailed">@Global.FailedRecords</th>
+                    <th data-property="Progress">@Global.Progress</th>
+                    <th data-property="Elapsed">@Global.Elapsed</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<input type="hidden" id="ViewBagCurrentDate" value="@ViewBag.CurrentDate" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainLoadBankResponse")
+}

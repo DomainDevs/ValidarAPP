@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="IndividualTaxView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="BaseConditionTaxCode">
+          <Column table-alias="Tax" name="BaseConditionTaxCode" />
+        </SelectValue>
+        <SelectValue alias="TaxCode">
+          <Column table-alias="Tax" name="TaxCode" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="Tax" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Rate">
+          <Column table-alias="TaxPeriodRate" name="Rate" />
+        </SelectValue>
+        <SelectValue alias="MinBaseAmount">
+          <Column table-alias="TaxPeriodRate" name="MinBaseAmount" />
+        </SelectValue>
+        <SelectValue alias="CurrentFrom">
+          <Column table-alias="TaxPeriodRate" name="CurrentFrom" />
+        </SelectValue>
+        <SelectValue alias="CurrentTo">
+          <Column table-alias="TaxPeriodRate" name="CurrentTo" />
+        </SelectValue>
+        <SelectValue alias="Enabled">
+          <Column table-alias="Tax" name="Enabled" />
+        </SelectValue>
+        <SelectValue alias="IndividualId">
+          <Column table-alias="IndividualTax" name="IndividualId" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="TaxRate" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="CountryCode">
+          <Column table-alias="TaxRate" name="CountryCode" />
+        </SelectValue>
+        <SelectValue alias="CoverageId">
+          <Column table-alias="TaxRate" name="CoverageId" />
+        </SelectValue>
+        <SelectValue alias="EconomicActivityCode">
+          <Column table-alias="TaxRate" name="EconomicActivityCode" />
+        </SelectValue>
+        <SelectValue alias="StateCode">
+          <Column table-alias="TaxRate" name="StateCode" />
+        </SelectValue>
+        <SelectValue alias="LineBusinessCode">
+          <Column table-alias="TaxRate" name="LineBusinessCode" />
+        </SelectValue>
+        <SelectValue alias="TaxConditionCode">
+          <Column table-alias="TaxCondition" name="TaxConditionCode" />
+        </SelectValue>
+        <SelectValue alias="RateTypeCode">
+          <Column table-alias="Tax" name="RateTypeCode" />
+        </SelectValue>
+        <SelectValue alias="TaxCondition">
+          <Column table-alias="TaxCondition" name="Description" />
+        </SelectValue>
+        <SelectValue alias="TaxCategoryCode">
+          <Column table-alias="TaxRate" name="TaxCategoryCode" />
+        </SelectValue>
+        <SelectValue alias="IsRetention">
+          <Column table-alias="Tax" name="IsRetention" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <Join>
+                <ClassNameTable name="Sistran.Core.Application.Tax.Entities.IndividualTax, Core.Tax.Entities" alias="IndividualTax" />
+                <ClassNameTable name="Sistran.Core.Application.Tax.Entities.TaxCondition, Core.Tax.Entities" alias="TaxCondition" />
+                <criteria>
+                  <BinaryPredicate type="And">
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="TaxCondition" name="TaxCode" />
+                      <Column table-alias="IndividualTax" name="TaxCode" />
+                    </BinaryCriterion>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="TaxCondition" name="TaxConditionCode" />
+                      <Column table-alias="IndividualTax" name="TaxConditionCode" />
+                    </BinaryCriterion>
+                  </BinaryPredicate>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Tax.Entities.Tax, Core.Tax.Entities" alias="Tax" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="Tax" name="TaxCode" />
+                  <Column table-alias="IndividualTax" name="TaxCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Tax.Entities.TaxRate, Core.Tax.Entities" alias="TaxRate" />
+            <criteria>
+              <BinaryPredicate type="And">
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="TaxRate" name="TaxCode" />
+                  <Column table-alias="IndividualTax" name="TaxCode" />
+                </BinaryCriterion>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="TaxRate" name="TaxConditionCode" />
+                  <Column table-alias="IndividualTax" name="TaxConditionCode" />
+                </BinaryCriterion>
+              </BinaryPredicate>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Tax.Entities.TaxPeriodRate, Core.Tax.Entities" alias="TaxPeriodRate" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="TaxPeriodRate" name="TaxRateId" />
+              <Column table-alias="TaxRate" name="TaxRateId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

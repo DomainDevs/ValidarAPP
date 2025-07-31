@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="section cols primary">
+    <div>
+      <p>Sucursal:<span class = "info">{{endorsements.[0].BRANCH}}</span> Ramo: <span class="info">{{endorsements.[0].PREFIX}}</span></p>
+      <p>Póliza:<span class = "info">{{endorsements.[0].DOCUMENT_NUM}}</span> / <span class="info">{{endorsementDetail.[0].ENDORSEMENT_TYPE}}</span></p>
+      <p>Sufijo: <span class="info">{{endorsements.[0].SUFFIX}}</span> Endoso:<span class="info">{{endorsementDetail.[0].ENDORSEMENT_NUM}}</span></p>
+      <p>Tomador: <span class="info">{{endorsements.[0].ID_HOLDER}} / {{endorsements.[0].HOLDER_NAME}}</span></p>
+    </div>
+    <div>
+      <p>Fecha de Emisión: <span class="info">{{formatDate endorsementDetail.[0].ISSUE_DATE}}</span></p>
+      <p>Inicio Vigencia: <span class="info">{{formatDate  endorsementDetail.[0].CURRENT_FROM}}</span> Fin Vigencia: <span class="info">{{formatDate endorsementDetail.[0].CURRENT_TO}}</span></p>
+      <p>Asegurado: <span class="info">{{endorsementDetail.[0].HOLDER_NAME}}</span></p>
+      <p>Moneda: <span class="info">{{endorsementDetail.[0].CURRENCY}}</span> - TRM <span class="info">{{formatNumber endorsementDetail.[0].EXCHANGE_RATE minimumFractionDigits="2" maximumFractionDigits="3"}}</span></p>
+      <p>Suma Asegura: <span class="info">{{formatNumber endorsementDetail.[0].LIMIT_AMT}}</span> Prima: <span class="info">{{formatNumber endorsementDetail.[0].PREMIUM_AMT}}</span></p>
+    </div>
+    <div></div>
+  </div>
+	<sise-tabs>
+    <sise-tab title="Beneficiarios y Garantes">
+  		<table class="table">
+  			<tr>
+  			  <th style="text-align: center">Riesgo</th>
+  			  <th style="text-align: center">Garante</th>
+  			  <th style="text-align: center">Nombre</th>
+  			</tr>
+  			{{#each benefAndGuarantee}}
+  			<tr>
+  				<td style="text-align: left">{{RISK}}</td>
+  				<td style="text-align: left">{{GUARANTEE}}</td>
+  				<td style="text-align: left">{{TRADE_NAME}}</td>
+  		  </tr>
+  		  {{/each}}
+  		</table>
+  	</sise-tab>
+  	<sise-tab title="Componentes de la Prima">
+  		<div class="section cols primary">
+  			<div>
+  			  <h2>Componentes de la Prima</h2>
+  			  <p>Prima: <span class="info">{{formatNumber paymentComp.[0].PREMIUM}}</span></p>
+          <p>Prima Minima: <span class="info">{{formatNumber paymentComp.[0].ACC_PREMIUM_AMT}}</span></p>
+  			  <p>Recargos: <span class="info">{{formatNumber paymentComp.[0].SURCHARGES}}</span></p>
+  			  <p>Descuentos: <span class="info">{{formatNumber paymentComp.[0].DISCOUNTS}}</span></p>
+  			  <p>Gastos: <span class="info">{{formatNumber paymentComp.[0].EXPENSES}}</span></p>
+  			  <p>IVA: <span class="info">{{formatNumber paymentComp.[0].TAXES}}</span></p>
+  			  <p>TOTAL: <span class="info">{{formatNumber paymentComp.[0].TOTAL}}</span></p>
+  			</div>
+  			<div>
+  			  <h2>Saldo</h2>
+  			  <p>Vencido: <span class="info">{{formatNumber endorsementDetail.[0].OUTSTANDING_BALANCES minimumFractionDigits="2" maximumFractionDigits="5"}}</span></p>
+  			  <p>Por Vencer: <span class="info">{{formatNumber endorsementDetail.[0].PAYMENTS_PAYABLE minimumFractionDigits="2" maximumFractionDigits="5"}}</span></p>
+  			  <p>Deuda Total: <span class="info">{{formatNumber endorsementDetail.[0].DEBIT_TOTAL minimumFractionDigits="2" maximumFractionDigits="5"}}</span></p>
+  			</div>
+  			<div>
+  			  <h2>Moneda</h2>
+  			  <p>Moneda: <span class="info">{{endorsementDetail.[0].CURRENCY}}</span></p>
+  			  <p>TRM: <span class="info">{{formatNumber endorsementDetail.[0].EXCHANGE_RATE minimumFractionDigits="2" maximumFractionDigits="5"}}</span></p>
+  			  <p>Suma Asegurada: <span class="info">{{formatNumber endorsementDetail.[0].LIMIT_AMT minimumFractionDigits="2" maximumFractionDigits="5"}}</span></p>  			  
+  			</div>    
+  		</div>
+  	</sise-tab>
+  	<sise-tab title="Textos">
+  		<table class="table">
+  		  <tr>
+  			  <th style="text-align: center">Textos</th>
+  			</tr>
+  			<tr>
+  				<td style="text-align: left">{{trextByRisk.[0].TEXT_RISK}}</td>
+  		  </tr>
+  		</table>
+  	</sise-tab>
+  </sise-tabs>
+</div>

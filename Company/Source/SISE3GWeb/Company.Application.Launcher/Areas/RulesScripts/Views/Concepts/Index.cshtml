@@ -1,0 +1,197 @@
+﻿@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.Concepts
+        </div>
+        <div class="column-30 even">
+            <input class="uif-input-search" type="text" placeholder="@Resources.Language.SearchForConcept" id="SearchConcept" />
+            <button class="btn btn-default" id="btnSearchAdvConcepts"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+
+<script id="display-template-concepts" type="text/template">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div class="success"><strong>{{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div class="warning"><strong>{{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div class="danger"><strong>{{Description}}</strong></div>
+    {{else}}
+    <div><strong>{{Description}}</strong></div>
+    {{/ifCond}}
+    <div>@Resources.Language.Type: {{ConceptTypeDescription}}</div>
+    {{#if IsStatic}}
+    <div>{{StaticDescription}}</div>
+    {{else}}
+    <div>{{StaticDescription}}</div>
+    {{/if}}
+</script>
+
+<form class="form form-space-adjusted" id="formConcepts">
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="AddEditConcept">
+                @Html.Action("AddEditConcept", "Concepts", new { Area = "RulesScripts", concept = new Sistran.Core.Framework.UIF.Web.Areas.RulesScripts.Models.ConceptViewModel() })
+            </div>
+        </div>
+    </div>
+</form>
+
+@* Modal de tipo lista *@
+<div class="uif-modal modal-Colombia" id="modalLists">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-6" id="formModalLists">
+                <div class="row">
+                    <div class="uif-col-12">
+                        @Html.Hidden("hdnConceptListIndex")
+                        @Html.Label(Resources.Language.ListName)
+                        @Html.TextBox("txtListName")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        @Html.Label(Resources.Language.ListElement)
+                        @Html.TextBox("txtListValue")
+                    </div>
+                </div>
+            </div>
+            <div class="uif-col-6" id="listViewModalLists">
+                <div class="uif-listview" id="lVModalList"></div>
+            </div>
+        </div>
+        <div class="row lineDividing" id="formModalListsButton">
+            <div class="uif-col-6">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" id="btnClearListConcept">
+                        <span aria-hidden="true"></span>
+                        @Resources.Language.New
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnAddListConcept">
+                        <span aria-hidden="true"></span>
+                        @Resources.Language.Add
+                    </button>
+                </div>
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-summary">
+                    <div class="items">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary btn-main" id="btnModalListOk">@Resources.Language.ButtonAccept</button>
+    </div>
+</div>
+
+@* Modal de tipo Rango *@
+<div class="uif-modal modal-Colombia" id="modalRanges">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-6" id="formModalRanges">
+                <div class="row">
+                    <div class="uif-col-12">
+                        @Html.Hidden("hdnConceptRangeIndex")
+                        @Html.Label(Resources.Language.RangeName)
+                        @Html.TextBox("txtRangeName")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        @Html.Label(Resources.Language.From)
+                        @Html.TextBox("txtRangeFrom")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        @Html.Label(Resources.Language.To)
+                        @Html.TextBox("txtRangeTo")
+                    </div>
+                </div>
+            </div>
+            <div class="uif-col-6" id="listViewModalRanges">
+                <div class="uif-listview" id="lVModalRanges"></div>
+            </div>
+        </div>
+        <div class="row lineDividing" id="formModalRangesButton">
+            <div class="uif-col-6">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" id="btnClearRangesConcept">
+                        <span aria-hidden="true"></span>
+                        @Resources.Language.New
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnAddRangesConcept">
+                        <span aria-hidden="true"></span>
+                        @Resources.Language.Add
+                    </button>
+                </div>
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-summary">
+                    <div class="items">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary btn-main" id="btnModalRangeOk">@Resources.Language.ButtonAccept</button>
+    </div>
+</div>
+
+
+@* Modal de tipo Referencias *@
+<div class="uif-modal" id="modalReferences">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="uif-listview" id="lVModalReferences"></div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+    </div>
+</div>
+
+
+@section Toolbar
+    {
+    <footer>
+        <div class="pull-right">
+            <button type="button" class="btn btn-default" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExit
+                </span>
+            </button>
+            <button type="button" class="btn btn-default" id="btnExportConcepts">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExport
+                </span>
+            </button>
+            <button class="btn btn-default" id="btnClearForm">
+                <span class="fa fa-file-o" aria-hidden="true"></span>
+                @Resources.Language.ButtonNew
+            </button>
+            <button type="button" class="btn btn-primary" id="btnSaveForm">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+            </button>
+        </div>
+    </footer>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/Areas/RulesScripts/Scripts/Concepts/ListConcepts.js")
+    @Scripts.Render("~/Areas/RulesScripts/Scripts/Concepts/AdvancedSearchConcepts.js")
+}

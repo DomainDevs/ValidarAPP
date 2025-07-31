@@ -1,0 +1,111 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.InfringementViewModel
+
+@section Title
+{
+    <div id="" class="row main-title">
+        <div id="tittle" class="column-70">
+            @Resources.Language.TitleInfringement
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Infringement", null, new { @class = "uif-input-search", id = "inputInfringement", @placeholder = @Resources.Language.SearchInfringement })
+            <button class="btn btn-default" id="btnSearchAdvInfringement"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+
+    <script id="InfringementTemplate" type="text/template">
+        {{#ifCond StatusTypeService "==" 2}}
+        <div><strong class="success">{{InfringementCode}} @*({{InfringementPreviousCode}})*@</strong></div>
+        {{else ifCond StatusTypeService "==" 3}}
+        <div><strong class="warning">{{InfringementCode}} @*({{InfringementPreviousCode}})*@</strong></div>
+        {{else}}
+        <div><strong>{{InfringementCode}} @*({{InfringementPreviousCode}})*@</strong></div>
+        {{/ifCond }}
+        <div>{{InfringementDescription}}</div>
+        <div>@Resources.Language.LabelInfringementGroup: <strong>{{InfringementGroupDescription}}</strong></div>
+    </script>
+
+<form id="formInfringement" autocomplete="off" class="form form-space-adjusted">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row row-space-adjusted"></div>
+            <div class="row row-space-adjusted">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelInfringementCode</label>
+                    @Html.TextBoxFor(model => model.InfringementCode, new { id = "inputInfringementCode", placeholder = @Resources.Language.LabelInfringementCode })
+                    @Html.ValidationMessageFor(model => model.InfringementCode)
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelInfringementPreviousCode</label>
+                    @Html.TextBoxFor(model => model.InfringementPreviousCode, new { id = "inputInfringementPreviousCode", placeholder = @Resources.Language.LabelInfringementPreviousCode })
+                    @Html.ValidationMessageFor(model => model.InfringementPreviousCode)
+                </div>
+            </div>
+            <div class="row row-space-adjusted">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.LabelInfringementDescription</label>
+                    @Html.TextAreaFor(model => model.InfringementDescription, new { id = "inputInfringementDescription", rows = "5", style = "text-transform:uppercase" })
+                    @Html.ValidationMessageFor(model => model.InfringementDescription)
+                </div>
+            </div>
+            <div class="row row-space-adjusted">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelInfringementGroup</label>
+                    <select class="uif-select form-control" id="selectInfringementGroup" data-id="InfringementGroupCode" data-name="InfringementGroupDescription"
+                            name="InfringementGroupCode" data-val="false" data-val-required="@Resources.Language.ErrorDocument"
+                            data-filter="true" data-native="false"></select>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 col-space-adjusted">
+            <div id="listViewInfringement" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewInfringement">
+                    @Resources.Language.New
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAddInfringement">
+                    @Resources.Language.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right" id="buttonsInfringementPanel">
+            <button type="button" class="btn btn-default" id="btnExitInfringement">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExit
+                </span>
+            </button>
+            <button class="btn btn-default" id="btnExportInfringement">
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExport
+                </span>
+            </button>
+            <button class="btn btn-primary" id="btnSaveInfringement">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+            </button>
+        </div>
+    </footer>
+}
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Infringement")
+}

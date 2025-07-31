@@ -1,0 +1,40 @@
+<map version="2.0" type="class" name="Coverage" namespace="Sistran.Core.Application.Quotation" file-version="1.0" description="COVERAGE_ENTITY">
+  <properties>
+    <property name="CoverageId" type="Integer" key="true" description="COVERAGE_ID_PROPERTY" autonumber="id"/>
+    <property name="PerilCode" type="Integer" description="PERIL_CODE_PROPERTY" />
+    <property name="SubLineBusinessCode" type="Integer" description="SUB_LINE_BUSINESS_CODE_PROPERTY" />
+    <property name="LineBusinessCode" type="Integer" description="LINE_BUSINESS_CODE_PROPERTY" />
+    <property name="InsuredObjectId" type="Integer" description="INSURED_OBJECT_ID_PROPERTY" />
+    <property name="PrintDescription" type="String" size="100" description="PRINT_DESCRIPTION_PROPERTY" />
+    <property name="IsPrimary" type="Boolean" description="IS_PRIMARY_PROPERTY" />
+    <property name="ExpirationDate" type="DateTime" nullable="true" description="EXPIRATION_DATE_PROPERTY" />
+    <property name="CompositionTypeCode" type="Integer" nullable="true" description="COMPOSITION_TYPE_CODE_PROPERTY" />
+    <property name="RuleSetId" type="Integer" nullable="true" description="RULE_SET_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="COVERAGE" schema="QUO" alias="COVERAGE" update="true">
+      <columns>
+        <column name="COVERAGE_ID" type="Int32" property="CoverageId" key="true" />
+        <column name="PERIL_CD" type="Int16" property="PerilCode" allowNull="false" />
+        <column name="SUB_LINE_BUSINESS_CD" type="Int16" property="SubLineBusinessCode" allowNull="false" />
+        <column name="LINE_BUSINESS_CD" type="Int16" property="LineBusinessCode" allowNull="false" />
+        <column name="INSURED_OBJECT_ID" type="Int32" property="InsuredObjectId" allowNull="false" />
+        <column name="PRINT_DESCRIPTION" type="String" property="PrintDescription" allowNull="false" size="100" />
+        <column name="IS_PRIMARY" type="Boolean" property="IsPrimary" allowNull="false" />
+        <column name="EXPIRATION_DATE" type="DateTime" property="ExpirationDate" />
+        <column name="COMPOSITION_TYPE_CD" type="Byte" property="CompositionTypeCode" />
+        <column name="RULE_SET_ID" type="Int32" property="RuleSetId" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Decimal" value="22" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

@@ -1,0 +1,111 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.CoverageModelsView
+
+@{
+    Layout = null;
+}
+
+<style type=text/css>
+    .title-template-modif {
+        height: 37px;
+        overflow: hidden;
+    }
+    .title-template-modif .input-group-addon {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        background: none;
+        border: none;
+    }
+</style>
+
+<script id="title-template" class="form without-space" type="text/template">
+    <div class="column-60">
+        @Resources.Language.QueryProcesses
+    </div>
+    <div class="column-10">
+        @Resources.Language.LabelDateEnd:
+    </div>
+    <div class="column-20 even">
+        <div class="title-template-modif">
+            @Html.TextBoxFor(model => model.CurrentFrom, new { id = "inputFrom", @class = "uif-datepicker" })
+        </div>
+    </div>
+    <div class="column-10 even">
+        <button class="btn btn-default" id="btnShowSearch"><i class="fa fa-search"></i></button>
+        <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ExportXLS
+        </button>
+    </div>
+</script>
+
+<form id="formMassiveProcess" autocomplete="off" class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            @Html.AntiForgeryToken()
+            <div id="modalMassiveProcess">
+
+                <!--tabla estado cargue-->
+                <div class="row">
+                    <div class="uif-col-12">
+                        <table data-paginate="true" data-selectiontype="none" class="uif-table" id="TableLoadProcess" data-filter="false">
+
+                            <thead>
+                                <tr>
+                                    <th data-property="ProcessType">@Resources.Language.LabelProcessType</th>
+                                    <th data-property="LoadNumber">@Resources.Language.LabelLoadNumber</th>
+                                    <th data-property="LoadDescription">@Resources.Language.LabelLoad</th>
+                                    <th data-property="RisksNumber">@Resources.Language.LabelRisksNumber</th>
+                                    <th data-property="StartDateLoadProcess">@Resources.Language.LabelStartDateLoadProcess</th>
+                                    <th data-property="EndDateLoadProcess">@Resources.Language.LabelEndDateLoadProcess</th>
+                                    @*<th data-property="StartDateExternalProcess">@Resources.Language.LabelStartDateExternalProcess</th>
+                                    <th data-property="EndDateExternalProcess">@Resources.Language.LabelEndDateExternalProcess</th>*@
+                                    <th data-property="StartDateTariffProcess">@Resources.Language.LabelStartDateTariffProcess</th>
+                                    <th data-property="EndDateTariffProcess">@Resources.Language.LabelEndDateTariffProcess</th>
+                                    <th data-property="StartDateIssueProcess">@Resources.Language.LabelStartDateIssueProcess</th>
+                                    <th data-property="EndDateIssueProcess">@Resources.Language.LabelEndDateIssueProcess</th>
+                                    <th data-property="AccountName">@Resources.Language.LabelUser</th>
+                                </tr>
+
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    @*<th></th>
+                                    <th></th>*@
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/MassiveProcess");
+}

@@ -1,0 +1,76 @@
+<map version="2.0" type="class" name="PolicyCancellation" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="POLICY_CANCELLATION_ENTITY">
+  <properties>
+    <property name="PolicyCancellationId" type="Integer" key="true" description="POLICY_CANCELLATION_ID_PROPERTY" />
+    <property name="ProcessNumber" type="Integer" description="PROCESS_NUMBER_PROPERTY" />
+    <property name="MotherPolicyId" type="Integer" nullable="true" description="MOTHER_POLICY_ID_PROPERTY" />
+    <property name="PolicyId" type="Integer" description="POLICY_ID_PROPERTY" />
+    <property name="PolicyNumber" type="Decimal" precision="9" scale="5" description="POLICY_NUMBER_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+    <property name="BranchCode" type="Integer" nullable="true" description="BRANCH_CODE_PROPERTY" />
+    <property name="SalePointCode" type="Decimal" precision="5" scale="0" nullable="true" description="SALE_POINT_CODE_PROPERTY" />
+    <property name="PrefixCode" type="Integer" nullable="true" description="PREFIX_CODE_PROPERTY" />
+    <property name="QuoteDueDate" type="DateTime" nullable="true" description="QUOTE_DUE_DATE_PROPERTY" />
+    <property name="InsuredCode" type="Integer" nullable="true" description="INSURED_CODE_PROPERTY" />
+    <property name="IntermediaryTypeCode" type="Integer" nullable="true" description="INTERMEDIARY_TYPE_CODE_PROPERTY" />
+    <property name="IntermediaryCode" type="Integer" nullable="true" description="INTERMEDIARY_CODE_PROPERTY" />
+    <property name="IssueDate" type="DateTime" description="ISSUE_DATE_PROPERTY" />
+    <property name="IssueDateFrom" type="DateTime" description="ISSUE_DATE_FROM_PROPERTY" />
+    <property name="IssueDateTo" type="DateTime" description="ISSUE_DATE_TO_PROPERTY" />
+    <property name="TotalPremiumIssued" type="Decimal" precision="18" scale="2" description="TOTAL_PREMIUM_ISSUED_PROPERTY" />
+    <property name="TotalPremiumCollected" type="Decimal" precision="18" scale="2" description="TOTAL_PREMIUM_COLLECTED_PROPERTY" />
+    <property name="OutstandingBalance" type="Decimal" precision="18" scale="2" description="OUTSTANDING_BALANCE_PROPERTY" />
+    <property name="ExclusionReasonCode" type="Integer" nullable="true" description="EXCLUSION_REASON_CODE_PROPERTY" />
+    <property name="CancellationMark" type="Boolean" nullable="true" description="CANCELLATION_MARK_PROPERTY" />
+    <property name="ProcessingMark" type="Boolean" nullable="true" description="PROCESSING_MARK_PROPERTY" />
+    <property name="ErrorMark" type="Boolean" nullable="true" description="ERROR_MARK_PROPERTY" />
+    <property name="ApplyMark" type="Boolean" nullable="true" description="APPLY_MARK_PROPERTY" />
+    <property name="ExclusionAllowCancel" type="Boolean" nullable="true" description="EXCLUSION_ALLOW_CANCEL_PROPERTY" />
+    <property name="Observation" type="String" size="2000" nullable="true" description="OBSERVATION_PROPERTY" />
+    <property name="AppliesCollection" type="Boolean" nullable="true" description="APPLIES_COLLECTION_PROPERTY" />
+    <property name="Reprocess" type="Boolean" nullable="true" description="REPROCESS_PROPERTY" />
+    <property name="RealPolicyId" type="Integer" nullable="true" description="REAL_POLICY_ID_PROPERTY" />
+    <property name="ImputationId" type="Integer" nullable="true" description="IMPUTATION_ID_PROPERTY" />
+    <property name="ReceiptNumber" type="Integer" nullable="true" description="RECEIPT_NUMBER_PROPERTY" />
+    <property name="EntryNumber" type="Integer" nullable="true" description="ENTRY_NUMBER_PROPERTY" />
+    <property name="CollectionDate" type="DateTime" nullable="true" description="COLLECTION_DATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="POLICY_CANCELLATION" schema="ACC" alias="POLICY_CANCELLATION" update="true">
+      <columns>
+        <column name="POLICY_CANCELLATION_ID" type="Int32" property="PolicyCancellationId" key="true" />
+        <column name="PROCESS_NUMBER" type="Int32" property="ProcessNumber" allowNull="false" />
+        <column name="MOTHER_POLICY_ID" type="Int32" property="MotherPolicyId" />
+        <column name="POLICY_ID" type="Int32" property="PolicyId" allowNull="false" />
+        <column name="POLICY_NUMBER" type="Decimal" property="PolicyNumber" allowNull="false" size="19" precision="9" />
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" />
+        <column name="SALE_POINT_CD" type="Decimal" property="SalePointCode" size="19" precision="5" />
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" />
+        <column name="QUOTE_DUE_DATE" type="DateTime" property="QuoteDueDate" />
+        <column name="INSURED_CD" type="Int32" property="InsuredCode" />
+        <column name="INTERMEDIARY_TYPE_CD" type="Int32" property="IntermediaryTypeCode" />
+        <column name="INTERMEDIARY_CD" type="Int32" property="IntermediaryCode" />
+        <column name="ISSUE_DATE" type="DateTime" property="IssueDate" allowNull="false" />
+        <column name="ISSUE_DATE_FROM" type="DateTime" property="IssueDateFrom" allowNull="false" />
+        <column name="ISSUE_DATE_TO" type="DateTime" property="IssueDateTo" allowNull="false" />
+        <column name="TOTAL_PREMIUM_ISSUED" type="Decimal" property="TotalPremiumIssued" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="TOTAL_PREMIUM_COLLECTED" type="Decimal" property="TotalPremiumCollected" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="OUTSTANDING_BALANCE" type="Decimal" property="OutstandingBalance" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="EXCLUSION_REASON_CD" type="Int32" property="ExclusionReasonCode" />
+        <column name="CANCELLATION_MARK" type="Boolean" property="CancellationMark" />
+        <column name="PROCESSING_MARK" type="Boolean" property="ProcessingMark" />
+        <column name="ERROR_MARK" type="Boolean" property="ErrorMark" />
+        <column name="APPLY_MARK" type="Boolean" property="ApplyMark" />
+        <column name="EXCLUSION_ALLOW_CANCEL" type="Boolean" property="ExclusionAllowCancel" />
+        <column name="OBSERVATION" type="String" property="Observation" size="2000" />
+        <column name="APPLIES_COLLECTION" type="Boolean" property="AppliesCollection" />
+        <column name="REPROCESS" type="Boolean" property="Reprocess" />
+        <column name="REAL_POLICY_ID" type="Int32" property="RealPolicyId" />
+        <column name="IMPUTATION_ID" type="Int32" property="ImputationId" />
+        <column name="RECEIPT_NUMBER" type="Int32" property="ReceiptNumber" />
+        <column name="ENTRY_NUMBER" type="Int32" property="EntryNumber" />
+        <column name="COLLECTION_DATE" type="DateTime" property="CollectionDate" />
+      </columns>
+    </table>
+  </tables>
+</map>

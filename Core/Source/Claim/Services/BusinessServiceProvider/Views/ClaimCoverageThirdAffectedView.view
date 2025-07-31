@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ActivePanelCoverageView">
+  <collections>
+    <collection name="ClaimCoverage" type="Sistran.Core.Application.Claims.Entities.ClaimCoverage, 
+                Core.Claims.Entities"></collection>
+    <collection name="ClaimCoverageThirdAffected" type="Sistran.Core.Application.Claims.Entities.ClaimCoverageThirdAffected, 
+                Core.Claims.Entities"></collection>    
+  </collections>
+  <relations>
+    <relation source="ClaimCoverage" destination="ClaimCoverageThirdAffected" name="ClaimCoverageClaimCoverageThirdAffected" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>  
+  </relations>
+</view>

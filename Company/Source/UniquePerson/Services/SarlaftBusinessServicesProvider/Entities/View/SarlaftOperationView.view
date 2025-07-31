@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="SarlaftOperationView">
+  <collections>
+    <collection name="SarlaftOperation" type="Sistran.Company.Application.UniquePerson.Entities.SarlaftOperation, 
+                Company.UniquePerson.Entities"></collection>
+    <collection name="ProductType" type="Sistran.Company.Application.UniquePerson.Entities.ProductType, 
+                Company.UniquePerson.Entities"></collection>
+    <collection name="OperationType" type="Sistran.Core.Application.Common.Entities.OperationType, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="SarlaftOperation" destination="ProductType" name="SarlaftOperationProductType" type="Inner">
+      <property left="ProductTypeCode" type="Equal" right="ProductTypeCode"></property>
+    </relation>
+    <relation source="SarlaftOperation" destination="OperationType" name="SarlaftOperationOperationType" type="Inner">
+      <property left="OperationTypeCode" type="Equal" right="OperationTypeCode"></property>
+    </relation>
+  </relations>
+</view>

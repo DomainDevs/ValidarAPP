@@ -1,0 +1,96 @@
+﻿@*AVISOS DE CANCELACION ES SOLO PARA BE*@
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ReportCancelledPolices;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.CancellationNotices</a></li>
+        <li class="active">@Global.ReportCancelledPolices</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="CleanCancelledPolices">
+            <i class="fa fa-paint-brush"></i> @Global.Clean
+        </button>
+        <button type="submit" class="btn btn-primary" id="ReportCancelledPolices" onclick="return false" data-role="button">
+            <i class="fa fa-print"></i> @Global.Accept
+        </button>
+    </footer>
+}
+
+<div class="progress" id="progressBar">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 0">
+    </div>
+</div>
+
+<form id="frmCancellation" onsubmit="return false">
+    <div class="uif-panel" data-title='@Global.Dates'>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="control-label" for="cancellationDate">
+                    <b>@Global.RequestDate</b>
+                </label>
+                <input type="text" id="cancellationDate" name="cancellationDate" maxlength="10" class="uif-datepicker" data-mask="99/99/9999" data-val="true" data-val-required='@Global.RequiredField' />
+                <span class="text-danger" data-valmsg-for="cancellationDate" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label" for="daysFrom">@Global.DaysFrom</label>
+                <input type="text" id="daysFrom" name="daysFrom" maxlength="3" onkeypress="return OnlyDecimalNumber(event,this)" />
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label" for="daysTo"> @Global.DaysTo</label>
+                <input type="text" id="daysTo" name="daysTo" maxlength="3" onkeypress="return OnlyDecimalNumber(event,this)" />
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertPaymentReminder"></div>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <input type="radio" id="partialBalance" name="partialBalance" value="0" checked>
+                <label class="control-label" for="partialBalance">@Global.PartialBalance </label>
+            </div>
+            <div class="uif-col-4">
+                <input type="radio" id="totalBalance" name="partialBalance" value="1">
+                <label class="control-label" for="totalBalance">@Global.TotalBalance</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-panel" data-title='@Global.Intermediaries'>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="control-label" for="AgentDocumentNumber">@Global.DocumentNumberIntermediary</label>
+                <input class="uif-autocomplete" type="text" id="AgentDocumentNumber" name="AgentDocumentNumber" data-source="@Url.Action("GetAgentByDocumentNumber", "Common")" data-displaykey="DocumentNumberName" onkeypress="return OnlyDecimalNumber(event,this)" data-val="true" data-val-required='@Global.RequiredField' />
+                <span class="text-danger" data-valmsg-for="AgentDocumentNumber" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label" for="AgentName">@Global.IntermediaryName</label>
+                <input class="uif-autocomplete" type="text" id="AgentName" name="AgentName" data-source="@Url.Action("GetAgentByName", "Common")" data-displaykey="DocumentNumberName" data-val="true" data-val-required='@Global.RequiredField' />
+                <span class="text-danger" data-valmsg-for="AgentName" data-valmsg-replace="true">
+                </span>
+            </div>
+        </div>
+
+        <div class="uif-row" id="Form1">
+            <div class="uif-col-4">
+                <a id="dynamicLink">@Global.DownloadFileLink</a>
+            </div>
+        </div>
+    </div>
+</form>
+

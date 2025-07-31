@@ -1,0 +1,846 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.Billing;
+    ViewBag.Branch = "BOGOTA";
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/redux/3.5.2/redux.js'></script>
+<link href="~/Content/caja/index.css" rel="stylesheet" />
+@section Modals
+{
+    <!-- Cash -->
+    <div class="uif-modal" id="modalCashAdd" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/CashModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="CashClose">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="CashAdd" onclick="return false">@Global.Add</button>
+        </div>
+    </div>
+    <!-- End Cash -->
+    <!-- Check -->
+    <div class="uif-modal" id="modalCheckAdd" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/CheckModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="CheckClose">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="CheckAdd" onclick="return false">@Global.Add</button>
+        </div>
+    </div>
+    <!-- End Check -->
+    <!-- CreditCard -->
+    <div class="uif-modal" id="modalCardAdd" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/CreditCardModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="CardClose">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="CardAdd" onclick="return false">@Global.Add</button>
+        </div>
+    </div>
+    <!-- End CreditCard -->
+    <!-- Consigment -->
+    <div class="uif-modal" id="modalConsignmentAdd" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/ConsignmentModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="ConsignmentClose">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="ConsignmentAdd" onclick="return false">@Global.Add</button>
+        </div>
+    </div>
+    <!-- End Consigment -->
+    <!-- ConsigmentCheck -->
+    <div class="uif-modal" id="modalConsignmentCheckAdd" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/ConsignmentCheckModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="ConsignmentCheckClose">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="ConsignmentCheckAdd" onclick="return false">@Global.Add</button>
+        </div>
+    </div>
+    <!-- End ConsigmentCheck -->
+    <!-- Datafono -->
+    <div class="uif-modal" id="modalDatafonoAdd" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/DatafonoModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="DatafonoClose">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="DatafonoAdd" onclick="return false">@Global.Add</button>
+        </div>
+    </div>
+    <!-- End Datafono -->
+    <!-- Premium -->
+    <div class="uif-modal" id="modalPremiumAdd" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/PremiumSearchModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">@Global.Close</button>
+        </div>
+    </div>
+    <!-- End Premium -->
+    <!-- Transfer -->
+    <div class="uif-modal" id="modalTransferAdd" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/TransferModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="TransferClose">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="TransferAdd" onclick="return false">@Global.Add</button>
+        </div>
+    </div>
+    <!-- End Transfer -->
+    <!-- Retention -->
+    <div class="uif-modal" id="modalRetentionAdd" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/RetentionModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="RetentionClose">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="RetentionAdd" onclick="return false">@Global.Add</button>
+        </div>
+    </div>
+    <!-- End Retention -->
+    <!-- All -->
+    <div class="uif-modal" id="modalAdd" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/PaymentMethodModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+        </div>
+    </div>
+    <!-- End All -->
+    <!-- BillingClosure -->
+    <div class="uif-modal" id="modalBillingClosure" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/BillingClosureModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="submit" class="btn btn-primary" id="AcceptClosure" onclick="return false">@Global.Accept</button>
+        </div>
+    </div>
+    <!-- End BillingClosure -->
+    <!-- OpeningBilling -->
+    <div class="uif-modal" id="modalOpeningBilling" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/OpeningBillingModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="submit" class="btn btn-primary" id="AcceptOpening" onclick="return false">@Global.Accept</button>
+            <button type="button" class="btn btn-default" id="DimmisOpening" data-dismiss="modal">@Global.Cancel</button>
+        </div>
+    </div>
+    @*MODAL DE PRIMAS POR COBRAR*@
+    <div class="uif-modal" id="ModalPremiums" data-size="xl">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Application/PremiumsReceivable/DialogSearchPolicies.cshtml")
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-info" id="ExportPolicyInformation" onclick="return false">@Global.ExportListExcel</button>
+            <button type="submit" class="btn btn-primary" id="SaveSearchPoliciesButton" onclick="return false">@Global.Accept</button>
+        </div>
+    </div>
+    <div class="uif-modal" id="AccountingMovementModal" data-size="xl">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Application/Accounting/Accounting.cshtml")
+        </div>
+    </div>
+    <!-- End OpeningBilling -->
+    <!-- SaveBill -->
+    <div class="uif-modal" id="modalSaveBill" style="display: none">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Billing/SaveBillSuccessModal.cshtml")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="SuccessCancell" data-dismiss="modal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Global.Close&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button type="submit" class="btn btn-default" id="ApplyReceipt" onclick="return false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Global.Apply&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button type="submit" class="btn btn-primary" id="PrintDetailBilling" onclick="return false">@Global.PrintDetail</button>
+        </div>
+    </div>
+    <!-- End SaveBill -->
+    <!-- End SaveBill -->
+}
+
+
+<script id="display-template" type="text/template">
+    <div>
+        Pólizas <strong>{{Poliza}}</strong> | Endoso {{Endoso}} <br>
+        {{Ciudad}}
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number">{{Number}}</div>
+    </div>
+</script>
+
+<script id="summaries-template" type="text/template">
+    <div>
+        <strong>{{PaymentMethod}}</strong>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number">{{LocalAmount}}</div>
+    </div>
+</script>
+
+<script id="summariess-template" type="text/template">
+    <div>
+        <span>@Global.PaymentMethod:<strong>{{PaymentMethod}}</strong></span>
+        <span>@Global.Currency:<strong>{{CurrencyDescription}}</strong></span>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number">{{Amount}}</div>
+    </div>
+</script>
+
+<script id="policiess-template" type="text/template">
+    <span>@Global.Policy:<strong>{{PolicyNumber}}</strong>, @Global.EndorsementNumber:<strong>{{EndorsementNumber}}</strong></span>
+    <span>@Global.Branch:<strong>{{BranchName}}</strong></span>
+    <span>@Global.DocumentNumber: <strong>{{PayerDocumentNumber}}</strong>, @Global.Payer:<strong>{{PayerName}}</strong></span>
+    <span>@Global.QuotaNumber: <strong>{{QuotaNumber}}</strong>, @Global.QuotaValue:<strong>{{QuotaValue}}</strong></span>
+</script>
+
+<script id="policies-template" type="text/template">
+    {{#ifCond  MovementType "==" 0 }}
+    <div>
+        <strong>
+            @Global.Premium:
+        </strong>
+        <br />
+        <span>@Global.Policy:<strong> {{PolicyNumber}}</strong> | @Global.EndorsementNumber:<strong> {{EndorsementNumber}}</strong></span>
+        | <span>@Global.Branch:<strong> {{BranchName}}</strong> | @Global.Prefix: <strong>{{PrefixDescription}}</strong></span>
+        <br />
+        <span>@Global.DocumentNumber:<strong> {{PayerDocumentNumber}}</strong> | @Global.Payer:<strong> {{PayerName}}</strong></span>
+        <br />
+        <span>@Global.QuotaNumber:<strong> {{QuotaNumber}}</strong></span>
+        {{#ifCond IsReversion "==" true}}
+        <div><label> <span class="label label-warning">@Global.PremiumReversion</span></label></div>
+        {{/ifCond }}
+        {{#ifCond DiscountedCommission "!=" 0}}
+        <div><label>@Global.DialogCommissionRetainedCommissionGranted:</label> <b>{{DiscountedCommission}}</b></div>
+        {{/ifCond }}
+    </div>
+    <di hidden="hidden">{{IsReversion}}</di>
+    <div class="text-justify">
+        <div class="number">@Global.QuotaValue: {{ValueToCollect}}</div>
+    </div>
+    {{else ifCond MovementType "==" 1}}
+    <div>
+        <strong>
+            @Global.AccountingMovements:
+        </strong>
+        <br />
+        <span>@Global.AccountingAccountName:<strong> {{BookAccount.AccountName}}</strong> | @Global.SalePoint:<strong> {{SalePoint.Description}}</strong></span>
+        |
+        <span>@Global.Branch:<strong> {{Branch.Description}}</strong> </span>
+        <br />
+        |<span> @Global.Nature: <strong>{{AccountingNatureDescription}}</strong> | @Global.Currency: <strong>{{Amount.Currency.Description}}</strong></span>
+        <br />
+    </div>
+    <div class="text-justify">
+        <div class="number">@Global.QuotaValue: {{FormatAmount}}</div>
+    </div>
+    {{else}}
+    {{/ifCond}}
+</script>
+
+
+<script id="premiums-template" type="text/template">
+    <div>
+        <strong>{{PolicyNumber}}</strong> | {{EndorsementNumber}} | @Global.QuotaNumber: {{QuotaNumber}} <br />
+        {{BranchName}} | @Global.Prefix: {{PrefixName}} <br />
+        <strong>{{PayerDocumentNumber}}</strong> | {{PayerName}}
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number">{{QuotaValue}}</div>
+    </div>
+</script>
+
+
+@section Title{
+    <div class="row main-title">
+        <div class="column-90 even">
+            @Global.Billing
+        </div>
+        <div class="column-15" id="AccountingDateInit">
+            @ViewBag.DateAccounting
+        </div>
+        <div class="column-10">
+            @User.Identity.Name
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
+        <form id="formBilling" onsubmit="return false" class="form">
+            <div class="row">
+                <div class="uif-col-4">
+                    <label for="">Sucursal</label>
+                    <select class="uif-select form-control" id="selectBranch" data-id="Id" data-name="Description"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label for="">@Global.CollectionTo</label>
+                    <select class="uif-select form-control" id="CollectionTo" name="CollectionTo" data-native="true"
+                            @*data-source='@Url.Content("~/Accounting/Common/GetIncomeConcepts")'*@
+                            data-id="Id" data-name="Description" data-val="true" data-val-required='@Global.ValidationRequired'></select>
+                    @*@Html.DropDownList("CollectionTo", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            //data_source = @Url.Content("~/Accounting/Common/GetPersonTypesByBillEnabled"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_val = "true",
+                            data_native = "true",
+                            data_val_required = @Global.ValidationRequired
+                        })*@
+                    <span class="text-danger" data-valmsg-for="CollectionTo" data-valmsg-replace="true" />
+                </div>
+                @*PERSONA*@
+                <div class="uif-col-12 uif-col-6 uif-col-4" id="rowPerson">
+                    <label for="inputDocumentNumber">@Global.DocumentNumber</label>
+                    <input class="uif-autocomplete" type="text"
+                           data-source="@Url.Action("GetPersonByDocumentNumber", "Billing")"
+                           onkeypress="return OnlyNumbers(event,this)"
+                           data-displaykey="DocumentNumber"
+                           placeholder='@Global.EnterDocumentNumber'
+                           id="inputDocumentNumber"
+                           name="inputDocumentNumber"
+                           data-val="true"
+                           maxlength="20"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputDocumentNumber" data-valmsg-replace="true" />
+                </div>
+                <!-- Agente -->
+                <div class="uif-col-12 uif-col-6 uif-col-4" id="rowAgent">
+                    <label for="">@Global.DocumentNumber</label>
+                    <input class="uif-autocomplete" type="text"
+                           data-source="@Url.Action("GetAgentByDocumentNumber", "Common")"
+                           onkeypress="return OnlyNumbers(event,this)"
+                           data-displaykey="DocumentNumber"
+                           placeholder='@Global.EnterDocumentNumber'
+                           id="inputAgentDocumentNumber"
+                           name="inputAgentDocumentNumber"
+                           data-val="true"
+                           maxlength="20"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputAgentDocumentNumber" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Compañía/ coaseguradora -->
+                <div class="uif-col-12 uif-col-6 uif-col-4" id="rowCompany">
+                    <label for="">
+                        @Global.DocumentNumber
+                    </label>
+                    <input class="uif-autocomplete"
+                           type="text"
+                           data-source="@Url.Action("GetCoinsuranceByDocumentNumber", "Common")"
+                           onkeypress="return OnlyNumbers(event,this)"
+                           data-displaykey="DocumentNumber"
+                           placeholder='@Global.EnterDocumentNumber'
+                           id="inputCompanyDocumentNumber"
+                           name="inputCompanyDocumentNumber"
+                           data-val="true"
+                           maxlength="20"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputCompanyDocumentNumber" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Otros / Cobrador -->
+                <div class="uif-col-12 uif-col-6 uif-col-4" id="rowOther">
+                    <label for="">
+                        @Global.DocumentNumber
+                    </label>
+                    <input type="text"
+                           placeholder='@Global.EnterDocumentNumber'
+                           id="inputOtherDocumentNumber"
+                           name="inputOtherDocumentNumber"
+                           data-val="true"
+                           maxlength="25"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputOtherDocumentNumber" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Terceros -->
+                <div class="uif-col-12 uif-col-6 uif-col-4" id="rowThird">
+                    <label for="">@Global.DocumentNumber</label>
+                    <input class="uif-autocomplete" type="text"
+                           data-source="@Url.Content("~/Claims/PaymentRequest/GetSuppliersByNameDocumentNumber")"
+                           onkeypress="return OnlyNumbers(event,this)"
+                           data-displaykey="DocumentNumber"
+                           placeholder='@Global.EnterDocumentNumber'
+                           id="inputThirdDocumentNumber"
+                           name="inputThirdDocumentNumber"
+                           data-val="true"
+                           maxlength="20"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputThirdDocumentNumber" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Asegurado -->
+                <div class="uif-col-12 uif-col-6 uif-col-4" id="rowInsured">
+                    <label for="">
+                        @Global.DocumentNumber
+                    </label>
+                    <input class="uif-autocomplete"
+                           type="text" data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                           @*onkeypress="return OnlyNumbers(event,this)"*@
+                           data-displaykey="DocumentNumber"
+                           placeholder='@Global.EnterDocumentNumber'
+                           id="inputInsuredDocumentNumber"
+                           name="inputInsuredDocumentNumber"
+                           data-val="true"
+                           maxlength="20"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputInsuredDocumentNumber" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Contratante -->
+                <div class="uif-col-12 uif-col-6 uif-col-4" id="rowContractor">
+                    <label for="">
+                        @Global.DocumentNumber
+                    </label>
+                    <input class="uif-autocomplete"
+                           type="text"
+                           data-source="@Url.Action("GetReinsurerByDocumentNumber", "Common")"
+                           data-displaykey="DocumentNumber"
+                           placeholder='@Global.EnterDocumentNumber'
+                           id="inputContractorDocumentNumber"
+                           name="inputContractorDocumentNumber"
+                           data-val="true"
+                           maxlength="25"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputContractorDocumentNumber" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Proveedor -->
+                <div class="uif-col-12 uif-col-6 uif-col-4" id="rowSupplier">
+                    <label for="inputSupplierDocumentNumber">
+                        @Global.DocumentNumber
+                    </label>
+                    <input class="uif-autocomplete"
+                           type="text"
+                           data-source="@Url.Action("GetSuppliersByDocumentNumber", "Common")" ,
+                           onkeypress="return OnlyNumbers(event,this)"
+                           data-displaykey="DocumentNumber"
+                           placeholder='@Global.EnterDocumentNumber'
+                           id="inputSupplierDocumentNumber"
+                           name="inputSupplierDocumentNumber"
+                           data-val="true"
+                           maxlength="20"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputSupplierDocumentNumber" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Reaseguradora -->
+                <div class="uif-col-12 uif-col-6 uif-col-4" id="rowReinsurance">
+                    <label for="">
+                        @Global.DocumentNumber
+                    </label>
+                    <input class="uif-autocomplete"
+                           type="text" data-source="@Url.Action("GetReinsurerByDocumentNumber", "Common")"
+                           data-displaykey="DocumentNumber"
+                           placeholder='@Global.EnterDocumentNumber'
+                           id="inputReinsuranceDocumentNumber"
+                           name="inputReinsuranceDocumentNumber"
+                           data-val="true"
+                           maxlength="25"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputReinsuranceDocumentNumber" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="row">
+
+                @*PERSONA*@
+                <div class="uif-col-12 uif-col-4" id="rowPersonName">
+                    <label for="">@Global.FullName</label>
+                    <div class="input-with-buttons">
+                        <input class="uif-autocomplete" type="text"
+                               data-source="@Url.Action("GetPersonByName", "Billing")"
+                               data-displaykey="Name"
+                               placeholder='@Global.EnterName'
+                               id="inputName" name="inputName"
+                               data-val="true"
+                               maxlength="100"
+                               data-val-required='@Global.RequiredField'>
+                    </div>
+                    <span class="text-danger" data-valmsg-for="inputName" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Agente -->
+                <div class="uif-col-12 uif-col-4" id="rowAgentName">
+                    <label for="">
+                        @Global.AgentName
+                    </label>
+                    <input class="uif-autocomplete"
+                           type="text" data-source="@Url.Action("GetAgentByName", "Common")"
+                           data-displaykey="Name"
+                           placeholder='@Global.EnterName'
+                           id="inputAgentName"
+                           name="inputAgentName"
+                           data-val="true"
+                           maxlength="100"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputAgentName" data-valmsg-replace="true" />
+                </div>
+                <!-- Compañía/ coaseguradora -->
+                <div class="uif-col-12 uif-col-4" id="rowCompanyName">
+                    <label for="">
+                        @Global.Company
+                    </label>
+                    <div class="input-with-buttons">
+                        <input class="uif-autocomplete"
+                               type="text"
+                               data-source="@Url.Action("GetCoinsurerByName", "Common")"
+                               data-displaykey="Name"
+                               placeholder='@Global.EnterName'
+                               id="inputCompanyName"
+                               name="inputCompayName"
+                               data-val="true"
+                               maxlength="100"
+                               data-val-required='@Global.RequiredField'>
+                    </div>
+                    <span class="text-danger" data-valmsg-for="inputCompayName" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Otros / Cobrador -->
+                <div class="uif-col-12 uif-col-4" id="rowOtherName">
+                    <label for="">
+                        @Global.FullName
+                    </label>
+                    <div class="input-with-buttons">
+                        <input type="text"
+                               placeholder='@Global.EnterName'
+                               id="inputOtherName"
+                               name="inputOtherName"
+                               data-val="true"
+                               maxlength="100"
+                               data-val-required='@Global.RequiredField' onblur="this.value = this.value.toUpperCase();">
+                    </div>
+                    <span class="text-danger" data-valmsg-for="inputOtherName" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Terceros -->
+                <div class="uif-col-12 uif-col-4" id="rowThirdName">
+                    <label for="">@Global.FullName</label>
+                    <div class="input-with-buttons">
+                        <input class="uif-autocomplete" type="text"
+                               data-source="@Url.Content("~/Claims/PaymentRequest/GetSuppliersByNameDocumentNumber")"
+                               data-displaykey="Name"
+                               placeholder='@Global.EnterName'
+                               id="inputThirdName" name="inputThirdName"
+                               data-val="true"
+                               maxlength="100"
+                               data-val-required='@Global.RequiredField'>
+                    </div>
+                    <span class="text-danger" data-valmsg-for="inputThirdName" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Asegurado -->
+                <div class="uif-col-12 uif-col-4" id="rowInsuredName">
+                    <label for="">
+                        @Global.InsuredName
+                    </label>
+                    <input class="uif-autocomplete"
+                           type="text" data-source="@Url.Action("GetInsuredByInsuredName", "Common")"
+                           data-displaykey="Name"
+                           placeholder='@Global.EnterName'
+                           id="inputInsuredName"
+                           name="inputInsuredName"
+                           data-val="true"
+                           maxlength="100"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputInsuredName" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Contratante -->
+                <div class="uif-col-12 uif-col-4" id="rowContractorName">
+                    <label for="">
+                        @Global.Contractor
+                    </label>
+                    <div class="input-with-buttons">
+                        <input class="uif-autocomplete"
+                               type="text" data-source="@Url.Action("GetReinsurerByName", "Common")"
+                               data-displaykey="Name"
+                               placeholder='@Global.EnterName'
+                               id="inputContractorName"
+                               name="inputContractorName"
+                               data-val="true"
+                               maxlength="100"
+                               data-val-required='@Global.RequiredField'>
+                    </div>
+                    <span class="text-danger" data-valmsg-for="inputContractorName" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Proveedor -->
+                <div class="uif-col-12 uif-col-4" id="rowSupplierName">
+                    <label for="">
+                        @Global.SupplierName
+                    </label>
+                    <input class="uif-autocomplete"
+                           type="text" data-source="@Url.Action("GetSuppliersByName", "Common")"
+                           data-displaykey="Name"
+                           placeholder='@Global.EnterName'
+                           id="inputSupplierName"
+                           name="inputSupplierName"
+                           data-val="true"
+                           maxlength="100"
+                           data-val-required='@Global.RequiredField'>
+                    <span class="text-danger" data-valmsg-for="inputSupplierName" data-valmsg-replace="true" />
+                </div>
+
+                <!-- Reaseguradora -->
+                <div class="uif-col-12 uif-col-4" id="rowReinsuranceName">
+                    <label for="">
+                        @Global.ReinsuranceCompany
+                    </label>
+                    <div class="input-with-buttons">
+                        <input class="uif-autocomplete"
+                               type="text"
+                               data-source="@Url.Action("GetReinsurerByName", "Common")"
+                               data-displaykey="Name"
+                               placeholder='@Global.EnterName'
+                               id="inputReinsuranceName"
+                               name="inputReinsuranceName"
+                               data-val="true"
+                               maxlength="100"
+                               data-val-required='@Global.RequiredField'>
+                    </div>
+                    <span class="text-danger" data-valmsg-for="inputReinsuranceName" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-12 uif-col-8">
+                    <label for="">@Global.Observations</label>
+                    <textarea class="form-control custom-control" id="Observation" name="Observation" data-val="true"
+                              data-val-required='@Global.RequiredField'
+                              rows="4" onblur=" this.value = this.value.toUpperCase(); " maxlength="250"></textarea>
+                    <span class="text-danger" data-valmsg-for="Observation" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-4 col-xs-4">
+                    <label for="">@Global.IncomeConcept</label>
+                    <select class="uif-select form-control" id="selectIncomeConcept" name="selectIncomeConcept" data-native="true"
+                            @*data-source='@Url.Content("~/Accounting/Common/GetIncomeConcepts")'*@
+                            data-id="Id" data-name="Description" data-val="true" data-val-required='@Global.RequiredField'></select>
+                    <span class="text-danger" data-valmsg-for="selectIncomeConcept" data-valmsg-replace="true" />
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+                    <label for="">  </label>
+                    <div class="big-buttons-wrapper" id="idPremium">
+                        <a class="btn btn-secondary btn-block" href="#" id="OpenPremium" style="border-right: 1px solid black;">
+                            <div>@Global.Premium</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+                    <label for="">  </label>
+                    <div class="big-buttons-wrapper" id="idAccounting">
+                        <a class="btn btn-secondary btn-block" href="#" id="OpenAccounting">
+                            <div>@Global.AccountingTitle</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-alert padded" id="alert"></div>
+            <div class="uif-alert padded" id="alert-risk-list"></div>
+        </form>
+
+        <h5 class="subTitle">@Global.Application</h5>
+        <hr class="margin" />
+        <div class="uif-row">
+            <div class="uif-col-xs-12">
+                <div id="policiesListView" class="uif-listview">
+                    <div class="footer">
+                        <div class="uif-col-xs-6">
+                            @Global.ApplicationTotal
+                        </div>
+                        <div class="uif-col-xs-6 text-right">
+                            <b id="TotalPolicy"></b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+        <div class="row justified-between">
+            <div class="col-md-4">
+                <a class="btn btn-default full-width" href="#" title="" id="OpenCash">
+                    @Global.Cash
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-default full-width" href="#" title="" id="OpenCheck">
+                    @Global.Check
+                </a>
+            </div>
+            <div class="col-md-4" style="display:none">
+                <a class="btn btn-default full-width" href="#" title="" id="OpenCard">
+                    @Global.Card
+                </a>
+            </div>
+        </div>
+        <div class="row justified-between">
+            <div class="col-md-6">
+                <a class="btn btn-default full-width" href="#" title="" id="OpenConsignment">
+                    @Global.Consignment
+                </a>
+            </div>
+            <div class="col-md-6">
+
+                <a class="btn btn-default full-width" href="#" title="" id="OpenConsignmentCheck">
+                    @Global.ConsignmentCheck
+                </a>
+            </div>
+        </div>
+
+        <hr class="margin" />
+        <form class="form">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label for="TotalApplication">@Global.ApplicationTotal</label>
+                    @Html.TextBox("TotalApplication", "", new
+                {
+                    @onkeypress = "return OnlyDecimalNumber(event,this)",
+                    style = "text-align: right;",
+                    required = "",
+                    maxlength = "14"
+                })
+                </div>
+                <div class="uif-col-6">
+                    <label for="TotalApplicationCash">@Global.Cash</label>
+                    @Html.TextBox("TotalApplicationCash", "", new
+                {
+                    @onkeypress = "return OnlyDecimalNumber(event,this)",
+                    style = "text-align: right;",
+                    required = "",
+                    maxlength = "14"
+                })
+                </div>
+            </div>
+        </form>
+        <hr class="margin" />
+        <div id="summariesListView" class="uif-listview">
+            <div class="footer">
+                <div>
+                    @Global.BillTotal
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="uif-col-6 text-left">
+                <label for="">@Global.ApplicationTotal</label>
+            </div>
+            <div class="uif-col-6 text-right">
+                <b id="TotalReceipt"></b><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-6 text-left">
+                <label for="">@Global.Difference</label>
+            </div>
+            <div class="uif-col-6 text-right">
+                <span class="diff" id="Difference"></span>
+            </div>
+        </div>
+        <hr class="margin" />
+        <div class="row">
+            <div class="uif-col-6">
+                <a class="btn btn-primary btn-block" href="#" title="" id="New">
+                    @Global.New
+                </a>
+            </div>
+            <div class="uif-col-6">
+                <a class="btn btn-primary btn-block" href="#" title="" id="SaveBill">
+                    @Global.Record
+                </a>
+            </div>
+        </div>
+        <hr class="margin" />
+    </div>
+</div>
+
+<style>
+    .title option {
+        color: navy !important;
+    }
+</style>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagDefaultValueBranch" value="@ViewBag.DefaultValueBranch" />
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagIsApply" value="@ViewBag.IsApply" />
+<input type="hidden" id="ViewBagAccountingDate" value="@ViewBag.AccountingDate" />
+<input type="hidden" id="ViewBagDateAccounting" value="@ViewBag.DateAccounting" />
+<input type="hidden" id="ViewBagParamPaymentMethodCreditableCreditCard" value="@ViewBag.ParamPaymentMethodCreditableCreditCard" />
+<input type="hidden" id="ViewBagParamPaymentMethodUncreditableCreditCard" value="@ViewBag.ParamPaymentMethodUncreditableCreditCard" />
+<input type="hidden" id="ViewBagParamPaymentMethodCash" value="@ViewBag.ParamPaymentMethodCash" />
+<input type="hidden" id="ViewBagUserNick" value="@ViewBag.UserNick" />
+<input type="hidden" id="ViewBagUserId" value="@ViewBag.UserId" />
+<input type="hidden" id="ViewBagImputationTypeBill" value="@ViewBag.ImputationTypeBill" />
+<input type="hidden" id="ViewBagParamPaymentMethodTransfer" value="@ViewBag.ParamPaymentMethodTransfer" />
+<input type="hidden" id="ViewBagParamPaymentMethodRetentionReceipt" value="@ViewBag.ParamPaymentMethodRetentionReceipt" />
+<input type="hidden" id="ViewBagParamPaymentMethodCurrentCheck" value="@ViewBag.ParamPaymentMethodCurrentCheck" />
+<input type="hidden" id="ViewBagParamPaymentMethodPostdatedCheck" value="@ViewBag.ParamPaymentMethodPostdatedCheck" />
+<input type="hidden" id="ViewBagPreliquidationId" value="@ViewBag.PreliquidationId" />
+<input type="hidden" id="ViewBagTempImputationId" value="@ViewBag.TempImputationId" />
+<input type="hidden" id="ViewBagBranchDefault" value="@ViewBag.BranchDefault" />
+<input type="hidden" id="ViewBagName" value="@ViewBag.Name" />
+<input type="hidden" id="ViewBagDocumentNumber" value="@ViewBag.DocumentNumber" />
+<input type="hidden" id="ViewBagDescription" value="@ViewBag.Description" />
+<input type="hidden" id="ViewBagPreliquidationBranch" value="@ViewBag.PreliquidationBranch" />
+<input type="hidden" id="ViewBagTotalAmount" value="@ViewBag.TotalAmount" />
+<input type="hidden" id="ViewBagIndividualId" value="@ViewBag.IndividualId" />
+<input type="hidden" id="ViewBagParamPaymentMethodDepositVoucher" value="@ViewBag.ParamPaymentMethodDepositVoucher" />
+<input type="hidden" id="ViewBagParamPaymentConsignmentCheck" value="@ViewBag.ParamPaymentConsignmentCheck" />
+<input type="hidden" id="ViewBagParamPaymentMethodDataphone" value="@ViewBag.ParamPaymentMethodDataphone" />
+<input type="hidden" id="ViewBagParamPaymentMethodElectronicPayment" value="@ViewBag.ParamPaymentMethodElectronicPayment" />
+<input type="hidden" id="ViewBagControlSpanMainBilling" value="true" />
+<input type="hidden" id="ViewBagBillingClosureIdLink" value="@Url.Content(Global.BillingClosureIdLink)" />
+<input type="hidden" id="ViewBagPreliquidationPersonTypeId" value="@ViewBag.PreliquidationPersonTypeId" />
+<input type="hidden" id="ViewBagMessageWaiting" value="@ViewBag.MessageWaiting" />
+
+<input type="hidden" id="ViewBagMainPreLiquidationsSearchLink" value="@Url.Content(Global.MainPreLiquidationsSearchLink)" />
+<input type="hidden" id="ViewBagShowReceiptReportLink" value="@Url.Content(Global.ShowReceiptReportLink)" />
+<input type="hidden" id="ViewBagLoadApplicationReceiptLink" value="@Url.Content(Global.LoadApplicationReceiptLink)" />
+
+<input type="hidden" id="ViewBagSupplierCode" value="@ViewBag.SupplierCode" />
+<input type="hidden" id="ViewBagInsuredCode" value="@ViewBag.InsuredCode" />
+<input type="hidden" id="ViewBagOthersCode" value="@ViewBag.OthersCode" />
+<input type="hidden" id="ViewBagCollectorCode" value="@ViewBag.CollectorCode" />
+<input type="hidden" id="ViewBagTradeAdviserCode" value="@ViewBag.TradeAdviserCode" />
+<input type="hidden" id="ViewBagEmployeeCode" value="@ViewBag.EmployeeCode" />
+<input type="hidden" id="ViewBagReinsurerCode" value="@ViewBag.ReinsurerCode" />
+<input type="hidden" id="ViewBagAgentCode" value="@ViewBag.AgentCode" />
+<input type="hidden" id="ViewBagCoinsurerCode" value="@ViewBag.CoinsurerCode" />
+<input type="hidden" id="ViewBagThird" value="@ViewBag.ThirdCode" />
+<input type="hidden" id="ViewBagDefaultCurrency" value="@ViewBag.DefaultCurrency" />
+
+@section Scripts
+{
+    @Scripts.Render("~/accounting/bundles/ReverseApplicationPremium")
+    @Scripts.Render("~/accounting/bundles/mainBilling");
+}

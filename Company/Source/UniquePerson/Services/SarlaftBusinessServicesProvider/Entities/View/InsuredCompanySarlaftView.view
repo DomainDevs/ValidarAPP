@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="InsuredCompanySarlaftView">
+  <collections>
+    <collection name="Company" type="Sistran.Core.Application.UniquePerson.Entities.Company, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="Insured" type="Sistran.Core.Application.UniquePerson.Entities.Insured, 
+                Core.UniquePerson.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Company" destination="Insured" name="CompanyInsured" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+  </relations>
+</view>

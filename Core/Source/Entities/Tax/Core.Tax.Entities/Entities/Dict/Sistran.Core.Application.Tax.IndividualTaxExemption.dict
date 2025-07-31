@@ -1,0 +1,44 @@
+<map version="2.0" type="class" name="IndividualTaxExemption" namespace="Sistran.Core.Application.Tax" file-version="1.0" description="INDIVIDUAL_TAX_EXEMPTION_ENTITY">
+  <properties>
+    <property name="IndTaxExemptionId" autonumber="id"  type="Integer" key="true" description="IND_TAX_EXEMPTION_ID_PROPERTY" />
+    <property name="IndividualId" type="Integer" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="TaxCode" type="Integer" description="TAX_CODE_PROPERTY" />
+    <property name="ExemptionPercentage" type="Decimal" precision="7" scale="4" description="EXEMPTION_PERCENTAGE_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" nullable="true" description="CURRENT_FROM_PROPERTY" />
+    <property name="CurrentTo" type="DateTime" nullable="true" description="CURRENT_TO_PROPERTY" />
+    <property name="TaxCategoryCode" type="Integer" nullable="true" description="TAX_CATEGORY_CODE_PROPERTY" />
+    <property name="StateCode" type="Integer" nullable="true" description="STATE_CODE_PROPERTY" />
+    <property name="CountryCode" type="Integer" nullable="true" description="COUNTRY_CODE_PROPERTY" />
+    <property name="BulletinDate" type="DateTime" nullable="true" description="BULLETIN_DATE_PROPERTY" />
+    <property name="ResolutionNumber" type="String" size="15" nullable="true" description="RESOLUTION_NUMBER_PROPERTY" />
+    <property name="HasFullRetention" type="Boolean" description="HAS_FULL_RETENTION_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="INDIVIDUAL_TAX_EXEMPTION" schema="TAX" alias="INDIVIDUAL_TAX_EXEMPTION" update="true">
+      <columns>
+        <column name="IND_TAX_EXEMPTION_ID" type="Int32" property="IndTaxExemptionId" key="true" />
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" allowNull="false" />
+        <column name="TAX_CD" type="Int16" property="TaxCode" allowNull="false" />
+        <column name="EXEMPTION_PCT" type="Decimal" property="ExemptionPercentage" allowNull="false" size="19" precision="7" scale="4" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" />
+        <column name="CURRENT_TO" type="DateTime" property="CurrentTo" />
+        <column name="TAX_CATEGORY_CD" type="Byte" property="TaxCategoryCode" />
+        <column name="STATE_CD" type="Int16" property="StateCode" />
+        <column name="COUNTRY_CD" type="Int16" property="CountryCode" />
+        <column name="BULLETIN_DATE" type="DateTime" property="BulletinDate" />
+        <column name="RESOLUTION_NUMBER" type="String" property="ResolutionNumber" size="15" />
+        <column name="HAS_FULL_RETENTION" type="Boolean" property="HasFullRetention" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="1007" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

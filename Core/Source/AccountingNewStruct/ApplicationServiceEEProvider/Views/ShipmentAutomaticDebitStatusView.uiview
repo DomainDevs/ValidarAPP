@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="ShipmentAutomaticDebitStatusView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="AutomaticDebitStatusCode">
+          <Column table-alias="Shipment" name="AutomaticDebitStatusCode" />
+        </SelectValue>
+        <SelectValue alias="ShipmentId">
+          <Column table-alias="Shipment" name="ShipmentId" />
+        </SelectValue>
+        <SelectValue alias="ProcessDate">
+          <Column table-alias="Shipment" name="ProcessDate" />
+        </SelectValue>
+        <SelectValue alias="IsPrenotification">
+          <Column table-alias="BankNetwork" name="Prenotification" />
+        </SelectValue>
+        <SelectValue alias="BankNetworkId">
+          <Column table-alias="BankNetwork" name="BankNetworkId" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Shipment,  Core.Accounting.Entities" alias="Shipment" />
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.AutomaticDebitStatus,  Core.Accounting.Entities" alias="AutomaticDebitStatus" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="AutomaticDebitStatus" name="AutomaticDebitStatusId" />
+                <Column table-alias="Shipment" name="AutomaticDebitStatusCode" /> 
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.BankNetwork,  Core.Accounting.Entities" alias="BankNetwork" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="BankNetwork" name="BankNetworkId" />
+              <Column table-alias="Shipment" name="BankNetworkCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

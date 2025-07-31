@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{129CA02C-122B-4968-8CE8-94ABB77CB739}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Company.Application.UniquePersonParamService</RootNamespace>
+    <AssemblyName>Company.UniquePersonParamService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Company.ModelServices">
+      <HintPath>..\..\..\..\Bin\Application\Company\ModelServices\Company.ModelServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ModelServices">
+      <HintPath>..\..\..\..\Bin\Application\Core\ModelServices\Core.ModelServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePersonParamService">
+      <HintPath>..\..\..\..\Bin\Services\Core\UniquePersonParam\UniquePersonParamService\Core.UniquePersonParamService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Utilities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\CompanyType.cs" />
+    <Compile Include="IUniquePersonParamServiceWeb.cs" />
+    <Compile Include="Models\CompanyAddress.cs" />
+    <Compile Include="Models\Alliance.cs" />
+    <Compile Include="Models\AllianceBranchSalePonit.cs" />
+    <Compile Include="Models\BranchAlliance.cs" />
+    <Compile Include="Models\ParamBasicCompany.cs" />
+    <Compile Include="Models\ParamBranchType.cs" />
+    <Compile Include="Models\ParamCompanyType.cs" />
+    <Compile Include="Models\ParamCountryStateCity.cs" />
+    <Compile Include="Models\ParamDocumentType.cs" />
+    <Compile Include="Models\ParamLegalRepresentativeSing.cs" />
+    <Compile Include="Models\ParamBasicPerson.cs" />
+    <Compile Include="Models\SmAgentAgency.cs" />
+    <Compile Include="Models\SmAlly.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Errors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Errors.es.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Errors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Company\UniquePersonParam\UniquePersonParamService\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

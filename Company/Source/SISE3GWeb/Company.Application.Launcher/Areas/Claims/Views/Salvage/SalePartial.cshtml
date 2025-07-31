@@ -1,0 +1,198 @@
+﻿<script id="footer-template" type="text/template">
+    <div id="buttonsRescue" class="footerUnderwriting" hidden="hidden">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0334"))
+        {
+            <button class="btn btn-primary general" type="button" id="btnSaveSale" onclick="return false">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> @Resources.Language.Save
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0335"))
+        {
+            <button class="btn btn-default general" type="button" id="btnClearSale" onclick="return false">
+                <i class="fa fa-eraser" aria-hidden="true"></i> @Resources.Language.Clean
+            </button>
+        }
+    </div>
+</script>
+
+<div id="accSalvageSaleInitialInformation">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <h5>
+                <strong>@Resources.Language.Sales</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.SaleNote</label>
+            <input type="text" id="_saleNote" name="_saleNote" class="rightAlign uif-input" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.SaleDate</label>
+            <input type="text" id="_saleDate" name="_saleDate" data-val="true" class="uif-datepicker"
+                   data-val-required="@Resources.Language.RequiredField" required />
+            <span class="text-danger" data-valmsg-for="_saleDate" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+</div>
+<div id="accSaleCancellation">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <h5>
+                <strong>@Resources.Language.SaleCancellation</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.CancellationDate</label>
+            <input type="text" id="_saleCancellationDate" name="_saleCancellationDate" data-val="true" class="uif-datepicker" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.CancellationReason</label>
+            <select class="uif-select form-control" id="ddlSaleCancellationdReason" data-id="Id" data-name="Description" name="ddlSaleCancellationdReason"
+                    data-val="true" data-native="false"></select>
+        </div>
+    </div>
+</div>
+<div id="accSaleDescription">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <h5>
+                <strong>@Resources.Language.SaleDetails</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-8">
+            <label class="field-required">@Resources.Language.Description</label>
+            <input type="text" id="_saleDescription" name="_saleDescription" data-val="true" class="uif-input"
+                   data-val-required="@Resources.Language.RequiredField" required />
+            <span class="text-danger" data-valmsg-for="_saleDescription" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            <label class="field-required">@Resources.Language.SaleQuantity</label>
+            <input type="text" id="_saleQuantity" name="_saleQuantity" data-val="true" class="uif-input rightAlign"
+                   data-val-required="@Resources.Language.RequiredField" maxlength="21" data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,16)" data-val="true" required />
+            <span class="text-danger" data-valmsg-for="_saleQuantity" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div id="Buyer">
+            <h5>
+                <strong>@Resources.Language.Buyer</strong>
+            </h5>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.DocumentNumber</label>
+                    <input type="text" class="uif-autocomplete" id="_BuyerDocumentNumber" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                           name="_BuyerDocumentNumber" data-source="@Url.Content("~/Salvage/GetBuyersByNameDocumentNumber")" data-displaykey="DocumentNumber" required />
+                    <span class="text-danger" data-valmsg-for="_BuyerDocumentNumber" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.FullName</label>
+                    <input type="text" class="uif-autocomplete" id="_BuyerFullName" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                           name="_BuyerFullName" data-source="@Url.Content("~/Salvage/GetBuyersByNameDocumentNumber")" data-displaykey="FullName" required />
+                    <span class="text-danger" data-valmsg-for="_BuyerFullName" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-8">
+                    <label>@Resources.Language.Address</label>
+                    <input type="text" id="_BuyerAddress" name="_BuyerAddress" data-val="true" class="uif-input" />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.Phone</label>
+                    <input type="text" id="_BuyerPhone" name="_BuyerPhone" data-val="true" class="uif-input" maxlength="15" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div id="accSalePaymentPlan">
+            <h5>
+                <strong>@Resources.Language.RecoveryPaymentPlan</strong>
+            </h5>
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.PaymentClass</label>
+                    <select class="uif-select form-control" id="ddlSalePaymentType" data-id="Id" data-name="Description" name="SalePaymentType"
+                            data-val="true" data-val-required="@Resources.Language.RequiredField" data-native="false"></select>
+                    <span class="text-danger" data-valmsg-for="SalePaymentType" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.Currency</label>
+                    <select class="uif-select form-control" id="ddlSalePaymentCurrency" data-id="Id" data-name="Description" name="SalePaymentCurrency"
+                            data-val="true" data-val-required="@Resources.Language.RequiredField" data-native="false"></select>
+                    <span class="text-danger" data-valmsg-for="SalePaymentCurrency" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.NetAmount</label>
+                    <input type="text" id="_SaleNetAmount" name="_SaleNetAmount" data-val="true" class="uif-input rightAlign"
+                           data-val-required="@Resources.Language.RequiredField" maxlength="21" data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,16)" data-val="true" required />
+                    <span class="text-danger" data-valmsg-for="_SaleNetAmount" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.Iva</label>
+                    <input type="text" id="_SaleTax" name="_SaleTax" data-val="true" class="uif-input rightAlign"
+                           data-val-required="@Resources.Language.RequiredField" required maxlength="2" />
+                    <span class="text-danger" data-valmsg-for="_SaleTax" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <label>@Resources.Language.Total</label>
+                    <input type="text" id="_SaleTotal" name="_SaleTotal" data-val="true" class="uif-input rightAlign"
+                           data-val-required="@Resources.Language.RequiredField" disabled="disabled" />
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.FirstPaymentDue</label>
+                    <input type="text" id="_SaleFirtPaymentDue" name="_SaleFirtPaymentDue" data-val="true" class="uif-datepicker"
+                           data-val-required="@Resources.Language.RequiredField" required />
+                    <span class="text-danger" data-valmsg-for="_SaleFirtPaymentDue" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.RecoveryPaymentsNumber</label>
+                    <input type="text" id="_SalePaymentsNumber" name="_SalePaymentsNumber" data-val="true" class="uif-input rightAlign"
+                           data-val-required="@Resources.Language.RequiredField" maxlength="2" required />
+                    <span class="text-danger" data-valmsg-for="_SalePaymentsNumber" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <table class="uif-table" id="tblSaleAgreedPlan" data-title="<b>@Resources.Language.AgreedPlan</b>" data-source="null" data-edit="false" data-delete="false" data-filter="false" data-paginate="false">
+                        <thead>
+                            <tr>
+                                <th data-property="Number"><b>@Resources.Language.RecoveryPaymentNumber</b></th>
+                                <th data-property="ExpirationDate"><b>@Resources.Language.DueDate</b></th>
+                                <th data-property="CurrencyDescription"><b>@Resources.Language.Currency</b></th>
+                                <th data-property="Amount" data-type="currency"><b>@Resources.Language.RecoveryAmount</b></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="uif-col-6">
+                    <table class="uif-table" id="tblSalePayedPlan" data-title="<b>@Resources.Language.PlayedPlan</b>" data-source="null" data-edit="false" data-delete="false" data-filter="false" data-paginate="false">
+                        <thead>
+                            <tr>
+                                <th data-property="PaymentNumber"><b>@Resources.Language.RecoveryPaymentNumber</b></th>
+                                <th data-property="ReceiptNumber"><b>@Resources.Language.RecoveryReceiptNumber</b></th>
+                                <th data-property="ReceiptDate"><b>@Resources.Language.ReceiptDate</b></th>
+                                <th data-property="Amount" data-type="currency"><b>@Resources.Language.RecoveryAmount</b></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<map version="2.0" type="class" name="PolicyToCancel" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="POLICY_TO_CANCEL_V_ENTITY">
+  <properties>
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="BranchName" type="String" size="50" description="BRANCH_NAME_PROPERTY" />
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="PrefixName" type="String" size="50" description="PREFIX_NAME_PROPERTY" />
+    <property name="PolicyNumber" type="Decimal" precision="12" scale="5" description="POLICY_NUMBER_PROPERTY" />
+    <property name="EndorsementNumber" type="Integer" description="ENDORSEMENT_NUMBER_PROPERTY" />
+    <property name="PayExpDate" type="DateTime" description="PAY_EXP_DATE_PROPERTY" />
+    <property name="DeclaredAmount" type="Decimal" precision="18" scale="2" description="DECLARED_AMOUNT_PROPERTY" />
+    <property name="PremiumAmount" type="Decimal" precision="18" scale="2" description="PREMIUM_AMOUNT_PROPERTY" />
+    <property name="PolicyBalance" type="Decimal" precision="38" scale="2" nullable="true" description="POLICY_BALANCE_PROPERTY" />
+    <property name="InsuredId" type="Integer" nullable="true" description="INSURED_ID_PROPERTY" />
+    <property name="InsuredName" type="String" size="8000" nullable="true" description="INSURED_NAME_PROPERTY" />
+    <property name="InsuredDocumentNumber" type="String" size="14" description="INSURED_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="IssueDate" type="DateTime" description="ISSUE_DATE_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" description="CURRENT_FROM_PROPERTY" />
+    <property name="CurrentTo" type="DateTime" nullable="true" description="CURRENT_TO_PROPERTY" />
+    <property name="EndoGroupId" type="Integer" description="ENDO_GROUP_ID_PROPERTY" />
+    <property name="EndorsementTypeCode" type="Integer" key="true" description="ENDORSEMENT_TYPE_CODE_PROPERTY" />
+    <property name="EndorsementTypeName" type="String" size="50" description="ENDORSEMENT_TYPE_NAME_PROPERTY" />
+    <property name="PolicyId" type="Integer" key="true" description="POLICY_ID_PROPERTY" />
+    <property name="AgentTypeCode" type="Integer" description="AGENT_TYPE_CODE_PROPERTY" />
+    <property name="AgentId" type="Integer" description="AGENT_ID_PROPERTY" />
+    <property name="AgentDocumentNumber" type="String" size="14" description="AGENT_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="AgentName" type="String" size="8000" nullable="true" description="AGENT_NAME_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+    <property name="BusinessTypeCode" type="Integer" description="BUSINESS_TYPE_CODE_PROPERTY" />
+    <property name="UserId" type="Integer" description="USER_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="POLICY_TO_CANCEL_V" schema="ACC" alias="POLICY_TO_CANCEL_V" update="true">
+      <columns>
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" allowNull="false" />
+        <column name="BRANCH_NAME" type="String" property="BranchName" allowNull="false" size="50" />
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" allowNull="false" />
+        <column name="PREFIX_NAME" type="String" property="PrefixName" allowNull="false" size="50" />
+        <column name="POLICY_NUMBER" type="Decimal" property="PolicyNumber" allowNull="false" size="19" precision="12" />
+        <column name="ENDORSEMENT_NUMBER" type="Int32" property="EndorsementNumber" allowNull="false" />
+        <column name="PAY_EXP_DATE" type="DateTime" property="PayExpDate" allowNull="false" />
+        <column name="DECLARED_AMT" type="Decimal" property="DeclaredAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="PREMIUM_AMT" type="Decimal" property="PremiumAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="POLICY_BALANCE" type="Decimal" property="PolicyBalance" size="19" precision="38" scale="2" />
+        <column name="INSURED_ID" type="Int32" property="InsuredId" />
+        <column name="INSURED_NAME" type="String" property="InsuredName" size="8000" />
+        <column name="INSURED_DOCUMENT_NUMBER" type="String" property="InsuredDocumentNumber" allowNull="false" size="14" />
+        <column name="ISSUE_DATE" type="DateTime" property="IssueDate" allowNull="false" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" allowNull="false" />
+        <column name="CURRENT_TO" type="DateTime" property="CurrentTo" />
+        <column name="ENDO_GROUP_ID" type="Int32" property="EndoGroupId" allowNull="false" />
+        <column name="ENDORSEMENT_TYPE_CD" type="Int16" property="EndorsementTypeCode" key="true" />
+        <column name="ENDORSEMENT_TYPE_NAME" type="String" property="EndorsementTypeName" allowNull="false" size="50" />
+        <column name="POLICY_ID" type="Int32" property="PolicyId" key="true" />
+        <column name="AGENT_TYPE_CD" type="Byte" property="AgentTypeCode" allowNull="false" />
+        <column name="AGENT_ID" type="Int32" property="AgentId" allowNull="false" />
+        <column name="AGENT_DOCUMENT_NUMBER" type="String" property="AgentDocumentNumber" allowNull="false" size="14" />
+        <column name="AGENT_NAME" type="String" property="AgentName" size="8000" />
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" allowNull="false" />
+        <column name="BUSINESS_TYPE_CD" type="Byte" property="BusinessTypeCode" allowNull="false" />
+        <column name="USER_ID" type="Int32" property="UserId" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

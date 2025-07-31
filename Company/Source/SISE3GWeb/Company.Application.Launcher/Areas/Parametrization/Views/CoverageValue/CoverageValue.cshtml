@@ -1,0 +1,103 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.CoverageValueViewModel
+
+@{
+    Layout = null;
+}
+
+@* script busqueda simple *@
+
+
+<script id="title-template" type="text/template">
+   
+        <div class="column-70">
+            @Resources.Language.titleCoverageValue
+        </div>
+        <div  class="column-30">
+            <select class="uif-select" style="color:white!important; background-color:#365380!important" id="ddlPrefixSimpleSearch" data-id="Id" data-name="DescriptionLong" data-native="false" name="ddlPrefixSimpleSearch"
+                    data-val="true"></select>
+        
+            <button class="btn background-dark" ; background-color:#365380!important" id="btnSearchAdvCovergeValue"><i class="fa fa-angle-down"></i></button>
+        </div>
+  
+</script>
+
+@*template de listview de ciudades *@
+<script id="template-coverageValue" type="text/template">
+    <div>
+
+        <div>
+            <strong>Ramo: </strong> {{Prefix.Description}}
+        </div>
+        <div>
+            <strong>Cobertura: </strong> {{Coverage.Description}}
+        </div>
+        <div>
+            <strong>Valor: </strong> {{Porcentage}}
+        </div>
+
+    </div>
+</script>
+
+<br>
+<form id="formCoverageValue" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPrefix</label>
+                    <select data-filter="true" data-native="false" class="uif-select form-control" id="ddlPrefix" name="Prefix.Id"
+                            data-id="Id" data-name="DescriptionLong"
+                            data-val="true"
+                            data-val-required="@Resources.Language.Errorfieldprefix"></select>
+                    @Html.ValidationMessageFor(model => model.Prefix.Id)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelCoverageValue</label>
+
+                    <select data-filter="true" data-native="false" class="uif-select form-control" id="ddlCoverage" name="Coverage.Id"
+                            data-id="Id" data-name="Description"
+                            data-val="true"
+                            data-val-required="@Resources.Language.ErrorfieldCoverage"></select>
+                    @Html.ValidationMessageFor(model => model.Coverage.Id)
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelValuePje</label>
+                    @Html.TextBoxFor(model => model.Porcentage, new { id = "Porcentage", placeholder = @Resources.Language.LabelValuePje })
+                    @Html.ValidationMessageFor(model => model.Porcentage)
+                </div>
+
+            </div>
+
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="lsvCoverageValue" class="uif-listview">
+            </div>
+            <h6>@Resources.Language.AlertMaxTableSearch</h6>
+        </div>
+    </div>
+
+
+
+    <script id="footer-template" type="text/template">
+        <div class="pull-right">
+            <button type="button" class="btn btn-default" id="btnSalir">@Resources.Language.ButtonExit </button>
+            <button type="button" class="btn btn-default" id="btnExportCoverageValue">
+                <span class="fa fa-download"></span>
+                @Resources.Language.ButtonExport
+            </button>
+            <button type="button" class="btn btn-default" id="btnNew">@Resources.Language.New</button>
+            <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.BtnSave </button>
+
+
+        </div>
+    </script>
+
+</form>
+

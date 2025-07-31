@@ -1,0 +1,290 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ChecksSearch;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                CODIGO HTML
+----------------------------------------------------------------------------------------------------------------------------------------------------------*@
+<style>
+    .modal-content {
+        width: 1000px;
+    }
+</style>
+
+@section Breadcrumb
+{
+<ol class="breadcrumb global-header-breadcrumb">
+    <li>@Global.AccountingAdministrative</li>
+    <li>@Global.CheckAdministration</li>
+    <li>@Global.SearchLabel @Global.Check</li>
+</ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-default" id="CheckSearchExcelExport">
+            <i class="fa fa-file-excel-o"></i> @Global.ExportListExcel
+        </button>
+        <button id="Exchange" class="btn btn-primary" role="button">
+            <i class="fa fa-exchange"></i> @Global.ExchangeCheck
+        </button>
+        <button id="Reject" class="btn btn-primary" role="button">
+            <i class="fa fa-clone"></i> @Global.Reject
+        </button>
+        <button id="Legalize" class="btn btn-primary" role="button">
+            <i class="fa fa-list"></i> @Global.Legalize
+        </button>
+        <button id="Regularize" class="btn btn-primary" role="button">
+            <i class="fa fa-check-circle-o"></i> @Global.Regularize
+        </button>
+    </footer>
+}
+
+@* Modal Canje de Cheques *@
+<div class="uif-modal" id="ExchangeCheckModal">
+    <div class="uif-alert" id="ExchangeAlert"></div>
+    <div class="uif-modalbody">
+        @Html.Partial("DialogExchangeChecks")
+    </div>
+    <div class="uif-modalbuttons">
+        <button id="CancelExchange" class="btn btn-default" data-dismiss="modal">
+            <i class="fa fa-remove"></i> @Global.Cancel
+        </button>
+        <button id="SaveExchange" class="btn btn-primary">
+            <i class="fa fa-check"></i> @Global.Accept
+        </button>
+    </div>
+</div>
+
+@* Modal Legalización de Cheques *@
+<div class="uif-modal" id="LegalizeCheckModal">
+    <div class="uif-alert" id="LegalizeAlert"></div>
+    <div class="uif-modalbody">
+        @Html.Partial("DialogTransferCheckToLegal")
+    </div>
+    <div class="uif-modalbuttons">
+        <button id="CancelLegalize" class="btn btn-default" data-dismiss="modal">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="SaveLegalize" class="btn btn-primary">
+            <i class="fa fa-check"></i>  @Global.Accept
+        </button>
+    </div>
+</div>
+
+@* Modal Rechazo de Cheques *@
+<div class="uif-modal" id="RejectionModal">
+    <div class="uif-alert" id="RejectionAlert"></div>
+    <div class="uif-modalbody">
+        @Html.Partial("CheckingRejectionDialog")
+    </div>
+    <div class="uif-modalbuttons">
+        <button id="CancelReject" class="btn btn-default" data-dismiss="modal">
+            <i class="fa fa-remove"></i> @Global.Cancel
+        </button>
+        <button id="SaveReject" class="btn btn-primary">
+            <i class="fa fa-check"></i> @Global.Accept
+        </button>
+    </div>
+</div>
+
+@* Modal de información de datos guardados *@
+<div class="uif-modal" id="SaveRejectedCheckSuccessModal">
+    <div class="uif-modalbody">
+        @Html.Partial("SaveRejectedCheckSuccessDialog")
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="PrintRejectedCheck" data-dismiss="modal">
+            <i class="fa fa-print"></i> @Global.Print
+        </button>
+        <button type="button" class="btn btn-primary" id="AcceptRejectedCheck" data-dismiss="modal">
+            <i class="fa fa-check"></i> @Global.Accept
+        </button>
+    </div>
+</div>
+
+@section Modals
+{
+    <div class="modal fade" id="SearchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="uif-panel" data-title="@Global.CheckDetails ">
+
+                    <div class="modal-header " style="padding: 10px">
+                    </div>
+                    <div class="modal-body" id="detailModal">
+                        @Html.Partial("DetailSearchCheckPartial")
+                    </div>
+                </div>
+                <div class="modal-footer " style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-primary" id="AcceptInformationModal" data-dismiss="modal">
+                        <i class="fa fa-check"></i> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   @*ESTE MODAL NO SE LO UTILIZA EN ESTA PANTALLA*@
+    @* Modal de guardado exitoso *@
+    <!-- Modal confirmación de grabación -->
+    @*<div class="modal fade" id="modalSave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="saveMessageTitle">@Global.MessageSaveConciliationTitle</label></h4>
+                </div>
+                <div class="modal-body" id="saveMessageModal">
+                    <p>@Global.MessageSaveConciliationDialog</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="SaveModalConfirmation">
+                        <i class="fa fa-check"></i> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+    @* Modal de información de datos guardados *@
+    <div class="uif-modal" id="SaveCheckSuccessModal">
+        <div class="uif-modalbody">
+            @Html.Partial("SaveCheckSuccessDialog")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-primary" @*id="AcceptInformationModal"*@ data-dismiss="modal">
+                <i class="fa fa-check"></i> @Global.Accept
+            </button>
+        </div>
+    </div>
+}
+
+
+<form id="FrmSearch" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>
+                @Global.IssuingBank:
+            </label>
+            <br />
+            <input type="hidden" id="ReceivingBank" name="ReceivingBank" />
+            <input type="text" id="CheckBank" name="CheckBank" maxlength="40" class="uif-autocomplete required"
+                   data-source="@Url.Action("GetBanks", "Billing")"
+                   data-displaykey="Value" placeholder='@Global.EnterBankName' data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="CheckBank" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>
+                @Global.CheckNumber:
+            </label>
+            <br />
+            <input type="text" id="CheckNumber" name="CheckNumber" onkeypress=" return JustNumbers(event, this); " maxlength="16" style="text-align: left" />
+        </div>
+        <div class="uif-col-3">
+            <label>
+                @Global.BankAccountNumber:
+            </label>
+            <br />
+            <input type="text" id="AccountNumber" name="AccountNumber" onkeypress=" return JustNumbers(event, this); " maxlength="16" style="text-align: left" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>
+                @Global.TransactionNumber:
+            </label>
+            <br />
+            <input type="text" id="TechnicalTransaction" name="TechnicalTransaction" onkeypress=" return JustNumbers(event, this); " maxlength="16" style="text-align: left" />
+        </div>
+        <div class="uif-col-6">
+            <label>
+                @Global.Branch:
+            </label>
+            <br />
+            <select class="uif-select form-control" id="Branches" name="Branches" data-native="true"
+                    data-source='@Url.Content("~/Accounting/Common/GetBranchs")' data-id="Id" data-name="Description" data-selectedid="@ViewBag.BranchDefault"></select>
+        </div>
+        
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer">
+                <br />
+                <button id="CleanCheckSearch" class="btn btn-default" role="button">
+                    <i class="fa fa-paint-brush"></i>  @Global.Clean
+                </button>
+                <button id="SearchCheckSearch" class="btn btn-primary" role="button">
+                    <i class="fa fa-search"></i>  @Global.Search
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="uif-alert" id="alert"></div>
+
+<div class="uif-row">
+    <div class="uif-col-12"></div>
+</div>
+
+<hr />
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" data-title="@Global.Search"
+            data-source="" id="searchCheck" data-selectiontype="single" data-filter="true" data-paginate="true">
+            <thead>
+                <tr>
+                    <th data-property="BillCode" data-visible="false">BillCode</th>
+                    <th data-property="PaymentCode" data-visible="false">PaymentCode</th>
+                    <th data-property="PaymentMethodTypeCode" data-visible="false">PaymentMethodTypeCode</th>
+                    <th data-property="BranchCode" data-visible="false">BranchCode</th>
+                    <th data-property="BranchDescription">@Global.Branch</th>
+                    <th data-property="IssuingBankCode" data-visible="false">IssuingBankCode</th>
+                    <th data-property="BankDescription">@Global.IssuingBank</th>
+                    <th data-property="ReceivingAccountNumber">@Global.BankAccountNumber</th>
+                    <th data-property="DocumentNumber">@Global.DocumentNumber</th>
+                    <th data-property="DatePayment">@Global.CheckDate</th>
+                    <th data-property="CurrencyCode" data-visible="false">@Global.Currency</th>
+                    <th data-property="CurrencyDescription">@Global.Currency</th>
+                    <th data-property="AmountFormated">@Global.Amount</th>
+                    <th data-property="Amount" data-visible="false">@Global.Amount</th>
+                    <th data-property="Status" data-visible="false">@Global.Status</th>
+                    <th data-property="StatusDescription">@Global.Status</th>
+                    <th data-property="Holder" data-visible="false">Holder</th>
+                    <th data-property="ExchangeRate" data-visible="false">ExchangeRate</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/common-validations.js")"></script>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable"  value="@ViewBag.BranchDisable"/>
+<input type="hidden" id="ViewBagAccountingDate" value="@ViewBag.AccountingDate"/>
+<input type="hidden" id="ViewBagRejectionDate" value="@ViewBag.RejectionDate"/>
+<input type="hidden" id="ViewBagMainCheckSearchLink" value="@Url.Content(Global.MainCheckSearchLink)"/>
+<input type="hidden" id="ViewBagLoadCheckRegularizationLink" value="@Url.Content(Global.LoadCheckRegularizationLink)" />
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCheckSearch")
+}

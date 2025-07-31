@@ -1,0 +1,54 @@
+﻿<script id="TechnicalBranchTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+    <div>
+        @Resources.Language.LabelPrefixTechnical: <strong class="success">{{Description}}</strong>
+        <div>
+            <strong>{{EnabledDescription}}</strong>
+        </div>
+    </div>
+    {{else ifCond Status "==" 3}}
+    <div>
+        @Resources.Language.LabelPrefixTechnical: <strong class="warning">{{Description}}</strong>
+        <div>
+            <strong>{{EnabledDescription}}</strong>
+        </div>
+    </div>
+    {{else ifCond Status "==" 4}}
+    <div>
+        @Resources.Language.LabelPrefixTechnical: <strong class="danger">{{Description}}</strong>
+        <div>
+            <strong>{{EnabledDescription}}</strong>
+        </div>
+    </div>
+    {{else }}
+    <div>
+        @Resources.Language.LabelPrefixTechnical: <strong>{{Description}}</strong>
+        <div>
+            <strong>{{EnabledDescription}}</strong>
+        </div>
+    </div>
+    {{/ifCond}}
+</script>
+
+<form class="form">
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelTechnicalBranch</label>
+            <select class="uif-select form-control" id="ddlTechnicalBranchBusiness" data-val="true" data-val-required="@Resources.Language.LabelTechnicalBranch"
+                    data-id="Id" data-name="Description" name="PrefixId" data-filter="true" data-native="false"></select>
+        </div>
+
+        <div class="uif-col-6  fit-col-secondary" id="panelTechnicalBranch">
+            <div id="listViewTechnicalBranch" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6" id="btnsTechnicalBranch">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnCancelTechnicalBranchBusiness">@Resources.Language.ButtonCancel</button>
+                <button type="button" class="btn btn-primary" id="btnSaveTechnicalBranchBusiness">@Resources.Language.ButtonSave</button>
+            </div>
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,284 @@
+﻿@{
+    Layout = null;
+}
+
+
+@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.GuaranteeViewModel
+
+@{ ViewBag.Title = Resources.Language.LabelGuarantee; }
+
+@*Template listView*@
+<script id="templateGuarantee" type="text/template">
+    <div>
+        <label>@Resources.Language.LabelDescription:</label> {{Description}} 
+        &nbsp &nbsp
+        <label>@Resources.Language.LabelNominalValue:</label> {{InsuredGuarantee.ValueAmount}}
+    </div>
+    <div>
+        <label>@Resources.Language.LabelHeaderDocumentNumber:</label> {{InsuredGuarantee.DocumentNumber}}
+        &nbsp &nbsp
+        <label>@Resources.Language.LabelClosedState:</label> {{InsuredGuarantee.CloseInd}} 
+        &nbsp &nbsp
+        <label>@Resources.Language.LabelStatus:</label> {{InsuredGuarantee.GuaranteeStatus.Description}}
+    </div>
+</script>
+
+
+@*Template listView*@
+<script id="templateGuarantors" type="text/template">
+    <div>
+        {{Name}} 
+    </div>
+    <div>
+        {{CardNro}}
+    </div>
+    <div>
+        {{Adrress}}  - @Resources.Language.Phone : {{PhoneNumber}}
+    </div>
+    <div>
+        {{CityText}}
+    </div>
+</script>
+
+<div id="modalDocumentatioReceived">
+    @Html.Partial("~/Areas/Person/Views/Guarantee/DocumentationReceived.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.DocumentationReceivedViewModel())
+</div>
+
+<div id="modalPrefixAssociated">
+    @Html.Partial("~/Areas/Person/Views/Guarantee/PrefixAssociated.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.PrefixAssociatedViewModel())
+</div>
+
+<div id="modalBinnacle">
+    @Html.Partial("~/Areas/Person/Views/Guarantee/Binnacle.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.BinnacleViewModel())
+</div>
+
+<div id="modalBindPolicy">
+    @Html.Partial("~/Areas/Person/Views/Guarantee/BindPolicy.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.BindPolicyViewModel())
+</div>
+
+<div id="modalGuarantors">
+    @Html.Partial("~/Areas/Person/Views/Guarantee/Guarantors.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.GuarantorsViewModel())
+</div>
+
+<div id="modalGuarantee">
+
+    @Html.HiddenFor(model=> model.ContractorId, new { id = "ContractorId" })
+    @Html.HiddenFor(model=> model.ContractorNumber, new { id = "ContractorNumber" })
+    @Html.HiddenFor(model=> model.ContractorDocumentType, new { id = "ContractorDocumentType" })
+    @Html.HiddenFor(model=> model.searchType, new { id = "searchType" })
+    @Html.HiddenFor(model=> model.Address, new { id = "Address" })
+    @Html.HiddenFor(model=> model.PhoneNumber, new { id = "PhoneNumber" })
+    @Html.HiddenFor(model=> model.CityText, new { id = "CityText" })
+    @Html.HiddenFor(model=> model.CityText, new { id = "ParamGuarantee" })
+
+    <div class="uif-row" style="padding-top:5px;">
+        <div class="uif-col-9">
+            <div class="uif-row ">
+                <div class="uif-col-8">
+                    <label>@Resources.Language.LabelSecure</label>
+                    @Html.TextBoxFor(model => model.ContractorName, new { disabled="disabled", id="inputContractorName" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+
+        <div class="uif-col col-md-9">
+            @Html.Partial("~/Areas/Person/Views/Guarantee/GuaranteeList.cshtml")
+        </div>
+         
+        <div class="uif-col-3">
+            <div class="item-bar" id="panelButtonsRight" style="display: none">
+				<ul>
+					<li>
+                        <a href="#" id="btnDocumentationReceived">@Resources.Language.LabelDocumentationReceived</a>
+                        <p id="selectedDocumentationReceived"></p>
+					</li>
+                    <li>
+                        <a href="#" id="btnPrefixAssociated">@Resources.Language.LabelPrefixAssociated</a>
+                        <p id="selectedPrefixAssociated"></p>
+                    </li>
+                    <li>
+                        <a href="#" id="btnBinnacle">@Resources.Language.LabelBinnacle</a>
+                        <p id="selectedBinnacle"></p>
+                    </li>
+                  @*<li>
+                        <a href="#" id="btnBindPolicy">@Resources.Language.LabelBindPolicy</a>
+                        <p id="selectedBindPolicy"></p>
+                    </li>*@
+				</ul>
+			</div>
+        </div>
+
+        <form id="Guarantee" name="Guarantee"> 
+            <div class="uif-col col-md-9" id="newGuaranteeForm" style="display:none;">
+                <div class="row uif-row-pc">
+                    <div class="uif-col col-md-4">
+                        <label>@Resources.Language.LabelBranch</label>
+                        <select class="uif-select form-control" data-native="false" id="selectBranchGuarantee" data-val="true" data-source="@Url.Content("~/Person/Guarantee/GetBranches")"
+                            data-val-required="@Resources.Language.ErrorDocumentControlBranch" data-id="Id" data-name="Description" name="Branch">
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Branch)
+                    </div>
+                    <div class="uif-col col-md-4">
+                        <label>@Resources.Language.LabelStatus</label>
+                        <select class="uif-select form-control" id="selectStatusGuarantee" data-native="false" data-val="true" data-source="@Url.Content("~/Person/Guarantee/GetGuaranteeStatus")"
+                            data-val-required="@Resources.Language.ErrorDocumentGuaranteeStatus" data-id="Code" data-name="Description" name="Status">
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Status)
+                    </div>
+                    <div class="uif-col col-md-2">
+                        <br>
+                        <input type="checkbox" id="IsClosed" name="IsClosed" />
+                        <label for="IsClosed"> @Resources.Language.LabelClosedState </label>
+                    </div>
+                </div>
+            </div>
+         </form>
+
+        <div class="uif-col col-md-12">
+            <ul class="nav nav-tabs uif-tab-pc" id="tabs">
+                <li class="tabGuarantee" id="optionPromissoryNote">
+                    <a href="#tabPromissoryNote" id="linkPromissoryNote" data-toggle="tab" class=""> @Resources.Language.LabelPromissoryNote</a>
+                </li>
+                <li class="tabGuarantee" id="optionMortage">
+                    <a href="#tabMortage" id="linkMortage" data-toggle="tab" class=""> @Resources.Language.LabelMortage</a>
+                </li>
+                <li class="tabGuarantee" id="optionPledge">
+                    <a href="#tabPledge" id="linkPledge" data-toggle="tab" class=""> @Resources.Language.LabelPledge</a>
+                </li>
+                <li class="tabGuarantee" id="optionCDT">
+                    <a href="#tabCDT" id="linkCDT" data-toggle="tab" class=""> @Resources.Language.LabelFixedTermDeposit</a>
+                </li>
+                <li class="tabGuarantee" id="optionOthers">
+                    <a href="#tabOthers" id="linkOthers" data-toggle="tab" class=""> @Resources.Language.LabelOthers</a>
+                </li>
+                <li class="tabGuarantee" id="optionActions">
+                    <a href="#tabActions" id="linkActions" data-toggle="tab" class=""> @Resources.Language.Actions</a>
+                </li>
+            </ul>
+            
+            <div class="tab-content">
+                <div id="tabPromissoryNote" class="tab-pane">
+                    @Html.Partial("~/Areas/Person/Views/Guarantee/PromissoryNote.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.PromissoryNoteViewModel())
+                </div>
+
+                <div id="tabMortage" class="tab-pane">
+                    @Html.Partial("~/Areas/Person/Views/Guarantee/Mortage.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.MortageViewModel())
+                </div>
+
+                <div id="tabPledge" class="tab-pane">
+                    @Html.Partial("~/Areas/Person/Views/Guarantee/Pledge.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.PledgeViewModel())
+                </div>
+
+                <div id="tabCDT" class="tab-pane">
+                    @Html.Partial("~/Areas/Person/Views/Guarantee/FixedTermDeposit.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.FixedTermDepositViewModel())
+                </div>
+
+                <div id="tabOthers" class="tab-pane">
+                    @Html.Partial("~/Areas/Person/Views/Guarantee/Others.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.OthersViewModel())
+                </div>
+
+                <div id="tabActions" class="tab-pane">
+                    @Html.Partial("~/Areas/Person/Views/Guarantee/Actions.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.ActionsViewModel())
+                </div>
+            </div> 
+        </div>
+    </div>
+@{
+    ViewBag.Title = "Datos Contragarantias";
+}
+
+ @section Toolbar
+    {
+        <div class="app-header">
+            <div class="uif-row">
+                <div class="uif-col-12">
+
+                    <div id="buttonsGuarantee" class="pull-right">
+                        <button type="button" class="btn btn-danger" id="btnCancelGuarantee">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonCancel
+                        </button>
+
+                         <button class="btn btn-primary" id="btnRecordGuarantee">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonSaveAndQuit
+                        </button>
+                    </div>
+
+                    <div id="buttonsGuarantors" class="pull-right">
+                        <button class="btn btn-primary" id="btnRecordGuarantors">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonAccept
+                        </button>
+
+                        <button type="button" class="btn btn-danger" id="btnCancelGuarantors">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonCancel
+                        </button>
+                    </div>
+
+                    <div id="buttonsBindPolicy" class="pull-right">
+                        <button type="button" class="btn btn-danger" id="btnCancelBindPolicy">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonCancel
+                        </button> 
+
+                        <button type="submit" class="btn btn-primary" id="btnNewBindPolicy">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonAccept
+                        </button>  
+                    </div>
+
+                    <div id="buttonsBinnacle" class="pull-right">
+                        <button type="button" class="btn btn-danger" id="btnCancelBinnacle">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.LabelQuit
+                        </button> 
+
+                        <button class="btn btn-primary" id="btnNewBinnacle" type="submit">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonSave
+                        </button>  
+                    </div>
+
+                    <div id="buttonsPrefixAssociated" class="pull-right">
+                        <button class="btn btn-primary" id="btnNewBranchAssociated">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonAccept
+                        </button>
+
+                        <button type="button" class="btn btn-danger" id="btnCancelPrefixAssociated">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonCancel
+                        </button>    
+                    </div>
+
+                    <div id="buttonsDocumentationReceived" class="pull-right">
+                        <button class="btn btn-primary" id="btnNewDocumentatioReceived">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonAccept
+                        </button>
+
+                        <button type="button" class="btn btn-danger" id="btnCancelDocumentation">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonCancel
+                        </button>    
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }       
+</div>
+
+
+<input type="hidden" id="cityIdHidden" name="cityWolfan" value="-1">
+<input type="hidden" id="hardRiskType_Code" name="hardRiskType_Code" value="@ViewBag.HardRiskType_Code">
+
+<script>@*
+    GuaranteeViewModel = '@Html.Raw(Json.Encode(Model))';
+    GuaranteeViewModel = JSON.parse(GuaranteeViewModel);*@
+</script>

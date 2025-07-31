@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TempRiskCoverageView">
+  <collections>
+    <collection name="TempRiskCoverage" type="Sistran.Core.Application.Temporary.Entities.TempRiskCoverage, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskCoverDeduct" type="Sistran.Core.Application.Temporary.Entities.TempRiskCoverDeduct, 
+                Core.Temporary.Entities"></collection>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, 
+                Core.Quotation.Entities"></collection>
+  <collection name="GroupCoverage" type="Sistran.Core.Application.Product.Entities.GroupCoverage, 
+                Core.Product.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="TempRiskCoverage" destination="TempRiskCoverDeduct" name="TempRiskCoverageTempRiskCoverDeduct" type="Left">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="TempRiskCoverage" destination="Coverage" name="TempRiskCoverageCoverage" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="Coverage" destination="GroupCoverage" name="CoverageGroupCoverage" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+  </relations>
+</view>

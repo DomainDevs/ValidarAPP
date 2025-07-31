@@ -1,0 +1,133 @@
+﻿<!--Underwriting-->
+@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.PolicyModelsView
+<script id="advancedSearchTemplate" type="text/template">
+    <div>
+        @Resources.Language.Temporal: {{Id}} | @Resources.Language.TitleProduct: {{Product.Description}} | @Resources.Language.LabelBranch: <strong>  {{Branch.Description}} </strong>
+    </div>
+    <div>
+        @Resources.Language.Endorsement: {{Endorsement.EndorsementTypeDescription}} | @Resources.Language.LabelPrefix: {{Prefix.Description}}
+    </div>
+    <div>
+        @Resources.Language.LabelIssuanceDate: {{IssueDate}} | @Resources.Language.LabelTotalSumInsured {{Summary.AmountInsured}}
+    </div>
+    <div>
+        @Resources.Language.LabelTableTotalPremium: <strong class="danger">{{Summary.FullPremium}}</strong>
+    </div>
+</script>
+<!--<script id="policies-template" type="text/template">
+    <div>
+        <span>@Global.Policy:<strong> {{PolicyNumber}}</strong> | @Global.EndorsementNumber:<strong> {{EndorsementNumber}}</strong></span>
+        | <span>@Global.Branch:<strong> {{BranchName}}</strong> | @Global.Prefix: <strong>{{PrefixName}}</strong></span>
+        <br />
+        <span>@Global.DocumentNumber:<strong> {{PayerDocumentNumber}}</strong> | @Global.Payer:<strong> {{PayerName}}</strong></span>
+        <br />
+        <span>@Global.QuotaNumber:<strong> {{QuotaNumber}}</strong></span>
+    </div>
+    <div class="text-justify">
+        <div class="number">@Global.QuotaValue: $ {{QuotaValue}}</div>
+    </div>
+</script>
+<!--
+<script id="ItemToApplyViewTemplate" type="text/template">
+    <div><label><b>@Global.BranchPrefixPolicyEndorsement</b>:</label> <span class="label label-warning">{{BranchPrefixPolicyEndorsement}}</span> </div>
+    <div><label><b>@Global.Quota:</b></label> {{PaymentNumber}}</div>
+    <div><label><b>@Global.Currency:</b></label> {{CurrencyDescription}} </div>
+    <div><label><b>@Global.PayExpDate:</b></label> {{PaymentExpirationDate}}</div>
+    <div><label><b>@Global.DocNumPayer:</b></label> {{PayerDocumentNumberName}} </div>
+    <div><label><b>UPD:</b></label> {{Upd}} </div>
+    <div><label><b>@Global.QuotaValue:</b></label> {{PaymentAmount}}</div>
+    <div><label><b>@Global.DialogCommissionRetainedCommissionGranted:</b></label> {{DiscountedCommission}}</div>
+    <div><label><b>@Global.ValueToCollect:</b></label> {{ValueToCollect}}</div>
+    <div><label><b>@Global.Balance:</b></label> {{PaymentAmount}} </div>
+    <div><label><b>@Global.AgentDocumentNumber:</b></label> {{PolicyAgentDocumentNumber}}</div>
+    <div><label><b>@Global.DialogCommissionRetainedOutstandingCommission:</b></label> {{PendingCommission}}</div>
+    <div><label><b>@Global.DialogDepositPremiumsOverPayment:</b></label> {{ExcessPayment}}</div>
+    <di hidden="hidden">{{CurrencyId}}</di>
+</script>-->
+<div class="uif-alert" id="alertAdvanced"></div>
+<form class="form" id="formAdvancedTemporal">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearchTemporal</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelBranch</label>
+            <select class="uif-select form-control" id="selectBranchAdvanced" data-native="false" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlBranch"
+                    data-id="Id" data-name="Description" name="BranchId"></select>
+            @Html.ValidationMessageFor(model => model.BranchId)
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelPrefixCommercial</label>
+            <select class="uif-select form-control" id="selectPrefixCommercialAdvanced" data-native="false" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"
+                    data-id="Id" data-name="Description" name="PrefixId"></select>
+            @Html.ValidationMessageFor(model => model.PrefixId)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.Policy</label>
+            @Html.TextBoxFor(model => model.Id, new { id = "inputPolicyAdvanced" })
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Resources.Language.Endorsement</label>
+            <input type="text" id="ChangeAmountEndorsement" name="_ChangeAmountEndorsement" disabled="disabled" style="width: 100%" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Resources.Language.Quota</label>
+            <input type="text" id="DepositAmountPayment" name="DepositAmountPayment" disabled="disabled" style="width: 100%" />
+        </div>
+        <div class="uif-col-3">
+            <div class="without-label">
+                <button type="button" name="name" id="btnAdvancedSearch" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-xs-6">
+            <label>@Resources.Language.Currency</label>
+            @Html.DropDownList("selectCashCurrency", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                data_id = "Id",
+                data_name = "Description",
+                data_native = "true",
+                data_val = "true",
+                data_val_required = @Resources.Language.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="selectCashCurrency" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Resources.Language.Endorsement</label>
+            <input type="text" id="ChangeAmountEndorsement" name="_ChangeAmountEndorsement" disabled="disabled" style="width: 100%" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Resources.Language.Quota</label>
+            <input type="text" id="DepositAmountPayment" name="DepositAmountPayment" disabled="disabled" style="width: 100%" />
+        </div>
+        <div class="uif-col-3">
+            <div class="without-label">
+                <button type="button" name="name" id="btnAdvancedSearch" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listViewSearchAdvanced">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchAdvTemp" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoadTemporal" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+

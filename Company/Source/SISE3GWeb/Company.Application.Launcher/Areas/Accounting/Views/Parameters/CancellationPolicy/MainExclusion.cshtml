@@ -1,0 +1,119 @@
+﻿
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.MenuParamtertExclusion;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameters</li>
+        <li>@Global.PolicyAutomaticCancellation</li>
+        <li class="active">@Global.MenuParamtertExclusion</li>
+    </ol>
+}
+
+<!-- Modal de ingreso de datos -->
+<form id="addExclusionForm" onsubmit="return false" class="form">
+    <div class="uif-modal" id="modalExclusion">
+        <div class="uif-modalbody">
+            @Html.Partial("../Parameters/CancellationPolicy/ExclusionModal")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+            <button type="submit" class="btn btn-primary" id="saveExclusion" onclick="return false">@Global.Save</button>
+        </div>
+    </div>
+</form>
+
+<!-- /.Modal de Eliminación -->
+<div class="modal fade" id="modalDeleteExclusionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times-circle">
+                    </i>
+                </button>
+                <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+            </div>
+            <div class="modal-body" id="deleteMessageModal">
+                <p>@Global.DeleteConfirmationMessage</p>
+            </div>
+            <div class="modal-footer" style="padding: 10px 20px 10px">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="deleteExclusion">
+                    <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <label>@Global.Type</label>
+        <select class="uif-select form-control" id="selectExclusionType" name="selectExclusionType"
+                data-source='@Url.Content("~/Accounting/Parameters/LoadPersonType")' data-id="Id"
+                data-name="Description" data-native="true"></select>
+        <span class="text-danger" data-valmsg-for="selectInsuredType" data-valmsg-replace="true" />
+    </div>
+</div>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="AlertExclusion"></div>
+    </div>
+</div>
+
+<div class="uif-row" id="DivExclusionPersonType" hidden="hidden">
+    <div class="uif-col-12">
+        <table class="uif-table"
+               id="tableExclusionPerson" data-exporttocsv="false" data-add="true" data-edit="false"
+               data-delete="true" data-selectiontype="none" data-filter="true"
+               data-paginate="true" data-title="@Global.Details">
+            <thead>
+                <tr>
+                    <th data-property="Id" data-visible="false">Id</th>
+                    <th data-property="DescriptionInsuredType">@Global.Type</th>
+                    <th data-property="DocumentNumber">@Global.DocumentNumber</th>
+                    <th data-property="Name">@Global.CoverageClaimDialog_names</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="uif-row" id="DivExclusionPolicy" hidden="hidden">
+    <div class="uif-col-12">
+        <table class="uif-table"
+               id="tableExclusionPolicy" data-exporttocsv="false" data-add="true" data-edit="false"
+               data-delete="true" data-selectiontype="none" data-filter="true"
+               data-paginate="true" data-title="@Global.Details">
+            <thead>
+                <tr>
+                    <th data-property="Id" data-visible="false">Id</th>
+                    <th data-property="DescriptionInsuredType">@Global.Type</th>
+                    <th data-property="BranchCd" data-visible="false">branchId</th>
+                    <th data-property="BranchDescription">@Global.Branch</th>
+                    <th data-property="PrefixCd" data-visible="false">PrefixId</th>
+                    <th data-property="PrefixDescription">@Global.Prefix</th>
+                    <th data-property="PolicyNumber">@Global.Policy</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainExclusion")
+}

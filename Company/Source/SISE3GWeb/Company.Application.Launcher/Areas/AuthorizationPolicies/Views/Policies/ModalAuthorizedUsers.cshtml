@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+<div class="uif-modal" id="modalAuthorizedUsers">
+    <div class="uif-modalbody">
+        <div class="row">
+            <form class="form" id="formModalAuthorizedUsers">
+                <div class="uif-col-6">
+                    <label class="field-required">Numero de autorizaciones</label>
+                    <input type="text" id="txtNumberAut" name="txtNumberAut" required="required"/>
+                    <span class="field-validation-valid" data-valmsg-for="txtNumberAut" data-valmsg-replace="true"></span>
+
+                </div>
+                <div class="uif-col-6">
+                    <label>Jerarquia</label>
+                    <select class="uif-select" id="ddlHierarchyAutUsers" data-val="true" data-id="Id" data-native="false" data-name="Description"></select>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <form class="uif-inline" id="editUserAut">
+                    <input type="hidden" name="hdnmIndexAutUser" id="hdnmIndexAutUser" value="" />
+                    <div class="row">
+                        <div class="column">
+                            <input type="checkbox" name="chkAutAutorized" id="chkAutAutorized" value="" />
+                            <label for="chkAutAutorized">Autorizador</label>
+                        </div>
+                        <div class="column">
+                            <input type="checkbox" name="chkAutRequired" id="chkAutRequired" value="" />
+                            <label for="chkAutRequired">Requerido</label>
+                        </div>
+                        <div class="column">
+                            <input type="checkbox" name="chkAutDefault" id="chkAutDefault" value="" />
+                            <label for="chkAutDefault">Default</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <table class="uif-table" id="tableAutUsers"
+                       data-title=""
+                       data-add="false"
+                       data-edit="true"
+                       data-delete="false"
+                       data-filter="false"
+                       data-sort="true"
+                       data-selectiontype="none"
+                       data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="Account">Usuario</th>
+                            <th data-property="Authorized" data-type="boolean">Autorizador</th>
+                            <th data-property="Required" data-type="boolean">Requerido</th>
+                            <th data-property="Default" data-type="boolean">Default</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0640"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSendAuthorizedUsers">@Resources.Language.ButtonSave</button>
+        }
+
+    </div>
+</div>

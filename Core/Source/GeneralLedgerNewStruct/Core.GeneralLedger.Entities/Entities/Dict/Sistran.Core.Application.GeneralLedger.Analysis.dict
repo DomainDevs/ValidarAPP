@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="Analysis" namespace="Sistran.Core.Application.GeneralLedger" file-version="1.0" description="ANALYSIS_ENTITY">
+  <properties>
+    <property name="AnalysisId" type="Integer" key="true" description="ANALYSIS_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="Description" type="String" size="50" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="AccountingNature" type="Integer" nullable="true" description="ACCOUNTING_NATURE_PROPERTY" />
+    <property name="RequireOrigin" type="Boolean" nullable="true" description="REQUIRE_ORIGIN_PROPERTY" />
+    <property name="ControlBalance" type="Boolean" nullable="true" description="CONTROL_BALANCE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="ANALYSIS" schema="GL" alias="ANALYSIS" update="true">
+      <columns>
+        <column name="ANALYSIS_ID" type="Int32" property="AnalysisId" key="true" identity ="true"/>
+        <column name="DESCRIPTION" type="String" property="Description" size="50" />
+        <column name="ACCOUNTING_NATURE" type="Int32" property="AccountingNature" />
+        <column name="REQUIRE_ORIGIN" type="Boolean" property="RequireOrigin" />
+        <column name="CONTROL_BALANCE" type="Boolean" property="ControlBalance" />
+      </columns>
+    </table>
+  </tables>
+</map>

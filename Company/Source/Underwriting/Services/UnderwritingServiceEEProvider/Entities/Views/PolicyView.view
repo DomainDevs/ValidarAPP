@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="PolicyView">
+  <collections>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="CoPolicy" type="Sistran.Core.Application.Issuance.Entities.CoPolicy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, 
+               Core.Issuance.Entities"></collection>
+    <collection name="GroupEndorsement" type="Sistran.Core.Application.Issuance.Entities.GroupEndorsement, 
+                Core.Issuance.Entities"></collection>
+    <collection name="PolicyAgent" type="Sistran.Core.Application.Issuance.Entities.PolicyAgent, 
+               Core.Issuance.Entities"></collection>
+    <collection name="CommissAgent" type="Sistran.Core.Application.Issuance.Entities.CommissAgent, 
+                Core.Issuance.Entities"></collection>
+    <collection name="EndorsementPayer" type="Sistran.Core.Application.Issuance.Entities.EndorsementPayer, 
+                Core.Issuance.Entities"></collection>
+    <collection name="PayerPayment" type="Sistran.Core.Application.Issuance.Entities.PayerPayment, 
+                Core.Issuance.Entities"></collection>
+    <collection name="PayerComp" type="Sistran.Core.Application.Issuance.Entities.PayerComp, 
+               Core.Issuance.Entities"></collection>
+    <collection name="CoinsuranceAccepted" type="Sistran.Core.Application.Issuance.Entities.CoinsuranceAccepted, 
+               Core.Issuance.Entities"></collection>
+    <collection name="CoinsuranceAssigned" type="Sistran.Core.Application.Issuance.Entities.CoinsuranceAssigned, 
+               Core.Issuance.Entities"></collection>
+    <collection name="PolicyClause" type="Sistran.Core.Application.Issuance.Entities.PolicyClause, 
+               Core.Issuance.Entities"></collection>
+    <collection name="TempPolicyControl" type="Sistran.Core.Application.Issuance.Entities.TempPolicyControl, 
+                Core.Issuance.Entities"></collection>
+    <collection name="PayerFinancialPremium" type="Sistran.Company.Application.Issuance.Entities.PayerFinancialPremium, 
+                Company.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+  <relation source="Policy" destination="CoPolicy" name="PolicyCoPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Policy" destination="Endorsement" name="PolicyEndorsement" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Endorsement" destination="GroupEndorsement" name="EndorsemenGroupEndorsement" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>     
+    </relation>
+    <relation source="Endorsement" destination="PolicyAgent" name="EndorsementPolicyAgent" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>     
+    </relation>
+    <relation source="Endorsement" destination="CommissAgent" name="EndorsementCommissAgent" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="Endorsement" destination="EndorsementPayer" name="EndorsementPayer" type="Left">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>     
+    </relation>
+    <relation source="Endorsement" destination="PayerPayment" name="EndorsementPayerPayment" type="Left">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>      
+    </relation>
+    <relation source="Endorsement" destination="PayerComp" name="EndorsementPayerComp" type="Left">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="Endorsement" destination="CoinsuranceAccepted" name="EndorsementCoinsuranceAccepted" type="Left">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+     
+    </relation>
+    <relation source="Endorsement" destination="CoinsuranceAssigned" name="EndorsementCoinsuranceAssigned" type="Left">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>     
+    </relation>
+    <relation source="Endorsement" destination="PolicyClause" name="EndorsementPolicyClause" type="Left">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>      
+    </relation>
+    <relation source="Endorsement" destination="TempPolicyControl" name="PolicyTempPolControl" type="Left">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="Endorsement" destination="PayerFinancialPremium" name="FinancialPremium" type="Left">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+  </relations>
+</view>

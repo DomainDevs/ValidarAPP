@@ -1,0 +1,65 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.BankNetwork
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.Description</label>
+            <br />
+            @Html.TextBoxFor(model => model.Description, new { 
+                data_val = "true",
+                data_val_required = @Global.RequiredField,
+                @onblur = "this.value = this.value.toUpperCase();" 
+            })
+            <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.TypeTax</label>
+            <select class="uif-select form-control" id="selectTaxCategory" name="selectTaxCategory" data-native="true"
+                    data-source='@Url.Content("~/Accounting/Common/GetTaxCategory")' data-id="Id" data-name="Description"
+                    data-val="true" data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="selectTaxCategory" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.CommissionValue</label>
+            @Html.TextBoxFor(model => model.Commission.Value, new
+       {
+           id = "Commission_LocalAmount",
+           maxlength = "15",
+           style = "text-align: right",
+           @onkeypress = "return OnlyDecimalNumber(event,this)",
+           data_val = "true",
+           data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="Commission_LocalAmount" data-valmsg-replace="true" />
+            <span class="text-danger" data-valmsg-for="Commission.Value" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.RetriesNumber</label>
+            @Html.TextBoxFor(model => model.RetriesNumber, new
+            {
+                @data_mask = "00000",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="RetriesNumber" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <br />
+            <span class="glyphicon glyphicon-check" id="checkHasTax"></span><input type="checkbox" id="HasTaxCheck"> @Global.HasTax
+        </div>
+        <div class="uif-col-6">
+            <br />
+            <span class="glyphicon glyphicon-check" id="checkRequiresNotification"></span><input type="checkbox" id="RequiresNotificationCheck"> @Global.PreNotifications
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+
+

@@ -1,0 +1,139 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.ConditionTextViewModel
+
+@{
+    Layout = null;
+}
+
+@* script busqueda simple *@
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        Texto Precatalogado
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "searchConditionText", @placeholder = "Buscar texto precatalogado" })
+    </div>
+</script>
+
+@*template de listview de ciudades *@
+<script id="template-cities" type="text/template">
+    <div>
+
+        <div>
+            <strong>Título: </strong> {{Title}}({{Id}})
+        </div>
+        <div>
+            <strong>Nivel: </strong> {{ConditionTextLevel.Description}}
+        </div>
+        <div>
+            <strong>Tipo de riesgo: </strong> {{ConditionTextLevelType.Description}}
+        </div>
+    </div>
+</script>
+
+<br>
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExit
+            </span>
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExport
+            </span>
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+        </button>
+    </div>
+</script>
+<form id="formConditionText" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">Título de Texto</label>
+                    @Html.TextBox("Id", null, new { id = "Title", @placeholder = "Titulo del Texto" })
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">Nivel de Condición</label>
+                    <select data-filter="true" data-native="false" class="uif-select form-control" id="ddlConditionLevel" name="ddlStates"
+                            data-id="Id" data-name="DescriptionLong"
+                            data-val="true">
+                            @*data-val-required="@Resources.Language.ErrorfieldState">*@
+                    </select>
+                    <span class="text-danger" data-valmsg-for="State" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-6" id="divConditionLevelType">
+                    <label class="field-required" id="TxtConditionLevelType">@Resources.Language.LabelRiskType</label>
+                    <select data-filter="true" data-native="false" class="uif-select form-control" id="ddlConditionLevelType"
+                            data-id="Id" data-name="DescriptionLong"
+                            data-val="true">
+                            @*data-val-required="@Resources.Language.ErrorfieldState">*@
+
+                    </select>
+                    <span class="text-danger" data-valmsg-for="ConditionLevelType" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-6 Cobertura" id="divCoverage">
+                    <label class="field-required">@Resources.Language.LabelCoverage</label>
+                    <input class="uif-input-search" id="Coverage" name="Coverage" placeholder="Cobertura" data-id="Id" data-name="Description" type="text" data-val="true" data-val-required="true">
+                </div>
+            </div>
+            <div class="row Cobertura" sstyle="background-color:black">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelTechnicalPlanInsuredObject</label>
+                    @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "ObjectInsurance", @placeholder = "Objeto del Seguro" })
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelProtection</label>
+                    @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "Protection", @placeholder = "Amparo" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div>
+                        @Html.TextAreaFor(model => model.Body, new { id = "Body", cols = "12", rows = "22", @class = "textarea" })
+                    </div>
+                </div>
+                </div>
+            </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="lsvConditionText" class="uif-listview">
+            </div>
+            <h6>@Resources.Language.AlertMaxTableSearch</h6>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                        @*<i class="fa fa-download" aria-hidden="true"></i>*@
+                        <span class="" aria-hidden="true">  </span>
+                        @*@Resources.Language.ButtonExport*@
+                <button type="button" class="btn btn-default" id="btnNew">@Resources.Language.New</button>
+                @*<button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.BtnSave </button>*@
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+@*Modal*@
+<div class="uif-modal" id="modalListSearchCoverage">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/Clauses/ListCoverage.cshtml")
+    </div>
+</div>

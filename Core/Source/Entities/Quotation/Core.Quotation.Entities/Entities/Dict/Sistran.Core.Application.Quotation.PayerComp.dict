@@ -1,0 +1,54 @@
+<map version="2.0" type="class" name="PayerComp" namespace="Sistran.Core.Application.Quotation" file-version="1.0" description="PAYER_COMP_ENTITY">
+  <properties>
+    <property name="QuotationId" type="Integer" key="true" description="QUOTATION_ID_PROPERTY" />
+    <property name="CustomerTypeCode" type="Integer" key="true" description="CUSTOMER_TYPE_CODE_PROPERTY" />
+    <property name="PayerId" type="Integer" key="true" description="PAYER_ID_PROPERTY" />
+    <property name="ComponentCode" type="Integer" key="true" description="COMPONENT_CODE_PROPERTY" />
+    <property name="PayerCompId" type="Integer" key="true" description="PAYER_COMP_ID_PROPERTY" />
+    <property name="RateTypeCode" type="Integer" description="RATE_TYPE_CODE_PROPERTY" />
+    <property name="Rate" type="Decimal" precision="18" scale="4" description="RATE_PROPERTY" />
+    <property name="CalcBaseAmount" type="Decimal" precision="18" scale="2" description="CALC_BASE_AMOUNT_PROPERTY" />
+    <property name="ComponentAmount" type="Decimal" precision="18" scale="2" description="COMPONENT_AMOUNT_PROPERTY" />
+    <property name="AdditRateTypeCode" type="Integer" nullable="true" description="ADDIT_RATE_TYPE_CODE_PROPERTY" />
+    <property name="AdditRate" type="Decimal" precision="10" scale="6" nullable="true" description="ADDIT_RATE_PROPERTY" />
+    <property name="AdditCalcBaseAmount" type="Decimal" precision="18" scale="2" nullable="true" description="ADDIT_CALC_BASE_AMOUNT_PROPERTY" />
+    <property name="AdditComponentAmount" type="Decimal" precision="18" scale="2" nullable="true" description="ADDIT_COMPONENT_AMOUNT_PROPERTY" />
+    <property name="LineBusinessCode" type="Integer" nullable="true" description="LINE_BUSINESS_CODE_PROPERTY" />
+    <property name="StateCode" type="Integer" nullable="true" description="STATE_CODE_PROPERTY" />
+    <property name="CountryCode" type="Integer" nullable="true" description="COUNTRY_CODE_PROPERTY" />
+    <property name="EconomicActivityCode" type="Integer" nullable="true" description="ECONOMIC_ACTIVITY_CODE_PROPERTY" />
+    <property name="CoverageId" type="Integer" nullable="true" description="COVERAGE_ID_PROPERTY" />
+    <property name="TaxCode" type="Integer" nullable="true" description="TAX_CODE_PROPERTY" />
+    <property name="TaxCategoryCode" type="Integer" nullable="true" description="TAX_CATEGORY_CODE_PROPERTY" />
+    <property name="TaxConditionCode" type="Integer" nullable="true" description="TAX_CONDITION_CODE_PROPERTY" />
+    <property name="ExemptionPercentage" type="Decimal" precision="7" scale="4" nullable="true" description="EXEMPTION_PERCENTAGE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYER_COMP" schema="QUO" alias="PAYER_COMP" update="true">
+      <columns>
+        <column name="QUOTATION_ID" type="Int32" property="QuotationId" key="true" />
+        <column name="CUSTOMER_TYPE_CD" type="Byte" property="CustomerTypeCode" key="true" />
+        <column name="PAYER_ID" type="Int32" property="PayerId" key="true" />
+        <column name="COMPONENT_CD" type="Byte" property="ComponentCode" key="true" />
+        <column name="PAYER_COMP_ID" type="Int32" property="PayerCompId" key="true" />
+        <column name="RATE_TYPE_CD" type="Byte" property="RateTypeCode" allowNull="false" />
+        <column name="RATE" type="Decimal" property="Rate" allowNull="false" size="19" precision="18" scale="4" />
+        <column name="CALC_BASE_AMT" type="Decimal" property="CalcBaseAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="COMPONENT_AMT" type="Decimal" property="ComponentAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="ADDIT_RATE_TYPE_CD" type="Byte" property="AdditRateTypeCode" />
+        <column name="ADDIT_RATE" type="Decimal" property="AdditRate" size="19" precision="10" scale="6" />
+        <column name="ADDIT_CALC_BASE_AMT" type="Decimal" property="AdditCalcBaseAmount" size="19" precision="18" scale="2" />
+        <column name="ADDIT_COMPONENT_AMT" type="Decimal" property="AdditComponentAmount" size="19" precision="18" scale="2" />
+        <column name="LINE_BUSINESS_CD" type="Int16" property="LineBusinessCode" />
+        <column name="STATE_CD" type="Int16" property="StateCode" />
+        <column name="COUNTRY_CD" type="Int16" property="CountryCode" />
+        <column name="ECONOMIC_ACTIVITY_CD" type="Int16" property="EconomicActivityCode" />
+        <column name="COVERAGE_ID" type="Int32" property="CoverageId" />
+        <column name="TAX_CD" type="Int16" property="TaxCode" />
+        <column name="TAX_CATEGORY_CD" type="Byte" property="TaxCategoryCode" />
+        <column name="TAX_CONDITION_CD" type="Byte" property="TaxConditionCode" />
+        <column name="EXEMPTION_PCT" type="Decimal" property="ExemptionPercentage" size="19" precision="7" scale="4" />
+      </columns>
+    </table>
+  </tables>
+</map>

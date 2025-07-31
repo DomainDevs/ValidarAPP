@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="CondTextLevel" namespace="Sistran.Core.Application.Quotation" file-version="1.0" description="COND_TEXT_LEVEL_ENTITY">
+  <properties>
+    <property name="CondTextLevelId" type="Integer" key="true" description="COND_TEXT_LEVEL_ID_PROPERTY" autonumber="id" />
+    <property name="ConditionTextId" type="Integer" description="CONDITION_TEXT_ID_PROPERTY" />
+    <property name="ConditionLevelId" type="Integer" nullable="true" description="CONDITION_LEVEL_ID_PROPERTY" />
+    <property name="IsAutomatic" type="Boolean" description="IS_AUTOMATIC_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="COND_TEXT_LEVEL" schema="QUO" alias="COND_TEXT_LEVEL" update="true">
+      <columns>
+        <column name="COND_TEXT_LEVEL_ID" type="Int32" property="CondTextLevelId" key="true" />
+        <column name="CONDITION_TEXT_ID" type="Int32" property="ConditionTextId" allowNull="false" />
+        <column name="CONDITION_LEVEL_ID" type="Int32" property="ConditionLevelId" />
+        <column name="IS_AUTOMATIC" type="Boolean" property="IsAutomatic" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Decimal" value="105" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

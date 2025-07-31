@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="EndorsementRiskCoverageDeductView">
+  <collections>
+    <collection name="EndorsementRiskCoverage" type="Sistran.Core.Application.Issuance.Entities.EndorsementRiskCoverage, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskCoverage" type="Sistran.Core.Application.Issuance.Entities.RiskCoverage, 
+                 Core.Issuance.Entities"></collection>
+    <collection name="RiskCoverDeduct" type="Sistran.Core.Application.Issuance.Entities.RiskCoverDeduct, 
+                 Core.Issuance.Entities"></collection>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="SubLineBusiness" type="Sistran.Core.Application.Common.Entities.SubLineBusiness, 
+                 Core.Common.Entities"></collection>
+    <collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, 
+                 Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="EndorsementRiskCoverage" destination="RiskCoverage" name="EndoRiskCoverageRiskCoverage" type="Inner">
+      <property left="RiskCoverId" type="Equal" right="RiskCoverId"></property>
+    </relation>
+    <relation source="RiskCoverage" destination="RiskCoverDeduct" name="RiskCoverageDeduct" type="Left">
+      <property left="RiskCoverId" type="Equal" right="RiskCoverId"></property>
+    </relation>
+    <relation source="RiskCoverage" destination="Coverage" name="RiskCoverageCoverage" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="Coverage" destination="SubLineBusiness" name="CoverageSubLineBusiness" type="Inner">
+      <property left="SubLineBusinessCode" type="Equal" right="SubLineBusinessCode"></property>
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="Coverage" destination="InsuredObject" name="CoverageInsuredObject" type="Inner">
+      <property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+    </relation>
+  </relations>
+</view>

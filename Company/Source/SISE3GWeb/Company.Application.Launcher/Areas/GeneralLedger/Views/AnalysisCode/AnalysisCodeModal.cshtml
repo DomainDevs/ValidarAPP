@@ -1,0 +1,64 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.AnalysisCodesModel
+
+@{
+    ViewBag.Title = "AnalysisCodeModal";
+    Layout = null;
+}
+
+<form id="addAnalysisCode" onsubmit=" return false ">
+    <div class="uif-modalbody">
+        @Html.HiddenFor(m => m.Id)
+        <div class="form">
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <span class="required-color">*</span>
+                    @Html.Label(Global.Description, htmlAttributes: new {@class = "control-label"})
+                    @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej.: Analisis", onblur = "this.value = this.value.toUpperCase();" } })
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
+                <div class="uif-col-3">
+                    <span class="required-color">*</span>
+                    @Html.Label(Global.Nature, htmlAttributes: new {@class = "control-label"})
+                    @Html.DropDownListFor(m => m.AccountingNatureId, Enumerable.Empty<SelectListItem>(), new {@class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetNatures"), data_id = "AccountingNatureId", data_name = "Description", data_selectedid = @Model.AccountingNatureId})
+                    @Html.ValidationMessageFor(m => m.AccountingNatureId)
+                </div>
+                <div class="uif-col-3">
+                    @Html.Label(Global.RequireOrigin, htmlAttributes:
+                        new
+                        {
+                            @class = "control-label"
+                        })
+                    <div class="checkbox">
+                        <input type="checkbox" id="CheckModule" checked="@Model.CheckModule">
+                        <label for="CheckModule"></label>
+                    </div>
+                </div>
+                <div class="uif-col-3">
+                    @Html.Label(Global.ControlBalance, htmlAttributes:
+                        new
+                        {
+                            @class = "control-label"
+                        })
+                    <div class="checkbox">
+                        <input type="checkbox" id="CheckBalance" checked="@Model.CheckBalance">
+                        <label for="CheckBalance"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="cancelButton" data-dismiss="modal" data-role="button">
+            <i class="fa fa-times"></i> @Global.Cancel
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0759"))
+        {
+            <button type="submit" class="btn btn-primary" id="saveButton" onclick=" return false " data-role="button">
+                <i class="fa fa-floppy-o"></i> @Global.Save
+            </button>
+        }
+        </div>
+</form>
+
+

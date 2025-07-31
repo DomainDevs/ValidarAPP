@@ -1,0 +1,240 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.AccountingAccountModel
+
+@{
+    ViewBag.Title = "AccountingAccountModal";
+}
+
+@Html.HiddenFor(model => model.AccountingAccountId)
+@Html.HiddenFor(model => model.AccountingAccountParentId)
+
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column" id="titleClaimVehicle">
+        Proof
+    </div>
+</script>
+
+<div class="uif-row">
+
+
+    <script id="title-template" type="text/template">
+        <div class="column-40">
+            @Resources.Language.DataPolicy
+        </div>
+        <div class="column-30 no-padding">
+            <div class="date important">
+                <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate"></span>
+            </div>
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputTemporal", @placeholder = @Resources.Language.SearchTemporal })
+            <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </script>
+
+
+
+
+    <div class="uif-row">
+        <div class="uif-col col-md-4 col-md-offset-8">
+            <div class="input-with-buttons" id="accountingSearch">
+                <h1></h1>
+                @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "AccountingIdTxt", @placeholder = "dehibyb" })
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="uif-col-4">
+        <span class="required-color">*</span>
+        @Html.LabelFor(model => model.AccountingAccountNumber, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.AccountingAccountNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej.: Nro." } })
+        @Html.ValidationMessageFor(model => model.AccountingAccountNumber)
+    </div>
+    <div class="uif-col-8">
+        <span class="required-color">*</span>
+        @Html.LabelFor(model => model.AccountingAccountName, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.AccountingAccountName, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej.: De ahorro.", onblur = "this.value = this.value.toUpperCase();" } })
+        @Html.ValidationMessageFor(model => model.AccountingAccountName)
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-3">
+        <span class="required-color">*</span>
+        @Html.LabelFor(model => model.BranchId, htmlAttributes: new { @class = "control-label" })
+        <select class="uif-select form-control" id="BranchId"
+                data-source='@Url.Content("~/GeneralLedger/Base/GetBranches")'
+                data-id="Id" data-name="Description" name="BranchId"
+                data-val="true"></select>
+        <span class="text-danger" data-valmsg-for="BranchId" data-valmsg-replace="true">
+        </span>
+    </div>
+    <div class="uif-col-3">
+        <span class="required-color">*</span>
+        @Html.LabelFor(model => model.PrefixId, htmlAttributes:
+                                                         new
+                                                         {
+                                                             @class = "control-label"
+                                                         })
+        <select class="uif-select form-control" id="PrefixId"
+                data-source='@Url.Content("~/GeneralLedger/Base/GetPrefixes")'
+                data-id="Id" data-name="Description" name="PrefixId"
+                data-val="true"></select>
+        <span class="text-danger" data-valmsg-for="PrefixId" data-valmsg-replace="true">
+        </span>
+    </div>
+    <div class="uif-col-3">
+        <span class="required-color">*</span>
+        @Html.LabelFor(model => model.AccountingNatureId, htmlAttributes:
+                                                         new
+                                                         {
+                                                             @class = "control-label"
+                                                         })
+        <select class="uif-select form-control" id="AccountingNatureId"
+                data-source='@Url.Content("~/GeneralLedger/Base/GetNatures")'
+                data-id="AccountingNatureId" data-name="Description" name="AccountingNatureId"
+                data-val="true"
+                data-val-required="@Global.RequiredField"></select>
+        <span class="text-danger" data-valmsg-for="AccountingNatureId" data-valmsg-replace="true">
+        </span>
+    </div>
+    <div class="uif-col-3">
+        <span class="required-color">*</span>
+        @Html.LabelFor(model => model.CurrencyId, htmlAttributes:
+                                                         new
+                                                         {
+                                                             @class = "control-label"
+                                                         })
+        <select class="uif-select form-control" id="CurrencyId"
+                data-source='@Url.Content("~/GeneralLedger/Base/GetCurrencies")'
+                data-id="Id" data-name="Description" name="CurrencyId"
+                data-val="true"></select>
+        <span class="text-danger" data-valmsg-for="CurrencyId" data-valmsg-replace="true">
+        </span>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-4">
+        <span class="required-color">*</span>
+        @Html.Label("Tipo", htmlAttributes:
+                                                         new
+                                                         {
+                                                             @class = "control-label"
+                                                         })
+        <select class="uif-select form-control" id="type"
+                data-source='@Url.Content("~/GeneralLedger/Base/GetAccountingAccountParents")'
+                data-id="AccountingAccountId" data-name="Description" name="type"
+                data-val="true"
+                data-val-required="@Global.RequiredField"></select>
+        <span class="text-danger" data-valmsg-for="type" data-valmsg-replace="true">
+        </span>
+    </div>
+    <div class="uif-col-4">
+        @Html.LabelFor(model => model.AnalysisId, htmlAttributes: new { @class = "control-label" })
+        <div class="input-group">
+            @Html.HiddenFor(m => m.RequireAnalysis)
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-unchecked" id="checkAnalysisId">
+                </span>
+            </span>
+            <select class="uif-select form-control" id="AnalysisId"
+                    data-source='@Url.Content("~/GeneralLedger/Base/GetAnalyses")'
+                    data-id="AnalysisCodeId" data-name="Description" name="AnalysisId"
+                    disabled="disabled"></select>
+        </div>
+    </div>
+    <div class="uif-col-4">
+        @Html.LabelFor(model => model.CostCenters, htmlAttributes:
+                                                         new
+                                                         {
+                                                             @class = "control-label"
+                                                         })
+        <select class="uif-multiselect form-control" id="costCenters"
+                data-source='@Url.Content("~/GeneralLedger/Base/GetCostCenters")'
+                data-id="CostCenterId"
+                data-name="Description"
+                data-numberdisplayed="1"
+                multiple="multiple"></select>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <hr />
+        @Html.Label(@Global.Application + ": ", htmlAttributes: new { @class = "control-label" })
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <input type="checkbox" id="EnableBilling" name="EnableBilling" />
+        <label class="control-label" for="EnableBilling">@Global.Billing</label>
+    </div>
+    <div class="uif-col-4">
+        <input type="checkbox" id="EnableAccountingTitle" name="EnableAccountingTitle" />
+        <label class="control-label" for="EnableAccountingTitle">@Global.AccountingTitle</label>
+    </div>
+    <div class="uif-col-4">
+        <input type="checkbox" id="EnableIsOfficialNomenclature" name="EnableIsOfficialNomenclature" />
+        <label class="control-label" for="EnableIsOfficialNomenclature">@Global.IsOfficialNomenclature</label>
+    </div>
+</div>
+<hr />
+<div class="uif-row">
+    <div class="uif-col-4 col-md-offset-1">
+        @Html.Label(@Global.AccountingPlanreevaluate + ": ", htmlAttributes: new { @class = "control-label" })
+    </div>
+    <div class="uif-col-4 col-md-offset-2">
+        @Html.Label(@Global.AccountingPlanreclassificationbalances + ": ", htmlAttributes: new { @class = "control-label" })
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-4 col-md-offset-1">
+        <input type="checkbox" id="ApplyReevaluate" name="ApplyReevaluate" />
+        <label class="control-label" for="ApplyReevaluate">@Global.AccountingPlanreevaluateAplicate</label>
+    </div>
+    <div class="uif-col-4 col-md-offset-2">
+        <input type="checkbox" id="ApplyReclassification" name="ApplyReclassification" />
+        <label class="control-label" for="ApplyReclassification">@Global.AccountingPlanreclassificationApplies</label>
+    </div>
+</div>
+<div class="uif-row">
+    @*<div class="uif-col-3 col-md-offset-1"  style = "display: none" id="divReevaluePositive">
+            <span class="required-color">*</span>
+            @Html.LabelFor(model => model.ReevaluePositive, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.ReevaluePositive, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej.: Nro.Positivo" } })
+            @Html.ValidationMessageFor(model => model.ReevaluePositive)
+        </div>
+        <div class="uif-col-3"  style = "display: none" id="divReevalueNegative">
+            <span class="required-color">*</span>
+            @Html.LabelFor(model => model.ReevalueNegative, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.ReevalueNegative, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej.: Nro.Ahorro"} })
+            @Html.ValidationMessageFor(model => model.ReevalueNegative)
+        </div>
+        <div class="uif-col-3" style = "display: none" id="divAccountClassify">
+            <span class="required-color">*</span>
+            @Html.LabelFor(model => model.AccountClassify, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.AccountClassify, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej.: Cta." } })
+            @Html.ValidationMessageFor(model => model.AccountClassify)
+        </div>*@
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <span class="required-color">*</span>
+        @Html.LabelFor(model => model.Comments, htmlAttributes:
+                                                              new
+                                                              {
+                                                                  @class = "control-label"
+                                                              })
+        @Html.EditorFor(model => model.Comments, new { @class = "form-control", placeholder = "Observaciones", id = "Comments", onblur = "this.value = this.value.toUpperCase();" })
+        <span class="text-danger" data-valmsg-for="kind" data-valmsg-replace="true"></span>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-6">
+
+    </div>
+</div>
+

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="BankNetworkFormatView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="BankNetworkFormatId">
+          <Column table-alias="BankNetworkFormat" name="BankNetworkFormatId" />
+        </SelectValue>
+        <SelectValue alias="BankNetworkCode">
+          <Column table-alias="BankNetworkFormat" name="BankNetworkCode" />
+        </SelectValue>
+        <SelectValue alias="BankNetworkDescription">
+          <Column table-alias="BankNetwork" name="Description" />
+        </SelectValue>
+        <SelectValue alias="FormatUsingType">
+          <Column table-alias="BankNetworkFormat" name="FormatUsingType" />
+        </SelectValue>
+        <SelectValue alias="FormatCode">
+          <Column table-alias="BankNetworkFormat" name="FormatCode" />
+        </SelectValue>
+        <SelectValue alias="FormatDescription">
+          <Column table-alias="Format" name="Description" />
+        </SelectValue>
+        <SelectValue alias="FileType">
+          <Column table-alias="Format" name="FileType" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.AutomaticDebitServices.EEProvider.Entities.BankNetworkFormat, Core.AutomaticDebitServices.EEProvider" alias="BankNetworkFormat" />
+            <ClassNameTable name="Sistran.Core.Application.AutomaticDebitServices.EEProvider.Entities.BankNetwork, Core.AutomaticDebitServices.EEProvider" alias="BankNetwork" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="BankNetwork" name="BankNetworkId" />
+                <Column table-alias="BankNetworkFormat" name="BankNetworkCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.ReportingServices.Provider.Entities.Format, Core.ReportingServices.Provider" alias="Format" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Format" name="FormatCode" />
+              <Column table-alias="BankNetworkFormat" name="FormatCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

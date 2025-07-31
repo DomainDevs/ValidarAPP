@@ -1,0 +1,100 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Collective.Models.EndorsementModelView
+
+@section Title{
+    <div class="row main-title">
+        <div class="column">
+            <i class="fa fa-file-o" aria-hidden="true"></i>
+            <div id="globalTitle"></div>
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div id="buttonsEndorsementModification" class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+            <button type="button" class="btn btn-primary" id="btnCreate">
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonCreateModification
+            </button>
+        </div>
+    </footer>
+}
+<div class="uif-alert" id="alert"></div>
+<form id="formEndorsementModification" class="form">
+    @Html.AntiForgeryToken()
+    <br /> 
+    <div class="row">
+        <div class="uif-col-12">
+
+            <div class="uif-summary">
+                <div class="title">@Resources.Language.TitleTablePrinter</div>
+                <div class="items">
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableRisk</div>
+                            <div id="labelRisk">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableSum</div>
+                            <div id="labelSum">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTablePremium</div>
+                            <div id="labelPremium">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableExpenses</div>
+                            <div id="labelExpenses">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableTaxes</div>
+                            <div id="labelTaxes">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableTotalPremium</div>
+                            <div id="labelTotalPremium">0</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelTypeStructure</label>
+            <div id="combo">
+                <select class="uif-select form-control ignore" id="selectTypeLoad" data-id="Id" data-native="false" data-name="Description" name="LoadTypeId"></select>
+            </div>
+         @*   @Html.ValidationMessageFor(model => model.LoadTypeId)*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelText</label>
+            <textarea rows="4" id="inputText"></textarea>
+        </div>
+    </div>
+
+</form>
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/EndorsementModificationCollective");
+    <script type="text/javascript">
+    var EndorsementCollectiveModel = @Html.Raw(Json.Encode(Model))
+    </script>
+}

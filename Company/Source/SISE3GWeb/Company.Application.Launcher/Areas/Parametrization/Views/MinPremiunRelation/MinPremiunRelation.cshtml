@@ -1,0 +1,150 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.MinPremiunRelationViewModel
+@{
+    Layout = null;
+}
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column-40">
+        @Resources.Language.MinPremiunRelation
+    </div>
+    <div class="column-30">
+        <select class="uif-select" name="PrefixSearch" id="PrefixSearch" data-id="Id" data-name="DescriptionLong" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("minPremiunRelationSearch", null, new { @class = "uif-input-search", id = "inputMinPremiunRelationSearch", placeholder = Resources.Language.LabelSearchProduct })
+    </div>
+</script>
+
+@*Nombre Ramo (id)
+
+  Sucursal: Nombre (id)
+
+  Tipo enodoso: Descripcion
+
+  Producto: Nombre (id)*@
+
+<script id="templateMinPremiunRelation" type="text/template">
+    <div><div>{{Prefix.Description}}</div></div>
+    <div><div><strong>@Resources.Language.LabelBranch: {{Branch.LongDescription}}</strong></div></div>
+    <div><div><strong>@Resources.Language.LabelEndorsementType: {{EndorsementType.Description}}</strong></div></div>
+    <div><div><strong>@Resources.Language.ProductName: {{Product.Description}}</strong></div></div>
+</script>
+
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitMiniumPremiun">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnDeleteMiniumPremiun">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonDelete
+        </button>
+        <button class="btn btn-default" id="btnAddMiniumPremiun">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonAdd
+        </button>
+        <button class="btn btn-default" id="btnExportMiniumPremiun">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSaveMiniumPremiun">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+@*Formulario Principal*@
+<form id="formMinPremiunRelation" class="form without-space">
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.StatusTypeService)
+    <div class="row">
+        <div class="uif-col-6 fit-col-main">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPrefix</label>
+                    <select class="uif-select" name="PrefixId" id="PrefixId" data-id="Id" data-name="DescriptionLong" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Prefix.Id, Resources.Language.Required)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelBranch</label>
+                    <select class="uif-select" name="BranchId" id="BranchId" data-id="Id" data-name="DescriptionLong" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Branch.Id, Resources.Language.Required)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelEndorsementType</label>
+                    <select class="uif-select" name="EndorsementTypeId" id="EndorsementTypeId" data-id="Id" data-name="DescriptionLong" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.EndorsementType.Id, Resources.Language.Required)
+                </div>
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelCurrency </label>
+                    <select class="uif-select" name="CurrencyId" id="CurrencyId" data-id="Id" data-name="DescriptionLong" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Currency.Id, Resources.Language.Required)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required" id="ProductLabel">@Resources.Language.LabelProduct</label>
+                    <select class="uif-select" name="ProductId" id="ProductId" data-id="Id" data-name="DescriptionLong" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Product.Id, Resources.Language.Required)
+                </div>
+
+                <div class="uif-col-6">
+                    <label class="field-required" id="ClaveLabel">Clave</label>
+                    <select class="uif-select" name="ClaveId" id="ClaveId" data-id="Id" data-name="DescriptionLong" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Clave.Id, Resources.Language.Required)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelMinimumPremiumValue</label>
+                    @Html.TextBoxFor(model => model.MiniumPremiunValue)
+                    @Html.ValidationMessageFor(model => model.MiniumPremiunValue, Resources.Language.Required)
+                </div>
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelMinimumValueInsured</label>
+                    @Html.TextBoxFor(model => model.MiniumSubValue)
+                    @Html.ValidationMessageFor(model => model.MiniumSubValue, Resources.Language.Required)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listMiniumPremiun" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            @*<div class="pull-right width-save">
+                    <button type="button" class="btn btn-default" id="btnDelegationNew">
+                        <span aria-hidden="true"></span>
+                        @Resources.Language.NewForm
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnDelegationAccept">
+                        <span aria-hidden="true"></span>
+                        @Resources.Language.AddForm
+                    </button>
+                </div>*@
+        </div>
+        <div class="uif-col-6" id="summaryAgent">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

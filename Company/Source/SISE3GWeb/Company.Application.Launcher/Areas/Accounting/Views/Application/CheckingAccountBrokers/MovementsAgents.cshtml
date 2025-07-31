@@ -1,0 +1,179 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "MovementsAgents";
+}
+<script id="agent-display-template" type="text/template">
+    <div>
+        <strong>{{BranchName}}</strong> | {{SalePointName}} | {{ConceptName}} <br>
+        <span class="text-danger"><strong>{{NatureName}}</strong></span>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"> {{Amount}}</div>
+    </div>
+</script>
+
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <!--left col-->
+        <div class="uif-col-6">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.Branch</label>
+                    @Html.DropDownList("selectAgentBranch", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            required = ""
+                        })
+                    <input type="hidden" id="MovementBillNumber" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.SalePoint</label>
+                    @Html.DropDownList("selectAgentSalePoint", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            required = ""
+                        })
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.Company</label>
+                    @Html.DropDownList("selectAgentCompany", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetAccountingCompanies"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            required = ""
+                        })
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.MovementDescription</label>
+                    @Html.TextBox("AgentMovementDescription", "", new
+                        {
+                            style = "text-align: left",
+                            maxlength = "40",
+                            required = ""
+                        })
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.AgentDocumentNumber</label>
+                    @Html.TextBox("AgentDocumentNumber", "", new
+                    {
+                        id = "AgentDocumentNumber",
+                        maxlength = "13",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetAgentByDocumentNumber"),
+                        data_displaykey = "DocumentNumber",
+                        placeholder = @Global.EnterAgentDocument,
+                        required = ""
+                    })
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.AgentName</label>
+                    @Html.TextBox("AgentName", "", new
+                    {
+                        id = "AgentName",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetAgentByName"),
+                        data_displaykey = "Name",
+                        placeholder = @Global.EnterAgentName,
+                        required = ""
+                    })
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.AccountingAccountConceptCode</label>
+                    @Html.DropDownList("selectAgentAccountingAccountConcept", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            required = ""
+                        })
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.Nature</label>
+                    @Html.DropDownList("selectAgentNature", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetNatures"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            required = ""
+                        })
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Currency</label>
+                    @Html.DropDownList("selectAgentCurrency", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            required = ""
+                        })
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.AmountExchange</label>
+                    <input type="text" id="AgentExchangeRate" style="text-align: right" />
+                    <input type="hidden" id="MovementMessageDuplicate" name="MovementMessageDuplicate" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Amount</label>
+                    @Html.TextBox("AgentAmount", "", new
+                        {
+                            @onkeypress = "return OnlyDecimalNumber(event,this)",
+                            style = "text-align: right",
+                            required = ""
+                        })
+                    <input type="hidden" id="AgentLocalAmount" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="uif-alert" id="alertForm"></div>
+                </div>
+            </div>
+        </div>
+        <!--End left col-->
+        <!--right col-->
+        <div class="uif-col-6">
+            <div id="agentsListView" class="uif-listview">
+                <div class="footer">
+                    <div class="uif-col-6">
+                        @Global.Total
+                    </div>
+                    <div style="text-align:right;">
+                        <b id="TotalAgentMovement">$0.00</b><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End right col-->
+    </div>
+</div>

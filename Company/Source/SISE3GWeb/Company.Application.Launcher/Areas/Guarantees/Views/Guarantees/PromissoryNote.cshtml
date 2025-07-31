@@ -1,0 +1,90 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Guarantees.Models.PromissoryNoteViewModel
+<form id="AddPromissoryNote" name="AddPromissoryNote">
+    @Html.AntiForgeryToken()
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelCountry</label>
+            <input class="uif-input-search"
+                   data-val="true" id="inputCountry-PromissoryNote" name="inputCountry-PromissoryNote" placeholder="@Resources.Language.NameCountry" type="text">
+            @Html.ValidationMessageFor(model => model.Country)
+        </div>
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelState</label>
+            <input class="uif-input-search"
+                   data-val="true" id="inputState-PromissoryNote" name="inputState-PromissoryNote" placeholder="@Resources.Language.NameDepartment" type="text">
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelCity</label>
+            <input class="uif-input-search"
+                   data-val="true" id="inputCity-PromissoryNote" name="inputCity-PromissoryNote" placeholder="@Resources.Language.NameCity" type="text">
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-4">
+            <label>@Resources.Language.LabelDocumentNumber </label>
+            @Html.TextBoxFor(model => model.DocumentNumber, new { disabled = "disabled", id = "PromissoryNote-DocumentNumber" })
+        </div>
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelConstitutionDate </label>
+            @Html.TextBoxFor(model => model.ConstitutionDate, "{0:dd/MM/yyyy}", new { id = "PromissoryNote-ConstitutionDate", @class = "uif-datepicker" })
+        </div>
+        <div class="uif-col col-md-4">
+            <label>@Resources.Language.LabelDueDate </label>
+            @Html.TextBoxFor(model => model.ExpirationDate, "{0:dd/MM/yyyy}", new { id = "PromissoryNote-ExpirationDate", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.ExpirationDate)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelNominalValue </label>
+            @Html.TextBoxFor(model => model.NominalValue, new { id = "PromissoryNote-NominalValue", placeholder = "0", @class = "numberWithCommas rightAlign", @maxlength = "18" })
+            @Html.ValidationMessageFor(model => model.NominalValue)
+        </div>
+
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelCoin </label>
+            <select class="uif-select form-control" id="PromissoryNote-Currency" data-val="true" data-native="false" data-source="@Url.Content("~/Guarantees/Guarantees/GetCurrencies")" data-val-required="@Resources.Language.ErrorDocumentControlCurrency" data-id="Id" data-name="Description" name="Currency"></select>
+            @Html.ValidationMessageFor(model => model.Currency)
+        </div>
+
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelPromissoryNoteType </label>
+            <select class="uif-select form-control" id="PromissoryNote-PromissoryNoteType" data-val="true" data-native="false" data-source="@Url.Content("~/Guarantees/Guarantees/GetPromissoryNoteType")"
+                    data-val-required="@Resources.Language.ErrorDocumentPromissoryNoteType" data-id="Id" data-name="Description"
+                    name="PromissoryNoteType"></select>
+            @Html.ValidationMessageFor(model => model.PromissoryNoteType)
+        </div>
+
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelSignatoriesNumber </label>
+            @Html.TextBoxFor(model => model.SignatoriesNumber, new { disabled = "disabled", id = "PromissoryNote-SignatoriesNumber" })
+        </div>
+
+        <div class="uif-col-3"><br />
+            <button type="button" class="btn btn-default" id="btnGuarantors" style="position: absolute; bottom: 0;">
+                <span class="" aria-hidden="true">@Resources.Language.LabelGuarantors </span>
+            </button>
+        </div>
+
+    </div>
+    @*<div class="row">
+        <div class="uif-col-3">
+            <button type="button" class="btn btn-default" id="btnGuarantors">
+                <span class="" aria-hidden="true">@Resources.Language.LabelGuarantors </span>
+            </button>
+        </div>
+    </div>*@
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelObservations</label>
+            @Html.TextAreaFor(model => model.Observations, new { id = "PromissoryNote-Observations", cols = "12", rows = "2", style = "resize: none", @class = "changeToUpper" })
+            @Html.ValidationMessageFor(model => model.Observations)
+        </div>
+    </div>
+</form>

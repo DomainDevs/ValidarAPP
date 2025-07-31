@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2FF08AFB-3757-4C7C-8B8B-6BEA2C12A6CC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.UnderwritingServices</RootNamespace>
+    <AssemblyName>Core.UnderwritingServices</AssemblyName>
+    <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core.AuthorizationPoliciesServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\AuthorizationPolicies\AuthorizationPoliciesService\Core.AuthorizationPoliciesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions">
+      <HintPath>..\..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ModelServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Application\Core\ModelServices\Core.ModelServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ProductServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\Product\ProductServices\Core.ProductServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.RulesScriptsServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\RulesScripts\RulesScriptsService\Core.RulesScriptsServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.TaxServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\Tax\TaxServices\Core.TaxServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePersonServices.V1">
+      <HintPath>..\..\..\..\Bin\Services\Core\UniquePerson\UniquePersonService\Core.UniquePersonServices.V1.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Utilities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\UnderwritingConstant.cs" />
+    <Compile Include="DTOs\ComboDTO.cs" />
+    <Compile Include="DTOs\ComboListDTO.cs" />
+    <Compile Include="DTOs\Filter\ComponentValueDTO.cs" />
+    <Compile Include="DTOs\Filter\FilterBase.cs" />
+    <Compile Include="DTOs\Filter\PaymentScheduleFilterDTO.cs" />
+    <Compile Include="DTOs\Filter\QuotaFilterDTO.cs" />
+    <Compile Include="DTOs\PolicyRiskDTO.cs" />
+    <Compile Include="Enums\AgentType.cs" />
+    <Compile Include="Enums\ClaimsUnderwritingKeys.cs" />
+    <Compile Include="Enums\ExecutionTypes.cs" />
+    <Compile Include="Enums\PaymentStatus.cs" />
+    <Compile Include="Enums\Status.cs" />
+    <Compile Include="Enums\UnderwritingTypes.cs" />
+    <Compile Include="Helpers\MappingRule.cs" />
+    <Compile Include="IUnderwritingRuleEngineCompatibilityService.cs" />
+    <Compile Include="IUnderwritingService.cs" />
+    <Compile Include="Models\AdditionalRateType.cs" />
+    <Compile Include="Models\AssistanceCover.cs" />
+    <Compile Include="Models\BaseConditionTax.cs" />
+    <Compile Include="Models\Base\BaseBillingQuota.cs" />
+    <Compile Include="Models\Base\BaseIssuanceAssociationType.cs" />
+    <Compile Include="Models\Base\BaseParamCoCoverageValue.cs" />
+    <Compile Include="Models\Base\BaseAdditionalData.cs" />
+    <Compile Include="Models\Base\BaseBeneficiary.cs" />
+    <Compile Include="Models\Base\BaseBeneficiaryType.cs" />
+    <Compile Include="Models\Base\BaseBillingGroup.cs" />
+    <Compile Include="Models\Base\BaseBusinessRuleSet.cs" />
+    <Compile Include="Models\Base\BaseCancellationReason.cs" />
+    <Compile Include="Models\Base\BaseClause.cs" />
+    <Compile Include="Models\Base\BaseConditionTextLevelType.cs" />
+    <Compile Include="Models\Base\BaseIssuanceCoInsuranceCompany.cs" />
+    <Compile Include="Models\Base\BaseCommission.cs" />
+    <Compile Include="Models\Base\BaseComponent.cs" />
+    <Compile Include="Models\Base\BaseConditionLevel.cs" />
+    <Compile Include="Models\Base\BaseCoverage.cs" />
+    <Compile Include="Models\Base\BaseCoverDetailType.cs" />
+    <Compile Include="Models\Base\BaseDeductible.cs" />
+    <Compile Include="Models\Base\BaseDeductibleSubject.cs" />
+    <Compile Include="Models\Base\BaseDeductibleUnit.cs" />
+    <Compile Include="Models\Base\BaseEndorsement.cs" />
+    <Compile Include="Models\Base\BaseExpense.cs" />
+    <Compile Include="Models\Base\BaseFinancialPlan.cs" />
+    <Compile Include="Models\Base\BaseGroupCoverage.cs" />
+    <Compile Include="Models\Base\BaseHolder.cs" />
+    <Compile Include="Models\Base\BaseInsObjLineBusiness.cs" />
+    <Compile Include="Models\Base\BaseInsuredObject.cs" />
+    <Compile Include="Models\Base\BaseInsuredObjectLineBusiness.cs" />
+    <Compile Include="Models\Base\BaseIssuanceAddress.cs" />
+    <Compile Include="Models\Base\BaseIssuanceAgency.cs" />
+    <Compile Include="Models\Base\BaseIssuanceAgent.cs" />
+    <Compile Include="Models\Base\BaseIssuanceAgentType.cs" />
+    <Compile Include="Models\Base\BaseIssuanceCompanyName.cs" />
+    <Compile Include="Models\Base\BaseIssuanceDocumentType.cs" />
+    <Compile Include="Models\Base\BaseIssuanceEconomicActivity.cs" />
+    <Compile Include="Models\Base\BaseIssuanceEmail.cs" />
+    <Compile Include="Models\Base\BaseIssuanceGuarantee.cs" />
+    <Compile Include="Models\Base\BaseIssuanceIdentificationDocument.cs" />
+    <Compile Include="Models\Base\BaseIssuanceInsured.cs" />
+    <Compile Include="Models\Base\BaseIssuanceInsuredGuarantee.cs" />
+    <Compile Include="Models\Base\BaseIssuancePaymentMethod.cs" />
+    <Compile Include="Models\Base\BaseIssuancePhone.cs" />
+    <Compile Include="Models\Base\BaseLimitRc.cs" />
+    <Compile Include="Models\Base\BaseLimitRCRelation.cs" />
+    <Compile Include="Models\Base\BaseLineBusinessCoveredRiskType.cs" />
+    <Compile Include="Models\Base\BaseConditionText.cs" />
+    <Compile Include="Models\Base\BaseConditionTextLevel.cs" />
+    <Compile Include="Models\Base\BaseParamCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamPrefix.cs" />
+    <Compile Include="Models\Base\BaseParamTax.cs" />
+    <Compile Include="Models\Base\BaseParamTaxCategory.cs" />
+    <Compile Include="Models\Base\BaseParamTaxCondition.cs" />
+    <Compile Include="Models\Base\BaseParamTaxRate.cs" />
+    <Compile Include="Models\Base\BasePayerComponent.cs" />
+    <Compile Include="Models\Base\BasePaymentDistribution.cs" />
+    <Compile Include="Models\Base\BasePaymentPlan.cs" />
+    <Compile Include="Models\Base\BasePaymentSchedule.cs" />
+    <Compile Include="Models\Base\BasePeril.cs" />
+    <Compile Include="Models\Base\BasePerilLineBusiness.cs" />
+    <Compile Include="Models\Base\BasePolicy.cs" />
+    <Compile Include="Models\Base\BasePrefixEndoTypeEnabled.cs" />
+    <Compile Include="Models\Base\BasePrefixLineBusiness.cs" />
+    <Compile Include="Models\Base\BaseQuota.cs" />
+    <Compile Include="Models\Base\BaseRatingZone.cs" />
+    <Compile Include="Models\Base\BaseRequest.cs" />
+    <Compile Include="Models\Base\BaseRisk.cs" />
+    <Compile Include="Models\Base\BaseRiskActivity.cs" />
+    <Compile Include="Models\Base\BaseRiskLocation.cs" />
+    <Compile Include="Models\Base\BaseRiskPayer.cs" />
+    <Compile Include="Models\Base\BaseRiskType.cs" />
+    <Compile Include="Models\Base\BaseRiskVehicle.cs" />
+    <Compile Include="Models\Base\BaseSubscriptionPayer.cs" />
+    <Compile Include="Models\Base\BaseSummary.cs" />
+    <Compile Include="Models\Base\BaseSuretyContractCategories.cs" />
+    <Compile Include="Models\Base\BaseSuretyContractType.cs" />
+    <Compile Include="Models\Base\BaseTaxAttribute.cs" />
+    <Compile Include="Models\Base\BaseTaxComponent.cs" />
+    <Compile Include="Models\Base\BaseTaxRate.cs" />
+    <Compile Include="Models\Base\BaseTaxRole.cs" />
+    <Compile Include="Models\Base\BaseTechnicalPlan.cs" />
+    <Compile Include="Models\Base\BaseVehicleColor.cs" />
+    <Compile Include="Models\Base\BaseVehicleFuel.cs" />
+    <Compile Include="Models\Base\BaseVehicleMake.cs" />
+    <Compile Include="Models\Base\BaseVehicleModel.cs" />
+    <Compile Include="Models\Base\BaseVehicleUse.cs" />
+    <Compile Include="Models\Base\BaseVehicleBody.cs" />
+    <Compile Include="Models\Base\BaseVehicleType.cs" />
+    <Compile Include="Models\Base\BaseTechnicalPlanCoverage.cs" />
+    <Compile Include="Models\Base\BaseText.cs" />
+    <Compile Include="Models\Base\BasevehicleVersion.cs" />
+    <Compile Include="Models\Base\extension.cs" />
+    <Compile Include="Models\Beneficiary.cs" />
+    <Compile Include="Models\BeneficiaryType.cs" />
+    <Compile Include="Models\BillingGroup.cs" />
+    <Compile Include="Models\BillingQuota.cs" />
+    <Compile Include="Models\BusinessRuleSet.cs" />
+    <Compile Include="Models\CancellationReason.cs" />
+    <Compile Include="Models\Clause.cs" />
+    <Compile Include="Models\CoInsuranceAssigned.cs" />
+    <Compile Include="Models\Distribution\ComponentValue.cs" />
+    <Compile Include="Models\Distribution\FinancialPaymentSchedule.cs" />
+    <Compile Include="Models\Distribution\PaymentDistributionPlan.cs" />
+    <Compile Include="Models\Distribution\FinancialPaymentPlan.cs" />
+    <Compile Include="Models\IssuanceAssociationType.cs" />
+    <Compile Include="Models\IntCoEquivalenceCoverage.cs" />
+    <Compile Include="Models\IssuanceCoInsuranceCompany.cs" />
+    <Compile Include="Models\Commission.cs" />
+    <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\AdditionalData.cs" />
+    <Compile Include="Models\ConditionLevel.cs" />
+    <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\InsuredObjectLineBusiness.cs" />
+    <Compile Include="Models\IssuanceAddress.cs" />
+    <Compile Include="Models\IssuanceAgency.cs" />
+    <Compile Include="Models\IssuanceAgent.cs" />
+    <Compile Include="Models\IssuanceAgentType.cs" />
+    <Compile Include="Models\IssuanceCompanyName.cs" />
+    <Compile Include="Models\IssuanceDocumentType.cs" />
+    <Compile Include="Models\IssuanceEconomicActivity.cs" />
+    <Compile Include="Models\IssuanceEmail.cs" />
+    <Compile Include="Models\IssuanceGuarantee.cs" />
+    <Compile Include="Models\IssuanceGuaranteeStatus.cs" />
+    <Compile Include="Models\IssuanceGuaranteeType.cs" />
+    <Compile Include="Models\IssuanceIdentificationDocument.cs" />
+    <Compile Include="Models\IssuanceInsured.cs" />
+    <Compile Include="Models\IssuanceInsuredGuarantee.cs" />
+    <Compile Include="Models\IssuancePaymentMethod.cs" />
+    <Compile Include="Models\IssuancePhone.cs" />
+    <Compile Include="Models\LineBusinessCoveredRiskType.cs" />
+    <Compile Include="Models\ParamCoCoverageValue.cs" />
+    <Compile Include="Models\ParamConditionText.cs" />
+    <Compile Include="Models\ParamConditionTextLevel.cs" />
+    <Compile Include="Models\ParamTax.cs" />
+    <Compile Include="Models\ParamTaxCategory.cs" />
+    <Compile Include="Models\ParamTaxCondition.cs" />
+    <Compile Include="Models\ParamTaxRate.cs" />
+    <Compile Include="Models\Distribution\PaymentDistributionComp.cs" />
+    <Compile Include="Models\Peril.cs" />
+    <Compile Include="Models\PerilLineBusiness.cs" />
+    <Compile Include="Models\PortfolioPolicy.cs" />
+    <Compile Include="Models\PrefixEndoTypeEnabled.cs" />
+    <Compile Include="Models\PrefixLineBusiness.cs" />
+    <Compile Include="Models\RateTypeTax.cs" />
+    <Compile Include="Models\RatingZone.cs" />
+    <Compile Include="Models\RetentionTax.cs" />
+    <Compile Include="Models\RiskActivity.cs" />
+    <Compile Include="Models\RiskChangeText.cs" />
+    <Compile Include="Models\RiskLocation.cs" />
+    <Compile Include="Models\RiskType.cs" />
+    <Compile Include="Models\RiskVehicle.cs" />
+    <Compile Include="Models\SuretyContractCategories.cs" />
+    <Compile Include="Models\SuretyContractType.cs" />
+    <Compile Include="Models\TaxAttribute.cs" />
+    <Compile Include="Models\TaxCategoryExcelReport.cs" />
+    <Compile Include="Models\TaxComponent.cs" />
+    <Compile Include="Models\TaxExcelReport.cs" />
+    <Compile Include="Models\TaxRateExcelReport.cs" />
+    <Compile Include="Models\TaxRole.cs" />
+    <Compile Include="Models\TechnicalPlanCoverages.cs" />
+    <Compile Include="Models\TechnicalPlan.cs" />
+    <Compile Include="Models\RiskCommercialClass.cs" />
+    <Compile Include="Models\InsObjLineBusiness.cs" />
+    <Compile Include="Models\InsuredObject.cs" />
+    <Compile Include="Models\CoverDetailType.cs" />
+    <Compile Include="Models\PayerComponent.cs" />
+    <Compile Include="Models\Coverage.cs" />
+    <Compile Include="Models\Deductible.cs" />
+    <Compile Include="Models\DeductibleSubject.cs" />
+    <Compile Include="Models\DeductibleUnit.cs" />
+    <Compile Include="Models\FinancialPlan.cs" />
+    <Compile Include="Models\GroupCoverage.cs" />
+    <Compile Include="Models\Endorsement.cs" />
+    <Compile Include="Models\Holder.cs" />
+    <Compile Include="Models\LimitRc.cs" />
+    <Compile Include="Models\LimitRCRelation.cs" />
+    <Compile Include="Models\PaymentDistribution.cs" />
+    <Compile Include="Models\PaymentPlan.cs" />
+    <Compile Include="Models\PaymentSchedule.cs" />
+    <Compile Include="Models\Policy.cs" />
+    <Compile Include="Models\PolicyClause.cs" />
+    <Compile Include="Models\Quota.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\Risk.cs" />
+    <Compile Include="Models\Summary.cs" />
+    <Compile Include="Models\RiskPayer.cs" />
+    <Compile Include="Models\SubscriptionPayer.cs" />
+    <Compile Include="Models\VehicleColor.cs" />
+    <Compile Include="Models\VehicleFuel.cs" />
+    <Compile Include="Models\VehicleMake.cs" />
+    <Compile Include="Models\VehicleModel.cs" />
+    <Compile Include="Models\VehicleUse.cs" />
+    <Compile Include="Models\VehicleBody.cs" />
+    <Compile Include="Models\VehicleType.cs" />
+    <Compile Include="Models\Text.cs" />
+    <Compile Include="Models\VehicleVersion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaxConditionExcelReport.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Underwriting.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{3D9AD99F-2412-4246-B90B-4EAA41C64699}">
+        <WcfProjectProperties>
+          <AutoStart>True</AutoStart>
+        </WcfProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\Underwriting\UnderwritingServices\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

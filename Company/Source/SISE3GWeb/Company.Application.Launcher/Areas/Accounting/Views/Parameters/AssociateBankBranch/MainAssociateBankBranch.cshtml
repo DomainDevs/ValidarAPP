@@ -1,0 +1,256 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AssociateBankBranch;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.Parameters</li>
+        <li>@Global.AssociateBankBranch</li>
+    </ol>
+}
+
+@section Modals
+{
+
+    @*MODAL INGRESO DEL BANCO*@
+    <div class="modal fade" id="ModalBankBranch" @*tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true"*@>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.AssociateBankBranch</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("~/Areas/Accounting/Views/Parameters/AssociateBankBranch/BankBranchModal.cshtml")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            id="CancelSaveBankBranchModal" data-dismiss="modal">
+                        @Global.Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary"
+                            id="SaveBankBranchModal" onclick=" return false ">
+                        @Global.Save
+                    </button>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+
+@*<div class="uif-row">
+        <center>
+            <img src="@Url.Content("~/Content/images/underconstruction.jpg")" class="img-responsive" />
+        </center>
+    </div>*@
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <label class="control-label">
+            <b>@Global.Branch</b>
+        </label>
+        @Html.DropDownList("ComboBranch", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_selectedid = @ViewBag.BranchDefault,
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+    </div>
+    <div class="uif-col-9">
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertBankBranch"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-7">
+        <table data-title="@Global.Bank" class="uif-table" id="TableBank"
+               data-add="true" data-edit="true" data-delete="true" data-selectiontype="none">
+            <thead>
+                <tr>
+                    <th data-visible="false" data-property="Id">BankId</th>
+                    <th data-visible="true" data-property="Description">@Global.Bank</th>
+                    <th data-visible="false" data-property="IsEnabled">IsEnabled</th>
+                    <th data-visible="true" data-property="IsEnabledDescription">@Global.Status</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="uif-col-5">
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainAssociateBankBranch")
+}
+
+@*<script type="text/javascript">
+
+           var statusBankEnabled = false;
+           var isEdit = false;
+           var bankId = 0;
+
+           //COMBO DE SUCURSAL
+           $('#ComboBranch').on('itemSelected', function (event, selectedItem) {
+
+               $("#alertBankBranch").hide();
+               if ($('#ComboBranch').val() > 0) {
+                   refreshBankBranch(selectedItem.Id);
+               } else {
+                   refreshBankBranch(0);
+               }
+           });
+
+           //Levanta modal selecciona banco
+           $('#TableBank').on('rowAdd', function (event, data) {
+
+               $("#alertBankBranch").hide();
+               $("#alertBankBranchModal").hide();
+               isEdit = false;
+               $("#BankBranchComboModal").attr("disabled", false);
+               $("#BankBranchComboModal").val("");
+
+               if ($('#ComboBranch').val() > 0) {
+                   $("#alertBankBranch").hide();
+                   $('#ModalBankBranch').appendTo("body").modal('show');
+               } else {
+                   $("#alertBankBranch").UifAlert('show', '@Global.SelectBranch', "warning");
+               }
+
+           });
+
+           //Levanta modal selecciona banco
+           $('#TableBank').on('rowEdit', function (event, data) {
+               $("#alertBankBranch").hide();
+               $("#alertBankBranchModal").hide();
+               isEdit = true;
+               bankId = data.Id;
+               $("#BankBranchComboModal").val(data.Id);
+               $("#BankBranchComboModal").attr("disabled", true);
+
+               if (data.IsEnabled) {
+                   $("#CheckEnableBank").prop("checked", true);
+               } else {
+                   $("#CheckEnableBank").prop("checked", false);
+               }
+               $('#ModalBankBranch').appendTo("body").modal('show');
+           });
+
+           //Elimina selecciona banco
+           $('#TableBank').on('rowDelete', function (event, data) {
+               $("#alertBankBranch").hide();
+               $("#alertBankBranchModal").hide();
+
+               showConfirm(data.Id);
+           });
+
+
+           // BOTON ACEPTAR DEL DIALOGO
+           $("#ModalBankBranch").find("#SaveBankBranchModal").click(function() {
+
+               $("#ModalBankBranch").find("#BankBranchForm").validate();
+               if ($("#ModalBankBranch").find("#BankBranchForm").valid()) {
+
+                   isEnabled();
+                   if (!isEdit) {
+                       bankId = $("#BankBranchComboModal").val();
+                   }
+
+                   $.ajax({
+                       url: '@Url.Content("~/")' + "Accounting/Parameters/SaveBankBranch",
+                       data: { "branchId": $('#ComboBranch').val(),"bankId": bankId,"isEnabled": statusBankEnabled,"isEdit": isEdit},
+                       success: function(data) {
+
+                           if (data > 0) {
+
+                               $("#alertBankBranch").UifAlert('show', '@Global.SaveSuccessfully', "success");
+
+                               refreshBankBranch($('#ComboBranch').val());
+                               $("#ModalBankBranch").modal('hide');
+                               $("#alertBankBranchModal").hide();
+
+                           } else {
+                               $("#alertBankBranchModal").UifAlert('show', '@Global.BankExist', "warning");
+                           }
+                       }
+                   });
+               }
+           });
+
+           // BOTON CANCELAR DEL DIALOGO
+           $("#CancelSaveBankBranchModal").click(function() {
+
+               $("#ModalBankBranch").modal('hide');
+           });
+
+           //COMBO DEL DIALOGO
+           $('#BankBranchComboModal').on('itemSelected', function (event, selectedItem) {
+               $("#alertBankBranchModal").hide();
+           });
+
+    //************************************************************************************************************//
+    //     FUNCIONES
+
+           function isEnabled() {
+
+               if ($("#CheckEnableBank").is(":checked")) {
+
+                   statusBankEnabled = true;
+               } else {
+                   statusBankEnabled = false;
+               }
+           }
+
+
+           function refreshBankBranch(branchId) {
+
+               var controller = '@Url.Content("~/")' + "Accounting/Parameters/GetBankBranchsByBranchId?branchId=" + branchId;
+               $("#TableBank").UifDataTable({ source: controller });
+           }
+
+          //Eliminar registro
+          function deleteBankBranch(bankId) {
+
+               $.ajax({
+                   url: '@Url.Content("~/")' + "Accounting/Parameters/DeleteBankBranch",
+                   data: { "branchId": $('#ComboBranch').val(), "bankId": bankId },
+                   success: function () {
+                       refreshBankBranch($('#ComboBranch').val());
+                       $("#alertBankBranch").UifAlert('show', '@Global.DeleteSucces', "success");
+                   }
+               });
+          }
+
+          //Confirmaciòn de borrado
+           showConfirm = function (bankId) {
+               $.UifDialog('confirm', {'message': '@Global.DeletedMultipleRecords',
+                                       'title': '@Global.Parameter'
+               }, function (result) {
+                   if (result) {
+                       deleteBankBranch(bankId);
+                   }
+               });
+           };
+
+
+
+       </script>*@
+

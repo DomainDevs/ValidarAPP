@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PreliquidationsView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PreliquidationCode">
+          <Column table-alias="Preliquidation" name="PreliquidationCode" />
+        </SelectValue>
+        <SelectValue alias="PreliquidationStatus">
+          <Column table-alias="Preliquidation" name="Status" />
+        </SelectValue>
+        <SelectValue alias="PreliquidationDescription">
+          <Column table-alias="Preliquidation" name="Description" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="Preliquidation" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+        <SelectValue alias="UserId">
+          <Column table-alias="TempImputation" name="UserId" />
+        </SelectValue>
+        <SelectValue alias="AccountName">
+          <Column table-alias="UniqueUsers" name="AccountName" />
+        </SelectValue>
+        <SelectValue alias="SalesPointCode">
+          <Column table-alias="Preliquidation" name="SalesPointCode" />
+        </SelectValue>
+        <SelectValue alias="SalesPointDescription">
+          <Column table-alias="SalePoint" name="Description" />
+        </SelectValue>
+        <SelectValue alias="RegisterDate">
+          <Column table-alias="TempImputation" name="RegisterDate" />
+        </SelectValue>
+        <SelectValue alias="CompanyCode">
+          <Column table-alias="Preliquidation" name="CompanyCode" />
+        </SelectValue>
+        <SelectValue alias="AccountingCompanyDescription">
+          <Column table-alias="Company" name="Description" />
+        </SelectValue>
+        <SelectValue alias="PersonTypeCode">
+          <Column table-alias="Preliquidation" name="PersonTypeCode" />
+        </SelectValue>
+        <SelectValue alias="PersonTypeDescription">
+          <Column table-alias="PersonType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="IndividualId">
+          <Column table-alias="Preliquidation" name="IndividualId" />
+        </SelectValue>
+        <SelectValue alias="DocumentNumber">
+          <Column table-alias="ListPersons" name="DocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="Name">
+          <Column table-alias="ListPersons" name="Name" />
+        </SelectValue>
+        <SelectValue alias="TempImputationCode">
+          <Column table-alias="TempImputation" name="TempImputationCode" />
+        </SelectValue>
+        <SelectValue alias="SourceCode">
+          <Column table-alias="TempImputation" name="SourceCode" />
+        </SelectValue>
+        <SelectValue alias="ImputationTypeCode">
+          <Column table-alias="TempImputation" name="ImputationTypeCode" />
+        </SelectValue>
+        <SelectValue alias="ImputationTypeDescription">
+          <Column table-alias="ImputationType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="IsRealSource">
+          <Column table-alias="TempImputation" name="IsRealSource" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <Join>
+                <Join>
+                  <Join>
+                    <Join>
+                      <Join>
+                        <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Preliquidation,  Core.Accounting.Entities" alias="Preliquidation" />
+                        <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+                        <criteria>
+                          <BinaryCriterion type="Equal">
+                            <Column table-alias="Branch" name="BranchCode" />
+                            <Column table-alias="Preliquidation" name="BranchCode" />
+                          </BinaryCriterion>
+                        </criteria>
+                      </Join>
+                      <ClassNameTable name="Sistran.Core.Application.Common.Entities.SalePoint, Core.Common.Entities" alias="SalePoint" />
+                      <criteria>
+                        <BinaryPredicate type="And">
+                          <BinaryCriterion type="Equal">
+                            <Column table-alias="SalePoint" name="SalePointCode" />
+                            <Column table-alias="Preliquidation" name="SalesPointCode" />
+                          </BinaryCriterion>
+                          <BinaryCriterion type="Equal">
+                            <Column table-alias="SalePoint" name="BranchCode" />
+                            <Column table-alias="Preliquidation" name="BranchCode" />
+                          </BinaryCriterion>
+                        </BinaryPredicate>
+                      </criteria>
+                    </Join>
+                    <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Company,  Core.Accounting.Entities" alias="Company" />
+                    <criteria>
+                      <BinaryCriterion type="Equal">
+                        <Column table-alias="Company" name="CompanyId" />
+                        <Column table-alias="Preliquidation" name="CompanyCode" />
+                      </BinaryCriterion>
+                    </criteria>
+                  </Join>
+                  <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PersonType,  Core.Accounting.Entities" alias="PersonType" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="PersonType" name="PersonTypeCode" />
+                      <Column table-alias="Preliquidation" name="PersonTypeCode" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.ListPersons,  Core.Accounting.Entities" alias="ListPersons" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="ListPersons" name="IndividualId" />
+                    <Column table-alias="Preliquidation" name="IndividualId" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.TempImputation,  Core.Accounting.Entities" alias="TempImputation" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="TempImputation" name="SourceCode" />
+                  <Column table-alias="Preliquidation" name="PreliquidationCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.ImputationType,  Core.Accounting.Entities" alias="ImputationType" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="ImputationType" name="ImputationTypeCode" />
+                <Column table-alias="TempImputation" name="ImputationTypeCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, Core.UniqueUser.Entities" alias="UniqueUsers" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="UniqueUsers" name="UserId" />
+              <Column table-alias="TempImputation" name="UserId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

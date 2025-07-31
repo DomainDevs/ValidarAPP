@@ -1,0 +1,87 @@
+﻿<script id="AgencyTemplate" type="text/template">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div>{{Code}} - <strong class="success">{{FullName}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div>{{Code}} - <strong class="warning">{{FullName}}</strong></div>
+    {{else}}
+    <div>{{Code}} - <strong>{{FullName}}</strong></div>
+    {{/ifCond}}
+    <div><br>{{DescriptionBranch}}</div>
+</script>
+<form id="formAgency" class="form modal-Colombia">
+    
+        <div class="uif-alert" id="alert"></div>
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <input id="Id" type="hidden" />
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelKey</label>
+                    <input type="text" id="inputkey" maxlength="60" />
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelBranch</label>
+                    <select class="uif-select form-control" id="selectBranch" data-id="Id" data-name="Description"></select>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.LanguagePerson.LabelAgencyName</label>
+                    <input class="upperCase-co" type="text" id="inputAgencyName" maxlength="60" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.TypeIntermediary</label>
+                    <select class="uif-select form-control" id="selectTypeIntermediary" data-id="Id" data-name="Description"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.LabelReasonLow</label>
+                    <select class="uif-select form-control" id="selectReasonLow" data-id="Id" data-name="SmallDescription"></select>
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.DateDeclined</label>
+                    <input type="text" class="uif-datepicker" id="InputDateDeclined" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.LanguagePerson.LabelNote</label>
+                    <textarea class="upperCase-co" rows="3" id="notesAgency" style="resize: none; text-align: justify;" maxlength="79"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listAgency" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0083"))
+                {
+                    <button type="button" class="btn btn-default" id="btnNewAgency">
+                        <span class="" aria-hidden="true">
+                            @Resources.LanguagePerson.NewForm
+                    </button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0084"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnacceptAgency">
+                        <span class="" aria-hidden="true"></span>
+                        @Resources.LanguagePerson.AddForm
+                    </button>
+                }
+                </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

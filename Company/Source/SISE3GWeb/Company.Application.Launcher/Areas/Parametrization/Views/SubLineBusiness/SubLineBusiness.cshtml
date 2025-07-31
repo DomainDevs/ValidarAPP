@@ -1,0 +1,108 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.SubLineBusinessViewModel
+
+@{
+    Layout = null;
+}
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column-40">
+        @Resources.Language.LabelTabTechnicalSubBranch
+    </div>
+    <div class="column-30">
+    </div>
+    <div class="column-30 even">
+        @Html.TextBoxFor(model => model.Id, new { id = "inputLoadId", @class = "uif-input-search", placeholder = @Resources.Language.EnterTextTechnicalSubBranchToSearch })
+        <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSaveSubBranch">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+<script id="SubBranchTemplate" type="text/template">
+	{{#ifCond StatusTypeService "==" 2}}
+	<div>Ramo Técnico: <strong class="success">{{LineBusinessDescription}} ({{LineBusinessId}})</strong></div>
+	{{else ifCond StatusTypeService "==" 3}}
+	<div>Ramo Técnico: <strong class="warning">{{LineBusinessDescription}} ({{LineBusinessId}})</strong></div>
+	{{else ifCond StatusTypeService "==" 4}}
+	<div>Ramo Técnico: <strong class="danger">{{LineBusinessDescription}} ({{LineBusinessId}})</strong></div>
+	{{else}}
+	<div>Ramo Técnico: <strong>{{LineBusinessDescription}} ({{LineBusinessId}})</strong></div>
+	{{/ifCond }}
+
+	<div>SubRamo: <strong>{{Description}} ({{Id}})</strong></div>
+</script>
+
+
+<form id="formSubBranch" autocomplete="off" class="form without-space">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" id="Id" />
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.TitleTechnicalBranch</label>
+                    <select class="uif-select form-control" id="selectLineBussines" data-id="Id" data-name="Description" name="LineBusinessId"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixTechnical"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.LineBusinessId)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDescriptionLong</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", placeholder = @Resources.Language.LabelDescriptionLong })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDescriptionShort</label>
+                    @Html.TextBoxFor(model => model.SmallDescription, new { id = "inputDescriptionShort", placeholder = @Resources.Language.LabelDescriptionShort })
+                    @Html.ValidationMessageFor(model => model.SmallDescription)
+                </div>
+
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary" id="panelSubBranch">
+            <div id="listViewSearchAdvanced" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsSubBranch">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewSubBranch">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnSubBranchAccept">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<div class="uif-modal" id="modalListSearchSubLineBusiness">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/SubLineBusiness/ListSubLineBusiness.cshtml")
+    </div>
+</div>

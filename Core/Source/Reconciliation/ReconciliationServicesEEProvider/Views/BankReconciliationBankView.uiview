@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="BankReconciliationBankView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="BankReconciliationId">
+          <Column table-alias="BankReconciliation" name="BankReconciliationId" />
+        </SelectValue>
+        <SelectValue alias="BankReconciliationDescription">
+          <Column table-alias="BankReconciliation" name="Description" />
+        </SelectValue>
+        <SelectValue alias="BankMovementCode">
+          <Column table-alias="BankReconciliationBank" name="Description" />
+        </SelectValue>
+        <SelectValue alias="IsVoucher">
+          <Column table-alias="BankReconciliationBank" name="IsVoucher" />
+        </SelectValue>
+        <SelectValue alias="BankCode">
+          <Column table-alias="BankReconciliationBank" name="BankCode" />
+        </SelectValue>
+        <SelectValue alias="BankDescription">
+          <Column table-alias="Bank" name="Description" />
+        </SelectValue>
+      </values>
+      <table>      
+        <Join>
+          <Join>
+              <ClassNameTable name="Sistran.Core.Application.ReconciliationServices.EEProvider.Entities.BankReconciliationBank, Core.ReconciliationServices.EEProvider" alias="BankReconciliationBank" />
+              <ClassNameTable name="Sistran.Core.Application.GeneralLedgerServices.Provider.Entities.BankReconciliation, Core.GeneralLedgerServices.Provider" alias="BankReconciliation" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="BankReconciliation" name="BankReconciliationId" />
+                  <Column table-alias="BankReconciliationBank" name="BankReconciliationCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>            
+          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Bank, Core.Common.Entities" alias="Bank" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Bank" name="BankCode" />
+              <Column table-alias="BankReconciliationBank" name="BankCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

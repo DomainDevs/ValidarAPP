@@ -1,0 +1,26 @@
+<map version="2.0" type="class" name="Facultative" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="FACULTATIVE_ENTITY">
+  <properties>
+    <property name="FacultativeId" type="Integer" key="true" description="FACULTATIVE_ID_PROPERTY" nullable = "false" autonumber="Identity" />
+    <property name="FacultativePercentage" type="Decimal" precision="12" scale="2" description="FACULTATIVE_PERCENTAGE_PROPERTY" />
+    <property name="PremiumPercentage" type="Decimal" precision="12" scale="2" description="PREMIUM_PERCENTAGE_PROPERTY" />
+    <property name="ProcessDate" type="DateTime" description="PROCESS_DATE_PROPERTY" />
+    <property name="Comments" type="String" size="100" description="COMMENTS_PROPERTY" />
+    <property name="UserId" type="Integer" description="USER_ID_PROPERTY" />
+    <property name="ReleaseTimeReserve" type="Integer" nullable="true" description="RELEASE_TIME_RESERVE_PROPERTY" />
+    <property name="SlipNumber" type="Integer" nullable="true" description="SLIP_NUMBER_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="FACULTATIVE" schema="REINS" alias="FACULTATIVE" update="true">
+      <columns>
+        <column name="FACULTATIVE_ID" type="Int32" property="FacultativeId" key="true" identity ="true" />
+        <column name="FACULTATIVE_PERCENTAGE" type="Decimal" property="FacultativePercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="PREMIUM_PERCENTAGE" type="Decimal" property="PremiumPercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="PROCESS_DATE" type="DateTime" property="ProcessDate" allowNull="false" />
+        <column name="COMMENTS" type="String" property="Comments" allowNull="false" size="100" />
+        <column name="USER_ID" type="Int32" property="UserId" allowNull="false" />
+        <column name="RELEASE_TIME_RESERVE" type="Int32" property="ReleaseTimeReserve" />
+        <column name="SLIP_NUMBER" type="Int32" property="SlipNumber" />
+      </columns>
+    </table>
+  </tables>
+</map>

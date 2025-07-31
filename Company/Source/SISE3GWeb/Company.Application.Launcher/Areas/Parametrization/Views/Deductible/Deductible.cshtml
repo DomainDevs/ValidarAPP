@@ -1,0 +1,215 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.DeductibleViewModel
+@{
+    Layout = null;
+}
+<script id="DeductibleTemplate" type="text/template">
+	{{#ifCond StatusTypeService "==" 2}}
+	<div>
+		Deducible:<strong class="success">
+			{{Value}}  {{UnitDescription}}  {{DeductibleSubjectDescription}}  , Mínimo  {{Min}}
+			{{UnitMinDescription}}  {{ApplyOnMinDescription}} ({{DeductibleId}} )
+		</strong>
+	</div>
+	{{else ifCond StatusTypeService "==" 3}}
+	<div>
+		Deducible:<strong>({{DeductibleId}})</strong>  <strong class="warning">
+			{{Value}}  {{UnitDescription}}  {{DeductibleSubjectDescription}}  , Mínimo  {{Min}}
+			{{UnitMinDescription}}  {{ApplyOnMinDescription}} ({{DeductibleId}} )
+		</strong>
+	</div>
+	{{else ifCond Status "==" 4}}
+	<div>
+		Deducible:<strong class="danger">
+			{{Value}}  {{UnitDescription}}  {{DeductibleSubjectDescription}}  , Mínimo  {{Min}}
+			{{UnitMinDescription}}  {{ApplyOnMinDescription}} ({{DeductibleId}} )
+		</strong>
+	</div>
+	{{else}}
+	<div>
+		Deducible:<strong>({{DeductibleId}})</strong>  <strong>
+			{{Value}}  {{UnitDescription}}  {{DeductibleSubjectDescription}}  , Mínimo  {{Min}}
+			{{UnitMinDescription}}  {{ApplyOnMinDescription}} ({{DeductibleId}} )
+		</strong>
+	</div>
+	{{/ifCond }}
+	<div>
+		Ramo Técnico: <strong>{{LineDescription}}</strong>
+	</div>
+	<div>
+		Moneda: <strong>{{CurrencyDescription}}</strong>
+	</div>
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.LabelDeductibles
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputProcess", @placeholder = @Resources.Language.SearchDeductibleId })
+        <button class="btn btn-default" id="advDeductibleSearch"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSaveDeductible">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+<form id="formDeductible" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.DeductibleId</label>
+                    @Html.TextBoxFor(model => model.Value, new { id = "inputId", @class = "rightAlign", @disabled = "true" })
+                    @Html.ValidationMessageFor(model => model.DeductibleId)
+                </div>
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelLineBusiness</label>
+                    <select class="uif-select form-control" id="selectLineBusiness"
+                            data-id="Id" data-name="Description" name="LineBusinessId"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixTechnical"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.LineBusinessId)
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Value</label>
+                    @Html.TextBoxFor(model => model.Value, new { id = "inputValue", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Value)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Unit</label>
+                    <select class="uif-select form-control" id="selectUnit"
+                            data-id="Id" data-name="Description" name="UnitId"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentUnitOfMeasure"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.UnitId)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.ApplyOn</label>
+                    <select class="uif-select form-control" id="selectApplyOn"
+                            data-id="Id" data-name="Description" name="ApplyOnId"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlApplyOn"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.ApplyOnId)
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Min</label>
+                    @Html.TextBoxFor(model => model.Min, new { id = "inputMin", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Min)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.UnitMin</label>
+                    <select class="uif-select form-control" id="selectUnitMin"
+                            data-id="Id" data-name="Description" name="UnitMinId"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentUnitOfMeasure"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.UnitMinId)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.ApplyOnMin</label>
+                    <select class="uif-select form-control" id="selectApplyOnMin"
+                            data-id="Id" data-name="Description" name="ApplyOnMinId"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlApplyOn"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.ApplyOnMinId)
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.Max</label>
+                    @Html.TextBoxFor(model => model.Value, new { id = "inputMax", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Max)
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.UnitMax</label>
+                    <select class="uif-select form-control" id="selectUnitMax"
+                            data-id="Id" data-name="Description" name="UnitMaxId"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.UnitMaxId)
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.ApplyOnMax</label>
+                    <select class="uif-select form-control" id="selectApplyOnMax"
+                            data-id="Id" data-name="Description" name="ApplyOnMaxId"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.ApplyOnMaxId)
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelType</label>
+                    <select class="uif-select form-control" id="selectType"
+                            data-id="Value" data-name="Text" name="Type"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlType"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Type)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelRate</label>
+                    @Html.TextBoxFor(model => model.Rate, new { id = "inputRate", maxLength = 20, @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Rate)
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelMoney</label>
+                    <select class="uif-select form-control" id="selectCurrency"
+                            data-id="Id" data-name="Description" name="CurrencyId"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.CurrencyId)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.TotalDescription</label>
+                    @Html.TextBoxFor(model => model.TotalDescription, new { id = "inputDescription", maxlength = "150", @disabled = "true" })
+                    @Html.ValidationMessageFor(model => model.TotalDescription)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listViewDeductible" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsDeductible">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNew">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAccept">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/DeductibleParametrization");
+}
+
+

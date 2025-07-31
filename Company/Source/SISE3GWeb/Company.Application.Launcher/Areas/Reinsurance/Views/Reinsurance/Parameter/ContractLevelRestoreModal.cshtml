@@ -1,0 +1,111 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<script id="restoreTemplate" type="text/template">
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <strong>@Global.NumberReestablishment:</strong>
+        </div>
+        <div class="uif-col-5">
+            <span class="label label-success">{{Number}} </span>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <strong>@Global.ReestablishmentPercentage:</strong>
+        </div>
+        <div class="uif-col-5">
+            <input id="_restorePercentage" name="_restorePercentage" type="text" disabled value="{{RestorePercentage}}" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <strong>@Global.NoticePercentage:</strong>
+        </div>
+        <div class="uif-col-5">
+            <input id="_noticePercentage" name="_noticePercentage" type="text" disabled value="{{NoticePercentage}}" />
+        </div>
+    </div>
+
+</script>
+
+<form id="formLevelRestore" onsubmit="return false" class="form">
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertRestorePayment"></div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+
+        <div class="uif-col-7">
+            <div class="row">
+                <div class="uif-col-7">
+                    <b>@Global.NumberReestablishment</b>
+                    <input type="text"
+                           id="noRestore"
+                           readonly="readonly"
+                           name="noRestore"
+                           style="text-align: left" />
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-7">
+                    <b>@Global.ReestablishmentPercentage</b>
+                    <input type="text"
+                           id="restorePercentage"
+                           name="restorePercentage"
+                           maxlength="3"
+                           data-val-required='@Global.RequiredField'
+                           onkeypress="return JustNumbers(event, this)"
+                           data-val="true"
+                              />
+                    <span class="text-danger" data-valmsg-for="restorePercentage" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-7">
+                    <b>@Global.NoticePercentage</b>
+                    <input type="text"
+                           id="noticePercentage"
+                           name="noticePercentage"
+                           maxlength="3"
+                           data-val="true"
+                           data-val-required='@Global.RequiredField'
+                           onkeypress="return JustNumbers(event, this)"
+                           />
+                    <span class="text-danger" data-valmsg-for="noticePercentage" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-5">
+                    <br />
+                    <button type="submit" class="btn btn-primary" id="SaveAddLevelRestore">@Global.Save</button>
+                    <button type="button" class="btn btn-default" id="CancelLevelRestore">@Global.Cancel</button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="uif-col-5">
+            <div class="uif-listview" id="levelRestoreListView">
+            </div>
+        </div>
+
+    </div>
+
+
+</form>
+
+
+
+
+

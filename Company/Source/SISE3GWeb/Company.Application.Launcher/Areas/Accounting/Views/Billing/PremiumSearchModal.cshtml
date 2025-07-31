@@ -1,0 +1,136 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "PremiumSearchModal";
+}
+
+<form id="addPremiumForm" onsubmit="return false" class="form">
+    <div class="main-content">
+        <div class="uif-row">
+            <!--left col-->
+            <div class="uif-col-6">
+                <div class="form">
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <label for="">
+                                @Global.SearchBy
+                            </label>
+                            @Html.DropDownList("selectSearch", Enumerable.Empty<SelectListItem>(), new
+                       {
+                           @class = "uif-select form-control",
+                           data_source = @Url.Content("~/Accounting/Common/GetSearchBy"),
+                           data_id = "Id",
+                           data_name = "Description",
+                           data_native = "true",
+                           data_val = "true",
+                           data_val_required = @Global.RequiredField
+                       })
+                            <span class="text-danger" data-valmsg-for="selectSearch" data-valmsg-replace="true" />
+                        </div>
+                    </div>
+                    <div class="row form-group" id="DivSearchBy" >
+                        <div class="col-xs-12" >
+                            <label for="" id="TitleSearchBy"></label>
+                            <div class="input-with-buttons">
+                                @Html.TextBox("SearchBy", "", new
+                           {
+                               style = "text-align: left",
+                               data_native = "true",
+                               data_val = "true",
+                               data_val_required = @Global.RequiredField,
+                               @onkeypress = "return JustNumbers(event, this)",
+                               maxlength = "12"
+                           })
+                               </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row form-group" id="DivInsured">
+                        <div class="col-xs-12">
+                            <input class="uif-autocomplete" type="text"
+                                   data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")" 
+                                   data-displaykey="DocumentNumberName"
+                                   placeholder='@Global.EnterInsurdeDocument'
+                                   id="InsuredDocumentNumberBill"
+                                   name="InsuredDocumentNumberBill"
+                                   data-val-required='@Global.RequiredField'
+                                   data-val="true"
+                                   maxlength="100" />
+                            <span class="text-danger" data-valmsg-for="InsuredDocumentNumberBill" data-valmsg-replace="true">
+                            </span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <label for="">
+                                @Global.Branch
+                            </label>
+                            @Html.DropDownList("selectBranch", Enumerable.Empty<SelectListItem>(), new
+                       {
+                           @class = "uif-select form-control",
+                           data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                           data_id = "Id",
+                           data_name = "Description",
+                           data_native = "true"
+                       })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <label for="">
+                                @Global.Prefix
+                            </label>
+                            @Html.DropDownList("selectPrefix", Enumerable.Empty<SelectListItem>(), new
+                       {
+                           @class = "uif-select form-control",
+                           data_source = @Url.Content("~/Accounting/Common/GetPrefixes"),
+                           data_id = "Id",
+                           data_name = "Description",
+                           data_native = "true"
+                       })
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            @*<label for="">@Global.PolicyHolder</label>
+                            @Html.TextBox("PolicyHolder", "", new
+                           {
+                               style = "text-align: left",
+                               maxlength = "50"
+                           })*@
+                            <button class="btn btn-primary" type="button" id="Search">@Global.Search</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="uif-alert" id="alertForm"></div>
+                    </div>
+                </div>
+                <!-- form -->
+            </div>
+            <!--End left col-->
+            <!--right col-->
+
+            @*<div class="uif-col-6">*@
+                        <br/>
+                        <div id="premiumsListView" class="uif-listview">
+                            <div class="footer">
+                                <div class="uif-col-xs-6">
+                                    @Global.Total
+                                </div>
+                                <div class="uif-col-xs-6 text-right">
+                                    <b id="TotalPremium">$0.00</b>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        @*</div>*@
+                        <!--End right col-->
+      
+        </div>
+            </div>
+</form>

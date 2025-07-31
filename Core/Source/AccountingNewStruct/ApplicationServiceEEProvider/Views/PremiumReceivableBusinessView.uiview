@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PremiumReceivableBusinessView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PremiumReceivableTransId">
+          <Column table-alias="PremiumReceivableTrans" name="PremiumReceivableTransId" />
+        </SelectValue>
+        <SelectValue alias="ImputationCode">
+          <Column table-alias="PremiumReceivableTrans" name="ImputationCode" />
+        </SelectValue>
+        <SelectValue alias="PolicyId">
+          <Column table-alias="PremiumReceivableTrans" name="PolicyId" />
+        </SelectValue>
+        <SelectValue alias="EndorsementId">
+          <Column table-alias="PremiumReceivableTrans" name="EndorsementId" />
+        </SelectValue>
+        <SelectValue alias="BusinessTypeCode">
+          <Column table-alias="Policy" name="BusinessTypeCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PremiumReceivableTrans,  Core.Accounting.Entities" alias="PremiumReceivableTrans" />
+          <ClassNameTable name="Sistran.Core.Application.Issuance.Entities.Policy, Core.Issuance.Entities" alias="Policy" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Policy" name="PolicyId" />
+              <Column table-alias="PremiumReceivableTrans" name="PolicyId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

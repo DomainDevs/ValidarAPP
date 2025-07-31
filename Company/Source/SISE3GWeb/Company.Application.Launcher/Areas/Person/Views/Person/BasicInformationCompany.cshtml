@@ -1,0 +1,83 @@
+﻿@model  Sistran.Core.Framework.UIF.Web.Areas.Person.Models.CompanyBasicViewModel
+<form id="formCompanyInfoBasic" class="form without-space">
+    <div class="uif-row fit-col-main">
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.DocumentTypeCompany, htmlAttributes: new { @class = "control-label field-required" })
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="DocumentTypeCompany" name="DocumentTypeCompany"
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.LanguagePerson.ErrorDocumentDocumentType"></select>
+            <span class="text-danger" data-valmsg-for="DocumentTypeCompany" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.DocumentNumberCompany, htmlAttributes: new { @class = "control-label field-required" })
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width: 80%">
+                            @Html.TextBoxFor(model => model.DocumentNumberCompany, htmlAttributes: new { @class = "form-control" })
+
+                        </td>
+                        <td>
+                            -
+                        </td>
+                        <td style="width: 20%">
+                            @Html.TextBoxFor(model => model.CompanyDigit, htmlAttributes: new { @class = "form-control" })
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            @Html.ValidationMessageFor(model => model.DocumentNumberCompany)
+            @Html.ValidationMessageFor(model => model.CompanyDigit)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.CompanyCode, htmlAttributes: new { @class = "control-label field-required" })
+            @Html.TextBoxFor(model => model.CompanyCode, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CompanyCode)
+        </div>
+    </div>
+    <div class="uif-row fit-col-main">
+        <div class="uif-col-6">
+            @Html.LabelFor(model => model.TradeName, htmlAttributes: new { @class = "control-label field-required" })
+            @Html.TextBoxFor(model => model.TradeName, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TradeName)
+        </div>
+        <div class="uif-col-6">
+            @Html.LabelFor(model => model.TypePartnership, htmlAttributes: new { @class = "control-label field-required" })
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="TypePartnership" name="TypePartnership"
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.LanguagePerson.ErrorDocumentTypePartnership"></select>
+            <span class="text-danger" data-valmsg-for="TypePartnership" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="uif-row fit-col-main">
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.CompanyTypePartnership, htmlAttributes: new { @class = "control-label field-required" })
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="CompanyTypePartnership" name="CompanyTypePartnership"
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.LanguagePerson.ErrorDocumentCompanyTypePartnership"></select>
+            <span class="text-danger" data-valmsg-for="CompanyTypePartnership" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-6">
+            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label field-required" })
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="Country" name="Country"
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.LanguagePerson.ErrorDocumentControlCountry"></select>
+            <span class="text-danger" data-valmsg-for="Country" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="uif-row fit-col-main">
+        <div class="uif-col-3">
+            <label>@Resources.LanguagePerson.LastUpdate</label>
+            @Html.TextBoxFor(model => model.LastUpdateCompany, htmlAttributes: new { @class = "uif-datepicker" })
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.UpdateByCompany, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.UpdateByCompany, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UpdateByCompany)
+        </div>
+    </div>
+</form>

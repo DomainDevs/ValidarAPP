@@ -1,0 +1,122 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.DebitStatusCodes;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameters</li>
+        <li>@Global.AutomaticDebit</li>
+        <li>@Global.DebitStatusCodes</li>
+    </ol>
+}
+
+@section Modals
+{
+<form id="MainDebitStatusAddForm" onsubmit="return false" class="form">
+    <div class="uif-modal" id="MainDebitStatusModalAdd">
+        <div class="uif-modalbody">
+            @Html.Partial("../Parameters/AutomaticDebit/DebitStatusCodesModal")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+            <button type="submit" class="btn btn-primary" id="MainDebitStatusSaveAdd" onclick="return false">@Global.Save</button>
+        </div>
+    </div>
+</form>
+
+<form id="MainDebitStatusEditForm" onsubmit="return false" class="form">
+    <div class="uif-modal" id="MainDebitStatusModalEdit">
+        <div class="uif-modalbody">
+            @Html.Partial("../Parameters/AutomaticDebit/DebitStatusCodesModal")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+            <button type="submit" class="btn btn-primary" id="MainDebitStatusSaveEdit" onclick="return false">@Global.Save</button>
+        </div>
+    </div>
+</form>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteDebit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="MainDebitStatusDeleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="MainDebitStatusDeleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="MainDebitStatusDeleteModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-modal" id="modalDebitStatusCodes"></div>
+
+}
+
+<form id="formDebitStatus" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.DebitStatusTable</label>
+            <select class="uif-select form-control" id="selectDebitStatusTable" name="selectDebitStatusTable" data-native="true"
+                    data-source='@Url.Content("~/Networks/GetDebitStatusTables")' data-id="Id" data-name="Description"
+                    data-val="true" data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="selectDebitStatusTable" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <br />
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="MainDebitStatusAlert"></div>
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableDebitStatus" data-exporttocsv="false" data-add="true" data-edit="true"
+               data-delete="true" data-selectiontype="multiple" data-filter="true"
+               data-source="" data-paginate="true" data-title="@Global.DebitStatusCodes">
+            <thead>
+                <tr>
+                    <th data-property="Id" data-visible="false">Id</th>
+                    <th data-property="SmallDescription">@Global.Code</th>
+                    <th data-property="Description">@Global.Description</th>
+                    <th data-property="IsEnabled" data-type="boolean">@Global.Enabled</th>
+                    <th data-property="IsRetry" data-type="boolean">@Global.Retry</th>
+                    <th data-property="DebitStatusType">@Global.DebitStatusType</th>
+                    <th data-property="RetryDays">@Global.RetryDays</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagControlSpan" value="true" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainDebitStatusCodes")
+}

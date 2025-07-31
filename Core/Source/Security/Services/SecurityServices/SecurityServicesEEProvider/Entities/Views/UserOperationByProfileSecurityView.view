@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="UserOperationByProfileSecurityView">
+  <collections>
+    <collection name="UniqueUser" type="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="ProfileUniqueUser" type="Sistran.Core.Application.UniqueUser.Entities.ProfileUniqueUser, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="AccessProfile" type="Sistran.Core.Application.UniqueUser.Entities.AccessProfiles, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Access" type="Sistran.Core.Application.UniqueUser.Entities.Accesses, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="AccessObject" type="Sistran.Core.Application.UniqueUser.Entities.AccessObjects, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="SubModule" type="Sistran.Core.Application.UniqueUser.Entities.Submodules, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Module" type="Sistran.Core.Application.UniqueUser.Entities.Modules, 
+                Core.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="UniqueUser" destination="ProfileUniqueUser" name="UserProfileUser" type="inner">
+      <property left="UserId" type="Equal" right="UserId"></property>
+    </relation>
+    <relation source="ProfileUniqueUser" destination="AccessProfile" name="ProfileUserOperationProfile" type="inner">
+      <property left="ProfileId" type="Equal" right="ProfileId"></property>
+    </relation>
+    <relation source="AccessProfile" destination="Access" name="OperationProfileOperation" type="inner">
+      <property left="AccessId" type="Equal" right="AccessId"></property>
+    </relation>
+    <relation source="Access" destination="AccessObject" name="OperationOperationObject" type="inner">
+      <property left="AccessObjectId" type="Equal" right="AccessObjectId"></property>
+    </relation>
+    <relation source="Access" destination="SubModule" name="OperationSubmodule" type="Left">
+      <property left="ModuleCode" type="Equal" right="ModuleCode"></property>
+      <property left="SubmoduleCode" type="Equal" right="SubmoduleCode"></property>
+    </relation>
+    <relation source="SubModule" destination="Module" name="SubmoduleModule" type="Left">
+      <property left="ModuleCode" type="Equal" right="ModuleCode"></property>
+    </relation>
+    </relations>
+</view>

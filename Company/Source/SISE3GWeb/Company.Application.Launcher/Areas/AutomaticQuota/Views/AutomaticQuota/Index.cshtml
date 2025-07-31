@@ -1,0 +1,322 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.AutomaticQuota.Models.AutomaticQuotaModelsView
+<div class="uif-alert" id="alert"></div>
+@{
+    Layout = null;
+}
+<script id="footer-template" type="text/template">
+    <div id="btnBottomMain">
+
+        <button type="button" class="btn btn-default" id="btnCloseAutomaticQuota">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            @Resources.LanguagePerson.ButtonExit
+        </button>
+
+        <button type="button" class="btn btn-default" id="btnCustomerKnowledge">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            @Resources.Language.CustomerKnowledge
+        </button>
+
+        <button type="button" class="btn btn-default" id="btnCalculate">
+            <i class="fa fa-file-o" aria-hidden="true"></i>
+            @Resources.Language.ButtonCalculate
+        </button>
+
+
+        <button type="button" class="btn btn-primary" id="btnSaveAutomaticQuota">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            @Resources.Language.LabelRecord
+        </button>
+
+    </div>
+</script>
+<script id="title-template" type="text/template">
+    <div class="column" id="titleMain">
+        @Resources.Language.AutomaticQuota
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputTemporalAutomaticQuota", @placeholder = @Resources.Language.SearchTemporalAutomaticQuota })
+        <button class="btn btn-default" id="btnShowAdvancedAq"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+<div id="modalTemporalAdvancedSearch" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/AutomaticQuota/Views/AutomaticQuota/AdvancedSearchAutomaticQuota.cshtml")
+    </div>
+</div>
+
+<div id="modalAutomaticQuotaThid" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/AutomaticQuota/Views/AutomaticQuota/ModalAutomaticQuotaThird.cshtml")
+    </div>
+</div>
+
+<div id="modalAutomaticQuotaIndicator" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/AutomaticQuota/Views/AutomaticQuota/ModalAutomaticQuotaIndicator.cshtml")
+    </div>
+</div>
+
+<div id="modalAutomaticQuotaUtility" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/AutomaticQuota/Views/AutomaticQuota/ModalAutomaticQuotaUtility.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalDefaultSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/AutomaticQuota/Views/AutomaticQuota/DefaultResults.cshtml")
+    </div>
+</div>
+<form id="FormExecuteScript">
+    <div class="uif-modal" id="ModalExecuteScript">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/RulesScripts/Views/Scripts/ExecuteScript.cshtml")
+        </div>
+        <div class="uif-modalbuttons width-save">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+            <button type="button" class="btn btn-primary" onclick="return false" id="btnRecordScrip">@Resources.Language.ButtonSave</button>
+        </div>
+    </div>
+</form>
+
+<form id="formAutomaticQuota" class="form">
+    <div class="uif-col-9 fit-col-main">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <h3><strong>@Resources.Language.LabelCompanyInformationCommercial</strong></h3>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.LanguagePerson.LabelTypeDocument</label>
+                <select class="uif-select form-control" id="SelectDocumentType" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="DocumentType"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="DocumentType" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelNtheIdentification</label>
+                <input class="uif-input-search upperCase-co" type="text" id="InputNIdentification" data-val="true" name="NIdentification" maxlength="20"
+                       data-val-required="@Resources.Language.FieldRequired" required />
+                <span class="text-danger" data-valmsg-for="NIdentification" data-valmsg-replace="true"></span>
+
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelNameBusinnesName</label>
+                <input type="text" id="InputNameBusinnesName" name="NameBusinnesName" class="upperCase-co" maxlength="60" data-val="true"
+                       data-val-required="@Resources.Language.FieldRequired" required />
+                <span class="text-danger" data-valmsg-for="NameBusinnesName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelCountry</label>
+                <input class="uif-input-search"
+                       data-val="true" id="InputCountry" name="InputCountry" placeholder="@Resources.LanguagePerson.NameCountry" type="text"
+                       data-val-required="@Resources.Language.FieldRequired" required />
+                <span class="text-danger" data-valmsg-for="InputCountry" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.LanguagePerson.LabelDepartment</label>
+                <input class="uif-input-search"
+                       data-val="true" id="InputDepartament" name="InputDepartament" placeholder="@Resources.LanguagePerson.NameDepartment" type="text"
+                       data-val-required="@Resources.Language.FieldRequired" required onkeyup="this.value = this.value.toUpperCase();" />
+                <span class="text-danger" data-valmsg-for="InputDepartment" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.LanguagePerson.LabelCity</label>
+                <input class="uif-input-search"
+                       data-val="true" id="InputCity" name="InputCity" placeholder="@Resources.LanguagePerson.NameCity" type="text"
+                       data-val-required="@Resources.Language.FieldRequired" required onkeyup="this.value = this.value.toUpperCase();" />
+                <span class="text-danger" data-valmsg-for="InputCity" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.LabelFullAddress</label>
+                <input type="text" id="InputFullAddress" name="FullAddress" class="upperCase-co" maxlength="80" data-val="true"
+                       data-val-required="@Resources.Language.FieldRequired" required />
+                <span class="text-danger" data-valmsg-for="FullAddress" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.LanguagePerson.LabelPhone</label>
+                <input type="text" id="InputPhone" name="Phone" class="rightAlign" maxlength="13" data-val="true"
+                       data-val-required="@Resources.Language.FieldRequired" required />
+                <span class="text-danger" data-valmsg-for="Phone" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label>@Resources.Language.Email</label>
+                <input type="text" id="InputEmail" maxlength="60" style="text-transform: lowercase" />
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelDateConstitution</label>
+                <input class="uif-datepicker"
+                       data-val="true" name="InputDateConstitution" type="text" id="InputDateConstitution"
+                       data-val-required="@Resources.Language.FieldRequired" required />
+                <span class="text-danger" data-valmsg-for="InputDateConstitution" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelLegalRepresentative</label>
+                <input type="text" id="InputLegalRepresentative" maxlength="60" style="text-transform: lowercase" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelReviewerLegal</label>
+                <input type="text" id="InputReviewerLegal" maxlength="60" style="text-transform: lowercase" />
+            </div>
+            <div class="uif-col-8">
+                <label class="field-required">@Resources.Language.LabelCiiuEconomicActivity</label>
+                <input class="uif-input-search upperCase-co" type="text" id="InputCiiuEconomicActivity" name="CiiuEconomicActivity" data-val="true" maxlength="60" style="text-transform: lowercase"
+                       data-val-required="@Resources.Language.FieldRequired" required onkeyup="this.value = this.value.toUpperCase();"/>
+                <span class="text-danger" data-valmsg-for="CiiuEconomicActivity" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12"></div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-8">
+                <label class="field-required">@Resources.Language.Agent</label>
+                <input class="uif-input-search upperCase-co" id="InputAgent" name="Agent" data-id="Id" data-name="Description" data-val="true"
+                       data-val-required="@Resources.Language.FieldRequired" required onkeyup="this.value = this.value.toUpperCase();"/>
+                <span class="text-danger" data-valmsg-for="Agent" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelProgram</label>
+                <select class="uif-select form-control" id="SelectProgram" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="SelectProgram"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="SelectProgram" data-valmsg-replace="true"></span>
+
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.Country</label>
+                <select class="uif-select form-control" id="SelectCountry" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="SelectCountry"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="SelectCountry" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.Department</label>
+                <select class="uif-select form-control" id="SelectDepartment" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="SelectDepartment"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="SelectDepartment" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.City</label>
+                <select class="uif-select form-control" id="SelectCity" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="SelectCity"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="SelectCity" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <h3><strong>@Resources.Language.LabelBondingQuota</strong></h3>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelSuggestedQuota</label>
+                <input type="text" id="InputSuggestedQuota" name="SuggestedQuota" maxlength="20" data-val="true"
+                       data-val-required="@Resources.Language.FieldRequired" required  disabled/>
+                <span class="text-danger" data-valmsg-for="SuggestedQuota" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelReconsiderationQuota</label>
+                <input type="text" id="InputReconsiderationQuota" name="ReconsiderationQuota" maxlength="20" data-val="true"
+                       data-val-required="@Resources.Language.FieldRequired" required />
+                <span class="text-danger" data-valmsg-for="ReconsiderationQuota" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelLegalQuota</label>
+                <input type="text" id="InputLegalQuota" name="LegalQuota" class="upperCase-co" maxlength="60" disabled data-val="true"
+                       data-val-required="@Resources.Language.FieldRequired" required />
+                <span class="text-danger" data-valmsg-for="LegalQuota" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelCurrentQuota</label>
+                <input type="text" id="InputCurrentQuota" maxlength="60" style="text-transform: lowercase" disabled />
+            </div>
+            <div class="uif-col-8">
+                <label class="field-required">@Resources.Language.LabelCurrentCumulu</label>
+                <input type="text" id="InputCurrentCumulu" name="CurrentCumulu" maxlength="60" style="text-transform: lowercase" data-val="true"
+                       data-val-required="@Resources.Language.FieldRequired" required disabled />
+                <span class="text-danger" data-valmsg-for="CurrentCumulu" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelElaborationQuotaDate</label>
+                <input class="uif-datepicker"
+                       data-val="true" id="InputElaborationQuotaDat" name="InputElaborationQuotaDate" type="text" disabled
+                       data-val-required="@Resources.Language.FieldRequired" required />
+                <span class="text-danger" data-valmsg-for="InputElaborationQuotaDate" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelForSolution</label>
+                <input class="uif-input-search upperCase-co" type="text" id="InputForSolution" name="ForSolution" maxlength="80" data-val="true"
+                       data-val-required="@Resources.Language.FieldRequired" required onkeyup="this.value = this.value.toUpperCase();"/>
+                <span class="text-danger" data-valmsg-for="ForSolution" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelElaboration</label>
+                <input type="text" id="InputElaboration" name="Elaboration" class="rightAlign" maxlength="13" disabled data-val="true"
+                       data-val-required="@Resources.Language.FieldRequired" required />
+                <span class="text-danger" data-valmsg-for="Elaboration" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelCounterGuaranteeType</label>
+                <select class="uif-select form-control" id="SelectCounterGuaranteeType" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="SelectCounterGuaranteeType"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="SelectCounterGuaranteeType" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelCounterGuaranteeState</label>
+                <select class="uif-select form-control" id="SelectCounterGuaranteeState" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="SelectCounterGuaranteeState"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="SelectCounterGuaranteeState" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelObservation</label>
+                <input type="text" id="InputObservation" name="Observation" class="rightAlign" maxlength="100" data-val="true"/>
+                       @*data-val-required="@Resources.Language.FieldRequired" required />*@
+                @*<span class="text-danger" data-valmsg-for="Observation" data-valmsg-replace="true"></span>*@
+
+            </div>
+        </div>
+
+    </div>
+    <div class="uif-col-3 fit-col-secondary">
+        <div class="uif-right-bar" id="panelButtonsRight">
+            <ul>
+                <li>
+                    <a href="#" id="btnThird">@Resources.Language.Third</a>
+                    <p id="selectedInclusionRisk"></p>
+                </li>
+                <li>
+                    <a href="#" id="btnUtility">@Resources.Language.Utility</a>
+                    <p id="selectedInclusionRisk"></p>
+                </li>
+                <li>
+                    <a href="#" id="btnIndicators">@Resources.Language.Indicators</a>
+                    <p id="selectedInclusionRisk"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+
+

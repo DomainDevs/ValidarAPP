@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RuleConditionConcept">
+  <collections>
+
+    <collection name="Concept" type=" Sistran.Core.Application.Script.Entities.Concept, 
+              Core.Script.Entities"></collection>
+
+
+    <collection name="RuleConditionConcept" type=" Sistran.Core.Application.Script.Entities.RuleConditionConcept, 
+              Core.Script.Entities"></collection>
+
+    <collection name="RuleCondition" type=" Sistran.Core.Application.Script.Entities.RuleCondition, 
+              Core.Script.Entities"></collection>
+
+  </collections>
+  <relations>
+    <relation source="Concept" destination="RuleConditionConcept" name="RuleConditionConcept_Concept" type="Left">
+      <property left="EntityId" type="Equal" right="EntityId"></property>
+      <property left="ConceptId" type="Equal" right="ConceptId"></property>
+    </relation>
+
+    <relation source="RuleConditionConcept" destination="RuleCondition" name="RuleCondition_RuleConditionConcept" type="Left">
+      <property left="RuleBaseId" type="Equal" right="RuleBaseId"></property>
+      <property left="EntityId" type="Equal" right="EntityId"></property>
+      <property left="ConceptId" type="Equal" right="ConceptId"></property>
+    </relation>
+  </relations>
+</view>
+
+

@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="AccessObjects" namespace="Sistran.Core.Application.UniqueUser" file-version="1.0" description="ACCESS_OBJECTS_ENTITY">
+  <properties>
+    <property name="AccessObjectId" type="Integer" key="true" description="ACCESS_OBJECT_ID_PROPERTY" autonumber="id" />
+    <property name="ObjectName" type="String" size="30" description="OBJECT_NAME_PROPERTY" />
+    <property name="Description" type="String" size="30" description="DESCRIPTION_PROPERTY" />
+    <property name="AccessObjTypeCode" type="Integer" description="ACCESS_OBJ_TYPE_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="ACCESS_OBJECTS" schema="UU" alias="ACCESS_OBJECTS" update="true">
+      <columns>
+        <column name="ACCESS_OBJECT_ID" type="Int32" property="AccessObjectId" key="true" />
+        <column name="OBJECT_NAME" type="String" property="ObjectName" allowNull="false" size="30" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="30" />
+        <column name="ACCESS_OBJ_TYPE_CD" type="Byte" property="AccessObjTypeCode" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="10" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

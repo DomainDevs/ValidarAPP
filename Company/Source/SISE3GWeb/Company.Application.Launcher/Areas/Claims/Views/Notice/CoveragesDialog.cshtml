@@ -1,0 +1,64 @@
+﻿<div data-disabled="true">
+  <h5>
+    <strong>@Resources.Language.Coverage</strong>
+  </h5>
+  <div class="row">
+    <div class="uif-col-6">
+      <label>@Resources.Language.Affected</label>
+      <select id="victim" name="coverageAffected">
+        <option value="1">@Resources.Language.InsuredName</option>
+        <option value="0">@Resources.Language.Third</option>
+      </select>
+    </div>
+    <div class="uif-col-6">
+      <label>@Resources.Language.DocumentType </label>
+      <select class="uif-select" 
+              id="ddlDocumentTypeCoverageModal" 
+              data-id="Id" 
+              data-name="Description" 
+              name="ddlDocumentTypeCoverageModal" required>
+      </select>
+      @*@Html.ValidationMessage("ddlDocumentTypeCoverage", @Resources.Language.RequiredField)*@
+    </div>
+  </div>
+  <div class="row">
+    <div class="uif-col-4">
+      <label>@Resources.Language.DocumentNumber</label>
+      <input type="text" class="uif-autocomplete"
+             data-source="@Url.Content("~/Claims/PaymentRequest/GetSuppliersByNameDocumentNumber")" data-displaykey="DocumentNumber"
+             data-id="Id" placeholder="@Resources.Language.PlaceHolderDocumentNumber" id="inputThirdDocumentNumber" name="documentNumber">
+      @*@Html.ValidationMessage("documentNumber", @Resources.Language.RequiredField)*@
+    </div>
+    <div class="uif-col-8">
+      <label>@Resources.Language.FullName</label>
+      <input type="text" class="uif-autocomplete"
+             data-source="@Url.Content("~/Claims/PaymentRequest/GetSuppliersByNameDocumentNumber")" data-displaykey="Name"
+             data-id="Id" name="dataFullNameId" placeholder="@Resources.Language.PlaceHolderNameSurname" id="inputThirdFullName" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="uif-col-3">
+      <label>@Resources.Language.EstimatedType</label>
+      <select class="uif-select" id="ddlEstimationType" data-id="Id" data-name="Description" disabled="disabled" required></select>
+      @*@Html.ValidationMessage("ddlEstimationType", @Resources.Language.RequiredField)*@
+    </div>
+    <div class="uif-col-4">
+        <label>@Resources.Language.Coverage</label>
+        <input class="uif-autocomplete" type="text" 
+               data-source="@Url.Content("~/Notice/GetRiskCoveragesByDescription")"
+               data-displaykey="Description"
+               data-id="coverageId" placeholder=""
+               id="txtCoverage" required>
+        <span class="text-danger" data-valmsg-for="txtCoverage" data-valmsg-replace="true"></span>
+    </div>
+    <div class="uif-col-3">
+      <label>@Resources.Language.InsuredAmount</label>
+      <input type="text" disabled="disabled" id="txtInsuredAmount" maxlength="21" data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,16)" data-val="true" style="text-align: right" />
+    </div>
+    <div class="uif-col-2">
+      <label>@Resources.Language.EstimatedValue</label>
+      <input type="text" id="estimatedValue" maxlength="21" data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,16)" data-val="true" style="text-align: right" pattern="[0-9]" name="estimatedValue" required />
+      @*@Html.ValidationMessage("estimatedValue", @Resources.Language.RequiredField)*@
+    </div>
+  </div>
+ </div>

@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sistran.Core.Application.AccountingServices.EEProvider.Models.Claims
+{
+    [DataContract]
+    public class EstimationType
+    {
+        [DataMember]
+        public int Id { get; set; }
+
+        [DataMember]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Enabled
+        /// </summary>
+        [DataMember]
+        public bool IsEnabled { get; set; }
+
+        /// <summary>
+        /// ShowSummary
+        /// </summary>
+        [DataMember]
+        public bool ShowSummary { get; set; }
+    }
+}

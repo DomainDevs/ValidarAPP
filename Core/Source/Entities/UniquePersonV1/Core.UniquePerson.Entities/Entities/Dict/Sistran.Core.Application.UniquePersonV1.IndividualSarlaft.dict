@@ -1,0 +1,59 @@
+<map version="2.0" type="class" name="IndividualSarlaft" namespace="Sistran.Core.Application.UniquePersonV1.Entities" file-version="1.0" description="INDIVIDUAL_SARLAFT_ENTITY">
+  <properties>
+    <property name="SarlaftId" type="Integer" key="true" description="SARLAFT_ID_PROPERTY" autonumber="id"/>
+    <property name="FormNum" type="String" size="12" description="FORM_NUM_PROPERTY" />
+    <property name="Year" type="Integer" description="YEAR_PROPERTY" />
+    <property name="RegistrationDate" type="DateTime" nullable="true" description="REGISTRATION_DATE_PROPERTY" />
+    <property name="AuthorizedBy" type="String" size="60" description="AUTHORIZED_BY_PROPERTY" />
+    <property name="FillingDate" type="DateTime" nullable="true" description="FILLING_DATE_PROPERTY" />
+    <property name="CheckDate" type="DateTime" nullable="true" description="CHECK_DATE_PROPERTY" />
+    <property name="VerifyingEmployee" type="String" size="60" description="VERIFYING_EMPLOYEE_PROPERTY" />
+    <property name="InterviewDate" type="DateTime" nullable="true" description="INTERVIEW_DATE_PROPERTY" />
+    <property name="InterviewerName" type="String" size="60" description="INTERVIEWER_NAME_PROPERTY" />
+    <property name="InternationalOperations" type="Boolean" description="INTERNATIONAL_OPERATIONS_PROPERTY" />
+    <property name="InterviewPlace" type="String" size="120" description="INTERVIEW_PLACE_PROPERTY" />
+    <property name="IndividualId" type="Integer" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="UserId" type="Integer" nullable="true" description="USER_ID_PROPERTY" />
+    <property name="BranchCode" type="Integer" nullable="true" description="BRANCH_CODE_PROPERTY" />
+    <property name="EconomicActivityCode" type="Integer" description="ECONOMIC_ACTIVITY_CODE_PROPERTY" />
+    <property name="SecondEconomicActivityCode" type="Integer" description="SECOND_ECONOMIC_ACTIVITY_CODE_PROPERTY" />
+    <property name="InterviewResultCode" type="Integer" description="INTERVIEW_RESULT_CODE_PROPERTY" />
+    <property name="PendingEvent" type="Boolean" description="PENDING_EVENT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="INDIVIDUAL_SARLAFT" schema="UP" alias="INDIVIDUAL_SARLAFT" update="true">
+      <columns>
+        <column name="SARLAFT_ID" type="Int32" property="SarlaftId" key="true" />
+        <column name="FORM_NUM" type="String" property="FormNum" allowNull="false" size="12" />
+        <column name="YEAR" type="Int16" property="Year" allowNull="false" />
+        <column name="REGISTRATION_DATE" type="DateTime" property="RegistrationDate" />
+        <column name="AUTHORIZED_BY" type="String" property="AuthorizedBy" allowNull="false" size="60" />
+        <column name="FILLING_DATE" type="DateTime" property="FillingDate" />
+        <column name="CHECK_DATE" type="DateTime" property="CheckDate" />
+        <column name="VERIFYING_EMPLOYEE" type="String" property="VerifyingEmployee" allowNull="false" size="60" />
+        <column name="INTERVIEW_DATE" type="DateTime" property="InterviewDate" />
+        <column name="INTERVIEWER_NAME" type="String" property="InterviewerName" allowNull="false" size="60" />
+        <column name="INTERNATIONAL_OPERATIONS" type="Boolean" property="InternationalOperations" allowNull="false" />
+        <column name="INTERVIEW_PLACE" type="String" property="InterviewPlace" allowNull="false" size="120" />
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" allowNull="false" />
+        <column name="USER_ID" type="Int32" property="UserId" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" />
+        <column name="ECONOMIC_ACTIVITY_CD" type="Int16" property="EconomicActivityCode" allowNull="false" />
+        <column name="SECOND_ECONOMIC_ACTIVITY_CD" type="Int16" property="SecondEconomicActivityCode" allowNull="false" />
+        <column name="INTERVIEW_RESULT_CD" type="Byte" property="InterviewResultCode" allowNull="false" />
+        <column name="PENDING_EVENT" type="Boolean" property="PendingEvent" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+
+  <autonumbers>
+    <autonumber name="id" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Int32" value="12149" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>  
+</map>

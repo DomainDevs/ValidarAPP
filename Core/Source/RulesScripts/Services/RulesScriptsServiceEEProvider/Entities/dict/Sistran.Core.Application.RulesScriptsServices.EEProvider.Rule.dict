@@ -1,0 +1,26 @@
+<map version="2.0" type="class" name="Rule" namespace="Sistran.Core.Application.RulesScriptsServices.EEProvider" file-version="1.0" description="RULE_ENTITY">
+  <properties>
+    <property name="RuleId" type="Integer" key="true" autonumber="id" description="RULE_ID_PROPERTY" />
+    <property name="Order" type="Integer" description="ORDER_PROPERTY" />
+    <property name="RuleBaseId" type="Integer" key="true" description="RULE_BASE_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="RULE" schema="SCR" alias="RULE" update="true">
+      <columns>
+        <column name="RULE_BASE_ID" type="Decimal" property="RuleBaseId" key="true" />
+        <column name="ORDER_NUM" type="Decimal" property="Order" allowNull="false" />
+        <column name="RULE_ID" type="Decimal" property="RuleId" key="true" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" table="RULE_BASE" schema="SCR" column="RULE_ENUMERATOR" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="RULE_BASE_ID" />
+          <Variable name="RuleBaseId" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

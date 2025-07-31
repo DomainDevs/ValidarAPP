@@ -1,0 +1,30 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.TextsModelsView
+
+<form id="formTexts" class="form">
+    <div class="row">
+        <div class="uif-col-8">
+            <label id="labelPrecataloged">@Resources.Language.LabelTextPrecataloged</label>
+            @Html.TextBoxFor(model => model.TextPrecataloged, new { id = "inputTextPrecataloged", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderText })
+            @Html.ValidationMessageFor(model => model.TextPrecataloged)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelText</label>
+            @Html.TextAreaFor(model => model.TextBody, new { id = "inputText", cols = "12", rows = "10", @class = "textarea" })
+        </div>
+    </div>
+    <br />
+    <div class="row" id="Observations">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelObservations</label>
+            @Html.TextAreaFor(model => model.Observations, new { id = "inputTextObservations", cols = "12", rows = "5", @class = "textarea" })
+        </div>
+    </div>
+    <div class="row" id="Records">
+        <div class="uif-col-12">
+            <label>@Resources.Language.RecordObservations</label>
+            <textarea cols="12" id="inputTextRecord" name="inputTextRecord" rows="5" required></textarea>
+        </div>
+    </div>
+</form>

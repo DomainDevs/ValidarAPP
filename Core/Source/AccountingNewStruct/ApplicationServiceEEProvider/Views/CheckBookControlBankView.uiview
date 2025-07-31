@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CheckBookControlBankView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="AccountBankCode">
+          <Column table-alias="CheckbookControl" name="AccountBankCode" />
+        </SelectValue>
+        <SelectValue alias="CheckbookControlCode">
+          <Column table-alias="CheckbookControl" name="CheckbookControlCode" />
+        </SelectValue>
+        <SelectValue alias="CheckFrom">
+          <Column table-alias="CheckbookControl" name="CheckFrom" />
+        </SelectValue>
+        <SelectValue alias="CheckTo">
+          <Column table-alias="CheckbookControl" name="CheckTo" />
+        </SelectValue>
+        <SelectValue alias="DisabledDate">
+          <Column table-alias="CheckbookControl" name="DisabledDate" />
+        </SelectValue>
+        <SelectValue alias="IsAutomatic">
+          <Column table-alias="CheckbookControl" name="IsAutomatic" />
+        </SelectValue>
+        <SelectValue alias="LastCheck">
+          <Column table-alias="CheckbookControl" name="LastCheck" />
+        </SelectValue>
+        <SelectValue alias="Status">
+          <Column table-alias="CheckbookControl" name="Status" />
+        </SelectValue>
+        <SelectValue alias="Number">
+          <Column table-alias="BankAccountCompany" name="AccountNumber" />
+        </SelectValue>
+        <SelectValue alias="DescriptionBank">
+          <Column table-alias="Bank" name="Description" />
+        </SelectValue>
+        <SelectValue alias="SmallDescriptionBranch">
+          <Column table-alias="Branch" name="SmallDescription" />
+        </SelectValue>
+        <SelectValue alias="BankCode">
+          <Column table-alias="Bank" name="BankCode" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="Branch" name="BranchCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CheckbookControl, Core.Accounting.Entities" alias="CheckbookControl" />
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.BankAccountCompany, Core.Accounting.Entities" alias="BankAccountCompany" />
+              
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="BankAccountCompany" name="BankAccountCompanyId" />
+                  <Column table-alias="CheckbookControl" name="AccountBankCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Common.Entities.Bank, Core.Common.Entities" alias="Bank" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Bank" name="BankCode" />
+                <Column table-alias="BankAccountCompany" name="BankCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Branch" name="BranchCode" />
+              <Column table-alias="BankAccountCompany" name="BranchCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

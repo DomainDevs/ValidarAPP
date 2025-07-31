@@ -1,0 +1,28 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="ModelViewModel.cs" company="SISTRAN">
+// Copyright (c) SISTRAN ANDINA. All rights reserved.
+// </copyright>
+// <author>Eder Camio Ramirez</author>
+// -----------------------------------------------------------------------
+namespace Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models
+{
+    /// <summary>
+    /// Modelo de las propiedades de Marca.
+    /// </summary>    
+    public class ModelViewModel
+    {
+        /// <summary>
+        /// Obtiene o establece el Id del modelo
+        /// </summary>
+        ///[Range(0, 255, ErrorMessageResourceType = typeof(App_GlobalResources.Language), ErrorMessageResourceName = "ErrorIdCoveredRiskType")]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Obtiene o establece la Descripción corta del tipo de Modelo.
+        /// </summary>
+        //[Display(Name = "LabelDescriptionShort", ResourceType = typeof(App_GlobalResources.Language))]
+        //[StringLength(15)]
+        //[Required(ErrorMessageResourceType = typeof(App_GlobalResources.Language), ErrorMessageResourceName = "ErrorDocument")]
+        public string Description { get; set; }
+    }
+}

@@ -1,0 +1,45 @@
+﻿@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+<form id="AccountingReportsForm">
+    <div class="uif-row">
+        <div class="uif-col-3" id="pnlFileType">
+            <label id="labelFileType">@Global.FileType:</label>
+            @Html.DropDownList("selectFileTypePartial", Enumerable.Empty<SelectListItem>(), new
+           {
+               @class = "uif-select form-control",
+               data_id = "Id",
+               data_source = @Url.Content("~/Reinsurance/Process/GetFileTypeList"),
+               data_name = "Description",
+               data_val = "true",
+               data_val_required = @Global.RequiredField,
+               data_native = "true"
+           })
+            <span class="text-danger" data-valmsg-for="selectFileTypePartial" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <table class="uif-table" data-source="" data-exporttocsv="false" 
+               data-exportname="cultura" data-add="false" id="tableMassiveProcessReport"
+               data-edit="true" data-delete="false" 
+               data-selectiontype="none" data-title=@Global.GeneratedReports>
+            <thead>
+                <tr>
+                    <th data-visible="false" data-property="Order">@Global.ProcessId</th>
+                    <th data-property="ProcessId">@Global.ProcessId</th>
+                    <th data-property="Description">@Global.Description</th>
+                    <th data-property="RecordsNumber">@Global.RecordsNumber</th>
+                    <th data-property="RecordsProcessed">@Global.ProcessedRecords</th>
+                    <th data-property="Progress">@Global.Progress</th>
+                    <th data-property="Elapsed">@Global.Elapsed</th>
+                    <th data-property="UrlFile">@Global.File</th>
+                    <th data-property="Status" data-visible="false">""</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </div>
+</form>
+

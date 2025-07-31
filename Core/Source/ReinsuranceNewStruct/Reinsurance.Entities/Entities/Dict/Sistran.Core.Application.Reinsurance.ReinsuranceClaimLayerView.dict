@@ -1,0 +1,34 @@
+<map version="2.0" type="class" name="ReinsuranceClaimLayerView" namespace="Sistran.Core.Application.Reinsurance" file-version="1.0" description="REINSURANCE_CLAIM_LAYER_V_ENTITY">
+  <properties>
+    <property name="ClaimCode" type="Integer" description="CLAIM_CODE_PROPERTY" />
+    <property name="ClaimModifyCode" type="Integer" description="CLAIM_MODIFY_CODE_PROPERTY" />
+    <property name="ClaimLayerId" type="Integer" key="true" description="CLAIM_LAYER_ID_PROPERTY" />
+    <property name="ReinsuranceNumber" type="Integer" description="REINSURANCE_NUMBER_PROPERTY" />
+    <property name="Description" type="String" size="100" description="DESCRIPTION_PROPERTY" />
+    <property name="ProcessDate" type="String" size="4000" nullable="true" description="PROCESS_DATE_PROPERTY" />
+    <property name="RegistrationDate" type="String" size="4000" nullable="true" description="REGISTRATION_DATE_PROPERTY" />
+    <property name="IsAutomatic" type="Boolean" description="IS_AUTOMATIC_PROPERTY" />
+    <property name="LayerNumber" type="Integer" description="LAYER_NUMBER_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="38" scale="2" nullable="true" description="AMOUNT_PROPERTY" />
+    <property name="MovementSourceId" type="Integer" description="MOVEMENT_SOURCE_ID_PROPERTY" />
+    <property name="ClaimCoverageCd" type="Integer" description="CLAIM_COVERAGE_CD_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="REINSURANCE_CLAIM_LAYER_V" schema="REINS" alias="REINSURANCE_CLAIM_LAYER_V" update="true">
+      <columns>
+        <column name="CLAIM_CD" type="Int32" property="ClaimCode" allowNull="false" />
+        <column name="CLAIM_MODIFY_CD" type="Int32" property="ClaimModifyCode" allowNull="false" />
+        <column name="CLAIM_LAYER_ID" type="Int32" property="ClaimLayerId" key="true" />
+        <column name="REINSURANCE_NUMBER" type="Int32" property="ReinsuranceNumber" allowNull="false" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="100" />
+        <column name="PROCESS_DATE" type="String" property="ProcessDate" size="4000" />
+        <column name="REGISTRATION_DATE" type="String" property="RegistrationDate" size="4000" />
+        <column name="IS_AUTOMATIC" type="Boolean" property="IsAutomatic" allowNull="false" />
+        <column name="LAYER_NUMBER" type="Int32" property="LayerNumber" allowNull="false" />
+        <column name="AMOUNT" type="Decimal" property="Amount" size="19" precision="38" scale="2" />
+        <column name="MOVEMENT_SOURCE_ID" type="Int32" property="MovementSourceId" allowNull="false" />
+        <column name="CLAIM_COVERAGE_CD" type="Int32" property="ClaimCoverageCd" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

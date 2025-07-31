@@ -1,0 +1,30 @@
+<map version="2.0" type="class" name="ProductForm" namespace="Sistran.Core.Application.Product" file-version="1.0" description="PRODUCT_FORM_ENTITY">
+  <properties>
+    <property name="FormId" type="Integer" key="true" autonumber="id" description="FORM_ID_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" description="CURRENT_FROM_PROPERTY" />
+    <property name="FormNumber" type="String" size="50" description="FORM_NUMBER_PROPERTY" />
+    <property name="ProductId" type="Integer" description="PRODUCT_ID_PROPERTY" />
+    <property name="CoverGroupId" type="Integer" description="COVER_GROUP_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PRODUCT_FORM" schema="PROD" alias="PRODUCT_FORM" update="true">
+      <columns>
+        <column name="FORM_ID" type="Int32" property="FormId" key="true" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" allowNull="false" />
+        <column name="FORM_NUMBER" type="String" property="FormNumber" allowNull="false" size="50" />
+        <column name="PRODUCT_ID" type="Int32" property="ProductId" allowNull="false" />
+        <column name="COVER_GROUP_ID" type="Byte" property="CoverGroupId" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Decimal" value="2220" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

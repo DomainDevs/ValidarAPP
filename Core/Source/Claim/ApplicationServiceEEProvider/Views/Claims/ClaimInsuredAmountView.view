@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ClaimInsuredAmoutView">
+  <collections>
+    <collection name="EndorsementRiskCoverage" type="Sistran.Core.Application.Issuance.Entities.EndorsementRiskCoverage, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskCoverage" type="Sistran.Core.Application.Issuance.Entities.RiskCoverage, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Claim" type="Sistran.Core.Application.Claims.Entities.Claim, 
+                Core.Claims.Entities"></collection>
+    <collection name="ClaimModify" type="Sistran.Core.Application.Claims.Entities.ClaimModify, 
+                Core.Claims.Entities"></collection>
+    <collection name="ClaimCoverage" type="Sistran.Core.Application.Claims.Entities.ClaimCoverage, 
+                Core.Claims.Entities"></collection>
+    <collection name="ClaimCoverageAmount" type="Sistran.Core.Application.Claims.Entities.ClaimCoverageAmount, 
+                Core.Claims.Entities"></collection>
+  </collections>
+  <relations>
+      <relation source="RiskCoverage" destination="EndorsementRiskCoverage" name="EndorsementRiskCoverageRiskCoverage" type="Inner">
+      <property left="RiskCoverId" type="Equal" right="RiskCoverId"></property>
+    </relation>
+    <relation source="Claim" destination="EndorsementRiskCoverage" name="EndorsementRiskCoverageClaim" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="ClaimModify" destination="Claim" name="ClaimModifyClaim" type="Inner">
+      <property left="ClaimCode" type="Equal" right="ClaimCode"></property>
+    </relation>
+    <relation source="ClaimCoverage" destination="ClaimModify" name="ClaimClaimCoverage" type="Inner">
+      <property left="ClaimModifyCode" type="Equal" right="ClaimModifyCode"></property>
+    </relation>
+    <relation source="ClaimCoverageAmount" destination="ClaimCoverage" name="ClaimCoverageAmountClaimCoverage" type="Inner">
+      <property left="ClaimCoverageCode" type="Equal" right="ClaimCoverageCode"></property>
+    </relation>
+  </relations>
+</view>

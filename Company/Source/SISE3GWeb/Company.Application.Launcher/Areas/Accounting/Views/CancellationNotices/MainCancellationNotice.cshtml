@@ -1,0 +1,112 @@
+﻿@*AVISOS DE CANCELACION ES SOLO PARA BE*@
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @ViewBag.TitleRel;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.CancellationNotice</a></li>
+        <li class="active">@Global.CancelNotice</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="CancelCancelation">
+            <i class="fa fa-paint-brush"></i> @Global.Clean
+        </button>
+        <button type="submit" class="btn btn-primary" id="AcceptCancelation" onclick="return false" data-role="button">
+            <i class="fa fa-print"></i> @Global.Accept
+        </button>
+    </footer>
+}
+
+
+@*Código html*@
+
+<form id="FormularioCancelation" onsubmit="return false">
+    <div class="uif-panel" data-title="@Global.CancellationNotice">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label>@Global.Branch</label>
+                @Html.DropDownList("BranchCancelation", Enumerable.Empty<SelectListItem>(), new
+                     {
+                         @class = "uif-select form-control",
+                         data_source = @Url.Content("~/Accounting/Common/GetListBranchesbyUserName"),
+                         data_id = "Id",
+                         data_name = "Description",
+                         data_selectedid = @ViewBag.BranchDefault,
+                         data_val = "true",
+                         data_val_required = @Global.RequiredField,
+                         data_native = "true"
+                     })
+                <span class="text-danger" data-valmsg-for="BranchCancelation" data-valmsg-replace="true" />
+
+            </div>
+            <div class="uif-col-6">
+                <label>@Global.Prefix</label>
+                @Html.DropDownList("PrefixCancelation", Enumerable.Empty<SelectListItem>(), new
+                     {
+                         @class = "uif-select form-control",
+                         data_source = @Url.Content("~/Accounting/Common/GetPrefixes"),
+                         data_id = "Id",
+                         data_name = "Description",
+                         data_val = "true",
+                         data_val_required = @Global.RequiredField,
+                         data_native = "true"
+                     })
+                <span class="text-danger" data-valmsg-for="PrefixCancelation" data-valmsg-replace="true" />
+
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Global.Policy </label>
+                @Html.TextBox("policyNumber", "", new
+                        {
+                            style = "text-align: left",
+                            @onkeypress = "return JustNumbers(event,this)",
+                            maxlength = "7",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                <span class="text-danger" data-valmsg-for="policyNumber" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.Suffix</label>
+                @Html.TextBox("sufix", "", new
+                        {
+                            style = "text-align: left",
+                            @onkeypress = "return JustNumbers(event,this)",
+                            maxlength = "4",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                <span class="text-danger" data-valmsg-for="sufix" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-6">
+                <label>@Global.Endorsement</label>
+                @Html.TextBox("endorsment", "", new
+                        {
+                            style = "text-align: left",
+                            @onkeypress = "return JustNumbers(event,this)",
+                            maxlength = "3",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                <span class="text-danger" data-valmsg-for="endorsment" data-valmsg-replace="true" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertCancelation"></div>
+            </div>
+        </div>
+    </div>
+</form>
+

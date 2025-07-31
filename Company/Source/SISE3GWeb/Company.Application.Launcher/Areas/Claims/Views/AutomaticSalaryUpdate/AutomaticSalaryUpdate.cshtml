@@ -1,0 +1,127 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.AutomaticSalaryUpdate
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div id="buttonsRescue" class="footerUnderwriting">
+        <button type="button" onclick="return false" id="btnUpdateSalaries" class="btn btn-default secondary-Colombia">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> @Resources.Language.Update
+        </button>
+    </div>
+</script>
+
+<div class="row">
+    <div class="uif-col-3">
+        <label>@Resources.Language.ValueMinimumSalaries</label>
+        <input type="text" id="minimunSalaryMounth" class="rightAlign" data-val="true" disabled />
+    </div>
+</div>
+
+<h5>
+    <strong>@Resources.Language.SearchClaim</strong>
+</h5>
+
+<form id="formSearchClaims" class="form" autocomplete="off">
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.Branch</label>
+            <select class="uif-select form-control" id="selectBranchClaim" data-val="true" data-id="Id" data-name="Description"
+                    name="BranchClaim" data-native="false" data-filter="true"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.Prefix</label>
+            <select class="uif-select form-control" id="selectPrefixClaim" data-val="true" data-id="Id" data-name="Description"
+                    name="PrefixClaim" data-native="false" data-filter="true"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelNumberPolicy</label>
+            <input type="text" id="inputDocumentNumber" name="inputDocumentNumber" class="rightAlign" data-val="true">
+            <span class="text-danger" data-valmsg-for="inputDocumentNumber" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelClaimNumber</label>
+            <input type="text" id="inputClaimSearchClaimNumber" name="claimSearchClaimNumber" class="rightAlign" data-val="true">
+            <span class="text-danger" data-valmsg-for="claimSearchClaimNumber" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.OcurrenceDateFrom</label>
+            <input type="text" class="uif-datepicker" id="inputDateOcurrenceFromClaim" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.OcurrenceDateTo</label>
+            <input type="text" class="uif-datepicker" id="inputDateOcurrenceToClaim" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.NoticeDateFrom</label>
+            <input type="text" class="uif-datepicker" id="inputDateNoticeFromClaim" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.NoticeDateTo</label>
+            <input type="text" class="uif-datepicker" id="inputDateNoticeToClaim" />
+        </div>
+    </div>    
+    
+</form>
+
+@* Grillas de  Busqueda *@
+<div id="toolbar" class="row">
+    <div class="uif-col-12">
+        <div class="pull-right width-report">
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0327"))
+            {
+
+            }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0326"))
+            {
+
+            }
+
+            <button class="btn btn-default general" type="button" id="btnClean" onclick="return false">
+                <i class="fa fa-eraser" aria-hidden="true"></i> @Resources.Language.Clean
+            </button>
+
+            <button class="btn btn-primary general" type="button" id="btnSearch" onclick="return false">
+                <i class="fa fa-search" aria-hidden="true"></i> @Resources.Language.search
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="uif-col-12">
+
+        <div data-disabled="false" data-visible="" id="searchClaimTable">
+            <div class="row">
+                <div class="uif-col-12">
+                    <table id="tblClaims" class="uif-table" data-title="<b>@Resources.Language.ClaimListing</b>" data-selectiontype="multiple">
+                        <thead>
+                            <tr>
+                                <th data-property="Number"><b>@Resources.Language.ClaimNumberAbbreviation</b></th>
+                                <th data-property="BranchDescription"><b>@Resources.Language.Branch</b></th>
+                                <th data-property="PrefixDescription"><b>@Resources.Language.Prefix</b></th>
+                                <th data-property="PolicyDocumentNumber"><b>@Resources.Language.Policy</b></th>
+                                <th data-property="EstimationType"><b>@Resources.Language.EstimationType</b></th>
+                                <th data-property="MinimumSalariesNumber"><b>@Resources.Language.SalaryNumberReserveBalance</b></th>
+                                <th data-property="Reserve" data-type="currency"><b>@Resources.Language.LabelReserveEquivalent</b></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

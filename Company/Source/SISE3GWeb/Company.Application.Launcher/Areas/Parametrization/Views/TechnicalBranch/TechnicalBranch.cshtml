@@ -1,0 +1,177 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.TechnicalBranchViewModel
+<script id="TechnicalBranchTemplate" type="text/template">
+    <div>Ramo Técnico: <strong>{{RamoTecnico}}</strong></div>
+    <div>
+        <br>
+        ID: <strong>{{Id}}</strong>
+    </div>
+    <div>
+        <br>
+        Descripción <strong>{{DescriptionRiskType}}</strong>
+    </div>
+    <div>
+        <p class="warning">
+            <strong>{{EnabledDescription}}</strong>
+            </>
+    </div>
+</script>
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.TitleTechnicalBranch
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputTechnicalBranchSearch", @placeholder = @Resources.Language.LabelPlaceHolderSearchTechnicalBranch })
+            <button type="button" class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+<footer>
+    <div class="pull-right">
+        <button type="button" class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button type="button" class="btn btn-default" id="btnExport">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ExportXLS
+        </button>
+        <button type="button" class="btn btn-primary" id="btnNewTechnicalBranch">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.SaveTechnicalBranch
+        </button>
+    </div>
+</footer>
+
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formRiskTypeTechnicalBranch">
+    <div class="uif-modal" id="ModalRiskTypeTechnicalBranch">
+        <div class="uif-modalbody">
+            @Html.Partial("RiskTypeTechnicalBranch")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="btnCancelModalRiskType" data-dismiss="modal">@Resources.Language.Close</button>
+            <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.SaveTechnicalBranch </button>
+        </div>
+    </div>
+</form>
+
+<form id="FormInsuranceObjects">
+    <div class="uif-modal" id="ModalInsuranceObjects">
+        <div class="uif-modalbody">
+            @Html.Partial("Insuranceobjects")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default cancel" id="btnCloseobjects" data-dismiss="modal">
+                @Resources.Language.ButtonClose
+            </button>
+            <button type="button" class="btn btn-primary" id="btnSaveObjects">
+                @Resources.Language.SaveTechnicalSubBranch
+            </button>
+        </div>
+    </div>
+</form>
+
+<form id="FormProtection">
+    <div class="uif-modal" id="ModalProtection">
+        <div class="uif-modalbody">
+            @Html.Partial("Protection")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default cancel" id="btnCloseProtection" data-dismiss="modal">
+                @Resources.Language.ButtonClose
+            </button>
+            <button type="button" class="btn btn-primary" id="btnSaveProtection" >
+                @Resources.Language.SaveTechnicalSubBranch
+            </button>
+        </div>
+    </div>
+</form>
+
+<form id="formTechnicalBranch" autocomplete="off" class="form">
+    <div class="uif-col-9 fit-col-main">
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelTechnicalBranchCode</label>
+                @Html.TextBoxFor(model => model.Id, new { id = "inputTechnicalBranchCode" })
+                @Html.ValidationMessageFor(model => model.Id)
+            </div>
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.LabelDescriptionLong</label>
+                @Html.TextBoxFor(model => model.LongDescription, new { id = "inputDescriptionLong" })
+                @Html.ValidationMessageFor(model => model.LongDescription)
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelDescriptionShort</label>
+                @Html.TextBoxFor(model => model.ShortDescription, new { id = "inputDescriptionShort" })
+                @Html.ValidationMessageFor(model => model.ShortDescription)
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.LabelAbbreviation</label>
+                @Html.TextBoxFor(model => model.TyniDescription, new { id = "inputAbbreviation" })
+                @Html.ValidationMessageFor(model => model.TyniDescription)
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.MessageRiskType</label>
+
+                <div class="input-with-buttons">
+
+                    <select class="uif-select form-control" id="selectRiskTypeTechnicalBranchMain" data-id="Value" data-name="Text" name="MessageRiskType"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlRiskTypeCovered"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.RiskTypeId)
+                    <button type="button" class="btn btn-primary" id="btnRiskTypeTechnicalBranch">
+                        <span class="glyphicon glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="uif-row hidden">
+            <div class="uif-col-9">
+                <div class="uif-col-6 fit-col-secondary" id="panelModule">
+                    <div id="listviewTechnicalBranch" class="uif-listview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-col-3 fit-col-secondary">
+        <div class="uif-right-bar" id="panelButtonsRight">
+            <ul>
+                <li>
+                    <a href="#" id="btnInsuranceObjects">@Resources.Language.LabelInsuredObject</a>
+                    <p id="selectedCoInsurance"></p>
+                </li>
+                <li>
+                    <a href="#" id="btnProtections">@Resources.Language.LabelProtections</a>
+                    <p id="selectedProtections"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/ParametrizationRequest");
+    @Scripts.Render("~/bundle/js/TechnicalBranch");
+
+
+}

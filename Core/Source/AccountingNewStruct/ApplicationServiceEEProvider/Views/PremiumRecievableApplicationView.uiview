@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PremiumRecievableApplicationView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="AppPremiumCode">
+          <Column table-alias="ApplicationPremium" name="AppPremiumCode" />
+        </SelectValue>
+        <SelectValue alias="AppCode">
+          <Column table-alias="ApplicationPremium" name="AppCode" />
+        </SelectValue>
+        <SelectValue alias="PolicyId">
+          <Column table-alias="AppReceivablePremiumStatusSearch" name="PolicyId" />
+        </SelectValue>
+        <SelectValue alias="PolicyDocumentNumber">
+          <Column table-alias="AppReceivablePremiumStatusSearch" name="PolicyDocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="EndorsementId">
+          <Column table-alias="ApplicationPremium" name="EndorsementCode" />
+        </SelectValue>
+        <SelectValue alias="EndorsementDocumentNumber">
+          <Column table-alias="AppReceivablePremiumStatusSearch" name="EndorsementDocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="PaymentNum">
+          <Column table-alias="ApplicationPremium" name="PaymentNum" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="AppReceivablePremiumStatusSearch" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="AppReceivablePremiumStatusSearch" name="BranchDescription" />
+        </SelectValue>
+        <SelectValue alias="PrefixCode">
+          <Column table-alias="AppReceivablePremiumStatusSearch" name="PrefixCode" />
+        </SelectValue>
+        <SelectValue alias="PrefixDescription">
+          <Column table-alias="AppReceivablePremiumStatusSearch" name="PrefixDescription" />
+        </SelectValue>
+        <SelectValue alias="SourceCode">
+          <Column table-alias="Application" name="SourceCode" />
+        </SelectValue>
+        <SelectValue alias="ModuleCode">
+          <Column table-alias="Application" name="ModuleCode" />
+        </SelectValue>
+        <SelectValue alias="TechnicalTransaction">
+          <Column table-alias="Application" name="TechnicalTransaction" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.ApplicationPremium, Core.Accounting.Entities" alias="ApplicationPremium" />
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Application, Core.Accounting.Entities" alias="Application" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Application" name="ApplicationCode" />
+                <Column table-alias="ApplicationPremium" name="AppCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.AppReceivablePremiumStatusSearch, Core.Accounting.Entities" alias="AppReceivablePremiumStatusSearch" />
+          <criteria>
+            <BinaryPredicate type="And">
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="AppReceivablePremiumStatusSearch" name="EndorsementId" />
+                  <Column table-alias="ApplicationPremium" name="EndorsementCode" />
+                </BinaryCriterion>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="AppReceivablePremiumStatusSearch" name="PaymentNum" />
+                  <Column table-alias="ApplicationPremium" name="PaymentNum" />
+                </BinaryCriterion>
+            </BinaryPredicate>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

@@ -1,0 +1,102 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.SubscriptionSearchViewModel
+@{
+    Layout = null;
+}
+
+<form id="formSearchQuotation" class="form without-peripheral">
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelInsured</label>
+            @Html.TextBoxFor(model => model.Insured, new { id = "inputInsured", autocomplete = "off", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+            @Html.TextBoxFor(model => model.InsuredId, new { id = "inputInsuredId", hidden = "hidden" })
+            @Html.ValidationMessageFor(model => model.Insured)
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelAgentPrincipal</label>
+            @Html.TextBoxFor(model => model.AgentPrincipal, new { id = "inputAgentPrincipal", autocomplete = "off", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderKeyName })
+            @Html.TextBoxFor(model => model.AgentPrincipalId, new { id = "inputAgentPrincipalId", hidden = "hidden" })
+            @Html.ValidationMessageFor(model => model.AgentPrincipal)
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelAgentAgency</label>
+            <select class="uif-select form-control" id="selectAgentAgency" data-val="true" data-native="false" data-val-required="@Resources.Language.ErrorDocumentControlAgency"
+                    data-id="Id" data-name="FullName" name="AgentAgency"></select>
+            @Html.ValidationMessageFor(model => model.AgentAgency)
+        </div>
+    </div>
+    <div class="row">
+        @*<div class="uif-col-3">
+            <label>@Resources.Language.LabelPrefixCommercial</label>
+            <select class="uif-select form-control" id="selectPrefixCommercial" data-native="false" data-val="true"
+                    data-id="Id" data-name="DescriptionLong" name="PrefixCommercialId"></select>
+            @Html.ValidationMessageFor(model => model.PrefixId)
+        </div>*@
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelQuotationNumber</label>
+            @Html.TextBoxFor(model => model.QuotationNumber, new { id = "inputQuotationNumber", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.QuotationNumber)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelVersion</label>
+            @Html.TextBoxFor(model => model.Version, new { id = "inputVersion", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Version)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelIssuanceDate</label>
+            @Html.TextBoxFor(model => model.IssueDate, new { id = "inputIssueDate", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.IssueDate)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelUser</label>
+            @Html.TextBoxFor(model => model.User, new { id = "inputUser", autocomplete = "off", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+            @Html.TextBoxFor(model => model.UserId, new { id = "inputUserId", hidden = "hidden" })
+            @Html.ValidationMessageFor(model => model.User)
+        </div>
+    </div>
+    <div class="row">
+        @*<div class="uif-col-3">
+            <label>@Resources.Language.LabelPlate</label>
+            @Html.TextBoxFor(model => model.Plate, new { id = "inputPlate", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Plate)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelEngine</label>
+            @Html.TextBoxFor(model => model.Engine, new { id = "inputEngine", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Engine)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelChassis</label>
+            @Html.TextBoxFor(model => model.Chassis, new { id = "inputChassis", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Chassis)
+        </div>*@
+       
+        <div class="uif-col-3 without-label">
+            <button type="button" class="btn btn-primary" id="btnSearchQuotation">@Resources.Language.ButtonSearch</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" data-title="" data-selectiontype="single" id="tableQuotation" data-filter="false" data-paginate="true">
+            <thead>
+                <tr>
+                    <th data-property="QuotationNumber">@Resources.Language.LabelQuotationNumber</th>
+                    <th data-property="Version">@Resources.Language.LabelVersion</th>
+                    <th data-property="PrefixCommercial">@Resources.Language.LabelPrefixCommercial</th>
+                    <th data-property="Insured">@Resources.Language.LabelInsured</th>
+                    <th data-property="Branch">@Resources.Language.Branch</th>
+                    <th data-property="CurrencyIssuance">@Resources.Language.LabelIssuanceCurrency</th>
+                    <th data-property="TotalPremium">@Resources.Language.LabelTotalPremium</th>
+                    <th data-property="User">@Resources.Language.LabelUser</th>
+                    <th data-property="Date">@Resources.Language.LabelQuotationDate</th>
+                    <th data-property="Days">@Resources.Language.LabelNumDays</th>
+                    <th data-property="AgentPrincipal">@Resources.Language.LabelAgentPrincipal</th>
+                    <th data-property="Product">@Resources.Language.LabelProduct</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

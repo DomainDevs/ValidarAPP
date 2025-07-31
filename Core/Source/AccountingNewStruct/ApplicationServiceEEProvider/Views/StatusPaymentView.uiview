@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="StatusPaymentView">
+	<selection>
+		<SelectQuery>
+			<values>
+				<SelectValue alias="PaymentMethodTypeCode">
+					<Column table-alias="StatusPayment" name="PaymentMethodTypeCode" />
+				</SelectValue>
+				<SelectValue alias="MethodDescription">
+					<Column table-alias="PaymentMethodType" name="Description" />
+				</SelectValue>
+				<SelectValue alias="Status">
+					<Column table-alias="StatusPayment" name="Status" />
+				</SelectValue>
+				<SelectValue alias="StatusDescription">
+					<Column table-alias="StatusPayment" name="Description" />
+				</SelectValue>
+			</values>
+			<table>
+				<Join>
+					<ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentMethodType,  Core.Accounting.Entities" alias="PaymentMethodType" />
+					<ClassNameTable name="Sistran.Core.Application.Accounting.Entities.StatusPayment,  Core.Accounting.Entities" alias="StatusPayment" />
+					<criteria>
+						<BinaryCriterion type="Equal">
+							<Column table-alias="StatusPayment" name="PaymentMethodTypeCode" />
+							<Column table-alias="PaymentMethodType" name="PaymentMethodTypeCode" />
+						</BinaryCriterion>
+					</criteria>
+				</Join>
+			</table>
+		</SelectQuery>
+	</selection>
+</uiview>

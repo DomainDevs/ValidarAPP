@@ -1,0 +1,173 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "CoinsuranceMovements";
+}
+
+<script id="coinsurance-display-template" type="text/template">
+    <div>
+        <strong>{{BranchName}}</strong> | {{SalePointName}} | {{ConceptName}} <br>
+        <span class="text-danger"><strong>{{NatureName}}</strong></span>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"> {{Amount}}</div>
+    </div>
+</script>
+
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <!--left col-->
+        <div class="uif-col-6">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.Branch</label>
+                    <select class="uif-select form-control" id="selectCoinsuranceBranch" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectCoinsuranceBranch" data-valmsg-replace="true" />
+                    <input type="hidden" id="MovementBillNumber" />
+                </div>
+                <div class="uif-col-6">
+                    
+                    <label>@Global.SalePoint</label>
+                    <select class="uif-select form-control" id="selectCoinsuranceSalePoint" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectCoinsuranceSalePoint" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.Company</label>
+                    <select class="uif-select form-control" id="selectCoinsuranceCompany" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectCoinsuranceCompany" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.CoinsuranceType</label>
+                    <select class="uif-select form-control" id="selectCoinsuranceType" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectCoinsuranceType" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.MovementDescription</label>
+                    @Html.TextBox("CoinsuranceMovementDescription", "", new
+                        {
+                            style = "text-align: left",
+                            maxlength = "50",
+                            @onblur = "this.value = this.value.toUpperCase();",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="CoinsuranceMovementDescription" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.CoinsuranceDocumentNumber</label>
+                    @Html.TextBox("CoinsuranceDocumentNumber", "", new
+                    {
+                        id = "CoinsuranceDocumentNumber",
+                        maxlength = "20",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetCoInsuranceCompaniesByDescription"),
+                        data_displaykey = "TributaryIdCardNo",
+                        placeholder = @Global.EnterCoInsuranceNumberDocument,
+                        onkeypress=" return JustNumbers(event, this); ",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="CoinsuranceDocumentNumber" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.CoinsuranceName</label>
+                    @Html.TextBox("CoinsuranceName", "", new
+                    {
+                        id = "CoinsuranceName",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetCoInsuranceCompaniesByDescription"),
+                        data_displaykey = "Description",
+                        placeholder = @Global.EnterCoInsuranceName,
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="CoinsuranceName" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.AccountingAccountConceptCode</label>
+                    <select class="uif-select form-control" id="selectCoinsuranceAccountingAccountConcept" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectCoinsuranceAccountingAccountConcept" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.Nature</label>
+                    <select class="uif-select form-control" id="selectCoinsuranceNature" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectCoinsuranceNature" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Currency</label>
+                    <select class="uif-select form-control" id="selectCoinsuranceCurrency" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectCoinsuranceCurrency" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.AmountExchange</label>
+                    <input type="text" id="CoinsuranceExchangeRate" disabled="disabled" style="text-align: right" />
+                    <input type="hidden" id="MovementMessageDuplicate" name="MovementMessageDuplicate" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Amount</label>
+                    @Html.TextBox("CoinsuranceAmount", "", new
+                        {
+                            @onkeypress = "return OnlyDecimalNumber(event,this)",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="CoinsuranceAmount" data-valmsg-replace="true" />
+                    <input type="hidden" id="CoinsuranceLocalAmount" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="uif-alert" id="alertForm"></div>
+                </div>
+            </div>
+        </div>
+        <!--End left col-->
+
+        <!--right col-->
+        <div class="uif-col-6">
+            <div id="coinsurancesListView" class="uif-listview">
+                <div class="footer">
+                    <label>@Global.Credit</label>
+                    <b id="TotalCoinsuranceMovement">$0.00</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>@Global.Debit</label>
+                    <b id="TotalDebitCoinsuranceMovement">$0.00</b>
+                </div>
+            </div>
+        </div>
+        <!--End right col-->
+    </div>
+    <div class="uif-row">
+        <div class="pull-right">
+            <div class="uif-modalbuttons">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0498"))
+                {
+                    <button type="submit" class="btn btn-primary" id="CoinsuranceAdd" onclick="return false">@Global.Add</button>
+                }
+                <button type="button" class="btn btn-default" id="CoinsuranceAcceptMovement">@Global.Accept</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,84 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AnalisysConceptByCode;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Parameter</a></li>
+        <li class="active">@Global.AnalisysConceptByCode</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal form" id="modalAnalysisConceptByCode">
+        <div class="uif-modalbody">
+            <table class="uif-table" id="tblAnalysisConceptByCode" data-add="false" data-edit="false"
+                   data-delete="false" data-filter="false" data-selectiontype="single" data-paginate="false"
+                   data-pagesize="false" data-title="@Global.Concepts" data-source="null">
+                <thead>
+                    <tr>
+                        <th data-property="AnalysisConceptId">Identificador</th>
+                        <th data-property="Description">@Global.Description</th>
+                        <th data-property="AnalysisTreatment">@Global.AnalisysTreatment</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="uif-modalbuttons">
+            <div class="uif-alert" id="alertTable"></div>
+            <button type="button" class="btn btn-default" id="cancelButton" data-dismiss="modal" data-role="button">
+                <i class="fa fa-times"></i> @Global.Cancel
+            </button>
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0762"))
+            {
+                <button type="submit" class="btn btn-primary" id="saveButton" onclick="return false" data-role="button">
+                    <i class="fa fa-floppy-o"></i> @Global.Save
+                </button>
+            }
+        </div>
+    </div>
+}
+
+<div class="uif-panel" data-title="@Global.AnalisysConceptByCode">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <span class="required-color">*</span>
+            <label class="control-label">
+                @Global.Code
+            </label>
+            <select class="uif-select form-control" id="dllCodes" data-id="Id" data-name="Description"
+                    data-source='@Url.Content("~/GeneralLedger/AnalysisConceptByCode/GetAnalysisCodes")' name="dllCodes"></select>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertAnalysisConceptByCode"></div>
+        </div>
+    </div>
+   
+    <div class="uif-row">
+        <div class="uif-col-12 center-block">
+            <div class="uif-listview" id="listViewAnalysisConceptByCode">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="listTemplateAnalysisConcept" type="text/template">
+    <div>
+        <strong>-@Global.Description: </strong>
+        <span class="label label-warning">
+            {{AnalysisConceptDescription}}
+        </span>
+    </div>
+</script>
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/AnalysisConceptByCode")
+}

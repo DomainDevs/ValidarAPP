@@ -1,0 +1,91 @@
+﻿@*AVISOS DE CANCELACION ES SOLO PARA BE*@
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.CollectionLetter;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.CancellationNotice</a></li>
+        <li class="active">@Global.CollectionLetter</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="CleanLetter">
+            <i class="fa fa-paint-brush"></i> @Global.Clean
+        </button>
+        <button type="submit" class="btn btn-primary" id="AcceptLetter" onclick="return false" data-role="button">
+            <i class="fa fa-print"></i> @Global.Accept
+        </button>
+    </footer>
+}
+
+<form id="report" onsubmit="return false">
+    <div class="uif-panel" data-title='@Global.Date'>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label" for="requestDate">@Global.RequestDate</label>
+                <input type="text" class="uif-datepicker form-control" data-mask="99/99/9999" id="requestDate" name="requestDate"
+                       data-val="true" data-val-required='@Global.RequiredField' />
+                <span class="text-danger" data-valmsg-for="requestDate" data-valmsg-replace="true">
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-panel" data-title='@Global.Insured'>
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label" for="documentNumber">@Global.DocNumInsured :</label>
+                <input class="uif-autocomplete" type="text" placeholder='@Global.EnterInsurdeDocument''
+                       data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")" id="documentNumber"
+                       data-displaykey="DocumentNumber" name="documentNumber" data-val="true"
+                       data-val-required='@Global.RequiredField'
+                       onkeypress="return JustNumbers(event, this);" />
+                <span class="text-danger" data-valmsg-for="documentNumber" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label" for="insuredName">@Global.InsuredName :</label>
+                <input class="uif-autocomplete" type="text" placeholder='@Global.EnterInsurdeName'
+                       data-source="@Url.Action("GetInsuredByInsuredName", "Common")" data-val="true"
+                       data-val-required='@Global.RequiredField' id="insuredName" name="insuredName"
+                       data-displaykey="Name" />
+                <span class="text-danger" data-valmsg-for="insuredName" data-valmsg-replace="true">
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="uif-alert" id="alertForm">
+    </div>
+
+    <div class="uif-panel" data-title='@Global.Policy'>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="control-label" for="policy">@Global.Policy :</label>
+                <select class="uif-select form-control" id="policy" data-id="Id" data-name="Description"
+                        data-val-required='@Global.RequiredField' data-source="null" data-val="true"
+                        name="policy" data-native="true"></select>
+                <span class="text-danger" data-valmsg-for="policy" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label" for="official">@Global.CollectionOfficer</label>
+                <input type="text" class="form-control" id="official" />
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label" for="manager">@Global.CollectionManager</label>
+                <input type="text" class="form-control" id="manager" />
+            </div>
+        </div>
+    </div>
+</form>
+

@@ -1,0 +1,108 @@
+﻿@*@{
+    Layout = null;
+}*@
+<script id="template-SearchDecisionTable" type="text/template">
+    <div>
+        <div>
+            @Resources.Language.Description: <strong>{{Description}} ({{RuleBaseId}})</strong>
+        </div>
+        <div>
+            @Resources.Language.LabelModule: {{Package.Description}}
+        </div>
+        <div>
+            @Resources.Language.LabelLevels: {{Level.Description}}
+        </div>
+        <div>
+            @Resources.Language.labelPublished: 
+            {{#if IsPublished}}
+            @Resources.Language.LabelIf
+            {{else}}
+            @Resources.Language.LabelNot
+            {{/if}}
+        </div>
+        <div>
+            @Resources.Language.DateLastModified: {{CurrentFrom}}
+        </div>
+    </div>
+</script>
+<form class="form" id="formAdvDt">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-2">
+            <label>ID</label>
+            @Html.TextBox("tableId", null, new { id = "inputTableId" })
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.ModificationDate</label>
+                <input type="text" id="inputDateModification" name="dateModification" value="" />
+            </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelPackages</label>
+            <select class="uif-select form-control"
+                    id="selectPackage"                    
+                    data-id="PackageId"
+                    data-name="Description"
+					required="required"
+					name="PackagesDT"
+                    data-native="false"></select>
+        </div>
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelLevels</label>
+            <select class="uif-select form-control"
+                    id="selectLevel"                    
+                    data-id="LevelId"
+                    data-name="Description"
+					required="required"
+					name="LevelsDT"
+                    data-native="false"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.labelPublished</label>
+            <select class="uif-select form-control"
+                    id="selectPublished"
+                    data-id="Value"
+                    data-name="Text" data-native="false" name="Type">
+                <option>Todos</option>
+                <option value="true">Publicadas</option>
+                <option value="false">Sin publicar</option>
+            </select>
+        </div>
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.Description</label>
+            @Html.TextBox("tableDescription", null, new { id = "inputTableDescription", placeholder = @Resources.Language.Description, @required = "required" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <button class="btn btn-primary-Co width-container" id="btnsearchDtAdv" type="button">
+                <span aria-hidden="true"></span>
+                @Resources.Language.search
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="lvSearchDesicionTable">
+            </div>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="uif-col-6">
+            "@Resources.Language.AlertMaxTableSearch"
+        </div>
+        <div class="uif-col-6">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchDt" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnOkSearchDt" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>

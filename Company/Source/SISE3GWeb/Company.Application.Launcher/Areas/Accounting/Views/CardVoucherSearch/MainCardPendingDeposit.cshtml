@@ -1,0 +1,165 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.PendingToDeposit;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.BallotsAdministration</li>
+        <li>@Global.DepositDepositCards</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="ReportCardPendingDeposit" class="btn btn-primary" role="button">
+            <i class="fa fa-print"></i>   @Global.BtnReport
+        </button>
+    </footer>
+}
+
+@*/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*                                                             CODIGO HTML                                                                                  */
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/*@
+
+<form id="MainCardPendingDepositForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label" for="CreditCardTypeCardPendingDeposit">
+                @Global.Conduit
+            </label>
+            @Html.DropDownList("CreditCardTypeCardPendingDeposit", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetCreditCardTypes"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_native = "true",
+                 data_val = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="CreditCardTypeCardPendingDeposit" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="CardVoucherNumberCardPendingDeposit">
+                @Global.VoucherNumber
+            </label>
+            <input type="text" value="" id="CardVoucherNumberCardPendingDeposit"
+                       class = "uif-mask"
+                       data-pattern = "000000000000000"
+                       maxlength = "15"
+                       placeholder="" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="CardCardNumberCardPendingDeposit">
+                @Global.CreditCardNumber
+            </label>
+            <input type="text" value="" id="CardCardNumberCardPendingDeposit"
+                   class="uif-mask"
+                   data-pattern="0000000000000000"
+                   maxlength="16" 
+                   placeholder=""/>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="CardBillNumberCardPendingDeposit">
+            @Global.BillNum</label>
+            <input type="text" value="" id="CardBillNumberCardPendingDeposit"
+                   class="uif-mask"
+                   data-pattern="000000000"
+                   maxlength="10" 
+                   placeholder=""/>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label" for="SearchCardBranchCardPendingDeposit">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("SearchCardBranchCardPendingDeposit", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/Common/GetListBranchesbyUserName"),
+                data_id = "Id",
+                data_name = "Description",
+                data_selectedid = @ViewBag.BranchDefault,
+                data_native = "true",
+            })
+            <span class="text-danger" data-valmsg-for="SearchCardBranchCardPendingDeposit" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="StartDateCardPendingDeposit">@Global.DateFrom</label>
+            <input type="text" id="StartDateCardPendingDeposit" name="StartDateCardPendingDeposit" class="uif-datepicker" data-mask="99/99/9999" maxlength="10" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="EndDateCardPendingDeposit">@Global.DateTo</label>
+            <input type="text" id="EndDateCardPendingDeposit" name="EndDateCardPendingDeposit" class="uif-datepicker" data-mask="99/99/9999" maxlength="10" />
+
+
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer">
+                <button id="CleanCardPendingDeposit" class="btn btn-default" role="button">
+                    <i class="fa fa-paint-brush"></i>  @Global.Clean
+                </button>
+                <button id="SearchCardPendingDeposit" class="btn btn-primary" role="button">
+                    <i class="fa fa-search"></i>  @Global.Search
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertCardVoucherPendingDeposit"></div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+            <table class="uif-table" id="CardVoucherCardPendingDeposit" data-exporttocsv="false"
+               data-add="false" data-edit="false" data-delete="false" data-selectiontype="none" data-filter="false"
+               data-paginate="true" data-title="@Global.SearchCards">
+            <thead>
+                <tr>
+                    <th data-property="BranchCode" data-visible="false">BranchId</th>
+                    <th data-property="Description">@Global.Branch</th>
+                    <th data-property="CardDescription">@Global.Conduit</th>
+                    <th data-property="DocumentNumber">@Global.CreditCardNumber</th>
+                    <th data-property="Voucher">@Global.VoucherNumber</th>
+                    <th data-property="CurrencyCode" data-visible="false">CurrencyId</th>
+                    <th data-property="CurrencyDescription">@Global.Currency</th>
+                    <th data-property="IncomeAmount">@Global.Amount</th>
+                    <th data-property="Amount">@Global.LocalAmount</th>
+                    <th data-property="Taxes">@Global.TotalTaxes</th>
+                    <th data-property="Retention">@Global.TotalRetention</th>
+                    <th data-property="TechnicalTransaction">@Global.TransactionNumber</th>
+                    <th data-property="CollectCode" data-visible="false">@Global.BillNum</th>
+                    <th data-property="CardDate">@Global.InternalBallotDepositCardGridCardDate</th>
+                    <th data-property="PaymentDate">@Global.PaymentDate</th>
+                    <th data-property="Status" data-visible="false">@Global.CurrentStatus</th>
+                    <th data-property="StatusDescription">@Global.CurrentStatus</th>
+                    <th data-property="CreditCardTypeCode" data-visible="false">CreditCardTypeCode</th>
+                    <th data-property="PaymentCode" data-visible="false">PaymentCode</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable"/>
+
+<script src="@Url.Content("~/Scripts/common-validations.js")"></script>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCardPendingDeposit")
+}
+

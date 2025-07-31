@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<map version="2.0" type="class" name="ListEntity" namespace="Sistran.Core.Application.RulesScriptsServices.EEProvider" file-version="1.0" description="LIST_ENTITY_ENTITY">
+  <properties>
+    <property name="ListEntityCode" type="Integer" key="true" autonumber="52" description="LIST_ENTITY_CODE_PROPERTY" />
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="ListValueAt" type="Integer" description="LIST_VALUE_AT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="LIST_ENTITY" schema="SCR" alias="LIST_ENTITY" update="true">
+      <columns>
+        <column name="LIST_VALUE_AT" type="Decimal" property="ListValueAt" allowNull="false" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" />
+        <column name="LIST_ENTITY_CD" type="Decimal" property="ListEntityCode" key="true" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="52" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Decimal" value="52" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

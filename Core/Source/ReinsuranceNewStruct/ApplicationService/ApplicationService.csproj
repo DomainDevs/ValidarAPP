@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9B455325-D55A-4239-991F-95737D8A5565}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.ReinsuranceServices</RootNamespace>
+    <AssemblyName>Core.ReinsuranceServices</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core.ReinsuranceOperatingQuotaIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\ReinsuranceOperatingQuota\IntegrationService\Core.ReinsuranceOperatingQuotaIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServices">
+      <HintPath>..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTOs\AccessProfileDTO.cs" />
+    <Compile Include="DTOs\AffectationTypeDTO.cs" />
+    <Compile Include="DTOs\AgentDTO.cs" />
+    <Compile Include="DTOs\AmountDTO.cs" />
+    <Compile Include="DTOs\ApplyReinsuranceDTO.cs" />
+    <Compile Include="DTOs\AssociationLineDTO.cs" />
+    <Compile Include="DTOs\BeneficiaryDTO.cs" />
+    <Compile Include="DTOs\BillingGroupDTO.cs" />
+    <Compile Include="DTOs\BranchDTO.cs" />
+    <Compile Include="DTOs\ByLineBusinessSubLineBusinessRiskDTO.cs" />
+    <Compile Include="DTOs\ByPrefixDTO.cs" />
+    <Compile Include="DTOs\ByPrefixRiskDTO.cs" />
+    <Compile Include="DTOs\CatastropheDTO.cs" />
+    <Compile Include="DTOs\CatastrophicEventDTO.cs" />
+    <Compile Include="DTOs\CauseDTO.cs" />
+    <Compile Include="DTOs\CityDTO.cs" />
+    <Compile Include="DTOs\ClaimAllocationDTO.cs" />
+    <Compile Include="DTOs\ClaimCoverageDTO.cs" />
+    <Compile Include="DTOs\ClaimDTO.cs" />
+    <Compile Include="DTOs\ClaimEndorsementDTO.cs" />
+    <Compile Include="DTOs\ClaimModifyDTO.cs" />
+    <Compile Include="DTOs\ClaimReinsuranceDTO.cs" />
+    <Compile Include="DTOs\ClaimDistributionDTO.cs" />
+    <Compile Include="DTOs\ContractCoverageDTO.cs" />
+    <Compile Include="DTOs\CumulusDetailDTO.cs" />
+    <Compile Include="DTOs\DamageResponsibilityDTO.cs" />
+    <Compile Include="DTOs\DetailCumulusParticipantsEconomicGroupDTO.cs" />
+    <Compile Include="DTOs\EconomicGroupDetailDTO.cs" />
+    <Compile Include="DTOs\EconomicGroupDTO.cs" />
+    <Compile Include="DTOs\EconomicGroupEventDTO.cs" />
+    <Compile Include="DTOs\EconomicgroupoperatingquotaDTO.cs" />
+    <Compile Include="DTOs\EconomicgrouppartnersDTO.cs" />
+    <Compile Include="DTOs\ReportTypeDTO.cs" />
+    <Compile Include="DTOs\IssueAllocationRiskCoverDTO.cs" />
+    <Compile Include="DTOs\OperatingQuotaEventDTO.cs" />
+    <Compile Include="DTOs\ContractReinsuranceCumulusDTO.cs" />
+    <Compile Include="DTOs\CoverageReinsuranceCumulusDTO.cs" />
+    <Compile Include="DTOs\PriorityRetentionDetailDTO.cs" />
+    <Compile Include="DTOs\PriorityRetentionDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceCumulusDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceCumulusDetailDTO.cs" />
+    <Compile Include="DTOs\SlipDTO.cs" />
+    <Compile Include="DTOs\TempErrorDetailDTO.cs" />
+    <Compile Include="DTOs\TempIssueDTO.cs" />
+    <Compile Include="DTOs\TempRiskCoverageDTO.cs" />
+    <Compile Include="DTOs\ThirdPartyVehicleDTO.cs" />
+    <Compile Include="DTOs\CoHierarchyAssociationDTO.cs" />
+    <Compile Include="DTOs\CompanyDTO.cs" />
+    <Compile Include="DTOs\ContractDTO.cs" />
+    <Compile Include="DTOs\ContractFunctionalityDTO.cs" />
+    <Compile Include="DTOs\ContractLineDTO.cs" />
+    <Compile Include="DTOs\ContractTypeDTO.cs" />
+    <Compile Include="DTOs\CoverageDTO.cs" />
+    <Compile Include="DTOs\CumulusDTO.cs" />
+    <Compile Include="DTOs\EstimationDTO.cs" />
+    <Compile Include="DTOs\EstimationTypeDTO.cs" />
+    <Compile Include="DTOs\ByFacultativeIssueDTO.cs" />
+    <Compile Include="DTOs\ByInsuredDTO.cs" />
+    <Compile Include="DTOs\ByInsuredPrefixDTO.cs" />
+    <Compile Include="DTOs\ByLineBusinessDTO.cs" />
+    <Compile Include="DTOs\ByLineBusinessInsuredObjectDTO.cs" />
+    <Compile Include="DTOs\ByLineBusinessSubLineBusinessCoverageDTO.cs" />
+    <Compile Include="DTOs\ByLineBusinessSubLineBusinessDTO.cs" />
+    <Compile Include="DTOs\ByLineBusinessSubLineBusinessInsuredObjectDTO.cs" />
+    <Compile Include="DTOs\ByOperationTypePrefixDTO.cs" />
+    <Compile Include="DTOs\ByPolicyDTO.cs" />
+    <Compile Include="DTOs\ByPolicyLineBusinessSubLineBusinessDTO.cs" />
+    <Compile Include="DTOs\ByPrefixProductDTO.cs" />
+    <Compile Include="DTOs\ExchangeRateDTO.cs" />
+    <Compile Include="DTOs\FacultativeCompaniesDTO.cs" />
+    <Compile Include="DTOs\HolderDTO.cs" />
+    <Compile Include="DTOs\IndividualDTO.cs" />
+    <Compile Include="DTOs\IndividualRelationAppDTO.cs" />
+    <Compile Include="DTOs\InsuredDTO.cs" />
+    <Compile Include="DTOs\InsuredObjectDTO.cs" />
+    <Compile Include="DTOs\InternalStatusDTO.cs" />
+    <Compile Include="DTOs\IssuanceAgencyDTO.cs" />
+    <Compile Include="DTOs\IssuanceAgentDTO.cs" />
+    <Compile Include="DTOs\IssuanceAgentTypeDTO.cs" />
+    <Compile Include="DTOs\IssuanceCommissionDTO.cs" />
+    <Compile Include="DTOs\LineBusinessDTO.cs" />
+    <Compile Include="DTOs\LineCumulusKeyDTO.cs" />
+    <Compile Include="DTOs\LineCumulusKeyRiskCoverageDTO.cs" />
+    <Compile Include="DTOs\MassiveReportDTO.cs" />
+    <Compile Include="DTOs\ModuleDateDTO.cs" />
+    <Compile Include="DTOs\PayerComponentDTO.cs" />
+    <Compile Include="DTOs\PaymentAllocationDTO.cs" />
+    <Compile Include="DTOs\PaymentPlanDTO.cs" />
+    <Compile Include="DTOs\PaymentDistributionDTO.cs" />
+    <Compile Include="DTOs\PlanFacultativeDTO.cs" />
+    <Compile Include="DTOs\PolicyTypeDTO.cs" />
+    <Compile Include="DTOs\PrefixTypeDTO.cs" />
+    <Compile Include="DTOs\ProductDTO.cs" />
+    <Compile Include="DTOs\ProfileDTO.cs" />
+    <Compile Include="DTOs\QuotaDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceMassiveHeaderDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceRealClaimByClaimCodeDTO.cs" />
+    <Compile Include="DTOs\RiskDTO.cs" />
+    <Compile Include="DTOs\SalePointDTO.cs" />
+    <Compile Include="DTOs\SelectDTO.cs" />
+    <Compile Include="DTOs\SubModuleDTO.cs" />
+    <Compile Include="DTOs\TempAllocationDTO.cs" />
+    <Compile Include="DTOs\TempFacultativeCompaniesDTO.cs" />
+    <Compile Include="DTOs\TempLineCumulusIssuanceDTO.cs" />
+    <Compile Include="DTOs\MovementTypeDTO.cs" />
+    <Compile Include="DTOs\PaymentReinsuranceDTO.cs" />
+    <Compile Include="DTOs\ReasonDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceFacultativeDTO.cs" />
+    <Compile Include="DTOs\StatusDTO.cs" />
+    <Compile Include="DTOs\SubLineBusinessDTO.cs" />
+    <Compile Include="DTOs\TempLayerDistributionsDTO.cs" />
+    <Compile Include="DTOs\TextOperationDTO.cs" />
+    <Compile Include="DTOs\DamageResponsabilityDTO.cs" />
+    <Compile Include="DTOs\DamageTypeDTO.cs" />
+    <Compile Include="DTOs\CountryDTO.cs" />
+    <Compile Include="DTOs\ConceptSourceDTO.cs" />
+    <Compile Include="DTOs\CumulusTypeDTO.cs" />
+    <Compile Include="DTOs\CurrencyDTO.cs" />
+    <Compile Include="DTOs\EndorsementDTO.cs" />
+    <Compile Include="DTOs\EndorsementReinsuranceDTO.cs" />
+    <Compile Include="DTOs\EPITypeDTO.cs" />
+    <Compile Include="DTOs\InspectionDTO.cs" />
+    <Compile Include="DTOs\InstallmentDTO.cs" />
+    <Compile Include="DTOs\IssGetDistributionErrorsDTO.cs" />
+    <Compile Include="DTOs\IssueAllocationDTO.cs" />
+    <Compile Include="DTOs\IssueLayerDTO.cs" />
+    <Compile Include="DTOs\IssueLayerLineDTO.cs" />
+    <Compile Include="DTOs\LevelCompanyDTO.cs" />
+    <Compile Include="DTOs\LevelDTO.cs" />
+    <Compile Include="DTOs\LevelPaymentDTO.cs" />
+    <Compile Include="DTOs\LevelRestoreDTO.cs" />
+    <Compile Include="DTOs\LineAssociationDTO.cs" />
+    <Compile Include="DTOs\LineAssociationTypeDTO.cs" />
+    <Compile Include="DTOs\LineCumulusTypeDTO.cs" />
+    <Compile Include="DTOs\LineDTO.cs" />
+    <Compile Include="DTOs\ModuleDTO.cs" />
+    <Compile Include="DTOs\PolicyDTO.cs" />
+    <Compile Include="DTOs\PrefixDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceAccountingParameterDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceAllocationDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceClaimDistributionDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceClaimLayerDTO.cs" />
+    <Compile Include="DTOs\PaymentRequestDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceCumulusRiskCoverageDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceDistributionDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceDistributionHeaderDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceLayerDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceLayerIssuanceDTO.cs" />
+    <Compile Include="DTOs\ReinsuranceLineDTO.cs" />
+    <Compile Include="DTOs\ReinsurancePaymentClaimAllocationDTO.cs" />
+    <Compile Include="DTOs\ReinsurancePaymentClaimCumulusDTO.cs" />
+    <Compile Include="DTOs\ReinsurancePaymentClaimDTO.cs" />
+    <Compile Include="DTOs\ReinsurancePaymentClaimLayerDTO.cs" />
+    <Compile Include="DTOs\ReinsurancePaymentDistributionDTO.cs" />
+    <Compile Include="DTOs\ReinsurancePaymentLayerDTO.cs" />
+    <Compile Include="DTOs\ReinsurancePrefixDTO.cs" />
+    <Compile Include="DTOs\ResettlementTypeDTO.cs" />
+    <Compile Include="DTOs\StateDTO.cs" />
+    <Compile Include="DTOs\TempReinsuranceProcessDTO.cs" />
+    <Compile Include="DTOs\ThirdAffectedDTO.cs" />
+    <Compile Include="DTOs\UniqueUserLoginDTO.cs" />
+    <Compile Include="DTOs\UserDTO.cs" />
+    <Compile Include="Enums\ApplyOnTypes.cs" />
+    <Compile Include="Enums\BussinesType.cs" />
+    <Compile Include="Enums\CalculationTypes.cs" />
+    <Compile Include="Enums\CumulusDetailKeys.cs" />
+    <Compile Include="Enums\ExerciseTypes.cs" />
+    <Compile Include="Enums\Modules.cs" />
+    <Compile Include="Enums\Movements.cs" />
+    <Compile Include="Enums\PremiumTypes.cs" />
+    <Compile Include="Enums\PresentationInformationTypes.cs" />
+    <Compile Include="Enums\ProcessTypes.cs" />
+    <Compile Include="Enums\ReinsuranceAssociationTypes.cs" />
+    <Compile Include="Enums\ReinsuranceKeys.cs" />
+    <Compile Include="Enums\UniqueUserTypes.cs" />
+    <Compile Include="IReinsuranceApplicationService.cs" />
+    <Compile Include="IReinsuranceReportsService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Condition="'$(BuildingInsideVisualStudio)' == 'true'" Include="..\packages\Sistran.Core.Analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\Reinsurance\ApplicationService\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\ProjectDeployBranch.msbuild" />
+</Project>

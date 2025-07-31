@@ -1,0 +1,232 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.IssuedChecks;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.OutcomeReports</li>
+        <li class="active">@Global.IssuedChecks</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="CancelIssuedChecks" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Clean
+            </button>
+            <button id="MassiveReportIssuedChecks" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+<form id="ReportFormIssuedChecks" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("BranchSelectIssuedChecks", Enumerable.Empty<SelectListItem>(), new
+            {
+               @class = "uif-select form-control",
+               data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+               data_id = "Id",
+               data_name = "Description",
+               data_selectedid = @ViewBag.BranchDefault,
+               data_val = "true",
+               data_native = "true",
+               data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="BranchSelectIssuedChecks" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Bank
+            </label>
+           
+            @Html.DropDownList("BankSelectIssuedChecks", Enumerable.Empty<SelectListItem>(), new
+            {
+               @class = "uif-select form-control",
+               data_id = "Id",
+               data_name = "Description",
+               data_val = "true",
+               data_native = "true",
+               data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="BankSelectIssuedChecks" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-4">
+            <label class="control-label" for="AccountingNumber">
+                @Global.AccountNumber
+            </label>
+             @Html.TextBox("AccountingNumberIssuedChecks", "", new
+                {
+                   id = "AccountingNumberIssuedChecks",
+                   @class = "uif-autocomplete",
+                   data_source = @Url.Content("~/Accounting/Parameters/GetAccountBankByBranchIdBankIdReport"),
+                   data_displaykey = "AccountNumber",
+                   placeholder = @Global.EnterNumberAccount,
+                   data_val = "true",
+                   data_val_required = @Global.RequiredField
+                })
+                <span class="text-danger" data-valmsg-for="AccountingNumberIssuedChecks" data-valmsg-replace="true" />
+        </div>
+
+    </div>
+
+    <div class="uif-row">
+        
+        <div class="uif-col-2">
+            <label>@Global.DateFrom</label>
+
+            @Html.TextBox("StartDateIssuedChecks", "", new
+            {
+               @class = "uif-datepicker",
+               style = "text-align: left",
+               data_mask = "99/99/9999",
+               data_val = "true",
+               data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="StartDateIssuedChecks" data-valmsg-replace="true" />
+        </div>
+      
+        <div class="uif-col-2">
+            <label>@Global.DateTo</label>
+
+            @Html.TextBox("EndDateIssuedChecks", "", new
+            {
+               @class = "uif-datepicker",
+               style = "text-align: left",
+               data_mask = "99/99/9999",
+               data_val = "true",
+               data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="EndDateIssuedChecks" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="all" value="1" checked>
+                    @Global.All
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-4">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="delivered" value="2">
+                    @Global.Delivered
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-4">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="Annulled" value="3">
+                    @Global.Annulled
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="claim" value="4">
+                    @Global.ClaimNumber
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-4">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="noDelivered" value="5">
+                    @Global.No @Global.Delivered
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-4">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="returnedChecks" value="6">
+                    @Global.Returned
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+
+    @section modals{
+
+        @*VENTANAS MODALES DE CONFIRMACION*@
+        <!-- Modal Confirma proceso de masivos reaseguros -->
+        <div class="modal fade" id="modalMassiveTotRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><b>@Global.IssuedChecks</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <b id="pnlModalTotRecords"></b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnModalIssuedChecks">@Global.Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalMassiveNo">@Global.No</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- Modal Confirmacion del Proceso Masivo de cada reporte -->
+        <div class="modal fade" id="modalMassiveReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><b>@Global.IssuedChecks</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        @Global.ConfirmMessageProcess
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnModalMassiveProcessReport">@Global.Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @section scripts
+    {
+        @Scripts.Render("~/accounting/bundles/IssuedChecks")
+    }
+
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>

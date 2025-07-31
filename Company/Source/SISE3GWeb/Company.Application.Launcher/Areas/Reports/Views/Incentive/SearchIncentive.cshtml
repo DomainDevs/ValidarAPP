@@ -1,0 +1,115 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Reports.Incentive.Models.IncentiveViewModel
+
+@{
+    Layout = null;
+}
+
+@*Titulo *@
+<br>
+<script id="title-template" type="text/template">
+    <div id="title" class="column">
+        Reporte Incentivo
+    </div>
+</script>
+
+<form class="form without-space" id="formReportRenovation">
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-3">
+                <label>@Resources.Language.DateHomeCollection</label>
+                @Html.TextBoxFor(model => model.labelInitialDateOfSelection, "{0:dd/MM/yyyy}", new { id = "inputFromDate", @class = "uif-datepicker" })
+                @Html.ValidationMessageFor(model => model.labelInitialDateOfSelection)
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.CollectionEndDate</label>
+                @Html.TextBoxFor(model => model.labelFinalyDateOfSelection, "{0:dd/MM/yyyy}", new { id = "inputFromDate", @class = "uif-datepicker" })
+                @Html.ValidationMessageFor(model => model.labelFinalyDateOfSelection)
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.Agent</label>
+                @Html.TextBox("IntermediaryId", null, new { @class = "uif-input-search", id = "IntermediaryId", @placeholder = @Resources.Language.PlaceHolderKeyName })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-3">
+                <label>@Resources.Language.LabelPrefix</label>
+                <select class="uif-select form-control" id="Prefix" name="Prefix"
+                        data-source=""
+                        data-id="Id" data-name="Description"
+                        data-val="true"
+                        data-filter="true" data-native="false"></select>
+                <span class="text-danger" data-valmsg-for="Prefix" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.Office</label>
+                <select class="uif-select form-control" id="Branch" name="Branch"
+                        data-source=""
+                        data-id="Id" data-name="Description"
+                        data-val="true"
+                        data-filter="true" data-native="false"></select>
+                <span class="text-danger" data-valmsg-for="Branch" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Description, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-8">
+            <div class="uif-col-8">
+                <button type="button" class="btn btn-primary" id="btnNewReportRenovation">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.ButtonConsult
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="active">
+                <table class="uif-table" data-selectiontype="none" id="tableReportRenovation" data-filter="false" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="AgentCode" data-visible="true">@Resources.Language.AgentCode</th>
+                            <th data-property="AgentBranch" data-visible="true">@Resources.Language.AgentBranch</th>
+                            <th data-property="BranchBranch" data-visible="true">@Resources.Language.BranchBranch</th>
+                            <th data-property="PoliceNumber" data-visible="true">@Resources.Language.LabelPolicyNumber</th>
+                            <th data-property="ExpeditionDate" data-visible="true">@Resources.Language.LabelExpeditionDate</th>
+                            <th data-property="TotalBonus" data-visible="true">@Resources.Language.LabelTotalBonus</th>
+                            <th data-property="Collection" data-visible="true">@Resources.Language.Collection</th>
+                            <th data-property="CollectionDate" data-visible="true">@Resources.Language.CollectionDate</th>
+                            <th data-property="NoReceiptOfCollection" data-visible="true">@Resources.Language.NoReceiptOfCollection</th>
+                            <th data-property="CommissionValue" data-visible="true">@Resources.Language.CommissionValue</th>
+                            <th data-property="IncentiveValue" data-visible="true">@Resources.Language.IncentiveValue</th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitReportRenovation">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExportReportRenovation">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnNewReportRenovation">
+            <span aria-hidden="true"></span>
+            @Resources.Language.NewForm
+        </button>
+    </div>
+</script>

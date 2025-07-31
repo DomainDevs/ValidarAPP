@@ -1,0 +1,26 @@
+<map version="2.0" type="class" name="CoinsuranceBalance" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="COINSURANCE_BALANCE_ENTITY">
+	<properties>
+		<property name="CoinsuranceBalanceCode" type="Integer" key="true" description="COINSURANCE_BALANCE_CODE_PROPERTY" nullable="false" autonumber="Identity" />
+		<property name="CoinsuredCompanyId" type="Integer" nullable="true" description="COINSURED_COMPANY_ID_PROPERTY" />
+		<property name="BalanceDate" type="DateTime" nullable="true" description="BALANCE_DATE_PROPERTY" />
+		<property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+		<property name="LastBalanceDate" type="DateTime" nullable="true" description="LAST_BALANCE_DATE_PROPERTY" />
+		<property name="BalanceAmount" type="Decimal" precision="18" scale="2" nullable="true" description="BALANCE_AMOUNT_PROPERTY" />
+		<property name="BalanceIncomeAmount" type="Decimal" precision="18" scale="2" nullable="true" description="BALANCE_INCOME_AMOUNT_PROPERTY" />
+		<property name="NumSheet" type="Decimal" precision="18" scale="2" nullable="true" description="NUM_SHEET_PROPERTY" />
+	</properties>
+	<tables>
+		<table name="COINSURANCE_BALANCE" schema="ACC" alias="COINSURANCE_BALANCE" update="true">
+			<columns>
+				<column name="COINSURANCE_BALANCE_CD" type="Int32" property="CoinsuranceBalanceCode" key="true" identity ="true" />
+				<column name="COINSURED_COMPANY_ID" type="Int32" property="CoinsuredCompanyId" />
+				<column name="BALANCE_DATE" type="DateTime" property="BalanceDate" />
+				<column name="CURRENCY_CD" type="Int32" property="CurrencyCode" />
+				<column name="LAST_BALANCE_DATE" type="DateTime" property="LastBalanceDate" />
+				<column name="BALANCE_AMOUNT" type="Decimal" property="BalanceAmount" size="19" precision="18" scale="2" />
+				<column name="BALANCE_INCOME_AMOUNT" type="Decimal" property="BalanceIncomeAmount" size="19" precision="18" scale="2" />
+				<column name="NUM_SHEET" type="Decimal" property="NumSheet" size="19" precision="18" scale="2" />
+			</columns>
+		</table>
+	</tables>
+</map>

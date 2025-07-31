@@ -1,0 +1,63 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Product.Models.IncentivesForAgentsModelsView
+<script id="agenciesAgentIncentiveTemplate" type="text/template">
+	<div><strong>({{AgentCode}})</strong> {{AgencyName}}</div>
+	<div>
+		<br />
+	</div>
+	<div>
+		<strong>Valor Incentivo: {{IncentiveValue}}</strong>
+	</div>
+	<div class="hidden">
+		{{Status}}
+	</div>
+</script>
+
+<form id="formAgenciesAgentIncentives" class="form modal-Colombia">
+    <div class="row" id="mainModalAgents">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.PrincipalAgent</label>
+                    <input type="text" placeholder="@Resources.Language.PrincipalAgent" id="inputAgenciesAgentDescriptionIA" required="required" maxlength="100" readonly disabled />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelAgentAgencyAssign</label>
+                    <select class="uif-select form-control" id="selectModalAgenciesAgentIA" data-id="Id" data-name="FullName" name="AgencyId"
+                            data-val-required="@Resources.Language.ErrorDocumentControlAgency"  data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.AgencyId)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelIncentiveValue</label>
+                    @Html.TextBoxFor(model => model.IncentiveValue, new { id = "inputIncentiveValue", placeholder = @Resources.Language.LabelIncentiveValue} )
+                    @Html.ValidationMessageFor(model => model.IncentiveValue)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-listview" id="listModalAgencyIncentivesData">
+            </div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnClearAgenciesAgentIncentive">
+                    <span class="" aria-hidden="true">@Resources.Language.NewForm</span>
+                </button>
+                <button type="button" class="btn btn-primary" id="btnSaveAgenciesAgentIncentive">
+                    <span class="" aria-hidden="true">@Resources.Language.AddForm</span>
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

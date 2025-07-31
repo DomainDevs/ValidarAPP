@@ -1,0 +1,72 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-col-3">
+            <label class="control-label" for="IsAutomaticId">
+                @Global.CheckType
+            </label>
+            <select class="uif-select form-control" id="IsAutomaticId"
+                    data-source='@Url.Content("~/Accounting/Parameters/GetCheckTypes")' data-native="true"
+                    data-id="Id" data-name="Description" name="IsAutomaticId" data-val="true"
+                    data-val-required="@Global.RequiredField"></select>
+            <span class="text-danger" data-valmsg-for="IsAutomaticId" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="StatusId">
+                @Global.Status
+            </label>
+            <select class="uif-select form-control" id="StatusId"
+                    data-source='@Url.Content("~/Accounting/Parameters/GetCheckStatus")' data-native="true"
+                    data-id="Id" data-name="Description" name="StatusId" data-val="true"
+                    data-val-required="@Global.RequiredField"></select>
+            <span class="text-danger" data-valmsg-for="StatusId" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="CheckFrom">
+                @Global.CheckFrom
+            </label>
+            @Html.TextBox("CheckFrom", null,
+            new
+            {
+                @class = "form-control",
+                placeholder = @Global.Example50,
+                type = "text",
+                data_val = "true",
+                maxlength = "10",
+                data_val_required = Global.RequiredField,
+                onkeypress = "return JustNumbers(event, this);"
+            })
+            <span class="text-danger" data-valmsg-for="CheckFrom" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="CheckTo">
+                @Global.CheckTo
+            </label>
+            @Html.TextBox("CheckTo", null,
+            new
+            {
+                @class = "form-control",
+                placeholder = @Global.Example100,
+                type = "text",
+                data_val = "true",
+                maxlength = "10",
+                data_val_required = Global.RequiredField,
+                onkeypress = "return JustNumbers(event, this);"
+            })
+            <span class="text-danger" data-valmsg-for="CheckTo" data-valmsg-replace="true">
+            </span>
+        </div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="toolbar uif-col-3">
+            <button id="cancelSave" class="btn btn-default cancel-button" type="button">Cancelar</button>
+            <button id="addItem" class="btn btn-primary save-button" type="button">Guardar Registro</button>
+        </div>
+    </div>
+</div>

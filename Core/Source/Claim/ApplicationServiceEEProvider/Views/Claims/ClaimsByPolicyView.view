@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ClaimsByPolicyView">
+  <collections>
+    <collection name="ClaimCoverage" type="Sistran.Core.Application.Claims.Entities.ClaimCoverage, 
+                Core.Claims.Entities"></collection>
+    <collection name="ClaimCoverageAmount" type="Sistran.Core.Application.Claims.Entities.ClaimCoverageAmount, 
+                Core.Claims.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="ClaimCoverage" destination="ClaimCoverageAmount" name="ClaimCoverageClaimCoverageAmount" type="Inner">
+      <property left="ClaimCoverageCode" type="Equal" right="ClaimCoverageCode"></property>
+    </relation>
+  </relations>
+</view>

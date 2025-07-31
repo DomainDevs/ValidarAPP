@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+<script id="display-template-concepts" type="text/template">
+    <div class="template-Concepts">
+        <p><b>{{Description}}</b></p>
+        <p>Tipo: <b>{{ConceptTypeDescription}}</b></p>
+        {{#if IsStatic}}
+        <p>{{StaticDescription}}</p>
+        {{else}}
+        <p style="color:orange">{{StaticDescription}}</p>
+        {{/if}}
+    </div>
+</script>
+
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelModule</label>
+            <select class="uif-select"
+                    id="ddlModuleAdv"
+                    data-selectedid="1"
+                    data-id="PackageId"
+                    data-name="Description"
+                    data-native="false"></select>
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelLevels</label>
+            <select class="uif-select"
+                    id="ddlLevelAdv"
+                    data-id="LevelId"
+                    data-name="Description"
+                    data-native="false"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelType</label>
+            <select id="dllTypeAdv" >
+                <option value="0">@Resources.Language.all</option>
+                <option value="1">@Resources.Language.Static</option>
+                <option value="2">@Resources.Language.Dynamic</option>
+            </select>
+        </div>       
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelDescription</label>
+            <input type="text" id="txtDescriptionAdv" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <button class="btn btn-primary-Co width-container" id="btnsearchConceptAdv" type="button">
+                <span aria-hidden="true"></span>
+                @Resources.Language.search
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="lvSearchConcepts">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            "@Resources.Language.AlertMaxTableSearch"
+        </div>
+        <div class="uif-col-6">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchConcept" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnOkSearchConcept" type="button">@Resources.Language.Accept</button>
+            </div>
+
+        </div>
+    </div>
+</form>

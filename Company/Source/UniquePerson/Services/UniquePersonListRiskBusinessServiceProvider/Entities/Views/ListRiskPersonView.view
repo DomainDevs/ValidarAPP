@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ListRiskPersonView">
+  <collections>
+    <collection name="RiskMaintenance" type="Sistran.Core.Application.UniquePerson.Entities.RiskMaintenance, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="RiskAssignedList" type="Sistran.Core.Application.UniquePerson.Entities.RiskAssignedList, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="RiskList" type="Sistran.Core.Application.UniquePerson.Entities.RiskList, 
+                Core.UniquePerson.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="RiskMaintenance" destination="RiskAssignedList" name="RiskMaintenanceRiskAssignedList" type="Inner">
+      <property left="IdCardNo" type="Equal" right="IdCardNo"></property>
+    </relation>
+    <relation source="RiskAssignedList" destination="RiskList" name="RiskAssignedListRiskLists" type="Inner">
+      <property left="RiskListCode" type="Equal" right="RiskListCode"></property>
+    </relation>
+  </relations>
+</view>

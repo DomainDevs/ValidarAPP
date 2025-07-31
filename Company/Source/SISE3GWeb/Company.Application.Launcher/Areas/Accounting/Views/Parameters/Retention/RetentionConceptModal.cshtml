@@ -1,0 +1,61 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Description</label>
+            @Html.TextBox("RetentionConceptDescription", "", new
+                    {
+                        @class = "uif-select form-control",
+                        @onblur = "this.value = this.value.toUpperCase();",
+                        data_id = "Id",
+                        data_name = "Description",
+                        data_native = "true",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+            <span class="text-danger" data-valmsg-for="RetentionConceptDescription" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.RetentionBase</label>
+            @Html.DropDownList("RetentionConceptTaxBase", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/Accounting/Retention/GetTaxBase"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        data_native = "true",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+            <span class="text-danger" data-valmsg-for="RetentionConceptTaxBase" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.Active</label>
+            @Html.DropDownList("RetentionConceptStatus", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Retention/GetActive"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+            <span class="text-danger" data-valmsg-for="RetentionConceptStatus" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.Tolerance</label>
+            <br />
+            <input type="text" id="Tolerance" data-val="true" data-val-required='@Global.RequiredField' maxlength="6" onkeypress=" return OnlyDecimalNumber(event, this) ">
+            <span class="text-danger" data-valmsg-for="Tolerance" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+</div>
+
+

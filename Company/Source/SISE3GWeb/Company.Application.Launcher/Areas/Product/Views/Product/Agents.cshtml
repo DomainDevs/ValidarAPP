@@ -1,0 +1,73 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Product.Models.AgentModelsView
+<script id="agencyTemplate" type="text/template">
+    <div><strong>{{FullName}}</strong></div>
+    <div class="danger"><strong>{{CommisionText}}</strong></div>
+</script>
+<script id="summaryAgentTemplate" type="text/template">
+    <div><strong>Intermediarios Asignados:</strong> <strong class="warning">{{AssignedAgents}}</strong></div>
+    <div><strong>Intermediarios Sin Asignar:</strong> <strong class="warning">{{UnassignedAgents}}</strong></div>
+    <div><strong>Agencias con comision diferencial:</strong> <strong class="warning">{{AgentsCommission}}</strong></div>
+    <div><strong>Agencias con Incentivos por intermediario:</strong> <strong class="warning">{{AgentsIncentives}}</strong></div>
+</script>
+
+<form id="formProductAgents" class="form form-space-adjusted">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row row-space-adjusted">
+                <div class="uif-col-9">
+                    <label class="field-required">@Resources.Language.LabelAgent</label>
+                    @Html.TextBoxFor(model => model.FullName, new { id = "inputAgentPrincipal", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderKeyName })
+                    @Html.ValidationMessageFor(model => model.FullName)
+                </div>
+                <div class="uif-col-3" style="padding-top:5%">
+                    <input type="checkbox" id="chkAgentAssigned" name="agentAssigned" />
+                    <label for="chkAgentAssigned">@Resources.Language.LabelAssigned</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="pull-left" id="panelButtonsRight">
+                        <button type="button" class="btn btn-default secondary-Colombia" id="btnAddAgenciesAgentComission">
+                            <span class="" aria-hidden="true">@Resources.Language.ButtonComissionAgencies</span>
+                        </button>
+                        @*<button type="button" class="btn btn-default secondary-Colombia" id="btnIncentivesForAgents">
+                            <span class="" aria-hidden="true">@Resources.Language.LabelIncentivesForAgents</span>
+                        </button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary">
+            <div id="listViewSummaryAgent" class="uif-listview"></div>
+            @*<table class="uif-table" id="TableModalAgentsData" data-source="" data-exporttocsv="false" data-exportname="cultura" data-add="false" data-edit="false" data-delete="false" data-filter="true" data-selectiontype="none" data-sort="false">
+                <thead>
+					<tr>
+						<th data-property="DataItem"></th>
+					</tr>
+                </thead>
+                <tbody></tbody>
+            </table>*@
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnCancelProductAgent">
+                    <span class="" aria-hidden="true">@Resources.Language.NewForm</span>
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0604"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnSaveProductAgent">
+                        <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

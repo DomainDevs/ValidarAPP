@@ -1,0 +1,100 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.RulesScripts.Models.ListEntityViewModel
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.ListEntity
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("ListEntityCode", null, new { @class = "uif-input-search", id = "inputSearchListEntity", @placeholder = @Resources.Language.SearchListEntity })
+        <button class="btn btn-default" id="btnSearchAdvRange"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div>
+        <button type="button" class="btn btn-default" id="btnExitListEntity">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonExit</span>
+        </button>
+        <button type="button" class="btn btn-primary" id="btnSaveListEntity">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+        </button>
+    </div>
+</script>
+<script id="listEntityTemplate" type="text/template">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div>@Resources.Language.Name: <strong class="success">{{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div>@Resources.Language.Name: <strong class="warning">{{Description}}({{ListEntityCode}})</strong></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div>@Resources.Language.Name: <strong class="danger">{{Description}}({{ListEntityCode}})</strong></div>
+    {{else}}
+    <div><div>@Resources.Language.Name: <strong>{{Description}}({{ListEntityCode}})</strong></div></div>
+    {{/ifCond}}
+</script>
+<script id="listEntityValueTemplate" type="text/template">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div>@Resources.Language.Name: <strong class="success">{{ListValue}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div>@Resources.Language.Name: <strong class="warning">{{ListValue}}({{ListValueCode}})</strong></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div>@Resources.Language.Name: <strong class="danger">{{ListValue}}({{ListValueCode}})</strong></div>
+    {{else}}
+    <div><div>@Resources.Language.Name: <strong>{{ListValue}}({{ListValueCode}})</strong></div></div>
+    {{/ifCond}}
+</script>
+<script id="add-template" type="text/template">
+    <div class="row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.LabelDescription</label>
+            <input type="text" name="name" value="" id="ListValue"/>
+        </div>
+    </div>
+</script>
+
+<form class="form without-space" id="formListEntity">    
+    <input type="hidden" id="Status" name="StatusTypeService" value="" />
+    <input type="hidden" id="Index" name="Index" value="" />
+    <input type="hidden" id="ListEntityCode" name="ListEntityCode" value="" />
+    <input type="hidden" id="ListValueAt" name="ListValueAt" value="" />
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { placeholder = @Resources.Language.LabelDescription, maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="uif-listview" id="lsvListEntityValue"></div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div class="uif-listview" id="lsvListEntity"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnCancelListEntity">
+                    @Resources.Language.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAddListEntity">
+                    @Resources.Language.AddForm
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,51 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AuxiliaryCodes;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Parameter</a></li>
+        <li class="active">@Global.AuxiliaryCodes</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal" id="modalAnalysisCodes"></div>
+}
+
+<script id="display-templateAnalysisCode" type="text/template">
+    <div>
+        <strong>-@Global.Description: </strong> {{Description}}
+        <strong>-@Global.Nature: </strong>
+        <span class="label label-primary">
+            {{AccountingNature}}
+        </span>
+    </div>
+    <div>
+        <strong>-@Global.RequireOrigin: </strong>{{CheckModuleType}}
+    </div>
+    <div>
+        <strong>-@Global.ControlBalance: </strong>{{CheckBalance}}
+    </div>
+</script>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertAnalysisCodes"></div>
+    </div>
+</div>
+<div class="uif-listview" id="listViewAnalysisCodes">
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagAnalysisCode" value="true" />
+
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/AnalysisCode")
+}

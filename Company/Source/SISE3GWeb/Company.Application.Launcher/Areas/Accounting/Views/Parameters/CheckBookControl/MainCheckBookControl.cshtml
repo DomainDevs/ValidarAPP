@@ -1,0 +1,142 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.CheckBookControl;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.CheckBookControl</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" id="rptCheck" class="btn btn-primary btn-fill pull-right" role="button" data-role="button" disabled="disabled" data-toggle="tooltip" data-placement="left" title="" data-original-title="Mostrar Reporte">
+            <i class="glyphicon glyphicon-print"></i> @Global.CheckReport
+        </button>
+    </footer>
+}
+
+@section modals{
+    <div class="uif-modal" id="modalCheckBook">
+        <div class="uif-modalbody">
+            @Html.Partial("../Parameters/CheckBookControl/CheckBookControlModal")
+        </div>
+    </div>
+}
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <label class="control-label">
+            @Global.Branch
+        </label>
+        <select class="uif-select form-control" id="BranchSelect" data-source='@Url.Content("~/Accounting/Common/GetBranchs")'
+                data-id="Id" data-name="Description" name="BranchSelect" data-native="true"></select>
+    </div>
+    <div class="uif-col-4">
+        <label class="control-label">
+            @Global.Bank
+        </label>
+        <select class="uif-select form-control" id="BankSelectCheckBook" data-id="Id" data-name="Description" name="BankSelectCheckBook" data-native="true"></select>
+    </div>
+    <div class="uif-col-4">
+        <label class="control-label">
+            @Global.AccountBank
+        </label>
+        <select class="uif-select form-control" id="AccountBankSelect" data-id="Id" data-name="Description" name="AccountBankSelect" data-native="true"></select>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+    </div>
+</div>
+
+<div class="row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertCheckBook"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="uif-col-12">
+        <div class="uif-listview" id="checkBookListView">
+        </div>
+    </div>
+</div>
+
+<!-- /.Modal de Eliminación -->
+<div class="modal fade" id="modalCheckBookControl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times-circle">
+                    </i>
+                </button>
+                <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+            </div>
+            <div class="modal-body" id="deleteMessageModal">
+                <p id="MessageHeader"></p>
+                <p id="MessageBody"></p>
+            </div>
+            <div class="modal-footer" style="padding: 10px 20px 10px">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-remove"></i> @Global.Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="DeleteModal">
+                    <i class="fa fa-check"></i> @Global.Accept
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@*VIEWBAG*@
+<input type="hidden" id="ViewBagBranchDisableMainCheckBook" value="@ViewBag.BranchDisable" />
+
+
+<script id="listTemplate" type="text/template">
+    <span>
+        <strong>-@Global.CheckType:</strong>
+        <strong><span class="label label-primary">{{IsAutomatic}}</span></strong>
+    </span>
+    <span>
+        <strong>-@Global.CheckFrom:</strong>
+        {{CheckFrom}}.
+        <strong>-@Global.CheckTo:</strong>
+        {{CheckTo}}.
+        <strong>-@Global.LastCheckUsed:</strong>
+        {{LastCheck}}
+    </span>
+    <span>
+        <strong>-@Global.Date:</strong>
+        {{DisabledDate}}
+    </span>
+    <span>
+        <strong>@Global.Status:</strong>
+        <span class="text-danger"><strong>{{Status}}</strong></span>
+    </span>
+</script>
+
+<div id="addItem" style="display: none">
+    <form>
+        @Html.Partial("~/Areas/Accounting/Views/Parameters/CheckBookControl/CheckBookControlEditor.cshtml")
+    </form>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCheckBookControl")
+}
+
+
+
+
+

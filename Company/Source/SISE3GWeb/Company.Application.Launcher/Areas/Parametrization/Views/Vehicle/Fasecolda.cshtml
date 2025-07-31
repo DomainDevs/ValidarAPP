@@ -1,0 +1,137 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.FasecoldaViewModel
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="row col-lg-12">
+        <div class="row main-title col-lg-12">
+            <div class="column-70">
+                @Resources.Language.LabelFasecolda
+            </div>
+            <div class="column-30 no-padding">
+                @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputFasecoldaCode", @placeholder = @Resources.Language.LabelSearchFasecoldaCode })
+                @*<button type="button" class="btn btn-default" id="btnShowAdvancedSearchFsecolda"><i class="fa fa-angle-down"></i></button>*@
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div id="btnBottomMain">
+        <button type="button" class="btn btn-default" id="btnCancelViewFasecolda">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            @Resources.Language.ButtonExit
+        </button>
+        <button type="button" class="btn btn-default" id="btnExportXLSFasecolda">
+            <i class="fa fa-file-o" aria-hidden="true"></i>
+            @Resources.Language.ButtonExport
+        </button>
+
+        <button type="button" class="btn btn-primary" id="btnSaveFasecolda">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+<script id="FasecoldaTemplate" type="text/template">
+    {{#ifCond State "==" 2}}
+    <div>Marca: <strong class="success">{{makeVehicle.Description}} ({{makeVehicle.Id}}) </strong></div>
+    {{else ifCond State "==" 3}}
+    <div>Marca: <strong class="warning">{{makeVehicle.Description}} ({{makeVehicle.Id}}) </strong></div>
+    {{else ifCond State "==" 4}}
+    <div>Marca: <strong class="danger">{{makeVehicle.Description}} ({{makeVehicle.Id}}) </strong></div>
+    {{else}}
+    <div>Marca: <strong>{{makeVehicle.Description}} ({{makeVehicle.Id}}) </strong></div>
+    {{/ifCond }}
+    <div>
+        <br>
+        Modelo: <strong>{{modelVehicle.Description}}({{modelVehicle.Id}})</strong> - Version: <strong>{{versionVehicle.Description}} </strong>
+    </div>
+    {{#ifCond State "==" 2}}
+    <div><br>Código Fasecolda: <strong class="success">{{MakeVehicleCode}}{{ModelVehicleCode}}</strong></div>
+    {{else ifCond State "==" 3}}
+    <div><br>Código Fasecolda: <strong class="warning">{{MakeVehicleCode}}{{ModelVehicleCode}}</strong></div>
+    {{else ifCond State "==" 4}}
+    <div><br>Código Fasecolda: <strong class="danger">{{MakeVehicleCode}}{{ModelVehicleCode}}</strong></div>
+    {{else}}
+    <div><br>Código Fasecolda: <strong>{{MakeVehicleCode}}{{ModelVehicleCode}}</strong></div>
+    {{/ifCond }}
+    <div class="hidden">
+        Fasecolda{{fasecoldaCodeView}}
+    </div>
+    @*<div>
+            <br>
+            Código modelo Fasecolda: <strong>{{ModelVehicleCode}}</strong>
+        </div>*@
+</script>
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formFasecolda" class="form without-space" autocomplete="off">
+
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelMake</label>
+                    <select class="uif-select form-control" id="selectBrandVehicle"
+                            data-id="Id" data-name="Description" name="Make" data-val="true"
+                            data-val-required="@Resources.Language.ErrorDocumentControlMake"
+                            data-filter="true" data-native="false"></select>
+                </div>
+
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelModel</label>
+                    <select class="uif-select form-control" id="selectModelVehicle" data-id="Id" data-name="Description" name="Model" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlModel" data-filter="true" data-native="false"></select>
+                </div>
+
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelVersion</label>
+                    <select class="uif-select form-control" id="selectVersionVehicle" data-id="Id" data-name="Description" name="Version" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlVersion" data-filter="true" data-native="false"></select>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelBrandCodeFasecolda</label>
+                    @*<input  type="number" id="InputBrandCodeFasecolda"/>*@
+                    @Html.TextBoxFor(model => model.MakeVehicleCode, new { id = "InputBrandCodeFasecolda" })
+                    @Html.ValidationMessageFor(model => model.MakeVehicleCode)
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelModelCodeFasecolda</label>
+                    @Html.TextBoxFor(model => model.ModelVehicleCode, new { id = "InputVersionCodeFasecolda" })
+                    @Html.ValidationMessageFor(model => model.ModelVehicleCode)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listViewFasecolda" class="uif-listview"></div>
+        </div>
+    </div>
+
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewFasecolda">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAcceptFasecolda">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

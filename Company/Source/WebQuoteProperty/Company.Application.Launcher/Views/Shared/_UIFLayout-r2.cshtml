@@ -1,0 +1,110 @@
+﻿@functions {
+    public int PopupShowDelay
+    {
+        get { return 60000 * (Session.Timeout - 1); }
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>UIF 2 Touch</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    @*CSSs*@
+    
+    <link href="@Url.Content("~/Lib/framework/build/vendors/css/vendors-4.0.0.css" )" rel="stylesheet" />
+    <link href="http://launcher.azurewebsites.net/Lib/framework/build/uif-touch-4.2.0.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="@Url.Content("~/Content/unidaddenegocio.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("styles", required: false)
+
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="loader main-loader">
+        <div class="spinner spinner-three-bounce">
+            <i class="fa fa-circle-o-notch fa-spin fa-4x"></i>
+        </div>
+    </div>
+    @if (Request.IsAuthenticated)
+    {
+
+        <div class="page">
+            <header>
+                <div class="breadcrumb-wrapper">
+                    <a class="logo" href="/"><img src="@Url.Content("~/Lib/framework/build/layout/default/images/logo.png")" alt="" /></a>
+                    @RenderSection("breadcrumb", required: false)
+                </div>
+
+                <div class="notifications">
+                    <div class="dropdown">
+                        <div class="btn dropdown-toggle global-header-notification-button" data-toggle="dropdown">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <ul class="dropdown-menu global-header-dropdown-menu dropdown-menu-right">
+                            <li><a href="@Url.Action("LogOff", "Account", new { @Area = "" })">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            @RenderSection("title", required: false)
+
+            <div class="main-container">
+                <div class="main-container-wrapper">
+                    <div class="row">
+                        <div class="col-xs-12 main-content">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            @RenderSection("toolbar", required: false)
+        </div>
+    }
+    else
+    {
+        @RenderBody()
+    }
+
+    @RenderSection("modals", required: false)
+
+    @*JSs*@
+
+    <script>
+        rootPath = '@Url.Content("~/")';
+    </script>
+    <script src="@Url.Content("~/Lib/framework/build/vendors/js/vendors-4.0.0.js")"></script>
+    <script src="http://launcher.azurewebsites.net/Lib/framework/build/uif-touch-4.2.0.min.js"></script>
+    <script src="@Url.Content("~/Lib/framework/build/uif-touch-4.0.0-alpha.es.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/Validator.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.redirect.js")"></script>
+    <script src="@Url.Content("~/Scripts/EnumsCommon.js")"></script>
+    <script src="@Url.Content("~/Scripts/Helpers.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/JSLINQ.js")"></script>
+    <script src="@Url.Content("~/Scripts/JSLINQ-vsdoc.js")"></script>
+    <script src="@Url.Content("~/Scripts/Uif2Co.js")"></script>
+
+    @Scripts.Render("~/uifr2/theme")
+    <script src="@Url.Content("~/Scripts/app/start.js")"></script>
+    @RenderSection("scripts", required: false)
+
+    <script src="@Url.Content("~/Scripts/jquery.iframe-transport.js")"></script>
+
+</body>
+</html>

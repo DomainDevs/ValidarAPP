@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ABD54DD0-51C0-4C6B-911E-268742592345}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.UnderwritingParamService.EEProvider</RootNamespace>
+    <AssemblyName>Core.UnderwritingParamService.EEProvider</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\..\Bin\lib\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Common.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Common\Core.Common.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonParamService">
+      <HintPath>..\..\..\..\Bin\Services\Core\CommonParam\CommonParamService\Core.CommonParamService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Integration.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Integration\Core.Integration.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Issuance.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Issuance\Core.Issuance.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ModelServices">
+      <HintPath>..\..\..\..\Bin\Application\Core\ModelServices\Core.ModelServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Parameters.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Parameters\Core.Parameters.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Product.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Product\Core.Product.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Quotation.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Quotation\Core.Quotation.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Request.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Request\Core.Request.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Script.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Script\Core.Script.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Tax.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Tax\Core.Tax.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.TaxServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Services\Core\Tax\TaxServices\Core.TaxServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UnderwritingParamService">
+      <HintPath>..\..\..\..\Bin\Services\Core\UnderwritingParam\UnderwritingParamService\Core.UnderwritingParamService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UnderwritingServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\Underwriting\UnderwritingServices\Core.UnderwritingServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UnderwritingServices.EEProvider">
+      <HintPath>..\..\..\..\Bin\Services\Core\Underwriting\UnderwritingServiceEEProvider\Core.UnderwritingServices.EEProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePerson.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\UniquePerson\Core.UniquePerson.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePerson.IntegrationService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Services\Core\UniquePerson\IntegrationService\Core.UniquePerson.IntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Utilities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServicesEEProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Services\Core\Utilities\UtilitiesServiceEEProvider\Core.UtilitiesServicesEEProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\..\..\..\Bin\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Co.Application.Data">
+      <HintPath>..\..\..\..\Bin\lib\Sistran.Co.Application.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.BAF">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.BAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF.Engine">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Queries, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.SAF">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.SAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.ServiceModel">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Transactions">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Transactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Views, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assemblers\EntityAssembler.cs" />
+    <Compile Include="Assemblers\ModelAssembler.cs" />
+    <Compile Include="Assemblers\ModelsServicesAssembler.cs" />
+    <Compile Include="Assemblers\ServicesModelsAssembler.cs" />
+    <Compile Include="Business\AllyCoverageBusiness.cs" />
+    <Compile Include="Business\CoverageBusiness.cs" />
+    <Compile Include="Business\DiscountBusiness.cs" />
+    <Compile Include="Business\InsuredObjectBusiness.cs" />
+    <Compile Include="Business\PaymentMethodBusiness.cs" />
+    <Compile Include="Business\PaymentPlanBusiness.cs" />
+    <Compile Include="Business\SurchargeBusiness.cs" />
+    <Compile Include="DAOs\AllyCoverageDAO.cs" />
+    <Compile Include="DAOs\AssistanceTypeDAO.cs" />
+    <Compile Include="DAOs\CompositionDAO.cs" />
+    <Compile Include="DAOs\DetailTypeDAO.cs" />
+    <Compile Include="DAOs\ExpenseDAO.cs" />
+    <Compile Include="DAOs\BusinessBusinessConfigurationDAO.cs" />
+    <Compile Include="DAOs\BusinessConfigurationDAO.cs" />
+    <Compile Include="DAOs\BusinessDAO.cs" />
+    <Compile Include="DAOs\ClauseLevelDAO.cs" />
+    <Compile Include="DAOs\ComponentRelationDAO.cs" />
+    <Compile Include="DAOs\Coverage2GDAO.cs" />
+    <Compile Include="DAOs\CoverageGroupDAO.cs" />
+    <Compile Include="DAOs\CoveredRiskTypeDAO.cs" />
+    <Compile Include="Business\SubLineBusinessBusiness.cs" />
+    <Compile Include="DAOs\CurrencyDAO.cs" />
+    <Compile Include="DAOs\DeductibleDAO.cs" />
+    <Compile Include="DAOs\DiscountDAO.cs" />
+    <Compile Include="DAOs\DetailDAO.cs" />
+    <Compile Include="DAOs\ClauseDAO.cs" />
+    <Compile Include="DAOs\CoverageDAO.cs" />
+    <Compile Include="DAOs\FileDAO.cs" />
+    <Compile Include="DAOs\FinancialPlanDAO.cs" />
+    <Compile Include="DAOs\GroupCoverageDAO.cs" />
+    <Compile Include="DAOs\InsuredObjectDAO.cs" />
+    <Compile Include="DAOs\LimitRcDAO.cs" />
+    <Compile Include="DAOs\LineBusinessDAO.cs" />
+    <Compile Include="DAOs\PaymentMethodDAO.cs" />
+    <Compile Include="DAOs\PaymentMethodTypeDAO.cs" />
+    <Compile Include="DAOs\PaymentPlanDAO.cs" />
+    <Compile Include="DAOs\PerilDAO.cs" />
+    <Compile Include="DAOs\PolicyNumberDAO.cs" />
+    <Compile Include="DAOs\PrefixDAO.cs" />
+    <Compile Include="DAOs\ProductDAO.cs" />
+    <Compile Include="DAOs\QuotaDAO.cs" />
+    <Compile Include="DAOs\RequestEndorsementDAO.cs" />
+    <Compile Include="DAOs\RuleSetDAO.cs" />
+    <Compile Include="DAOs\RateTypeDAO.cs" />
+    <Compile Include="DAOs\TechnicalPlanDAO.cs" />
+    <Compile Include="DAOs\VehicleBodyDAO.cs" />
+    <Compile Include="DAOs\VehicleTypeDAO.cs" />
+    <Compile Include="DelegateService.cs" />
+    <Compile Include="DAOs\SurchargeDAO.cs" />
+    <Compile Include="DAOs\SubLineBusinessDAO.cs" />
+    <Compile Include="DAOs\QuotationNumberDAO.cs" />
+    <Compile Include="DAOs\RatingZoneDAO.cs" />
+    <Compile Include="DAOs\VehicleUseDAO.cs" />
+    <Compile Include="Entities\Views\CiaRatingZoneBranchView.cs" />
+    <Compile Include="Entities\Views\ClauseParametrizationView.cs" />
+    <Compile Include="Entities\Views\ClausePrefixParametrizationView.cs" />
+    <Compile Include="Entities\Views\CoverageClauseParametrizationView.cs" />
+    <Compile Include="Entities\Views\CoverageParametrizationView.cs" />
+    <Compile Include="Entities\Views\ParamDeductibleView.cs" />
+    <Compile Include="Entities\Views\ExpenseView.cs" />
+    <Compile Include="Entities\Views\DiscountView.cs" />
+    <Compile Include="Entities\Views\DetailTypeView.cs" />
+    <Compile Include="Entities\Views\HardRiskTypeCoveredRiskType.cs" />
+    <Compile Include="Entities\Views\InsuredObjectCoveredRiskTypeView.cs" />
+    <Compile Include="Entities\Views\LineBusinessClauseLevelParametrizationView.cs" />
+    <Compile Include="Entities\Views\ParamClauseView.cs" />
+    <Compile Include="Entities\Views\ParamCoverageView.cs" />
+    <Compile Include="Entities\Views\ParametrizationLineBusinessView.cs" />
+    <Compile Include="Entities\Views\ParamPolicyNumberView.cs" />
+    <Compile Include="Entities\Views\RiskTypeParametrizationView.cs" />
+    <Compile Include="Entities\Views\TechnicalPlanCoveragesView.cs" />
+    <Compile Include="Entities\Views\VehicleTypeBodyView.cs" />
+    <Compile Include="Entities\Views\InsuredObjectLineBusinessView.cs" />
+    <Compile Include="Entities\Views\ParametrizationQuotationNumberView.cs" />
+    <Compile Include="Entities\Views\ParamPaymentMethodView.cs" />
+    <Compile Include="Entities\Views\ParamFinancialPlanView.cs" />
+    <Compile Include="Entities\Views\PaymentScheduleDistributionView.cs" />
+    <Compile Include="Entities\Views\SurchargeView.cs" />
+    <Compile Include="Entities\Views\SubLineBusinessParametrizationView.cs" />
+    <Compile Include="Entities\Views\PerilLineBusinessView.cs" />
+    <Compile Include="Entities\Views\VehicleBodyUseView.cs" />
+    <Compile Include="Entities\Views\RatingZoneView.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Resources\Errors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderwritingParamServiceEEProviderWeb.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Entities\Views\CiaRatingZoneBranchView.view" />
+    <None Include="Entities\Views\ClauseParametrizationView.view" />
+    <None Include="Entities\Views\ClausePrefixParametrizationView.view" />
+    <None Include="Entities\Views\ParamDeductibleView.view" />
+    <None Include="Entities\Views\ExpenseView.view">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Entities\Views\CoverageClauseParametrizationView.view" />
+    <None Include="Entities\Views\CoverageParametrizationView.view" />
+    <None Include="Entities\Views\HardRiskTypeCoveredRiskType.view">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Entities\Views\LineBusinessClauseLevelParametrizationView.view" />
+    <None Include="Entities\Views\ParametrizationLineBusinessView.view" />
+    <None Include="Entities\Views\InsuredObjectCoveredRiskTypeView.view" />
+    <None Include="Entities\Views\ParamPolicyNumberView.view" />
+    <None Include="Entities\Views\RiskTypeParametrizationView.view" />
+    <None Include="Entities\Views\TechnicalPlanCoveragesView.view" />
+    <None Include="Entities\Views\VehicleTypeBodyView.view" />
+    <None Include="Entities\Views\DiscountView.view" />
+    <None Include="Entities\Views\DetailTypeView.view" />
+    <None Include="Entities\Views\ParamCoverageView.view">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Entities\Views\ParamClauseView.view">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Entities\Views\SubLineBusinessParametrizationView.view" />
+    <None Include="Entities\Views\InsuredObjectLineBusinessView.view" />
+    <None Include="Entities\Views\ParametrizationQuotationNumberView.view" />
+    <None Include="Entities\Views\ParamPaymentMethodView.view">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Entities\Views\ParamFinancialPlanView.view">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Entities\Views\PaymentScheduleDistributionView.view" />
+    <None Include="Entities\Views\PerilLineBusinessView.view" />
+    <None Include="Entities\Views\SurchargeView.view" />
+    <None Include="Entities\Views\VehicleBodyUseView.view" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Errors.es.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Errors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Entities\Views\RatingZoneView.view" />
+    <None Include="Entities\Views\PaymentScheduleDistributionView.view" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UnderwritingServiceEEProvider\Core.UnderwritingServices.EEProvider.csproj">
+      <Project>{832F2278-D6F0-4671-8B1E-1191A8A3EA73}</Project>
+      <Name>Core.UnderwritingServices.EEProvider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\UnderwritingParam\UnderwritingParamServiceEEProvider\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

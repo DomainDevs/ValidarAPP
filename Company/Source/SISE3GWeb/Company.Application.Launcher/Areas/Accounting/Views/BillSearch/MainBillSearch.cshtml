@@ -1,0 +1,149 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.SearchBillsMain;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+
+@section Breadcrumb
+{
+<ol class="breadcrumb global-header-breadcrumb">
+    <li>@Global.AccountingAdministrative</li>
+    <li class="active">@Global.Billing</li>
+    <li class="active">@Global.SearchPaymentReceipts</li>
+</ol>
+}
+
+
+<div style="padding: 0 0 0 0">
+    @Html.Partial("BillSearch")
+</div>
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-default" id="ExportExcel">
+            <i class="fa fa-file-excel-o"></i> @Global.ExportToExcel
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0505"))
+        {
+            <button class="btn btn-primary" id="CancelBill">
+                <i class="fa fa-remove"></i> @Global.Annul
+            </button>
+        }
+        <button class="btn btn-primary" id="IncomeChangeConcept">
+            <i class="fa fa-exchange"></i> @Global.IncomeChangeConceptTitle
+        </button>
+        <button class="btn btn-primary" id="ApplyBill">
+            <i class="fa fa-check"></i> @Global.Apply
+        </button>
+        <button class="btn btn-primary" id="PrintBill">
+            <i class="fa fa-print"></i>  @Global.Print
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0787"))
+        {
+            <button class="btn btn-primary" id="ReverseApplication">
+                <i class="fa fa-repeat"></i> @Global.Reverse
+            </button>
+        }
+    </footer>
+}
+
+
+
+@section Modals{
+
+    @*MODAL ANULACION DE RECIBO*@
+    <div class="modal fade" id="CancelDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.BillingCancelBillConfirmationTitle</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.BillingCancelBillConfirmationWarning
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> @Global.No
+                    </button>
+                    <button type="button" class="btn btn-primary" id="CancelBillDialog"
+                            onclick="return CancelBillDialog(event, 'CancelDialog')">
+                        <i class="fa fa-check"> @Global.Yes</i>
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    @*MODAL CAMBIO CONCEPTO INGRESO*@
+    <div class="uif-modal" id="IncomeConceptDialog">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Html.Partial("../BillSearch/DialogIncomeChangeConcept")
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="CancelConceptDialogCancel" data-dismiss="modal">@Global.Cancel</button>
+            <button type="submit" class="btn btn-primary" id="SaveConceptDialogAccept"
+                    onclick="return SaveConceptDialogAccept(event, 'IncomeConceptDialog')">
+                @Global.Accept
+                </button>
+            </div>
+        </div>
+
+
+        @*@*MODAL REVERSO*@
+        <div class="modal fade bs-example-modal-lg" id="PremiumReceivableListSelectionDialog" tabindex="-1"
+             role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="PremiumReceivableTitleDialog"><b>@Global.AfectedPrimesWarningLabel</b></h4>
+                    </div>
+                    <div class="uif-col-12">
+                        @Html.Partial("../BillSearch/PremiumReceivableReverseListSelectionDialog")
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <span class="fa fa-remove"></span> @Global.Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary" id="ConfirmReverseApplication">
+                            <span class="fa fa-check"> @Global.Accept</span>
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        @*MODAL DESPLIEGA DETALLES DEL RECIBO*@
+        <div class="uif-modal" id="DetailTransactionDialog" style="display: none">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/BillSearch/DetailTransaction.cshtml")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button id="btnAppCancel" type="button" class="btn btn-primary" data-dismiss="modal">
+                    <i class="fa fa-sign-out"></i> @Global.Cancel
+                </button>
+            </div>
+        </div>
+}
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagReceiptNumber" value="@ViewBag.ReceiptNumber" />
+<input type="hidden" id="ViewBagBranchId" value="@ViewBag.BranchId" />
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagImputationType" value="@ViewBag.ImputationType" />
+<input type="hidden" id="ViewBagParamPaymentMethodCreditableCreditCard" value="@ViewBag.ParamPaymentMethodCreditableCreditCard" />
+<input type="hidden" id="ViewBagParamPaymentMethodUncreditableCreditCard" value="@ViewBag.ParamPaymentMethodUncreditableCreditCard" />
+<input type="hidden" id="ViewBagHasRevertImputation" value='@ViewBag.HasRevertImputation' />
+<input type="hidden" id="ViewBagLoadApplicationReceiptLink" value="@Url.Content(Global.LoadApplicationReceiptLink)" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainBillSearch")
+}

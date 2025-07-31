@@ -1,0 +1,152 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.CompanyPhoneTypeViewModel
+<script id="CompanyPhoneTypeTemplate" type="text/template">
+
+	{{#ifCond StatusTypeService "==" 2}}
+	<div><strong class="success">{{Description}}</strong></div>
+	{{else ifCond StatusTypeService "==" 3}}
+	<div><strong class="warning">{{Description}} ({{PhoneTypeCode}})</strong></div>
+	{{else ifCond StatusTypeService "==" 4}}
+	<div><strong class="danger">{{Description}}</strong></div>
+	{{else}}
+	<div><strong>{{Description}} ({{PhoneTypeCode}})</strong></div>
+	{{/ifCond }}
+	<div>
+		<br>
+		<strong>{{LabelIsCellphone}}</strong>
+	</div>
+	<div class="hidden">
+		<br>
+		Descripción Corta: <strong>{{SmallDescription}}</strong>
+	</div>
+	<div class="hidden">
+		<br>
+		Es Celular: <strong>{{IsCellphone}}</strong>
+	</div>
+	<div class="hidden">
+		<br>
+		Expresión Regular: <strong>{{RegExpression}}</strong>
+	</div>
+	<div class="hidden">
+		<br>
+		Mensaje de Error: <strong>{{ErrorMessage}}</strong>
+	</div>
+	<div class="hidden">
+		<br>
+		Permiso Eliminar: <strong>{{allowDelete}}</strong>
+	</div>
+	<div class="hidden">
+		{{StatusType}}
+	</div>
+</script>
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.LanguagePerson.LabelCompanyPhoneType
+        </div>
+        <div class="column-30 even">
+            <input type="text" name="Id" id="inputSearchCompanyPhoneType" class="uif-input-search" placeholder="@Resources.LanguagePerson.EnterCompanyPhoneTypeToSearch" />
+            <button class="btn btn-default" id="btnSearchAdvCompanyPhoneType"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.LanguagePerson.ButtonExit
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.LanguagePerson.ExportXLS
+            </button>
+
+            <button class="btn btn-primary" id="btnSaveCompanyPhoneType" @*style="display: none"*@>
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.LanguagePerson.ButtonSave
+            </button>
+
+        </div>
+
+    </footer>
+}
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formCompanyPhoneType" autocomplete="off" class="form without-space">
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+
+                    <input type="hidden" id="inputId" readonly />
+        
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", placeholder = @Resources.LanguagePerson.LabelDescription })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelDescriptionShort</label>
+                    @Html.TextBoxFor(model => model.SmallDescription, new { id = "inputSmallDescription", placeholder = @Resources.LanguagePerson.LabelDescriptionShort })
+                    @Html.ValidationMessageFor(model => model.SmallDescription)
+                </div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.LabelRegExpression</label>
+                    @Html.TextBoxFor(model => model.RegExpression, new { id = "inputRegExpression", placeholder = @Resources.LanguagePerson.LabelRegExpression })
+                    @Html.ValidationMessageFor(model => model.RegExpression)
+                </div>
+                <div class="uif-col-8">
+                    <label>@Resources.LanguagePerson.LabelErrorMessage</label>
+                    @Html.TextBoxFor(model => model.ErrorMessage, new { id = "inputErrorMessage", placeholder = @Resources.LanguagePerson.LabelErrorMessage })
+                    @Html.ValidationMessageFor(model => model.ErrorMessage)
+                </div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="inputIsCellphone" name="inputIsCellphone" />
+                        <label for="inputIsCellphone">@Resources.LanguagePerson.LabelIsCellphone</label>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary" id="panelCompanyPhoneType">
+            <div id="listCompanyPhoneType" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsCompanyPhoneType">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewCompanyPhoneType">@Resources.LanguagePerson.New</button>
+                <button type="button" class="btn btn-primary" id="btnCompanyPhoneTypeAccept">@Resources.LanguagePerson.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/bundle/js/CompanyPhoneType")"></script>
+}

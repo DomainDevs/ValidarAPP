@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="RejectedPayment" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="REJECTED_PAYMENT_ENTITY">
+  <properties>
+    <property name="RejectedPaymentCode" type="Integer" key="true" description="REJECTED_PAYMENT_CODE_PROPERTY" autonumber="Identity" />
+    <property name="PaymentCode" type="Integer" nullable="true" description="PAYMENT_CODE_PROPERTY" />
+    <property name="RejectionCode" type="Integer" nullable="true" description="REJECTION_CODE_PROPERTY" />
+    <property name="RejectionDate" type="DateTime" nullable="true" description="REJECTION_DATE_PROPERTY" />
+    <property name="Comission" type="Decimal" precision="18" scale="2" nullable="true" description="COMISSION_PROPERTY" />
+    <property name="TaxComission" type="Decimal" precision="18" scale="2" nullable="true" description="TAX_COMISSION_PROPERTY" />
+    <property name="Description" type="String" size="200" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="UserId" type="Integer" nullable="true" description="USER_ID_PROPERTY" />
+    <property name="RegisterDate" type="DateTime" nullable="true" description="REGISTER_DATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="REJECTED_PAYMENT" schema="ACC" alias="REJECTED_PAYMENT" update="true">
+      <columns>
+        <column name="REJECTED_PAYMENT_CD" type="Int32" property="RejectedPaymentCode" key="true" identity ="true" />
+        <column name="PAYMENT_CD" type="Int32" property="PaymentCode" />
+        <column name="REJECTION_CD" type="Int32" property="RejectionCode" />
+        <column name="REJECTION_DATE" type="DateTime" property="RejectionDate" />
+        <column name="COMISSION" type="Decimal" property="Comission" size="19" precision="18" scale="2" />
+        <column name="TAX_COMISSION" type="Decimal" property="TaxComission" size="19" precision="18" scale="2" />
+        <column name="DESCRIPTION" type="String" property="Description" size="200" />
+        <column name="USER_ID" type="Int32" property="UserId" />
+        <column name="REGISTER_DATE" type="DateTime" property="RegisterDate" />
+      </columns>
+    </table>
+  </tables>
+</map>

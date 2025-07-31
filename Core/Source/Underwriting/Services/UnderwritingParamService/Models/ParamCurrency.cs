@@ -1,0 +1,19 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="ParamCurrency.cs" company="SISTRAN">
+// Copyright (c) SISTRAN ANDINA. All rights reserved.
+// </copyright>
+// <author>Camila Vergara</author>
+// -----------------------------------------------------------------------
+namespace Sistran.Core.Application.UnderwritingParamService.Models
+{
+    using Sistran.Core.Application.UnderwritingParamService.Models.Base;
+    using System.Runtime.Serialization;
+    /// <summary>
+    /// Modelo de moneda
+    /// </summary>
+    [DataContract]
+    public class ParamCurrency: BaseParamCurrency
+    { 
+        
+    }
+}

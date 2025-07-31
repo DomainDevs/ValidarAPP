@@ -1,0 +1,24 @@
+<map version="2.0" type="class" name="Node" namespace="Sistran.Core.Application.RulesScriptsServices.EEProvider" file-version="1.0" description="NODE_ENTITY">
+  <properties>
+    <property name="NodeId" type="Integer" key="true" description="NODE_ID_PROPERTY" autonumbre="id"/>
+    <property name="ScriptId" type="Integer" key="true" description="SCRIPT_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="NODE" schema="SCR" alias="NODE" update="true">
+      <columns>
+        <column name="NODE_ID" type="Int32" property="NodeId" key="true" />
+        <column name="SCRIPT_ID" type="Int32" property="ScriptId" key="true" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Decimal" value="34" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

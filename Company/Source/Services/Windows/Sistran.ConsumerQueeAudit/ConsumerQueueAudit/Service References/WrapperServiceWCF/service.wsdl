@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WrapperService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://microsoft.com/wsdl/types/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWrapperService_Quote_InputMessage">
+    <wsdl:part name="parameters" element="tns:Quote" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_Quote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QuoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_CreateQuotationListFromJson_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateQuotationListFromJson" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_CreateQuotationListFromJson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateQuotationListFromJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_RegisterExternalInformationLog_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterExternalInformationLog" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_RegisterExternalInformationLog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterExternalInformationLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_loadCacheByJson_InputMessage">
+    <wsdl:part name="parameters" element="tns:loadCacheByJson" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_loadCacheByJson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:loadCacheByJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_CreateVersionHistoryExternal_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateVersionHistoryExternal" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_CreateVersionHistoryExternal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateVersionHistoryExternalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_SaveListInfringementSimit_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveListInfringementSimit" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_SaveListInfringementSimit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveListInfringementSimitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_GetNodeRulSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNodeRulSet" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_GetNodeRulSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNodeRulSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_GetVersionHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVersionHistory" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_GetVersionHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVersionHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_GetCacheStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCacheStatus" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_GetCacheStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCacheStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_AuditData_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuditData" />
+  </wsdl:message>
+  <wsdl:message name="IWrapperService_AuditData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuditDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWrapperService">
+    <wsdl:operation name="Quote">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWrapperService/Quote" message="tns:IWrapperService_Quote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWrapperService/QuoteResponse" message="tns:IWrapperService_Quote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuotationListFromJson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWrapperService/CreateQuotationListFromJson" message="tns:IWrapperService_CreateQuotationListFromJson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWrapperService/CreateQuotationListFromJsonResponse" message="tns:IWrapperService_CreateQuotationListFromJson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterExternalInformationLog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWrapperService/RegisterExternalInformationLog" message="tns:IWrapperService_RegisterExternalInformationLog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWrapperService/RegisterExternalInformationLogResponse" message="tns:IWrapperService_RegisterExternalInformationLog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="loadCacheByJson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWrapperService/loadCacheByJson" message="tns:IWrapperService_loadCacheByJson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWrapperService/loadCacheByJsonResponse" message="tns:IWrapperService_loadCacheByJson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateVersionHistoryExternal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWrapperService/CreateVersionHistoryExternal" message="tns:IWrapperService_CreateVersionHistoryExternal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWrapperService/CreateVersionHistoryExternalResponse" message="tns:IWrapperService_CreateVersionHistoryExternal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveListInfringementSimit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWrapperService/SaveListInfringementSimit" message="tns:IWrapperService_SaveListInfringementSimit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWrapperService/SaveListInfringementSimitResponse" message="tns:IWrapperService_SaveListInfringementSimit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeRulSet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWrapperService/GetNodeRulSet" message="tns:IWrapperService_GetNodeRulSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWrapperService/GetNodeRulSetResponse" message="tns:IWrapperService_GetNodeRulSet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWrapperService/GetVersionHistory" message="tns:IWrapperService_GetVersionHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWrapperService/GetVersionHistoryResponse" message="tns:IWrapperService_GetVersionHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWrapperService/GetCacheStatus" message="tns:IWrapperService_GetCacheStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWrapperService/GetCacheStatusResponse" message="tns:IWrapperService_GetCacheStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuditData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWrapperService/AuditData" message="tns:IWrapperService_AuditData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWrapperService/AuditDataResponse" message="tns:IWrapperService_AuditData_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWrapperService" type="tns:IWrapperService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Quote">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/Quote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuotationListFromJson">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/CreateQuotationListFromJson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterExternalInformationLog">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/RegisterExternalInformationLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loadCacheByJson">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/loadCacheByJson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateVersionHistoryExternal">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/CreateVersionHistoryExternal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveListInfringementSimit">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/SaveListInfringementSimit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeRulSet">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/GetNodeRulSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionHistory">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/GetVersionHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheStatus">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/GetCacheStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuditData">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/AuditData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IWrapperService1" type="tns:IWrapperService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Quote">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/Quote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuotationListFromJson">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/CreateQuotationListFromJson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterExternalInformationLog">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/RegisterExternalInformationLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loadCacheByJson">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/loadCacheByJson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateVersionHistoryExternal">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/CreateVersionHistoryExternal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveListInfringementSimit">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/SaveListInfringementSimit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeRulSet">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/GetNodeRulSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionHistory">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/GetVersionHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheStatus">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/GetCacheStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuditData">
+      <soap:operation soapAction="http://tempuri.org/IWrapperService/AuditData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WrapperService">
+    <wsdl:port name="BasicHttpBinding_IWrapperService" binding="tns:BasicHttpBinding_IWrapperService">
+      <soap:address location="http://localhost/External/WrapperService" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IWrapperService1" binding="tns:BasicHttpBinding_IWrapperService1">
+      <soap:address location="http://localhost/WrapperService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

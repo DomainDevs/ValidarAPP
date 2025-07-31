@@ -1,0 +1,26 @@
+<map version="2.0" type="class" name="InterestGroupType" namespace="Sistran.Core.Application.UniquePersonV1" file-version="1.0" description="INTEREST_GROUP_TYPE_ENTITY">
+  <properties>
+    <property name="InterestGroupTypeCode" type="Integer" key="true" description="INTEREST_GROUP_TYPE_CODE_PROPERTY" autonumber="id"/>
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="SmallDescription" type="String" size="15" description="SMALL_DESCRIPTION_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="INTEREST_GROUP_TYPE" schema="UP" alias="INTEREST_GROUP_TYPE" update="true">
+      <columns>
+        <column name="INTEREST_GROUP_TYPE_CD" type="Byte" property="InterestGroupTypeCode" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="SMALL_DESCRIPTION" type="String" property="SmallDescription" allowNull="false" size="15" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="10023" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>  
+</map>

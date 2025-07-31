@@ -1,0 +1,131 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.FinancialPlanViewModel
+
+@{
+    Layout = null;
+}
+@*Fields ListView*@
+<script id="tmpComponentForAssign" type="text/template">
+    <div>
+        <label>
+            {{Description}}
+        </label>
+    </div>
+</script>
+
+@*Fields ListView*@
+<script id="tmpForComponent" type="text/template">
+    <div>
+        <label>
+            {{Description}}
+        </label>
+    </div>
+</script>
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column">
+        @Resources.Language.FinancialPlan
+    </div>
+</script>
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnCreateFinancialPlan">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+<form class="form without-space" id="formFinancialPlan">
+    <br />
+    <div>
+        <input type="hidden" name="Id" id="Id" />
+        <input type="hidden" name="StatusTypeService" value="" id="StatusTypeService" />
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelPaymentPlan</label>
+                    <select class="uif-select" id="IdPaymentPlan" data-name="Description" name="IdPaymentPlan" data-val-required="true" data-val="true"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.IdPaymentPlan, Resources.Language.FieldRequired)
+                </div>
+
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.Methodpayment</label>
+                    <select class="uif-select" id="IdPaymentMethod" data-name="Description" name="IdPaymentMethod" data-val-required="true" data-val="true"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.IdPaymentMethod, Resources.Language.FieldRequired)
+                </div>
+
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelCurrencies</label>
+                    <select class="uif-select" id="IdCurrency" data-name="Description" name="IdCurrency" data-val-required="true" data-val="true"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.IdPaymentMethod, Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelMinimunQuota</label>
+                    @Html.TextBoxFor(model => model.MinimunQuota, new { id = "MinimunQuota" })
+                    @Html.ValidationMessageFor(model => model.MinimunQuota)
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        @*Tabla*@
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="uif-col-5">
+                    <div class="uif-listview" id="listviewComponent">
+                    </div>
+                </div>
+                <div class="uif-col-2">
+                    <div class="uif-row centerAlign">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalComponentAssignAll">
+                                <span class="" aria-hidden="true">>></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalComponentDeallocateAll">
+                                <span class="" aria-hidden="true"><<</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalComponentAssign">
+                                <span class="" aria-hidden="true">></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalComponentDeallocate">
+                                <span class="" aria-hidden="true"><</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-col-5">
+                    <div class="uif-listview" id="listviewComponentAssing">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

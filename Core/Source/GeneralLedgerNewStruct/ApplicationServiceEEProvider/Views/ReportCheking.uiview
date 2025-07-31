@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="ReportCheking">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="AccountingAccountId">
+          <Column table-alias="AccountingAccount" name="AccountingAccountId" />
+        </SelectValue>
+        <SelectValue alias="AccountName">
+          <Column table-alias="AccountingAccount" name="AccountName" />
+        </SelectValue>
+        <SelectValue alias="AccountNumber">
+          <Column table-alias="AccountingAccount" name="AccountNumber" />
+        </SelectValue>
+        <SelectValue alias="Date">
+          <Column table-alias="JournalEntry" name="Date" />
+        </SelectValue>
+        <SelectValue alias="AccountingNature">
+          <Column table-alias="JournalEntryItem" name="AccountingNature" />
+        </SelectValue>
+        <SelectValue alias="AmountValue">
+          <Column table-alias="JournalEntryItem" name="AmountValue" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AccountingAccount, Core.GeneralLedger.Entities" alias="AccountingAccount" />
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.JournalEntryItem, Core.GeneralLedger.Entities" alias="JournalEntryItem" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="JournalEntryItem" name="AccountingAccountId" />
+                <Column table-alias="AccountingAccount" name="AccountingAccountId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.JournalEntry, Core.GeneralLedger.Entities" alias="JournalEntry" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="JournalEntry" name="JournalEntryId" />
+              <Column table-alias="JournalEntryItem" name="JournalEntryId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

@@ -1,0 +1,121 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        <div id="Title">Eventos Sarlafts</div>
+    </div>
+    <div class="column-30 even" id="btnSearchs">
+        <input class="uif-input-search" type="text" placeholder="Busqueda avanzada" id="SearchGroupEvents" />
+        <button class="btn btn-default" id="btnSearchAdvGroupEvents"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsEventsSarlaft">
+        <button type="button" class="btn btn-default" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>@Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0647"))
+        {
+            <button type="button" class="btn btn-default" id="btnExport">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>@Resources.Language.ButtonExport
+            </button>
+        }
+
+    </div>
+</script>
+<div class="row">
+    <div class="uif-col-12 fit-col-main">
+        <div class="without-space without-space-tabs">
+            <div class="row">
+                <div class="uif-col-12" id="tabsEvents">
+                    <ul class="uif-tab">
+                        <li data-name-module="@Resources.Language.LabelTabEventGroup" class="active">
+                            <a href="#EventsGroupTab">
+                                @Resources.Language.LabelTabEventGroup
+                            </a>
+                        </li>
+                        <li data-name-module="@Resources.Language.LabelTabEntities">
+                            <a href="#EntitiesTab">
+                                @Resources.Language.LabelTabEntities
+                            </a>
+                        </li>
+                        <li data-name-module="@Resources.Language.LabelTabGroupConditions">
+                            <a href="#ConditionsGroupTab">
+                                @Resources.Language.LabelTabGroupConditions
+                            </a>
+                        </li>
+                        <li data-name-module="@Resources.Language.LabelTabEvents">
+                            <a href="#EventsTab">
+                                @Resources.Language.LabelTabEvents
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="uif-tab-content tab-content whitout-tap-margin-top">
+                        <div id="EventsGroupTab" class="active tab-pane">
+                            @Html.Partial("EventsGroup")
+                        </div>
+                        <div id="EntitiesTab" class="tab-pane">
+                            @Html.Partial("Entities")
+                        </div>
+                        <div id="ConditionsGroupTab" class="tab-pane">
+                            @Html.Partial("GroupConditions")
+                        </div>
+                        <div id="EventsTab" class="tab-pane">
+                            @Html.Partial("Events")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    .table-fixed thead,
+    .table-fixed tfoot {
+        width: 100%;
+    }
+
+    .table-fixed tbody {
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    .min tbody {
+        height: 210px;
+    }
+
+    .max tbody {
+        height: 450px;
+    }
+
+    .med tbody {
+        height: 300px;
+    }
+
+    .table-fixed thead,
+    .table-fixed tbody,
+    .table-fixed tfoot {
+        display: block;
+    }
+
+    .table-fixed thead {
+        display: inline-table;
+    }
+</style>

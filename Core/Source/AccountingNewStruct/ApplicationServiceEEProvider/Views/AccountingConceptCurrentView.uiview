@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="AccountingConceptCurrentView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CheckingAccountConceptCode">
+          <Column table-alias="AccountingConcept" name="AccountingConceptCode" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="AccountingConcept" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AgentEnabled">
+          <Column table-alias="AccountingConcept" name="AgentEnabled" />
+        </SelectValue>
+        <SelectValue alias="CoinsuranceEnabled">
+          <Column table-alias="AccountingConcept" name="CoinsuranceEnabled" />
+        </SelectValue>
+        <SelectValue alias="ReinsuranceEnabled">
+          <Column table-alias="AccountingConcept" name="ReinsuranceEnabled" />
+        </SelectValue>
+        <SelectValue alias="UserId">
+          <Column table-alias="UserBranchPaymentConcept" name="UserId" />
+        </SelectValue>
+        <SelectValue alias="BranchPaymentCode">
+          <Column table-alias="UserBranchPaymentConcept" name="BranchPaymentCode" />
+        </SelectValue>
+        <SelectValue alias="ItemEnabled">
+          <Column table-alias="AccountingConcept" name="ItemEnabled" />
+        </SelectValue>
+        <SelectValue alias="PaymentConceptCode">
+          <Column table-alias="BranchPaymentConcept" name="PaymentConceptCode" />
+        </SelectValue>
+        <SelectValue alias="PaymentBranchCode">
+          <Column table-alias="BranchPaymentConcept" name="PaymentBranchCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AccountingConcept, Core.GeneralLedger.Entities" alias="AccountingConcept" />
+              <ClassNameTable name="Sistran.Core.Application.Parameters.Entities.CheckingAccountConceptBranch, Core.Parameters.Entities" alias="CheckingAccountConceptBranch" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="CheckingAccountConceptBranch" name="CheCheckingAccountConceptCode" />
+                  <Column table-alias="AccountingConcept" name="AccountingConceptCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Parameters.Entities.UserBranchPaymentConcept, Core.Parameters.Entities" alias="UserBranchPaymentConcept" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="UserBranchPaymentConcept" name="BranchPaymentCode" />
+                <Column table-alias="CheckingAccountConceptBranch" name="BranchPaymentCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Parameters.Entities.BranchPaymentConcept, Core.Parameters.Entities" alias="BranchPaymentConcept" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="BranchPaymentConcept" name="BranchPaymentCode" />
+              <Column table-alias="UserBranchPaymentConcept" name="BranchPaymentCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

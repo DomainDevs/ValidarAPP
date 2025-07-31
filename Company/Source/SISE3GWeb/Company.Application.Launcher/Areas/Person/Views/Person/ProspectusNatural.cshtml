@@ -1,0 +1,140 @@
+﻿@{
+    Layout = null;
+}
+@Html.Partial("~/Areas/Person/Views/Person/Persons.cshtml")
+<div class="uif-row">
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.LanguagePerson.LabelTypeDocument</label>
+        <select class="uif-select form-control" id="selectDocumentTypePrn" data-id="Id" data-name="SmallDescription">
+        </select>
+    </div>
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.LanguagePerson.LabelDocumentNumber</label>
+        <input type="text" id="InputDocumentNumber" />
+    </div>
+      <div class="uif-col-3">
+        
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.LanguagePerson.CodeProspect</label>
+         <input style="color: red" type="text" id="lblPersonCode" disabled />
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.LanguagePerson.Surname</label>
+        <input type="text" id="InputSurnamePrn" class="upperCase-co"/>
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.LanguagePerson.Secondsurname</label>
+        <input type="text" id="InputLastNamePrn" class="upperCase-co" maxlength="60"/>
+    </div>
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.LanguagePerson.Names</label>
+        <input type="text" id="InputNamePrn" class="upperCase-co" maxlength="60"/>
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.LanguagePerson.Maritalstatus</label>
+        <select class="uif-select form-control" id="selectMaritalStatusPrn" data-id="Id" data-name="Description">
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.LanguagePerson.LabelGender</label>
+        <select class="uif-select form-control" id="selectGenderProspect" data-val="true" data-val-required="@Resources.LanguagePerson.ErrorDocumentGender"
+                              data-id="Id" data-name="Description" name="PersonTypeId">
+        </select>
+    </div>
+
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.LanguagePerson.Birthdate</label>
+        <input type="text" class="uif-datepicker" data-type="date" data-mask="99/99/9999" id="InputbirthdatePrn" autocomplete="off" />
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.LanguagePerson.age</label>
+        <input type="text" id="InputAgePrn" maxlength="60"/>
+    </div>
+     <div class="uif-col-3"></div>
+</div>
+
+
+<br />
+<label>@Resources.LanguagePerson.LabelAddressesAndPhone</label>
+<hr />
+<div id="panelComunProspectN">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Resources.LanguagePerson.LabelTypeAddress</label>
+            <select class="uif-select form-control" id="selectAddressPl1" data-id="Id" data-name="Description">
+            </select>
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.LanguagePerson.LabelFullAddress</label>
+            <input type="text" id="inputAddressAllPrn" maxlength="60" class="upperCase-co" />
+        </div>
+        <div class="uif-col-3">
+            <br />
+            <div class="checkbox">
+                <input type="checkbox" id="rdPrincipal" />
+                <label for="rdPrincipal">@Resources.LanguagePerson.PrincipalAddress</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.LanguagePerson.LabelCountry</label>
+            <input class="uif-input-search"
+                data-val="true" id="inputCountryPl1" name="inputCountryPl1" placeholder="@Resources.LanguagePerson.NameCountry" type="text">
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.LanguagePerson.LabelCodDaneCity</label>
+            <input type="text" value="" id="inputDaneCodePl" name="DaneCodePn" data-minlenght="2" data-maxlenght="5" placeholder="@Resources.LanguagePerson.EnterCodeDANE" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.LanguagePerson.LabelState</label>
+            <input class="uif-input-search"
+                data-val="true" id="inputStatePl" name="inputStatePl" placeholder="@Resources.LanguagePerson.NameDepartment" type="text">
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.LanguagePerson.LabelCity</label>
+            <input class="uif-input-search"
+                data-val="true" id="inputCityPl" name="inputCityPl" placeholder="@Resources.LanguagePerson.NameCity" type="text">
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Resources.LanguagePerson.LabelPhone</label>
+            <input type="text" id="inputPhoneProspectNatural" class="rightAlign" maxlength="13" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.LanguagePerson.Email</label>
+            <input type="text" id="inputEmailPrn" maxlength="60" style="text-transform: lowercase" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.LanguagePerson.TitleGeneralInformation</label>
+            <input type="text" id="inputGeneralInfoPrn" maxlength="100" style="text-transform: lowercase" />
+        </div>
+        <div class="uif-col-3"></div>
+        <label class="text-hide" id="hideIndividualIdPl">0</label>
+    </div>
+
+</div>
+<div class="uif-col-12" id="panelButtonsBottomProspectNatural">
+</div>
+
+<script id="footer-template" type="text/template">
+    <div id="btnBottomMain">
+        <button type="button" class="btn btn-default" id="btnCancelView">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            @Resources.LanguagePerson.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0153"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSavePerson">
+                <i class="fa fa-save" aria-hidden="true"></i>
+                @Resources.LanguagePerson.LabelRecord
+            </button>
+        }
+        </div>
+</script>

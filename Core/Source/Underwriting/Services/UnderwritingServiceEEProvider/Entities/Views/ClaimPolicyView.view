@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="ClaimPolicyView">
+  <collections>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="CoPolicy" type="Sistran.Core.Application.Issuance.Entities.CoPolicy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="BusinessType" type="Sistran.Core.Application.Parameters.Entities.BusinessType, 
+                Core.Parameters.Entities"></collection>
+    <collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, 
+               Core.Issuance.Entities"></collection>    
+    <collection name="PolicyAgent" type="Sistran.Core.Application.Issuance.Entities.PolicyAgent, 
+               Core.Issuance.Entities"></collection>
+    <collection name="CoinsuranceAccepted" type="Sistran.Core.Application.Issuance.Entities.CoinsuranceAccepted, 
+               Core.Issuance.Entities"></collection>
+    <collection name="CoinsuranceAssigned" type="Sistran.Core.Application.Issuance.Entities.CoinsuranceAssigned, 
+               Core.Issuance.Entities"></collection>
+    <collection name="Currency" type="Sistran.Core.Application.Common.Entities.Currency, 
+               Core.Common.Entities"></collection>
+    <collection name="CoPolicyType" type="Sistran.Core.Application.Common.Entities.CoPolicyType, 
+               Core.Common.Entities"></collection>
+    <collection name="EndorsementType" type="Sistran.Core.Application.Parameters.Entities.EndorsementType, 
+               Core.Parameters.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+               Core.Common.Entities"></collection>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, 
+               Core.Common.Entities"></collection>
+    </collections>
+  <relations>
+    <relation source="Policy" destination="CoPolicy" name="PolicyCoPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>    
+    <relation source="Policy" destination="BusinessType" name="PolicyBusinessType" type="Inner">
+      <property left="BusinessTypeCode" type="Equal" right="BusinessTypeCode"></property>
+    </relation>
+    <relation source="Policy" destination="Endorsement" name="PolicyEndorsement" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Endorsement" destination="PolicyAgent" name="EndorsementPolicyAgent" type="Inner">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Endorsement" destination="CoinsuranceAccepted" name="EndorsementCoinsuranceAccepted" type="Left">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Endorsement" destination="CoinsuranceAssigned" name="EndorsementCoinsuranceAssigned" type="Left">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Currency" destination="Policy" name="CurrencyPolicy" type="Inner">
+      <property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+    </relation>
+    <relation source="CoPolicy" destination="CoPolicyType" name="PolicyCoPolicyType" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+      <property left="PolicyTypeCode" type="Equal" right="PolicyTypeCode"></property>
+    </relation>
+    <relation source="Endorsement" destination="EndorsementType" name="EndorsementEndorsementType" type="Inner">
+      <property left="EndoTypeCode" type="Equal" right="EndoTypeCode"></property>
+    </relation>
+    <relation source="Policy" destination="Prefix" name="PolicyPrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="Policy" destination="Branch" name="PolicyBranch" type="Inner">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,1 @@
+﻿$('#main-menu').UifMainMenu({ source: rootPath + 'Layout/GetModules', pathBaseFront: LevelOpetarion });

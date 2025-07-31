@@ -1,0 +1,148 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Collective.Models.CollectiveModelView
+
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            <span id="titleCollective">@Resources.Language.TemporalUploadQuery</span>
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputLoadSearch", @placeholder = @Resources.Language.PlaceHolderLoadSearch })
+            <button class="btn btn-default" id="btnAdvancedSearch"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+
+@section Toolbar
+{
+
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+            <button type="button" class="btn btn-default" id="btnPrinter">
+                <i class="fa fa-print" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.LabelPrinter
+            </button>
+            <button class="btn btn-default" id="btnAddProcess">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                @Resources.Language.ProcessAdd
+            </button>
+            <button class="btn btn-default" id="btnErrors">
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonErrors
+            </button>
+            <button class="btn btn-default" id="btnReport">
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonReport
+            </button>
+            <button class="btn btn-default" id="btnDeleteLoad">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonDeleteLoad
+            </button>
+            <button class="btn btn-primary" id="btnTariff">
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonTariff
+            </button>
+            <button class="btn btn-primary" id="btnIssue">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonEmit
+            </button>
+        </div>
+    </footer>
+}
+<div class="uif-alert" id="alert"></div>
+<form id="formCollective" autocomplete="off" class="form">
+
+    @Html.AntiForgeryToken()
+    <div id="modalCollective">
+
+        <!--tabla estado cargue-->
+        <div class="row">
+            <div class="uif-col-12">
+                <table data-paginate="true" data-selectiontype="multiple" class="uif-table" id="TableLoad" data-title="@Resources.Language.LabelAssociatedProcesses" data-filter="false">
+                    <thead>
+                        <tr>
+                            <th data-property="TempId" data-visible="false">@Resources.Language.LabelTemporal</th>
+                            <th data-property="Id">@Resources.Language.LabelLoad</th>
+                            <th data-property="Description">@Resources.Language.LabelDescription</th>
+                            <th data-property="FieldSetId" data-visible="false">FieldSetId</th>
+                            <th data-property="CountRiskProcessed">@Resources.Language.LabelCorrectRecords</th>
+                            <th data-property="CountRiskErrors">@Resources.Language.LabelErrorMessage</th>
+                            <th data-property="CountRisk">@Resources.Language.LabelRisks</th>
+                            <th data-property="StateDescription">@Resources.Language.LabelStatus</th>
+                            <th data-property="State" data-visible="false">stateId</th>
+                            <th data-property="AccountName">@Resources.Language.LabelUser</th>
+                        </tr>
+
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>@Resources.Language.LabelTotal</th>
+                            <th></th>
+                            <th></th>
+                            <th id="CountRiskProcessed"></th>
+                            <th id="CountRiskPending"></th>
+                            <th id="CountRisk"></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+<div id="modalMassiveLoadFinished">
+    @Html.Partial("MassiveLoadFinished")
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Collective")
+    <script type="text/javascript">
+        var CollectiveModel = @Html.Raw(Json.Encode(Model))
+    </script>
+}
+@section Modals
+{
+    <div class="uif-modal" id="modalAddMassive">
+        <div class="uif-modalbody">
+            @Html.Partial("AddMassive")
+        </div>
+        <div id="buttonsAddMassive" class="uif-modalbuttons width-save">
+            <button type="button" class="btn btn-default" id="btnCancelMassive" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+            <button type="button" class="btn btn-primary" id="btnLoad">@Resources.Language.ButtonSave</button>
+        </div>
+    </div>
+
+
+   
+
+    <div id="modalMassiveLoadTariffed">
+        @Html.Partial("MassiveLoadTariffed")
+    </div>
+    <div class="uif-modal" id="modalIssuePolicy">
+        <div class="uif-modalbody">
+            @Html.Partial("MassiveLoadIssue")
+        </div>
+        <div id="buttonsIssueMassive" class="uif-modalbuttons width-save-button">
+            <button type="button" class="btn btn-default " id="btnCancelIssue" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+            <button type="button" class="btn btn-primary " id="btnCreateIssue">@Resources.Language.IssuePolicy</button>
+        </div>
+    </div>
+
+}

@@ -1,0 +1,35 @@
+<map version="2.0" type="class" name="Detail" namespace="Sistran.Core.Application.Quotation" file-version="1.0" description="DETAIL_ENTITY">
+  <properties>
+    <property name="DetailId" type="Integer" key="true" description="DETAIL_ID_PROPERTY" autonumber="id" />
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="DetailTypeCode" type="Integer" description="DETAIL_TYPE_CODE_PROPERTY" />
+    <property name="Enabled" type="Boolean" description="ENABLED_PROPERTY" />
+    <property name="RateTypeCode" type="Integer" nullable="true" description="RATE_TYPE_CODE_PROPERTY" />
+    <property name="Rate" type="Decimal" precision="18" scale="4" nullable="true" description="RATE_PROPERTY" />
+    <property name="SublimitAmount" type="Decimal" precision="18" scale="2" nullable="true" description="SUBLIMIT_AMOUNT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="DETAIL" schema="QUO" alias="DETAIL" update="true">
+      <columns>
+        <column name="DETAIL_ID" type="Int32" property="DetailId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="DETAIL_TYPE_CD" type="Byte" property="DetailTypeCode" allowNull="false" />
+        <column name="ENABLED" type="Boolean" property="Enabled" allowNull="false" />
+        <column name="RATE_TYPE_CD" type="Byte" property="RateTypeCode" />
+        <column name="RATE" type="Decimal" property="Rate" size="19" precision="18" scale="4" />
+        <column name="SUBLIMIT_AMT" type="Decimal" property="SublimitAmount" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+<autonumbers>
+    <autonumber name="id" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Int32" value="78" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>
+

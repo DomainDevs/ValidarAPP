@@ -1,0 +1,32 @@
+﻿<div class="form modal-Colombia">
+    <div class="uif-row">
+        <div class="uif-col-12 text-center">
+            <label>@Resources.Language.PersonNotExistMessage</label>
+            <br />
+            <label id="CreatePersonOrProspectMessage">@Resources.Language.CreatePersonOrProspectMessage</label>
+            <br />
+            <label id="CreatePersonMessage">@Resources.Language.CreatePersonMessage</label>
+            <input id="userName" type="hidden" value="@User.Identity.Name" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12  text-center">
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0151"))
+            {
+                <a class="btn btn-primary" id="btnOpenPersonLegal">Persona Juridica</a>
+            }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0096"))
+            {
+                <a class="btn btn-primary" id="btnOpenPersonNatural">Persona Natural</a>
+            }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0154"))
+            {
+                <a class="btn btn-primary" id="btnOpenProspectNatural">Prospecto Natural</a>
+            }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0157"))
+            {
+                <a class="btn btn-primary" id="btnOpenProspectLegal">Prospecto Juridico</a>
+            }
+            </div>
+    </div>
+</div>

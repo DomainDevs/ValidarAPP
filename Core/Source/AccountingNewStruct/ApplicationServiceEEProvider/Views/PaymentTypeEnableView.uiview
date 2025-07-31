@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PaymentTypeEnableView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PaymentTypeCode">
+          <Column table-alias="PaymentType" name="PaymentTypeCode" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="PaymentType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="EnabledTicket">
+          <Column table-alias="PaymentType" name="EnabledTicket" />
+        </SelectValue>
+        <SelectValue alias="EnabledBilling">
+          <Column table-alias="PaymentType" name="EnabledBilling" />
+        </SelectValue>
+        <SelectValue alias="EnabledPaymentOrder">
+          <Column table-alias="PaymentType" name="EnabledPaymentOrder" />
+        </SelectValue>
+        <SelectValue alias="EnabledPaymentRequest">
+          <Column table-alias="PaymentType" name="EnabledPaymentRequest" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentType, Core.Accounting.Entities" alias="PaymentType" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="PaymentType" name="PaymentTypeCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>  
+</uiview>

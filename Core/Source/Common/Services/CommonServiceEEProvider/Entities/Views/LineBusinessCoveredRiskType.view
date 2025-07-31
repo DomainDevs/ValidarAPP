@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="LineBusinessView">
+  <collections>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, 
+                 Core.Common.Entities"></collection>
+    <collection name="LineBusinessCoveredRiskType" type="Sistran.Core.Application.Common.Entities.LineBusinessCoveredRiskType, 
+                 Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="LineBusinessCoveredRiskType" destination="LineBusiness" name="LineBusinessByCoveredRiskType" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,223 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div id="accChangeCheckInformation" class="uif-panel" data-title="@Global.ExchangeCheck">
+    <form id="ExchangeInformationForm" class="form">
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.Date:
+                </label>
+                <br />
+                <input type="text" id="ExchangeCheckDate" name="ExchangeCheckDate" disabled="disabled" />
+                <input type="hidden" id="paymentCode" name="paymentCode" />
+            </div>
+            <div class="uif-col-8">
+                <label class="control-label">
+                    @Global.Branch:
+                </label>
+                <br />
+                <input type="text" id="ExchangeBranchName" name="ExchangeBranchName" disabled="disabled" />
+                <input type="hidden" id="ExchangeBranchCode" name="ExchangeBranchCode" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.DocumentNumber:
+                </label>
+                <br />
+                <input type="text" id="ExchangeDocumentNumber" name="ExchangeDocumentNumber" maxlength="18" class="uif-autocomplete required"
+                           data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                           data-displaykey="DocumentNumber" 
+                           placeholder='@Global.EnterDocumentNumber' 
+                           data-val="true"
+                           data-val-required='@Global.RequiredField' />
+                <input type="hidden" id="PaymentMethodTypeCode" name="PaymentMethodTypeCode" />
+                <span class="text-danger" data-valmsg-for="ExchangeDocumentNumber" data-valmsg-replace="true" />
+            </div>
+
+            <div class="uif-col-8">
+                <label class="control-label">
+                    @Global.FullName:
+                </label>
+                <br />
+                <input type="text" id="ExchangeName" name="ExchangeName" maxlength="80" style="text-align: left" class="uif-autocomplete required"
+                           data-source="@Url.Action("GetInsuredByInsuredName", "Common")"
+                           data-displaykey="Name" 
+                           placeholder='@Global.EnterSurnamesAndNames' 
+                           data-val="true"
+                           data-val-required='@Global.RequiredField' />
+                <input type="hidden" id="NewPayerId" name="NewPayerId" />
+                <span class="text-danger" data-valmsg-for="ExchangeName" data-valmsg-replace="true" />
+            </div>
+        </div>
+
+        <input type="submit" id="validate_frmExchange" name="validate_frmExchange" style="visibility:hidden" />
+    </form>
+</div>
+
+<div id="accOriginalCheck" class="uif-panel" data-title="@Global.OriginalCheck">
+      
+    <form id="frmExchangeTwo" class="form">
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.IssuingBank:
+                </label>
+                <br />
+                <input type="text" id="IssuingBankNameOriginal" name="IssuingBankNameOriginal" disabled="disabled" />
+                <input type="hidden" id="IssuingBankOriginal" name="IssuingBankOriginal" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.IssuingAccountNumber:
+                </label>
+                <br />
+                <input type="text" id="IssuingAccountBankOriginal" name="IssuingAccountBankOriginal" disabled="disabled" />
+                <input type="hidden" id="IssuingAccountBankOriginal" name="IssuingAccountBankOriginal" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.CheckNumber:
+                </label>
+                <br />
+                <input type="text" id="CheckNumberOriginal" name="CheckNumberOriginal" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.IncomeReceiptNum :
+                </label>
+                <br />
+                <input type="text" id="IncomeReceiptNumberOriginal" name="IncomeReceiptNumberOriginal" disabled="disabled" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.CheckDate:
+                </label>
+                <br />
+                <input type="text" id="CheckDateOriginal" name="CheckDateOriginal" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Currency:
+                </label>
+                <br />
+                <input type="text" id="CurrencyNameOriginal" name="CurrencyNameOriginal" disabled="disabled" />
+                <input type="hidden" id="CurrencyCodeOriginal" name="CurrencyCodeOriginal" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Amount:
+                </label>
+                <br />
+                <input type="text" id="AmountOriginal" name="AmountOriginal" disabled="disabled" style="text-align:right" />
+                <input type="hidden" id="OriginalExchangeRate" name="OriginalExchangeRate" />
+            </div>
+
+            <div class="uif-col-3">
+                <label class="control-label">@Global.Status:</label>
+                <br />
+                <input type="text" id="CurrentStatusNameOriginal" name="CurrentStatusNameOriginal" disabled="disabled" />
+                <input type="hidden" id="CurrentStatusOriginal" name="CurrentStatusOriginal" />
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <label class="control-label">
+                    @Global.Issuer:
+                </label>
+                <br />
+                <input type="text" id="HolderCheckOriginal" name="HolderCheckOriginal" disabled="disabled" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="accNewCheck" class="uif-panel" data-title="@Global.NewCheck">
+    <form id="ExchangeForm" class="form" >
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.IssuingBank
+                </label>
+                <br />
+                <input type="text" id="CheckNewBank" name="CheckNewBank" maxlength="40" class="uif-autocomplete required"
+                           data-source="@Url.Action("GetBanks", "Billing")"
+                           data-displaykey="Value" placeholder='@Global.EnterDocumentNumber' data-val="true"
+                           data-val-required='@Global.RequiredField' />
+                <span class="text-danger" data-valmsg-for="CheckNewBank" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.BankAccountNumber
+                </label>
+                <br />
+                <input type="text" id="CheckNewAccountNumber" name="CheckNewAccountNumber" onkeypress=" return JustNumbers(event, this); "
+                       style="text-align: right" maxlength="12" class="required" data-val="true"
+                       data-val-required='@Global.RequiredField' />
+                <span class="text-danger" data-valmsg-for="CheckNewAccountNumber" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.CheckNumber
+                </label>
+                <br />
+                <input type="text" id="CheckNewNumber" name="CheckNewNumber" onkeypress=" return JustNumbers(event, this); "
+                           style="text-align: right" maxlength="12" class="required" data-val="true"
+                           data-val-required='@Global.RequiredField' />
+                <span class="text-danger" data-valmsg-for="CheckNewNumber" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Currency
+                </label>
+                <br />
+                <input type="text" id="CurrencyNameNew" name="CurrencyNameNew" disabled="disabled" />
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Amount
+                </label>
+                <br />
+                <input type="text" id="CheckNewAmount" style="text-align: right" disabled="disabled" class="required" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Date
+                </label>
+                <br />
+                <input type="text" id="CheckNewDate" name="CheckNewDate" class="uif-datepicker required" data-val="true" data-min-date="01/01/1900"
+                       data-max-date="@ViewBag.CurrentDate"
+                       data-val-required='@Global.RequiredField' maxlength="10" data-mask="99/99/9999" />
+                <input type="hidden" id="BillingDate" name="BillingDate" style="text-align: left" />
+                <span class="text-danger" data-valmsg-for="CheckNewDate" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label">
+                    @Global.CheckIssuer
+                </label>
+                <br />
+                <input type="text" id="CheckNewEmisor" name="CheckNewEmisor" class="required" data-val="true" maxlength="100"
+                       data-val-required='@Global.RequiredField' onblur="this.value = this.value.toUpperCase();" />
+                <span class="text-danger" data-valmsg-for="CheckNewEmisor" data-valmsg-replace="true" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="AlertExchangeChecks">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+ 
+
+

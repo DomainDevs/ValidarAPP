@@ -1,0 +1,99 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+<form id="CardPaymentForm" onsubmit=" return false ">
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            @Global.TotalToPay
+            <br />
+            <input type="text" id="_totalCreditPayment" name="_totalCreditPayment" disabled="disabled" style="text-align:right" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            @Global.Conduit
+            <br />
+
+            @Html.DropDownList("ConduitDrop", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetCreditCardTypes"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+            <span class="text-danger" data-valmsg-for="ConduitDrop" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            @Global.CreditCardNumber
+            <br />
+            <input type="text" id="_numberCreditCard" name="_numberCreditCard"
+                   data-val="true" data-val-required='@Global.RequiredField' onkeypress=" return JustNumbers(event, this);"
+                   maxlength="18" />
+            <span class="text-danger" data-valmsg-for="_numberCreditCard" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            @Global.PaymentButtonCreditCardCVV
+            <br />
+            <input type="text" id="CardCVV" name="CardCVV"
+                   data-val="true" data-val-required='@Global.RequiredField' onkeypress=" return JustNumbers(event, this);"
+                   maxlength="4" />
+            <span class="text-danger" data-valmsg-for="CardCVV" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            @Global.PaymentButtonCreditCardExpirationYear
+            <br />
+            <input type="text" id="CardExpirationYear" name="CardExpirationYear"
+                   data-val="true" data-val-required='@Global.RequiredField' onkeypress=" return JustNumbers(event, this);"
+                   maxlength="4" />
+            <span class="text-danger" data-valmsg-for="CardExpirationYear" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            @Global.PaymentButtonCreditCardExpirationMonth
+            <br />
+            @Html.DropDownList("ExpirationMonthDrop", Enumerable.Empty<SelectListItem>(), new
+                                {
+                                    @class = "uif-select form-control",
+                                    data_source = @Url.Content("~/Accounting/Common/GetValidMonths"),
+                                    data_id = "Id",
+                                    data_name = "Description",
+                                    data_native = "true",
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+            <span class="text-danger" data-valmsg-for="ExpirationMonthDrop" data-valmsg-replace="true" />
+
+        </div>
+        <div class="uif-col-4">
+            @Global.PayCreditCardName
+            <br />
+            <input type="text" id="_namesCreditCard" name="_namesCreditCard"
+                   data-val="true" data-val-required='@Global.RequiredField' maxlength="30" />
+            <span class="text-danger" data-valmsg-for="_namesCreditCard" data-valmsg-replace="true" />
+
+
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            @Global.VoucherNumber
+            <br/>
+            <input type="text" id="_numberVoucher" name="_numberVoucher" maxlength="10" disabled="disabled"
+                   value="*"/>
+        </div>
+        <div class="uif-col-4">
+            @Global.AuthorizationNumber
+            <br/>
+            <input type="text" id="_AuthorizationNumber" name="_AuthorizationNumber" maxlength="10" disabled="disabled"
+                   value="*"/>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertCreditCard"></div>
+        </div>
+    </div>
+</form>

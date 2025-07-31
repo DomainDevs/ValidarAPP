@@ -1,0 +1,18 @@
+<map version="2.0" type="class" name="PaymentRecovery" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="PAYMENT_RECOVERY_ENTITY">
+  <properties>
+    <property name="PaymentRecoveryCode" type="Integer" key="true" description="PAYMENT_RECOVERY_CODE_PROPERTY" nullable = "false"  autonumber="Identity"/>
+    <property name="PaymentRequestCode" type="Integer" nullable="true" description="PAYMENT_REQUEST_CODE_PROPERTY" />
+    <property name="RecoveryCode" type="Integer" nullable="true" description="RECOVERY_CODE_PROPERTY" />
+    <property name="SalvageCode" type="Integer" nullable="true" description="SALVAGE_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_RECOVERY" schema="PAYM" alias="PAYMENT_RECOVERY" update="true">
+      <columns>
+        <column name="PAYMENT_RECOVERY_CD" type="Int32" property="PaymentRecoveryCode" key="true" allowNull = "false" identity ="true"/>
+        <column name="PAYMENT_REQUEST_CD" type="Int32" property="PaymentRequestCode"  />
+        <column name="RECOVERY_CD" type="Int32" property="RecoveryCode" />
+        <column name="SALVAGE_CD" type="Int32" property="SalvageCode" />
+      </columns>
+    </table>
+  </tables>
+</map>

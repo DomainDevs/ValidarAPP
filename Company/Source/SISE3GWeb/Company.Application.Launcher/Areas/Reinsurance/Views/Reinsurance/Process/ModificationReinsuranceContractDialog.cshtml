@@ -1,0 +1,33 @@
+﻿@using System.Web.Mvc.Html
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = null;
+
+}
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <b>@Global.Sum:</b>
+            <input class="form-control" id="Sum" name="Sum" type="text" style="text-align:right"
+                   data-val="true" data-val-required="@Global.RequiredField" maxlength="22" onkeypress="return OnlyDecimalNumber(event, this)" />
+            <span class="text-danger" data-valmsg-for="Sum" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            <b>@Global.Prime:</b>
+            <input class="form-control" id="Premium" name="Premium" type="text" style="text-align:right"
+                  data-val="true" data-val-required="@Global.RequiredField" maxlength="22" onkeypress="return OnlyDecimalNumber(event, this)" />
+            <span class="text-danger" data-valmsg-for="Premium" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertContractDialog"></div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="ReinsuranceAllocationId" value="" />

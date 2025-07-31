@@ -1,0 +1,215 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.BankStatement;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.BankConciliation</li>
+        <li>@Global.BankStatement</li>
+    </ol>
+}
+
+@section Modals
+{
+<form id="addFormBankStatement" onsubmit="return false" class="form">
+    <div class="uif-modal" id="modalAddBankStatement">
+        <div class="uif-modalbody">
+            @Html.Partial("BankStatementModal")
+        </div>
+
+        <div class="uif-modalbuttons">
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0572"))
+            {
+                <button type="submit" class="btn btn-primary" id="btnSaveAdd" onclick="return false">@Global.Save</button>
+            }
+
+        </div>
+    </div>
+</form>
+
+<form id="editFormBankStatement" onsubmit="return false" class="form">
+    <div class="uif-modal" id="modalEditBankStatement">
+        <div class="uif-modalbody">
+            @Html.Partial("BankStatementModal")
+        </div>
+        <div class="uif-modalbuttons">
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0573"))
+            {
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+            }
+
+            <button type="submit" class="btn btn-primary" id="btnSaveEdit" onclick="return false">@Global.Save</button>
+        </div>
+    </div>
+</form>
+
+<div class="uif-modal" id="modalBankStatement"></div>
+    
+<!-- /.Modal de Eliminación -->
+<div class="modal fade" id="modalDeleteBankStatement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times-circle">
+                    </i>
+                </button>
+                <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+            </div>
+            <div class="modal-body" id="deleteMessageModal">
+                <p>@Global.DeleteConfirmationMessage</p>
+                <p id="selectedRecod">@Global.DeleteConfirmationMessage</p>
+            </div>
+            <div class="modal-footer" style="padding: 10px 20px 10px">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0575"))
+                {
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i>@Global.Cancel
+                    </button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0574"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnDeleteModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                }
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+}
+
+@section Toolbar
+{
+
+}
+
+<form id="formBankStatement" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.Bank</label>
+            <select class="uif-select form-control" id="selectBankStatement" name="selectBankStatement" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/Accounting/BankStatement/GetBanks")' data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="selectBankStatement" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.AccountType</label>
+            <select class="uif-select form-control" id="selectAccountType" name="selectAccountType" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/Accounting/BankStatement/GetAccountTypes")' data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="selectAccountType" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.AccountNumber</label>
+            <select class="uif-select form-control" id="selectAccountNumber" name="selectAccountNumber" data-val="true" data-val-required="@Global.RequiredField"
+                    data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="selectAccountNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.UploadDate</label>
+            <select class="uif-select form-control" id="selectDate" data-id="Id" data-name="Description" data-native="true"></select>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-9">
+            <label>@Global.File</label>
+            <input type="file" accept=".xlsx,.xls,.txt" id="inputControlSingleBankStatement" class="uif-inputfile" data-input="true" name="inputControlSingleBankStatement" data-val="true" data-val-required="@Global.RequiredField">
+            <span class="text-danger" data-valmsg-for="inputControlSingleBankStatement" data-valmsg-replace="true" />
+
+            @*<form id="imageform" method="post" enctype="multipart/form-data" target="iframeUpload">
+            </form>*@
+        </div>
+        <div class="uif-col-3">
+            <br />
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0569"))
+            {
+                <button class="btn btn-primary btn-file" id="btnUploadFile">
+                    <span class="glyphicon glyphicon-upload"></span>&nbsp;  @Global.UploadFile
+                </button>
+            }
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertBankStatement"></div>
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-9">
+        <div class="uif-alert" id="alertStatement"></div>
+    </div>
+    <div class="uif-col-3">
+        <div id="container">
+            <p><img src="@Url.Content("~/Images/loader.gif")" /> @Global.Processing</p>
+        </div>
+    </div>    
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <ul class="uif-tab" id="tabBankStatement">
+            <li class="active"><a href="#tabExecel">@Global.ErrorLoadStatement</a></li>
+            <li><a href="#tabSingle">@Global.ReconcilePending</a></li>
+        </ul>
+        <div class="uif-tab-content">
+            <div class="active" id="tabExecel">
+                <table class="uif-table" id="tableSingleExcel" data-exporttocsv="false"
+                       data-add="false" data-edit="false" data-delete="false" data-selectiontype="multiple" data-filter="false"
+                       data-paginate="true" data-title="@Global.BankStatement">
+                    <thead>
+                        <tr>
+                            <th data-property="BankStatementId">Id</th>
+                            <th data-property="MovementDate">@Global.Date</th>
+                            <th data-property="BankingMovementTypeDescription">@Global.MovementType</th>
+                            <th data-property="VoucherNumber">@Global.DocumentNumber</th>
+                            <th data-property="MovementThird">@Global.ThirdParty</th>
+                            <th data-property="MovementDescription">@Global.Description</th>
+                            <th data-property="MovementAmount">@Global.Amount</th>
+                            <th data-property="BranchDescription">@Global.Branch</th>
+                            <th data-property="MovementOrigin">@Global.LoadState</th>
+                            <th data-property="BranchId" data-visible="false">BranchId</th>
+                            <th data-property="BankingMovementTypeId" data-visible="false">BankingMovementTypeId</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div id="tabSingle">
+                <table class="uif-table" data-source="" id="tableSingle" data-exporttocsv="false"
+                       data-add="true" data-edit="true" data-delete="true" data-selectiontype="multiple" data-filter="true"
+                       data-paginate="true" data-title="@Global.BankStatement">
+                    <thead>
+                        <tr>
+                            <th data-property="BankStatementId">Id</th>
+                            <th data-property="MovementDate">@Global.Date</th>
+                            <th data-property="BankingMovementTypeDescription">@Global.MovementType</th>
+                            <th data-property="VoucherNumber">@Global.DocumentNumber</th>
+                            <th data-property="MovementThird">@Global.ThirdParty</th>
+                            <th data-property="MovementDescription">@Global.Description</th>
+                            <th data-property="MovementAmount">@Global.Amount</th>
+                            <th data-property="BranchDescription">@Global.Branch</th>
+                            <th data-property="BranchId" data-visible="false">BranchId</th>
+                            <th data-property="BankingMovementTypeId" data-visible="false">BankingMovementTypeId</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainBankStatement")
+}

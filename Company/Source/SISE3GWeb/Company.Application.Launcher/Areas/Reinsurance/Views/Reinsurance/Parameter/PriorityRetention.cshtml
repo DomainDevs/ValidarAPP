@@ -1,0 +1,120 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@section Title{
+    <div class="row main-title">
+        <div class="column">
+            @Resources.Language.TitlePriorityRetention
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0401"))
+            {
+                <button class="btn btn-default cancel" id="btnExit">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.Language.ButtonExit
+                </button>
+            }
+
+
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0400"))
+            {
+                <button class="btn btn-primary" id="btnSavePriorityRetention" @*style="display: none"*@>
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.Language.ButtonSave
+                </button>
+            }
+        </div>
+    </footer>
+}
+
+<script id="PriorityRetentionTemplate" type="text/template">
+    <div>@Resources.Language.Prefix: <strong>{{Prefix.Description}}</strong></div>
+    <div>@Resources.Language.LabelPriorityRetentionValue: <strong>{{PriorityRetentionAmountFormat}}</strong></div>
+    <div class="hidden">{{Prefix.Id}}</div>
+    <div class="hidden">{{ValidityFrom}}</div>
+    <div class="hidden">{{ValidityTo}}</div>
+    <div class="hidden">{{Id}}</div>
+    <div class="hidden">{{StatusTypeService}}</div>
+    <div class="hidden">{{PriorityRetentionAmount}}</div>
+</script>
+<form id="formPriorityRetention" class="form without-space">
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPrefix</label>
+                    <select class="uif-select form-control" id="PrefixId" name="PrefixId"
+                            data-val="true" data-val-required="@Resources.Language.RequiredField"
+                            data-id="Id" data-name="Description" data-filter="true" data-native="false" required></select>
+                    <span class="text-danger" data-valmsg-for="PrefixId" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPriorityRetentionValuePesos</label>
+
+                    <input type="text" id="PriorityRetentionAmount" name="PriorityRetentionAmount" style="text-align:right" class="form-control"
+                           data-val="true" data-val-number="@Resources.Global.OnlyNumber" onkeypress="return OnlyDecimalNumber(event, this);" maxlength="21" data-val-required="@Resources.Language.RequiredField" required />
+                    <span class="text-danger" data-valmsg-for="PriorityRetentionAmount" data-valmsg-replace="true"></span>
+                </div>
+                <imput hidden="hidden" id="PriorityRetentionId" value="0"></imput>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.DateFrom</label>
+                    <input type="text" id="ValidityFrom" name="ValidityFrom" class="uif-datepicker"
+                           data-val="true" data-val-required="@Resources.Language.RequiredField" placeholder="@Resources.Language.DateFrom" data-rule-lessThanDateTo="#ValidityTo"
+                           data-msg-lessThanDateTo="@Global.ValidateDateFrom" required />
+                    <span class="text-danger" data-valmsg-for="ValidityFrom" data-valmsg-replace="true"></span>
+
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.DateTo</label>
+                    <input type="text" id="ValidityTo" name="ValidityTo" class="uif-datepicker"
+                           data-val="true" data-val-required="@Resources.Language.RequiredField" placeholder="@Resources.Language.DateTo" data-rule-greaterThanDateTo="#ValidityFrom"
+                           data-msg-greaterThanDateTo="@Global.ValidateDateTo" required />
+                    <span class="text-danger" data-valmsg-for="ValidityTo" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="uif-col-3">
+                <div class="checkbox">
+                    <input type="checkbox" id="Enabled">
+                    <label for="Enabled">@Resources.Language.Enabled</label>
+                </div>
+            </div>
+            <br />
+        </div>
+        <div class="uif-col-6 fit-col-secondary" id="panelPriorityRetention">
+            <div id="listPriorityRetention" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsPriorityRetention">
+            <div class="pull-right">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0398"))
+                {
+                    <button type="button" class="btn btn-default" id="btnNewPriorityRetention">@Resources.Language.New</button>
+                }
+
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0399"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnPriorityRetentionAccept">@Resources.Language.Add</button>
+                }
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    @Scripts.Render("~/reinsurance/bundles/PriorityRetention")
+}

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="HardRiskTypeCoveredRiskType">
+  <collections>
+    <collection name="LineBusinessCoveredRiskType" type="Sistran.Core.Application.Common.Entities.LineBusinessCoveredRiskType, 
+                 Core.Common.Entities"></collection>
+    <collection name="HardRiskType" type="Sistran.Core.Application.Parameters.Entities.HardRiskType, 
+                 Core.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="LineBusinessCoveredRiskType" destination="HardRiskType" name="LineCode" type="Left">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="LineBusinessCoveredRiskType" destination="HardRiskType" name="CoveredCode" type="Left">
+      <property left="CoveredRiskTypeCode" type="Distinct" right="CoveredRiskTypeCode"></property>
+    </relation>
+  </relations>
+</view>

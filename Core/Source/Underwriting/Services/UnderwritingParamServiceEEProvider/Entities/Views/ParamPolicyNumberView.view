@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ParamPolicyNumberView">
+  <collections>
+    <collection name="PolicyNumber" type="Sistran.Core.Application.Issuance.Entities.PolicyNumber, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, 
+                Core.Common.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                Core.Common.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="PolicyNumber" destination="Branch" name="PolicyNumberBranch" type="Inner">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="PolicyNumber" destination="Prefix" name="PolicyNumberPrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="PolicyNumber" destination="Policy" name="PolicyNumberPolicy" type="Left">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+      <property left="LastPolicyNum" type="Equal" right="DocumentNumber"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,85 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Framework.UIF.Web.Areas.Accounting.Models.BankReconciliation.BankStatementModel
+@{
+    int selectedBranchItem = 0;
+}
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Branch</label>
+            <br />
+            <select class="uif-select form-control" id="BranchId" name="BranchId" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/BankStatement/GetBranchs")' data-id="Id" data-native="true"
+                    data-name="Description" data-selectedid="@selectedBranchItem"></select>
+            <span class="text-danger" data-valmsg-for="BranchId" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.MovementType</label>
+            <select class="uif-select form-control" id="BankingMovementTypeId" name="BankingMovementTypeId" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/BankStatement/GetMovementTypes")' data-id="Id" data-native="true"
+                    data-name="Description" data-selectedid="@selectedBranchItem"></select>
+            <span class="text-danger" data-valmsg-for="BankingMovementTypeId" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-4">
+            <label>@Global.Date</label>
+            @Html.TextBoxFor(model => model.MovementDate, new
+            {
+                @class = "uif-datepicker",
+                @data_mask = "99/99/9999",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="MovementDate" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.DocumentNumber</label>
+            @Html.TextBoxFor(model => model.VoucherNumber, new
+            {
+                @data_mask = "000000000000000",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="VoucherNumber" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-4">
+            <label>@Global.Amount</label>
+            @Html.TextBoxFor(model => model.MovementAmount, new
+            {
+                //@data_mask = "000000000000.00",
+                data_val = "true",
+                onkeypress = "return OnlyDecimalNumber(event, this);",
+                style = "text-align: right",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="MovementAmount" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.ThirdParty</label>
+            @Html.TextBoxFor(model => model.MovementThird, new
+            {
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="MovementThird" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.Description</label>
+            @Html.TextBoxFor(model => model.MovementDescription, new
+            {
+                data_val = "true",
+                data_val_required = @Global.RequiredField,
+                @onblur = "this.value = this.value.toUpperCase();",
+            })
+            <span class="text-danger" data-valmsg-for="MovementDescription" data-valmsg-replace="true" />
+        </div>
+    </div>
+</div>

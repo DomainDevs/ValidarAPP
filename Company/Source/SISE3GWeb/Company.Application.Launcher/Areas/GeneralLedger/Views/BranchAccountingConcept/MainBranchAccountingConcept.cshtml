@@ -1,0 +1,153 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.UserBranchAccountingConcept;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameter</li>
+        <li>@Global.AccountingConcept</li>
+        <li class="active">@Global.UserBranchAccountingConcept</li>
+    </ol>
+}
+
+@section Modals
+{
+    <!--Grabar Conceptos Contables x sucursal y usuario -->
+    <form id="addAccountingConceptForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("../BranchAccountingConcept/BranchAccountingConceptModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="submit" class="btn btn-primary" id="SaveModal" onclick="return false">
+                    <i class="fa fa-save"></i> @Global.Save
+                </button>
+            </div>
+           
+        </div>
+
+</form>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteBranchAccountingConcept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="deleteKeyModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+    <form id="formBranchAccountingConcept" onsubmit="return false" class="form">
+
+        <div class="uif-row">
+
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.ConceptSource:
+                </label>
+                <br />
+                <select class="uif-select form-control" id="conceptSources" name="conceptSources"
+                        data-source='@Url.Content("~/GeneralLedger/MovementType/GetConceptSources")'
+                        data-id="Id" data-name="Description"
+                        data-val="true" data-val-required='@Global.RequiredField'
+                        data-native="true"></select>
+                <span class="text-danger" data-valmsg-for="conceptSources" data-valmsg-replace="true" />
+            </div>
+
+            <div class="uif-col-3">
+                <label>
+                    @Global.MovementType:
+                </label>
+                <br />
+                <select class="uif-select form-control" id="movementTypes" name="movementTypes"
+                        data-id="Id" data-name="Description"
+                        data-val="true" data-native="true" data-val-required='@Global.RequiredField'></select>
+                <span class="text-danger" data-valmsg-for="movementTypes" data-valmsg-replace="true" />
+            </div>
+
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Branch:
+                </label>
+                <br />
+                <select class="uif-select form-control" id="branchs" name="branchs"
+                        data-source='@Url.Content("~/GeneralLedger/Base/GetBranches")'
+                        data-id="Id" data-name="Description"
+                        data-val="true" data-val-required='@Global.RequiredField'
+                        data-native="true"></select>
+                <span class="text-danger" data-valmsg-for="branchs" data-valmsg-replace="true" />
+            </div>
+
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.User:
+                </label>
+                <br />
+                <input type="text" maxlength="40" class="uif-autocomplete" id="users" name="users"
+                       data-source="@Url.Action("GetUsers", "../Accounting/BillSearch")"
+                       data-displaykey="value" placeholder="" data-val="true" data-val-required='@Global.RequiredField' />
+
+                <span class="text-danger" data-valmsg-for="users" data-valmsg-replace="true" />
+            </div>
+
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <table class="uif-table" id="branchAccountingConceptTable" data-exporttocsv="false" data-add="true"
+                        data-delete="true" data-selectiontype="none" data-filter="true"
+                        data-paginate="true" data-title="@Global.UserBranchAccountingConcept">
+                    <thead>
+                        <tr>
+                            <th data-property="UserBranchId">Id</th>
+                            <th data-property="BranchAccountingConceptId" data-visible="false">BranchAccountingConceptId</th>
+                            <th data-property="AccountingConcept.Id">@Global.CodeConcept</th>
+                            <th data-property="AccountingConcept.Description">@Global.AccountingConcept</th>
+                            <th data-property="AccountingAccountNumber">@Global.AccountingAccount</th>
+                            <th data-property="UserId">@Global.Search_Claim_UserId</th>
+                            <th data-property="MovementType.Description">@Global.MovementType</th>
+
+                            @*<th data-property="AnalysisConceptId" data-visible="false">AnalysisConceptId</th>*@
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alert"></div>
+            </div>
+        </div>
+
+
+    </form>
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/MainBranchAccountingConcept")
+}

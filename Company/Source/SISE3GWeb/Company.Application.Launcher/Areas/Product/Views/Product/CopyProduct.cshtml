@@ -1,0 +1,70 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Product.Models.CopyProductModelsView
+<div class="uif-alert" id="alertCopyProduct"></div>
+<form id="formCopyProduct" class="form">
+    <div class="row">
+		<div class="uif-col-6">
+			<label class="field-required">@Resources.Language.LabelDescriptionProduct</label>
+			@Html.TextBoxFor(model => model.Description, new { id = "inputModalCopyProductDescription", placeholder = @Resources.Language.LabelDescriptionProduct, required = "required", maxlength = "50" })
+			@Html.ValidationMessageFor(model => model.Description)
+		</div>
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelDescriptionProductReduced</label>
+            @Html.TextBoxFor(model => model.DescriptionReduced, new { id = "inputModalCopyProductReducedDescription", placeholder = @Resources.Language.LabelDescriptionProductReduced, required = "required", maxlength = "15" })
+            @Html.ValidationMessageFor(model => model.DescriptionReduced)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <a id="btnInsured" role="button" title="@Resources.Language.LabelGroupCoverages">
+                    <input type="checkbox" id="checkGroupCoverages" onclick="return true" checked="true">
+                    <label for="checkGroupCoverages">@Resources.Language.LabelGroupCoverages</label>
+                </a>
+            </div>
+            <div class="row">
+                <a id="btnProvider" title="@Resources.Language.LabelPaymentPlan">
+                    <input type="checkbox" id="checkPaymentPlan" onclick="return true" checked="true">
+                    <label for="checkPaymentPlan">@Resources.Language.LabelPaymentPlan</label>
+                </a>
+            </div>
+            <div class="row">
+                <a title="@Resources.Language.LabelRuleSet">
+                    <input type="checkbox" id="checkRuleSet" onclick="return true" checked="true">
+                    <label for="checkRuleSet">@Resources.Language.LabelRuleSet</label>
+                </a>
+            </div>
+            <div class="row">
+                <a id="btnAgent" role="button" title="@Resources.Language.LabelPrintingFormes">
+                    <input type="checkbox" id="checkPrintingFormes" onclick="return true" checked="true">
+                    <label for="checkPrintingFormes">@Resources.Language.LabelPrintingFormes</label>
+                </a>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="row">
+                <a id="btnAgent" role="button" title="@Resources.Language.Agent">
+                    <input type="checkbox" id="checkAgent" onclick="return true" checked="true">
+                    <label for="checkAgent">@Resources.Language.Agent</label>
+                </a>
+            </div>
+            <div class="row">
+                <a id="btnProvider" title="@Resources.Language.LabelLimitRC">
+                    <input type="checkbox" id="checkLimitRC" onclick="return true" checked="true">
+                    <label for="checkLimitRC">@Resources.Language.LabelLimitRC</label>
+                </a>
+            </div>
+            <div class="row">
+                <a id="btnAgent" role="button" title="@Resources.Language.LabelScript">
+                    <input type="checkbox" id="checkScriptCP" onclick="return true" checked="true">
+                    <label for="checkScriptCP">@Resources.Language.LabelScript</label>
+                </a>
+            </div>
+            <div class="row">
+                <a id="btnAgent" role="button" title="@Resources.Language.LabelActivityRisk">
+                    <input type="checkbox" id="checkActivityRisk" onclick="return true" checked="true">
+                    <label for="checkActivityRisk">@Resources.Language.LabelActivityRisk</label>
+                </a>
+            </div>
+        </div>
+    </div>
+</form>

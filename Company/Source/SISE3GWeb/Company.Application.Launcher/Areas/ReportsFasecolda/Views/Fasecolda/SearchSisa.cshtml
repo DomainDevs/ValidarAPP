@@ -1,0 +1,159 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.ReportsFasecolda.Models.SisaViewModel
+
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-90">
+        <div id="Title">@Resources.Language.LabelConsultationSisa</div>
+    </div>
+    <div class="column-10"></div>
+</script>
+<script id="footer-template" type="text/template">
+    <button class="btn btn-default" id="btnExitSearchSisa">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <span class="" aria-hidden="true"></span>
+        @Resources.Language.LabelQuit
+    </button>
+</script>
+<form id="formSearchSisa" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-12">
+            <br />
+            <div class="row">
+                <div class="uif-col-2">
+                    <label class="field-required">@Resources.Language.LabelLicencesePlate</label>
+                    @Html.TextBoxFor(model => model.DesPlate, new { id = "inputPlate" })
+                    @Html.ValidationMessageFor(model => model.DesPlate)
+                </div>
+                <div class="uif-col-2">
+                    <label>@Resources.Language.LabelEngine</label>
+                    @Html.TextBoxFor(model => model.labelEngine, new { id = "inputEngine" })
+                    @Html.ValidationMessageFor(model => model.labelEngine)
+                </div>
+                <div class="uif-col-2">
+                    <label>@Resources.Language.LabelChassis</label>
+                    @Html.TextBoxFor(model => model.LabelChassis, new { id = "inputChassis" })
+                    @Html.ValidationMessageFor(model => model.LabelChassis)
+                </div>
+                <div class="uif-col-2">
+                    <label class="field-required">Captchat</label>
+                    @Html.TextBoxFor(model => model.Captcha, new { id = "Inputcaptcha" })
+                    @Html.ValidationMessageFor(model => model.Captcha)
+                </div>
+                <div>
+                    <label class="field-required">CaptchatImg</label>
+                </div>
+                <div class="uif-col-2">
+                    <button type="button" class="btn btn-primary" id="btnSearchSisa">@Resources.Language.ButtonSearch</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <ul class="uif-tab nav nav-tabs" id="tabs">
+                <li class=""><a href="#tabInfoPolice" id="tab1" data-disabled="true" data-toggle="tab">@Resources.Language.LabelPoliceInformation</a></li>
+                <li class=""><a href="#tabSimit" id="tab2" data-disabled="true" data-toggle="tab">Simit</a></li>
+                <li class=""><a href="#tabClaims" data-disabled="true" id="tab3" data-toggle="tab">@Resources.Language.LabelClaims</a></li>
+                <li class=""><a href="#tabValueGuide" data-disabled="true" id="tab4" data-toggle="tab">@Resources.Language.LabelValuesGuide</a></li>
+                <li class=""><a href="#tabVINSAE" data-disabled="true" id="tab5" data-toggle="tab">@Resources.Language.LabelVerification VIN SAE</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tabInfoPolice" class="form tab-pane">
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <table data-paginate="true" class="uif-table" id="TablePolicies" data-filter="false">
+                                <thead>
+                                    <tr>
+                                        <th data-property="Consulta">@Resources.Language.Query</th>
+                                        <th data-property="Compañia">@Resources.Language.LabelCompany</th>
+                                        <th data-property="Placa">@Resources.Language.LabelLicencesePlate</th>
+                                        <th data-property="IVigencia">@Resources.Language.StartValidateDate</th>
+                                        <th data-property="FVigencia">@Resources.Language.LabelEndvalidity</th>
+                                        <th data-property="Estado">@Resources.Language.LabelStatus</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="tabSimit" class="form tab-pane">
+                    <table class="uif-table" id="TableSimit">
+                        <thead>
+                            <tr>
+                                <th data-property="Numero">@Resources.Language.LabelNro</th>
+                                <th data-property="Fecha">@Resources.Language.LabelDate</th>
+                                <th data-property="Nombre">@Resources.Language.LabelTableName</th>
+                                <th data-property="Codigo">@Resources.Language.LabelTableCode</th>
+                                <th data-property="Valor">@Resources.Language.Value</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div id="tabClaims" class="form tab-pane">
+                    <table class="uif-table" id="TableClaims">
+                        <thead>
+                            <tr>
+                                <th data-property="Consulta">@Resources.Language.Query</th>
+                                <th data-property="Compañia">@Resources.Language.LabelCompany</th>
+                                <th data-property="Placa">@Resources.Language.LabelPlate</th>
+                                <th data-property="Fecha">@Resources.Language.LabelDate</th>
+                                <th data-property="NumeroSin">@Resources.Language.LabelNro Sin</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div id="tabValueGuide" class="form tab-pane">
+                    <table class="uif-table" id="TableValueGuide">
+                        <thead>
+                            <tr>
+                                <th data-property="Guia">@Resources.Language.LabelGuide</th>
+                                <th data-property="Codigo">@Resources.Language.LabelTableCode</th>
+                                <th data-property="Marca">@Resources.Language.LabelMake</th>
+                                <th data-property="Modelo">@Resources.Language.LabelModel</th>
+                                <th data-property="Clase">@Resources.Language.LabelClass</th>
+                                <th data-property="Tipo">@Resources.Language.LabelType</th>
+                                <th data-property="VInicial">@Resources.Language.LabelStartValue</th>
+                                <th data-property="VActual">@Resources.Language.LabelCurrentvalue</th>
+                                <th data-property="FGuia">@Resources.Language.LabelGuideDate</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div id="tabVINSAE" class="form tab-pane">
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <table class="uif-table" id="TableInfoProtection">
+                                <thead>
+                                    <tr>
+                                        <th data-property="Amparo">@Resources.Language.LabelTableCode WMI</th>
+                                        <th data-property="Notice">@Resources.Language.LabelMaker</th>
+                                        <th data-property="status">@Resources.Language.Address</th>
+                                        <th data-property="Value">@Resources.Language.LabelCountry</th>
+                                        <th data-property="status">@Resources.Language.CreationDate</th>
+                                        <th data-property="Value">@Resources.Language.DateModifid</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{ Html.RenderAction("ModalPolicyInformation", "Fasecolda", new { area = "ReportsFasecolda" });}
+@{ Html.RenderAction("ModalSinisterInformation", "Fasecolda", new { area = "ReportsFasecolda" });}

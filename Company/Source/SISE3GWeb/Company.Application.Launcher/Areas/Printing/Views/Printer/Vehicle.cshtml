@@ -1,0 +1,75 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Printing.Models.VehicleModelsView
+
+<div class="row">
+    <div class="uif-col-12">
+        <h5 id="LabelPrinter"><strong> @Resources.Language.LabelPrinterHeaderDetail</strong></h5>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-2">
+        <div class="radio">
+            <label><input type="radio" checked name="rbPrintSelect" value="1" id="rbRiskAll">@Resources.Language.LabelPrinterAll</label>
+        </div>
+    </div>
+    <div class="uif-col-2">
+        <div class="radio">
+            <label><input type="radio" name="rbPrintSelect" value="2" id="rbLicensePlate">@Resources.Language.LabelLicencePlatePrinter</label>
+        </div>
+    </div>
+    <div class="uif-col-2">
+        <div class="radio">
+            <label><input type="radio" name="rbPrintSelect" value="3" id="rbNumberRisk">@Resources.Language.LabelNumberRisk</label>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="printerPlate">
+    <div class="uif-col-12">
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.Language.LicensePlateSearch</label>
+                <input type="text" class="uif-input-search" id="inputLicensePlate" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <label>@Resources.Language.PrintLicensePlate</label>
+                @Html.TextBoxFor(model => model.LicensePlates, new { id = "inputLicensePlates" })
+                @Html.ValidationMessageFor(model => model.LicensePlates)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="printerRank">
+    <div class="uif-col-12">
+        <div class="row">
+            <div class="uif-col-3">
+                <label>@Resources.Language.LabelRankRisk</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-2">
+                <label>@Resources.Language.LabelFromPrinter</label>
+                @Html.TextBoxFor(model => model.RangeFrom, new { id = "inputRangeFrom", maxlength = "4" })
+                @Html.ValidationMessageFor(model => model.RangeFrom)
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.LabelToPrinter</label>
+                @Html.TextBoxFor(model => model.RangeTo, new { id = "inputRangeTo", maxlength = "4" })
+                @Html.ValidationMessageFor(model => model.RangeTo)
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="uif-col-3">
+        <div class="without-label">
+            <input type="checkbox" id="chkDetailRisk" name="DetailRisk" checked="checked" />
+            <label for="chkDetailRisk">@Resources.Language.LabelDetailRiskPrinter</label>
+        </div>
+    </div>
+</div>

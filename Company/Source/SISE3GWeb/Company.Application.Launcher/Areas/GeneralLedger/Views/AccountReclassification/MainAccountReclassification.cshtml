@@ -1,0 +1,132 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AccountingAccountReclassificationParameterization;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.AccountingAccountReclassification</a></li>
+        <li class="active">@Global.AccountingAccountReclassificationParameterization</li>
+    </ol>
+}
+
+@section Modals
+{
+    <form id="accountingAccountReclassificationAddForm">
+        <div class="uif-modal" id="accountingAccountReclassificationModalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("../AccountReclassification/AccountReclassificationModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="accountingAccountReclassificationSaveAdd" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="accountingAccountReclassificationEditForm">
+        <div class="uif-modal" id="accountingAccountReclassificationModalEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("../AccountReclassification/AccountReclassificationModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="accountingAccountReclassificationSaveEdit" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteAccountingAccountReclassification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="accountingAccountReclassificationDeleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="accountingAccountReclassificationDeleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="accountingAccountReclassificationDeleteModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modal" id="modalAccountingAccountReclassification"></div>
+
+
+}
+
+<form id="accountingAccountReclassificationForm">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Month</label>
+            @Html.DropDownList("AccountingAccountReclassificationMonth", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_id = "Id",
+                data_name = "Description",
+                data_val = "true",
+                data_val_required = @Global.RequiredField,
+                data_native = "true"
+            })
+            <span class="text-danger" data-valmsg-for="AccountingAccountReclassificationMonth" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.Year</label>
+            <input type="text" id="AccountingAccountReclassificationYear" name="AccountingAccountReclassificationYear" onkeypress="return JustNumbers(event, this) "
+                   maxlength="4" value="@ViewBag.Year" data-val="true" data-val-required="@Global.RequiredField" />
+            <span class="text-danger" data-valmsg-for="AccountingAccountReclassificationYear" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableAccountingAccountReclassification" data-exporttocsv="false" data-add="true" data-edit="true"
+               data-delete="true" data-selectiontype="none" data-filter="true"
+               data-source="" data-paginate="true" data-title="@Global.AccountingAccountReclassificationParameterization">
+            <thead>
+                <tr>
+                    <th data-property="Year" data-visible="false">Year</th>
+                    <th data-property="Month" data-visible="false">Month</th>
+                    <th data-property="AccountingAccountOriginId" data-visible="false">AccountingAccountOriginId</th>
+                    <th data-property="AccountingAccountOrigin">@Global.AccountingAccountOrigin</th>
+                    <th data-property="AccountingAccountOriginName" data-visible="false">AccountantAccountOriginName</th>
+                    <th data-property="AccountingAccountDestinationId" data-visible="false">AccountingAccountDestinationId</th>
+                    <th data-property="AccountingAccountDestination">@Global.AccountingAccountDestination</th>
+                    <th data-property="AccountingAccountDestinationName" data-visible="false">AccountingAccountDestinationName</th>
+                    <th data-property="PrefixOpening">@Global.PrefixOpening</th>
+                    <th data-property="PrefixOpeningId" data-visible="false">PrefixOpeningId</th>
+                    <th data-property="BranchOpening">@Global.BranchOpening</th>
+                    <th data-property="BranchOpeningId" data-visible="false">BranchOpeningId</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<input type="hidden" id="ViewBagMonthDefault" value="@ViewBag.Month" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/MainAccountReclassification")
+}

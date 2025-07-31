@@ -1,0 +1,86 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.DuplicatePaymentConcept;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Parameter</a></li>
+        <li class="active">@Global.DuplicatePaymentConcept</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="Cancel">
+            <i class="fa fa-times"></i> @Global.Cancel
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0785"))
+        {
+            <button type="button" class="btn btn-primary" id="Duplicate">
+                <i class="fa fa-check"></i> @Global.Record
+            </button>
+        }
+
+    </footer>
+}
+
+@section Modals
+{
+    <div class="uif-modal" id="DuplicateConfirmationModal">
+        <div class="uif-modalbody">
+            @Global.MsgWantContinue
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="duplicateConfirmationCancel" data-dismiss="modal">@Global.No</button>
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0786"))
+            {
+                <button type="submit" class="btn btn-primary" id="duplicateConfirmationAccept" onclick="return false">@Global.Yes</button>
+            }
+        </div>
+    </div>
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="duplicatePaymentConceptAlert"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <label for="">@Global.ConceptToBeDuplicated</label>
+        <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetAccountingConceptsById", "AccountingConcept")"
+               data-displaykey="Description"
+               placeholder='@Global.EnterConceptCode' id="PaymentConcept"
+               name="PaymentConcept" data-val="true"
+               data-minlenght="1"
+               data-val-required='@Global.RequiredField' />
+    </div>
+    <div class="uif-col-4"></div>
+    <div class="uif-col-4"></div>
+</div>
+<div class="uif-row"></div>
+<div class="uif-row">
+    <div class="uif-col-4">
+        <label>@Global.FromBranch</label>
+        <select class="uif-select form-control" id="SourceBranch" name="SourceBranch" data-val="true" data-val-required="@Global.RequiredField"
+                data-source=null data-id="Id" data-name="Description" data-native="true"></select>
+    </div>
+    <div class="uif-col-4">
+        <label>@Global.ToBranch</label>
+        <select class="uif-select form-control" id="DestinationBranch" name="DestinationBranch" data-val="true" data-val-required="@Global.RequiredField"
+                data-source=null data-id="Id" data-name="Description" data-native="true"></select>
+    </div>
+    <div class="uif-col-4"></div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/DuplicatePaymentConcept")
+}
+

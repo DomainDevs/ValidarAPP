@@ -1,0 +1,54 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.Field
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-2">
+            <label>@Global.OrderNumber</label>
+            <br />
+            <input type="text" data-pattern="000" class="uif-mask" id="OrderNumber">
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.Field</label>
+            <br />
+            <input type="text" id="FieldName" name="FieldName" data-val="true" data-val-required="@Global.RequiredField">
+            <span class="text-danger" data-valmsg-for="FieldName" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.Description</label>
+            <br />
+            <input type="text" id="Description" name="Description" data-val="true" data-val-required="@Global.RequiredField">
+            <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.ExcelColumnNumber</label>
+            <br />
+            <input type="text" data-pattern="000" class="uif-mask" id="ColumnNumber">
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.ExcelRowNumber</label>
+            <br />
+            <input type="text" data-pattern="000" class="uif-mask" id="RowNumber" name="RowNumber" data-val="true" data-val-required="@Global.RequiredField">
+            <span class="text-danger" data-valmsg-for="RowNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Length</label>
+            <br />
+            <input type="text" data-pattern="000" class="uif-mask" id="FieldLength" name="FieldLength" data-val="true" data-val-required="@Global.RequiredField">
+            <span class="text-danger" data-valmsg-for="FieldLength" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <br />
+            <span class="glyphicon glyphicon-check" id="checkIsRequired"></span><input type="checkbox" id="IsRequiredCheck"> @Global.IsRequired
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-alert" id="alertFieldForm"></div>
+    </div>
+</div>
+
+

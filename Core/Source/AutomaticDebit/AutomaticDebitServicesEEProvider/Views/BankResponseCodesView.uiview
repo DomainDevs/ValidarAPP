@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="BankResponseCodesView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="BankNetworkCode">
+          <Column table-alias="BankNetworkStatus" name="BankNetworkCode" />
+        </SelectValue>
+        <SelectValue alias="CouponStatusCode">
+          <Column table-alias="BankNetworkStatus" name="CouponStatusCode" />
+        </SelectValue>
+        <SelectValue alias="BankNetworkDescription">
+          <Column table-alias="BankNetwork" name="Description" />
+        </SelectValue>
+        <SelectValue alias="RejectionDefault">
+          <Column table-alias="BankNetworkStatus" name="RejectionDefault" />
+        </SelectValue>
+        <SelectValue alias="RejectionDefaultDescription">
+          <Column table-alias="CouponStatus" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AppliedDefault">
+          <Column table-alias="BankNetworkStatus" name="AppliedDefault" />
+        </SelectValue>
+        <SelectValue alias="AppliedDefaultDescription">
+          <Column table-alias="CouponStatusApplied" name="Description" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <ClassNameTable name="Sistran.Core.Application.AutomaticDebitServices.EEProvider.Entities.BankNetworkStatus, Core.AutomaticDebitServices.EEProvider" alias="BankNetworkStatus" />
+              <ClassNameTable name="Sistran.Core.Application.AutomaticDebitServices.EEProvider.Entities.BankNetwork, Core.AutomaticDebitServices.EEProvider" alias="BankNetwork" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="BankNetwork" name="BankNetworkId" />
+                  <Column table-alias="BankNetworkStatus" name="BankNetworkCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.AutomaticDebitServices.EEProvider.Entities.CouponStatus, Core.AutomaticDebitServices.EEProvider" alias="CouponStatus" />
+            <criteria>
+              <BinaryPredicate type="And">
+            
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="CouponStatus" name="CouponStatusId" />
+                    <Column table-alias="BankNetworkStatus" name="CouponStatusCode" />
+                  </BinaryCriterion>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="CouponStatus" name="CouponStatusBankCode" />
+                    <Column table-alias="BankNetworkStatus" name="RejectionDefault" />
+                  </BinaryCriterion>
+
+              </BinaryPredicate>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.AutomaticDebitServices.EEProvider.Entities.CouponStatus, Core.AutomaticDebitServices.EEProvider" alias="CouponStatusApplied" />
+          <criteria>
+            <BinaryPredicate type="And">
+              <BinaryCriterion type="Equal">
+                <Column table-alias="CouponStatusApplied" name="CouponStatusId" />
+                <Column table-alias="BankNetworkStatus" name="CouponStatusCode" />
+              </BinaryCriterion>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="CouponStatusApplied" name="CouponStatusBankCode" />
+                <Column table-alias="BankNetworkStatus" name="AppliedDefault" />
+              </BinaryCriterion>
+            </BinaryPredicate>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

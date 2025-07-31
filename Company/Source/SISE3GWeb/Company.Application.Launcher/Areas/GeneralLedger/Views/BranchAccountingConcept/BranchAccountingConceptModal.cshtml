@@ -1,0 +1,29 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Application.GeneralLedgerServices.DTOs.AccountingConcepts.BranchAccountingConceptDTO
+
+<div class="uif-panel">
+        
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="accountingConceptTable" data-exporttocsv="false"
+                   data-selectiontype="multiple"
+                   data-source="@Url.Action("GetAccountingConcepts", "AccountingConcept")"
+                   data-paginate="true" data-title="@Global.AccountingConcept">
+                <thead>
+                    <tr>
+                        <th data-property="Id">Id</th>
+                        <th data-property="AccountingAccountId" data-visible="false"></th>
+                        <th data-property="Description">@Global.Description</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+</div>

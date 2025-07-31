@@ -1,0 +1,529 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Product.Models.ProductModelsView
+@section Title{
+    <div id="mainProduct" class="row main-title">
+        <div class="column-40">
+            <div id="Title">@Resources.Language.TitleProducts</div>
+        </div>
+        <div class="column-30 no-padding">
+            <select class="uif-select important" id="selectSearchProduct" data-val="true" data-source='@Url.Content("~/Product/Product/GetPrefixes")' data-val-required="@Resources.Language.ErrorDocumentPrefix"
+                    data-id="Id" data-name="Description" name="PrefixId" data-emptyText="@Resources.Language.SelectABranch"></select>
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Description", null, new { @class = "uif-input-search", id = "inputProduct", @placeholder = @Resources.Language.ProductName, maxlength = "50" })
+            <button class="btn btn-default" id="btnSearchAdvProduct"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+    <div id="mainProductNew" class="row main-title " style="display: none">
+        <div class="column-70">
+            <div id="globalTitle">@Resources.Language.TitleProducts</div>
+        </div>
+        <div class="column-30 even" style="justify-content:space-between">
+            <div id="globalText">@Resources.Language.TitleProducts</div>
+        </div>
+
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="app-header">
+            <div class="row">
+                <div class="uif-col-12">
+                    <div id="buttonsProduct" class="pull-right">
+                        <button class="btn btn-default" id="btnReturnProduct">
+                            <span class="fa fa-times-circle" aria-hidden="true"></span>
+                            @Resources.Language.ButtonExit
+                        </button>
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0612"))
+                        {
+                            <button class="btn btn-default" id="btnProductNew">
+                                <span class="fa fa-file-o" aria-hidden="true"></span>
+                                @Resources.Language.LabelNewProduct
+                            </button>
+                        }
+
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0611"))
+                        {
+                            <button class="btn btn-default" id="btnReportProduct">
+                                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                <span class="" aria-hidden="true"></span>
+                                @Resources.Language.ButtonReport
+                            </button>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0610"))
+                        {
+                            <button class="btn btn-default" id="btnListProduct">
+                                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                <span class="" aria-hidden="true"></span>
+                                @Resources.Language.ButtonListProduct
+                            </button>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0609"))
+                        {
+                            <button class="btn btn-default" id="btnProductEnableDisableBtn">
+                                <span class="fa fa-ban" aria-hidden="true"></span>
+                                <span id="btnProductEnableDisable">@Resources.Language.LabelDisable</span>
+                            </button>
+                        }
+                        <button type="button" class="btn btn-default" id="btnCancel" style="display:none">
+                            <span class="" aria-hidden="true"></span>
+                            @Resources.Language.ButtonWipeScreen
+                        </button>
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0608"))
+                        {
+                            <button class="btn btn-primary" id="btnRecordProduct">
+                                <span class="fa fa-floppy-o" aria-hidden="true"></span>
+                                @Resources.Language.LabelSavedProduct
+                            </button>
+                        }
+                    </div>
+                    <div id="buttonsInsuredObject" class="pull-right">
+                        <button type="button" class="btn btn-default" id="btnModalInsuredObjectClose">@Resources.Language.ButtonClose</button>
+                        <button type="button" class="btn btn-primary" id="btnModalInsuredObjectSave">@Resources.Language.ButtonSave</button>
+                    </div>
+                    <div id="buttonsCoverage" class="pull-right">
+                        <button type="button" class="btn btn-default" id="btnModalCoverageClose">@Resources.Language.ButtonClose</button>
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0594"))
+                        {
+                            <button type="button" class="btn btn-default" id="btnModalTechnicalPlan">@Resources.Language.LabelTechnicalPlan</button>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0593"))
+                        {
+                            <button type="button" class="btn btn-primary" id="btnModalCoverageSave">@Resources.Language.ButtonSave</button>
+                        }
+                    </div>
+                    <div id="buttonsRulesAndscripts" class="pull-right">
+                        <button type="button" class="btn btn-default" id="btnModalRulesAndscriptsClose">@Resources.Language.ButtonClose</button>
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0597"))
+                        {
+                            <button type="button" class="btn btn-primary" id="btnModalRulesAndscriptsSave">@Resources.Language.ButtonSave</button>
+                        }
+                    </div>
+                    <div id="buttonsAdditionalData" class="pull-right">
+                        <button type="button" class="btn btn-default" id="btnModalAdditionalDataClose">@Resources.Language.ButtonClose</button>
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0598"))
+                        {
+                            <button type="button" class="btn btn-primary" id="btnModalAdditionalDataSave">@Resources.Language.ButtonSave</button>
+                        }
+                    </div>
+                    <div id="buttonsAgents" class="pull-right">
+                        <button type="button" class="btn btn-default" id="btnModalAgentsClose">@Resources.Language.ButtonClose</button>
+
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0606"))
+                        {
+                            <button type="button" class="btn btn-default" id="btnModalAgentsDeallocateAll">@Resources.Language.ButtonDeallocateAll</button>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0605"))
+                        {
+                            <button type="button" class="btn btn-default" id="btnModalAgentsAssignAll">@Resources.Language.ButtonAssignAll</button>
+                        }
+
+                        @*<button type="button" class="btn btn-primary" id="btnModalAgentsSave">@Resources.Language.ButtonSave</button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+}
+
+<div class="uif-alert" id="alert"></div>
+
+@*--Vistas Parciales*@
+@* -- Periferico Moneda -- *@
+<div class="uif-modal" id="modalCurrency">
+    <div class="uif-modalbody">
+        @Html.Partial("Currency", new Sistran.Core.Framework.UIF.Web.Areas.Product.Models.CurrencyModelsView())
+    </div>
+    <div id="buttonsCurrency" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalCurrencyClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnModalCurrencySave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+@* -- Periferico Tipos de póliza -- *@
+<div class="uif-modal" id="modalPolicyType">
+    <div class="uif-modalbody">
+        @Html.Partial("PolicyType")
+    </div>
+    <div id="buttonsPolicyType" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalPolicyTypeClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnModalPolicyTypeSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+@* -- Periferico Tipos de riesgos -- *@
+<div class="uif-modal" id="modalRiskType">
+    <div class="uif-modalbody">
+        @Html.Partial("RiskType", new Sistran.Core.Framework.UIF.Web.Areas.Product.Models.RiskTypesModelsView())
+    </div>
+    <div id="buttonsRiskType" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalRiskTypeClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnModalRiskTypeSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+@* -- Periferico Intermediarios y comisiones -- *@
+<div id="modalAgents">
+    @Html.Partial("Agents", new Sistran.Core.Framework.UIF.Web.Areas.Product.Models.AgentModelsView())
+</div>
+
+
+<div class="uif-modal" id="modalAgenciesAgentComission">
+    <div class="uif-modalbody">
+        @Html.Partial("ComissionAgents", new Sistran.Core.Framework.UIF.Web.Areas.Product.Models.CommisionAgentModelsView())
+    </div>
+    <div id="buttonsComissionAgents" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalAgenciesAgentComissionClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnModalAgenciesAgentComissionSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalAgenciesAgentIncentives">
+    <div class="uif-modalbody">
+        @Html.Partial("IncentivesForAgents", new Sistran.Core.Framework.UIF.Web.Areas.Product.Models.IncentivesForAgentsModelsView())
+    </div>
+    <div id="buttonsComissionAgents" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalAgenciesAgentIncentivesClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnModalAgenciesAgentIncentivesSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+@* -- Periferico Plan de Pagos -- *@
+<div class="uif-modal" id="modalPaymentPlan">
+    <div class="uif-modalbody">
+        @Html.Partial("PaymentPlan")
+    </div>
+    <div id="buttonsPaymentPlan" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalPaymentPlanClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0587"))
+        {
+            <button type="button" class="btn btn-primary" id="btnModalPaymentPlanSave">@Resources.Language.ButtonSave</button>
+        }
+    </div>
+</div>
+
+@* -- Periferico Coberturas -- *@
+<div id="modalInsuredObject">
+    @Html.Partial("InsuredObject", new Sistran.Core.Framework.UIF.Web.Areas.Product.Models.InsuredObjectModelsView())
+</div>
+
+<div id="modalCoverage">
+    @Html.Partial("Coverage", new Sistran.Core.Framework.UIF.Web.Areas.Product.Models.CoverageModelsView())
+</div>
+
+<div class="uif-modal" id="modalAllyCoverage">
+    <div class="uif-modalbody">
+        @Html.Partial("CoverageAllied")
+    </div>
+    <div id="buttonsAllyCoverage" class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalAllyCoverageClose">@Resources.Language.ButtonClose</button>
+    </div>
+</div>
+
+@* -- Periferico Reglas y Guiones -- *@
+<div id="modalRulesAndscripts">
+    @Html.Partial("RulesAndscripts")
+</div>
+
+@* -- Periferico Copias Producto -- *@
+<div class="uif-modal" id="modalCopyProduct">
+    <div class="uif-modalbody">
+        @Html.Partial("CopyProduct", new Sistran.Core.Framework.UIF.Web.Areas.Product.Models.CopyProductModelsView())
+    </div>
+    <div id="buttonsCopyProduct" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalCopyProductClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0607"))
+        {
+            <button type="button" class="btn btn-primary" id="btnModalCopyProduct">
+                @Resources.Language.ButtonCopy
+            </button>
+        }
+        </div>
+
+</div>
+
+@* -- Periferico Datos Adicionales -- *@
+<div id="modalAdditionalData" class="form form-space-adjusted">
+    @Html.Partial("AdditionalData", new Sistran.Core.Framework.UIF.Web.Areas.Product.Models.FormsModelsView())
+</div>
+
+@* -- Periferico Tipo de Asistencia -- *@
+@*<div class="uif-modal" id="modalTypeOfAssistance">
+        <div class="uif-modalbody">
+            @Html.Partial("CptAssistanceType")
+        </div>
+        <div id="buttonsTypeOfAssistance" class="uif-modalbuttons width-save">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="btnmodalTypeOfAssistanceClose">@Resources.Language.ButtonClose</button>
+            <button type="button" class="btn btn-primary" id="btnmodalTypeOfAssistanceSave">@Resources.Language.ButtonSave</button>
+        </div>
+    </div>*@
+
+<form id="formProduct" class="form form-space-adjusted" autocomplete="off">
+    <div id="modalProduct">
+        @Html.HiddenFor(model => model.Title, new { id = "hiddenTitle" })
+        <div class="row">
+            <div class="uif-col-9">
+                <div class="row row-space-adjusted">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelPrefix</label>
+
+                        <select class="uif-select form-control" id="selectPrefixCommercial" data-val="true"
+                                data-source='@Url.Content("~/Product/Product/GetPrefixes")'
+                                data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"
+                                data-id="Id" data-name="Description" name="PrefixId" data-filter="true" data-native="false"></select>
+                        @Html.ValidationMessageFor(model => model.PrefixId)
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelDescriptionProduct</label>
+                        @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", placeholder = @Resources.Language.LabelDescriptionProduct, maxlength = "50" })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelDescriptionProductReduced</label>
+                        @Html.TextBoxFor(model => model.DescriptionReduced, new { id = "inputDescriptionReduced", placeholder = @Resources.Language.LabelDescriptionProductReduced, maxlength = "15" })
+                        @Html.ValidationMessageFor(model => model.DescriptionReduced)
+                    </div>
+
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelMoney</label>
+                        <div class="input-with-buttons">
+                            <select class="uif-select form-control" id="selectCurrency" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlMoney"
+                                    data-id="Id" data-name="Description" name="Currency" data-filter="true" data-native="false"></select>
+                            @Html.ValidationMessageFor(model => model.Currency)
+                            <button type="button" class="btn btn-default" id="btnCurrency">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelCurrentDate</label>
+                        @Html.TextBoxFor(model => model.CurrentDate, new { id = "inputCurrentDate", @class = "uif-datepicker", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.CurrentDate)
+                    </div>
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelDisabledDate</label>
+                        @Html.TextBoxFor(model => model.DisabledDate, new { id = "inputDisabledDate", @class = "uif-datepicker" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelPolicyType</label>
+                        <div class="input-with-buttons">
+                            <select class="uif-select form-control" id="selectPolicyType" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPolicyType"
+                                    data-id="Id" data-name="Description" name="PolicyType" data-filter="true" data-native="false"></select>
+                            @Html.ValidationMessageFor(model => model.PolicyType)
+                            <button type="button" class="btn btn-default" id="btnPolicyType">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelRiskType</label>
+                        <div class="input-with-buttons">
+                            <select class="uif-select form-control" id="selectRiskType" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlRiskType"
+                                    data-id="Id" data-name="Description" name="RiskType" data-filter="true" data-native="false"></select>
+                            @Html.ValidationMessageFor(model => model.RiskType)
+                            <button type="button" class="btn btn-default" id="btnRiskType">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelMaximumNumberRisk</label>
+                        @Html.TextBoxFor(model => model.MaximumNumberRisk, new { id = "inputMaximumNumberRisk", @class = "rightAlign", onKeyPress = "return checkOnlyNumbersLength(event,value)" })
+                        @Html.ValidationMessageFor(model => model.MaximumNumberRisk)
+                    </div>
+
+                    <div class="uif-col-2">
+                        <label>@Resources.Language.LabelVersion</label>
+                        @Html.TextBoxFor(model => model.VersionId, new { id = "inputVersionId", placeholder = @Resources.Language.LabelVersion, @readonly = "readonly", disabled = "disabled", Value = "1" })
+                    </div>
+
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelProduct2G</label>
+                        <select class="uif-select form-control" id="selectProduct2G"
+                                data-id="Id" data-name="Description" name="Product2G" data-filter="true" data-native="false"></select>
+
+                    </div>
+
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelPercentageCommissionNormal</label>
+                        @Html.TextBoxFor(model => model.Percentage, new { id = "inputProductAgentsPercentage", @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.Percentage)
+                    </div>
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelPercentageCommissionAditional</label>
+                        @Html.TextBoxFor(model => model.PercentageAdditional, new { id = "inputProductAgentsPercentageAdditional", @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.PercentageAdditional)
+                    </div>
+
+
+                </div>
+
+
+                <div class="row">
+                    <div class="uif-col-6" style="padding-top:2%">
+                    </div>
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label>@Resources.Language.ApplyTo :</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-3">
+                        <input type="checkbox" id="chkLightCotizador" name="LightCotizador" disabled="disabled" />
+                        <label for="chkLightCotizador">@Resources.Language.LabelApplyLightCotizador</label>
+                    </div>
+                    <div class="uif-col-3">
+                        <input type="checkbox" id="chkFlatRate" name="FlatRate" disabled="disabled" />
+                        <label for="chkFlatRate">@Resources.Language.LabelFlatRateProduct</label>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="uif-col-6" style="padding-top:2%">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label>@Resources.Language.ProductProcessType :</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-3">
+                        <input type="checkbox" id="chkIsInteractive" name="IsInteractive" />
+                        <label for="chkIsInteractive">@Resources.Language.ProductIsInteractive</label>
+                    </div>
+                    <div class="uif-col-3">
+                        <input type="checkbox" id="chkIsCollective" name="IsCollective" disabled="disabled" />
+                        <label for="chkIsCollective">@Resources.Language.ProductIsCollective</label>
+                    </div>
+                    <div class="uif-col-3">
+                        <input type="checkbox" id="chkIsMassive" name="IsMassive" disabled="disabled" />
+                        <label for="chkIsMassive">@Resources.Language.ProductIsMassive</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="uif-col-3 col-space-adjusted">
+                <div class="uif-right-bar" id="panelButtonsRight">
+                    <ul>
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0584"))
+                        {
+                            <li>
+                                <a href="#" id="btnPaymentPlan">@Resources.Language.LabelPaymentPlans</a>
+                                <p id="selectedPaymentPlan"></p>
+                            </li>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0588"))
+                        {
+                            <li>
+                                <a href="#" id="btnCoverage">@Resources.Language.LabelObjectsAndCoverages</a>
+                                <p id="selectedCoverage"></p>
+                            </li>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0595"))
+                        {
+                            <li>
+                                <a href="#" id="btnRulesAndscripts">@Resources.Language.LabelRulesAndscripts</a>
+                                <p id="selectedRulesAndscripts"></p>
+                            </li>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0613"))
+                        {
+                            <li>
+                                <a href="#" id="btnAdditionalData">@Resources.Language.LabelAdditionalData</a>
+                                <p id="selectedAdditionalData"></p>
+                            </li>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0603"))
+                        {
+                            <li>
+                                <a href="#" id="btnAgents">@Resources.Language.LabelAgentsAndCommissions</a>
+                                <p id="selectedAgents"></p>
+                            </li>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0614"))
+                        {
+                            <li>
+                                <a href="#" id="btnCopyProduct">@Resources.Language.LabelCopyProduct</a>
+                                <p id="selectedCopyProduct"></p>
+                            </li>
+                        }
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Product")
+    @*@Scripts.Render("~/Areas/Product/Scripts/Product/Product.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/Product.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/Currency.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/PolicyType.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/RiskType.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/Agent.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/PaymentPlan.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/InsuredObject.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/Coverage.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/CoverageAllied.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/RulesAndscript.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/Script.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/CopyProduct.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/AdditionalData.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/CommisionAgent.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/ProductResources.es.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/AdvancedSearch.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/DeductiblesByCoverage.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/TypeOfAssistance.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/IncentivesForAgents.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/DeductiblesByCoverage.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/UifTouch_Co.es5.js")
+        @Scripts.Render("~/Areas/Product/Scripts/Product/TypeOfAssistance.es5.js")*@
+}
+
+@section Modals
+{
+    <div class="uif-modal" id="modalDialogList">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Product/Views/Product/IndividualResults.cshtml")
+        </div>
+    </div>
+
+    <div class="loader main-loader" id="DivPreloader" style="display:none; opacity:0.5">
+        <div class="spinner spinner-three-bounce">
+            <i class="fa fa-circle-o-notch fa-spin fa-4x"></i>
+        </div>
+    </div>
+    <div class="uif-modal" id="modalRulesAndScriptsResults">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Product/Views/Product/RulesAndScriptsResults.cshtml")
+        </div>
+    </div>
+    <div class="uif-modal" id="modalScriptsResults">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Product/Views/Product/ScriptsResults.cshtml")
+        </div>
+    </div>
+}

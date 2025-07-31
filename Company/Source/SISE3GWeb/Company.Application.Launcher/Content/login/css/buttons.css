@@ -1,0 +1,541 @@
+@font-face {
+    font-family: SourceSansPro-Black;
+    src: url(../fonts/SourceSansPro-Black.otf);
+}
+
+@font-face {
+    font-family: SourceSansPro-Regular;
+    src: url(../fonts/SourceSansPro-Regular.ttf);
+}
+
+@font-face {
+    font-family: SourceSansPro-Semibold;
+    src: url(../fonts/SourceSansPro-Semibold.ttf);
+}
+
+/* GENERIC   */
+
+.bb-buttons-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 80%;
+    margin-left: 10%;
+    padding: 50px 0;
+}
+
+.bb-button-wrapper {
+    flex: 0 0 200px;
+    margin: 0 15px;
+}
+
+    .bb-button-wrapper pre {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+.bb-buttons-container a {
+    margin-bottom: 30px;
+}
+
+/* / GENERIC  */
+
+/* ***** */
+/* BUTTON */
+/* ***** */
+
+.button {
+    font-family: SourceSansPro-Regular;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-height: 30px;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    outline: none;
+    border-style: solid;
+    user-select: none;
+}
+
+    .button.blue {
+        background-color: #00008f;
+        border: 0;
+        color: #fff;
+    }
+
+    .button.white {
+        background-color: #fff;
+        border-color: #00008f;
+        color: #00008f;
+    }
+
+    .button.ghost {
+        background-color: transparent;
+        border-color: #00008f;
+        color: #00008f;
+        -webkit-transition: border-color 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+        -moz-transition: border-color 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+        transition: border-color 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    }
+
+    .button.ghost-white {
+        background-color: transparent;
+        border-color: #fff;
+        color: #fff;
+    }
+
+    .button.ghost-blue {
+        background-color: transparent;
+        border-color: #00008f;
+        color: #00008f;
+    }
+
+    .button.large {
+        height: 40px;
+        border-width: 2px;
+        font: normal 600 16px/16px 'Source Sans Pro';
+    }
+
+    .button.medium {
+        height: 30px;
+        border-width: 2px;
+        font: normal 600 14px/14px 'Source Sans Pro';
+    }
+
+    .button.small {
+        height: 30px;
+        border-width: 1px;
+        font: normal 600 12px/12px 'Source Sans Pro';
+    }
+
+@media(min-width: 768px) {
+
+    .button.large {
+        height: 50px;
+    }
+
+    .button.medium {
+        height: 40px;
+    }
+
+    .button.small {
+        height: 30px;
+    }
+}
+
+
+/* animations  */
+.button:after {
+    position: absolute;
+    content: '';
+    z-index: 0;
+    -webkit-transition: height 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    -moz-transition: height 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    transition: height 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+}
+
+.button:after {
+    width: 100%;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+    transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* specific case on blue button  */
+.button.blue:before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    background: #00005b;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+}
+
+.button.blue:after {
+    background-color: #00005b;
+}
+
+.button.white:after {
+    background-color: #00008f;
+}
+
+.button.ghost:after {
+    background-color: transparent;
+}
+
+.button.ghost-white:after {
+    background-color: #fff;
+}
+
+.button.ghost-blue:after {
+    background-color: #00008f;
+}
+
+.button.large:active:after,
+.button.large:hover:after {
+    height: 800%;
+}
+
+.button.medium:active:after,
+.button.medium:hover:after {
+    height: 620%;
+}
+
+.button.small:active:after,
+.button.small:hover:after {
+    height: 880%;
+}
+
+.button span {
+    z-index: 20;
+    -webkit-transition: color 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    -moz-transition: color 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    transition: color 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+}
+
+.button:active.blue span,
+.button:hover.blue span {
+    color: #fff;
+}
+
+.button:active.white span,
+.button:hover.white span {
+    color: #fff;
+}
+
+.button:active.ghost,
+.button:hover.ghost {
+    color: #00005b;
+    border-color: #00005b;
+}
+
+.button:active.ghost-white,
+.button:hover.ghost-white {
+    color: #00008f;
+}
+
+.button:active.ghost-blue,
+.button:hover.ghost-blue {
+    color: #fff;
+}
+
+/* ***** */
+/* / BUTTON */
+/* ***** */
+
+/* ***** */
+/* / BUTTON PICTO */
+/* ***** */
+
+.button.picto .icon {
+    position: relative;
+    width: 16px;
+    height: 16px;
+}
+
+    .button.picto .icon.right {
+        margin-left: 10px;
+    }
+
+    .button.picto .icon.left {
+        margin-right: 10px;
+    }
+
+@media(min-width: 768px) {
+
+    .button.picto .icon {
+        margin-top: 2px;
+    }
+
+        .button.picto .icon.right {
+            margin-left: 15px;
+        }
+
+        .button.picto .icon.left {
+            margin-right: 15px;
+        }
+}
+
+.button.picto svg path {
+    -webkit-transition: fill 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    -moz-transition: fill 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    transition: fill 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+}
+
+
+.button.picto.blue svg {
+    fill: #fff;
+}
+
+.button.picto.white svg {
+    fill: #00008f;
+}
+
+.button.picto.white:active svg,
+.button.picto.white:hover svg {
+    fill: #fff;
+}
+
+.button.picto.ghost svg {
+    fill: #00008f;
+}
+
+.button.picto.ghost:active svg,
+.button.picto.ghost:hover svg {
+    fill: #00005b;
+}
+
+.button.picto.ghost-white svg {
+    fill: #fff;
+}
+
+.button.picto.ghost-white:active svg,
+.button.picto.ghost-white:hover svg {
+    fill: #00008f;
+}
+
+.button.picto.ghost-blue svg {
+    fill: #00008f;
+}
+
+.button.picto.ghost-blue:active svg,
+.button.picto.ghost-blue:hover svg {
+    fill: #fff;
+}
+
+
+
+/* ***** */
+/* BUTTON ARROW */
+/* ***** */
+
+.button.arrow .icon {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    margin-left: 15px;
+    margin-top: 2px;
+}
+
+.button.arrow svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.button.arrow.blue svg {
+    fill: #fff;
+}
+
+    .button.arrow.blue svg:nth-child(2) {
+        fill: #fff;
+        opacity: 0;
+    }
+
+.button.arrow.white svg {
+    fill: #00008f;
+}
+
+    .button.arrow.white svg:nth-child(2) {
+        fill: #fff;
+        opacity: 0;
+    }
+
+.button.arrow.ghost svg {
+    fill: #00008f;
+}
+
+    .button.arrow.ghost svg:nth-child(2) {
+        fill: #00005b;
+        opacity: 0;
+    }
+
+.button.arrow.ghost-white svg {
+    fill: #fff;
+}
+
+    .button.arrow.ghost-white svg:nth-child(2) {
+        fill: #00008f;
+        opacity: 0;
+    }
+
+.button.arrow.ghost-blue svg {
+    fill: #00008f;
+}
+
+    .button.arrow.ghost-blue svg:nth-child(2) {
+        fill: #fff;
+        opacity: 0;
+    }
+
+/* ***** */
+/* / BUTTON ARROW  */
+/* ***** */
+
+/* ***** */
+/* CUSTOM ICON BUTTON  */
+/* ***** */
+
+.button.custom-icon {
+    padding: 0;
+}
+
+    .button.custom-icon span:first-child {
+        padding: 0 20px;
+    }
+
+    .button.custom-icon .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        border-left: 1px solid rgba( 255, 255, 255, 0.2);
+        -webkit-transition: border-color 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+        transition: border-color 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+        -moz-transition: border-color 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    }
+
+    .button.custom-icon.large .icon {
+        width: 49px;
+        flex-basis: 49px;
+        flex-shrink: 0;
+    }
+
+    .button.custom-icon.medium .icon {
+        width: 39px;
+        flex-basis: 39px;
+        flex-shrink: 0;
+    }
+
+    .button.custom-icon.small .icon {
+        width: 29px;
+        flex-basis: 29px;
+        flex-shrink: 0;
+    }
+
+    .button.custom-icon svg path {
+        -webkit-transition: fill 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+        -moz-transition: fill 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+        transition: fill 0.29s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    }
+
+    /* no svg fill hover  */
+    .button.custom-icon.blue svg {
+        position: relative;
+        fill: #fff;
+    }
+
+    /* white  */
+    .button.custom-icon.white .icon {
+        border-color: rgba( 0, 0, 0, 0.1 );
+    }
+
+    .button.custom-icon.white svg {
+        position: relative;
+        fill: #00008f;
+    }
+
+    .button.custom-icon.white:active .icon,
+    .button.custom-icon.white:hover .icon {
+        border-color: rgba( 255, 255, 255, 0.2 );
+    }
+
+    .button.custom-icon.white:active svg,
+    .button.custom-icon.white:hover svg {
+        fill: #fff;
+    }
+
+    /* ghost  */
+    .button.custom-icon.ghost .icon {
+        border-color: rgba( 0, 0, 0, 0.05 );
+    }
+
+    .button.custom-icon.ghost svg {
+        fill: #00008f;
+    }
+
+    .button.custom-icon.ghost:active .icon,
+    .button.custom-icon.ghost:hover .icon {
+        border-color: rgba( 0, 0, 0, 0.1 );
+    }
+
+    .button.custom-icon.ghost:active svg,
+    .button.custom-icon.ghost:hover svg {
+        fill: #00005b;
+    }
+
+    /* ghost-white  */
+    .button.custom-icon.ghost-white svg {
+        fill: #fff;
+    }
+
+    .button.custom-icon.ghost-white:active .icon,
+    .button.custom-icon.ghost-white:hover .icon {
+        border-color: rgba( 0, 0, 0, 0.05 );
+    }
+
+    .button.custom-icon.ghost-white:active svg,
+    .button.custom-icon.ghost-white:hover svg {
+        fill: #00008f;
+    }
+
+    .button.custom-icon.ghost-white:active .icon,
+    .button.custom-icon.ghost-white:hover .icon {
+        border-color: rgba( 0, 0, 0, 0.05 );
+    }
+
+    /* ghost-blue  */
+    .button.custom-icon.ghost-blue .icon {
+        border-color: rgba( 0, 0, 143, 0.1 );
+    }
+
+    .button.custom-icon.ghost-blue:active .icon,
+    .button.custom-icon.ghost-blue:hover .icon {
+        border-color: rgba( 255, 255, 255, 0.2 );
+    }
+
+    .button.custom-icon.ghost-blue svg {
+        fill: #00008f;
+    }
+
+    .button.custom-icon.ghost-blue:active svg,
+    .button.custom-icon.ghost-blue:hover svg {
+        fill: #fff;
+    }
+
+    .button.custom-icon.large:active:after,
+    .button.custom-icon.large:hover:after {
+        height: 630%;
+    }
+
+    .button.custom-icon.medium:active:after,
+    .button.custom-icon.medium:hover:after {
+        height: 710%;
+    }
+
+    .button.custom-icon.small:active:after,
+    .button.custom-icon.small:hover:after {
+        height: 880%;
+    }
+
+/* ***** */
+/* / CUSTOM ICON BUTTON  */
+/* ***** */

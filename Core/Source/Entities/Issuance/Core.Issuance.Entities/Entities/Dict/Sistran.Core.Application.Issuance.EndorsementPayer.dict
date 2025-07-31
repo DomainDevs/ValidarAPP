@@ -1,0 +1,31 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<map version="2.0" type="class" name="EndorsementPayer" namespace="Sistran.Core.Application.Issuance" file-version="1.0" description="ENDORSEMENT_PAYER_ENTITY">
+   <properties>
+      <property name="EndorsementId" type="Integer" key="true" description="ENDORSEMENT_ID_PROPERTY" />
+      <property name="PolicyId" type="Integer" key="true" description="POLICY_ID_PROPERTY" />
+      <property name="PayerId" type="Integer" key="true" description="PAYER_ID_PROPERTY" />
+      <property name="SurchargePercentage" type="Decimal" precision="7" scale="4" description="SURCHARGE_PERCENTAGE_PROPERTY" />
+      <property name="PaymentScheduleId" type="Integer" description="PAYMENT_SCHEDULE_ID_PROPERTY" />
+      <property name="PaymentMethodCode" type="Integer" description="PAYMENT_METHOD_CODE_PROPERTY" />
+      <property name="MailAddressId" type="Integer" nullable="true" description="MAIL_ADDRESS_ID_PROPERTY" />
+      <property name="PaymentId" type="Integer" nullable="true" description="PAYMENT_ID_PROPERTY" />
+      <property name="AgtPayExpDate" type="DateTime" nullable="true" description="AGT_PAY_EXP_DATE_PROPERTY" />
+      <property name="IsByPaymentUpdate" type="Boolean" description="IS_BY_PAYMENT_UPDATE_PROPERTY" />
+   </properties>
+   <tables>
+      <table name="ENDORSEMENT_PAYER" schema="ISS" alias="ENDORSEMENT_PAYER" update="true">
+         <columns>
+            <column name="ENDORSEMENT_ID" type="Int32" property="EndorsementId" key="true" />
+            <column name="POLICY_ID" type="Int32" property="PolicyId" key="true" />
+            <column name="PAYER_ID" type="Int32" property="PayerId" key="true" />
+            <column name="SURCHARGE_PCT" type="Decimal" property="SurchargePercentage" allowNull="false" size="19" precision="7" scale="4" />
+            <column name="PAYMENT_SCHEDULE_ID" type="Int32" property="PaymentScheduleId" allowNull="false" />
+            <column name="PAYMENT_METHOD_CD" type="Byte" property="PaymentMethodCode" allowNull="false" />
+            <column name="MAIL_ADDRESS_ID" type="Int16" property="MailAddressId" />
+            <column name="PAYMENT_ID" type="Int16" property="PaymentId" />
+            <column name="AGT_PAY_EXP_DATE" type="DateTime" property="AgtPayExpDate" />
+            <column name="IS_BY_PAYMENT_UPDATE" type="Boolean" property="IsByPaymentUpdate" />       
+         </columns>
+      </table>
+   </tables>
+</map>

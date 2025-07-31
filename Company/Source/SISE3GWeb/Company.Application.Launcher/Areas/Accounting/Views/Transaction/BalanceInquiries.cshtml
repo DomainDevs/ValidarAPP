@@ -1,0 +1,113 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.MenuBalanceInquiries;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.Billing</li>
+        <li class="active">@Global.MenuBalanceInquiries</li>
+    </ol>
+}
+
+<form id="BalanceInquiriesForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Branch</label>
+            <br />
+            @Html.DropDownList("BranchSearchCashMovements", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_val = "true",
+                 data_native="true",
+                 data_selectedid = @ViewBag.BranchDefault,
+                 data_val_required = @Global.RequiredField
+              })
+            <span class="text-danger" data-valmsg-for="BranchSearchCashMovements" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.BalanceCashier</label>
+            <br />
+            @Html.DropDownList("CashierSearchCashMovements", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_id = "Id",
+                 data_name = "Nick",
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="CashierSearchCashMovements" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.Date:</label>
+            
+            @Html.TextBox("CurrentDateSearchCashMovements", "", new
+            {
+              @class = "uif-datepicker",
+              style = "text-align: left",
+              data_mask="99/99/9999",
+              data_val = "true",
+              data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="CurrentDateSearchCashMovements" data-valmsg-replace="true" />
+       </div>
+    </div>
+</form>
+<div class="form-footer">
+    <button type="button" class="btn btn-default" id="CleanCashMovements">
+        <i class="fa fa-paint-brush"></i>        @Global.Clean
+    </button>
+    <button type="button" class="btn btn-primary" id="SearchCashMovements">
+        <i class="fa fa-search"></i>        @Global.Search
+    </button>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="BalanceInquieries" data-exporttocsv="false" data-edit="false" data-delete="false"
+               data-filter="false" data-paginate="true" data-selectiontype="none" data-title="@Global.BillBalance">
+            <thead>
+                <tr>
+                    <th data-visible="false" data-property="PaymentMethodTypeCode">PaymentMethodTypeCode</th>
+                    <th data-property="PaymentDescription" style="text-align:left">@Global.PaymentType</th>
+                    <th data-visible="false" data-property="CurrencyCode">CurrencyCode</th>
+                    <th data-property="CurrencyDescription" style="text-align:left">@Global.Currency</th>
+                    <th data-property="IncomeAmount">@Global.BalanceAmount</th>
+                    <th data-property="Amount">@Global.BalanceTotal</th>
+                    <th data-visible="false" data-property="BranchCode">BranchCode</th>
+                    <th data-visible="false" data-property="BranchDescription">BranchDescription</th>
+                    <th data-visible="false" data-property="UserId">UserId</th>
+                    <th data-visible="false" data-property="RegisterDate">RegisterDate</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            @*<foot class="container-fluid">
+                <div class="container">
+                    <th>TOTAL: </th>
+                    <th id="totalInquiries" style="text-align:right"></th>
+                </div>
+            </foot>*@
+        </table>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable"/>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/BalanceInquiries")
+}

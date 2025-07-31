@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="BelongingToIndividualIdView">
+  <collections>
+    <collection name="OperatingQuotaEvent" type="Sistran.Core.Application.UniquePersonV1.Entities.OperatingQuotaEvent, 
+                Core.UniquePersonV1.Entities"></collection>
+    <collection name="ConsortiumEvent" type="Sistran.Core.Application.UniquePersonV1.Entities.ConsortiumEvent, 
+                Core.UniquePersonV1.Entities"></collection>
+    <collection name="EconomicGroupEvent" type="Sistran.Core.Application.UniquePersonV1.Entities.EconomicGroupEvent, 
+                Core.UniquePersonV1.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="OperatingQuotaEvent" destination="ConsortiumEvent" name="EndorsementRiskJudicialSurety" type="Inner">
+      <property left="IdentificationId" type="Equal" right="ConsortiumId"></property>
+    </relation>
+    <relation source="OperatingQuotaEvent" destination="EconomicGroupEvent" name="EndoEndorsementRisk" type="Inner">
+      <property left="IdentificationId" type="Equal" right="IndividualId"></property>
+    </relation>
+  </relations>
+</view>

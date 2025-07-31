@@ -1,0 +1,822 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+
+<div class="uif-row">
+    <div class="uif-col-3">   
+        <select class="uif-select form-control" id="PaymentMethodType" name="PaymentMethodType"
+                data-source='@Url.Content("~/Regularization/GetEnabledPaymentMethodTypess")' data-id="Id"
+                data-name="Description" data-val="true" data-native="true"
+                data-val-required='@Global.RequiredField'></select>
+        <span class="text-danger" data-valmsg-for="PaymentMethodType" data-valmsg-replace="true" />
+    </div>
+</div>
+
+
+<!-- Cash -->
+<form id="divCash">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.Currency</label>
+            <select class="uif-select form-control required" id="CashCurrencySelect" name="CashCurrencySelect"
+                    data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id"
+                    data-name="Description" data-val="true" data-native="true"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="CashCurrencySelect" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Amount</label>
+            <br />
+            @*<input type="text" id="CashAmount" name="CashAmount" style="text-align: right">*@
+            <input type="text" id="CashAmountRegularization" name="CashAmountRegularization" style="text-align: right"
+                   class="required" onkeypress="return OnlyDecimalNumber(event,this)" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="CashAmountRegularization" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.ExchangeRate</label>
+            <br/>
+            <input type="text" id="CashExchangeRate" disabled="disabled" style="text-align: right"/>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Global.LocalAmount</label>
+                <br />
+                <input type="text" id="CashLocalAmount" disabled="disabled" style="text-align: right" />
+            </div>
+        </div>
+    </div>
+</form>
+<!-- End Cash -->
+<!-- Check -->
+<form id="divCheck">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Currency</label>
+            <select class="uif-select form-control" id="CheckCurrencySelect" name="CheckCurrencySelect"
+                    data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id"
+                    data-name="Description" data-val="true" data-native="true"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="CheckCurrencySelect" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Amount</label>
+            <br />
+            <input type="text" id="CheckAmount" style="text-align: right" name="CheckAmount"
+                   onkeypress="return OnlyDecimalNumber(event,this)" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="CheckAmount" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.ExchangeRate</label>
+            <br />
+            <input type="text" id="CheckExchangeRate" disabled="disabled" style="text-align: right" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.LocalAmount</label>
+            <br />
+            <input type="text" id="CheckLocalAmount" disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.IssuingBank</label>
+            <br />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value"
+                   placeholder='@Global.EnterIssuingBank' id="CheckBank" name="CheckBank" data-val="true"
+                   data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="CheckBank" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.AccountNumber</label>
+            <br />
+            <input type="text" id="CheckAccountNumber" style="text-align: right" maxlength="15" onkeypress=" return JustNumbers(event, this); "
+                   name="CheckAccountNumber" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="CheckAccountNumber" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.DocumentNumber</label>
+            <br />
+            <input type="text" id="CheckDocumentNumber" style="text-align: right" maxlength="15" onkeypress=" return JustNumbers(event, this); "
+                   name="CheckDocumentNumber" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="CheckDocumentNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.PayHolderName</label>
+            <br />
+            <input type="text" id="CheckHolderName" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Date</label>
+            <br />
+            <input type="text" value="@ViewBag.AccountingDate" class="uif-datepicker" data-mask="99/99/9999" id="CheckDateRegularizated"
+                   name="CheckDateRegularizated" data-min-date="@ViewBag.CurrentDate" data-max-date="@ViewBag.CurrentDate"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <input type="text" id="CheckPostDate" name="CheckPostDate" 
+                   data-min-date="@ViewBag.CurrentDate" data-max-date="@ViewBag.CurrentDate"
+                    class="uif-datepicker" data-val-required='@Global.RequiredField' data-mask="99/99/9999" />
+            <span class="text-danger" data-valmsg-for="CheckDateRegularizated" data-valmsg-replace="true" />
+            <span class="text-danger" data-valmsg-for="CheckPostDate" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+<!-- End Check -->
+<!-- Credit Card -->
+<form id="divCreditCard">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Currency</label>
+            <select class="uif-select form-control" id="CreditCardCurrencySelect" name="CreditCardCurrencySelect"
+                    data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id" data-native="true"
+                    data-name="Description"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Amount</label>
+            <br />
+            <input type="text" id="CreditCardAmount" style="text-align: right" onkeypress="return OnlyDecimalNumber(event,this)" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Exchange</label>
+            <br />
+            <input type="text" id="CreditCardExchangeRate" disabled="disabled" style="text-align: right" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.LocalAmount</label>
+            <br />
+            <input type="text" id="CreditCardLocalAmount" disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-9">
+            <label>@Global.Conduit</label>
+            <br />
+            <select class="uif-select form-control" id="CreditCardTypeSelect" name="CreditCardTypeSelect"
+                    data-source='@Url.Content("~/Accounting/Common/GetCreditCardTypes")' data-id="Id" data-native="true"
+                    data-name="Description"></select>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.IssuingBank</label>
+            <br />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value" placeholder='@Global.EnterIssuingBank' id="CreditCardIssuingBankInput">
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.CreditCardNumber</label>
+            <br />
+            <input type="text" id="CreditCardNumber" style="text-align: right" maxlength="16" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.AuthorizationNumber</label>
+            <br />
+            <input type="text" id="CreditCardAuthorizationNumber" style="text-align: right" maxlength="12" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.VoucherNumber</label>
+            <br />
+            <input type="text" id="CreditCardVoucherNumber" name="CreditCardVoucherNumber" style="text-align: right" maxlength="12" />
+        </div>
+        <div class="uif-col-9">
+            <label>@Global.PayCreditCardName</label>
+            <br />
+            <input type="text" id="CreditCardHolderName" name="CreditCardHolderName" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-9">
+            <label>@Global.ExpirationMonthYear</label>
+            <br />
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <select class="uif-select form-control" id="CreditCardValidThruMonthSelect" name="selectCreditCardValidThruMonth"
+                            data-source='@Url.Content("~/Accounting/Common/GetValidMonths")' data-id="Id" data-name="Description" data-native="true"></select>
+                </div>
+                <div class="uif-col-6">
+                    <input type="text" id="CreditCardValidThruYear" name="CreditCardValidThruYear" data-pattern="0000" class="uif-mask" />
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.TaxBase</label>
+                    <br />
+                    <input type="text" id="CreditCardTaxBase" style="text-align: right" onkeypress="return OnlyDecimalNumber(event,this)" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- End CreditCard -->
+
+
+<form id="divTransfer">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Currency
+            </label>
+            <br />
+            <select class="uif-select form-control required" id="TransferCurrencySelect" name="TransferCurrencySelect"
+                    data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id"
+                    data-name="Description" data-val="true" data-native="true"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="TransferCurrencySelect" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Amount
+            </label>
+            <br />
+            <input type="text" id="TransferAmount" name="TransferAmount" style="text-align: right"
+                   onkeypress="return OnlyDecimalNumber(event,this)"
+                   data-val="true" class="required"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="TransferAmount" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Exchange
+            </label>
+            <br />
+            <input type="text" id="TransferExchangeRate" disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.LocalAmount
+            </label>
+            <br />
+            <input type="text" id="TransferLocalAmount" disabled="disabled" style="text-align: right" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.IssuingBank
+            </label>
+            <br />
+            <input class="uif-autocomplete required" type="text" data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value"
+                   placeholder='@Global.EnterIssuingBank' id="TransferIssuingBank" maxlength="40"
+                   name="TransferIssuingBank" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="TransferIssuingBank" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.BankAccountNumber
+            </label>
+            <br />
+            <input type="text" id="TransferIssuingAccountNumber" name="TransferIssuingAccountNumber" style="text-align: right"
+                   onkeypress="return JustNumbers(event,this)"
+                   data-val="true" class="required"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="TransferIssuingAccountNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.DocumentNumber
+            </label>
+            <br />
+            <input type="text" id="TransferDocumentNumber" name="TransferDocumentNumber" style="text-align: right"
+                   onkeypress="return JustNumbers(event,this)"
+                   data-val="true" class="required" />
+            <span class="text-danger" data-valmsg-for="TransferDocumentNumber" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.ReceivingBank
+            </label>
+            <br />
+            <select class="uif-select form-control required" id="TransferReceivingBankSelect" name="TransferReceivingBankSelect"
+                    data-source=@Url.Content("~/Accounting/Common/GetAccountBanks")
+                    data-id="Id" data-native="true"
+                    data-name="Description" data-val="true"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="TransferReceivingBankSelect" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.ReceivingBankAccountNumber
+            </label>
+            <br />
+            <select class="uif-select form-control required" id="AccountNumberReceivingBankSelect" name="AccountNumberReceivingBankSelect"
+                    data-source='' data-id="Id"
+                    data-name="Description" data-val="true"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="AccountNumberReceivingBankSelect" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.PayHolderName
+            </label>
+            <br />
+            <input type="text" id="TransferHolderName" name="TransferHolderName" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Date
+            </label>
+            <br />
+            <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="TransferDate" name="TransferDate"
+                   data-val="true" data-val-required='@Global.RequiredField' data-min-date="@ViewBag.DateAccounting" />
+            <span class="text-danger" data-valmsg-for="TransferDate" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+
+<form id="divDepositVoucher">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Currency
+            </label>
+            <br />
+            <select class="uif-select form-control" id="DepositVoucherCurrencySelect" name="DepositVoucherCurrencySelect"
+                    data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id"
+                    data-name="Description" data-val="true" data-native="true"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="DepositVoucherCurrencySelect" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Amount
+            </label>
+            <br />
+            <input type="text" id="DepositVoucherAmount" name="DepositVoucherAmount" style="text-align: right" onkeypress="return OnlyDecimalNumber(event,this)" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="DepositVoucherAmount" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Exchange
+            </label>
+            <br />
+            <input type="text" id="DepositVoucherExchangeRate" disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.LocalAmount
+            </label>
+            <br />
+            <input type="text" id="DepositVoucherLocalAmount" disabled="disabled" style="text-align: right" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.ReceivingBank
+            </label>
+            <br />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value" placeholder='@Global.EnterIssuingBank'
+                   id="DepositVoucherBankReceivingSelect" data-val="true" name="DepositVoucherBankReceivingSelect"
+                   data-val-required='@Global.RequiredField' data-native="true">
+            <span class="text-danger" data-valmsg-for="DepositVoucherBankReceivingSelect" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.AccountNumber
+            </label>
+            <br />
+            <input class="uif-select" type="text" data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value"
+                   id="DepositVoucherReceivingAccountNumberSelect" data-val="true" name="DepositVoucherReceivingAccountNumberSelect"
+                   data-val-required='@Global.RequiredField' data-native="true">
+            <span class="text-danger" data-valmsg-for="DepositVoucherReceivingAccountNumberSelect" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.DepositorName
+            </label>
+            <br />
+            <input type="text" id="DepositVoucherHolderName" name="DepositVoucherHolderName" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.BallotNumber
+            </label>
+            <br />
+            <input type="text" id="DepositVoucherDocumentNumberSelect" name="DepositVoucherDocumentNumberSelect" style="text-align: right"
+                   onkeypress="return JustNumbers(event,this)" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="DepositVoucherDocumentNumberSelect" data-valmsg-replace="true" />
+        </div>
+        
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Date
+            </label>
+            <br />
+            <input type="text" id="DepositVoucherDate" name="DepositVoucherDate" class="uif-datepicker" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="DepositVoucherDate" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+
+<form id="divRetentionReceipt">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Currency
+            </label>
+            <br />
+            <select class="uif-select form-control" id="RetentionReceiptCurrencySelet" name="RetentionReceiptCurrencySelet"
+                    data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id"
+                    data-name="Description" data-val="true" data-native="true"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="RetentionReceiptCurrencySelet" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                Resources.Global.RetentionValue
+            </label>
+            <br />
+            <input type="text" id="RetentionReceiptAmount" name="RetentionReceiptAmount"
+                   onkeypress="return OnlyDecimalNumber(event,this)" style="text-align: right" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="RetentionReceiptAmount" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Exchange
+            </label>
+            <br />
+            <input type="text" id="RetentionReceiptExchangeRate" disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.LocalAmount
+            </label>
+            <br />
+            <input type="text" id="RetentionReceiptLocalAmount" disabled="disabled" style="text-align: right" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                Resources.Global.SerialNumber
+            </label>
+            <br />
+            <input type="text" id="RetentionReceiptSerialNumber" name="RetentionReceiptSerialNumber"
+                   onkeypress="return JustNumbers(event,this)" style="text-align: right" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="RetentionReceiptSerialNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.BillNum
+            </label>
+            <br />
+            <input type="text" id="RetentionReceiptDocumentNumber" name="RetentionReceiptDocumentNumber" onkeypress="return JustNumbers(event,this)" style="text-align: right" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="RetentionReceiptDocumentNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.AuthorizationNumber
+            </label>
+            <br />
+            <input type="text" id="RetentionReceiptAuthorizationNumber" name="RetentionReceiptAuthorizationNumber" onkeypress="return JustNumbers(event,this)" style="text-align: right" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="RetentionReceiptAuthorizationNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.VoucherNumber
+            </label>
+            <br />
+            <input type="text" id="RetentionReceiptVoucher" name="RetentionReceiptVoucher" onkeypress="return JustNumbers(event,this)" style="text-align: right" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="RetentionReceiptVoucher" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                Resources.Global.Billing_SummaryPay_Retention_Serial_Voucher_Number
+            </label>
+            <br />
+            <input type="text" id="RetentionReceiptSerialVoucher" name="RetentionReceiptSerialVoucher" onkeypress="return JustNumbers(event,this)" style="text-align: right" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="RetentionReceiptSerialVoucher" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Date
+            </label>
+            <br />
+            <input type="text" id="RetentionReceiptDate" class="uif-datepicker" data-mask="99/99/9999" name="RetentionReceiptDate" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="RetentionReceiptDate" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+
+<div id="divPaymentArea">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Currency
+            </label>
+            <br />
+            <select class="uif-select form-control" id="TransferCurrencyAreaSlect" name="TransferCurrencyAreaSlect"
+                    data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id" data-native="true"
+                    data-name="Description"></select>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Amount
+            </label>
+            <br />
+            <input type="text" id="TransferAmountArea" name="TransferAmountArea" style="text-align: right" onkeypress="return OnlyDecimalNumber(event,this)" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Exchange
+            </label>
+            <br />
+            <input type="text" id="TransferExchangeRateArea" disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Date
+            </label>
+            <br />
+            <input type="text" id="TransferAreaDate" name="TransferDate" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.PayHolderName
+            </label>
+            <br />
+            <input type="text" id="TransferAreaHolderName" name="TransferHolderName" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.LocalAmount
+            </label>
+            <br />
+            <input type="text" id="TransferAreaLocalAmount" disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.IssuingBank
+            </label>
+            <br />
+            <select class="uif-select form-control" id="TransferAreaIssuingBankSelect" name="TransferAreaIssuingBankSelect"
+                data-source='' data-id="Id" data-native="true" data-name="Description"></select>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.AccountNumber
+            </label>
+            <br />
+            <input type="text" id="TransferAreaIssuingAccountNumber" name="TransferIssuingAccountNumber" onkeypress="return OnlyDecimalNumber(event,this)"
+                   style="text-align: right" class="required" data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="TransferIssuingAccountNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.ReceivingBank
+            </label>
+            <br />
+            <select class="uif-select form-control" id="TransferAreaReceivingBank" name="TransferAreaReceivingBank"
+                    data-source='@Url.Action("GetBanks", "Common")' data-id="Id" data-native="true"
+                    data-name="Description"></select>
+            
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.ReceivingBankAccountNumber
+            </label>
+            <br />
+            <select class="uif-select form-control" id="TransferAreaReceivingAccountNumberBankSelect" name="TransferAreaReceivingAccountNumberBankSelect"
+                    data-source='@Url.Action("GetBanks", "Common")' data-id="Id" data-native="true" data-name="Description"></select>
+            
+        </div>
+    </div>
+
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.DocumentNumber
+            </label>
+            <br />
+            <input type="text" id="TransferDocumentNumberArea" name="TransferIssuingAccountNumber" style="text-align: right" class="uif2_required" disabled="disabled" />
+        </div>
+    </div>
+</div>
+<div id="divPaymentCard">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Currency
+            </label>
+            <br />
+            <select class="uif-select form-control" id="CreditCardCurrencyPaymentSelet" name="CreditCardCurrencyPaymentSelet"
+                    data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id" data-native="true"
+                    data-name="Description"></select>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Amount
+            </label>
+            <br />
+            <input type="text" id="PaymentCreditCardAmount" name="CreditCardAmount" style="text-align: right" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Exchange
+            </label>
+            <br />
+            <input type="text" id="PaymentCreditCardExchangeRate" disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.LocalAmount
+            </label>
+            <br />
+            <input type="text" id="PaymentCreditCardLocalAmount" disabled="disabled" style="text-align: right" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Conduit
+            </label>
+            <br />
+            <select class="uif-select form-control" id="PaymentCreditCardTypeSelect" name="PaymentCreditCardTypeSelect"
+                    data-source='@Url.Content("~/Accounting/Common/GetCreditCardTypes")' data-id="Id" data-native="true"
+                    data-name="Description"></select>
+            
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                Resources.Global.PaymentButton_CreditCard_CVV
+            </label>
+            <br />
+            <input type="password" id="CardCVV" name="CardCVV" maxlength="4" class="uif2_required" />
+        </div>
+    </div>
+
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Number @Global.Card
+            </label>
+            <br />
+            <input type="text" id="PaymentCreditCardNumber" name="CreditCardNumber" style="text-align: right" />
+        </div>
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.FullName @Global.Card
+            </label>
+            <br />
+            <input type="text" id="PaymentCreditCardHolderName" name="CreditCardHolderName" />
+        </div>
+    </div>
+
+
+    @*  *@
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.ExpirationDate
+            </label>
+            <br />
+        </div>
+    </div>
+
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.ExpirationMonthYear
+            </label>
+        </div>
+        <div class="uif-col-3">
+            @Html.DropDownList("PaymentCreditCardValidThruMonth", new SelectList(@ViewBag.ValidationMonth, "Id", "Description"))
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                Resources.Global.ExpirationYear
+            </label>
+        </div>
+        <div class="uif-col-3">
+            <input type="text" id="PaymentCreditCardValidThruYear" name="CreditCardValidThruYear" maxlength="4" />
+        </div>
+        <div class="uif-col-3" hidden="hidden">
+            <label class="control-label">
+                @Global.AuthorizationNumber
+            </label>
+            <br />
+            <input type="text" id="PaymentCreditCardAuthorizationNumber" name="CreditCardAuthorizationNumber" style="text-align: right" disabled="disabled" />
+        </div>
+        <div class="uif-col-3" hidden="hidden">
+            <label class="control-label">
+                @Global.VoucherNumber
+            </label>
+            <input type="text" id="PaymentCreditCardVoucherNumber" name="CreditCardVoucherNumber" style="text-align: right" disabled="disabled" />
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="pull-right">
+        <div class="uif-col-12">
+            @*CHEQUES*@
+            <button id="_accept" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-plus"></span>  @Global.Save
+            </button>
+            @*TARJETAS*@
+            <button id="AcceptCardRegularization" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-plus"></span>  @Global.Save
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+
+
+<br />
+
+@*Grid para mostrar los resúmens de Pago*@
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tblPaySummary"  data-add="false" data-edit="false"
+               data-delete="true" data-selectiontype="none" data-filter="true"
+               data-source="" data-paginate="true" data-title="@Global.SummaryPaymentType">
+            <thead>
+                <tr>
+                    <th data-property="PaymentTypeId" data-visible="false">ItemId</th>
+                    <th data-property="PaymentTypeDescription">@Global.PaymentType</th>
+                    <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+                    <th data-property="Currency">@Global.Currency</th>
+                    <th data-property="Amount">@Global.Amount</th>
+                    <th data-property="Exchange">@Global.ExchangeRate</th>
+                    <th data-property="LocalAmount">@Global.LocalAmount</th>
+                    <th data-property="DocumentNumber" data-visible="false">DocumentNumber</th>
+                    <th data-property="VoucherNumber" data-visible="false">VoucherNumber</th>
+                    <th data-property="CardNumber" data-visible="false">CardNumber</th>
+                    <th data-property="CardType" data-visible="false">CardType</th>
+                    <th data-property="CardTypeName" data-visible="false">CardTypeName</th>
+                    <th data-property="AuthorizationNumber" data-visible="false">AuthorizationNumber</th>
+                    <th data-property="CardsName" data-visible="false">CardsName</th>
+                    <th data-property="ValidThruMonth" data-visible="false">ValidThruMonth</th>
+                    <th data-property="ValidThruYear" data-visible="false">ValidThruYear</th>
+                    <th data-property="IssuingBankId" data-visible="false">IssuingBankId</th>
+                    <th data-property="IssuinBankName" data-visible="false">IssuinBankName</th>
+                    <th data-property="IssuingBankAccountNumber" data-visible="false">IssuingBankAccountNumber</th>
+                    <th data-property="IssuerName" data-visible="false">IssuerName</th>
+                    <th data-property="RecievingBankId" data-visible="false">RecievingBankId</th>
+                    <th data-property="RecievingBankName" data-visible="false">RecievingBankName</th>
+                    <th data-property="RecievingBankAccountNumber" data-visible="false">RecievingBankAccountNumber</th>
+                    <th data-property="SerialVoucher" data-visible="false">SerialVoucher</th>
+                    <th data-property="SerialNumber" data-visible="false">SerialNumber</th>
+                    <th data-property="Date" data-visible="false">Date</th>
+                    <th data-property="TaxBase" data-visible="false">TaxBase</th>
+                    <th data-property="Tax" data-visible="false">Tax</th>
+                    
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+

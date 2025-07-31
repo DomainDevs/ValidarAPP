@@ -1,0 +1,43 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.Company;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Parameter</a></li>
+        <li class="active">@Global.Company</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal" id="modalAccountingCompany"></div>
+}
+
+<script id="display-template" type="text/template">
+    <div>
+        <strong>-@Global.Description: </strong> {{Description}}
+        <strong>-@Global.Default: </strong>
+        <span class="label label-primary">
+            {{DefaultDescription}}
+        </span>
+    </div>
+</script>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertAccountingCompany"></div>
+    </div>
+</div>
+<div class="uif-listview" id="listViewAccountingCompany">
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/AccountingCompany")
+}
+
+

@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.EstimationTypeByPrefix
+    </div>
+</script>
+
+<div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.EstimationType</label>
+            <select class="uif-select form-control" id="ddlEstimation" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                    data-id="Id" data-name="Description" name="ddlEstimation" data-source="@Url.Content("~/EstimationTypePrefix/GetEstimationTypes")"
+                    data-filter="true" data-native="false" required></select>
+            <span class="text-danger" data-valmsg-for="ReasonId" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="divTblEstimation" class="uif-col-6 " hidden="hidden">
+            <table id="tblEstimation" class="uif-table" data-selectiontype="multiple" data-filter="false" data-paginate="true"
+                   data-edit="false" data-delete="false" data-add="false">
+                <thead>
+                    <tr>
+                        <th data-property="Id">Id</th>
+                        <th data-property="Description">@Resources.Language.LineBusiness</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="divBtn" class="modal-footer" hidden="hidden">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0353"))
+        {
+            <button type="submit" class="btn btn-default" id="btnCancelar" onclick="return false">Cancelar</button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0352"))
+        {
+            <button type="submit" class="btn btn-primary" id="btnGrabar" onclick="return false">Grabar</button>
+        }
+    </div>
+
+</div>

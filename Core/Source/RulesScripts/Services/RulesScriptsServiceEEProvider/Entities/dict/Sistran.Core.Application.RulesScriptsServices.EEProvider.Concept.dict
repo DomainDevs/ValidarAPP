@@ -1,0 +1,44 @@
+<map version="2.0" type="class" name="Concept" namespace="Sistran.Core.Application.RulesScriptsServices.EEProvider" file-version="1.0" description="CONCEPT_ENTITY">
+  <properties>
+    <property name="ConceptId" type="Integer" key="true" autonumber="id" description="CONCEPT_ID_PROPERTY" />
+    <property name="EntityId" type="Integer" key="true" description="ENTITY_ID_PROPERTY" />
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="ConceptName" type="String" size="50" description="CONCEPT_NAME_PROPERTY" />
+    <property name="ConceptTypeCode" type="Integer" description="CONCEPT_TYPE_CODE_PROPERTY" />
+    <property name="KeyOrder" type="Integer" description="KEY_ORDER_PROPERTY" />
+    <property name="IsStatic" type="Boolean" description="IS_STATIC_PROPERTY" />
+    <property name="ConceptControlCode" type="Integer" description="CONCEPT_CONTROL_CODE_PROPERTY" />
+    <property name="IsReadOnly" type="Boolean" description="IS_READ_ONLY_PROPERTY" />
+    <property name="IsVisible" type="Boolean" description="IS_VISIBLE_PROPERTY" />
+    <property name="IsNullable" type="Boolean" description="IS_NULLABLE_PROPERTY" />
+    <property name="IsPersistible" type="Boolean" description="IS_PERSISTIBLE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CONCEPT" schema="SCR" alias="CONCEPT" update="true">
+      <columns>
+        <column name="CONCEPT_ID" type="Int32" property="ConceptId" key="true"/>
+        <column name="ENTITY_ID" type="Int32" property="EntityId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="CONCEPT_NAME" type="String" property="ConceptName" allowNull="false" size="50" />
+        <column name="CONCEPT_TYPE_CD" type="Byte" property="ConceptTypeCode" allowNull="false" />
+        <column name="KEY_ORDER" type="Byte" property="KeyOrder" allowNull="false" />
+        <column name="IS_STATIC" type="Boolean" property="IsStatic" allowNull="false" />
+        <column name="CONCEPT_CONTROL_CD" type="Byte" property="ConceptControlCode" allowNull="false" />
+        <column name="IS_READ_ONLY" type="Boolean" property="IsReadOnly" allowNull="false" />
+        <column name="IS_VISIBLE" type="Boolean" property="IsVisible" allowNull="false" />
+        <column name="IS_NULLABLE" type="Boolean" property="IsNullable" allowNull="false" />
+        <column name="IS_PERSISTIBLE" type="Boolean" property="IsPersistible" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="37" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

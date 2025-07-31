@@ -1,0 +1,80 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.Field
+
+@{
+    int selectedFormatTypeItem = 0;
+}
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.ColumnNumber</label>
+            <br />
+            <input type="text" data-pattern="000" class="uif-mask" id="ColumnNumber" name="ColumnNumber" 
+                   data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="ColumnNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-9">
+            <label>@Global.Description</label>
+            <br />
+            <input type="text" id="Description" name="Description" data-val="true" data-val-required='@Global.RequiredField'
+                   onblur="this.value = this.value.toUpperCase();">
+            <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.InitialPosition</label>
+            <br />
+            <input type="text" data-pattern="000" class="uif-mask" id="InitialPosition" name="InitialPosition" 
+                   data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="InitialPosition" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Length</label>
+            <br />
+            <input type="text" data-pattern="000" class="uif-mask" id="FieldLength" name="FieldLength"
+                   data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="FieldLength" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Value</label>
+            <br />
+            <input type="text" id="FieldValue" data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="FieldLength" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Field</label>
+            <br />
+            <input type="text" id="FieldName" data-val="true">
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Format</label>
+            <select class="uif-select form-control" id="selectFieldFormat" name="selectFieldFormat"
+                    @*data-source='@Url.Content("~/Networks/GetFieldFormats")'*@ 
+                    data-id="Id" data-name="Description" data-native="true"
+                    data-selectedid="@selectedFormatTypeItem" data-val="true" data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="selectFieldFormat" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Filled</label>
+            <br />
+            <input type="text" id="Filled" maxlength="1" data-val="true">
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Alignment</label>
+            <select class="uif-select form-control" id="selectFieldAlignment" name="selectFieldAlignment" data-native="true"
+                    data-source='@Url.Content("~/Networks/GetFieldAlignment")' data-id="Id"
+                    data-name="Description" data-selectedid="@selectedFormatTypeItem" data-val="true">
+            </select>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-alert" id="alertFieldForm"></div>
+    </div>
+</div>
+

@@ -1,0 +1,158 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Massive.Models.CancellationMassiveViewModel
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.LabelCancellationMassive
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputLoadId", @placeholder = @Resources.Language.PlaceHolderLoadSearch })
+            <button class="btn btn-default" id="btnAdvancedSearch"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+
+@section Toolbar
+    {
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+            <button type="button" class="btn btn-default" id="btnMassivePrint">
+                <i class="fa fa-print" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.LabelPrinter
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExport
+            </button>
+            <button type="button" class="btn btn-primary" id="btnNewLoad">
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonNew
+            </button>           
+            <button class="btn btn-primary" id="btnTariff">
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonTariff
+            </button>
+            <button class="btn btn-primary" id="btnCancelPolicy">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.LabelCancelPolicy
+            </button>
+        </div>
+    </footer>
+}
+
+<form id="formCancellationMassive" autocomplete="off" class="form">
+    <div class="row">
+        <div class="uif-col-10">
+            <label class="field-required">@Resources.Language.LabelExcelFile</label>
+            @Html.TextBoxFor(model => model.FileName,
+                        new Dictionary<string, Object>
+                        {
+                            {"input,","false"},
+                            { "id","inputFile"},
+                            { "class", "uif-inputfile"},
+                            { "type","file"},
+                            {"data-text",Resources.Language.ChooseFile},
+                            {"accept",".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"}
+                        })
+        </div>
+        <div class="uif-col-2">
+            <div class="without-label" style="float: right">
+                <button type="button" class="btn btn-default secondary-Colombia" id="btnAddLoad">
+                    @Resources.Language.ButtonLoad
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-10 withoutOutMargin">
+            <div class="progress" style="height: 35px;">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    <span class="sr-only">0% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelStateLoad</label>
+            @Html.TextBoxFor(model => model.StateDescription, new { id = "inputStateDescription", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.TotalRecords</label>
+            @Html.TextBoxFor(model => model.RecordsTotal, new { id = "inputRecordsTotal", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelCorrectRecords</label>
+            @Html.TextBoxFor(model => model.RecordsProcessed, new { id = "inputRecordsProcessed", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.Pendings</label>
+            @Html.TextBoxFor(model => model.RecordsPendings, new { id = "inputRecordsPendings", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.WithEvents</label>
+            @Html.TextBoxFor(model => model.RecordsEvents, new { id = "inputRecordsEvents", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.WithErrors</label>
+            @Html.TextBoxFor(model => model.RecordsErrors, new { id = "inputRecordsErrors", disabled = "disabled" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12" id="divErrors">
+            <table data-paginate="true" data-selectiontype="none" class="uif-table" id="tableError" data-title="" data-filter="false">
+                <thead>
+                    <tr>
+                        <th data-property="MassiveLoadVehiclePolicyId">@Resources.Language.LabelExcelRow</th>
+                        <th data-property="LicensePlate">@Resources.Language.LabelPlate</th>
+                        <th data-property="DescriptionType">@Resources.Language.LabelType</th>
+                        <th data-property="DescriptionMake">@Resources.Language.LabelMake</th>
+                        <th data-property="CountRiskErrors">@Resources.Language.LabelErrorMessage</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="uif-col-12" id="divTemporals">
+            <table data-paginate="true" data-selectiontype="none" class="uif-table" id="tableTemporals" data-title="" data-filter="false">
+                <thead>
+                    <tr>
+                        <th data-property="Risk.Policy.Id">@Resources.Language.LabelTemporal</th>
+                        <th data-property="Risk.Policy.PolicyType.Description">@Resources.Language.LabelPolicyType</th>
+                        <th data-property="Risk.Description">@Resources.Language.LabelRisks</th>
+                        <th data-property="Risk.Policy.Summary.FullPremium">@Resources.Language.LabelPremium</th>
+                        <th data-property="TotalCommission">@Resources.Language.LabelCommission</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="uif-col-12" id="divPolicies">
+            <table data-paginate="true" data-selectiontype="none" class="uif-table" id="TableIssue" data-title="" data-filter="false">
+                <thead>
+                    <tr>
+                        <th data-property="DocumentNumber">@Resources.Language.LabelPolicy</th>
+                        <th data-property="PolicyType">@Resources.Language.LabelPolicyType</th>
+                        <th data-property="RiskIdentifier">@Resources.Language.LabelRisks</th>
+                        <th data-property="Premium">@Resources.Language.LabelPremium</th>
+                        <th data-property="Commission">@Resources.Language.LabelCommission</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/CancellationMassive")
+}

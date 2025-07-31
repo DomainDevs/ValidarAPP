@@ -1,0 +1,265 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.JournalEntryModel
+
+@{
+    ViewBag.Title = @Global.Income;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.JournalEntry</li>
+        <li class="active">@Global.Income</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-primary" role="button" id="SaveEntry" onclick="return false">
+            <i class="fa fa-floppy-o"></i>
+            @Global.Save
+        </button>
+    </footer>
+}
+
+@section Modals
+{
+    <form id="journalEntryModalForm" class="form">
+        <div class="uif-modal" id="journalEntryModal">
+            <div class="uif-modalbody">
+                @Html.Partial("JournalEntryModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" id="journalEntryModalCancel" data-dismiss="modal">
+                    @Global.Cancel
+                </button>
+                <button type="submit" class="btn btn-primary" id="journalEntryModalSave" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+    <form id="costCenterModalForm" class="form">
+        <div class="uif-modal" id="costCenterModal">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/GeneralLedger/Views/EntryModal/CostCenterModal.cshtml")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" id="costCenterModalCancel" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="costCenterModalSave" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+    <form id="analysisModalForm" class="form">
+        <div class="uif-modal" id="analysisModal">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/GeneralLedger/Views/EntryModal/AnalysisModal.cshtml")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" id="analysisModalCancel" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="analysisModalSave" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+    <form id="postDatedModalForm" class="form">
+        <div class="uif-modal" id="postDatedModal">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/GeneralLedger/Views/EntryModal/PostDatedModal.cshtml")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" id="postDatedModalCancel" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="postDatedModalSave" onclick=" return false ">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+    <div class="uif-modal" id="DeleteConfirmationModal">
+        <div class="uif-modalbody">
+            @Global.DeleteConfirmationMessage
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="deleteConfirmationCancel" data-dismiss="modal">@Global.No</button>
+            <button type="submit" class="btn btn-primary" id="deleteConfirmationAccept" onclick=" return false ">@Global.Yes</button>
+        </div>
+    </div>
+}
+
+<form id="mainForm">
+    <div class="uif-alert" id="alert"></div>
+    <div class="uif-panel" data-title="@Global.DailyEntrySeat">
+        <div class="uif-alert" id="mainAlert"></div>
+        <div class="uif-panel" data-title="@Global.Movements">
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    @Html.LabelFor(model => model.BranchId)
+                    @Html.DropDownListFor(model => model.BranchId, Enumerable.Empty<SelectListItem>(),
+                    new
+                    {
+                        @class = "uif-select",
+                        data_source = @Url.Content("~/GeneralLedger/Base/GetBranches"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        name = "BranchId",
+                        id = "BranchId",
+                        data_selectedid = @ViewBag.BranchDefault
+                    })
+                    @Html.ValidationMessageFor(model => model.BranchId)
+                </div>
+                <div class="uif-col-4">
+                    @Html.LabelFor(model => model.SalePointId)
+                    @Html.DropDownListFor(model => model.SalePointId, Enumerable.Empty<SelectListItem>(),
+                    new
+                    {
+                        @class = "uif-select",
+                        id = "SalePointId",
+                        name = "SalePointId",
+                        data_id = "Id",
+                        data_name = "Description"
+                    })
+                    @Html.ValidationMessageFor(model => model.SalePointId)
+                </div>
+                <div class="uif-col-4">
+                    @Html.LabelFor(model => model.AccountingCompanyId)
+                    @Html.DropDownListFor(model => model.AccountingCompanyId, Enumerable.Empty<SelectListItem>(),
+                   new
+                   {
+                       @class = "uif-select",
+                       data_source = @Url.Content("~/GeneralLedger/Base/GetAccountingCompanies"),
+                       id = "AccountingCompanyId",
+                       name = "AccountingCompanyId",
+                       data_id = "AccountingCompanyId",
+                       data_name = "Description",
+                       data_selectedid = @ViewBag.DefaultAccountingCompany //@Global.DefaultCompanyValue
+                   })
+                    @Html.ValidationMessageFor(model => model.AccountingCompanyId)
+                </div>
+            </div>
+            <div class="uif-alert" id="exchangeAlert"></div>
+            <div class="uif-row">
+                <div class="uif-col-8">
+                    @Html.LabelFor(model => model.Description)
+                    @Html.TextBoxFor(model => model.Description, new { @onblur = "this.value = this.value.toUpperCase();" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-4">
+                    @Html.LabelFor(model => model.Date)
+                    @Html.TextBoxFor(model => model.Date, new
+               {
+                   @class = "uif-datepicker",
+                   data_mask = "99/99/9999",
+                   name = "Date",
+                   disabled = "disabled"
+               })
+                    @Html.ValidationMessageFor(model => model.Date)
+                </div>
+            </div>
+            <table class="uif-table" data-title="@Global.AccountingAccount"
+                   data-source="null" id="tblDailyEntries"
+                   data-add="true" data-edit="true"
+                   data-delete="true" data-filter="false" data-paginate="false">
+                <thead>
+                    <tr>
+                        <th data-property="AccountingAccountId" data-visible="false">@Global.Id</th>
+                        <th data-property="AccountingAccountNumber">@Global.LedgerAccountNumber</th>
+                        <th data-property="AccountingAccountName">@Global.AccountingAccountName</th>
+                        <th data-property="AccountingNatureId" data-visible="false">@Global.Id</th>
+                        <th data-property="AccountingNatureDescription">@Global.Nature</th>
+                        <th data-property="CurrencyId" data-visible="false">@Global.Id</th>
+                        <th data-property="CurrencyDescription">@Global.Currency</th>
+                        <th data-property="ExchangeRate">@Global.Exchange</th>
+                        <th data-property="Amount">@Global.Amount</th>
+                        <th data-property="IndividualId" data-visible="false">@Global.IndividualId</th>
+                        <th data-property="DocumentNumber" data-visible="false">@Global.DocumentNumber</th>
+                        <th data-property="PersonName" data-visible="false">@Global.FullName</th>
+                        <th data-property="AccountingConceptId" data-visible="false">@Global.Id</th>
+                        <th data-property="AccountingConceptDescription" data-visible="false">@Global.AccountingConcept</th>
+                        <th data-property="BankReconciliationId" data-visible="false">@Global.Id</th>
+                        <th data-property="BankReconciliationDescription" data-visible="false">@Global.BankConciliation</th>
+                        <th data-property="ReceiptNumber" data-visible="false">@Global.VoucherNumber</th>
+                        <th data-property="ReceiptDate" data-visible="false">@Global.DateVoucher</th>
+                        <th data-property="Description">@Global.MovementDescription</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <br />
+            <div class="uif-alert" id="recordAlert"></div>
+            <ul class="uif-tab">
+                <li class="active"><a href="#tabSingle">@Global.CostCenter</a></li>
+                <li><a href="#tabSelected">@Global.Analysis</a></li>
+                <li><a href="#tabDepended">@Global.Postdated</a></li>
+            </ul>
+            <div class="uif-tab-content">
+                <div class="active" id="tabSingle">
+                    <table id="tblCostCenter" class="uif-table" data-title="@Global.CostCenter"
+                           data-source="null" data-edit="true" data-delete="true"
+                           data-filter="false" data-add="true" data-paginate="false" data-selectiontype="none">
+                        <thead>
+                            <tr>
+                                <th data-property="CostCenterId">@Global.Id</th>
+                                <th data-property="Description">@Global.Description</th>
+                                <th data-property="PercentageAmount">@Global.Percentage</th>
+                                @*<th data-property="PercentageAmountFormated" data-visible="false">@Global.Percentage</th>*@
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div id="tabSelected">
+                    <table id="tblAnalysis" class="uif-table" data-title="@Global.Analysis"
+                           data-source="null" data-edit="true" data-delete="true"
+                           data-filter="false" data-paginate="false" data-add="true" data-selectiontype="none">
+                        <thead>
+                            <tr>
+                                <th data-property="AnalysisId" data-visible="false">AnalysisId</th>
+                                <th data-property="AnalysisDescription">@Global.Code</th>
+                                <th data-property="AnalysisConceptId" data-visible="false">AnalysConceptId</th>
+                                <th data-property="AnalysisConceptDescription">@Global.Concept</th>
+                                <th data-property="Key">@Global.Key</th>
+                                <th data-property="Description">@Global.Description</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div id="tabDepended">
+                    <table id="tblPostdated" class="uif-table" data-title="@Global.Postdated"
+                           data-source="null" data-edit="true" data-delete="true"
+                           data-filter="false" data-paginate="false" data-add="true" data-selectiontype="none">
+                        <thead>
+                            <tr>
+                                <th data-property="PostDateTypeId" data-visible="false">PostDateTypeId</th>
+                                <th data-property="PostDateTypeDescription">@Global.Type</th>
+                                <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+                                <th data-property="CurrencyDescription">@Global.Currency</th>
+                                <th data-property="ExchangeRate">@Global.Exchange</th>
+                                <th data-property="DocumentNumber" data-visible="false">@Global.DocumentNumber</th>
+                                @*<th data-property="ExchangeRateFormated" data-visible="false">@Global.Exchange</th>*@
+                                <th data-property="IssueAmount">@Global.IssueAmount</th>
+                                @*<th data-property="IssueAmountFormated" data-visible="false">@Global.IssueAmount</th>*@
+                                <th data-property="LocalAmount">@Global.LocalAmount</th>
+                                @*<th data-property="LocalAmountFormated" data-visible="false">@Global.LocalAmount</th>*@
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagOptionId" value="DailyEntry" />
+<input type="hidden" id="ViewBagParameterMulticompany" value="@ViewBag.ParameterMulticompany" />
+<input type="hidden" id="ViewBagSalePointBranchUserDefault" value="@ViewBag.SalePointBranchUserDefault" />
+<input type="hidden" id="ViewBagModuleId" value="@ViewBag.ViewBagModuleId"/>
+<input type="hidden" id="ViewBagBranchDefault" value="@ViewBag.BranchDefault" />
+<input type="hidden" id="ViewBagThirdAccountingUsed" value="@ViewBag.ThirdAccountingUsed" />
+
+<input type="hidden" id="ViewBagDefaultAccountingCompany" value="@ViewBag.DefaultAccountingCompany" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/JournalEntry")
+}

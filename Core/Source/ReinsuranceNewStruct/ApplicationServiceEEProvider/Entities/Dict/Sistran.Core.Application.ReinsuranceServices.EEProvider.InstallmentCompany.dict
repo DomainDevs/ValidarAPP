@@ -1,0 +1,32 @@
+<map version="2.0" type="class" name="InstallmentCompany" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="INSTALLMENT_COMPANY_ENTITY">
+  <properties>
+    <property name="InstallmentCompanyId" type="Integer" key="true" description="INSTALLMENT_COMPANY_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="FacultativeCode" type="Integer" description="FACULTATIVE_CODE_PROPERTY" />
+    <property name="BrokerReinsuranceCode" type="Integer" description="BROKER_REINSURANCE_CODE_PROPERTY" />
+    <property name="ReinsuranceCompanyCode" type="Integer" description="REINSURANCE_COMPANY_CODE_PROPERTY" />
+    <property name="ParticipationPercentage" type="Decimal" precision="12" scale="2" description="PARTICIPATION_PERCENTAGE_PROPERTY" />
+    <property name="PremiumPercentage" type="Decimal" precision="12" scale="2" description="PREMIUM_PERCENTAGE_PROPERTY" />
+    <property name="CommissionPercentage" type="Decimal" precision="12" scale="2" description="COMMISSION_PERCENTAGE_PROPERTY" />
+    <property name="PaymentDeadline" type="DateTime" description="PAYMENT_DEADLINE_PROPERTY" />
+    <property name="ReservePremiumPercentage" type="Decimal" precision="12" scale="2" nullable="true" description="RESERVE_PREMIUM_PERCENTAGE_PROPERTY" />
+    <property name="InterestReserveRelease" type="Decimal" precision="12" scale="2" nullable="true" description="INTEREST_RESERVE_RELEASE_PROPERTY" />
+    <property name="DepositReleaseDate" type="DateTime" nullable="true" description="DEPOSIT_RELEASE_DATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="INSTALLMENT_COMPANY" schema="REINS" alias="INSTALLMENT_COMPANY" update="true">
+      <columns>
+        <column name="INSTALLMENT_COMPANY_ID" type="Int32" property="InstallmentCompanyId" key="true" identity ="true"/>
+        <column name="FACULTATIVE_CD" type="Int32" property="FacultativeCode" allowNull="false" />
+        <column name="BROKER_REINSURANCE_CD" type="Int32" property="BrokerReinsuranceCode" allowNull="false" />
+        <column name="REINSURANCE_COMPANY_CD" type="Int32" property="ReinsuranceCompanyCode" allowNull="false" />
+        <column name="PARTICIPATION_PERCENTAGE" type="Decimal" property="ParticipationPercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="PREMIUM_PERCENTAGE" type="Decimal" property="PremiumPercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="COMMISSION_PERCENTAGE" type="Decimal" property="CommissionPercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="PAYMENT_DEADLINE" type="DateTime" property="PaymentDeadline" allowNull="false" />
+        <column name="RESERVE_PREMIUM_PERCENTAGE" type="Decimal" property="ReservePremiumPercentage" size="19" precision="12" scale="2" />
+        <column name="INTEREST_RESERVE_RELEASE" type="Decimal" property="InterestReserveRelease" size="19" precision="12" scale="2" />
+        <column name="DEPOSIT_RELEASE_DATE" type="DateTime" property="DepositReleaseDate" />
+      </columns>
+    </table>
+  </tables>
+</map>

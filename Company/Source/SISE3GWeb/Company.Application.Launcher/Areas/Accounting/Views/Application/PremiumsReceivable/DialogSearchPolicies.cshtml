@@ -1,0 +1,282 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<script id="ItemToPayViewTemplate" type="text/template">
+    <div><label><b>@Global.BranchPrefixPolicyEndorsement</b>:</label> <span class="label label-warning">{{BranchPrefixPolicyEndorsement}}</span> <label><b>@Global.Quota:</b></label> {{PaymentNumber}} </div>
+    <div><label><b>@Global.DocNumInsured:</b></label> {{InsuredDocumentNumberName}} </div>
+    <div><label><b>@Global.Currency:</b></label> {{CurrencyDescription}} <label><b>@Global.Balance:</b></label> {{PaymentAmount}} <label><b>@Global.PayExpDate:</b></label> {{PaymentExpirationDate}}</div>
+    <div><label><b>@Global.BusinessType:</b></label> {{BussinessTypeDescription}}</div>
+</script>
+
+<script id="ItemToApplyViewTemplate" type="text/template">
+    <div><label><b>@Global.BranchPrefixPolicyEndorsement</b>:</label> <span class="label label-warning">{{BranchPrefixPolicyEndorsement}}</span> </div>
+    <div><label><b>@Global.Quota:</b></label> {{PaymentNumber}}</div>
+    <div><label><b>@Global.DocNumPayer:</b></label> {{PayerDocumentNumberName}} </div>
+    <div><label><b>@Global.QuotaValue:</b></label> {{ValueToCollect}}</div>
+    {{#ifCond IsReversion "==" true}}
+    <div><label> <span class="label label-warning">@Global.PremiumReversion</span></label></div>
+    {{/ifCond }}
+    {{#ifCond DiscountedCommission "!=" 0}}
+    <div><label><b>@Global.DialogCommissionRetainedCommissionGranted:</b></label> {{DiscountedCommission}}</div>
+    {{/ifCond }}
+    <di hidden="hidden">{{Tax}}</di>
+    <di hidden="hidden">{{Expenses}}</di>
+    <di hidden="hidden">{{CurrencyId}}</di>
+    <di hidden="hidden">{{IsReversion}}</di>
+</script>
+
+
+
+<form id="PoliciesSearchForm" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="uif-row">
+                    <div class="input-with-buttons" id="documentSearch">
+                        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "policyIdTxt", onkeypress = "return OnlyDecimalNumber(event,this)", @placeholder = Global.SearchPolicy })
+                        <button class="btn btn-default" id="btnSearchAdvPolicy"><i class="fa fa-angle-down"></i></button>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <ul class="uif-tab" id="policiesSearchTab">
+                        <li class="active"><a href="#searchTab">@Global.Policies</a></li>
+                        @*<li><a href="#depositPremiumTab">@Global.DepositPremium</a></li>*@
+                        <li><a href="#commissionTab">@Global.DiscountedCommissionsLabel</a></li>
+                        <li><a href="#reversionTab">@Global.ConsultationReversion</a></li>                      
+                    </ul>
+                </div>
+                <div class="uif-tab-content">
+                    <div class="tab-pane active" id="searchTab">
+                        <div id="upperPanel">
+                            @*Panel Superior*@
+                            <div class="uif-row">
+                                <div class="col-12 no-padding-right col-left">
+                                    <div class="uif-row">
+                                        <div class="uif-col-7">
+                                            <label class="control-label">@Global.Branch</label>
+                                            <br />
+                                            <select class="uif-select form-control" id="BranchSearchDrop" data-id="Id" data-name="Description"></select>
+                                        </div>
+                                        <div class="uif-col-5">
+                                            <label class="control-label">@Global.Prefix</label>
+                                            <br />
+                                            <select class="uif-select form-control" id="PrefixDrop" data-id="Id" data-name="Description"></select>
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-4">
+                                            <label class="control-label">@Global.PolicyNumber</label>
+                                            <br />
+                                            <input type="text" id="SearchPolicyNumber"
+                                                   onkeypress=" return JustNumbers(event, this); "
+                                                   data-val-required='@Global.RequiredField'
+                                                   data-val="true"
+                                                   name="SearchPolicyNumber"
+                                                   maxlength="10" />
+                                            @*<span class="text-danger" data-valmsg-for="PolicyDocumentNumber" data-valmsg-replace="true" />*@
+                                        </div>
+                                        <div class="uif-col-3">
+                                            <label class="control-label">@Global.Endorsement</label>
+                                            <br />
+                                            <select class="uif-select form-control" id="searchEndorsementNumber"></select>
+                                           
+                                        </div>
+                                        <div class="uif-col-2">
+                                            <label class="control-label">@Resources.Language.Quota</label>
+                                            <select class="uif-select form-control" name="searchPaymentNumber" id="searchPaymentNumber"></select>
+                                            @*<input type="text" id="searchPaymentNumber" name="searchPaymentNumber" disabled="disabled" style="width: 100%" />*@
+                                        </div>
+                                        <div class="uif-col-3">
+                                            <div class="without-label">
+                                                <button type="button" name="name" id="SearchSearchPoliciesButton" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-2">
+                                            <label>@Global.Currency</label>
+                                            @Html.DropDownList("selectCashCurrency", Enumerable.Empty<SelectListItem>(), new
+                                            {
+                                                @class = "uif-select form-control",
+                                                data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                                                data_id = "Id",
+                                                data_name = "Description",
+                                                data_native = "true",
+                                                data_val = "true",
+                                                data_val_required = @Global.RequiredField,
+                                                disabled = "disabled",
+                                                @style = "display: none;"
+                                            })
+                                            <span id="CurrencyDescriptionText"></span>
+                                            @*<span class="text-danger" data-valmsg-for="selectCashCurrency" data-valmsg-replace="true" />*@
+                                        </div>
+                                        <div class="uif-col-2">
+                                            <label>@Global.LabelChange</label>
+                                            <input type="text" id="CashExchangeRate" style="text-align: right" />
+                                        </div>
+                                        <div class="uif-col-4">
+                                            <label>@Global.Amount</label>
+                                            <br />
+                                            @Html.TextBox("CashAmount", "", new
+                                            {
+                                                @onkeypress = "return OnlyDecimalNumber(event,this)",
+                                                style = "text-align: right",
+                                                data_val = "true",
+                                                maxlength = "26",
+                                                data_val_required = @Global.RequiredField
+                                            })
+                                            @*<span class="text-danger" data-valmsg-for="CashAmount" data-valmsg-replace="true" />*@
+                                        </div>
+                                        <div class="uif-col-4">
+                                            <label>@Global.TotalLocalCurrency</label>
+                                            <br />
+                                            <input type="text" id="CashLocalAmount" disabled="disabled" style="text-align: right" />
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-4">
+                                            <label>@Global.LabelTotalBonus</label>
+                                            <br />
+                                            <input type="text" id="Premium_txt" disabled="disabled" style="text-align: right" />
+                                            @*<label id="Premium_txt"></label>*@
+                                        </div>
+                                        <div class="uif-col-4">
+                                            <label>@Global.Taxes</label>
+                                            <br />
+                                            <input type="text" id="Tax_txt" style="text-align: right" />
+                                        </div>
+                                        <div class="uif-col-4">
+                                            <label>@Global.accExpenses</label>
+                                            <br />
+                                            <input type="text" id="Expenses_txt" disabled="disabled" style="text-align: right" />
+
+                                        </div>
+                                    </div>
+
+                                    <div class="uif-row">
+                                        <div class="uif-col-6">
+                                            <label class="control-label">@Global.Holder</label>
+                                            <br />
+                                            <label id="InsuredDocumentNumber"></label>
+                                        </div>
+                                        <div class="uif-col-6" style="text-align: right">
+                                            <input type="checkbox" id="checkNoExpenses" disabled="disabled" />
+                                            <label class="control-label" for="checkNoExpenses">@Global.NoExpenses</label>
+                                        </div>                                        
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-12 text-right">
+                                            <button id="CleanPoliciesButton" class="btn btn-default" role="button">
+                                                <i class="fa fa-paint-brush"></i> @Global.New
+                                            </button>
+                                            <button id="AddPoliciesButton" class="btn btn-primary" role="button">
+                                                <i class="fa fa-search"></i> @Global.Add
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-12">
+                                            <div class="uif-alert" id="alertPolicyView"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*Final Panel Superior*@
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="depositPremiumTab">
+                        <div id="lowerPanel">
+                            @Html.Partial("~/Areas/Accounting/Views/Application/PremiumsReceivable/DialogDepositPremiums.cshtml")
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="commissionTab">
+                        @*<h5><b>@Global.DiscountedCommissionsLabel</b></h5>*@
+                        <div class="uif-row">
+                            <div class="text-right">
+                                <div class="uif-col-4"></div>
+                                <div class="uif-col-2">
+                                    <label>@Global.Commission</label>
+                                </div>
+                                <div class="uif-col-3">
+                                    <input type="text" id="CommissionTxt" style="text-align: right" />
+                                </div>
+                                <div class="uif-col-3">
+                                    <button id="AddCommissionButton" class="btn btn-primary" role="button">
+                                        <i class="fa fa-search"></i> @Global.Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-12">
+                                <table class="uif-table" id="DiscountedCommissionTable" data-exporttocsv="false" data-edit="false" data-delete="false"
+                                       data-filter="false" data-paginate="true"
+                                       data-title="@Global.Commission">
+                                    <thead>
+                                        <tr>
+                                            <th data-property="AgentIndividualId" data-visible="false"></th>
+                                            <th data-property="AgentName">@Global.Intermediary</th>
+                                            <th data-property="CommissionPercentage">% Comision</th>
+                                            <th data-property="AgentPercentageParticipation">% Participacion Agent</th>
+                                            <th data-property="BaseAmount">@Global.Commission</th>
+                                            <th data-property="CurrencyDescription">@Global.Currency</th>
+                                            <th data-property="ExchangeRate">@Global.ExchangeRate</th>
+                                            <th data-property="CurrencyCode" data-visible="false">CurerncyId</th>
+                                            <th data-property="Amount">Descontada</th>
+                                            @*<th data-property="CurrencyCode" data-visible="false"></th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th>TOTAL</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th id="totalCommissionfooter"></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="uif-col-12">
+                                    <div class="uif-alert" id="alertCommissionInfo"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="text-right">
+                                <div class="uif-col-5"></div>
+                                <div class="uif-col-3">
+                                    <label>@Global.Commission: </label>
+                                </div>
+                                <div class="uif-col-4">
+                                    <label id="TotalCommissionTxt"></label>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="tab-pane" id="reversionTab">
+                        @Html.Partial("~/Areas/Accounting/Views/Application/PremiumsReceivable/DialogReversion.cshtml")
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div id="ItemToApplyView" class="uif-listview">
+                    <div class="footer">
+                        <div id="TotalPremiumSearch" class="uif-col-xs-6">
+                            @Global.TotalPremium
+                        </div>
+                        <div class="uif-col-xs-6 text-right">
+                            <b id="TotalPremium"></b>
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-col-12">
+                    <div class="uif-alert" id="alertPrimeApply"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

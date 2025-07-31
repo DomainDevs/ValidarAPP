@@ -1,0 +1,29 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.CostCenterEntryModel
+
+@{
+    ViewBag.Title = "CostCenterModal";
+}
+
+<div class="form">
+    <div class="uif-alert" id="costCenterAlert"></div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            @Html.LabelFor(m => m.CostCenterId)
+            @Html.TextBoxFor(m => m.CostCenterId, new { @class = "uif-autocomplete", data_source = Url.Action("SearchCostCenterById", "Base"), data_minlenght = "1", data_displaykey = "CostCenterId", placeholder = @Global.Code })
+            @Html.ValidationMessageFor(m => m.CostCenterId)
+        </div>
+        <div class="uif-col-4">
+            @Html.LabelFor(m => m.Description)
+            @Html.TextBoxFor(m => m.Description, new { @class = "uif-autocomplete", data_source = @Url.Action("SearchCostCenterByName", "Base"), data_displaykey = "Description", placeholder = @Global.Description })
+            @Html.ValidationMessageFor(m => m.Description)
+
+        </div>
+        <div class="uif-col-4">
+            @Html.LabelFor(m => m.PercentageAmount)
+            @Html.TextBoxFor(m => m.PercentageAmount, new { onkeypress = "return OnlyDecimalNumber(event, this);", style = "text-align: right" })
+            @Html.ValidationMessageFor(m => m.PercentageAmount)
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,227 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.PaymentStatus;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.Billing</li>
+        <li class="active">@Global.PaymentStatus</li>
+    </ol>
+}
+
+
+@section Toolbar
+{
+    <footer>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0515"))
+        {
+            <button type="submit" class="btn btn-default" id="Clean" onclick="return false"><i class="fa fa-paint-brush"></i> @Global.Clean</button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0514"))
+        {
+            <button type="button" class="btn btn-primary" id="SearchPayment"><i class="fa fa-search"></i> @Global.Search</button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0516"))
+        {
+            <button class="btn btn-default" id="MainPaymentStatusPreviousPage">
+                <i class="fa fa-backward"></i> [ 100 ]
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0517"))
+        {
+            <button class="btn btn-default" id="MainPaymentStatusNextPage">
+                [ 100 ] <i class="fa fa-forward"></i>
+            </button>
+        }
+    </footer>
+}
+
+
+<div class="main-content">
+    <div class="uif-row background-grey grow">
+        <div class="uif-col-xs-12">
+            <div class="row height-100 flex">
+                <div class="col-xs-12 col-md-6 col-left">
+                    <div class="uif-panel" data-title="@Global.Search">
+                        <form id="PaymentStatusForm" onsubmit=" return false ">
+                            <div class="row form-group">
+                                <div class="uif-col-4">
+                                    <label>@Global.SearchBy</label>
+                                    @Html.DropDownList("PaymentSearchBy", Enumerable.Empty<SelectListItem>(), new
+                                    {
+                                        @class = "uif-select form-control",
+                                        data_source = @Url.Content("~/Accounting/Common/GetPaymentSearchBy"),
+                                        data_id = "Id",
+                                        data_name = "Description",
+                                        data_native = "true",
+                                        data_val = "true",
+                                        data_val_required = @Global.RequiredField
+                                    })
+                                    <span class="text-danger" data-valmsg-for="PaymentSearchBy" data-valmsg-replace="true" />
+                                </div>
+                            </div>
+                            <div class="row form-group" id="RowInsured">
+                                <div class="uif-col-4">
+                                    <label>@Global.DocumentNumber</label>
+                                    @Html.TextBox("DocumentNumberPaymentStatus", "", new
+                                    {
+                                        id = "DocumentNumberPaymentStatus",
+                                        maxlength = "20",
+                                        @class = "uif-autocomplete",
+                                        data_source = @Url.Content("~/Accounting/Common/GetInsuredByDocumentNumber"),
+                                        data_displaykey = "DocumentNumber",
+                                        placeholder = @Global.EnterDocumentNumber,
+                                        data_val = "true",
+                                        data_val_required = @Global.RequiredField
+                                    })
+                                    <span class="text-danger" data-valmsg-for="DocumentNumberPaymentStatus" data-valmsg-replace="true" />
+                                </div>
+                                <div class="uif-col-8">
+                                    <label>@Global.InsuredName</label>
+                                    @Html.TextBox("InsuredName", "", new
+                                    {
+                                        id = "InsuredName",
+                                        maxlength = "120",
+                                        @class = "uif-autocomplete",
+                                        data_source = @Url.Content("~/Accounting/Common/GetInsuredByInsuredName"),
+                                        data_displaykey = "Name",
+                                        placeholder = @Global.EnterInsurdeName,
+                                        data_val = "true",
+                                        data_val_required = @Global.RequiredField
+                                    })
+                                    <span class="text-danger" data-valmsg-for="InsuredName" data-valmsg-replace="true" />
+                                </div>
+                            </div>
+
+                            <div class="row form-group" id="RowPolicy">
+                                <div class="uif-col-6">
+                                    <label>@Global.PolicyNumber</label><br>
+                                    @Html.TextBox("PolicyNumber", "", new
+                                    {
+                                        id = "PolicyNumber",
+                                        style = "text-align: left",
+                                        maxlength = "10",
+                                        onkeypress = "return JustNumbers(event, this);",
+                                        data_val = "true",
+                                        data_val_required = @Global.RequiredField
+                                    })
+                                    <span class="text-danger" data-valmsg-for="PolicyNumber" data-valmsg-replace="true" />
+                                </div>
+                                <div class="uif-col-6">
+                                    <label>@Global.Endorsement</label><br>
+                                    <input type="text" id="EndorsementNumber" onkeypress="return JustNumbers(event, this);" maxlength="10" />
+                                </div>
+                            </div>
+
+                            <div class="row form-group" id="RowBranchPrefix">
+                                <div class="uif-col-6">
+                                    <label>@Global.Branch</label>
+                                    <br />
+                                    @Html.DropDownList("Branch", Enumerable.Empty<SelectListItem>(), new
+                                    {
+                                        @class = "uif-select form-control",
+                                        data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                                        data_id = "Id",
+                                        data_name = "Description",
+                                        data_native = "true"
+                                    })
+                                </div>
+                                <div class="uif-col-6">
+                                    <label>@Global.Prefix</label><br>
+                                    @Html.DropDownList("Prefix", Enumerable.Empty<SelectListItem>(), new
+                                    {
+                                        @class = "uif-select form-control",
+                                        data_source = @Url.Content("~/Accounting/Common/GetPrefixes"),
+                                        data_id = "Id",
+                                        data_name = "Description",
+                                        data_native = "true"
+                                    })
+                                </div>
+                            </div>
+
+                            <div class="row form-group" id="RowExpirationDates">
+                                <div class="uif-col-6">
+                                    <label>@Global.ExpirationDateFrom</label><br>
+                                    <input type="text" class="uif-datepicker" id="idExpirationDateFrom"/>
+                                </div>
+                                <div class="uif-col-6">
+                                    <label>@Global.ExpirationDateTo</label><br>
+                                    <input type="text" class="uif-datepicker" id="idExpirationDateTo" />
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="uif-col-12">
+                                    <div class="uif-alert" id="alertForm"></div>
+                                </div>
+                            </div>
+                            <!-- form -->
+                        </form>
+                    </div>
+                </div>
+                <!-- left col -->
+
+                <div class="col-xs-12 col-md-6 no-padding-left col-right">
+                    <div class="uif-panel" data-title="@Global.SearchSummary">
+                        <div id="paymentStatusListView" class="uif-listview">
+                            <div class="footer">
+                                <div class="uif-col-xs-6">
+                                    @Global.Total
+                                </div>
+                                <div class="uif-col-xs-6 text-right col-number">
+                                    <b id="TotalCash">$0.00</b><br>
+                                </div>
+                            </div>
+                            <div class="modal-footer" hidden="hidden">
+                                <div class="uif-col-4">
+                                    @Global.ErrorDescription
+                                </div>
+                                <div class="uif-col-xs-6 text-right col-number">
+                                    <b id="Error"></b><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script id="payment-template" type="text/template">
+    <div>
+        <span>
+            @Global.Policy:<strong> {{BranchPrefixPolicyEndorsement}}</strong><br />
+        </span>
+        <span>
+            @Global.Payer:<strong> {{PayerDocumentNumberName}}</strong><br />
+            @Global.InsuredName:<strong> {{InsuredDocumentNumberName}}</strong>
+        </span>
+        <br />
+        <span>@Global.QuotaNumber:<strong> {{PaymentNumber}}</strong> | @Global.Currency:<strong> {{CurrencyDescription}} </strong> | @Global.DueDate: <strong> {{PaymentExpirationDate}}</strong></span>
+        <br />
+        <span>
+            @Global.QuotaValue:<strong> {{Amount}}</strong> |
+            @Global.PayedQuota:<strong> {{PaidAmount}}</strong> |
+            @Global.DialogDepositPremiumsFeeBalance:<strong> {{PaymentAmount}}</strong>
+        </span>
+    </div>
+    <div>
+        <span class=" label label-primary">
+            @Global.Observations:<strong> {{Observations}}</strong><br/>
+        </span>
+    </div>
+</script>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainPaymentStatus")
+}

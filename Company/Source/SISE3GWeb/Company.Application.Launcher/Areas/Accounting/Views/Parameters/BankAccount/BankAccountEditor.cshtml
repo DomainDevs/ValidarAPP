@@ -1,0 +1,139 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-col-3">
+            <label class="control-label" for="AccountTypeId">
+                @Global.AccountType
+            </label>
+            <select class="uif-select form-control" id="AccountTypeId"
+                    data-source='@Url.Content("~/Accounting/Common/GetAccountTypes")' data-native="true"
+                    data-id="AccountTypeId" data-name="AccountTypeDescription" name="AccountTypeId" data-val="true"
+                    data-val-required="@Global.RequiredField"></select>
+            <span class="text-danger" data-valmsg-for="AccountTypeId" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="AccountNumber">
+                @Global.AccountNumber
+            </label>
+            <input class="form-control" placeholder='@Global.Example' data-val="true"
+                   data-val-required="@Global.RequiredField" id="AccountNumber" name="AccountNumber"
+                   type="text" value="" onkeypress="return JustNumbers(event, this);" />
+            <span class="text-danger" data-valmsg-for="AccountNumber" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="CurrencyId">
+                @Global.Currency
+            </label>
+            <select class="uif-select form-control" id="CurrencyId" data-source='@Url.Content("~/Accounting/Common/GetCurrencies")'
+                    data-id="Id" data-name="Description" name="CurrencyId" data-val="true" data-native="true"
+                    data-val-required="@Global.RequiredField"></select>
+            <span class="text-danger" data-valmsg-for="CurrencyId" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="Enabled">
+                @Global.Status
+            </label>
+            <select class="uif-select form-control" id="Enabled" data-source='@Url.Content("~/Accounting/Parameters/GetStatus")'
+                    data-id="Enabled" data-name="EnabledDescription" name="Enabled" data-val="true" data-native="true"
+                    data-val-required="@Global.RequiredField"></select>
+            <span class="text-danger" data-valmsg-for="Enabled" data-valmsg-replace="true">
+            </span>
+        </div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-col-3">
+            <label class="control-label" for="AccountingNumberBankAccount">
+                @Global.AccountingAccountNumber
+            </label>
+            <input class="uif-autocomplete" type="text"
+                   data-source="@Url.Action("GetAccountintAccountByNumber", "Parameters")"
+                   data-displaykey="AccountingNumber"
+                   placeholder='@Global.EnterNumberAccount'
+                   id="AccountingNumberBankAccount"
+                   data-val="true"
+                   data-val-required="@Global.RequiredField" value=""
+                   name="AccountingNumberBankAccount"
+                   onkeypress="return JustNumbers(event, this);" />
+            <span class="text-danger" data-valmsg-for="AccountingNumberBankAccount" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="AccountingNameBank">
+                @Global.AccountingAccountName
+            </label>
+            <input class="uif-autocomplete" type="text" 
+                   data-source="@Url.Action("GetAccountintAccountByName", "Parameters")"
+                   data-displaykey="AccountingName" 
+                   placeholder='@Global.EnterAccounName' id="AccountingNameBank"
+                   data-val="true"
+                   data-val-required="@Global.RequiredField" value="" 
+                   name="AccountingNameBank" />
+            <span class="text-danger" data-valmsg-for="AccountingNameBank" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-5">
+            <label class="control-label" for="Description">
+                @Global.Description
+            </label>
+            <input class="form-control" placeholder='@Global.ExampleObservation' id="Description" name="Description"
+                   type="text" value="" onblur="this.value = this.value.toUpperCase();" data-val="true" data-val-required="@Global.RequiredField" />
+            <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var accountName = "";
+    var accountNumber = "";
+   
+    //este código no se ejecuta desde el Main en un .js x separado ya que está dentro de un template de ListView
+    $('#AccountingNumberBankAccount').on('itemSelected', function (event, selectedItem) {
+            
+        accountName = selectedItem.AccountingName;
+        accountNumber = selectedItem.AccountingNumber;
+        accountingAccountNumber = selectedItem.AccountingNumber;
+        accountingAccountId = selectedItem.AccountingAccountId;
+        $('#AccountingNameBank').val(accountName);
+    });
+
+    $('#AccountingNameBank').on('itemSelected', function (event, selectedItem) {
+        accountName = selectedItem.AccountingName;
+        accountNumber = selectedItem.AccountingNumber;
+        accountingAccountNumber = selectedItem.AccountingNumber;
+        accountingAccountId = selectedItem.AccountingAccountId;
+        $('#AccountingNumberBankAccount').val(accountNumber);
+    });
+
+    //pierde el foco el campo de nombre cta. cble.
+    $("#AccountingNameBank").blur(function (event) {
+        setTimeout(function () {
+            $("#AccountingNameBank").val(accountName);
+        }, 50);
+    });
+
+    $("#AccountingNumberBankAccount").blur(function () {
+        setTimeout(function () {
+            $("#AccountingNumberBankAccount").val(accountNumber);
+        }, 50);
+    });
+
+    $('.cancel-button').click(function () {
+        $("#BankSelectBankAccount").removeAttr("disabled");
+        $("#BranchSelect").removeAttr("disabled");
+       
+    });
+
+    $('.add-button').click(function () {
+        $("#BankSelectBankAccount").attr("disabled", "disabled");
+        $("#BranchSelect").attr("disabled", "disabled");
+    });
+</script>
+

@@ -1,0 +1,22 @@
+<map version="2.0" type="class" name="PerceivedRetention" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="PERCEIVED_RETENTION_ENTITY">
+  <properties>
+    <property name="PerceivedRetentionId" type="Integer" key="true" description="PERCEIVED_RETENTION_ID_PROPERTY" nullable = "false" autonumber="Identity" />
+    <property name="Description" type="String" size="50" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="RetentionBaseCode" type="Integer" description="RETENTION_BASE_CODE_PROPERTY" />
+    <property name="RetentionPercentage" type="Decimal" precision="5" scale="2" description="RETENTION_PERCENTAGE_PROPERTY" />
+    <property name="MaximumDifferenceTax" type="Decimal" precision="5" scale="2" description="MAXIMUM_DIFFERENCE_TAX_PROPERTY" />
+    <property name="IsActive" type="Boolean" description="IS_ACTIVE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PERCEIVED_RETENTION" schema="ACC" alias="PERCEIVED_RETENTION" update="true">
+      <columns>
+        <column name="PERCEIVED_RETENTION_ID" type="Int32" property="PerceivedRetentionId" key="true" identity ="true" />
+        <column name="DESCRIPTION" type="String" property="Description" size="50" />
+        <column name="RETENTION_BASE_CD" type="Int32" property="RetentionBaseCode" allowNull="false" />
+        <column name="RETENTION_PERCENTAGE" type="Decimal" property="RetentionPercentage" allowNull="false" size="19" precision="5" scale="2" />
+        <column name="MAXIMUM_DIFFERENCE_TAX" type="Decimal" property="MaximumDifferenceTax" allowNull="false" size="19" precision="5" scale="2" />
+        <column name="IS_ACTIVE" type="Boolean" property="IsActive" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

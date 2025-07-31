@@ -1,0 +1,32 @@
+﻿
+<script id="title-template" type="text/template">
+    <div class="column-40" id="titleMain">
+        @Resources.LanguagePerson.LabelEditBasicInformation
+    </div>
+    <div class="column-30 no-padding" id="typeSearch">
+        <select class="uif-select important" id="selectSearchPersonType" data-val="true" data-val-required="@Resources.LanguagePerson.ErrorDocumentPersonType"
+                data-id="Id" data-name="Description" name="PersonTypeId"></select>
+    </div>
+    <div class="column-30 even" id="documentSearch">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputDocument", @placeholder = @Resources.LanguagePerson.holderIdentificationDocument })
+        <button class="btn btn-default" id="ShowSearchAdvBasicInformation"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<div id="BasicInformationPerson">
+    @Html.Partial("~/Areas/Person/Views/Person/BasicInformationPerson.cshtml")
+</div>
+<div id="BasicInformationCompany">
+    @Html.Partial("~/Areas/Person/Views/Person/BasicInformationCompany.cshtml")
+</div>
+<script id="footer-template" type="text/template">
+    <div id="btnBottomMain">
+        <button type="button" class="btn btn-default" id="CloseBasicInformation">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            @Resources.LanguagePerson.ButtonExit
+        </button>
+        <button type="button" class="btn btn-primary" id="SaveBasicInformation">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            @Resources.LanguagePerson.LabelRecord
+        </button>
+    </div>
+</script>

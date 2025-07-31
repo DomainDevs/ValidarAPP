@@ -1,0 +1,92 @@
+<map version="2.0" type="class" name="PolicyPremiumReceivable" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="RECEIVABLE_PREMIUM_STATUS_SEARCH_ENTITY">
+  <properties>
+    <property name="PolicyDocumentNumber" type="Decimal" precision="12" scale="5" description="POLICY_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="PolicyId" type="Integer" key="true" description="POLICY_ID_PROPERTY" />
+    <property name="BusinessTypeCode" type="Integer" description="BUSINESS_TYPE_CODE_PROPERTY" />
+    <property name="BussinessTypeDescription" type="String" size="30" nullable="true" description="BUSSINESS_TYPE_DESCRIPTION_PROPERTY" />
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="BranchDescription" type="String" size="50" description="BRANCH_DESCRIPTION_PROPERTY" />
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="PrefixDescription" type="String" size="50" description="PREFIX_DESCRIPTION_PROPERTY" />
+    <property name="InsuredIndividualId" type="Integer" nullable="true" description="INSURED_INDIVIDUAL_ID_PROPERTY" />
+    <property name="InsuredDocumentNumber" type="String" size="14" description="INSURED_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="InsuredName" type="String" size="8000" nullable="true" description="INSURED_NAME_PROPERTY" />
+    <property name="EndorsementId" type="Integer" key="true" description="ENDORSEMENT_ID_PROPERTY" />
+    <property name="EndorsementDocumentNumber" type="Integer" description="ENDORSEMENT_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="EndoTypeCode" type="Integer" description="ENDO_TYPE_CODE_PROPERTY" />
+    <property name="EndorsementTypeDescription" type="String" size="50" description="ENDORSEMENT_TYPE_DESCRIPTION_PROPERTY" />
+    <property name="PaymentNum" type="Integer" key="true" description="PAYMENT_NUM_PROPERTY" />
+    <property name="PayerIndividualId" type="Integer" key="true" description="PAYER_INDIVIDUAL_ID_PROPERTY" />
+    <property name="PayerDocumentNumber" type="String" size="14" description="PAYER_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="PayerName" type="String" size="8000" nullable="true" description="PAYER_NAME_PROPERTY" />
+    <property name="PaymentExpirationDate" type="DateTime" description="PAYMENT_EXPIRATION_DATE_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" description="AMOUNT_PROPERTY" />
+    <property name="PaymentAmount" type="Decimal" precision="38" scale="2" nullable="true" description="PAYMENT_AMOUNT_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+    <property name="CurrencyDescription" type="String" size="50" description="CURRENCY_DESCRIPTION_PROPERTY" />
+    <property name="ExchangeRate" type="Decimal" precision="10" scale="6" description="EXCHANGE_RATE_PROPERTY" />
+    <property name="PolicyAgentIndividualId" type="Integer" key="true" description="POLICY_AGENT_INDIVIDUAL_ID_PROPERTY" />
+    <property name="PolicyAgentDocumentNumber" type="String" size="14" description="POLICY_AGENT_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="PolicyAgentName" type="String" size="8000" nullable="true" description="POLICY_AGENT_NAME_PROPERTY" />
+    <property name="PolicyNetPremium" type="Decimal" precision="38" scale="2" description="POLICY_NET_PREMIUM_PROPERTY" />
+    <property name="PolicySurcharges" type="Decimal" precision="38" scale="2" description="POLICY_SURCHARGES_PROPERTY" />
+    <property name="PolicyExpenses" type="Decimal" precision="38" scale="2" description="POLICY_EXPENSES_PROPERTY" />
+    <property name="PolicyTaxes" type="Decimal" precision="38" scale="2" description="POLICY_TAXES_PROPERTY" />
+    <property name="PolicyDiscounts" type="Decimal" precision="38" scale="2" description="POLICY_DISCOUNTS_PROPERTY" />
+    <property name="PolicyIssuanceDate" type="DateTime" description="POLICY_ISSUANCE_DATE_PROPERTY" />
+    <property name="PolicyCurrentFrom" type="DateTime" description="POLICY_CURRENT_FROM_PROPERTY" />
+    <property name="PolicyCurrentTo" type="DateTime" nullable="true" description="POLICY_CURRENT_TO_PROPERTY" />
+    <property name="PaymentMethodId" type="Integer" key="true" description="PAYMENT_METHOD_ID_PROPERTY" />
+    <property name="PaymentMethodDescription" type="String" size="50" description="PAYMENT_METHOD_DESCRIPTION_PROPERTY" />
+    <property name="PaymentScheduleId" type="Integer" key="true" description="PAYMENT_SCHEDULE_ID_PROPERTY" />
+    <property name="PaymentScheduleDescription" type="String" size="50" description="PAYMENT_SCHEDULE_DESCRIPTION_PROPERTY" />
+    <property name="Observations" type="String" size="250" nullable="true" description="OBSERVATIONS_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="RECEIVABLE_PREMIUM_STATUS_SEARCH" schema="ACC" alias="RECEIVABLE_PREMIUM_STATUS_SEARCH" update="true">
+      <columns>
+        <column name="POLICY_DOCUMENT_NUMBER" type="Decimal" property="PolicyDocumentNumber" allowNull="false" size="19" precision="12" />
+        <column name="POLICY_ID" type="Int32" property="PolicyId" key="true" />
+        <column name="BUSINESS_TYPE_CD" type="Byte" property="BusinessTypeCode" allowNull="false" />
+        <column name="BUSSINESS_TYPE_DESCRIPTION" type="String" property="BussinessTypeDescription" size="30" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" allowNull="false" />
+        <column name="BRANCH_DESCRIPTION" type="String" property="BranchDescription" allowNull="false" size="50" />
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" allowNull="false" />
+        <column name="PREFIX_DESCRIPTION" type="String" property="PrefixDescription" allowNull="false" size="50" />
+        <column name="INSURED_INDIVIDUAL_ID" type="Int32" property="InsuredIndividualId" />
+        <column name="INSURED_DOCUMENT_NUMBER" type="String" property="InsuredDocumentNumber" allowNull="false" size="14" />
+        <column name="INSURED_NAME" type="String" property="InsuredName" size="8000" />
+        <column name="ENDORSEMENT_ID" type="Int32" property="EndorsementId" key="true" />
+        <column name="ENDORSEMENT_DOCUMENT_NUMBER" type="Int32" property="EndorsementDocumentNumber" allowNull="false" />
+        <column name="ENDO_TYPE_CD" type="Int16" property="EndoTypeCode" allowNull="false" />
+        <column name="ENDORSEMENT_TYPE_DESCRIPTION" type="String" property="EndorsementTypeDescription" allowNull="false" size="50" />
+        <column name="PAYMENT_NUM" type="Byte" property="PaymentNum" key="true" />
+        <column name="PAYER_INDIVIDUAL_ID" type="Int32" property="PayerIndividualId" key="true" />
+        <column name="PAYER_DOCUMENT_NUMBER" type="String" property="PayerDocumentNumber" allowNull="false" size="14" />
+        <column name="PAYER_NAME" type="String" property="PayerName" size="8000" />
+        <column name="PAYMENT_EXPIRATION_DATE" type="DateTime" property="PaymentExpirationDate" allowNull="false" />
+        <column name="AMOUNT" type="Decimal" property="Amount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="PAYMENT_AMOUNT" type="Decimal" property="PaymentAmount" size="19" precision="38" scale="2" />
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" allowNull="false" />
+        <column name="CURRENCY_DESCRIPTION" type="String" property="CurrencyDescription" allowNull="false" size="50" />
+        <column name="EXCHANGE_RATE" type="Decimal" property="ExchangeRate" allowNull="false" size="19" precision="10" scale="6" />
+        <column name="POLICY_AGENT_INDIVIDUAL_ID" type="Int32" property="PolicyAgentIndividualId" key="true" />
+        <column name="POLICY_AGENT_DOCUMENT_NUMBER" type="String" property="PolicyAgentDocumentNumber" allowNull="false" size="14" />
+        <column name="POLICY_AGENT_NAME" type="String" property="PolicyAgentName" size="8000" />
+        <column name="POLICY_NET_PREMIUM" type="Decimal" property="PolicyNetPremium" allowNull="false" size="19" precision="38" scale="2" />
+        <column name="POLICY_SURCHARGES" type="Decimal" property="PolicySurcharges" allowNull="false" size="19" precision="38" scale="2" />
+        <column name="POLICY_EXPENSES" type="Decimal" property="PolicyExpenses" allowNull="false" size="19" precision="38" scale="2" />
+        <column name="POLICY_TAXES" type="Decimal" property="PolicyTaxes" allowNull="false" size="19" precision="38" scale="2" />
+        <column name="POLICY_DISCOUNTS" type="Decimal" property="PolicyDiscounts" allowNull="false" size="19" precision="38" scale="2" />
+        <column name="POLICY_ISSUANCE_DATE" type="DateTime" property="PolicyIssuanceDate" allowNull="false" />
+        <column name="POLICY_CURRENT_FROM" type="DateTime" property="PolicyCurrentFrom" allowNull="false" />
+        <column name="POLICY_CURRENT_TO" type="DateTime" property="PolicyCurrentTo" />
+        <column name="PAYMENT_METHOD_ID" type="Byte" property="PaymentMethodId" key="true" />
+        <column name="PAYMENT_METHOD_DESCRIPTION" type="String" property="PaymentMethodDescription" allowNull="false" size="50" />
+        <column name="PAYMENT_SCHEDULE_ID" type="Int32" property="PaymentScheduleId" key="true" />
+        <column name="PAYMENT_SCHEDULE_DESCRIPTION" type="String" property="PaymentScheduleDescription" allowNull="false" size="50" />
+        <column name="OBSERVATIONS" type="String" property="Observations" size="250" />
+      </columns>
+    </table>
+  </tables>
+</map>

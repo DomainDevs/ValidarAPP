@@ -1,0 +1,133 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.DocumentTypeRangeViewModel
+@{
+    Layout = null;
+}
+
+
+<script id="title-template" type="text/template">
+    <div class="main-title uif-col-12">
+        Rangos de Cedulación
+    </div>
+</script>
+
+
+<div>
+
+    <div class="row">
+        <div class="uif-col-3">
+            <label class="field-required">@Html.Label(@Resources.Language.PersonType)</label>
+
+
+            <select class="uif-select form-control" id="selectPersonTypeSearch" data-val="true"
+                    data-source="@Url.Content("~/Person/Person/GetIndividualTypes")"
+                    data-id="Id" data-name="Description" name="PersonTypeSearchId" data-filter="true" data-native="false">
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <table id="tblTypePerson" class="uif-table" data-exporttocsv="true" data-exportname="DocumentTypeRange" data-add="true" data-edit="true" data-delete="false" data-filter="true" data-selectiontype="none">
+                <thead>
+                    <tr>
+                        <th data-property="Id" data-visible="false">Id</th>
+                        <th data-property="DescriptionIndividualType">Tipo Persona</th>
+                        <th data-property="Gender">Sexo</th>
+                        <th data-property="CardTypeCode.Description">Tipo Documento</th>
+                        <th data-property="CardNumberFrom">Inicial</th>
+                        <th data-property="CardNumberTo">Final</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="uif-modal" id="AddDocumentTypeRangeModal">
+
+    <div class="uif-modalbody">
+
+        <form id="formDocumentTypeRange" autocomplete="off" class="form without-space">
+
+            <div class="uif-row">
+
+                <div class="uif-col-4">
+                    <label class="field-required">@Html.Label(@Resources.Language.PersonType)</label>
+                    <select class="uif-select form-control" id="selectPersonType" name="PersonTypeId"
+                            data-id="Id" data-name="Description"
+                            data-val="true"
+                            data-val-required="Campo requerido"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.PersonTypeId)
+                </div>
+
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelGender</label>
+                    <select class="uif-select form-control" id="selectGender" name="GenderId"
+                            data-id="Value" data-name="Text"
+                            data-val="true"
+                            data-val-required="Campo requerido"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.GenderId)
+                </div>
+
+            </div>
+
+            <div class="uif-row">
+
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelTypeDocument</label>
+                    <select class="uif-select form-control" id="selectTypeDocument" name="TypeDocumentId"
+                            data-id="Id" data-name="SmallDescription"
+                            data-val="true"
+                            data-val-required="Campo requerido"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.TypeDocumentId)
+                </div>
+
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Initial</label>
+                    @Html.TextBoxFor(model => model.Inicial)
+                    @Html.ValidationMessageFor(model => model.Inicial)
+                </div>
+
+            </div>
+
+
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Html.Label("Final")</label>
+                    @Html.TextBoxFor(model => model.Final)
+                    @Html.ValidationMessageFor(model => model.Final)
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Cancel</button>
+        <button class="btn btn-primary" id="btnSaveDocumentTypeRange">@Resources.Language.Accept</button>
+    </div>
+
+
+</div>
+
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+    </div>
+</script>

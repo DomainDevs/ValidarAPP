@@ -1,0 +1,91 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.RulesAndScripts.Models.AdvSearchRuleModelView
+
+<script id="templateAdvRules" type="text/template">
+    <div>
+        <div>
+            <strong>Id: </strong>{{RuleSetId}}
+        </div>
+        <div>
+            <strong>@Resources.Language.Description:</strong> {{Description}} 
+        </div>
+        <div>
+            <strong>@Resources.Language.LabelModule: </strong> {{Package.Description}}
+        </div>
+        <div>
+            <strong>@Resources.Language.LabelLevels:</strong> {{Level.Description}}
+        </div>
+        <div>
+            <strong>@Resources.Language.DateCreate:</strong> {{CurrentFrom}}
+        </div>
+        {{#if CurrentTo}}
+        <div>
+            <strong>@Resources.Language.ModificationDate:</strong> {{CurrentTo}}
+        </div>
+        {{/if}}
+    </div>
+</script>
+<form class="form" id="formAdvRules">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            @Html.Label("Id")
+            @Html.TextBoxFor(model => model.IdAdv, new { @maxlength = "10" })
+        </div>
+        <div class="uif-col-4">
+            @Html.LabelFor(model => model.DateCreation)
+            <input type="text" id="DateCreation" name="DateCreation" value="" maxlength = "10"/>
+        </div>
+        <div class="uif-col-4">
+            @Html.LabelFor(model => model.DateModification)
+            <input type="text" id="DateModification" name="DateModification" value="" class="uif-datepicker" maxlength = "10" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            @Html.LabelFor(model => model.TypePackageId, new { @class = "field-required" })
+            <select class="uif-select" id="TypePackageId" data-native="false" name="TypePackageId" data-val-required="@Resources.Language.FieldRequired"
+                    data-val="true" data-id="PackageId" data-name="Description" required></select>
+            @Html.ValidationMessageFor(model => model.TypePackageId)
+        </div>
+        <div class="uif-col-6">
+            @Html.LabelFor(model => model.LevelIdAdv, new { @class = "field-required" })
+            <select class="uif-select" id="LevelIdAdv" name="LevelIdAdv"  data-val-required="@Resources.Language.FieldRequired"
+                    data-val="true" data-id="LevelId" data-name="Description" data-native="false" required></select>
+            @Html.ValidationMessageFor(model => model.LevelIdAdv)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            @Html.LabelFor(model => model.RuleDescription, new { @class = "field-required" })
+            @Html.TextBoxFor(model => model.RuleDescription, new { @required = "required", maxlength = "50" })
+            @Html.ValidationMessageFor(model => model.RuleDescription)
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="uif-col-12">
+        <button type="button" name="name" id="btnAdvancedSearch" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-12">
+        <div class="uif-listview" id="listViewAdv"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-6">
+        <label>"@Resources.Language.Display50records"</label>
+    </div>
+    <div class="uif-col-6">
+        <div class="pull-right width-save">
+            <button class="btn btn-default" id="btnCancelAdv" data-dismiss="modal" type="button">@Resources.Language.Close</button>
+            <button class="btn btn-primary" id="btnAcceptdAdv" type="button">@Resources.Language.Accept</button>
+        </div>
+    </div>
+</div>
+
+

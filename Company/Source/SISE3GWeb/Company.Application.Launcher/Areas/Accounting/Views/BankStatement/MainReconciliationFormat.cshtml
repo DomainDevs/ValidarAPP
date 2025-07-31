@@ -1,0 +1,106 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ReconciliationFormats;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.BankConciliation</li>
+        <li>@Global.ReconciliationFormats</li>
+    </ol>
+}
+
+@section Modals
+{
+    <form id="MainReconciliationFormatAddForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="MainReconciliationFormatModalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/BankStatement/ReconciliationFormatModal.cshtml")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="ReconciliationFormatSaveAdd" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="MainReconciliationFormatEditForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="MainReconciliationFormatModalEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/BankStatement/ReconciliationFormatModal.cshtml")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="ReconciliationFormatSaveEdit" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="uif-modal" id="modalReconciliationFormat"></div>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteReconciliationFormat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                    <br />
+                    <p id="selectedMessageDelete"></p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="ReconciliationFormatDeleteModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<br />
+
+<div class="uif-row">
+    <div class="uif-alert" id="MainReconciliationFormatAlert"></div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableReconciliationFormat" data-exporttocsv="false" data-add="true" data-edit="true"
+               data-delete="true" data-selectiontype="none" data-filter="false"
+               data-source="@Url.Action("GetReconciliationFormats", "BankStatement")"
+               data-paginate="true" data-title="@Global.ReconciliationFormats">
+            <thead>
+                <tr>
+                    <th data-property="Id" style="text-align:left">Id</th>
+                    <th data-property="BankAccountCompanyId" data-visible="false">BankAccountCompanyId</th>
+                    <th data-property="BankAccountCompanyName" style="text-align:left">@Global.AccountBank</th>
+                    <th data-property="FormatId" data-visible="false">FormatId</th>
+                    <th data-property="FormatName" style="text-align:left">@Global.Format</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<input type="hidden" id="ViewBagControlSpanReconciliationFormat" value="true" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainReconciliationFormat")
+}
+

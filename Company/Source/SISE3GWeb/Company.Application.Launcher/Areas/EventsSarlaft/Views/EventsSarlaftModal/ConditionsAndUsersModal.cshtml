@@ -1,0 +1,99 @@
+﻿<div class="row">
+    <div class="uif-col-3">
+        <div class="form-group">
+            <h5><b>@Resources.Language.LabelTabEventGroup.ToUpper()</b></h5>
+            <h5><label id="labelGroupCondition"></label></h5>
+            @*<input type="hidden" id="IdGroupEventCondition" />*@
+        </div>
+        <div class="form-group">
+            <h5><b>@Resources.Language.LabelEvent.ToUpper()</b></h5>
+            <h5><label id="labelEventEventCondition"></label></h5>
+            @*<input type="hidden" id="IdEventEventCondition" />*@
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <label>DELEGACIÓN</label>
+                <select class="uif-select form-control" id="selectDelegation" data-val="true"
+                        data-id="HierarchyId" data-name="Description" name="Delegation" data-native="false"></select>
+            </div>
+        </div>
+    </div>
+    <div class="uif-col-9">
+        <div id="divCondition">
+        </div>
+        <div id="divUser">
+            <table class="uif-table" id="tableUser" data-exporttocsv="false" data-alignactions="right" data-exportname="cultura" data-add="false" data-edit="true" data-delete="false" data-filter="true" data-selectiontype="none"
+                   data-paginate="true" data-pagesize="5" data-sort="false">
+                <thead>
+                    <tr>
+                        <th data-property="Authorized" data-type="boolean">@Resources.Language.LabelAuthorize</th>
+                        <th data-property="Notificated" data-type="boolean">@Resources.Language.LabelNotified</th>
+                        <th data-property="NotificatedDefault" data-type="boolean">@Resources.Language.LabelDefault</th>
+                        <th data-property="UserName">@Resources.Language.LabelUser</th>
+                        <th data-property="Email">@Resources.Language.LabelEmail</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-12">
+        <form id="formConditionEvent">
+            <div class="uif-inline" id="editFormCondition">
+                <input type="text" id="indexCondition" name="Index" hidden />
+                <input type="text" id="entityId" name="EntityId" hidden />
+                <input type="text" id="conditionId" name="Id" hidden />
+                <div class="row">
+                    <div class="uif-col-4">
+                        <h5><b>@Resources.Language.LabelEntity</b></h5>
+                        <h5><label id="labelEntities"></label></h5>
+                    </div>
+                    <div class="uif-col-4">
+                        <label>Operador</label>
+                        <select class="uif-select form-control" id="selectOperator" data-val="true"
+                                data-id="ComparatorId" data-name="Description" name="OperatorId" data-native="false"></select>
+                    </div>
+                    <div class="uif-col-4" id="controlsValues">
+                        <label>Valor</label>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form id="formUserEvent">
+            <div class="uif-inline" id="editFormUser">
+                <input type="text" id="indexUser" name="Index" hidden />
+                <input type="text" id="description" name="Description" hidden />
+                <input type="text" id="email" name="Email" hidden />
+                <input type="text" id="personId" name="PersonId" hidden />
+                <input type="text" id="userId" name="UserId" hidden />
+                <input type="text" id="userName" name="UserName" hidden />
+                <div class="row">
+                    <div class="uif-col-4">
+                        <div class="without-label">
+                            <input type="checkbox" id="chkAuthorized" name="chkAuthorized" />
+                            <label for="chkAuthorized">@Resources.Language.LabelAuthorize</label>
+                        </div>
+                    </div>
+                    <div class="uif-col-4">
+                        <div class="without-label">
+                            <input type="checkbox" id="chkNotified" name="chkNotificated" />
+                            <label for="chkNotified">@Resources.Language.LabelNotified</label>
+                        </div>
+                    </div>
+                    <div class="uif-col-4">
+                        <div class="without-label">
+                            <input type="checkbox" id="chkDefaultEvent" name="chkNotificatedDefault" />
+                            <label for="chkDefaultEvent">@Resources.Language.LabelDefault</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="uif-modalbuttons width-save">
+            <button type="button" class="btn btn-default" id="btnClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        </div>
+    </div>
+</div>

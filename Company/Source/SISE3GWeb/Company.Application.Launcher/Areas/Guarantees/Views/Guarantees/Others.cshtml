@@ -1,0 +1,13 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Guarantees.Models.OthersViewModel
+
+<form id="AddOthers" name="AddOthers">
+    @Html.AntiForgeryToken()
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelObservations</label>
+            @Html.TextAreaFor(model => model.Observations, new { id = "Others-Observations", cols = "12", rows = "2", style = "resize: none", @class = "changeToUpper" })
+            @Html.ValidationMessageFor(model => model.Observations)
+        </div>
+    </div>
+</form>

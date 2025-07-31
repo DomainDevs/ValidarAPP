@@ -1,0 +1,111 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.SalePointViewModel
+@using Sistran.Core.Framework.UIF.Web.Helpers;
+
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.TitleSalePoint
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("SalePoint", null, new { @class = "uif-input-search", id = "inputSalePoint", @placeholder = @Resources.Language.SearchSalePoint })
+    </div>
+</script>
+<script id="SalePointTemplate" type="text/template">
+    @*<div>{{Branch}} ({{BranchId}})</div>*@
+    {{#ifCond Status "==" 2}}
+    <div><strong class="success"><strong>{{Description}}</strong> </strong></div>
+    {{else ifCond Status "==" 3}}
+    <div><strong class="warning"><strong>{{Description}} ({{Id}})</strong> </strong></div>
+    {{else ifCond Status "==" 4}}
+    <div><strong class="danger"><strong>{{Description}} ({{Id}})</strong> </strong></div>
+    {{else}}
+    <div><strong>{{Description}} ({{Id}})</strong></div>
+    {{/ifCond}}
+    <div>{{SmallDescription}}</div>
+</script>
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExit
+            </span>
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExport
+            </span>
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+        </button>
+    </div>
+</script>
+<form id="formSalePoint" autocomplete="off" class="form form-space-adjusted">
+    <br />
+    <input type="hidden" name="Id" id="Id" />
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.Branch</label>
+                    <select class="uif-select form-control" id="selectBranch"
+                            data-id="Id" data-name="Description" name="Branch"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentBranch"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Branch)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelLongDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputLongDescription", maxlength = "50", placeholder = @Resources.Language.LabelLongDescription })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelSalesPointCode</label>
+                    @Html.TextBoxFor(model => model.Id, new { id = "inputIntPointCode", placeholder = @Resources.Language.LabelSalesPointCode })
+                    @Html.ValidationMessageFor(model => model.Id)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelShortDescription</label>
+                    @Html.TextBoxFor(model => model.SmallDescription, new { id = "inputShortDescription", maxlength = "15", placeholder = @Resources.Language.LabelShortDescription })
+                    @Html.ValidationMessageFor(model => model.SmallDescription)
+                </div>
+                <div class="without-label col-md-4">
+                    <input type="checkbox" id="chkEnabledSalesPoint" name="chkEnabledSalesPoint" />
+                    <label for="chkEnabledSalesPoint">@Resources.Language.Enabled</label>
+                    @*@Html.CheckBox(model => model.Enabled, new { id = "chkEnabledSalesPoint" })*@
+                    @Html.ValidationMessageFor(model => model.Enabled)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 col-space-adjusted">
+            <div id="listViewSalePoint" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewObject">
+                    @Resources.Language.New
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAcceptObject">
+                    @Resources.Language.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

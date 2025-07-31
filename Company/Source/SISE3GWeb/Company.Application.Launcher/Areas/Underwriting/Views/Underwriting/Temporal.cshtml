@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-40">
+        @Resources.Language.DataPolicy
+    </div>
+    <div class="column-30 no-padding">
+        <div class="date important">
+            <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate"></span>
+        </div>
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputTemporal", @placeholder = @Resources.Language.SearchTemporal })
+        <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsUnderwriting" class="footerUnderwriting">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button type="button" class="btn btn-default" id="btnPrintTemporal">
+            <i class="fa fa-print" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.PrintTemporal
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0026"))
+        {
+            <button class="btn btn-default cancel" id="btnDeleteTemporal">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonDeleteTemporal
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0283"))
+        {
+            <button type="button" class="btn btn-default" id="btnNewTemporal">
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonNewTemporal
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0284"))
+        {
+            <button type="button" class="btn btn-default" id="btnSaveTemporal">
+                <i class="fa fa-save" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonSaveTemporal
+            </button>
+        }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0025"))
+            {
+                <button class="btn btn-primary" id="btnIssuePolicy">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    <span class="" aria-hidden="true">@Resources.Language.IssuePolicy</span>
+                </button>
+            }
+        </div>
+</script>
+@*@section Scripts
+    {
+        <script type="text/javascript">
+            var AppResources;
+            var resourceManager = uif2.resourceManager({ path: rootPath + "Layout/GetResources" })
+            resourceManager.getResources().then(function (resources) {
+                AppResources = resources;
+            });
+        </script>
+    }*@
+@Html.Partial("~/Areas/Underwriting/Views/Underwriting/Underwriting.cshtml")

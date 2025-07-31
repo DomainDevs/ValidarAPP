@@ -1,0 +1,121 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.ContractObjectModelsView
+<script id="title-template" type="text/template">
+    <div class="uif-col-12">
+        @Resources.Language.UpdateContractObject
+    </div>
+</script>
+<div class="uif-modal" id="modalTextSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/TextsResults.cshtml")
+    </div>
+</div>
+<script id="footer-template" type="text/template">
+    <footer>
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" id="btnCancel">@Resources.Language.ButtonClose</button>
+                    <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.ModificationSave</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+</script>
+<form id="formContractObject" class="form">
+    <div class="row">
+        <div class="uif-col-4">
+            <input type="checkbox" id="chkUpdatePolicy" name="chkUpdatePolicy" />
+            <label for="chkUpdatePolicy">@Resources.Language.UpdateLevelPolicy</label>
+        </div>
+        <div class="uif-col-4">
+            <input type="checkbox" id="chkUpdateRisk" name="chkUpdateRisk">
+            <label for="chkUpdateRisk">@Resources.Language.UpdateLevelRisk</label>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelPrefixCommercial</label>
+                <select class="uif-select form-control" id="selectPrefixRisk" data-val="true" data-native="false" )'
+                        @*data-val-required="@Resources.Language.ErrorDocumentPrefix"*@ data-id="Id" data-name="Description" name="PrefixId"></select>
+                @Html.ValidationMessageFor(model => model.PrefixId)
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelBranch</label>
+                <select class="uif-select form-control" id="selectBranchRisk" data-val="true" )'
+                        @*data-val-required="@Resources.Language.ErrorDocumentBranch"*@ data-id="Id" data-native="false" data-name="Description" name="BranchId"></select>
+                @Html.ValidationMessageFor(model => model.BranchId)
+            </div>
+            <div class="uif-col-4">
+                <label class="required">@Resources.Language.LabelPolicyNumber</label>
+                @Html.TextBoxFor(model => model.Id, new { id = "inputPolicyNumber1", @class = "uif-input-search" })
+                @Html.ValidationMessageFor(model => model.Id)
+            </div>
+        </div>
+    </div>
+
+    <h5>
+        <strong>Datos de Texto Poliza</strong>
+    </h5>
+
+    <div class="row">
+        <div class="uif-col-8">
+            <label id="labelPrecataloged">@Resources.Language.LabelTextPrecataloged</label>
+            @Html.TextBoxFor(model => model.TextPrecataloged, new { id = "inputTextPrecatalogedPolicy", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderText })
+            @Html.ValidationMessageFor(model => model.TextPrecataloged)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelText</label>
+            @Html.TextAreaFor(model => model.TextBody, new { id = "inputTextPolicy", cols = "12", rows = "10", @class = "textarea" })
+        </div>
+    </div>
+
+    <h5>
+        <strong>Riesgos</strong>
+    </h5>
+
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.Risk</label>
+            <select class="uif-select form-control" id="selectRisk" data-val="true" data-native="false" )'
+                    @*data-val-required="@Resources.Language.ErrorDocumentPrefix"*@ data-id="Id" data-name="Description" name="RiskId"></select>
+            @Html.ValidationMessageFor(model => model.PrefixId)
+        </div>
+    </div>
+
+    <h5>
+        <strong>Datos de Texto Riesgo</strong>
+    </h5>
+
+    <div class="row">
+        <div class="uif-col-8">
+            <label id="labelPrecataloged">@Resources.Language.LabelTextPrecataloged</label>
+            @Html.TextBoxFor(model => model.TextPrecataloged, new { id = "inputTextPrecatalogedRisk", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderText })
+            @Html.ValidationMessageFor(model => model.TextPrecataloged)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelText</label>
+            @Html.TextAreaFor(model => model.TextBody, new { id = "inputTextRisk", cols = "12", rows = "10", @class = "textarea" })
+        </div>
+    </div>
+
+    <h5>
+        <strong>@Resources.Language.LabelReason</strong>
+    </h5>
+
+    <div class="row">
+        <div class="uif-col-12">
+            @Html.TextAreaFor(model => model.TextBody, new { id = "inputReason", cols = "12", rows = "10", @class = "textarea" })
+        </div>
+    </div>
+
+    <br />
+</form>

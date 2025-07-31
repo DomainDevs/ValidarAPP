@@ -1,0 +1,83 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Guarantees.Models.BindPolicyViewModel
+
+@using (Html.BeginForm("BindPolicy", "Guarantee", FormMethod.Post, new { enctype = "multipart/form-data", id = "BindPolicy" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row uif-row-pc" style="padding-top:5px;">
+        <div class="uif-col col-md-7">
+            <label>@Resources.Language.LabelSecure</label>
+            @Html.TextBoxFor(model => model.SecureName, new { disabled = "disabled" })
+        </div>
+
+        <div class="uif-col col-md-5">
+            <label>@Resources.Language.LabelNumDocument</label>
+            @Html.TextBoxFor(model => model.NumberDocument, new { disabled = "disabled", id = "BindPolicy-NumberDocument" })
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-3">
+            <label>@Resources.Language.LabelBranch</label>
+            <select class="uif-select form-control" id="selectOffice-BindPolicy" data-val="true" data-native="false" data-source="@Url.Content("~/Guarantees/Guarantees/GetBranches")"
+                    data-val-required="@Resources.Language.ErrorDocumentControlBranch" data-id="Id" data-name="Description" name="Branch"></select>
+            @Html.ValidationMessageFor(model => model.Branch_Cd)
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-3">
+            <label>@Resources.Language.LabelPrefixCommercial</label>
+            <select class="uif-select form-control" id="selectPrefixCommercial" data-val="true" data-source="@Url.Content("~/Guarantees/Guarantees/GetPrefixCommercial")"
+                    data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial" data-id="Id" data-name="Description" name="Prefix"></select>
+            @Html.ValidationMessageFor(model => model.Prefix_Cd)
+        </div>
+
+        <div class="uif-col col-md-2">
+            <label> @Resources.Language.LabelNroPolicy</label>
+            @Html.TextBoxFor(model => model.NumberPolicy, new { id = "NumberPolicy", @class = "changeToUpper" })
+            @Html.ValidationMessageFor(model => model.NumberPolicy)
+        </div>
+
+        <div class="uif-col-2" style="padding-top: 28px">
+            <button type="button" class="btn btn-default" id="btnSearchPolicy">
+                <span class="" aria-hidden="true"> @Resources.Language.search </span>
+            </button>
+        </div>
+
+        <div class="uif-col col-md-3">
+            <label>@Resources.Language.LabelEndorsement</label>
+            <select class="uif-select form-control" id="selectEndorsement" data-val="true" data-source='' data-native="false" data-val-required="@Resources.Language.ErrorDocumentControlEndorsement" data-id="Id" data-name="Description" name="Endorsement"></select>
+            @Html.ValidationMessageFor(model => model.Endorsement)
+        </div>
+
+        <div class="uif-col-2" style="padding-top: 28px">
+            <button type="button" class="btn btn-default pull-right " id="btnAssign">
+                <span class="" aria-hidden="true"> @Resources.Language.LabelAssign </span>
+            </button>
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-12">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnUnassign">
+                    <span class="" aria-hidden="true">@Resources.Language.LabelUnassign </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div id="listBindPolicyHistory" class="uif-listview"></div>
+        </div>
+    </div>
+}
+
+
+<script id="display-bindPolicyHistory" type="text/template">
+    <div><label>@Resources.Language.LabelBranch:</label> {{DescriptionBranch}}</div>
+    <div><label>@Resources.Language.LabelPrefix:</label> {{DescriptionPrefix}}</div>
+    <div><label>@Resources.Language.LabelPolicyNumber:</label> {{DocumentNumber}} - {{DocumentNum}}</div>
+    <div><label>@Resources.Language.LabelBind: SI</label></div>
+</script>

@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+
+@*TITULO*@
+<script id="title-template" type="text/template">
+    <div class="column">
+        <div id="Title">@Resources.Language.LoadDecisionTableFromExcel</div>
+    </div>
+</script>
+@**@
+
+@*FOOTER*@
+<script id="footer-template" type="text/template">
+    <button type="button" class="btn btn-default btn-sm" id="btnBack">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        <span class="" aria-hidden="true">@Resources.Language.ButtonGoBack</span>
+    </button>
+    <button type="button" class="btn btn-primary btn-sm" id="btnLoad">
+        <i class="fa fa-upload" aria-hidden="true"></i>
+        <span class="" aria-hidden="true">@Resources.Language.Load</span>
+    </button>
+</script>
+@**@
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <input class="uif-inputfile" type="file" id="loadFileXML" accept=".xml, .txt" data-text="Archivo XML">
+    </div>
+    <div class="uif-col-6">
+        <input class="uif-inputfile" type="file" id="loadFileXLS" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" data-text="Archivo Excel">
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <textarea id="txtPreviewXML" rows="25" readonly style="white-space: pre;"></textarea>
+        <input type="hidden" id="nameFileXML" />
+    </div>
+    <div class="uif-col-6">
+        <div id="divPreviewXls">
+            @Html.Action("PreviewXlsFile", "DecisionTable", new { area = "RulesAndScripts", pathXml = "", pathXls = "", save = false, isEvent = false })
+        </div>
+    </div>
+</div>
+
+
+
+@*@section Modals
+    {
+        <form id="formRulesModalEditAddData" class="form">
+            <div class="uif-modal" id="ModalPreviewFile">
+                <div class="uif-modalbody">
+                    <div id="ModalContent"></div>
+                </div>
+                <div class="uif-modalbuttons">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Cancel</button>
+                </div>
+            </div>
+        </form>
+    }*@

@@ -1,0 +1,76 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.PhoneViewModel
+<script id="phoneTemplate" type="text/template">
+    <div><strong>{{PhoneType.Description}}</strong></div>
+    <div><br>({{CountryCode}}{{CityCode}}){{Description}}</div>
+    {{#if IsMain}}
+    <div class="warning"><br>Principal</div>
+    {{/if}}
+    <div><br>Actualizado por {{UpdateUser}} - Fecha: {{UpdateDate}} </div>
+</script>
+<form id="formPhone" class="form modal-Colombia">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelPhoneType</label>
+                    <select class="uif-select form-control" id="selectPhoneType" data-id="Id" data-name="Description" required></select>
+                </div>
+                <div class="uif-col-6">
+                    <div class="checkbox">
+                        <input type="checkbox" id="chkPhonePrincipal" />
+                        <label for="chkPhonePrincipal">@Resources.LanguagePerson.LabelPrincipalCheckBox</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelCountryCode</label>
+                    <input type="text"  id="inputCountryCodeAdPnPhone"  maxlength="5" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.LabelCityCode</label>
+                    <input type="text" id="inputCityCodeAdPnPhone" maxlength="5" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelPhone</label>
+                    <input type="text" id="inputPhone" class="required number rightAlign" maxlength="15" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.LabelExtension</label>
+                    <input type="text" id="inputExtensionPhone"/>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.LabelScheduleAvailability</label>
+                    <input type="text" id="inputScheduleAvailability"  maxlength="20" />
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listPhonesses" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnNewPhone">
+                    <span aria-hidden="true"></span>
+                    @Resources.LanguagePerson.New
+                </button>
+                <button type="button" class="btn btn-primary" id="btnCreatePhone">
+                    <span aria-hidden="true"></span>
+                    @Resources.LanguagePerson.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

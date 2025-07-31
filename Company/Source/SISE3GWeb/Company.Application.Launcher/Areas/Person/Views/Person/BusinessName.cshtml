@@ -1,0 +1,81 @@
+﻿<script id="businessNameTemplate" type="text/template">
+    <div>{{NameNum}} - {{TradeName}}</div>
+    <div>{{Address.AddressType.Description}} - {{Address.Description}} - {{Address.City.Description}}</div>
+    <div>{{Phone.PhoneType.Description}} - {{Phone.Description}}</div>
+    <div>{{Email.EmailType.Description}} - {{Email.Description}}</div>
+
+</script>
+<form id="formBusinessName" class="modal-Colombia">
+    <div class="uif-alert" id="alert"></div>
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.BusinessName</label>
+                    <input type="text" id="InputBusinessName" class="upperCase-co" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.LabelAddress</label>
+                    <select class="uif-select form-control" id="selectAddressBusinessName" data-id="Id" data-name="Description"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelPhone</label>
+                    <select class="uif-select form-control" id="selectPhoneBusinessName" data-id="Id" data-name="Description"></select>
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.Email</label>
+                    <select class="uif-select form-control" id="selectEmailBusinessName" data-id="Id" data-name="Description"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="EnableId" />
+                        <label for="EnableId">@Resources.LanguagePerson.Emission</label>
+                    </div>
+                </div>
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="IsMainBusinessName" />
+                        <label for="IsMainBusinessName">@Resources.LanguagePerson.LabelPrincipalCheckBox</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="uif-col-6">
+            <div id="listBusinessName" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0104"))
+                {
+                    <button type="button" class="btn btn-default" id="btnNewBusinessName">
+                        <span class="" aria-hidden="true"></span>
+                        @Resources.LanguagePerson.NewForm
+                    </button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0105"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnCreateBusinessName">
+                        <span class="" aria-hidden="true"></span>
+                        @Resources.LanguagePerson.AddForm
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,39 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<form id="BankBranchForm" onsubmit="return false " class="form">
+    <div class="uif-panel">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label"><b>@Global.Bank</b></label>
+                <br/>
+                @Html.DropDownList("BankBranchComboModal",
+                    Enumerable.Empty<SelectListItem>(), new
+                                                        {
+                                                            @class = "uif-select form-control",
+                                                            data_source = @Url.Content("~/Accounting/Common/GetAllBanks"),
+                                                            data_id = "Id",
+                                                            data_name = "Description",
+                                                            data_native = "true",
+                                                            data_val = "true",
+                                                            data_val_required = @Global.RequiredField
+                                                        })
+                <span class="text-danger" data-valmsg-for="BankBranchComboModal" data-valmsg-replace="true" />
+            </div>
+
+            <div class="uif-col-3">
+                <b>@Global.Enabled?</b>
+                <div class="checkbox">
+                    <input type="checkbox" id="CheckEnableBank">
+                    <label for="CheckEnableBank"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertBankBranchModal"></div>
+            </div>
+        </div>
+
+    </div>
+</form>

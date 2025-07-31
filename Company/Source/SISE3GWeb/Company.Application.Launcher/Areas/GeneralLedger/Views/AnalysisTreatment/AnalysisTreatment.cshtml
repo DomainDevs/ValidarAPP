@@ -1,0 +1,43 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AnalisysTreatment;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Parameter</a></li>
+        <li class="active">@Global.AnalisysTreatment</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal" id="analysisTreatmentModal">
+    </div>
+}
+
+<script id="listTemplateAnalysis" type="text/template">
+    <span>
+        <strong>
+            -@Global.Description:
+        </strong>
+        <span class="label label-primary">
+            {{Description}}.
+        </span>
+    </span>
+</script>
+<div class="uif-row">
+    <div class="uif-alert" id="alertAnalysisTreatment"></div>
+</div>
+<div class="uif-listview" id="AnalysisTreatmentListView">
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="hiddenAnalysisTreatment" value="true" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/AnalysisTreatment")
+}

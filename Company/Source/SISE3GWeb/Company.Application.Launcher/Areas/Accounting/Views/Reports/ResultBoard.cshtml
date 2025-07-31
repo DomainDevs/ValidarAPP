@@ -1,0 +1,108 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ResultBoard;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+<ol class="breadcrumb global-header-breadcrumb">
+    <li><a href="/Home">@Global.Reports</a></li>
+    <li class="active">@Global.ResultBoard</li>
+</ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="RBReportCancel" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-remove"></span>  @Global.Clean
+            </button>
+            <button id="RBReportGenerate" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+@section modals{
+    <!-- Modal Confirma proceso de masivos-->
+    <div class="modal fade" id="modalConfirmRB" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.ResultBoard</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="RBModalConfirm">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="RBReportForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("RBReportBranch", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+           data_id = "Id",
+           data_name = "Description",
+           data_selectedid = @ViewBag.BranchDefault,
+           data_val = "true",
+           data_native = "true",
+           data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="RBReportBranch" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.DateFrom</label>
+            <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="DateFromRB"
+                   name="DateFromRB" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="DateFromRB" data-valmsg-replace="true" />
+
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.DateTo</label>
+            <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="DateToRB"
+                   name="DateToRB" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="DateToRB" data-valmsg-replace="true" />
+        </div>
+
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertRB"></div>
+        </div>
+    </div>
+</form>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/ResultBoard")
+}

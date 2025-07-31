@@ -1,0 +1,69 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.AllianceSalesPointsViewModel
+
+<script id="SalesPointTemplate" type="text/template">
+    <div><strong>{{SalePointDescription}} ({{SalePointId}})</strong></div>
+    <div>@Resources.Language.LabelBranch: {{BranchName}}</div>
+    <div>@Resources.Language.LabelAllied: {{AlliedName}}</div>
+</script>
+
+<form id="formSalesPointAlliance" autocomplete="off" class="form form-space-adjusted">
+    @Html.AntiForgeryToken()
+    <div class="row" style="margin-left:auto!important">
+        <div class="uif-col-6">
+            <div class="row row-space-adjusted">
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelAllied</label>
+                    @Html.TextBox("SalePointAlliedName", null, new { @class = "uif-input", id = "inputSalePointName", disabled = true })
+                </div>
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelBranch</label>
+                    @Html.TextBox("SalePointBranchName", null, new { @class = "uif-input", id = "inputSalePointBranchName", disabled = true })
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelSalesPointCode</label>
+                    @Html.TextBoxFor(model => model.SalePointId, new { id = "inputBranchSalePointCode", placeholder = @Resources.Language.LabelSalesPointCode })
+                    @Html.ValidationMessageFor(model => model.SalePointId)
+                </div>
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.Description</label>
+                    @Html.TextBoxFor(model => model.SalePointDescription, new { id = "inputSalePontAlliedDescription", placeholder = @Resources.Language.Description, maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.SalePointDescription)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 col-space-adjusted">
+            <div id="listViewSalesPointAlliance" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing" style="margin-left:auto!important">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewSalesPointAlliance">
+                    @Resources.Language.New
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAddSalesPointAlliance">
+                    @Resources.Language.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="uif-modalbuttons width-save">
+    <button type="button" class="btn btn-default" id="btnExitSalesPoint">
+        @Resources.Language.ButtonExit
+    </button>
+    <button class="btn btn-default" id="btnExportSalesPoint">
+        @Resources.Language.ButtonExport
+    </button>
+    <button class="btn btn-primary" id="btnSaveSalePoint">
+        @Resources.Language.ButtonSave
+    </button>
+</div>

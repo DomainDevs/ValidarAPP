@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TempApplicationPremiumComponentView">
+  <collections>
+    <collection name="TempApplicationPremiumComponent" type="Sistran.Core.Application.Accounting.Entities.TempApplicationPremiumComponent, Core.Accounting.Entities"></collection>
+    <collection name="Component" type="Sistran.Core.Application.Parameters.Entities.Component, Core.Parameters.Entities"></collection>
+    <collection name="ComponentType" type="Sistran.Core.Application.Parameters.Entities.ComponentType, Core.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="TempApplicationPremiumComponent" destination="Component" name="TempApplicationPremiumComponentComponent" type="Inner">
+      <property left="ComponentCode" type="Equal" right="ComponentCode"></property>
+    </relation>
+    <relation source="Component" destination="ComponentType" name="ComponentComponentType" type="Inner">
+      <property left="ComponentTypeCode" type="Equal" right="ComponentTypeCode"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E50945BB-1CAA-4996-86E3-FA8674F436CD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.ReinsuranceServices.EEProvider</RootNamespace>
+    <AssemblyName>Core.ReinsuranceServices.EEProvider</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\lib\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AccountingIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\Integration\AccountingIntegrationService\Core.AccountingIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AuthorizationPoliciesServices">
+      <HintPath>..\..\..\Bin\Services\Core\AuthorizationPolicies\AuthorizationPoliciesService\Core.AuthorizationPoliciesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\Common\CommonIntegrationServices\Core.CommonIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions">
+      <HintPath>..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Reinsurance.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Reinsurance\Core.Reinsurance.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.GeneralLedgerServices">
+      <HintPath>..\..\..\Bin\Services\Core\GeneralLedger\ApplicationService\Core.GeneralLedgerServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ReinsuranceIntegrationServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Services\Core\Integration\ReinsuranceIntegrationServices\Core.ReinsuranceIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ReinsuranceOperatingQuotaIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\ReinsuranceOperatingQuota\IntegrationService\Core.ReinsuranceOperatingQuotaIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ReinsuranceServices">
+      <HintPath>..\..\..\Bin\Services\Core\Reinsurance\ApplicationService\Core.ReinsuranceServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ReportingServices">
+      <HintPath>..\..\..\Bin\Services\Core\Reporting\Reporting\Core.ReportingServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.TempCommonIntegrationService">
+      <HintPath>..\..\..\Bin\Services\Core\TempCommon\TempCommonIntegrationService\Core.TempCommonIntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.TempCommonServices">
+      <HintPath>..\..\..\Bin\Services\Core\TempCommon\TempCommon\Core.TempCommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UndewritingIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\Integration\UndewritingIntegrationServices\Core.UndewritingIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePerson.IntegrationService">
+      <HintPath>..\..\..\Bin\Services\Core\UniquePerson\IntegrationService\Core.UniquePerson.IntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniqueUserIntegrationService">
+      <HintPath>..\..\..\Bin\Services\Core\UniqueUser\UniqueUserIntegrationService\Core.UniqueUserIntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniqueUserServices">
+      <HintPath>..\..\..\Bin\Services\Core\UniqueUser\UniqueUserServices\Core.UniqueUserServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Utilities">
+      <HintPath>..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServices">
+      <HintPath>..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Co.Application.Data">
+      <HintPath>..\..\..\Bin\lib\Sistran.Co.Application.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.BAF">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.BAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF.Engine">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Queries">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.SAF">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.SAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.ServiceModel">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Views, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assemblers\ModelAssembler.cs" />
+    <Compile Include="Assemblers\ModelDTOAssembler.cs" />
+    <Compile Include="DAOs\Reinsurance\AffectationTypeDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\AssociationColumnValueDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\AssociationLineDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\AssociationTypeDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\ClaimDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\ContractDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\ContractLineDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\ContractTypeDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\CumulusTypeDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\DistributionDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\ReportTypeDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\EpiTypeDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\InstallmentDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\LevelCompanyDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\LevelDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\LevelPaymentDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\LevelRestoreDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\LineBusinessReinsuranceDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\LineDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\PriorityRetentionDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\ReinsuranceDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\ResettlementTypeDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\TempAllocationDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\TempClaimReinsSourceDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\TempFacultativeCompanyDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\TempIssueLayerDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\TempLayerLineDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\TempPaymentReinsSourceDAO.cs" />
+    <Compile Include="DAOs\Reinsurance\TempRiskCoverageDAO.cs" />
+    <Compile Include="Enums\ApplyOnTypes.cs" />
+    <Compile Include="Enums\BusinessTypeKeys.cs" />
+    <Compile Include="Enums\CalculationTypes.cs" />
+    <Compile Include="Enums\ContractTypeKeys.cs" />
+    <Compile Include="Enums\ContractYear.cs" />
+    <Compile Include="Enums\CumulusDetailKeys.cs" />
+    <Compile Include="Enums\EventOperationQuota.cs" />
+    <Compile Include="Enums\ExerciseTypes.cs" />
+    <Compile Include="Enums\FileTypes.cs" />
+    <Compile Include="Enums\LineBusinessKeys.cs" />
+    <Compile Include="Enums\Modules.cs" />
+    <Compile Include="Enums\Movements.cs" />
+    <Compile Include="Enums\PrefixTypes.cs" />
+    <Compile Include="Enums\PremiumTypes.cs" />
+    <Compile Include="Enums\PresentationInformationTypes.cs" />
+    <Compile Include="Enums\ProcessTypes.cs" />
+    <Compile Include="Enums\ReportTypes.cs" />
+    <Compile Include="Helper\Worker.cs" />
+    <Compile Include="IntegrationProviders\ReinsuranceIntegrationServiceProvider.cs" />
+    <Compile Include="Models\Reinsurance\Agency.cs" />
+    <Compile Include="Models\Reinsurance\Agent.cs" />
+    <Compile Include="Models\Reinsurance\AgentDeclinedType.cs" />
+    <Compile Include="Models\Reinsurance\AgentType.cs" />
+    <Compile Include="Models\Reinsurance\AssociationType.cs" />
+    <Compile Include="Models\Reinsurance\Catastrophe.cs" />
+    <Compile Include="Models\Reinsurance\CatastrophicEvent.cs" />
+    <Compile Include="Models\Reinsurance\Cause.cs" />
+    <Compile Include="Models\Reinsurance\Claim.cs" />
+    <Compile Include="Models\Reinsurance\ClaimCoverage.cs" />
+    <Compile Include="Models\Reinsurance\ClaimEndorsement.cs" />
+    <Compile Include="Models\Reinsurance\ClaimModify.cs" />
+    <Compile Include="Models\Reinsurance\Company.cs" />
+    <Compile Include="Models\Reinsurance\CompanyType.cs" />
+    <Compile Include="Models\Reinsurance\Consortium.cs" />
+    <Compile Include="Models\Reinsurance\DamageResponsability.cs" />
+    <Compile Include="Models\Reinsurance\DamageResponsibility.cs" />
+    <Compile Include="Models\Reinsurance\DamageType.cs" />
+    <Compile Include="Models\Reinsurance\DocumentType.cs" />
+    <Compile Include="Models\Reinsurance\Driver.cs" />
+    <Compile Include="Models\Reinsurance\EconomicActivity.cs" />
+    <Compile Include="Models\Reinsurance\EmployeePerson.cs" />
+    <Compile Include="Models\Reinsurance\ReportType.cs" />
+    <Compile Include="Models\Reinsurance\Estimation.cs" />
+    <Compile Include="Models\Reinsurance\EstimationType.cs" />
+    <Compile Include="Models\Reinsurance\GroupAgent.cs" />
+    <Compile Include="Models\Reinsurance\IdentificationDocument.cs" />
+    <Compile Include="Models\Reinsurance\Individual.cs" />
+    <Compile Include="Models\Reinsurance\IndividualPaymentMethod.cs" />
+    <Compile Include="Models\Reinsurance\IndividualType.cs" />
+    <Compile Include="Models\Reinsurance\Inspection.cs" />
+    <Compile Include="Models\Reinsurance\Insured.cs" />
+    <Compile Include="Models\Reinsurance\InsuredConcept.cs" />
+    <Compile Include="Models\Reinsurance\InsuredDeclinedType.cs" />
+    <Compile Include="Models\Reinsurance\InsuredObject.cs" />
+    <Compile Include="Models\Reinsurance\InsuredProfile.cs" />
+    <Compile Include="Models\Reinsurance\InsuredSegment.cs" />
+    <Compile Include="Models\Reinsurance\InternalStatus.cs" />
+    <Compile Include="Models\Reinsurance\IssueAllocationRiskCover.cs" />
+    <Compile Include="Models\Reinsurance\PaymentAccount.cs" />
+    <Compile Include="Models\Reinsurance\PaymentAccountType.cs" />
+    <Compile Include="Models\Reinsurance\PaymentMethod.cs" />
+    <Compile Include="Models\Reinsurance\PriorityRetention.cs" />
+    <Compile Include="Models\Reinsurance\PriorityRetentionDetail.cs" />
+    <Compile Include="Models\Reinsurance\Reason.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceMassiveHeader.cs" />
+    <Compile Include="Models\Reinsurance\AssociationLine.cs" />
+    <Compile Include="Models\Reinsurance\ClaimAllocation.cs" />
+    <Compile Include="Models\Reinsurance\ClaimDistribution.cs" />
+    <Compile Include="Models\Reinsurance\Cumulus.cs" />
+    <Compile Include="Models\Reinsurance\EndorsementReinsurance.cs" />
+    <Compile Include="Models\Reinsurance\IssGetDistributionErrors.cs" />
+    <Compile Include="Models\Reinsurance\IssueAllocation.cs" />
+    <Compile Include="Models\Reinsurance\IssueLayer.cs" />
+    <Compile Include="Models\Reinsurance\IssueLayerLine.cs" />
+    <Compile Include="Enums\ReinsuranceAssociationTypes.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByFacultativeIssue.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByInsured.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByInsuredPrefix.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByLineBusiness.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByLineBusinessInsuredObject.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByLineBusinessSubLineBusiness.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByLineBusinessSubLineBusinessCoverage.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByLineBusinessSubLineBusinessInsuredObject.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByOperationTypePrefix.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByPolicy.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByPolicyLineBusinessSubLineBusiness.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationTypes\ByPrefixProduct.cs" />
+    <Compile Include="Models\Reinsurance\LineContractLimit.cs" />
+    <Compile Include="Models\Reinsurance\LineCumulusKey.cs" />
+    <Compile Include="Models\Reinsurance\LineCumulusKeyRiskCoverage.cs" />
+    <Compile Include="Models\Reinsurance\LineCumulusType.cs" />
+    <Compile Include="Models\Reinsurance\Module.cs" />
+    <Compile Include="Models\Reinsurance\PaymentAllocation.cs" />
+    <Compile Include="Models\Reinsurance\PaymentDistribution.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceAccountingParameter.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceClaimDistribution.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceClaimLayer.cs" />
+    <Compile Include="Models\Reinsurance\PaymentRequest.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceDistribution.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceDistributionHeader.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceFacultative.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceLayerIssuance.cs" />
+    <Compile Include="Models\Reinsurance\ReinsurancePaymentClaim.cs" />
+    <Compile Include="Models\Reinsurance\ReinsurancePaymentClaimAllocation.cs" />
+    <Compile Include="Models\Reinsurance\ReinsurancePaymentClaimCumulus.cs" />
+    <Compile Include="Models\Reinsurance\ReinsurancePaymentClaimLayer.cs" />
+    <Compile Include="Models\Reinsurance\AffectationType.cs" />
+    <Compile Include="Models\Reinsurance\Contract.cs" />
+    <Compile Include="Models\Reinsurance\ContractFunctionality.cs" />
+    <Compile Include="Models\Reinsurance\ContractLine.cs" />
+    <Compile Include="Models\Reinsurance\ContractType.cs" />
+    <Compile Include="Models\Reinsurance\CumulusType.cs" />
+    <Compile Include="Models\Reinsurance\EPIType.cs" />
+    <Compile Include="Models\Reinsurance\Installment.cs" />
+    <Compile Include="Models\Reinsurance\Level.cs" />
+    <Compile Include="Models\Reinsurance\LevelCompany.cs" />
+    <Compile Include="Models\Reinsurance\LevelPayment.cs" />
+    <Compile Include="Models\Reinsurance\LevelRestore.cs" />
+    <Compile Include="Models\Reinsurance\Line.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociation.cs" />
+    <Compile Include="Models\Reinsurance\LineAssociationType.cs" />
+    <Compile Include="Models\Reinsurance\Reinsurance.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceAllocation.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceCumulusRiskCoverage.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceLayer.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceLine.cs" />
+    <Compile Include="Models\Reinsurance\ReinsurancePaymentDistribution.cs" />
+    <Compile Include="Models\Reinsurance\ReinsurancePaymentLayer.cs" />
+    <Compile Include="Models\Reinsurance\ReinsurancePrefix.cs" />
+    <Compile Include="Models\Reinsurance\ReinsuranceRealClaimByClaimCode.cs" />
+    <Compile Include="Models\Reinsurance\ResettlementType.cs" />
+    <Compile Include="Models\Reinsurance\Role.cs" />
+    <Compile Include="Models\Reinsurance\SalesChannel.cs" />
+    <Compile Include="Models\Reinsurance\Select.cs" />
+    <Compile Include="Models\Reinsurance\Slip.cs" />
+    <Compile Include="Models\Reinsurance\Status.cs" />
+    <Compile Include="Models\Reinsurance\TempAllocation.cs" />
+    <Compile Include="Models\Reinsurance\TempErrorDetail.cs" />
+    <Compile Include="Models\Reinsurance\TempFacultativeCompanies.cs" />
+    <Compile Include="Models\Reinsurance\TempIssue.cs" />
+    <Compile Include="Models\Reinsurance\TempLayerDistributions.cs" />
+    <Compile Include="Models\Reinsurance\TempReinsuranceProcess.cs" />
+    <Compile Include="Models\Reinsurance\TempLineCumulusIssuance.cs" />
+    <Compile Include="Models\Reinsurance\TempRiskCoverage.cs" />
+    <Compile Include="Models\Reinsurance\TextOperation.cs" />
+    <Compile Include="Models\Reinsurance\ThirdAffected.cs" />
+    <Compile Include="Models\Reinsurance\ThirdPartyVehicle.cs" />
+    <Compile Include="ReinsuranceApplicationServiceProvider.cs" />
+    <Compile Include="Assemblers\DTOAssembler.cs" />
+    <Compile Include="Assemblers\EntityAssembler.cs" />
+    <Compile Include="Business\ReinsuranceBusiness.cs" />
+    <Compile Include="DelegateService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReinsuranceReportsServiceProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Reinsurance.Entities\Reinsurance.Entities.csproj">
+      <Project>{8983cbff-c634-4ec1-8229-3986d3789b9c}</Project>
+      <Name>Reinsurance.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reinsurance.Resources\Reinsurance.Resources.csproj">
+      <Project>{9EC9C381-B331-478E-BA56-43837C1D5FEE}</Project>
+      <Name>Reinsurance.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\DistributionClaimLayerView.uiview" />
+    <None Include="Views\GetClaimDistribution.uiview" />
+    <None Include="Views\GetClaims.uiview" />
+    <None Include="Views\GetClmTmpAllocation.uiview" />
+    <None Include="Views\GetContractLine.uiview" />
+    <None Include="Views\GetDistributionErrors.uiview" />
+    <None Include="Views\GetEndorsementReinsurance.uiview" />
+    <None Include="Views\GetIssDistribution.uiview" />
+    <None Include="Views\GetIssTmpAllocation.uiview" />
+    <None Include="Views\GetIssTmpFacultativeCompany.uiview" />
+    <None Include="Views\GetIssTmpLayerDistribution.uiview" />
+    <None Include="Views\GetIssTmpLineCumulus.uiview" />
+    <None Include="Views\GetLineCumulusType.uiview" />
+    <None Include="Views\GetModules.uiview" />
+    <None Include="Views\GetPaymentDistribution.uiview" />
+    <None Include="Views\GetPymTmpAllocation.uiview" />
+    <None Include="Views\GetReinsuranceDistribution.uiview" />
+    <None Include="Views\GetReinsuranceFacultativeDistribution.uiview" />
+    <None Include="Views\GetReinsuranceLayers.uiview" />
+    <None Include="Views\GetTempReinsuranceProcess.uiview" />
+    <None Include="Views\ReinsPaymentDistributionView.uiview" />
+    <None Include="Views\ReinsuranceClaimLayerView.uiview" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Condition="'$(BuildingInsideVisualStudio)' == 'true'" Include="..\packages\Sistran.Core.Analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\Reinsurance\ApplicationServiceEEProvider\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\ProjectDeployBranch.msbuild" />
+</Project>

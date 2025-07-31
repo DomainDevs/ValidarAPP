@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="DailyEntryConsultation">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="JournalEntryItemId">
+          <Column table-alias="JournalEntryItem" name="JournalEntryItemId" />
+        </SelectValue>
+        <SelectValue alias="AccountingAccountId">
+          <Column table-alias="AccountingAccount" name="AccountingAccountId" />
+        </SelectValue>
+        <SelectValue alias="AccountNumber">
+          <Column table-alias="AccountingAccount" name="AccountNumber" />
+        </SelectValue>
+        <SelectValue alias="AccountName">
+          <Column table-alias="AccountingAccount" name="AccountName" />
+        </SelectValue>
+        <SelectValue alias="AccountingNature">
+          <Column table-alias="JournalEntryItem" name="AccountingNature" />
+        </SelectValue>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="JournalEntryItem" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="AmountValue">
+          <Column table-alias="JournalEntryItem" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="AmountLocalValue">
+          <Column table-alias="JournalEntryItem" name="LocalAmount" />
+        </SelectValue>
+        <SelectValue alias="Date">
+          <Column table-alias="JournalEntry" name="RegisterDate" />
+        </SelectValue>
+        <SelectValue alias="EntryHeaderDescription">
+          <Column table-alias="JournalEntry" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="JournalEntryItem" name="Description" />
+        </SelectValue>
+        <SelectValue alias="EntryNumber">
+          <Column table-alias="JournalEntry" name="EntryNumber" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="JournalEntry" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="UserCode">
+          <Column table-alias="JournalEntry" name="UserCode" />
+        </SelectValue>
+        <SelectValue alias="JournalEntryId">
+          <Column table-alias="JournalEntry" name="JournalEntryId" />
+        </SelectValue>
+        <SelectValue alias="TechnicalTransaction">
+          <Column table-alias="JournalEntry" name="TechnicalTransaction" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.JournalEntryItem, Core.GeneralLedger.Entities" alias="JournalEntryItem" />
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.JournalEntry, Core.GeneralLedger.Entities" alias="JournalEntry" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="JournalEntry" name="JournalEntryId" />
+                <Column table-alias="JournalEntryItem" name="JournalEntryId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AccountingAccount, Core.GeneralLedger.Entities" alias="AccountingAccount" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="AccountingAccount" name="AccountingAccountId" />
+              <Column table-alias="JournalEntryItem" name="AccountingAccountId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

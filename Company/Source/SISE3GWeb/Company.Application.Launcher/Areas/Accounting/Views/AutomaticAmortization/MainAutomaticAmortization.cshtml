@@ -1,0 +1,311 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AutomaticAmortizationPolicies;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.SpecialProcesses</li>
+        <li class="active">@Global.AutomaticAmortizationPolicies</li>
+    </ol>
+}
+
+
+@section Modals
+{
+    <!-- Modal confirmación de generación -->
+    <div class="modal fade" id="modalSave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="saveMessageTitle">@Global.GeneratingAutomaticAmortization</label></h4>
+                </div>
+                <div class="modal-body" id="saveMessageModal">
+                    <p>@Global.MessageGenerateAutomaticAmortizationDialog</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="GenerateModalAmortization">
+                        <i class="fa fa-check"></i> @Global.Accept
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Modal confirmación de eliminación -->
+    <div class="modal fade" id="modalDeleteAmortization" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="DeleteModalAmortization">
+                        <i class="fa fa-check"></i> @Global.Accept
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="PrintAmortization" class="btn btn-default" role="button">
+            <i class="fa fa-print"></i>  @Global.Print
+        </button>
+        <button id="DeleteAmortization" class="btn btn-primary" role="button">
+            <i class="fa fa-remove"></i>  @Global.Delete
+        </button>
+        <button id="LowAmortization" class="btn btn-primary" role="button">
+            <i class="fa fa-hand-o-down"></i>  @Global.Low
+        </button>
+        <button id="ApplyAmortization" class="btn btn-primary" role="button">
+            <i class="fa fa-save"></i>  @Global.Apply
+        </button>
+    </footer>
+}
+
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <ul class="uif-tab" id="tabMainAutomaticAmortization">
+            <li class="active"><a href="#tabProcess">@Global.Processes</a></li>
+            <li><a href="#tabAmortizationPolicies">@Global.PendingApplication</a></li>
+        </ul>
+        <div class="uif-tab-content">
+            <div class="tab-pane active" id="tabProcess">
+
+                <form id="formAutomaticAmortization" onsubmit="return false" class="form">
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label>@Global.Operation</label>
+                            <select class="uif-select form-control" id="selectOperation" name="selectOperation"
+                                    data-val="true" data-val-required='@Global.RequiredField'
+                                    data-source='@Url.Content("~/Accounting/AutomaticAmortization/GetOperations")' data-id="Id" data-name="Description" data-native="true"></select>
+                            <span class="text-danger" data-valmsg-for="selectOperation" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.Branch</label>
+                            <select class="uif-select form-control" id="selectBranch" data-native="true"
+                                    data-source='@Url.Content("~/Accounting/Common/GetBranchs")' data-id="Id"
+                                    data-name="Description" data-selectedid="@ViewBag.BranchDefault"></select>
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.Prefix</label>
+                            <select class="uif-select form-control" id="selectPrefix" data-native="true"
+                                    data-source='@Url.Content("~/Accounting/Common/GetPrefixes")' data-id="Id" data-name="Description"></select>
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.Policy</label>
+                            <input type="text" value="" id="PolicyNumber" placeholder="" data-pattern="000000000000000" class="uif-mask" />
+                        </div>
+                    </div>
+
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label class="control-label" for="InsuredDocumentNumber">@Global.DocNumInsured :</label>
+                            @Html.TextBox("InsuredDocumentNumber", "", new
+                            {
+                                id = "InsuredDocumentNumber",
+                                maxlength = "20",
+                                @class = "uif-autocomplete",
+                                data_source = @Url.Content("~/Accounting/Common/GetInsuredByDocumentNumber"),
+                                data_displaykey = "DocumentNumber",
+                                placeholder = @Global.EnterInsurdeDocument,
+                                onkeypress = " return JustNumbers(event, this)",
+                                //data_val = "true",
+                                data_val_required = @Global.RequiredField
+                            })
+                            <span class="text-danger" data-valmsg-for="InsuredDocumentNumber" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="control-label" for="InsuredName">@Global.InsuredName :</label>
+                            @Html.TextBox("InsuredName", "", new
+                            {
+                                id = "InsuredName",
+                                @class = "uif-autocomplete",
+                                data_source = @Url.Content("~/Accounting/Common/GetInsuredByInsuredName"),
+                                data_displaykey = "Name",
+                                placeholder = @Global.EnterInsurdeName,
+                                //data_val = "true",
+                                data_val_required = @Global.RequiredField
+                            })
+                            <span class="text-danger" data-valmsg-for="InsuredName" data-valmsg-replace="true" />
+                        </div>
+
+                        <div class="uif-col-3">
+                            <label>@Global.AmortizedValue</label>
+                            @Html.TextBox("AmortizedValue", "", new
+                            {
+                                data_source = @Url.Content("~/Accounting/Common/GetLimitAmountAmortization"),
+                                @onkeypress = "return OnlyDecimalNumber(event,this)",
+                                style = "text-align: right",
+                                data_val = "true",
+                                data_val_required = @Global.RequiredField
+                            })
+                            <span class="text-danger" data-valmsg-for="AmortizedValue" data-valmsg-replace="true" />
+                            @*<input type="text" value="" id="AmortizedValue" placeholder="" data-pattern="000000000000000" class="uif-mask" />*@
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.FilterBy  @Global.Status</label>
+                            <select class="uif-select form-control" id="SelectStatusProcess" name="SelectStatusProcess"
+                                    data-val="true"
+                                    data-source='@Url.Content("~/Accounting/AutomaticAmortization/GetAmortizationStatus")'
+                                    data-id="Id"
+                                    data-name="Name"
+                                    data-native="true"></select>
+                        </div>
+                    </div>
+
+                    <div class="uif-row">
+                        <div class="uif-col-6">
+                            <label class="control-label">@Global.StartDate</label>
+                            <br />
+                            <input type="text" id="StartDateAmortization" name="StartDateAmortization"
+                                   data-mask="99/99/9999" class="uif-datepicker" maxlength="10" />
+                        </div>
+                        <div class="uif-col-6">
+                            <label class="control-label">@Global.DateTo</label>
+                            <br />
+                            <input type="text" id="EndDateAmortization" name="EndDateAmortization"
+                                   data-mask="99/99/9999" class="uif-datepicker" maxlength="10" />
+                        </div>
+                    </div>
+
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <div class="form-footer">
+                                <button id="CleanSearchAmortization" class="btn btn-default" role="button">
+                                    <i class="fa fa-paint-brush"></i> @Global.Clean
+                                </button>
+                                <button type="submit" id="GenerateAmortization" class="btn btn-primary" role="button" onclick=" return false ">
+                                    <i class="fa fa-search"></i> @Global.Generate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alert"></div>
+                    </div>
+                </div>
+
+                <table class="uif-table" id="tablePendingProcessesAmortization" data-exporttocsv="false"
+                       data-edit="false" data-delete="false" data-selectiontype="single" data-filter="false"
+                       data-paginate="true">
+                        <thead>
+                            <tr>
+                                <th data-property="EntryNumber" data-visible="false">EntryNumber</th>
+                                <th data-property="Id">@Global.ProcessNumber</th>
+                                <th data-property="ProcessDate">@Global.ProcessDate</th>
+                                <th data-property="PositiveTotalApplied" data-type="currency">@Global.TotalApplied (+)</th>
+                                <th data-property="NegativeTotalApplied" data-type="currency">@Global.TotalApplied (-)</th>
+                                <th data-property="UserName">@Global.User</th>
+                                <th data-property="IsApplied" data-visible="false">@Global.Applied</th>
+                                <th data-property="ReceiptNumber">@Global.TransactionNumber</th>
+                                <th data-property="IsActive">@Global.ProcessState</th>
+                                <th data-property="Progress">@Global.Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+            </div>
+            <div id="tabAmortizationPolicies" class="tab-pane">
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label>@Global.ProcessNumberAutomaticAmortization</label>
+                        <input class="uif-input-search" type="text" id="ProcessAmortizationPolicies" onkeypress="return JustNumbers(event, this);" maxlength="10" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.User</label>
+                        <input type="text" value="" id="UserNameAmortization" placeholder=""/>
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.Date</label>
+                        <input type="text" value="" id="ProcessDate" placeholder="" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.TotalDebits</label>
+                        <input type="text" value="" id="TotalDebits" placeholder="" style="text-align: right" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.TotalCredits</label>
+                        <input type="text" value="" id="TotalCredits" placeholder="" style="text-align: right" />
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertProcess"></div>
+                    </div>
+                </div>
+
+                <table class="uif-table" id="tableAmortizationPolicies" data-exporttocsv="false" data-edit="false" data-delete="false" data-selectiontype="multiple" data-filter="true"
+                       data-paginate="true" @*data-title="@Global.PendingApplication"*@>
+                    <thead>
+                        <tr>
+                            <th data-property="Id" data-visible="false">Id</th>
+                            <th data-property="BranchId" data-visible="false">BranchId</th>
+                            <th data-property="Branch">@Global.Branch</th>
+                            <th data-property="PrefixId" data-visible="false">PrefixId</th>
+                            <th data-property="Prefix">@Global.Prefix</th>
+                            <th data-property="PolicyId" data-visible="false">PrefixId</th>
+                            <th data-property="Policy">@Global.Policy</th>
+                            <th data-property="Endorsement">@Global.Endorsement</th>
+                            <th data-property="Insured">@Global.Insured</th>
+                            <th data-property="Payer">@Global.Payer</th>
+                            <th data-property="PrincipalAgent">@Global.PrincipalAgent</th>
+                            <th data-property="CurrencyId" data-visible="false">PrefixId</th>
+                            <th data-property="Currency">@Global.Currency</th>
+                            <th data-property="Amount">@Global.Amount</th>
+                            <th data-property="Change">@Global.Exchange</th>
+                            <th data-property="LocalAmount">@Global.LocalAmount</th>
+                            <th data-property="ApplicationReceiptNumber" data-visible="false">@Global.ApplicationReceiptNumber</th>
+                            <th data-property="EntryNumber" data-visible="false">EntryNumber</th>
+                            <th data-property="ProcessNumber" data-visible="false">ProcessType</th>
+                            <th data-property="InsuredPersonType" data-visible="false">InsuredPersonType</th>
+                            <th data-property="AgentPersonType" data-visible="false">AgentPersonType</th>
+                            <th data-property="PayerPersonType" data-visible="false">PayerPersonType</th>
+                            <th data-property="ItemId" data-visible="false">ItemId</th>
+                            <th data-property="ImputationId" data-visible="false">ImputationId</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainAutomaticAmortization")
+}

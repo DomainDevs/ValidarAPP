@@ -1,0 +1,75 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.ParametroViewModel
+@{
+    Layout = null;
+}
+<script id="VariableTemplate" type="text/template">
+    <div>
+        <br>
+        <strong>{{Description}}</strong>(<strong>{{Value}}</strong>)
+    </div>
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="row col-lg-12">
+        <div class="row main-title col-lg-12">
+            <div class="column-70">
+                @Resources.Language.TitleVariable
+            </div>
+            <div class="column-30 no-padding">
+               
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+<form id="formVariable" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.Description</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.Value</label>
+                    @Html.TextBoxFor(model => model.Value, new { id = "inputVariable", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Value)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listViewVariable" class="uif-listview"></div>
+        </div>
+    </div>
+
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsVariable">
+            <div class="pull-right width-select">
+                <button type="button" class="btn btn-default" id="btnUpdateVariable">@Resources.Language.Update</button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,89 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Reports</a></li>
+        <li class="active">@Global.CashAccountDailyEntryAuxiliar</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-primary " id="daylyEntryReport"><i class="fa fa-file-pdf-o"></i>@Global.BtnReport </button>
+        <button class="btn btn-primary " id="daylyEntryExcel"><i class="fa fa-file-excel-o"></i>@Global.GenerateExcel</button>
+   </footer>
+}
+
+<form id="formData">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-tab-content">
+                <div class="active" id="tabDailyEntry">
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label class="checkbox">@Global.DateFrom</label>
+                            <input type="text" class="uif-datepicker"
+                                   data-mask="99/99/9999"
+                                   id="dailyDateFrom"
+                                   name="dailyDateFrom"
+                                   data-val="true" 
+                                   data-val-required="@Global.RequiredField" />
+                            <span class="text-danger" data-valmsg-for="dailyDateFrom" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="checkbox">@Global.DateTo</label>
+                            <input type="text" class="uif-datepicker"
+                                   data-mask="99/99/9999"
+                                   id="dailyDateTo" name="dailyDateTo"
+                                   data-val="true" 
+                                   data-val-required="@Global.RequiredField" />
+                            <span class="text-danger" data-valmsg-for="dailyDateTo" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-2">
+                            <label class="control-label">@Global.AllBranches</label>
+                            <div class="checkbox">
+                                <input type="checkbox" id="allBranches">
+                                <label for="allBranches"></label>
+                            </div>
+                        </div>
+                        <div class="uif-col-3 " id="divBranches">
+                            <label class="checkbox">
+                                @Global.Select @Global.Branch
+                            </label>
+                            <select class="uif-col-12 uif-select form-control "
+                                    id="ddlBranchesAuxiliaryDailyEntry"
+                                    data-id="Id"
+                                    data-name="Description"
+                                    name="ddlBranchesAuxiliaryDailyEntry"
+                                    data-val="true" 
+                                    data-val-required="@Global.RequiredField"></select>
+                            <span class="text-danger" data-valmsg-for="ddlBranchesAuxiliaryDailyEntry" data-valmsg-replace="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <iframe src="" name="framePdf" id="framePdf" scrolling="auto" frameborder="no" width="100%" height="900px" style="margin: 0 0px 0 0;"></iframe>
+    </div>
+</form>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagOptionId" value="AuxiliaryDailyEntry" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/AuxiliaryDailyEntry")
+}

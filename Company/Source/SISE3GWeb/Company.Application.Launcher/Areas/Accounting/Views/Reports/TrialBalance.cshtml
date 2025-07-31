@@ -1,0 +1,171 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.TrialBalance;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.AccountingReports</li>
+        <li>@Global.AccountingLable</li>
+        <li class="active">@Global.TrialBalance</li>
+    </ol>
+}
+
+
+@section modals{
+    <div class="modal fade" id="modalMassiveTotRecordsTb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.TrialBalance</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="TBReportModal">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="TBReportForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">@Global.Year</label>
+            <input class="form-control" placeholder='@Global.ExampleYear' data-val="true" data-val-required="@Global.RequiredField"
+                   id="TBReportYear" name="TBReportYear" type="text" onkeypress="return JustNumbers(event, this);" maxlength="4" min="1900" />
+            <span class="text-danger" data-valmsg-for="TBReportYear" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Global.MonthFrom</label>
+            <select class="uif-select form-control required" id="TBReportMonthFrom" name="TBReportMonthFrom"
+                    data-source='@Url.Content("~/Accounting/Common/GetYearMonths")'
+                    data-val="true" data-val-required="@Global.RequiredField"
+                    data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="TBReportMonthFrom" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Global.MonthTo</label>
+            <select class="uif-select form-control required" id="TBReportMonthTo" name="TBReportMonthTo" 
+                    data-source='@Url.Content("~/Accounting/Common/GetYearMonths")'
+                    data-val="true" data-val-required="@Global.RequiredField"
+                    data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="TBReportMonthTo" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("TBReportBranch", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+           data_id = "Id",
+           data_name = "Description",
+           data_selectedid = @ViewBag.BranchDefault,
+           data_val = "true",
+           data_native = "true",
+           data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="TBReportBranch" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <span class="glyphicon glyphicon-check" id="checkAllTB"></span><input type="checkbox" id="checkAllTB"> @Global.All
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkAssetsTB"></span><input type="checkbox" id="checkAssetsTB"> @Global.Assets
+        </div>
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkLiabilitiesTB"></span><input type="checkbox" id="checkLiabilitiesTB"> @Global.Liabilities
+        </div>
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkPatrimonyTB"></span><input type="checkbox" id="checkPatrimonyTB"> @Global.Patrimony
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkIncomeTB"></span><input type="checkbox" id="checkIncomeTB"> @Global.Income
+        </div>
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkExpensesTB"></span><input type="checkbox" id="checkExpensesTB"> @Global.Expenses
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="Detail" value="D" checked>
+                    @Global.Detailed
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="Total" value="T" checked>
+                    @Global.TotalRadio
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertFormTB"></div>
+        </div>
+    </div>
+
+</form>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagAssets" value="@ViewBag.Assets" />
+<input type="hidden" id="ViewBagLiabilities" value="@ViewBag.Liabilities" />
+<input type="hidden" id="ViewBagPatrimony" value="@ViewBag.Patrimony" />
+<input type="hidden" id="ViewBagIncome" value="@ViewBag.Income" />
+<input type="hidden" id="ViewBagExpenses" value="@ViewBag.Expenses" />
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="TBReportCancel" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Clean
+            </button>
+
+            <button id="TBReportGenerate" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    @Scripts.Render("~/accounting/bundles/TrialBalance")
+}
+

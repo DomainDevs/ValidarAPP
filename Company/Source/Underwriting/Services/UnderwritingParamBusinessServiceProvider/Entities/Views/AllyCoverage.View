@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CitiesView">
+  <collections>
+    <collection name="City" type="Sistran.Company.Application.Common.Entities.City, 
+                Company.Common.Entities"></collection>
+    <collection name="Country" type="Sistran.Company.Application.Common.Entities.Country, 
+                Company.Common.Entities"></collection>
+    <collection name="State" type="Sistran.Company.Application.Common.Entities.State, 
+                Company.Common.Entities"></collection>
+    </collections>
+  <relations>
+    <relation source="City" destination="Country" name="CityCountry" type="Inner">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+    </relation>
+    <relation source="City" destination="State" name="CityState" type="Inner">
+      <property left="StateCode" type="Equal" right="StateCode"></property>
+    </relation>
+  </relations>
+</view>

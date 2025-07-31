@@ -1,0 +1,43 @@
+﻿
+
+<div class="row">
+    <div class="uif-col-12">
+        <table data-title="<b>@Resources.Language.PaymentConcept</b>" class="uif-table" id="tblPaymentConcept" data-paginate="10" data-filter="true" >
+            <thead>
+                <tr>
+                    <th data-property="Id"><b>@Resources.Language.Code</b></th>
+                    <th data-property="Description"><b>@Resources.Language.PaymentConcept</b></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table data-title="<b>@Resources.Language.PaymentConceptSelect</b>" id="tblSingleBillingInformation" data-paginate="5">
+            <thead>
+                <tr>
+                    <th data-property="PaymentConcept"><b>@Resources.Language.PaymentConcept</b></th>
+                    <th data-property="Value" data-type="currency"><b>@Resources.Language.ConceptValue</b></th>
+                    <th data-property="TaxValue" data-type="currency"><b>@Resources.Language.TaxValueAmount</b></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="uif-alert" id="alertSinglePaymentConcept"></div>
+
+        <form id="editForm" class="form">
+            <div class="uif-inline" id="editAction">
+                <div class="row">
+                    <div class="uif-col-6">
+                        <input type="text" id="inputPaymentConceptId" name="PaymentConceptId" hidden="hidden" />
+                        @Resources.Language.PaymentConcept
+                        <input type="text" id="inputPaymentConcept" name="PaymentConcept" readonly="readonly" />
+                    </div>
+                    <div class="uif-col-6">
+                        @Resources.Language.ConceptValue
+                        <input class="rightAlign" type="text" id="inputConceptValue" name="ConceptValue" maxlength="21" data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,16)"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

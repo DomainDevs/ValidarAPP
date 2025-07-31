@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ParamDeductibleView">
+  <collections>
+    <collection name="Deductible" type="Sistran.Core.Application.Quotation.Entities.Deductible, 
+                Core.Quotation.Entities"></collection>
+    <collection name="DeductibleUnit" type="Sistran.Core.Application.Parameters.Entities.DeductibleUnit, 
+                Core.Parameters.Entities"></collection>
+    <collection name="MinimumDeductibleUnit" type="Sistran.Core.Application.Parameters.Entities.DeductibleUnit, 
+                Core.Parameters.Entities"></collection>
+    <collection name="MaximumDeductibleUnit" type="Sistran.Core.Application.Parameters.Entities.DeductibleUnit, 
+                Core.Parameters.Entities"></collection>
+    <collection name="DeductibleSubject" type="Sistran.Core.Application.Parameters.Entities.DeductibleSubject, 
+                Core.Parameters.Entities"></collection>
+    <collection name="MinimumDeductibleSubject" type="Sistran.Core.Application.Parameters.Entities.DeductibleSubject, 
+                Core.Parameters.Entities"></collection>
+    <collection name="MaximumDeductibleSubject" type="Sistran.Core.Application.Parameters.Entities.DeductibleSubject, 
+                Core.Parameters.Entities"></collection>
+    <collection name="Currency" type="Sistran.Core.Application.Common.Entities.Currency, 
+                Core.Common.Entities"></collection>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Deductible" destination="DeductibleUnit" name="DeductibleDeductibleUnit" type="left">
+      <property left="DeductUnitCode" type="Equal" right="DeductUnitCode"></property>
+    </relation>
+    <relation source="Deductible" destination="MinimumDeductibleUnit" name="DeductibleMinimumDeductibleUnit" type="left">
+      <property left="MinDeductUnitCode" type="Equal" right="DeductUnitCode"></property>
+    </relation>
+    <relation source="Deductible" destination="MaximumDeductibleUnit" name="DeductibleMaxDeductibleUnit" type="left">
+      <property left="MaxDeductUnitCode" type="Equal" right="DeductUnitCode"></property>
+    </relation>
+    <relation source="Deductible" destination="DeductibleSubject" name="DeductibleDeductibleSubject" type="left">
+      <property left="DeductSubjectCode" type="Equal" right="DeductSubjectCode"></property>
+    </relation>
+    <relation source="Deductible" destination="MinimumDeductibleSubject" name="DeductibleMinimumDeductibleSubject" type="left">
+      <property left="MinDeductSubjectCode" type="Equal" right="DeductSubjectCode"></property>
+    </relation>
+    <relation source="Deductible" destination="MaximumDeductibleSubject" name="DeductibleMaxDeductibleSubject" type="left">
+      <property left="MaxDeductSubjectCode" type="Equal" right="DeductSubjectCode"></property>
+    </relation>
+    <relation source="Deductible" destination="Currency" name="DeductibleCurrency" type="left">
+      <property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+    </relation>
+    <relation source="Deductible" destination="LineBusiness" name="DeductibleLineBusiness" type="left">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+  </relations>
+</view>

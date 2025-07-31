@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskVehicleView">
+  <collections>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskVehicle" type="Sistran.Core.Application.Issuance.Entities.RiskVehicle, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Risk" type="Sistran.Core.Application.Issuance.Entities.Risk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="CompanyCoRisk" type="Sistran.Company.Application.Issuance.Entities.CompanyCoRisk, 
+                Company.Issuance.Entities"></collection>
+    <collection name="RiskPayer" type="Sistran.Core.Application.Issuance.Entities.RiskPayer, 
+                Core.Issuance.Entities"></collection>
+    <collection name="CoRiskVehicle" type="Sistran.Company.Application.Issuance.Entities.CompanyCoRiskVehicle, 
+                Company.Issuance.Entities"></collection>
+    <collection name="RiskBeneficiary" type="Sistran.Core.Application.Issuance.Entities.RiskBeneficiary, 
+                Core.Issuance.Entities"></collection>
+    <collection name="VehicleMake" type="Sistran.Core.Application.Common.Entities.VehicleMake, 
+                Core.Common.Entities"></collection>
+    <collection name="VehicleModel" type="Sistran.Core.Application.Common.Entities.VehicleModel, 
+                Core.Common.Entities"></collection>
+    <collection name="VehicleVersion" type="Sistran.Core.Application.Common.Entities.VehicleVersion, 
+                Core.Common.Entities"></collection>
+    <collection name="VehicleColor" type="Sistran.Core.Application.Common.Entities.VehicleColor, 
+                Core.Common.Entities"></collection>
+    <collection name="VehicleUse" type="Sistran.Core.Application.Common.Entities.VehicleUse, 
+                Core.Common.Entities"></collection>
+    <collection name="VehicleType" type="Sistran.Core.Application.Common.Entities.VehicleType, 
+                Core.Common.Entities"></collection>
+    <collection name="RatingZone" type="Sistran.Core.Application.Common.Entities.RatingZone, 
+                Core.Common.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskClause" type="Sistran.Core.Application.Issuance.Entities.RiskClause, 
+               Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="EndorsementRisk" destination="RiskVehicle" name="EndorsementRiskVehicle" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="Policy" name="EndorsementPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Risk" destination="EndorsementRisk" name="EndorsementRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RatingZone" destination="Risk" name="RatingZoneRisk" type="Left">
+      <property left="RatingZoneCode" type="Equal" right="RatingZoneCode"></property>
+    </relation>
+    <relation source="CompanyCoRisk" destination="EndorsementRisk" name="EndorsementCoRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskPayer" destination="EndorsementRisk" name="EndorsementRiskPayer" type="left">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+      
+    </relation>
+    <relation source="CoRiskVehicle" destination="EndorsementRisk" name="EndorsementCoRiskVehicle" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskBeneficiary" destination="EndorsementRisk" name="EndorsementRiskBeneficiary" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskClause" destination="EndorsementRisk" name="EndorsementRiskClause" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+
+    <relation source="VehicleMake" destination="RiskVehicle" name="VehicleMakeRiskVehicle" type="Left">
+      <property left="VehicleMakeCode" type="Equal" right="VehicleMakeCode"></property>
+    </relation>
+    <relation source="VehicleModel" destination="RiskVehicle" name="VehicleModelRiskVehicle" type="Left">
+      <property left="VehicleModelCode" type="Equal" right="VehicleModelCode"></property>
+    </relation>
+    <relation source="VehicleVersion" destination="RiskVehicle" name="VehicleVersionRiskVehicle" type="Left">
+      <property left="VehicleVersionCode" type="Equal" right="VehicleVersionCode"></property>
+    </relation>
+    <relation source="VehicleColor" destination="RiskVehicle" name="VehicleColorRiskVehicle" type="Left">
+      <property left="VehicleColorCode" type="Equal" right="VehicleColorCode"></property>
+    </relation>
+    <relation source="VehicleUse" destination="RiskVehicle" name="VehicleUseRiskVehicle" type="Left">
+      <property left="VehicleUseCode" type="Equal" right="VehicleUseCode"></property>
+    </relation>
+    <relation source="VehicleType" destination="RiskVehicle" name="VehicleTypeRiskVehicle" type="Left">
+      <property left="VehicleTypeCode" type="Equal" right="VehicleTypeCode"></property>
+    </relation>
+    <relation source="VehicleModel" destination="VehicleMake" name="VehicleModelVehicleMake" type="Left">
+      <property left="VehicleMakeCode" type="Equal" right="VehicleMakeCode"></property>
+    </relation>
+    <relation source="VehicleVersion" destination="VehicleModel" name="VehicleVersionVehicleModel" type="Left">
+      <property left="VehicleModelCode" type="Equal" right="VehicleModelCode"></property>
+    </relation>
+    <relation source="VehicleVersion" destination="VehicleMake" name="VehicleVersionVehicleMake" type="Left">
+      <property left="VehicleMakeCode" type="Equal" right="VehicleMakeCode"></property>
+    </relation>
+    
+  </relations>
+</view>

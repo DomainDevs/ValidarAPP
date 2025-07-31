@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Consultas";
+    Layout = "~/Views/Shared/_QueryLayout.cshtml";
+}
+
+<div id="app"></div>
+
+@section Scripts {
+    <script>
+        try {
+            var QueryManager = new QueryManager({
+                element: document.getElementById('app'),
+                endpoint: "@Url.Content("~")",
+                tokenEndpoint: "@Url.Content("~")",
+                SentryToken: 'https://067e4be49744457d8ade3ae96d70311c@sentry.io/5188045'
+            });
+        } catch (e) {
+            handleError(e);
+            //window.location.href = "@Url.Content("~")";
+        } 
+
+    </script>
+}
+

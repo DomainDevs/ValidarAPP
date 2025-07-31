@@ -1,0 +1,315 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @Global.PremiumReceivableAntiquity;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.PortfolioReports</li>
+        <li class="active">@Global.PremiumReceivableAntiquity</li>
+    </ol>
+}
+
+
+<form id="PRALReportForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4" id="divOperationType">
+            <label class="control-label">
+                @Global.SelecctionReport
+            </label>
+            @Html.DropDownList("PRALReportOperationTypeReport", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/Reports/GetReportTypeList"),
+                data_id = "Id",
+                data_name = "Description",
+                data_val = "true",
+                headen = "headen",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="PRALReportOperationTypeReport" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row" id="row1">
+        <div class="uif-col-4" id="divInsuredNumber">
+            <label>@Global.DocumentNumber  @Global.Insured</label>
+            @Html.TextBox("PRALReportInsuredByDocumentNumber", "", new
+            {
+                id = "PRALReportInsuredByDocumentNumber",
+                @class = "uif-autocomplete",
+                data_source = @Url.Content("~/Accounting/Common/GetInsuredByDocumentNumber"),
+                data_displaykey = "DocumentNumber",
+                placeholder = @Global.EnterDocumentNumber,
+                onkeypress = "return JustNumbers(event, this);",
+                data_val = "true",
+            })
+        </div>
+        <div class="uif-col-4" id="divInsured">
+            <label>@Global.Insured</label>
+            @Html.TextBox("PRALReportInsuredName", "", new
+            {
+                id = "PRALReportInsuredName",
+                @class = "uif-autocomplete",
+                data_source = @Url.Content("~/Accounting/Common/GetInsuredByInsuredName"),
+                data_displaykey = "Name",
+                placeholder = @Global.EnterInsurdeName,
+                data_val = "true",
+            })
+        </div>
+        <div class="uif-col-4" id="divBranch">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("PRALReportBranch", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Accounting/Common/GetListBranchesbyUserName"),
+           data_id = "Id",
+           data_selectedid = @ViewBag.BranchDefault,
+           data_name = "Description",
+           data_val = "true",
+           data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="PRALReportBranch" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-4" id="divCurrency" hidden="hidden">
+            <label class="control-label">
+                @Global.Currency
+            </label>
+            @Html.DropDownList("PRALReportCurrency", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                data_id = "Id",
+                data_name = "Description",
+                data_native = "true",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="PRALReportCurrency" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4" id="divRadio" hidden="hidden">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="RemoveNegativeAndZeroValues" value="RN">
+                    @Global.RemoveNegativeAndZeroValues
+                </label>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="uif-row" id="row2" hidden="hidden">
+        <div class="uif-col-4" id="divOperation">
+            <label class="control-label">
+                @Global.Operation
+            </label>
+            @Html.DropDownList("PRALReportOperation", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/AutomaticCreditNotes/GetOperations"),
+                data_id = "Id",
+                data_name = "Description",
+                data_val = "true",
+            })
+        </div>
+        <div class="uif-col-4" id="divPrefix">
+            <label class="control-label">
+                @Global.Prefix
+            </label>
+            @Html.DropDownList("PRALReportPrefix", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/Common/GetPrefixes"),
+                data_id = "Id",
+                data_name = "Description",
+                data_val = "true",
+            })
+        </div>
+        <div class="uif-col-4" id="divPrefixTechnical">
+            <label class="control-label">
+                @Global.TechnicalPrefix
+            </label>
+            @Html.DropDownList("PRALReportPrefixTechnical", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_id = "Id",
+                data_name = "Description",
+                data_native = "true",
+                data_val = "true",
+            })
+        </div>
+    </div>
+
+    <div class="uif-row" id="row3" hidden="hidden">
+        <div class="uif-col-4" id="divAgentNumber">
+            <label>@Global.DocumentNumber @Global.Agent</label>
+            @Html.TextBox("PRALReportAgentByDocumentNumber", "", new
+            {
+                id = "PRALReportAgentByDocumentNumber",
+                @class = "uif-autocomplete",
+                data_source = @Url.Content("~/Accounting/Common/GetAgentByDocumentNumber"),
+                data_displaykey = "DocumentNumber",
+                onkeypress = "return JustNumbers(event, this);",
+                placeholder = @Global.EnterDocumentNumber,
+                data_val = "true",
+            })
+        </div>
+        <div class="uif-col-4" id="divAgent">
+            <label>@Global.AgentName</label>
+            @Html.TextBox("PRALReportAgentName", "", new
+            {
+                id = "PRALReportAgentName",
+                @class = "uif-autocomplete",
+                data_source = @Url.Content("~/Accounting/Common/GetAgentByName"),
+                data_displaykey = "Name",
+                placeholder = @Global.EnterAgentName,
+                data_val = "true",
+            })
+        </div>
+        <div class="uif-col-4" id="divSalesPoint" hidden="hidden">
+            <label class="control-label">
+                @Global.SalePoint
+            </label>
+            @Html.DropDownList("PRALReportSalesPoint", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_id = "Id",
+                data_name = "Description",
+                data_val = "true",
+                data_native = "true",
+                data_val_required = @Global.ValidationRequired
+            })
+            <span class="text-danger" data-valmsg-for="PRALReportSalesPoint" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4" id="divDueDate">
+            <label>@Global.CutDate</label>
+            <input class="uif-datepicker" type="text" id="PRALReportDueDate" name="PRALReportDueDate" data-mask="99/99/9999" required="" />
+            <span class="text-danger" data-valmsg-for="PRALReportDueDate" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-4" id="divDateFrom" hidden="hidden">
+            <label>@Global.DateFrom</label>
+            <input class="uif-datepicker" type="text" id="PRALReportStartDate" name="PRALReportStartDate" data-mask="99/99/9999" required="" />
+            <span class="text-danger" data-valmsg-for="PRALReportStartDate" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-4" id="divDateTo" hidden="hidden">
+            <label>@Global.DateTo</label>
+            <input class="uif-datepicker" type="text" id="PRALReportEndDate" name="PRALReportEndDate" data-mask="99/99/9999" required="" />
+            <span class="text-danger" data-valmsg-for="PRALReportEndDate" data-valmsg-replace="true">
+            </span>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4" id="divRanges" hidden="hidden">
+            <label class="control-label">
+                @Global.Range
+            </label>
+            @Html.DropDownList("PRALReportRangeList", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_id = "Id",
+                data_name = "Description",
+                data_native = "true",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="PRALReportRangeList" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4" id="divDateToCollection" hidden="hidden">
+            <label>@Global.DateTo</label>
+            <input class="uif-datepicker" type="text" id="PRALReportDateTo" name="PRALReportDateTo" data-mask="99/99/9999" required="" />
+            <span class="text-danger" data-valmsg-for="PRALReportDateTo" data-valmsg-replace="true">
+            </span>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+    <div class="uif-row" id="PRALGoTo">
+        <div class="uif-col-12">
+            <a href='@Url.Content("~/Accounting/Reports/MainViewReport")' class="btn btn-link" role="button">@Global.ViewReportGenerated</a>
+        </div>
+    </div>
+</form>
+
+@section Toolbar
+    {
+    <footer>
+        <button id="CancelPremiumReceivableAntiquity" class="btn btn-default" role="button">
+            <span class="glyphicon glyphicon-remove"></span>  @Global.Clean
+        </button>
+        <button id="MassiveReportPremiumReceivableAntiquity" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+        </button>
+    </footer>
+}
+
+
+@section modals{
+
+    @*VENTANAS MODALES DE CONFIRMACION*@
+    <!-- Modal Confirma proceso de masivos-->
+    <div class="modal fade" id="modalMassiveTotRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.PremiumReceivableAntiquity</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnModalPremiumReceivableAntiquity">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalMassiveNo">@Global.No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal Confirmacion del Proceso Masivo de cada reporte -->
+    <div class="modal fade" id="modalMassiveReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.PremiumReceivableAntiquity</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.ConfirmMessageProcess
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnModalMassiveProcessReport">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/PremiumReceivableAntiquityList")
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.SubscriptionSearchViewModel
+@{
+    Layout = null;
+}
+
+<form id="formSearchPolicy" class="form without-peripheral">
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelHolder</label>
+            @Html.TextBoxFor(model => model.Holder, new { id = "inputHolderPolicy", autocomplete = "off", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+            @Html.TextBoxFor(model => model.HolderId, new { id = "inputHolderIdPolicy", hidden = "hidden" })
+            @Html.ValidationMessageFor(model => model.Holder)
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelInsured</label>
+            @Html.TextBoxFor(model => model.Insured, new { id = "inputInsuredPolicy", autocomplete = "off", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+            @Html.TextBoxFor(model => model.InsuredId, new { id = "inputInsuredIdPolicy", hidden = "hidden" })
+            @Html.ValidationMessageFor(model => model.Insured)
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelAgentPrincipal</label>
+            @Html.TextBoxFor(model => model.AgentPrincipal, new { id = "inputAgentPrincipalPolicy", autocomplete = "off", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderKeyName })
+            @Html.TextBoxFor(model => model.AgentPrincipalId, new { id = "inputAgentPrincipalIdPolicy", hidden = "hidden" })
+            @Html.ValidationMessageFor(model => model.AgentPrincipal)
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelAgentAgency</label>
+            <select class="uif-select form-control" id="selectAgentAgencyPolicy" data-native="false" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlAgency"
+                    data-id="Id" data-name="FullName" name="AgentAgency"></select>
+            @Html.ValidationMessageFor(model => model.AgentAgency)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.Branch</label>
+            <select class="uif-select form-control" id="selectBranch" data-native="false" data-val="true"
+                    data-id="Id" data-name="DescriptionLong" name="Branch"></select>
+            @Html.ValidationMessageFor(model => model.BranchId)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.Prefix</label>
+            <select class="uif-select form-control" data-native="false" id="selectPrefix" data-val="true"
+                    data-id="Id" data-name="DescriptionLong" name="Prefix"></select>
+            @Html.ValidationMessageFor(model => model.PrefixId)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.Policy</label>
+            @Html.TextBoxFor(model => model.PolicyNumber, new { id = "inputPolicyNumber", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.PolicyNumber)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.EndorsementNumber</label>
+            @Html.TextBoxFor(model => model.EndorsementId, new { id = "inputEndorsementId", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.EndorsementId)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelIssuanceDate</label>
+            @Html.TextBoxFor(model => model.IssueDate, new { id = "inputIssueDatePolicy", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.IssueDate)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelPlate</label>
+            @Html.TextBoxFor(model => model.Plate, new { id = "inputPlatePolicy", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Plate)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelEngine</label>
+            @Html.TextBoxFor(model => model.Engine, new { id = "inputEnginePolicy", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Engine)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelChassis</label>
+            @Html.TextBoxFor(model => model.Chassis, new { id = "inputChassisPolicy", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Chassis)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelUser</label>
+            @Html.TextBoxFor(model => model.User, new { id = "inputUserPolicy", autocomplete = "off", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+            @Html.TextBoxFor(model => model.UserId, new { id = "inputUserIdPolicy", hidden = "hidden" })
+            @Html.ValidationMessageFor(model => model.User)
+        </div>
+        <div class="uif-col-3 without-label">
+            <button type="button" class="btn btn-primary" id="btnSearchPolicy">@Resources.Language.ButtonSearch</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" data-title="" data-selectiontype="none" id="tableSearchPolicy" data-filter="false" data-paginate="true">
+            <thead>
+                <tr>
+                    <th data-property="PolicyNumber">@Resources.Language.LabelNroPolicy</th>
+                    <th data-property="Endorsement">@Resources.Language.Endorsement</th>
+                    <th data-property="PrefixCommercial">@Resources.Language.LabelPrefixCommercial</th>
+                    <th data-property="EndorsementType">@Resources.Language.LabelEndorsementType</th>
+                    <th data-property="Insured">@Resources.Language.LabelInsured</th>
+                    <th data-property="Branch">@Resources.Language.Branch</th>
+                    <th data-property="IssueCurrency">@Resources.Language.LabelIssuanceCurrency</th>
+                    <th data-property="TotalPremium">@Resources.Language.LabelTotalPremium</th>
+                    <th data-property="User">@Resources.Language.LabelUser</th>
+                    <th data-property="IssueDate" data-type="date">@Resources.Language.LabelIssuanceDate</th>
+                    <th data-property="AgentPrincipal">@Resources.Language.LabelAgentPrincipal</th>
+                    <th data-property="Product">@Resources.Language.LabelProduct</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.CostCenter;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Parameter</a></li>
+        <li class="active">@Global.CostCenter</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal" id="costCenterModal">
+    </div>
+}
+
+<script id="display-templateCenter" type="text/template">
+    <div>
+        <strong>-@Global.Description: </strong> {{Description}}
+        <strong>-@Global.Prorated: </strong>
+        <span class="label label-primary">
+            {{IsProratedDescription}}
+        </span>
+    </div>
+    <div>
+        <strong>-@Global.CostCenterType: </strong>{{CostCenterTypeDescription}}
+    </div>
+</script>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertCostCenter"></div>
+    </div>
+</div>
+<div class="uif-listview" id="costCenterListView">
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagCostCenter" value="false" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/CostCenter")
+}

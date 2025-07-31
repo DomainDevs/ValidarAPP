@@ -1,0 +1,188 @@
+﻿
+@{
+    Layout = null;
+}
+@model Sistran.Company.Application.Transports.TransportApplicationService.DTOs.CoverageDTO
+
+<script id="title-template" type="text/template">
+</script>
+
+<script id="footer-template" type="text/template">
+    <div id="buttonsInsuredObject" class="pull-right">
+        <button type="button" class="btn btn-default" id="btnCloseObject">
+            <span aria-hidden="true"></span>
+            @Resources.Language.Close
+        </button>
+        <button type="button" class="btn btn-primary" id="btnSaveCoverage">
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+<div class="uif-modal" id="modalTexts">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Texts.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.TextsModelsView())
+    </div>
+    <div id="buttonsTexts" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnTextClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnTextSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalClauses">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Clauses.cshtml")
+    </div>
+    <div id="buttonsClauses" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClausesClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnClausesSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+@Html.Partial("~/Areas/Underwriting/Views/RiskTransport/InsuredObject.cshtml", new Sistran.Company.Application.Transports.Transport.ApplicationServices.DTOs.InsuredObjectDTO())
+
+<form id="formCoverage" class="form without-space">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id, new { id = "hiddenCoverageId" })
+
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelNameCoverage</label>
+                    <select class="uif-select form-control" id="selectCoverage" data-id="Id" data-name="Description" name="CoverageId" data-val="true" data-val-required="@Resources.Language.ErrorDocumentCoverage"></select>
+                    @Html.ValidationMessageFor(model => model.CoverageId)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelFrom</label>
+                    @Html.TextBoxFor(model => model.StartDate, "{0:dd/MM/yyyy}", new { id = "inputFromCoverage", @class = "uif-datepicker" })
+                    @Html.ValidationMessageFor(model => model.StartDate)
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelTo</label>
+                    @Html.TextBoxFor(model => model.ExpirationDate, "{0:dd/MM/yyyy}", new { id = "inputToCoverage", @class = "uif-datepicker" })
+                    @Html.ValidationMessageFor(model => model.ExpirationDate)
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelDays</label>
+                    <input type="text" id="inputDaysCoverage" disabled="disabled" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelDeclaredValue</label>
+                    @Html.TextBoxFor(model => model.DeclaredValue, new { id = "inputDeclaredValue", maxLength = 20, @class = "rightAlign input-money" })
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelLimitInsured,</label>
+                    @Html.TextBoxFor(model => model.InsuredLimit, new { id = "inputDeclaredValue", maxLength = 20, @class = "rightAlign input-money" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelSublimit</label>
+                    @Html.TextBoxFor(model => model.Sublimit, new { id = "inputDeclaredValue", maxLength = 20, @class = "rightAlign input-money" })
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelMaximumResponsability,</label>
+                    @Html.TextBoxFor(model => model.MaximumResponsability, new { id = "inputDeclaredValue", maxLength = 20, @class = "rightAlign input-money" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelLimitOccurrence</label>
+                    @Html.TextBoxFor(model => model.OcurrencyLimit, new { id = "inputDeclaredValue", maxLength = 20, @class = "rightAlign input-money" })
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelLimitClaimant,</label>
+                    @Html.TextBoxFor(model => model.ClaimantLimit, new { id = "inputDeclaredValue", maxLength = 20, @class = "rightAlign input-money" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelCalculeType</label>
+                    <select class="uif-select form-control" id="selectCalculationType" data-source="" data-id="Value" data-name="Text" name="CalculationTypeId" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlFirstRiskType"></select>
+
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelRateType</label>
+                    <select class="uif-select form-control" id="selectRateType" data-source="" data-id="Value" data-name="Text" name="RateType" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlFirstRiskType"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelRate</label>
+                    @Html.TextBoxFor(model => model.Rate, new { id = "inputRateAmount", maxLength = 5, @class = "rightAlign input-money" })
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelPrecentagePremiumDeposit,</label>
+                    @Html.TextBoxFor(model => model.DepositPremiumPercent, new { id = "inputDepositPremiumPercentAmount", maxLength = 5, @class = "rightAlign input-money" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelPremium</label>
+                    @Html.TextBoxFor(model => Model.PremiumAmount, new { id = "inputPremiumAmount", maxLength = 20, @class = "rightAlign input-money" })
+                </div>
+                <div class="uif-col-6">
+                    <input type="checkbox" id="chkIsDeclarative" name="IsDeclarative" />
+                    <label for="chkIsDeclarative">@Resources.Language.LabelIsDeclarative</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelDeductible</label>
+                    @Html.TextBoxFor(model => model.DeductibleId, new { id = "inputDeclaredValue", maxLength = 20, @class = "rightAlign input-money" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12 width-clauses">
+                    <button type="button" class="btn btn-default secondary-Colombia" id="btnTextCoverage">@Resources.Language.LabelText</button>
+                    <button type="button" class="btn btn-default secondary-Colombia" id="btnClausesCoverage">@Resources.Language.LabelClauses</button>
+                    <button type="button" class="btn btn-default secondary-Colombia" id="btnConceptsCoverage">@Resources.Language.Concepts}</button>
+                </div>
+            </div>
+            <div class="uif-col-6 fit-col-secondary">
+                <div id="listCoveragesEdit" class="uif-listview"></div>
+            </div>
+        </div>
+        <div class="row lineDividing">
+            <div class="uif-col-6 center-col-right">
+                <div class="pull-right width-save">
+                    <button type="button" class="btn btn-default" id="btnCancelCoverage">@Resources.Language.NewForm</button>
+                    <button type="button" class="btn btn-primary" id="btnAcceptCoverage">@Resources.Language.AddForm</button>
+                </div>
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-summary">
+                    <div class="items">
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelInsuredValue</div>
+                                <div id="inputAmountInsured">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelPremium</div>
+                                <div id="inputPremium">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

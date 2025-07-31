@@ -1,0 +1,36 @@
+<map version="2.0" type="class" name="PersonAccountBank" namespace="Sistran.Core.Application.UniquePersonV1" file-version="1.0" description="PERSON_ACCOUNT_BANK_ENTITY">
+   <properties>
+      <property name="AccountBankCode" type="Integer" key="true" description="ACCOUNT_BANK_CODE_PROPERTY" autonumber="Identity"/>
+      <property name="IndividualId" type="Integer" key="true" description="INDIVIDUAL_ID_PROPERTY" />
+      <property name="AccountTypeCode" type="Integer" description="ACCOUNT_TYPE_CODE_PROPERTY" />
+      <property name="Number" type="String" size="20" description="NUMBER_PROPERTY" />
+      <property name="BankCode" type="Integer" description="BANK_CODE_PROPERTY" />
+      <property name="Active" type="Boolean" description="ACTIVE_PROPERTY" />
+      <property name="DefaultAccount" type="Boolean" description="DEFAULT_ACCOUNT_PROPERTY" />
+      <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+      <property name="BankSquare" type="String" size="30" description="BANK_SQUARE_PROPERTY" />
+      <property name="BankIntermediary" type="Boolean" description="BANK_INTERMEDIARY_PROPERTY" />
+      <property name="Beneficiary" type="String" size="50" description="BENEFICIARY_PROPERTY" />
+      <property name="InscriptionDate" type="DateTime" nullable="true" description="INSCRIPTION_DATE_PROPERTY" />
+      <property name="BankBranch" type="String" size="20" nullable="true" description="BANK_BRANCH_PROPERTY" />
+   </properties>
+   <tables>
+      <table name="PERSON_ACCOUNT_BANK" schema="UP" alias="PERSON_ACCOUNT_BANK" update="true">
+         <columns>
+            <column name="ACCOUNT_BANK_CD" type="Int32" property="AccountBankCode" key="true" identity="true"/>
+            <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" key="true" />
+            <column name="ACCOUNT_TYPE_CD" type="Byte" property="AccountTypeCode" allowNull="false" />
+            <column name="NUMBER" type="String" property="Number" allowNull="false" size="20" />
+            <column name="BANK_CD" type="Int32" property="BankCode" allowNull="false" />
+            <column name="ACTIVE" type="Boolean" property="Active" allowNull="false" />
+            <column name="DEFAULT_ACCOUNT" type="Boolean" property="DefaultAccount" allowNull="false" />
+            <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" allowNull="false" />
+            <column name="BANK_SQUARE" type="String" property="BankSquare" allowNull="false" size="30" />
+            <column name="BANK_INTERMEDIARY" type="Boolean" property="BankIntermediary" allowNull="false" />
+            <column name="BENEFICIARY" type="String" property="Beneficiary" allowNull="false" size="50" />
+            <column name="INSCRIPTION_DATE" type="DateTime" property="InscriptionDate" />
+            <column name="BANK_BRANCH" type="String" property="BankBranch" size="20" />
+         </columns>
+      </table>
+   </tables>
+</map>

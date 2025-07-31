@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="IndividualTaxCategoryConditionView">
+  <collections>
+    <collection name="IndividualTax" type="Sistran.Core.Application.Tax.Entities.IndividualTax, 
+                Core.Tax.Entities"></collection>
+    <collection name="Tax" type="Sistran.Core.Application.Tax.Entities.Tax, 
+                Core.Tax.Entities"></collection>
+    <collection name="TaxCondition" type="Sistran.Core.Application.Tax.Entities.TaxCondition, 
+                Core.Tax.Entities"></collection>
+    <collection name="TaxCategory" type="Sistran.Core.Application.Tax.Entities.TaxCategory, 
+                Core.Tax.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="IndividualTax" destination="TaxCondition" name="IndividualTaxTaxCondition" type="Inner">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+      <property left="TaxConditionCode" type="Equal" right="TaxConditionCode"></property>
+    </relation>
+    <relation source="IndividualTax" destination="TaxCategory" name="IndividualTaxTaxCategory" type="left">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+      <property left="TaxCategoryCode" type="Equal" right="TaxCategoryCode"></property>
+    </relation>
+    <relation source="IndividualTax" destination="Tax" name="TaxIndividualTax" type="Inner">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+    </relation>
+  </relations>
+</view>

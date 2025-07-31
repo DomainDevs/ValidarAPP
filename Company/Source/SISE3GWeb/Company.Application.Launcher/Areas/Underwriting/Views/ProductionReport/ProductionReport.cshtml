@@ -1,0 +1,82 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.PolicyModelsView
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.ProductionReport
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnSaveProduction">
+            <i class="fa fa fa-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExport
+            </span>
+        </button>
+    </div>
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnExitProduction">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExit
+            </span>
+        </button>
+    </div>
+</script>
+
+
+<div class="uif-modal" id="modalDefaultSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/DefaultResults.cshtml")
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label>@Resources.Language.LabelBranch</label>
+        <select class="uif-select form-control" data-emptytext="Todos" id="selectBranch" data-val="true" @*data-val-required="@Resources.Language.ErrorDocumentControlBranch"*@
+                data-id="Id" data-name="Description" name="BranchId" data-native="false"></select>
+
+    </div>
+
+    <div class="uif-col-6">
+        <label class="field-required">@Resources.Language.LabelPrefixCommercial</label>
+        <select class="uif-select form-control" id="selectPrefixCommercial" data-native="false" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"
+                data-id="Id" data-name="Description" name="PrefixId"></select>
+        @Html.ValidationMessageFor(model => model.PrefixId)
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label>@Resources.Language.LabelAgentPrincipal</label>
+        @Html.TextBoxFor(model => model.AgentName, new { id = "inputAgentPrincipal", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderKeyName })
+        @Html.ValidationMessageFor(model => model.AgentName)
+    </div>
+    <div class="uif-col-6">
+        <label>@Resources.Language.LabelCommercialProduct</label>
+        <select class="uif-select form-control" data-emptytext="Todos" id="selectProduct" data-native="false" data-val="true" @*data-val-required="@Resources.Language.ErrorDocumentControlProduct"*@
+                data-id="Id" data-name="Description" name="ProductId">
+        </select>        
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <div class="col-md-offset-6">
+            <label class="field-required">@Resources.Language.LabelFrom</label>
+            @Html.TextBoxFor(model => model.CurrentFrom, new { id = "inputFrom", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.CurrentFrom)
+        </div>
+    </div>
+    <div class="uif-col-3">
+        <div>
+            <label class="field-required">@Resources.Language.LabelTo</label>
+            @Html.TextBoxFor(model => model.CurrentTo, new { id = "inputTo", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.CurrentTo)
+        </div>
+    </div>
+</div>

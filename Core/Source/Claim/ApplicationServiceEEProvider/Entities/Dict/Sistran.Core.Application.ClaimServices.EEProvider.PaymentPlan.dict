@@ -1,0 +1,18 @@
+<map version="2.0" type="class" name="PaymentPlan" namespace="Sistran.Core.Application.ClaimServices.EEProvider" file-version="1.0" description="PAYMENT_PLAN_ENTITY">
+  <properties>
+    <property name="PaymentPlanCode" type="Integer" key="true" description="PAYMENT_PLAN_CODE_PROPERTY" autonumber="Identity" />
+    <property name="ClassPaymentCode" type="Integer" nullable="true" description="CLASS_PAYMENT_CODE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+    <property name="TaxPercentage" type="Decimal" precision="18" scale="6" nullable="true" description="TAX_PERCENTAGE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_PLAN" schema="PAYM" alias="PAYMENT_PLAN" update="true" >
+      <columns>
+        <column name="PAYMENT_PLAN_CD" type="Int32" property="PaymentPlanCode" key="true" identity="true" />
+        <column name="CLASS_PAYMENT_CD" type="Int32" property="ClassPaymentCode" />
+        <column name="CURRENCY_CD" type="Int32" property="CurrencyCode" />
+        <column name="TAX_PCT" type="Decimal" property="TaxPercentage" size="19" precision="18" scale="6" />
+      </columns>
+    </table>
+  </tables>
+</map>

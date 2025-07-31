@@ -1,0 +1,107 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AccountBank;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.Parameters</li>
+        <li>@Global.AccountBank</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal" id="modalAccountBank">
+        <div class="uif-modalbody">
+            @Html.Partial("../Parameters/BankAccount/BankAccountModal")
+        </div>
+    </div>
+}
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label class="control-label">
+            @Global.Branch
+        </label>
+        <select class="uif-select form-control" id="BranchSelect"
+                data-source='@Url.Content("~/Accounting/Common/GetBranchs")'
+                data-id="Id"
+                data-name="Description"
+                data-selectedid="@ViewBag.BranchDefault"
+                data-native="true"
+                name="BranchSelect"></select>
+    </div>
+    <div class="uif-col-6">
+        <label class="control-label">
+            @Global.Bank
+        </label>
+        <select class="uif-select form-control" id="BankSelectBankAccount"
+                data-id="Id"
+                data-name="Description"
+                data-native="true"
+                name="BankSelect">
+        </select>
+    </div>
+   
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertAccountBank"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-listview" id="accountBankListView">
+        </div>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisableBankAccount" value="@ViewBag.BranchDisable" />
+
+<script id="listTemplate" type="text/template">
+    <span>
+        <strong>-@Global.Description:</strong>
+        <strong><span class="label label-primary">{{Description}}</span></strong>
+    </span>
+    <span>
+        <strong>-@Global.AccountType:</strong>
+        {{AccountTypeDescription}}.
+        <strong>-@Global.AccountNumber:</strong>
+        {{AccountNumber}}
+    </span>
+    <span>
+        <strong>-@Global.AccountingAccountNumber:</strong>
+        {{AccountingNumber}}.
+        <strong>-@Global.AccountingAccountName:</strong>
+        {{AccountingName}}
+    </span>
+    <span>
+        <strong>-@Global.Currency:</strong>
+        {{CurrencyDescription}}
+    </span>
+    <span>
+        <strong>-@Global.Status:</strong>
+        <span class="text-danger"><strong>{{EnabledDescription}}</strong></span>
+    </span>
+    <span>
+        <strong>-@Global.Date:</strong>
+        <span class="text-danger"><strong>{{DisableDate}}</strong></span>
+    </span>
+</script>
+
+<script id="add-templateMainBank" type="text/template">
+    @Html.Partial("BankAccount/BankAccountEditor")
+</script>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainBankAccount")
+}

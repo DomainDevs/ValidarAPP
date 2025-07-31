@@ -1,0 +1,107 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ExchangeRate;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Parameter</a></li>
+        <li class="active">@Global.ExchangeRate</li>
+    </ol>
+}
+
+@section modals{
+    <!--Modal Agregar-->
+    <form id="exchangeRateAdd" onsubmit="return false" class="form">
+        <div class="uif-modal" id="exchangeRateParametrizationAddModal">
+            <div class="uif-modalbody">
+                @Html.Partial("../ExchangeRate/ExchangeRateModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="exchangeRateParametrizationSaveAddField" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <!--Modal Eliminar-->
+    <div class="form">
+        <div class="modal fade" id="exchangeRateDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding: 10px">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="fa fa-times-circle">
+                            </i>
+                        </button>
+                        <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                    </div>
+                    <div class="modal-body" id="deleteMessageModal">
+                        <p>@Global.DeleteConfirmationMessage</p>
+                    </div>
+                    <div class="modal-footer" style="padding: 10px 20px 10px">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <i class="glyphicon glyphicon-remove"></i> @Global.Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btnDeleteModal">
+                            <i class="glyphicon glyphicon-ok"></i> @Global.Accept
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Modal Editar-->
+    <form id="exchangeRateEditFieldForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="exchangeRateParametrizationModalEditField">
+            <div class="uif-modalbody">
+                @Html.Partial("../ExchangeRate/ExchangeRateModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="exchangeRateParametrizationSaveEditField" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+}
+<div class="uif-alert" id="alertExchangeRate"></div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="exchangeRateParametrizationAlert"></div>
+    </div>
+</div>
+<!--Carga ExchangeRates-->
+<div class="row">
+    <div class="col-md-12">
+        <table class="uif-table" data-source='@Url.Action("GetExchangeRate","ExchangeRate")'
+               data-title="" id="tableExchangeRate" data-edit="true" data-delete="true"
+               data-filter="true" data-paginate="true" data-pagesize="10" data-add="true" data-selectiontype="none">
+            <thead>
+                <tr>
+                    <th data-property="RateDate">@Global.RateDate</th>
+                    <th data-property="CurrencyCode" data-visible="false"></th> 
+                    <th data-property="CurrencyDescription" >@Global.Currency</th> 
+                    <th data-property="SellAmount">@Global.SaleRate</th>
+                    <th data-property="BuyAmount">@Global.BuyRate</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@*VIEWBAGS*@
+<input type="hidden" id="hiddenExchangeRate" value="true" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/ExchangeRate")
+}

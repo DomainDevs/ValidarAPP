@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskJudicialSuretyGuaranteeView">
+  <collections>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, 
+                Core.Issuance.Entities"></collection>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskSuretyGuarantee" type="Sistran.Core.Application.Issuance.Entities.RiskSuretyGuarantee, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskJudicialSuretyGuarantee" type="Sistran.Core.Application.Issuance.Entities.RiskJudicialSuretyGuarantee, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Policy" destination="Endorsement" name="PolicyEndorsement" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Endorsement" destination="EndorsementRisk" name="EndorsementEndorsementRisk" type="Inner">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="RiskSuretyGuarantee" name="EndorsementRiskRiskSuretyGuarantee" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="RiskJudicialSuretyGuarantee" name="EndorsementRiskRiskJudicialSuretyGuarantee" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="ApplicationParametersView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="ImputationTypeCode">
+          <Column table-alias="Imputation" name="ImputationTypeCode" />
+        </SelectValue>
+        <SelectValue alias="SourceCode">
+          <Column table-alias="Imputation" name="SourceCode" />
+        </SelectValue>
+        <SelectValue alias="EndorsementId">
+          <Column table-alias="PremiumReceivableTrans" name="EndorsementId" />
+        </SelectValue>
+        <SelectValue alias="PolicyId">
+          <Column table-alias="PremiumReceivableTrans" name="PolicyId" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="CollectControl" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="BusinessTypeCode">
+          <Column table-alias="Policy" name="BusinessTypeCode" />
+        </SelectValue>
+        <SelectValue alias="ComponentCollectionCode">
+          <Column table-alias="ComponentCollection" name="ComponentCollectionCode" />
+        </SelectValue>
+        <SelectValue alias="ComponentId">
+          <Column table-alias="ComponentCollection" name="ComponentId" />
+        </SelectValue>
+        <SelectValue alias="IncomeAmount">
+          <Column table-alias="ComponentCollection" name="IncomeAmount" />
+        </SelectValue>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="ComponentCollection" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="ExchangeRate">
+          <Column table-alias="ComponentCollection" name="ExchangeRate" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="ComponentCollection" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="IndividualId">
+          <Column table-alias="Collect" name="IndividualId" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <Join>
+                <Join>
+                  <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Imputation, Core.Accounting.Entities" alias="Imputation" />
+                  <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PremiumReceivableTrans, Core.Accounting.Entities" alias="PremiumReceivableTrans" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="PremiumReceivableTrans" name="ImputationCode" />
+                      <Column table-alias="Imputation" name="ImputationCode" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.ComponentCollection, Core.Accounting.Entities" alias="ComponentCollection" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="ComponentCollection" name="PremiumReceivableCode" />
+                    <Column table-alias="PremiumReceivableTrans" name="PremiumReceivableCode" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Issuance.Entities.Policy, Sistran.Core.Application.Issuance" alias="Policy" />
+              <criteria>
+                <BinaryPredicate type="And">
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Policy" name="PolicyId" />
+                    <Column table-alias="Policy" name="PolicyId" />
+                  </BinaryCriterion>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Policy" name="PolicyId" />
+                    <Column table-alias="PremiumReceivableTrans" name="PolicyId" />
+                  </BinaryCriterion>
+                </BinaryPredicate>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Collect, Core.Accounting.Entities" alias="Collect" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Collect" name="CollectId" />
+                <Column table-alias="Imputation" name="SourceCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CollectControl, Core.Accounting.Entities" alias="CollectControl" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="CollectControl" name="CollectControlId" />
+              <Column table-alias="Collect" name="CollectControlCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

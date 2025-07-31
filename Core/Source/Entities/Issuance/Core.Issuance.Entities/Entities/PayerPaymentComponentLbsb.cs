@@ -1,0 +1,314 @@
+﻿using Sistran.Core.Framework;
+using Sistran.Core.Framework.DAF;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sistran.Core.Application.Issuance.Entities
+{
+    [
+      PersistentClass("Sistran.Core.Application.Issuance.PayerPaymentComponentLbsb.dict"),
+      Serializable(),
+      DescriptionKey("PAYER_PAYMENT_COMP_LBSB_ENTITY"),
+      TableMap(TableName = "PAYER_PAYMENT_COMP_LBSB", Schema = "ISS"),
+      ]
+    public partial class PayerPaymentComponentLbsb :
+          BusinessObject2
+    {
+        #region static
+        /// <summary>
+        /// Propiedades públicas de la entidad.
+        /// </summary>
+        public static class Properties
+        {
+            public static readonly string PayerPaymentCompLbsbId = "PayerPaymentCompLbsbId";
+            public static readonly string PayerPaymentId = "PayerPaymentId";
+            public static readonly string ComponentCode = "ComponentCd";
+            public static readonly string LineBusinessCode = "LineBusinessCode";
+            public static readonly string SubLineBusinessCode = "SubLineBusinessCode";
+            public static readonly string Amount = "Amount";
+            public static readonly string LocalAmount = "LocalAmount";
+            public static readonly string MainAmount = "MainAmount";
+            public static readonly string MainLocalAmount = "MainLocalAmount";
+        }
+
+        /// <summary>
+        /// Crea una clave primaria para una clase concreta.
+        /// </summary>
+        /// <param name="payerPaymentCompLbsbId">Clase concreta.</param>
+        /// <param name="lineBusinessCode">Propiedad clave PaymentScheduleId.</param>
+        /// <returns>Clave primaria.</returns>
+        protected static PrimaryKey InternalCreatePrimaryKey<T>(int payerPaymentCompLbsbId, int lineBusinessCode)
+        {
+            Dictionary<string, object> keys = new Dictionary<string, object>();
+            keys.Add(Properties.PayerPaymentCompLbsbId, payerPaymentCompLbsbId);
+            keys.Add(Properties.LineBusinessCode, lineBusinessCode);
+
+            return new PrimaryKey<T>(keys);
+        }
+
+        /// <summary>
+        /// Crea una clave primaria para esta clase.
+        /// </summary>
+        /// <param name="payerPaymentCompLbsbId">Propiedad clave PaymentScheduleId.</param>
+        /// <param name="lineBusinessCode">Propiedad clave PaymentNumber.</param>
+        public static PrimaryKey CreatePrimaryKey(int payerPaymentCompLbsbId, int lineBusinessCode)
+        {
+            return InternalCreatePrimaryKey<PayerPaymentComponentLbsb>(payerPaymentCompLbsbId, lineBusinessCode);
+        }
+
+  
+        #endregion
+
+        //*** Object Attributes ********************************
+
+        /// <summary>
+        /// Atributo para la propiedad PayerPaymentId.
+        /// </summary>
+        private int _payerPaymentId;
+        /// <summary>
+        /// Atributo para la propiedad ComponentCode.
+        /// </summary>
+        private int _componentCode;
+        /// <summary>
+        /// Atributo para la propiedad IsGreaterDate.
+        /// </summary>
+        private int _subLineBusinessCode;
+        /// <summary>
+        /// Atributo para la propiedad IsIssueDate.
+        /// </summary>
+        private decimal _amount;
+        /// <summary>
+        /// Atributo para la propiedad FirstPayQuantity.
+        /// </summary>
+        private decimal _localAmount;
+        /// <summary>
+        /// Atributo para la propiedad PaymentQuantity.
+        /// </summary>
+        private decimal _mainAmount;
+        /// <summary>
+        /// Atributo para la propiedad GapUnitCode.
+        /// </summary>
+        private decimal _mainLocalAmount;
+
+        //*** Object Constructors ********************************
+
+        /// <summary>
+        /// Constructor de instancia de la clase en base a las propiedades claves.
+        /// </summary>
+        /// <param name="payerPaymentCompLbsbId">PaymentScheduleId key property.</param>
+        public PayerPaymentComponentLbsb(int payerPaymentCompLbsbId, int lineBusinessCode) :
+            this(PayerPaymentComponentLbsb.CreatePrimaryKey(payerPaymentCompLbsbId, lineBusinessCode), null)
+        {
+        }
+
+        /// <summary>
+        /// Constructor de instancia de la clase en base a las propiedades claves.
+        /// </summary>
+        /// <param name="paymentScheduleId">PaymentScheduleId key property.</param>
+        public PayerPaymentComponentLbsb(PrimaryKey key, IDictionary initialValues) :
+         base(key, initialValues)
+        {
+        }
+
+
+
+
+        /*** Object Properties ********************************/
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad PaymentScheduleId.
+        /// </summary>
+        /// <value>Propiedad PaymentScheduleId.</value>
+        [
+        DescriptionKey("PAYER_PAYMENT_COMP_LBSB_ID_PROPERTY"),
+        PersistentProperty(IsKey = true),
+        ColumnMap(ColumnName = "PAYER_PAYMENT_COMP_LBSB_ID", DbType = System.Data.DbType.String),
+        ]
+        public int PayerPaymentCompLbsbId
+        {
+            get
+            {
+                return (int)this._primaryKey[Properties.PayerPaymentCompLbsbId];
+            }
+            set
+            {
+                this._primaryKey[Properties.PayerPaymentCompLbsbId] = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad PaymentScheduleId.
+        /// </summary>
+        /// <value>Propiedad PaymentScheduleId.</value>
+        [
+        DescriptionKey("LINE_BUSINESS_CD_PROPERTY"),
+        PersistentProperty(IsKey = true),
+        ColumnMap(ColumnName = "LINE_BUSINESS_CD", DbType = System.Data.DbType.String),
+        ]
+        public int LineBusinessCode
+        {
+            get
+            {
+                return (int)this._primaryKey[Properties.LineBusinessCode];
+            }
+            set
+            {
+                this._primaryKey[Properties.LineBusinessCode] = value;
+            }
+        }
+  
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad Description.
+        /// </summary>
+        /// <value>Propiedad Description.</value>
+        [
+        DescriptionKey("PAYER_PAYMENT_ID_PROPERTY"),
+        PersistentProperty(),
+        ColumnMap(ColumnName = "PAYER_PAYMENT_ID", DbType = System.Data.DbType.String),
+        ]
+        public int PayerPayment
+        {
+            get
+            {
+                return this._payerPaymentId;
+            }
+            set
+            {
+                this._payerPaymentId = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad SmallDescription.
+        /// </summary>
+        /// <value>Propiedad SmallDescription.</value>
+        [
+        DescriptionKey("COMPONENT_CD_PROPERTY"),
+        PersistentProperty(),
+        ColumnMap(ColumnName = "COMPONENT_CD", DbType = System.Data.DbType.String),
+        ]
+        public int ComponentCode
+        {
+            get
+            {
+                return this._componentCode;
+            }
+            set
+            {
+                this._componentCode = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad SmallDescription.
+        /// </summary>
+        /// <value>Propiedad SmallDescription.</value>
+        [
+        DescriptionKey("SUB_LINE_BUSINESS_CD_PROPERTY"),
+        PersistentProperty(),
+        ColumnMap(ColumnName = "SUB_LINE_BUSINESS_CD", DbType = System.Data.DbType.String),
+        ]
+        public int SubLineBusinessCode
+        {
+            get
+            {
+                return this._subLineBusinessCode;
+            }
+            set
+            {
+                this._subLineBusinessCode = value;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad IsIssueDate.
+        /// </summary>
+        /// <value>Propiedad IsIssueDate.</value>
+        [
+        DescriptionKey("AMOUNT_PROPERTY"),
+        PersistentProperty(),
+        ColumnMap(ColumnName = "AMOUNT", DbType = System.Data.DbType.String),
+        ]
+        public decimal Amount
+        {
+            get
+            {
+                return this._amount;
+            }
+            set
+            {
+                this._amount = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad FirstPayQuantity.
+        /// </summary>
+        /// <value>Propiedad FirstPayQuantity.</value>
+        [
+        DescriptionKey("LOCAL_AMOUNT_PROPERTY"),
+        PersistentProperty(),
+        ColumnMap(ColumnName = "LOCAL_AMOUNT", DbType = System.Data.DbType.String),
+        ]
+        public decimal LocalAmount
+        {
+            get
+            {
+                return this._localAmount;
+            }
+            set
+            {
+                this._localAmount = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad PaymentQuantity.
+        /// </summary>
+        /// <value>Propiedad PaymentQuantity.</value>
+        [
+        DescriptionKey("MAIN_AMOUNT_PROPERTY"),
+        PersistentProperty(),
+        ColumnMap(ColumnName = "MAIN_AMOUNT", DbType = System.Data.DbType.String),
+        ]
+        public decimal MainAmount
+        {
+            get
+            {
+                return this._mainAmount;
+            }
+            set
+            {
+                this._mainAmount = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad GapUnitCode.
+        /// </summary>
+        /// <value>Propiedad GapUnitCode.</value>
+        [
+        DescriptionKey("MAIN_LOCAL_AMOUNT_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "MAIN_LOCAL_AMOUNT", DbType = System.Data.DbType.String),
+        ]
+        public decimal MainLocalAmount
+        {
+            get
+            {
+                return this._mainLocalAmount;
+            }
+            set
+            {
+                this._mainLocalAmount = value;
+            }
+        }
+
+
+    }
+}

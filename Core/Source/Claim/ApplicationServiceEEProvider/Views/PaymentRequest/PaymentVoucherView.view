@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PaymentVoucherView">
+  <collections>
+    <collection name="PaymentVoucher" type="Sistran.Core.Application.Claims.Entities.PaymentVoucher, 
+                Core.Claims.Entities"></collection>
+    <collection name="Currency" type="Sistran.Core.Application.Common.Entities.Currency,
+                Core.Common.Entities"></collection>
+    <collection name="VoucherType" type="Sistran.Core.Application.Parameters.Entities.VoucherType, 
+                Core.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="PaymentVoucher" destination="Currency" name="PaymentVoucherCurrency" type="Inner">
+      <property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+    </relation>
+    <relation source="PaymentVoucher" destination="VoucherType" name="PaymentVoucherVoucherType" type="Inner">
+      <property left="VoucherTypeCode" type="Equal" right="VoucherTypeCode"></property>
+    </relation>
+  </relations>
+</view>

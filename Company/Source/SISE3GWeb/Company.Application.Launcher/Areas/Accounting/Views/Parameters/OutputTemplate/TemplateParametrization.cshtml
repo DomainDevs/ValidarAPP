@@ -1,0 +1,214 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.FormatDesign;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameters</li>
+        <li>@Global.OutputFormats</li>
+        <li class="active">@Global.FormatDesign</li>
+    </ol>
+}
+
+@section Modals
+{
+
+    @*header*@
+    <form id="addFormType" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalAddFormType">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/OutputTemplate/TemplateTypeModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveAddFormType" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+    <form id="editFormType" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalEditFormType">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/OutputTemplate/TemplateTypeModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveEditFormType" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- FormatDetails -->
+    <form id="addFieldForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalAddFieldForm">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/OutputTemplate/TemplateTypeModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveAddFieldForm" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+    <form id="editFieldForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalEditFieldForm">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/OutputTemplate/TemplateTypeModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveEditFieldForm" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteFormatType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="deleteFieldModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalDeleteFiledFormat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="deleteFieldFormat">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<form id="formatParamForm" onsubmit=" return false " class="form">
+    <div class="uif-row">
+
+        <div class="uif-col-5" id="divOperationType">
+            <label class="control-label">
+                @Global.FormatGroup
+            </label>
+            @Html.DropDownList("StructureType", Enumerable.Empty<SelectListItem>(), new
+                                                                                    {
+                                                                                        @class = "uif-select form-control",
+                                                                                        data_source = @Url.Content("~/Accounting/Parameters/GetStructureList"),
+                                                                                        data_id = "Id",
+                                                                                        data_name = "Description",
+                                                                                        data_val = "true",
+                                                                                        headen = "headen",
+                                                                                    })
+        </div>
+        <div class="uif-col-7">
+            <label>@Global.Format</label>
+            @Html.DropDownList("Format", Enumerable.Empty<SelectListItem>(), new
+                                                                             {
+                                                                                 @class = "uif-select form-control",
+                                                                                 data_id = "Id",
+                                                                                 data_name = "Description",
+                                                                                 data_val = "true",
+                                                                                 data_val_required = @Global.RequiredField,
+                                                                                 data_native = "true"
+                                                                             })
+            <span class="text-danger" data-valmsg-for="Format" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertTemplate"></div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="tableFormatType" data-exporttocsv="false"
+                   data-add="true" data-edit="true"
+                   data-delete="true" data-selectiontype="single" data-filter="true"
+                   data-source="" data-paginate="true" data-title=@Global.RangeDetail>
+                <thead>
+                <tr>
+                    <th data-property="Id" data-visible="false">Formato</th>
+                    <th data-property="FormatTypeCd" data-visible="false">formatType</th>
+                    <th data-property="FormatTypeDescription">@Global.FormatType</th>
+                    <th data-property="Separator">@Global.Separator</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertDetail"></div>
+        </div>
+    </div>
+    <!--FormatDetails -->
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="tableFieldFormat" data-exporttocsv="false" data-add="true" data-edit="true"
+                   data-delete="true" data-selectiontype="none" data-filter="true"
+                   data-source="" data-paginate="true" data-title="@Global.DetailDesignFormat">
+                <thead>
+                    <tr>
+                        <th data-property="Id" data-visible="false">Id</th>
+                        <th data-property="Order">Orden</th>
+                        <th data-property="Description">@Global.Description</th>
+                        <th data-property="Start">@Global.InitialPosition</th>
+                        <th data-property="Length">@Global.Length</th>
+                        <th data-property="Value">@Global.Value</th>
+                        <th data-property="ColumnNumber">@Global.ColumnNumber</th>
+                        <th data-property="RowNumber">@Global.RowNumber</th>
+                        <th data-property="Field" data-visible="false">Field</th>
+                        <th data-property="Mask">@Global.Format</th>
+                        <th data-property="Filled">@Global.Filled</th>
+                        <th data-property="Align">@Global.Alignment</th>
+                        <th data-property="IsRequired" data-type="boolean">@Global.Required</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/TemplateParametrization")
+}

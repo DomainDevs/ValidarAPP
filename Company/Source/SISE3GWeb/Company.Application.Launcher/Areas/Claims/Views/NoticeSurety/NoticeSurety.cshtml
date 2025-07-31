@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+<form id="frmNoticeSurety" method="get" autocomplete="off" onsubmit="return false" class="form">
+    <div id="tabMain">
+        <div class="uif-alert" id="mainAlert"></div>
+        <div class="row">
+            <div class="uif-col-12">
+                <div>
+                    <h5>
+                        <strong>@Resources.Language.ContactInformation</strong>
+                    </h5>
+                    @Html.Partial("../Notice/ContactInformationPartial")
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <div id="accClaimNotice">
+                    @Html.Partial("../NoticeSurety/NoticeSuretyDataPartial")
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <div id="accPolicy">
+                    @Html.Partial("../Notice/PolicyInformationPartial")
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</form>
+<div class="row">
+    <div class="uif-col-12">
+        <div>
+            @Html.Partial("../Notice/ClaimNotice")
+        </div>
+    </div>
+</div>
+@* // -- // Modales // -- // *@
+
+<div class="uif-modal" id="modalSearchbyInsured">
+    <div class="uif-modalbody">
+        @Html.Partial("../NoticeSurety/SearchPoliciesSuretyDialog")
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="AgentProductAgentView">
+  <collections>
+    <collection name="Agent" type="Sistran.Core.Application.UniquePerson.Entities.Agent, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="AgentAgency" type="Sistran.Core.Application.UniquePerson.Entities.AgentAgency, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="ProductAgent" type="Sistran.Core.Application.Product.Entities.ProductAgent, 
+                Core.Product.Entities"></collection>
+    <collection name="IndividualRelationApp" type="Sistran.Core.Application.UniquePerson.Entities.IndividualRelationApp, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="UniqueUsers" type="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, 
+                Core.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>    
+    <relation source="Agent" destination="AgentAgency" name="AgentAgentAgency" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="Agent" destination="ProductAgent" name="AgentProductAgent" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="IndividualRelationApp" destination="UniqueUsers" name="IndividualRelationUser" type="Left">
+      <property left="ParentIndividualId" type="Equal" right="PersonId"></property>
+    </relation>    
+    <relation source="AgentAgency" destination="IndividualRelationApp" name="IndividualRelationAgency" type="Left">
+      <property left="AgentAgencyId" type="Equal" right="AgentAgencyId"></property>
+      <property left="IndividualId" type="Equal" right="ChildIndividualId"></property>
+    </relation>
+  </relations>
+</view>

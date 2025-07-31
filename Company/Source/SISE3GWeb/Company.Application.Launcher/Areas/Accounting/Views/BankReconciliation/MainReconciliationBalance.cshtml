@@ -1,0 +1,263 @@
+﻿@*ESTA PANTALLAS ES DE BUSINESS NO EXISTE PARA ENTERPRISE*@
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ReconciliationBalance;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.BankConciliation</a></li>
+        <li class="active">@Global.BankStatement</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="Cancel" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Cancel
+            </button>
+            <button id="Process" class="btn btn-primary" role="button">
+                <i class="fa fa-file-pdf-o"></i>  @Global.Process
+            </button>
+            <button id="Acept" class="btn btn-primary" role="button">
+                <i class="fa fa-file-pdf-o"></i>  @Global.Accept
+            </button>
+        </div>
+    </footer>
+}
+
+<form id="formBankStatement" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.Bank</label>
+            <select class="uif-select form-control" id="Bank" name="Bank" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/Accounting/BankStatement/GetBanks")' data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="Bank" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.AccountType</label>
+            <select class="uif-select form-control" id="AccountType" name="AccountType" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/Accounting/BankStatement/GetAccountTypes")' data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="AccountType" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.AccountNumber</label>
+            <select class="uif-select form-control" id="AccountNumber" name="AccountNumber" data-val="true" data-val-required="@Global.RequiredField"
+                    data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="AccountNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.MonthTo</label>
+            @Html.DropDownList("MonthTo", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetYearMonths"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.YearTo</label>
+            <input type="text" id="YearTo" name="YearTo" onkeypress="return JustNumbers(event, this) " maxlength="6">
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.LastAccountingBalance</label>
+            <input type="text" id="LastAccountingBalance" name="LastAccountingBalance" disabled="disabled" style="text-align:right">
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.NewAccountingBalance</label>
+            <input type="text" id="NewAccountingBalance" name="NewAccountingBalance" onkeypress="return JustNumbers(event, this) " style="text-align:right" disabled="disabled">
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.LastBankBalance</label>
+            <input type="text" id="LastBankBalance" name="LastBankBalance" disabled="disabled" style="text-align:right">
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.NewBankBalance</label>
+            <input type="text" id="NewBankBalance" name="NewBankBalance" onkeypress="return JustNumbers(event, this) " style="text-align:right" disabled="disabled">
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertReconciliationBalance"></div>
+        </div>
+    </div>
+</form>
+@*
+@using System.Data
+@model System.Data.DataTable
+<table>
+    <thead>
+        <tr>
+            @foreach (DataColumn column in Model.Columns)
+            {
+                <th>@column.ColumnName</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DataRow row in Model.Rows)
+        {
+            <tr>
+                @foreach (DataColumn column in Model.Columns)
+                {
+                    <td>@row[column]</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+*@
+
+@section Scripts
+{
+    <script type="text/javascript">
+    $('#AccountType').on('itemSelected', function (event, selectedItem) {
+        if (selectedItem.Id > 0) {
+            var controller = "@Url.Content("~/")" + "Accounting/BankStatement/GetAccountNumbers?bankId=" + $('#Bank').val() + "&accountTypeId=" + selectedItem.Id;
+            $("#AccountNumber").UifSelect({ source: controller });
+        }
+        else {
+            $("#AccountNumber").UifSelect();
+        }
+    });
+
+    $('#Bank').on('itemSelected', function (event, selectedItem) {
+        if (selectedItem.Id > 0) {
+            $("#AccountType").val('');
+            $("#AccountType").trigger('change');
+            $("#AccountNumber").val('');
+            $("#AccountNumber").trigger('change');
+        }
+    });
+
+    //////////////////////////////////////
+    // Botón Cancelar                   //
+    //////////////////////////////////////
+    $('#Cancel').click(function () {
+        $("#Bank").val("");
+        $("#AccountType").val("");
+        $("#AccountNumber").val("");
+        $("#MonthTo").val("");
+        $("#YearTo").val("");
+        $("#LastAccountingBalance").val("");
+        $("#NewAccountingBalance").val("");
+        $("#NewBankBalance").val("");
+        $("#LastBankBalance").val("");
+
+    });
+
+    $('#YearTo').blur(function () {
+        GetAmountBalance();
+    });
+
+    /// Reporte de Pendiente de Bancos
+    $("#Process").click(function () {
+
+        $("#formPendingBanks").validate();
+
+        if ($("#Bank").val != "") {
+            var AccountType = ($("#AccountType").val() == "") ? -1 : $("#AccountType").val();
+            if (AccountType == null) {
+                AccountType = -1;
+            }
+
+            var dateTo = "01" + "/" + $("#MonthTo").val() + "/" + $("#YearTo").val();
+            ShowPendingBanksReport($("#Bank option:selected").html(), $("#Bank").val(), $("#AccountType").val(), $("#AccountType option:selected").html(), $("#AccountNumber option:selected").html(), $("#MonthTo option:selected").html(), dateTo, ClearFormatCurrency($("#NewAccountingBalance").val()), ClearFormatCurrency($("#NewBankBalance").val()), ClearFormatCurrency($("#LastAccountingBalance").val()), ClearFormatCurrency($("#LastBankBalance").val()));
+            showReport();
+        }
+
+    });
+
+
+    // Visualiza el reporte de Pendiente de Bancos en pantalla
+    function ShowPendingBanksReport(bankName, bankId, accountTypeId, accountTypeName, accountNumber, monthName, dateTo, newAccountingBalance, newBankBalance, lastAccountingBalance, lastBankBalance) {
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "@Url.Content("~/Accounting/BankReconciliation/GetReconciliationBalance")",
+            data: { "bankName": bankName, "bankId": bankId, "accountTypeId": accountTypeId, "accountTypeName": accountTypeName, "accountNumber": $("#AccountNumber option:selected").html(), "monthName": monthName, "dateTo": dateTo, "newAccountingBalance": newAccountingBalance, "newBankBalance": newBankBalance, "lastAccountingBalance": lastAccountingBalance, "lastBankBalance": lastBankBalance },
+            success: function (data) { }
+        });
+    }
+
+    function showReport() {
+        window.open("@Url.Content("~/Accounting/BankReconciliation/ShowReconciliationBalance")", 'mywindow', 'fullscreen=yes, scrollbars=auto');
+    }
+
+    // Obtiene los saldos anteriores
+    function GetAmountBalance() {
+        var dateTo = "01" + "/" + $("#MonthTo").val() + "/" + $("#YearTo").val();
+
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "@Url.Content("~/Accounting/BankReconciliation/GetAmountReconciliationBalance")",
+            data: { "accountBankId": $("#Bank").val(), "dateTo": dateTo, "accountNumber": $("#AccountNumber option:selected").html() },
+            success: function (data) {
+                $("#LastAccountingBalance").val(data[0].AccountingBalance);
+                $("#LastBankBalance").val(data[0].BankBalance);
+                $("#NewAccountingBalance").val(data[0].AccountingBalanceNew);
+                $("#NewBankBalance").val(data[0].BankBalance);
+
+                var lastAccountingBalance = $("#LastAccountingBalance").val()
+                lastAccountingBalance = lastAccountingBalance.replace("$", "");
+                $("#LastAccountingBalance").val(FormatCurrency(FormatDecimal(lastAccountingBalance)));
+
+                var lastBankBalance = $("#LastBankBalance").val();
+                lastBankBalance = lastBankBalance.replace("$", "");
+                $("#LastBankBalance").val(FormatCurrency(FormatDecimal(lastBankBalance)));
+
+                var newAccountingBalance = $("#NewAccountingBalance").val()
+                newAccountingBalance = newAccountingBalance.replace("$", "");
+                $("#NewAccountingBalance").val(FormatCurrency(FormatDecimal(newAccountingBalance)));
+
+                var newBankBalance = $("#NewBankBalance").val();
+                newBankBalance = newBankBalance.replace("$", "");
+                $("#NewBankBalance").val(FormatCurrency(FormatDecimal(newBankBalance)));
+
+
+            }
+        });
+    }
+
+    // Graba los nuevos saldos
+    $("#Acept").click(function () {
+
+        var dateTo = "01" + "/" + $("#MonthTo").val() + "/" + $("#YearTo").val();
+
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "@Url.Content("~/Accounting/BankReconciliation/SaveAmountReconciliationBalance")",
+                data: { "accountBankId": $("#Bank").val(), "dateTo": dateTo, "accountNumber": $("#AccountNumber option:selected").html(), "accountingBalance": ClearFormatCurrency($("#NewAccountingBalance").val()), "bankBalance": ClearFormatCurrency($("#NewBankBalance").val())},
+                success: function (data) {
+                    if(data[0].Id == -1)
+                    {
+                        $("#alertReconciliationBalance").UifAlert('show', '@Global.SuccesSave', "success");
+                    }
+                }
+            });
+
+        });
+
+
+
+</script>
+<script src="@Url.Content("~/Scripts/common-validations.js")"></script>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainReconciliationBalance")
+}

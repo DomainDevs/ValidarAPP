@@ -1,0 +1,63 @@
+﻿@model Sistran.Company.Application.UniquePersonListRiskApplicationServices.DTO.ListRiskPersonDTO
+<form id="formNewListPerson" class="form">
+    @Html.AntiForgeryToken()
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelTypeDocument</label>
+            <select id="selectDocumentType" name="selectDocumentType" data-val="true" data-id="Id" data-name="Description" required></select>
+            <span class="field-validation-valid" data-valmsg-for="selectDocumentType" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelDocumentNumber</label>
+            @Html.TextBoxFor(@model => @model.IdCardNo, new { id = "inputDocumentNumber", data_val = "true", data_val_required = "Numero de Documento es Obligatorio" })
+            @Html.ValidationMessageFor(@model => @model.IdCardNo)
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelNameAgentExecutive</label>
+            @Html.TextBoxFor(@model => @model.Name, new { id = "inputName", data_val = "true", data_val_required = "Nombre es obligatorio" })
+            @Html.ValidationMessageFor(@model => @model.Name)
+        </div>
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelLastName</label>
+            @Html.TextBoxFor(@model => @model.LastName, new { id = "inputLastName", data_val = "true", data_val_required = "Apellido es obligatorio" })
+            @Html.ValidationMessageFor(@model => @model.LastName)
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>Apodo/Sobrenombre</label>
+            <input class="form-control" id="inputNickName" name="inputNickName"/>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.Birthdate</label>
+            <input class="uif-datepicker" id="inputBirthDate" name="inputBirthDate" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.Age</label>
+            <input class="form-control" id="inputAge" name="inputAge" disabled/>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelListRisk</label>
+            <select class="uif-select" data-id="Id" data-name="Description" id="selectListRisk" name="ListRisk" required> </select>
+        </div>
+
+        <div class="uif-col-6 without-label">
+            <input type="checkbox" id="checkExcludedPerson" name="ExcludedPerson" />
+            <label for="checkExcludedPerson">@Resources.Language.Excluded</label>
+        </div>
+    </div>
+
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnNewPersonCancel" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnAddNewPersonSave" onclick="return false">@Resources.Language.ButtonSave</button>
+    </div>
+</form>

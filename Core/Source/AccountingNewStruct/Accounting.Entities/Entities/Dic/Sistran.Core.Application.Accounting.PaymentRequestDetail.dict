@@ -1,0 +1,24 @@
+<map version="2.0" type="class" name="PaymentRequestDetail" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="PAYMENT_REQUEST_DETAIL_V_ENTITY">
+  <properties>
+    <property name="PaymentRequestCode" type="Integer" nullable="true" description="PAYMENT_REQUEST_CODE_PROPERTY" />
+    <property name="Number" type="String" size="200" nullable="true" description="NUMBER_PROPERTY" />
+    <property name="VoucherTypeCode" type="Integer" nullable="true" description="VOUCHER_TYPE_CODE_PROPERTY" />
+    <property name="VoucherDescription" type="String" size="250" nullable="true" description="VOUCHER_DESCRIPTION_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" nullable="true" description="AMOUNT_PROPERTY" />
+    <property name="Taxes" type="Decimal" precision="38" scale="6" description="TAXES_PROPERTY" />
+    <property name="Retentions" type="Decimal" precision="38" scale="6" description="RETENTIONS_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_REQUEST_DETAIL_V" schema="ACC" alias="PAYMENT_REQUEST_DETAIL_V" update="true">
+      <columns>
+        <column name="PAYMENT_REQUEST_CD" type="Int32" property="PaymentRequestCode" />
+        <column name="NUMBER" type="String" property="Number" size="200" />
+        <column name="VOUCHER_TYPE_CD" type="Int32" property="VoucherTypeCode" />
+        <column name="VOUCHER_DESCRIPTION" type="String" property="VoucherDescription" size="250" />
+        <column name="AMOUNT" type="Decimal" property="Amount" size="19" precision="18" scale="2" />
+        <column name="TAXES" type="Decimal" property="Taxes" allowNull="false" size="19" precision="38" scale="6" />
+        <column name="RETENTIONS" type="Decimal" property="Retentions" allowNull="false" size="19" precision="38" scale="6" />
+      </columns>
+    </table>
+  </tables>
+</map>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="TaxAttributeIndividualView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="TaxCode">
+          <Column table-alias="IndividualTax" name="TaxCode" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="TaxAttributeType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="TaxAttributeTypeCode">
+          <Column table-alias="TaxAttributeType" name="TaxAttributeTypeCode" />
+        </SelectValue>
+        <SelectValue alias="IndividualId">
+          <Column table-alias="IndividualTax" name="IndividualId" />
+        </SelectValue>
+        <SelectValue alias="Enabled">
+          <Column table-alias="Tax" name="Enabled" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <ClassNameTable name="Sistran.Core.Application.Tax.Entities.IndividualTax, Core.Tax.Entities" alias="IndividualTax" />
+              <ClassNameTable name="Sistran.Core.Application.Tax.Entities.TaxAttribute, Core.Tax.Entities" alias="TaxAttribute" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="TaxAttribute" name="TaxCode" />
+                  <Column table-alias="IndividualTax" name="TaxCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.TempCommonServices.Provider.Entities.TaxAttributeType, Core.TempCommonServices.Provider" alias="TaxAttributeType" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="TaxAttributeType" name="TaxAttributeTypeCode" />
+                <Column table-alias="TaxAttribute" name="TaxAttributeTypeCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Tax.Entities.Tax, Core.Tax.Entities" alias="Tax" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Tax" name="TaxCode" />
+              <Column table-alias="IndividualTax" name="TaxCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

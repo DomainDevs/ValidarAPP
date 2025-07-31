@@ -1,0 +1,71 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Application.GeneralLedgerServices.DTOs.AccountingConcepts.AccountingConceptDTO
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label>@Global.LedgerAccountNumber</label>
+        @Html.HiddenFor(model => model.AccountingAccount.AccountingAccountId)
+
+        @Html.TextBoxFor(model => model.AccountingAccount.Number, new
+        {
+            @class = "uif-autocomplete",
+            data_source = @Url.Action("GetAccountingAccountsByNumberDescription", "Base"),
+            data_displaykey = "Number",
+            id = "accountingAccountNumber"
+        })
+        @Html.ValidationMessageFor(model => model.AccountingAccount.Number)
+    </div>
+
+    <div class="uif-col-6">
+        <label>@Global.AccountingAccountName</label>
+        <input type="text" placeholder="" id="accountingAccountDescription" disabled="disabled">
+    </div>
+
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <label>@Global.Description</label>
+        <br />
+        @Html.TextBoxFor(model => model.Description, new
+        {
+            id = "Description",
+            data_val = "true",
+            data_val_required = @Global.RequiredField,
+            style = "text-align: left"
+        })
+        <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true" />
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-6">
+        <br />
+        <span class="glyphicon glyphicon-unchecked" id="spanAgent"></span><input type="checkbox" id="AgentCheck"> @Global.Agent
+    </div>
+    <div class="uif-col-6">
+        <br />
+        <span class="glyphicon glyphicon-unchecked" id="spanCoinsurance"></span><input type="checkbox" id="CoinsuranceCheck"> @Global.Coinsurances
+    </div>
+
+    <div class="uif-col-6">
+        <br />
+        <span class="glyphicon glyphicon-unchecked" id="spanReinsurance"></span><input type="checkbox" id="ReinsuranceCheck"> @Global.Reinsurance
+    </div>
+
+    <div class="uif-col-6">
+        <br />
+        <span class="glyphicon glyphicon-unchecked" id="spanInsured"></span><input type="checkbox" id="InsuredCheck"> @Global.Insured
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-6">
+        <br />
+        <span class="glyphicon glyphicon-unchecked" id="spanItems"></span><input type="checkbox" id="ItemsCheck"> @Global.EnabledItem
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertForm"></div>
+    </div>
+</div>
+

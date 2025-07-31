@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="ImputationJournalEntryView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="ImputationCode">
+          <Column table-alias="Imputation" name="ImputationCode" />
+        </SelectValue>
+        <SelectValue alias="ImputationTypeCode">
+          <Column table-alias="Imputation" name="ImputationTypeCode" />
+        </SelectValue>
+        <SelectValue alias="Status">
+          <Column table-alias="JournalEntry" name="Status" />
+        </SelectValue>
+        <SelectValue alias="UserId">
+          <Column table-alias="Imputation" name="UserId" />
+        </SelectValue>
+        <SelectValue alias="RegisterDate">
+          <Column table-alias="Imputation" name="RegisterDate" />
+        </SelectValue>
+        <SelectValue alias="AccountingDate">
+          <Column table-alias="JournalEntry" name="AccountingDate" />
+        </SelectValue>
+        <SelectValue alias="IndividualId">
+          <Column table-alias="JournalEntry" name="IndividualId" />
+        </SelectValue>
+        <SelectValue alias="Name">
+          <Column table-alias="ListPersons" name="Name" />
+        </SelectValue>
+        <SelectValue alias="DocumentNumber">
+          <Column table-alias="ListPersons" name="DocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="JournalEntry" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+        <SelectValue alias="JournalEntryCode">
+          <Column table-alias="JournalEntry" name="JournalEntryCode" />
+        </SelectValue>
+        <SelectValue alias="JurnalDescription">
+          <Column table-alias="JournalEntry" name="Description" />
+        </SelectValue>
+        <SelectValue alias="TechnicalTransaction">
+          <Column table-alias="Imputation" name="TechnicalTransaction" />
+        </SelectValue>
+        <SelectValue alias="AccountName">
+          <Column table-alias="UniqueUsers" name="AccountName" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+          <Join type="Left">
+            <Join>
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Imputation, Core.Accounting.Entities" alias="Imputation" />
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.JournalEntry, Core.Accounting.Entities" alias="JournalEntry" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="JournalEntry" name="JournalEntryCode" />
+                  <Column table-alias="Imputation" name="SourceCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.UniquePersonV1.Entities.ListPersons, Core.UniquePersonV1.Entities" alias="ListPersons" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="ListPersons" name="IndividualId" />
+                <Column table-alias="JournalEntry" name="IndividualId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Branch" name="BranchCode" />
+              <Column table-alias="JournalEntry" name="BranchCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+        <ClassNameTable name="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, Core.UniqueUser.Entities" alias="UniqueUsers" />
+        <criteria>
+          <BinaryCriterion type="Equal">
+            <Column table-alias="UniqueUsers" name="UserId" />
+            <Column table-alias="Imputation" name="UserId" />
+          </BinaryCriterion>
+        </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

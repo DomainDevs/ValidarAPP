@@ -1,0 +1,123 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.BankNetworkRelationshipPaymentMethod;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameters</li>
+        <li>@Global.AutomaticDebit</li>
+        <li>@Global.BankNetworkRelationshipPaymentMethod</li>
+    </ol>
+}
+
+@section Modals
+{
+    <form id="networkRelationshipAddForm">
+        <div class="uif-modal" id="networkRelationshipModalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/AutomaticDebit/BankNetworkRelationshipModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" id="networkRelationshipCancelAdd" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="networkRelationshipSaveAdd" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+    <form id="networkRelationshipEditForm">
+        <div class="uif-modal" id="networkRelationshipModalEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/AutomaticDebit/BankNetworkRelationshipModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="networkRelationshipSaveEdit" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteRelation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="relationDeleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="relationDeleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="relationDeleteModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modal" id="modalRelation"></div>
+
+
+}
+
+<form id="bankNetRelationshipForm">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.Net</label>
+            @Html.DropDownList("NetworkRelationshipSelectBankNetwork", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/Accounting/Common/GetNets"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField,
+                        data_native = "true"
+                    })
+            <span class="text-danger" data-valmsg-for="NetworkRelationshipSelectBankNetwork" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableNetworkRelation" data-exporttocsv="false" data-add="true" data-edit="false"
+               data-delete="true" data-selectiontype="none" data-filter="true"
+               data-source="" data-paginate="true" data-title="@Global.BankNetworkRelationshipPaymentMethod">
+            <thead>
+                <tr>
+                    <th data-property="Id" data-visible="false">Id</th>
+                    <th data-property="PaymentMethodId" data-visible="false">PaymentMethodId</th>
+                    <th data-property="PaymentMethodDescription">@Global.ConduitName</th>
+                    <th data-property="Generate" data-type="boolean">@Global.Generate</th>
+                    <th data-property="BankAndAccount">@Global.BankAndAccount</th>
+                    <th data-property="BankId" data-visible="false">BankId</th>
+                    <th data-property="AccountBankId" data-visible="false">AccountBankId</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<input type="hidden" id="ViewBagControlSpanBankNetwork" value="true" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainBankNetworkRelationship")
+}

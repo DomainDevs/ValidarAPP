@@ -1,0 +1,29 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.ConcessionaireViewModel
+@{
+    Layout = null;
+}
+
+<form id="formConcessionaire" class="form">
+
+    <div class="row">
+        <div class="uif-col-8">
+            <label id="labelConcessionaire">@Resources.Language.Description</label>
+            @Html.TextBoxFor(model => model.Description, new { id = "InputConcessionaire" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        <div class="uif-col-4">
+            <div class="without-label">
+                <input type="checkbox" name="concessionaireEnable" value=" " id="concessionaireEnable" />
+                <label for="concessionaireEnable">@Resources.Language.Enabled</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-8">
+            <label id="labelMake">@Resources.Language.Make</label>
+            <select class="uif-select" name="Make" id="Make" data-id="Id" data-name="Description" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+        </div>
+    </div>
+
+</form>

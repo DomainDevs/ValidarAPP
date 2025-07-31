@@ -1,0 +1,109 @@
+﻿
+<div class="uif-row">
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.Language.OriginOfPayment</label>
+        <select class="uif-select form-control" id="selectPaymentSource" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                data-id="Id" data-name="Description" data-native="false" data-filter="true" name="selectPaymentSource" required></select>
+        <span class="text-danger" data-valmsg-for="selectPaymentSource" data-valmsg-replace="true"></span>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.Language.MovementType</label>
+        <select class="uif-select form-control" id="selectMovementType" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                data-id="Id" data-name="Description" data-native="false" data-filter="true" name="selectMovementType" required></select>
+        <span class="text-danger" data-valmsg-for="selectMovementType" data-valmsg-replace="true"></span>
+    </div>
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.Language.RecoveryBranch</label>
+        <select class="uif-select form-control" id="selectRecoveryBranch" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                data-id="Id" data-name="Description" data-native="false" data-filter="true" name="selectRecoveryBranch" required></select>
+        <span class="text-danger" data-valmsg-for="selectRecoveryBranch" data-valmsg-replace="true"></span>
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.Language.RegistrationDate</label>
+        <input type="text" name="inputRegistrationDate" id="inputRegistrationDate" class="uif-input" disabled="disabled" />
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.Language.LabelAccountingDate</label>
+        <input type="text" name="inputAccountingDate" id="inputAccountingDate" class="uif-input" disabled="disabled" />
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.Language.CollectTo</label>
+        <select class="uif-select form-control" id="selectCollectTo" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                data-id="Id" data-name="Description" data-native="false" name="selectCollectTo" required></select>
+        <span class="text-danger" data-valmsg-for="selectCollectTo" data-valmsg-replace="true"></span>
+    </div>
+
+    <div id="divInsured" hidden="hidden">
+        <div class="uif-col-3" id="divDocumentNumberInsured">
+            <label class="field-required">@Resources.Language.DocumentNumber</label>
+            <input type="text" class="uif-autocomplete" id="inputDocumentNumberInsured" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                   data-name="Description" name="inputDocumentNumberInsured" data-source="@Url.Content("~/Charge/GetInsuredsByNameDocumentNumber")" data-displaykey="DocumentNumber" 
+                   placeholder="@Resources.Language.PlaceHolderDocumentNumber" required />
+            <span class="text-danger" data-valmsg-for="inputDocumentNumberInsured" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-6" id="divFullNameInsured">
+            <label class="field-required">@Resources.Language.FullName</label>
+            <input type="text" class="uif-autocomplete" id="inputFullNameInsured" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                   data-name="Description" name="inputFullNameInsured" data-source="@Url.Content("~/Charge/GetInsuredsByNameDocumentNumber")" data-displaykey="FullName" 
+                   placeholder="@Resources.Language.PlaceHolderNameSurname" required />
+            <span class="text-danger" data-valmsg-for="inputFullNameInsured" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+    <div id="divHolder" hidden="hidden">
+        <div class="uif-col-3" id="divDocumentNumberHolder">
+            <label class="field-required">@Resources.Language.DocumentNumber</label>
+            <input type="text" class="uif-autocomplete" id="inputDocumentNumberHolder" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                   data-name="Description" name="inputDocumentNumberHolder" data-source="@Url.Content("~/Charge/GetHoldersByDescriptionInsuredSearchTypeCustomerType")" data-displaykey="DocumentNumber" 
+                   placeholder="@Resources.Language.PlaceHolderDocumentNumber" required />
+            <span class="text-danger" data-valmsg-for="inputDocumentNumberHolder" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-6" id="divFullNameHolder">
+            <label class="field-required">@string.Format("{0} / {1}",Resources.Language.FullName, Resources.Language.LabelBusinessName) </label>
+            <input type="text" class="uif-autocomplete" id="inputFullNameHolder" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                   data-name="Description" name="inputFullNameHolder" data-source="@Url.Content("~/Charge/GetHoldersByDescriptionInsuredSearchTypeCustomerType")" data-displaykey="FullName" 
+                   placeholder="@Resources.Language.PlaceHolderNameSurname" required />
+            <span class="text-danger" data-valmsg-for="inputFullNameHolder" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+    <div id="divSupplier" hidden="hidden">
+        <div class="uif-col-3" id="divDocumentNumberSupplier">
+            <label class="field-required">@Resources.Language.DocumentNumber</label>
+            <input type="text" class="uif-autocomplete" id="inputDocumentNumberSupplier" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                   data-name="Description" name="inputDocumentNumberSupplier" data-source="@Url.Content("~/Charge/GetSuppliersByNameDocumentNumber")" data-displaykey="DocumentNumber" 
+                   placeholder="@Resources.Language.PlaceHolderDocumentNumber" required />
+            <span class="text-danger" data-valmsg-for="inputDocumentNumberSupplier" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-6" id="divFullNameSupplier">
+            <label class="field-required">@Resources.Language.FullName</label>
+            <input type="text" class="uif-autocomplete" id="inputFullNameSupplier" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                   data-name="Description" name="inputFullNameSupplier" data-source="@Url.Content("~/Charge/GetSuppliersByNameDocumentNumber")" data-displaykey="Name" 
+                   placeholder="@Resources.Language.PlaceHolderNameSurname" required />
+            <span class="text-danger" data-valmsg-for="inputFullNameSupplier" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+    <div id="divThirdparty" hidden="hidden">
+        <div class="uif-col-3">
+            <label class="field-required">@Html.Label(@Resources.Language.DocumentNumber)</label>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Claims/PaymentRequest/GetSuppliersByNameDocumentNumber")"
+                   data-val-required="@Resources.Language.RequiredField" data-displaykey="DocumentNumber" data-val="true"
+                   placeholder="@Resources.Language.PlaceHolderDocumentNumber" id="InputDocumentNumberThirdParty" name="DocumentNumberThirdParty" required>
+            <span class="text-danger" data-valmsg-for="InputDocumentNumberThirdParty" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-6">
+            <label class="field-required">@Html.Label(string.Format("{0} / {1}", Resources.Language.FullName, Resources.Language.LabelBusinessName))</label>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Claims/PaymentRequest/GetSuppliersByNameDocumentNumber")"
+                   data-val-required="@Resources.Language.RequiredField" data-val="true" data-displaykey="FullName"
+                   placeholder="@Resources.Language.PlaceHolderNameSurname" id="InputFullNameThirdParty" name="FullNameThirdParty" required>
+            <span class="text-danger" data-valmsg-for="InputFullNameThirdParty" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+</div>
+

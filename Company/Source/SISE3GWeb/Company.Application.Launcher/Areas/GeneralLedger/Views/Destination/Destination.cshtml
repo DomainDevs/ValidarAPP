@@ -1,0 +1,46 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.Destination;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Parameter</a></li>
+        <li class="active">@Global.Destination</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal" id="destinationModal">
+    </div>
+}
+
+<script id="listTemplateDestination" type="text/template">
+    <span>
+        <strong>
+            -@Global.Description:
+        </strong>
+        <span class="label label-primary">
+            {{Description}}.
+        </span>
+    </span>
+</script>
+
+<div class="row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertDestination"></div>
+    </div>
+</div>
+<div class="uif-listview" id="destinationListView">
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagDestination" value="true" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/Destination")
+}

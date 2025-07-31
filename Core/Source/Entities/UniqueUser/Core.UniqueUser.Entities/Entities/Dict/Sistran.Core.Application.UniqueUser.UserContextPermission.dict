@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="UserContextPermission" namespace="" file-version="1.0" description="USER_CONTEXT_PERMISSION_ENTITY">
+	<properties>
+		<property name="Id" type="Integer" key="true" description="ID_PROPERTY" autonumber="id"  />
+		<property name="ContextPermissionsCode" type="Integer" description="CONTEXT_PERMISSIONS_CODE_PROPERTY" />
+		<property name="PermissionCode" type="Integer" description="PERMISSION_CODE_PROPERTY" />
+		<property name="ProfileCode" type="Integer" description="PROFILE_CODE_PROPERTY" />
+	</properties>
+	<tables>
+		<table name="USER_CONTEXT_PERMISSION" schema="UU" alias="USER_CONTEXT_PERMISSION" update="true">
+			<columns>
+				<column name="ID" type="Int32" property="Id" key="true" />
+				<column name="CONTEXT_PERMISSIONS_CD" type="Int32" property="ContextPermissionsCode" allowNull="false" />
+				<column name="PERMISSION_CD" type="Int32" property="PermissionCode" allowNull="false" />
+				<column name="PROFILE_CD" type="Int32" property="ProfileCode" allowNull="false" />
+			</columns>
+		</table>
+	</tables>
+   <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="10029" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

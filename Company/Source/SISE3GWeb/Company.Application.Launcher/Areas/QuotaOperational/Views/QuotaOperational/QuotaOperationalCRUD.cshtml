@@ -1,0 +1,33 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.QuotaOperational.Models.QuotaOperationalModelView
+
+<form id="formQuotaOperational">
+    <div class="row">
+        <div class="uif-col-12">
+            <label>Asegurado</label>
+            @Html.TextBoxFor(x => x.HolderName, new { id = "inputTomador" })
+        </div>
+
+        <div class="uif-col-12">
+            <label>Ramo Tecnico</label>
+            <select class="uif-select form-control" id="inputLineBusiness" data-native="false" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"
+                    data-id="Id" data-name="Description" name="PrefixId"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>Moneda</label>
+            <select class="uif-select form-control" id="inputMoneyName" data-native="false" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlMoney"
+                    data-id="Id" data-name="Description" name="Currency"></select>
+        </div>
+
+        <div class="uif-col-12">
+            <label>Cupo Operativo</label>
+            @Html.TextBoxFor(x => x.amountValue, new { id = "inputOperationalQuotaValue" })
+        </div>
+
+        <div class="uif-col-12">
+            <label>Fecha Hasta</label>
+            @Html.TextBoxFor(x => x.DateEnd, new { id = "inputDateEnd", @class = "uif-datepicker" })
+        </div>
+    </div>
+</form>

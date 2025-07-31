@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ClaimPaymentsView">
+  <collections>
+    <collection name="PaymentRequestClaim" type="Sistran.Core.Application.Claims.Entities.PaymentRequestClaim, 
+                Core.Claims.Entities"></collection>
+    <collection name="PaymentRequest" type="Sistran.Core.Application.Claims.Entities.PaymentRequest,
+                Core.Claims.Entities"></collection>
+    <collection name="PaymentVoucherConcept" type="Sistran.Core.Application.Claims.Entities.PaymentVoucherConcept, 
+                Core.Claims.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="PaymentRequestClaim" destination="PaymentRequest" name="PaymentRequestClaimPaymentRequest" type="Inner">
+      <property left="PaymentRequestCode" type="Equal" right="PaymentRequestCode"></property>
+    </relation>
+    <relation source="PaymentRequestClaim" destination="PaymentVoucherConcept" name="PaymentVoucherPaymentVoucherConcept" type="Inner">
+      <property left="PaymentVoucherConceptCode" type="Equal" right="PaymentVoucherConceptCode"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,36 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <label>@Global.Bank</label>
+        <select class="uif-select form-control" id="selectBankReconciliation" name="selectBankReconciliation" data-val="true" data-val-required='@Global.RequiredField'
+                data-source='@Url.Content("~/Accounting/Common/GetBanks")' data-id="Id" data-name="Description" data-native="true"></select>
+        <span class="text-danger" data-valmsg-for="selectBankReconciliation" data-valmsg-replace="true" />
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <label>@Global.Format</label>
+        @Html.DropDownList("selectFormat", Enumerable.Empty<SelectListItem>(), new
+   {
+       @class = "uif-select form-control",
+       data_id = "Id",
+       data_name = "Description",
+       data_val = "true",
+       data_source = @Url.Content("~/Accounting/Parameters/GetFormatSelect?idStructure=1"),
+       data_val_required = @Global.RequiredField,
+       data_native = "true"
+   })
+        <span class="text-danger" data-valmsg-for="selectFormat" data-valmsg-replace="true" />
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertForm"></div>
+    </div>
+</div>
+
+
+
+
+

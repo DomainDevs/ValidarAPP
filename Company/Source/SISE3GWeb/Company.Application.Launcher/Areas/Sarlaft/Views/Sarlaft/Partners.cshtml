@@ -1,0 +1,95 @@
+﻿@{
+    Layout = null;
+}
+
+@*Titulo*@
+
+<script id="title-template" type="text/template">
+    <div class="column column-100">
+        @Resources.Language.LabelPartners
+    </div>
+</script>
+<script id="ListPartnersTemplate" type="text/template">
+    <div>Nombre/ Razón Social : <strong>{{TradeName}}</strong></div>
+    <div>Tipo de Documento : <strong>{{DocumentTypeDescription}}</strong></div>
+    <div>Número de Documento : <strong>{{IdCardNumero}}</strong></div>
+    <div>Participacion : <strong>{{Participation}} </strong></div>
+    {{#if Active}}
+    <div>Activo : <strong class="success">@Resources.Language.Active</strong></div>
+    {{else}}
+    <div>Activo : <strong class="warning">@Resources.Language.Inactive</strong></div>
+    {{/if}}
+</script>
+
+
+
+
+<form class="form" id="formPartners">
+    <input type="hidden" name="Id" id="Id" />
+    <input type="hidden" name="Status" value="" id="Status" />
+    <input type="hidden" name="IndividualId" value="" id="IndividualId" />
+    <div>
+        <div class="row">
+            <div class="uif-col-6">
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelTypeDocument</label>
+                        <select class="uif-select form-control" id="selectPartnerDocumentType" name="DocumentTypeId" data-native="false" data-id="Id" data-name="DescriptionLong" data-val-required="Campo requerido"  required="required"></select>
+                        @Html.ValidationMessage("DocumentTypeId", Resources.Language.FieldRequired)
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelNumberDocument</label>
+                        <input type="text" value="" id="partnerDocumentNumber" name="IdCardNumero" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val-required="Campo requerido"  required="required" class="rightAlign" />
+                        @Html.ValidationMessage("IdCardNumero", Resources.Language.FieldRequired)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label class="field-required">@Resources.Language.LabelName</label>
+                        <input type="text" value="" id="namePartner" name="TradeName" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" data-val-required="Campo requerido" required="required" />
+                        @Html.ValidationMessage("TradeName", Resources.Language.FieldRequired)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.Percent</label>
+                        <input type="text" value="" id="partnerParticipation" name="Participation" minlenght="1" class="rightAlign" data-val="true" data-val-required="Campo requerido"  required="required" />
+                        @Html.ValidationMessage("Participation", Resources.Language.FieldRequired)
+                    </div>
+                    <div class="uif-col-6">
+                        <input type="checkbox" id="rdActive" name="Active"/>
+                        <label for="rdActive">@Resources.Language.Active</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-6">
+                        <button type="button" class="btn btn-default" id="btnFinalBeneficiary">
+                            @Resources.Language.Beneficiary
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uif-col-6 fit-col-secondary">
+                <div id="listPartners" class="uif-listview"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnPartnersNew">
+                    @Resources.Language.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btnPartnersAdd">
+                    @Resources.Language.AddForm
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>
+<div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnPartnersCancel" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnPartnersSave" onclick="return false">@Resources.Language.ButtonSave</button>
+    </div>

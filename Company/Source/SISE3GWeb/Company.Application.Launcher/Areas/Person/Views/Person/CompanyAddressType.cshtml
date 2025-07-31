@@ -1,0 +1,133 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.CompanyAddressTypeViewModel
+<script id="CompanyAddressTypeTemplate" type="text/template">
+	{{#ifCond StatusTypeService "==" 4}}
+	<div><strong class="danger">{{SmallDescription}} ({{AddressTypeCode}})</strong></div>
+	{{else}}
+	<div><strong>{{SmallDescription}} ({{AddressTypeCode}})</strong></div>
+	{{/ifCond }}
+	<div>
+		<br>
+		<strong>{{LabelIsMail}}</strong>
+	</div>
+	<div class="hidden">
+		<br>
+		Abreviatura: <strong>{{TinyDescription}}</strong>
+	</div>
+	<div class="hidden">
+		<br>
+		Es Correo Electrónico: <strong>{{IsElectronicMail}}</strong>
+	</div>
+	<div class="hidden">
+		<br>
+		Asignado: <strong>{{IsForeing}}</strong>
+	</div>
+	<div class="hidden">
+		<br>
+		Permiso Eliminar: <strong>{{allowDelete}}</strong>
+	</div>
+	<div class="hidden">
+		{{StatusType}}
+	</div>
+</script>
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.LanguagePerson.LabelCompanyAddressType
+        </div>
+        <div class="column-30 even">
+            <input type="text" name="Id" id="inputSearchCompanyAddressType" class="uif-input-search" placeholder="@Resources.LanguagePerson.EnterCompanyAddressTypeToSearch" />
+            <button class="btn btn-default" id="btnSearchAdvCompanyAddressType"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.LanguagePerson.ButtonExit
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.LanguagePerson.ExportXLS
+            </button>
+
+            <button class="btn btn-primary" id="btnSaveCompanyAddressType" @*style="display: none"*@>
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.LanguagePerson.ButtonSave
+            </button>
+
+        </div>
+
+    </footer>
+}
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formCompanyAddressType" autocomplete="off" class="form without-space">
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+
+                    <input type="hidden" id="inputId" readonly />
+              
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.SmallDescription, new { id = "inputSmallDescription", placeholder = @Resources.LanguagePerson.LabelDescription })
+                    @Html.ValidationMessageFor(model => model.SmallDescription)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelAbbreviation</label>
+                    @Html.TextBoxFor(model => model.TinyDescription, new { id = "inputTinyDescription", placeholder = @Resources.LanguagePerson.LabelAbbreviation })
+                    @Html.ValidationMessageFor(model => model.TinyDescription)
+                </div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    @*<label class="field-required">@Resources.Language.LabelIsElectronicMail</label>
+                        @Html.CheckBoxFor(model => model.IsElectronicMail, new { id = "inputIsElectronicMail", placeholder = @Resources.Language.LabelIsElectronicMail })
+                        @Html.ValidationMessageFor(model => model.IsElectronicMail)*@
+                    <div class="without-label">
+                        <input type="checkbox" id="inputIsElectronicMail" name="inputIsElectronicMail" />
+                        <label for="inputIsElectronicMail">@Resources.LanguagePerson.LabelIsElectronicMail</label>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary" id="panelCompanyAddressType">
+            <div id="listCompanyAddressType" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsCompanyAddressType">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewCompanyAddressType">@Resources.LanguagePerson.New</button>
+                <button type="button" class="btn btn-primary" id="btnCompanyAddressTypeAccept">@Resources.LanguagePerson.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/bundle/js/CompanyAddressType")"></script>
+}

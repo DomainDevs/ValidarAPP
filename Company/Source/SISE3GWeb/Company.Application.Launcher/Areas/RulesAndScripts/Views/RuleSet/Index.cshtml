@@ -1,0 +1,198 @@
+﻿@{
+    Layout = null;
+}
+
+@*TITULO*@
+<script id="title-template" type="text/template">
+    <div class="column-50">
+        <div id="Title">@Resources.Language.Rules</div>
+    </div>
+    <div class="column-5 no-padding">
+        <input type="text" value="@Resources.Language.LabelPackages" readonly style="width: 80px!important;">
+    </div>
+    <div class="column-20 no-padding">
+        <select class="uif-select" id="ddlPackage" data-native="false" data-val="true" data-id="PackageId" data-name="Description"></select>
+    </div>
+    <div class="column-30 even">
+        <input class="uif-input-search" type="text" placeholder="@Resources.Language.LabelRuleSetFilter" id="SearchRule" />
+        <button class="btn btn-default" id="btnSearchAdvRules"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+@**@
+
+@*FOOTER*@
+<script id="footer-template" type="text/template">
+    <button type="button" class="btn btn-default" id="btnExit">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+        <span class="" aria-hidden="true">@Resources.Language.ButtonExit</span>
+    </button>
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0622"))
+    {
+        <button type="button" class="btn btn-default" id="btnExportAllRule">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonExport</span>
+        </button>
+    }
+
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0621"))
+    {
+        <button type="button" class="btn btn-default" id="btnExportRule">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.DownloadPackage</span>
+        </button>
+    }
+
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0620"))
+    {
+        <label class="btn btn-default btn-sm">
+            <input type="file" id="btnLoadFromFile" accept=".rule" style=" display: none;" />
+            <i class="fa fa-upload" aria-hidden="true"></i>
+            <span aria-hidden="true">@Resources.Language.LoadPackage</span>
+        </label>
+    }
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0619"))
+    {
+        <button type="button" class="btn btn-primary" id="btnRecordRule">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+        </button>
+    }
+</script>
+@**@
+
+@*TEMPLATES*@
+<script id="template-policies-rulesSet" type="text/template">
+    <div>
+
+        <div>
+            <strong>Id: </strong> {{RuleSetId}}
+        </div>
+        <div>
+            <strong>@Resources.Language.Description:</strong> {{Description}}
+        </div>
+        <div>
+            <strong>@Resources.Language.LabelModule: </strong> {{Package.Description}}
+        </div>
+        <div>
+            <strong>@Resources.Language.LabelLevels:</strong> {{Level.Description}}
+        </div>
+        <div>
+            <strong>@Resources.Language.DateCreate:</strong> {{CurrentFrom}}
+        </div>
+        {{#if CurrentTo}}
+        <div>
+            <strong>@Resources.Language.ModificationDate:</strong> {{CurrentTo}}
+        </div>
+        {{/if}}
+        @*{{#if HasError}}
+            <span class="label label-danger">@Resources.Language.WithError</span>
+        {{/if}}
+		{{#ifCond Active "==" 0}}
+			{{#ifCond ActiveType "==" 1}}
+			<div>
+				<strong>@Resources.Language.LabelDeactivatedByTheUser</strong>
+			</div>
+			{{else ifCond ActiveType "==" 2}}
+			<div>
+				<strong>@Resources.Language.LabelDeactivatedByTheSystem</strong>
+			</div>		
+			{{else}}
+			<div>
+				<strong>@Resources.Language.LabelWithoutActivate</strong>
+			</div>
+			{{/ifCond}}
+		{{else ifCond Active "==" 1}}
+			{{#ifCond ActiveType "==" 1}}
+			<div>
+				<strong>@Resources.Language.LabelActiveByTheUser</strong>
+			</div>
+			{{else ifCond ActiveType "==" 2}}
+			<div>
+				<strong>@Resources.Language.LabelActiveForTheSystem</strong>
+			</div>
+			{{/ifCond}}
+        {{else}}
+			<div>
+				<strong>@Resources.Language.LabelWithoutActivate</strong>
+			</div>
+		{{/ifCond}}*@
+    </div>
+</script>
+
+<script id="template-policies-rules" type="text/template">    
+    {{#ifCond StatusType "==" 2}}
+    <div class="success">{{Description}}</div>
+    {{else ifCond StatusType "==" 3}}
+    <div class="warning">{{Description}}</div>
+    {{else ifCond StatusType "==" 4}}
+    <div class="danger">{{Description}}</div>
+    {{else}}
+    <div>{{Description}}</div>
+    {{/ifCond}}
+    {{#if HasError}}
+    <span class="label label-danger">@Resources.Language.WithError</span>
+    {{/if}}
+</script>
+
+
+<script id="template-policies-rules-Condition" type="text/template">
+    <div>
+        {{#each ExpressionStr}}
+        <div>{{this}}</div>
+        {{/each}}
+        {{#if HasError}}
+        <span class="label label-danger">@Resources.Language.WithError</span><br /><br />
+        {{/if}}
+    </div>
+</script>
+
+<script id="template-policies-rules-Action" type="text/template">
+    <div>
+        {{#each ExpressionStr}}
+        <div>{{this}}</div>
+        {{/each}}
+        {{#if HasError}}
+        <span class="label label-danger">@Resources.Language.WithError</span><br /><br />
+        {{/if}}
+    </div>
+</script>
+@**@
+
+<form class="form without-space">
+    <div class="row">
+        <div class="uif-col-4 no-padding">
+            <div id="lsvRulesSet" class="uif-listview">
+            </div>
+            <div id="lsvRules" class="uif-listview">
+            </div>
+        </div>
+        <div class="uif-col-4 no-padding">
+            <div id="lsvCondition" class="uif-listview">
+            </div>
+        </div>
+        <div class="uif-col-4 no-padding">
+            <div id="lsvAction" class="uif-listview">
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@*Modales*@
+@{Html.RenderAction("ModalRuleSet", "RuleSet", new { area = "RulesAndScripts" });}
+@{Html.RenderAction("ModalRule", "RuleSet", new { area = "RulesAndScripts" });}
+@{Html.RenderAction("ModalConditionRule", "RuleSet", new { area = "RulesAndScripts" });}
+@{Html.RenderAction("ModalActionRule", "RuleSet", new { area = "RulesAndScripts" });}
+<div class="uif-modal" id="modalRulesAndScriptsResults">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/RulesAndScripts/Views/RuleSet/RulesAndScriptsResult.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalConceptTableResult">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/RulesAndScripts/Views/RuleSet/ModalConceptTableResult.cshtml")
+    </div>
+</div>
+
+@**@

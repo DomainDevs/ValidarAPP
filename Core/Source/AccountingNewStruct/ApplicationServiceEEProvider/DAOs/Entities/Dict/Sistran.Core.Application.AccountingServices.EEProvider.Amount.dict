@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="Amount" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="AMOUNT_ENTITY">
+  <properties>
+    <property name="AmountId" type="Integer" key="true" description="AMOUNT_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="DepositPremiumTransactionCode" type="Integer" nullable="true" description="DEPOSIT_PREMIUM_TRANSACTION_CODE_PROPERTY" />
+    <property name="IncomeAmount" type="Decimal" precision="12" scale="2" nullable="true" description="INCOME_AMOUNT_PROPERTY" />
+    <property name="ExchangeRate" type="Decimal" precision="12" scale="6" nullable="true" description="EXCHANGE_RATE_PROPERTY" />
+    <property name="Value" type="Decimal" precision="12" scale="2" nullable="true" description="VALUE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="AMOUNT" schema="ACC" alias="AMOUNT" update="true">
+      <columns>
+        <column name="AMOUNT_ID" type="Int32" property="AmountId" key="true" identity ="true"/>
+        <column name="DEPOSIT_PREMIUM_TRANSACTION_CD" type="Int32" property="DepositPremiumTransactionCode" />
+        <column name="INCOME_AMOUNT" type="Decimal" property="IncomeAmount" size="19" precision="12" scale="2" />
+        <column name="EXCHANGE_RATE" type="Decimal" property="ExchangeRate" size="19" precision="12" scale="6" />
+        <column name="VALUE" type="Decimal" property="Value" size="19" precision="12" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

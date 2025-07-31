@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="UserGroupView">
+  <collections>
+    <collection name="User" type="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Group" type="Sistran.Company.Application.UniqueUser.Entities.Group, 
+                Company.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Group" destination="User" name="GroupData" type="Left">
+      <property left="GroupCode" type="Equal" right="GroupCode"></property>
+    </relation>
+    <relation source="User" destination="Group" name="UserData" type="Left">
+      <property left="UserId" type="Equal" right="UserId"></property>
+    </relation>
+  </relations>
+</view>

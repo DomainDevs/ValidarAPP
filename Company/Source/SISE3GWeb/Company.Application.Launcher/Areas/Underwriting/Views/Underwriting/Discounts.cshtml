@@ -1,0 +1,75 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.DiscountsModelsView
+
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.DiscountsTitle
+    </div>
+    <div class="column-30 even">
+    </div>
+</script>
+
+<script id="DiscountsTemplate" type="text/template">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div><strong class="success">({{Id}}) {{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div><strong class="warning">({{Id}}) {{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div><strong class="danger">({{Id}}) {{Description}}</strong></div>
+    {{else}}
+    <div><strong>({{Id}}) {{Description}}</strong></div>
+    {{/ifCond }}
+    <div><strong>{{TaxeTypeDescription}}</strong></div>
+    <div><strong>{{Taxe}}</strong></div>
+</script>
+
+<form id="formDiscounts" class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.DiscountsParametrization</label>
+                    <select class="uif-select form-control" id="dllDiscountsParametrization"
+                            data-id="Id" data-name="Description" name="DiscountsParametrization"
+                            data-val="true" data-val-required="Se revento"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(m => m.DiscountsParametrization)
+                </div>
+
+                <div class="uif-col-12">
+                    <label>@Resources.Language.DiscountsType</label>
+                    @Html.TextBoxFor(x => x.TaxeType, new { id = "inputTaxeType", placeholder = " ", disabled = "disabled" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.DiscountsTaxe</label>
+                    @Html.TextBoxFor(x => x.Taxe, new { id = "inputTaxe" })
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listViewDiscounts" class="uif-listview"></div>
+            <br />
+            <div class="uif-col-14">
+                @Html.TextBoxFor(x => x.totalDiscounts, new { id = "inputTotalDiscount", placeholder = Resources.Language.DiscountsTotal, disabled = "disabled" })
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewDiscounts">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAcceptDiscount">@Resources.Language.Add </button>
+            </div>
+        </div>
+    </div>
+
+</form>
+

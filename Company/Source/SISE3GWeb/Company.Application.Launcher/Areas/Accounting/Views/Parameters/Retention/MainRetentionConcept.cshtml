@@ -1,0 +1,127 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = Resources.Global.Retention;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Parameters</a></li>
+        <li class="active">@Global.Retention</li>
+    </ol>
+}
+
+@section Modals
+{
+    <form id="addForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Parameters/Retention/RetentionConceptModal.cshtml")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" id="cancelAdd" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveAdd" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="editForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Parameters/Retention/RetentionConceptModal.cshtml")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="SaveEdit" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="uif-modal" id="modalFormatDesign"></div>
+
+    <form id="addFieldForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalAddField">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Parameters/Retention/FieldRetentionModal.cshtml")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveAddField" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="editFieldForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalEditField">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Parameters/Retention/FieldRetentionModal.cshtml")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveEditField" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+
+}
+
+<br />
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertRetentionConcept"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableRetentionConcept" data-exporttocsv="false" data-add="true" data-edit="true"
+               data-selectiontype="single" data-filter="true"
+               data-source="@Url.Action("GetRetentionConcepts", "Retention")" data-paginate="true" data-title="@Global.RetentionConcept">
+            <thead>
+                <tr>
+                    <th data-property="Id">Id</th>
+                    <th data-property="Description">@Global.Description</th>
+                    <th data-property="RetentionBase">@Global.RetentionBase</th>
+                    <th data-property="RetentionBaseId" data-visible="false">RetentionBaseId</th>
+                    <th data-property="DifferenceAmount">@Global.Tolerance</th>
+                    <th data-property="Status">@Global.Active</th>
+                    <th data-property="StatusId" data-visible="false">StatusId</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertDetailRetentionConcept"></div>
+    </div>
+</div>
+<!--FormatDetails -->
+<div id="tabSingle">
+    <table class="uif-table" id="tableDetailsRetentionConcept" data-exporttocsv="false" data-add="true" data-edit="true"
+           data-selectiontype="none" data-filter="true"
+           data-source="" data-paginate="true" data-title="@Global.PercentageByRetentionConcept">
+        <thead>
+            <tr>
+                <th data-property="Id">@Global.Id</th>
+                <th data-property="DateFrom">@Global.CurrentFrom</th>
+                <th data-property="DateTo">@Global.CurrentTo</th>
+                <th data-property="Percentage">@Global.Percentage</th>
+                <th data-property="ExternalCode">@Global.Codes</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainRetentionConcept")
+}
+

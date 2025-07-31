@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column-90">
+        @Resources.Language.ClaimSubCause
+    </div>
+    <div class="column-10 even">
+
+    </div>
+</script>
+<form id="formSubCause" class="form">
+    <div class="uif-col-12">
+        <div class="row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.Prefix</label>
+                <select class="uif-select form-control" id="selectPrefix" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                        data-id="Id" data-name="Description" name="selectPrefix"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="selectPrefix" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelCause</label>
+                <select class="uif-select form-control" id="selectCause" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                        data-id="Id" data-name="Description" name="selectCause"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="selectCause" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        </div>
+    <div class="uif-col-12">
+        <table class="uif-table" id="tblsubcause" data-pagesize="10" data-add="true" data-title="<b>Subcausas</b>" data-selectiontype="none" data-delete="true" data-edit="true">
+            <thead>
+                <tr>
+                    <th data-property="Description"><b>@Resources.Language.LabelSubcause</b></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</form>
+<div class="uif-modal" id="modalClaimSubcause">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/ClaimsSubcause/ModalClaimSubcause.cshtml")
+    </div>
+</div>

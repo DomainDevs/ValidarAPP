@@ -1,0 +1,18 @@
+<map version="2.0" type="class" name="PaymentCumulus" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="PAYMENT_CUMULUS_ENTITY">
+  <properties>
+    <property name="PaymentCumulusId" type="Integer" key="true" description="PAYMENT_CUMULUS_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="PaymentLayerId" type="Integer" description="PAYMENT_LAYER_ID_PROPERTY" />
+    <property name="LineId" type="Integer" description="LINE_ID_PROPERTY" />
+    <property name="CumulusKey" type="String" size="100" description="CUMULUS_KEY_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_CUMULUS" schema="REINS" alias="PAYMENT_CUMULUS" update="true">
+      <columns>
+        <column name="PAYMENT_CUMULUS_ID" type="Int32" property="PaymentCumulusId" key="true" identity ="true"/>
+        <column name="PAYMENT_LAYER_ID" type="Int32" property="PaymentLayerId" allowNull="false" />
+        <column name="LINE_ID" type="Int32" property="LineId" allowNull="false" />
+        <column name="CUMULUS_KEY" type="String" property="CumulusKey" allowNull="false" size="100" />
+      </columns>
+    </table>
+  </tables>
+</map>

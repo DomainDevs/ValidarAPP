@@ -1,0 +1,34 @@
+<map version="2.0" type="class" name="FinancialPlan" namespace="Sistran.Core.Application.Product" file-version="1.0" description="FINANCIAL_PLAN_ENTITY">
+  <properties>
+    <property name="FinancialPlanId" type="Integer" key="true" description="FINANCIAL_PLAN_ID_PROPERTY" autonumber="id"/>
+    <property name="PaymentMethodCode" type="Integer" description="PAYMENT_METHOD_CODE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+    <property name="SurchargePercentage" type="Decimal" precision="7" scale="4" description="SURCHARGE_PERCENTAGE_PROPERTY" />
+    <property name="PaymentScheduleId" type="Integer" description="PAYMENT_SCHEDULE_ID_PROPERTY" />
+    <property name="MinPayAmount" type="Decimal" precision="18" scale="2" description="MIN_PAY_AMOUNT_PROPERTY" />
+    <property name="DisabledDate" type="DateTime" nullable="true" description="DISABLED_DATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="FINANCIAL_PLAN" schema="PROD" alias="FINANCIAL_PLAN" update="true">
+      <columns>
+        <column name="FINANCIAL_PLAN_ID" type="Int16" property="FinancialPlanId" key="true" />
+        <column name="PAYMENT_METHOD_CD" type="Byte" property="PaymentMethodCode" allowNull="false" />
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" allowNull="false" />
+        <column name="SURCHARGE_PCT" type="Decimal" property="SurchargePercentage" allowNull="false" size="19" precision="7" scale="4" />
+        <column name="PAYMENT_SCHEDULE_ID" type="Int32" property="PaymentScheduleId" allowNull="false" />
+        <column name="MIN_PAY_AMT" type="Decimal" property="MinPayAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="DISABLED_DATE" type="DateTime" property="DisabledDate" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="26" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

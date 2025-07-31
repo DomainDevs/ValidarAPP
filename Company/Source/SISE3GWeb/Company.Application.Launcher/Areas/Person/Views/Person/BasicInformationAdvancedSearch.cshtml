@@ -1,0 +1,113 @@
+﻿@model  Sistran.Core.Framework.UIF.Web.Areas.Person.Models.BasicInformationAdvancedSearchViewModel
+<script id="AdvSearchBasicInfoTemplate" type="text/template">
+    {{#ifCond CompanyCode "==" null}}
+    <div>
+        <div>
+            {{FirstName}} {{LastName}} {{Name}}
+        </div>
+    </div>
+    {{else ifCond PersonCode "==" null}}
+    <div>
+        <div>
+            {{TradeName}}
+        </div>
+    </div>
+    {{/ifCond}}
+    <div>
+        {{NameTypeDocument}}. {{DocumentNumber}}
+    </div>
+    <div>
+        <strong>@Resources.LanguagePerson.Roles</strong>
+        <label style="color:#ff3a25;">
+            {{Role}}
+        </label>
+    </div>
+</script>
+<form class="form" id="formAdvSearchBasicInformation">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.LanguagePerson.LabelConsultationPerson</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-8">
+            @Html.LabelFor(model => model.PersonTypeSearch, htmlAttributes: new { @class = "control-label field-required" })
+            <select data-filter="true" data-native="true" class="uif-select form-control" id="PersonTypeSearch" name="PersonTypeSearch"
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.LanguagePerson.ErrorDocumentPersonType"></select>
+            <span class="text-danger" data-valmsg-for="PersonTypeSearch" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            @Html.LabelFor(model => model.PersonCodeSearch, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.PersonCodeSearch, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PersonCodeSearch)
+        </div>
+    </div>
+    <div id="InformationPersonAdvSearch">
+        <div class="row">
+            <div class="uif-col-4">
+                @Html.LabelFor(model => model.FirstNameSearch, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.FirstNameSearch, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FirstNameSearch)
+            </div>
+            <div class="uif-col-4">
+                @Html.LabelFor(model => model.LastNameSearch, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.LastNameSearch, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LastNameSearch)
+            </div>
+            <div class="uif-col-4">
+                @Html.LabelFor(model => model.NameSearch, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.NameSearch, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NameSearch)
+            </div>
+        </div>
+    </div>
+    <div id="InformationCompanyAdvSearch">
+        <div class="row">
+            <div class="uif-col-12">
+                @Html.LabelFor(model => model.TradeName, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.TradeName, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TradeName)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            @Html.LabelFor(model => model.DocumentTypeSearch, htmlAttributes: new { @class = "control-label field-required" })
+            <select data-filter="true" data-native="true" class="uif-select form-control" id="DocumentTypeSearch" name="DocumentTypeSearch"
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.LanguagePerson.ErrorDocumentDocumentType"></select>
+            <span class="text-danger" data-valmsg-for="DocumentTypeSearch" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            @Html.LabelFor(model => model.DocumentNumberSearch, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DocumentNumberSearch, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DocumentNumberSearch)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="without-label">
+                <button class="btn btn-primary-Co width-container" id="SearchAdvancedBasicInformation" type="button"> @Resources.Language.search</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="lvSearchAdvBasicInformation">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="CancelSearchAdvBasicInformation" type="button">@Resources.LanguagePerson.Close</button>
+                <button class="btn btn-primary" id="SelectedSearchAdvBasicInformation" type="button">@Resources.LanguagePerson.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+

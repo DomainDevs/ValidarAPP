@@ -1,0 +1,66 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.CouponStatus
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.Code</label>
+            <br />
+            @Html.TextBoxFor(model => model.SmallDescription, new
+            {
+                data_val = "true",
+                data_val_required = @Global.RequiredField,
+                maxlength = @ViewBag.MaxLength
+            })
+            <span class="text-danger" data-valmsg-for="SmallDescription" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-9">
+            <label>@Global.Description</label>
+            <br />
+            @Html.TextBoxFor(model => model.Description, new
+            {
+                data_val = "true",
+                data_val_required = @Global.RequiredField,
+                @onblur = "this.value = this.value.toUpperCase();"
+            })
+            <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.RetryDays</label>
+            <br />
+            @Html.TextBoxFor(model => model.RetriesNumber, new
+            {
+                @data_mask = "0000",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="RetriesNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.DebitStatusType</label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="optionRejection" value="R" checked>
+                    @Global.Rejected
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="optionApplied" value="A">
+                    @Global.Applied
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <br />
+            <span class="glyphicon glyphicon-check" id="checkStatusEnabled"></span><input type="checkbox" id="StatusEnabledCheck"> @Global.Enabled
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-alert" id="alertForm"></div>
+    </div>
+</div>
+

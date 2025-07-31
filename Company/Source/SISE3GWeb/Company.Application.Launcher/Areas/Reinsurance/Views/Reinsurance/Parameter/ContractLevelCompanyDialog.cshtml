@@ -1,0 +1,294 @@
+﻿@using System.Web.Mvc.Html
+@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.Reinsurance.Models.ContractLevelCompanyModel
+
+@{
+
+    ViewBag.Title = "ContractLevelCompanyDialog";
+    string hidden = "show";
+    int contractLevelCode = 0;
+    string brokerName = "";
+    string reinsuranceCompanyName = "";
+    int presentationCode = 0;
+    int brokerCommission = 0;
+
+    if (Model.ContractLevel.ContractLevelId > 0)
+    {
+        contractLevelCode = int.Parse(Model.ContractLevel.ContractLevelId.ToString());
+    }
+
+    if (Model.AgentName != null)
+    {
+        brokerName = Model.AgentName;
+    }
+
+    if (Model.CompanyName != null)
+    {
+        reinsuranceCompanyName = Model.CompanyName;
+    }
+
+    if (Model.Presentation > 0)
+    {
+        presentationCode = Model.Presentation;
+    }
+
+    if (Model.Presentation > 0)
+    {
+        brokerCommission = Model.BrokerCommission;
+    }
+
+    if (!Model.ContractFunctionalityType)
+    {
+        hidden = "hidden";
+    }
+}
+
+<form id="formContractLevelCompany" onsubmit="return false" class="form">
+
+    <div class="uif-modalbody">
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                @Html.HiddenFor(model => model.ContractLevelCompanyId)
+                <b>@Global.Intermediary</b>
+                @Html.HiddenFor(model => model.AgentIndividual)
+                @Html.ValidationMessage("ContractLevelCompanyId")
+
+                <input type="hidden" id="ContractLevelCode" name="ContractLevelCode" value="@contractLevelCode" />
+
+                <input class="uif-autocomplete" type="text" id="inputSearchBroker"
+                       data-source="@Url.Action("GetReinsuranceCompanyByName", "Parameter")"
+                       data-displaykey="Name"
+                       placeholder="@Global.EnterSearchCriteriaHere"
+                       value="@brokerName"
+                       data-val-required=@Global.RequiredField
+                       data_val="true">
+                @Html.ValidationMessage("inputSearchBroker")
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <label class="field-required">@Global.ReinsuranceCompany</label>
+                <input class="uif-autocomplete"
+                       type="text"
+                       id="inputSearchCompany"
+                       name="inputSearchCompany"
+                       data-source="@Url.Action("GetReinsuranceCompanyByName","Parameter")"
+                       data-displaykey="Name"
+                       placeholder="@Global.EnterSearchCriteriaHere"
+                       value="@reinsuranceCompanyName"
+                       data-val-required="@Global.RequiredField"
+                       data-val="true"
+                       required="required">
+                <span class="text-danger" data-valmsg-for="inputSearchCompany" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="uif-row">
+
+            <div class="uif-col-4">
+
+                <b class="field-required">@Global.AssignmentPercentage</b>
+                @Html.TextBoxFor(model => model.Percentage, new
+                {
+                    id = "PercentageAsig",
+                    maxlength = "5",
+                    @onkeypress = "return OnlyDecimalNumber(event, this)",
+                    data_val_required = @Global.RequiredField,
+                    style = "text-align: right",
+                    data_val_range_min = "1",
+                    data_val_range_max = @ViewBag.ParticipationPercentage,
+                    data_val_range = string.Format(@Global.AssignmentPercentageValue, @ViewBag.ParticipationPercentage )
+                })
+                @Html.ValidationMessage("Percentage")
+
+                <input type="hidden" id="ParticipationPercentage" name="ParticipationPercentage" value="@ViewBag.ParticipationPercentage" />
+            </div>
+
+            <div class="uif-col-4" @hidden>
+                <b class="field-required">@Global.CommissionPercentage</b>
+                @Html.TextBoxFor(model => model.CommissionPercentage, new
+                {
+                    maxlength = "5",
+                    @onkeypress = "return OnlyDecimalNumber(event, this)",
+                    data_val_required = @Global.RequiredField,
+                    data_val = "true",
+                    style = "text-align: right",
+                    data_val_range_min = "1",
+                    data_val_range_max = "100",
+                    data_val_range = @Global.ErrorPercentageHigher
+                })
+                @Html.ValidationMessage("CommissionPercentage")
+            </div>
+
+            <div class="uif-col-4" @hidden>
+                <b>@Global.ReservePremiumPercentage</b>
+                @Html.TextBoxFor(model => model.ReservePremiumPercentage,
+                new
+                {
+                    maxlength = "5",
+                    @onblur = "validatePercentage(this);",
+                    @onkeypress = "return OnlyDecimalNumber(event, this);",
+                    style = "text-align: right"
+                })
+                <span id="ReservePremiumPercentageMsg" class="field-validation-error"></span>
+            </div>
+
+        </div>
+
+        <div class="uif-row">
+
+            <div class="uif-col-4" @hidden>
+                <b>@Global.InterestReserveRelease</b>
+                @Html.TextBoxFor(model => model.InterestReserveRelease,
+                new
+                {
+                    maxlength = "5",
+                    @onkeypress = "return OnlyDecimalNumber(event, this);",
+                    @onblur = "validatePercentage(this);",
+                    style = "text-align: right"
+                })
+                <span id="InterestReserveReleaseMsg" class="field-validation-error"></span>
+            </div>
+
+            <div class="uif-col-4" @hidden>
+                <b>@Global.ProfitSharingPercentage</b>
+                @Html.TextBoxFor(model => model.ProfitSharingPercentage,
+                  new
+                  {
+                      maxlength = "5",
+                      @onkeypress = "return OnlyDecimalNumber(event, this);",
+                      @onblur = "validatePercentage(this);",
+                      style = "text-align: right"
+                  })
+                <span id="ProfitSharingPercentageMsg" class="field-validation-error"></span>
+            </div>
+
+            <div class="uif-col-4" @hidden>
+                <b>@Global.AdditionalCommission</b>
+                @Html.TextBoxFor(model => model.AdditionalCommission,
+                 new
+                 {
+                     maxlength = "5",
+                     @onkeypress = "return OnlyDecimalNumber(event, this);",
+                     @onblur = "validatePercentage(this);",
+                     style = "text-align: right"
+                 })
+                <span id="AdditionalCommissionMsg" class="field-validation-error"></span>
+            </div>
+
+        </div>
+
+        <div class="uif-row" @hidden>
+
+            <div class="uif-col-4">
+                <b class="field-required">@Global.Presentation</b>
+                @Html.DropDownList("Presentation", Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select form-control",
+                    data_source = @Url.Content("~/Parameter/GetFrameTime"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_selectedid = @presentationCode,
+                    data_native = "true",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+                @Html.ValidationMessage("Presentation")
+            </div>
+
+            <div class="uif-col-4">
+                <b>@Global.ReinsurerExpenditur</b>
+                @Html.TextBoxFor(model => model.ReinsurerExpenditur,
+                new
+                {
+                    maxlength = "5",
+                    @onkeypress = "return OnlyDecimalNumber(event, this);",
+                    @onblur = "validatePercentage(this);",
+                    style = "text-align: right"
+                })
+                <span id="ReinsurerExpenditurMsg" class="field-validation-error"></span>
+            </div>
+
+            <div class="uif-col-4">
+                <b>@Global.DragLoss</b>
+                @Html.TextBoxFor(model => model.DragLoss,
+                new
+                {
+                    maxlength = "5",
+                    @onkeypress = "return OnlyDecimalNumber(event, this);",
+                    @onblur = "validatePercentage(this);",
+                    style = "text-align: right"
+                })
+                <span id="DragLossMsg" class="field-validation-error"></span>
+            </div>
+
+        </div>
+
+        <div class="uif-row" @hidden>
+
+            <div class="uif-col-4">
+                <b>@Global.BrokerCommission</b>
+                @Html.DropDownList("BrokerCommission", Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select form-control",
+                    data_source = @Url.Content("~/Parameter/GetExistsIntermediaryCommission"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_selectedid = @brokerCommission,
+                    data_native = "true",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+                @Html.ValidationMessage("BrokerCommission")
+            </div>
+
+            <div class="uif-col-4">
+                <b>@Global.LossCommissionPercentage</b>
+                @Html.TextBoxFor(model => model.LossCommissionPercentage,
+                new
+                {
+                    maxlength = "5",
+                    @onkeypress = "return OnlyDecimalNumber(event, this);",
+                    @onblur = "validatePercentage(this);",
+                    style = "text-align: right"
+                })
+                <span id="LossCommissionPercentageMsg" class="field-validation-error"></span>
+            </div>
+
+            <div class="uif-col-4">
+                <b>@Global.DifferentialCommissionPercentage</b>
+                @Html.TextBoxFor(model => model.DifferentialCommissionPercentage,
+                new
+                {
+                    maxlength = "5",
+                    @onkeypress = "return OnlyDecimalNumber(event, this);",
+                    @onblur = "validatePercentage(this);",
+                    style = "text-align: right"
+                })
+                <span id="DifferentialCommissionPercentageMsg" class="field-validation-error"></span>
+            </div>
+
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertLayerComp"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="uif-modalbuttons">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0382") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0386"))
+        {
+            <button type="submit" class="btn btn-primary" id="btnContractLevelCompany">
+                @Global.Save
+            </button>
+        }
+    </div>
+
+</form>

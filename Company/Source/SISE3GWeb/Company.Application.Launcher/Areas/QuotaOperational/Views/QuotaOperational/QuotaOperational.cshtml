@@ -1,0 +1,94 @@
+﻿@{
+    Layout = null;
+}
+
+@model Sistran.Core.Framework.UIF.Web.Areas.QuotaOperational.Models.QuotaOperationalModelView
+
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.TitleQuotaOperational
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button type="button" class="btn btn-default" id="btnDelete">
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.Delete
+        </button>
+        <button type="button" class="btn btn-default" id="btnEdit">
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonEdit
+        </button>
+        <button type="button" class="btn btn-default" id="btnNew">
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.New
+        </button>
+    </div>
+</script>
+
+<div class="uif-modal" id="modalQuotaOperational" style="overflow-y: scroll;">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/QuotaOperational/Views/QuotaOperational/QuotaOperationalCRUD.cshtml")
+    </div>
+    <div id="buttonsQuotaOperational" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnQuotaOperationalClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnQuotaOperationalEdit">
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonEdit
+        </button>
+        <button type="button" class="btn btn-primary" id="btnQuotaOperationalSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalIndividualDetail">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/QuotaOperational/Views/QuotaOperational/IndividualDetail.cshtml")
+    </div>
+    <div id="buttonsIndividualDetail" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnIndividualClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnIndividualSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<form id="formListQuotaOperational" class="form without-space" autocomplete="off">
+    <div class="row">
+        <div class="uif-col-9 fit-col-main">
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.LabelHolder</label>
+                @Html.TextBoxFor(model => model.HolderName, new { id = "inputHolder", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+                @Html.ValidationMessageFor(model => model.HolderName)
+            </div>
+
+            <div class="uif-col-6">
+                <label>Identificación</label>
+                @Html.TextBoxFor(x => x.IdTomador, new { id = "inputTomadoId", disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="uif-col-12">
+            <table class="uif-table" data-selectiontype="single" id="tableResultQuotaOperational" data-filter="false">
+                <thead>
+                    <tr>
+                        <th data-property="LineBussines"> Ramo Comercial</th>
+                        <th data-property="Money"> Moneda </th>
+                        <th data-property="QuotaOperational"> Cupo Operativo </th>
+                        <th data-property="CurrentTo"> Fecha Hasta </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    @Html.HiddenFor(x => x.individualId, new { id = "inputHiddenIndividualId" })
+    @Html.HiddenFor(x => x.InsuredId, new { id = "inputHiddenInsuredId" })
+    
+</form>
+

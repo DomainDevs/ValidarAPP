@@ -1,0 +1,108 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.SearchReinsureProcessMassive;    
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.ReinsureProcessMassive</li>
+        <li>@Global.SearchReinsureProcessMassive</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+
+        @*@if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0449"))
+        {*@
+            <button id="btnSearchProcessMassive" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-search"></span>  @Global.Search
+            </button>
+        @*}
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0450"))
+        {*@
+            <button id="btnCleanProcessMassive" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-remove"></span>  @Global.Clean
+            </button>
+        @*}
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0451"))
+        {*@
+            <button id="btnExportExcel" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-flash"></span>  @Global.Excel
+            </button>
+        @*}
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0452"))
+        {*@
+            @*<button id="btnExportPdf" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-flash"></span>  @Global.btnExportPdf
+            </button>*@
+        @*}*@
+    </footer>
+}
+
+<form id="formReinsuranceMassiveSearch" onsubmit="return false">
+    <div class="uif-row">
+
+        <div class="uif-col-2">
+            <b> @Global.ProcessType</b>
+            <select class="uif-select form-control" id="selectTypeProcess" name="selectTypeProcess"
+                    data-source='@Url.Content("~/Reinsurance/Process/GetTypeProcessMassive")'
+                    data-id="Id"
+                    data-native="true"
+                    data-val="true"
+                    data-name="Description"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="selectTypeProcess" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-2">
+            <b> @Global.ProcessId</b>
+            <input type="text" id="ProcessId" name="ProcessId" maxlength="8" onkeypress="return JustNumbers(event);" />
+        </div>
+        <div class="uif-col-8"></div>
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertMassive"></div>
+        </div>
+
+    </div>
+</form>
+
+<table data-title="<b>@Global.SearchReinsureProcessMassive</b>" class="uif-table" id="tableSearchReinsuranceProcess"
+       data-filter="true" data-paginate="true">
+    <thead>
+        <tr>
+            <th data-property="TempReinsuranceProcessId" data-visible="true">@Global.ProcessId</th>
+            <th data-property="Description">@Global.Description</th>
+            <th data-property="RecordsNumber">@Global.RecordsNumber</th>
+            <th data-property="RecordsProcessed">@Global.ProcessedRecords</th>
+            <th data-property="RecordsFailed">@Global.FailedRecords</th>
+            <th data-property="Status" data-visible="false">@Global.Status</th>
+            <th data-property="StatusDescription">@Global.Status</th>
+
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<table data-title="<b>@Global.SearchReinsureProcessMassiveDetails</b>" class="uif-table" id="tableSearchReinsuranceProcessDetails"
+       data-selectionType="none" data-filter="true" data-paginate="true">
+    <thead>
+        <tr>
+            <th data-property="BranchDescription">@Global.Branch</th>
+            <th data-property="PrefixDescription">@Global.Prefix</th>
+            <th data-property="PolicyNumber">@Global.PolicyNumber</th>
+            <th data-property="EndorsementNumber">@Global.EndorsementNumber</th>
+            <th data-property="RiskNumber">@Global.RiskNumber</th>
+            <th data-property="CoverageNumber">@Global.CoverageNumber</th>
+            <th data-property="ErrorDescription">@Global.Description</th>
+
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts{
+    @Scripts.Render("~/reinsurance/bundles/SearchReinsureProcessMassive")
+}

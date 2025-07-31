@@ -1,0 +1,32 @@
+<map version="2.0" type="class" name="Sale" namespace="Sistran.Core.Application.Claims" file-version="1.0" description="SALE_ENTITY">
+  <properties>
+    <property name="SaleCode" type="Integer" key="true" description="SALE_CODE_PROPERTY" autonumber="Identity" />
+    <property name="SalvageCode" type="Integer" nullable="true" description="SALVAGE_CODE_PROPERTY" />
+    <property name="Date" type="DateTime" nullable="true" description="DATE_PROPERTY" />
+    <property name="CancellationDate" type="DateTime" nullable="true" description="CANCELLATION_DATE_PROPERTY" />
+    <property name="Description" type="String" size="250" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="SoldQuantity" type="Integer" nullable="true" description="SOLD_QUANTITY_PROPERTY" />
+    <property name="Buyer" type="Integer" nullable="true" description="BUYER_PROPERTY" />
+    <property name="CancellationReasonCode" type="Integer" nullable="true" description="CANCELLATION_REASON_CODE_PROPERTY" />
+    <property name="TotalAmount" type="Decimal" precision="18" scale="6" nullable="true" description="TOTAL_AMOUNT_PROPERTY" />
+    <property name="PaymentPlanCode" type="Integer" nullable="true" description="PAYMENT_PLAN_CODE_PROPERTY" />
+    <property name="IsParticipant" type="Boolean" description="IS_PARTICIPANT_PROPERTY" />  
+  </properties>
+  <tables>
+    <table name="SALE" schema="CLM" alias="SALE" update="true">
+      <columns>
+        <column name="SALE_CD" type="Int32" property="SaleCode" key="true" identity ="true" />
+        <column name="SALVAGE_CD" type="Int32" property="SalvageCode" />
+        <column name="DATE" type="DateTime" property="Date" />
+        <column name="CANCELLATION_DATE" type="DateTime" property="CancellationDate" />
+        <column name="DESCRIPTION" type="String" property="Description" size="250" />
+        <column name="SOLD_QTY" type="Int32" property="SoldQuantity" />
+        <column name="BUYER" type="Int32" property="Buyer" />
+        <column name="CANCELLATION_REASON_CD" type="Int32" property="CancellationReasonCode" />
+        <column name="TOTAL_AMT" type="Decimal" property="TotalAmount" size="19" precision="18" scale="6" />
+        <column name="PAYMENT_PLAN_CD" type="Int32" property="PaymentPlanCode" />
+        <column name="IS_PARTICIPANT" type="Boolean" property="IsParticipant" allowNull="false"/>
+      </columns>
+    </table>
+  </tables>
+</map>

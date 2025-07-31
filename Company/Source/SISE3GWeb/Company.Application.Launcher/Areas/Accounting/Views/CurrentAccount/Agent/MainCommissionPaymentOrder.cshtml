@@ -1,0 +1,164 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.CommissionsPaymentOrder;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.CurrentAccount</li>
+        <li>@Global.Intermediaries</li>
+        <li>@Global.CommissionsPaymentOrder</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0558"))
+        {
+            <button class="btn btn-default" id="CancelCommissionPaymentOrder">
+                <i class="fa fa-remove"></i>  @Global.Cancel
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0557"))
+        {
+            <button class="btn btn-primary" id="GenerateCommissionPaymentOrder">
+                <i class="fa fa-list-alt"></i> @Global.Accept
+            </button>
+        }
+    </footer>
+}
+
+<div class="uif-panel">
+    <form id="formCommissionPaymentOrder" onsubmit="return false">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label">@Global.Branch</label>
+                @Html.DropDownList("selectBranch", Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select form-control",
+                    data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_selectedid = @ViewBag.BranchDefault,
+                    data_native = "true",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+                <span class="text-danger" data-valmsg-for="selectBranch" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label">@Global.Company</label>
+                @Html.DropDownList("selectCompany", Enumerable.Empty<SelectListItem>(), new
+           {
+               @class = "uif-select form-control",
+               data_source = @Url.Content("~/Accounting/Common/GetAccountingCompanies"),
+               data_id = "Id",
+               data_name = "Description",
+               data_native = "true",
+               data_selectedid = @ViewBag.AccountingCompanyDefault,
+               data_val = "true",
+               data_val_required = @Global.RequiredField
+           })
+                <span class="text-danger" data-valmsg-for="selectCompany" data-valmsg-replace="true" />
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="control-label">@Global.Year</label>
+                @Html.TextBox("GenerationYear", "", new
+                {
+                    @onkeypress = "return JustNumbers(event,this)",
+                    style = "text-align: left",
+                    maxlength = "4",
+                })
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label">@Global.Month</label>
+                @Html.DropDownList("ValidThruMonth", Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select form-control",
+                    data_source = @Url.Content("~/Accounting/Common/GetYearMonths"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_native = "true",
+                })
+            </div>
+            <div class="uif-col-4">
+                <label>@Global.EstimatedPaymentDate</label>
+                @Html.TextBox("PaymentEstimatedDate", "", new
+                {
+                    id = "PaymentEstimatedDate",
+                    maxlength = "10",
+                    @class = "uif-datepicker",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+                <span class="text-danger" data-valmsg-for="PaymentEstimatedDate" data-valmsg-replace="true" />
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Global.SearchBy</label>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="agoptions" id="optionAgent" value="A" checked>
+                        @Global.AnAgent
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="agoptions" id="optionAllAgent" value="T">
+                        @Global.AllAgents
+                    </label>
+                </div>
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.AgentDocumentNumber</label>
+                @Html.TextBox("AgentDocumentNumber", "", new
+                    {
+                        id = "AgentDocumentNumber",
+                        maxlength = "20",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetAgentByDocumentNumber"),
+                        data_displaykey = "DocumentNumber",
+                        placeholder = @Global.EnterAgentDocument,
+                    })
+            </div>
+            <div class="uif-col-6">
+                <label>@Global.AgentName</label>
+                @Html.TextBox("AgentName", "", new
+                    {
+                        id = "AgentName",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetAgentByName"),
+                        data_displaykey = "Name",
+                        placeholder = @Global.EnterAgentName,
+                    })
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertForm"></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagAccountingCompanyDefault" value="@ViewBag.AccountingCompanyDefault" />
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagBranchUserDefault" value="@ViewBag.BranchUserDefault" />
+<input type="hidden" id="ViewBagParameterMulticompany" value="@ViewBag.ParameterMulticompany" />
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCommissionPaymentOrder")
+}

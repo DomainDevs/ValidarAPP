@@ -1,0 +1,98 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Helpers;
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.ArticleByProductTitle
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("ArticleProduct", null, new { @class = "uif-input-search", id = "inputArticleProduct", @placeholder = @Resources.Language.FindArticle })
+    </div>
+</script>
+
+<script id="ArticleProductTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+    <div> @Resources.Language.LabelProduct <strong class="success"><strong>{{ProductDescription}}</strong> </strong></div>
+    <div>@Resources.Language.LabelArticle <strong class="success"><strong>{{ArticleDescription}}</strong> </strong></div>
+    {{else ifCond Status "==" 4}}
+    <div> @Resources.Language.LabelProduct <strong class="danger"><strong>{{ProductDescription}}</strong> </strong></div>
+    <div>@Resources.Language.LabelArticle <strong  class="danger"><strong>{{ArticleDescription}}</strong> </strong></div>
+    {{else}}
+    <div> @Resources.Language.LabelProduct <strong><strong>{{ProductDescription}}</strong> </strong></div>
+    <div>@Resources.Language.LabelArticle <strong><strong>{{ArticleDescription}}</strong> </strong></div>
+    {{/ifCond}}
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExit
+            </span>
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExport
+            </span>
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+        </button>
+    </div>
+</script>
+
+<form id="formProductArticle" autocomplete="off" class="form form-space-adjusted">
+    <br />
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-6">
+                    <span class="" aria-hidden="true">@Resources.Language.LabelProduct</span>
+                    <select class="uif-select form-control" id="selectProduct"
+                            data-id="Id" data-name="Description" name="Product"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlProduct"
+                            data-filter="true" data-native="false"></select>
+                </div>
+                <div class="uif-col-6">
+                    <span class="" aria-hidden="true">@Resources.Language.LabelArticle</span>
+                    <select class="uif-select form-control" id="selectArticle"
+                            data-id="Id" data-name="SmallDescription" name="Article"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentArticle"
+                            data-filter="true" data-native="false"></select>
+                </div>
+                @*<div class="uif-col-3">
+                    <input type="checkbox" id="chkEnabledProductArticle" name="chkEnabledProductArticle" />
+                    <label for="chkEnabledProductArticle">@Resources.Language.Enabled</label>
+                    @Html.ValidationMessageFor(model => model.Enabled)
+                </div>*@
+            </div>
+        </div>
+        <div class="uif-col-6 col-space-adjusted">
+            <div id="listViewProductArticle" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewObject">
+                    @Resources.Language.New
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAcceptObject">
+                    @Resources.Language.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

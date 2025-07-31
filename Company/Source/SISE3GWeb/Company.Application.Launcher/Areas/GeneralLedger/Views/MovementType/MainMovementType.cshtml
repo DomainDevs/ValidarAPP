@@ -1,0 +1,71 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = Global.MovementType;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameter</a></li>
+        <li>@Global.AccountingConcept</li>
+        <li class="active">@Global.MovementType</li>
+    </ol>
+}
+    <script id="movementTypeListTemplate" type="text/template">
+        <span>
+            <strong>
+                @Global.Description:
+            </strong>
+            <span class="label label-success">
+                {{Description}}
+            </span>
+        </span>
+    </script>
+
+    <script id="add-template" type="text/template">
+        @Html.Partial("~/Areas/GeneralLedger/Views/MovementType/MovementTypeModal.cshtml")
+    </script>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="mainAlert"></div>
+        </div>
+    </div>
+
+    <form id="formMovementType" onsubmit="return false" class="form">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label">
+                    @Global.ConceptSource
+                </label>
+                @Html.DropDownList("ConceptSources", Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select form-control",
+                    data_source = @Url.Content("~/GeneralLedger/MovementType/GetConceptSources"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_val = "true",
+                    headen = "headen",
+                    data_val_required = @Global.RequiredField
+                })
+                <span class="text-danger" data-valmsg-for="ConceptSources" data-valmsg-replace="true" />
+            </div>
+        </div>
+      
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="uif-listview" id="movementTypeListView">
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/MainMovementType")
+}

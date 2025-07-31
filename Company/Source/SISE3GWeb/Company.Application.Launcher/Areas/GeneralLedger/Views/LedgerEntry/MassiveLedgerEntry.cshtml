@@ -1,0 +1,96 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.AccountingEntry</a></li>
+        <li class="active">@Global.EntryMassiveLoad</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-default" id="CancelLedgerEntry">
+            <i class="fa fa-remove"></i> @Global.Cancel
+        </button>
+        <button class="btn btn-primary" id="GenerateLedgerEntry">
+            <i class="fa fa-save"></i> @Global.GenerateEntry
+        </button>
+    </footer>
+}
+
+<form id="uploadFileForm" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-9" id="divUploadFile">
+            <label>@Global.File</label>
+            <input type="file" id="inputControlSingle" class="uif-inputfile" data-input="true" name="inputControlSingle" data-val="true" 
+                   data-val-required="@Global.RequiredField">
+            <span class="text-danger" data-valmsg-for="inputControlSingle" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <br />
+            @*
+            <button class="btn btn-default btn-file" id="uploadFile">
+                <span class="glyphicon glyphicon-upload"></span>&nbsp;  @Global.UploadFile
+            </button>
+            *@
+            <button class="btn btn-default" id="uploadFile">
+                <i class="fa fa-file-excel-o"></i> @Global.UploadFile
+            </button>
+        </div>
+    </div>
+</form>
+@*
+<div class="progress progress-striped active" id="progressBarPanel">
+    <div class="progress-bar" role="progressbar" id="progressBar"
+         aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+         style="width: 100%">
+        <span class="sr-only">45% completado</span>
+    </div>
+</div>
+*@
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+@*
+<div class="uif-row">
+    <div class="uif-col-3 ">
+        <a class="btn btn-primary" role="button" id="showFailed">@Global.ShowFailed</a>
+        <a class="btn btn-primary" role="button" id="generateEntry">@Global.GenerateEntry</a>
+    </div>
+</div>
+*@
+<div id="failedRecordsPanel">
+    <table class="uif-table" data-title="@Global.FailedRecords" data-source="null" id="tableFailedRecords" data-selectiontype="none" 
+           data-add="false" data-edit="false" data-delete="false" data-filter="false" data-paginate="true">
+        <thead>
+            <tr>
+                <th data-property="Id" data-visible="false">Id</th>
+                <th data-property="ProcessDate">@Global.ProcessDate</th>
+                <th data-property="OperationDate">@Global.OperationDate</th>
+                <th data-property="RowNumber">@Global.MovementRowNumber</th>
+                <th data-property="Success" data-visible="false">Success</th>
+                <th data-property="Description">@Global.ErrorDescription</th>
+                <th data-property="Enabled" data-visible="false">Enabled</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/MassiveLedgerEntry")
+}
+
+
+
+
+

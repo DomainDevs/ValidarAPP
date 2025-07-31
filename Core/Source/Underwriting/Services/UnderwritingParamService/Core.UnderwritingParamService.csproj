@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{807C642C-3288-4D7A-9A5B-B3B854C206CC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.UnderwritingParamService</RootNamespace>
+    <AssemblyName>Core.UnderwritingParamService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core.CommonParamService">
+      <HintPath>..\..\..\..\Bin\Services\Core\CommonParam\CommonParamService\Core.CommonParamService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ModelServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Application\Core\ModelServices\Core.ModelServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UnderwritingServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Services\Core\Underwriting\UnderwritingServices\Core.UnderwritingServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Utilities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\ConditionType.cs" />
+    <Compile Include="Enums\ComponentClass.cs" />
+    <Compile Include="Enums\ComponentType.cs" />
+    <Compile Include="Enums\ParametrizationTypes.cs" />
+    <Compile Include="Enums\RuleSetLevel.cs" />
+    <Compile Include="Enums\RuteSet.cs" />
+    <Compile Include="IUnderwritingParamServiceWeb.cs" />
+    <Compile Include="Models\Base\BaseAllyCoverage.cs" />
+    <Compile Include="Models\Base\BaseBmParamPaymentMethod.cs" />
+    <Compile Include="Models\Base\BaseBmParamPaymentMethodType.cs" />
+    <Compile Include="Models\Base\BaseParamAllyCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamAssistanceType.cs" />
+    <Compile Include="Models\Base\BaseParamBusiness.cs" />
+    <Compile Include="Models\Base\BaseParamBusinessParamBusinessConfiguration.cs" />
+    <Compile Include="Models\Base\BaseParamClause.cs" />
+    <Compile Include="Models\Base\BaseParamClauseCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamClauseDesc.cs" />
+    <Compile Include="Models\Base\BaseParamClauseInsuredObject.cs" />
+    <Compile Include="Models\Base\BaseParamClauseLevel.cs" />
+    <Compile Include="Models\Base\BaseParamClauseLineBusiness.cs" />
+    <Compile Include="Models\Base\BaseParamClauseModel.cs" />
+    <Compile Include="Models\Base\BaseParamClausePrefix.cs" />
+    <Compile Include="Models\Base\BaseParamCoCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamCoCoverage2G.cs" />
+    <Compile Include="Models\Base\BaseParamComposition.cs" />
+    <Compile Include="Models\Base\BaseParamCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamCoveredRiskType.cs" />
+    <Compile Include="Models\Base\BaseParamCoveredRiskTypeDesc.cs" />
+    <Compile Include="Models\Base\BaseParamCurrency.cs" />
+    <Compile Include="Models\Base\BaseParamDeductibleDesc.cs" />
+    <Compile Include="Models\Base\BaseParamDetailTypeDesc.cs" />
+    <Compile Include="Models\Base\BaseParamDiscount.cs" />
+    <Compile Include="Models\Base\BaseParametrizationCoverageGroupRiskType.cs" />
+    <Compile Include="Models\Base\BaseParametrizationDetail.cs" />
+    <Compile Include="Models\Base\BaseParametrizationDetailType.cs" />
+    <Compile Include="Models\Base\BaseParametrizationPaymentPlan.cs" />
+    <Compile Include="Models\Base\BaseParametrizationQuota.cs" />
+    <Compile Include="Models\Base\BaseParametrizationQuotationNumber.cs" />
+    <Compile Include="Models\Base\BaseParametrizationRateType.cs" />
+    <Compile Include="Models\Base\BaseParamExpense.cs" />
+    <Compile Include="Models\Base\BaseParamFinancialPlan.cs" />
+    <Compile Include="Models\Base\BaseParamFirstPayComponent.cs" />
+    <Compile Include="Models\Base\BaseParamGroupCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamInsuredObject.cs" />
+    <Compile Include="Models\Base\BaseParamInsuredObjectDesc.cs" />
+    <Compile Include="Models\Base\BaseParamInsuredObjectModel.cs" />
+    <Compile Include="Models\Base\BaseParamLimitRc.cs" />
+    <Compile Include="Models\Base\BaseParamLineBusiness.cs" />
+    <Compile Include="Models\Base\BaseParamLineBusinessDesc.cs" />
+    <Compile Include="Models\Base\BaseParamLineBusinessModel.cs" />
+    <Compile Include="Models\Base\BaseParamPaymentMethod.cs" />
+    <Compile Include="Models\Base\BaseParamPeril.cs" />
+    <Compile Include="Models\Base\BaseParamPerilModel.cs" />
+    <Compile Include="Models\Base\BaseParamPolicyNumber.cs" />
+    <Compile Include="Models\Base\BaseParamPrefix.cs" />
+    <Compile Include="Models\Base\BaseParamProduct.cs" />
+    <Compile Include="Models\Base\BaseParamRateType.cs" />
+    <Compile Include="Models\Base\BaseParamRatingZone.cs" />
+    <Compile Include="Models\Base\BaseParamRequestEndorsement.cs" />
+    <Compile Include="Models\Base\BaseParamRuleSet.cs" />
+    <Compile Include="Models\Base\BaseParamSubLineBusinessDesc.cs" />
+    <Compile Include="Models\Base\BaseParamSurcharge.cs" />
+    <Compile Include="Models\Base\BaseParamTechnicalPlan.cs" />
+    <Compile Include="Models\Base\BaseParamTechnicalPlanAllyCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamTechnicalPlanCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamVehicleBody.cs" />
+    <Compile Include="Models\Base\BaseParamVehicleType.cs" />
+    <Compile Include="Models\Base\BaseParamVehicleUse.cs" />
+    <Compile Include="Models\Base\BaseParamBusinessConfiguration.cs" />
+    <Compile Include="Models\Base\BaseQueryAllyCoverage.cs" />
+    <Compile Include="Models\BmParamPaymentMethod.cs" />
+    <Compile Include="Models\BmParamPaymentMethodType.cs" />
+    <Compile Include="Models\DetailType.cs" />
+    <Compile Include="Models\ParamAllyCoverage.cs" />
+    <Compile Include="Models\ParamAssistanceType.cs" />
+    <Compile Include="Models\ParamClauseLineBusiness.cs" />
+    <Compile Include="Models\ParamBusiness.cs" />
+    <Compile Include="Models\ParamBusinessConfiguration.cs" />
+    <Compile Include="Models\ParamBusinessParamBusinessConfiguration.cs" />
+    <Compile Include="Models\ParamClause.cs" />
+    <Compile Include="Models\ParamClauseCoverage.cs" />
+    <Compile Include="Models\ParamClauseDesc.cs" />
+    <Compile Include="Models\ParamClauseInsuredObject.cs" />
+    <Compile Include="Models\ParamClauseLevel.cs" />
+    <Compile Include="Models\ParamClauseModel.cs" />
+    <Compile Include="Models\ParamClausePrefix.cs" />
+    <Compile Include="Models\ParamCoCoverage.cs" />
+    <Compile Include="Models\ParamCoCoverage2G.cs" />
+    <Compile Include="Models\ParamComposition.cs" />
+    <Compile Include="Models\ParamCoverage.cs" />
+    <Compile Include="Models\ParamCoveredRiskType.cs" />
+    <Compile Include="Models\ParamCoveredRiskTypeDesc.cs" />
+    <Compile Include="Models\ParamCurrency.cs" />
+    <Compile Include="Models\ParamDeductibleDesc.cs" />
+    <Compile Include="Models\ParamDetailTypeDesc.cs" />
+    <Compile Include="Models\ParamDiscount.cs" />
+    <Compile Include="Models\ParametrizacionQuotaTypeComponent.cs" />
+    <Compile Include="Models\ParametrizationCoverageGroupRiskType.cs" />
+    <Compile Include="Models\ParametrizationDetail.cs" />
+    <Compile Include="Models\ParametrizationDetailType.cs" />
+    <Compile Include="Models\ParametrizationPaymentPlan.cs" />
+    <Compile Include="Models\ParametrizationQuota.cs" />
+    <Compile Include="Models\ParametrizationQuotationNumber.cs" />
+    <Compile Include="Models\ParametrizationRateType.cs" />
+    <Compile Include="Models\ParamExpense.cs" />
+    <Compile Include="Models\ParamFinancialPlan.cs" />
+    <Compile Include="Models\ParamFinancialPlanComponent.cs" />
+    <Compile Include="Models\ParamFirstPayComponent.cs" />
+    <Compile Include="Models\ParamGroupCoverage.cs" />
+    <Compile Include="Models\ParamInsuredObject.cs" />
+    <Compile Include="Models\ParamInsuredObjectDesc.cs" />
+    <Compile Include="Models\ParamInsuredObjectModel.cs" />
+    <Compile Include="Models\ParamLimitRc.cs" />
+    <Compile Include="Models\ParamLineBusiness.cs" />
+    <Compile Include="Models\ParamLineBusinessCoveredRiskType.cs" />
+    <Compile Include="Models\ParamLineBusinessInsuredObject.cs" />
+    <Compile Include="Models\ParamLineBusinessPeril.cs" />
+    <Compile Include="Models\ParamLineBusinessClause.cs" />
+    <Compile Include="Models\ParamLineBusinessDesc.cs" />
+    <Compile Include="Models\ParamLineBusinessModel.cs" />
+    <Compile Include="Models\ParamPaymentMethod.cs" />
+    <Compile Include="Models\ParamPeril.cs" />
+    <Compile Include="Models\ParamPerilModel.cs" />
+    <Compile Include="Models\ParamPolicyNumber.cs" />
+    <Compile Include="Models\ParamPrefix.cs" />
+    <Compile Include="Models\ParamProduct.cs" />
+    <Compile Include="Models\ParamQueryCoverage.cs" />
+    <Compile Include="Models\ParamRateType.cs" />
+    <Compile Include="Models\ParamRatingZone.cs" />
+    <Compile Include="Models\ParamRatingZoneCity.cs" />
+    <Compile Include="Models\ParamRequestEndorsement.cs" />
+    <Compile Include="Models\ParamRuleSet.cs" />
+    <Compile Include="Models\ParamSubLineBusinessDesc.cs" />
+    <Compile Include="Models\ParamSurcharge.cs" />
+    <Compile Include="Models\ParamTechnicalPlan.cs" />
+    <Compile Include="Models\ParamTechnicalPlanAllyCoverage.cs" />
+    <Compile Include="Models\ParamTechnicalPlanCoverage.cs" />
+    <Compile Include="Models\ParamTechnicalPlanDTO.cs" />
+    <Compile Include="Models\ParamTechnicalPlansCoverage.cs" />
+    <Compile Include="Models\ParamVehicleBody.cs" />
+    <Compile Include="Models\ParamVehicleBodyUse.cs" />
+    <Compile Include="Models\ParamVehicleType.cs" />
+    <Compile Include="Models\ParamVehicleTypeBody.cs" />
+    <Compile Include="Models\ParamVehicleUse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Errors.Designer.cs">
+      <DependentUpon>Errors.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Errors.es.Designer.cs">
+      <DependentUpon>Errors.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Errors.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Errors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\UnderwritingParam\UnderwritingParamService\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

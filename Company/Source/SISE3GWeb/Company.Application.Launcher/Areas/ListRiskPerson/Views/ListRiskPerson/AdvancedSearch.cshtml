@@ -1,0 +1,52 @@
+﻿@model Sistran.Company.Application.UniquePersonListRiskApplicationServices.DTO.ListRiskPersonDTO
+@{
+
+    Layout = null;
+}
+@*<script id="resultTemplate" type="text/template">
+    <div>@Resources.Language.LabelNameAgentExecutive:<strong>{{Name}}</strong></div>
+    <div>@Resources.Language.LabelNickName:<strong>{{NickName}}</strong></div>
+    <div>@Resources.Language.LabelListRisk:<span><b>{{ListRiskDescription}}</b></span></div>
+</script>*@
+<form id="formListRiskPersonSerachAdvanced">
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelDocumentNumber</label>
+                    <input type="text" id="inputDocumentNumberAdv" name="DocumentNumber" class=" form-control" />
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required"> @Resources.Language.LabelListRisk</label>
+                    <div class="input-with-buttons">
+                        <select class="uif-select form-control"
+                                id="selectListRiskAdv"
+                                data-id="Id"
+                                data-name="Description"
+                                name="ListRisk"
+                                data-val="true" required></select>
+                    </div>
+                    @Html.ValidationMessageFor(@model => @model.ListRisk, Resources.Language.LabelListRiskRequired)
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <button class="btn btn-primary" id="btnFindSearchAdv" type="button">
+                        <span aria-hidden="true">@Resources.Language.ButtonSearch</span>
+                    </button>
+                </div>
+            </div>
+            @*<div class="uif-row">
+                <div id="listViewResult" class="uif-listview"></div>
+            </div>*@
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCloseSearchView" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnOkSearchAdv" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>*@
+</form>

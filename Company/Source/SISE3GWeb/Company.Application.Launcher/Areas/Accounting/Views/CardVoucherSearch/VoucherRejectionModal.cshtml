@@ -1,0 +1,210 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = null;
+}
+
+<form id="RejectedVoucherFormulario" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <h3><b> &nbsp;&nbsp;&nbsp;@Global.InformationCard</b></h3>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Conduit
+            </label>
+            <input type="text" value="" id="RejectVoucherDuct" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Card
+            </label>
+            <input type="text" value="" id="RejectVoucherCardNumber" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.VoucherNumber
+            </label>
+            <input type="text" value="" id="RejectVoucherVoucherNumber" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.DateVoucher
+            </label>
+            <input type="text" value="" id="RejectVoucherRegisterDate" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3" hidden="hidden">
+            <label class="control-label">
+                @Global.IncomeReceiptNum
+            </label>
+            <input type="text" value="" id="RejectVoucherBillCode" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+        
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.IncomeTransactionNumber
+            </label>
+            <input type="text" value="" id="RejectVoucherTransactionNumber" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.NameOwnerCreditCard
+            </label>
+            <input type="text" value="" id="RejectVoucherBusinessNameCard" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Currency
+            </label>
+            <input type="text" value="" id="RejectVoucherCurrency" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Amount
+            </label>
+            <input type="text" value="" id="RejectVoucherAmount" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.TotalTaxes
+            </label>
+            <input type="text" value="" id="RejectTax" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.DepositDate
+            </label>
+            <input type="text" value="" id="RejectDateDeposit" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.DepositSlip
+            </label>
+            <input type="text" value="" id="RejectTicketDepositNumber" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.ReceivingBank
+            </label>
+            <input type="text" value="" id="RejectReceivingBank" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.ReceivingBankAccountNumber
+            </label>
+            <input type="text" value="" id="RejectReceivingAccount" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.DepositTransaction
+            </label>
+            <input type="text" value="" id="RejectDepositTransaction" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Depositor
+            </label>
+            <input type="text" value="" id="RejectPayer" placeholder="" style="text-align: left" disabled="disabled" />
+        </div>
+    </div>
+
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="VoucherPoliciesRejection" data-exporttocsv="false" data-exportname="cultura" data-add="false" data-edit="false"
+                   data-delete="false" data-filter="false" data-selectiontype="multiple" data-title="@Global.AssociatedPoliciesEndorsements">
+
+                <thead>
+                    <tr>
+                        <th data-property="CollectCode">Id</th>
+                        <th data-property="BranchDescription">@Global.Branch</th>
+                        <th data-property="PrefixDescription">@Global.Prefix</th>
+                        <th data-property="PolicyId">@Global.Policy</th>
+                        <th data-property="Endorsement">@Global.Endorsement</th>
+                        <th data-property="QuoteNum">@Global.QuotaValue</th>
+                        <th data-property="Amount">@Global.Amount</th>
+                        <th data-property="CollectItemCode" data-visible="false">BillItemCode</th>
+                        <th data-property="TechnicalTransaction" data-visible="false">TransactionNumber</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <h3><b> &nbsp;&nbsp;&nbsp;@Global.RejectInformation</b></h3>
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.RejectionDate
+            </label>
+            <input type="text" value="@ViewBag.CurrentDate" class="uif-datepicker" data-mask-date="99/99/9999" 
+                   id="RejectDateRejection" data-val="true" data-val-required='@Global.RequiredField' 
+                   name="RejectDateRejection" />
+            <span class="text-danger" data-valmsg-for="RejectDateRejection" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label class="control-label">
+                <b>@Global.RejectionReason</b>
+            </label>
+            @Html.DropDownList("RejectionVoucherMotive", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/CardVoucherSearch/GetRejections"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_native = "true",
+                 data_val = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="RejectionVoucherMotive" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label class="control-label">
+                <b>@Global.Observations</b>
+            </label>
+            <input type="text" value="" id="RejectObservations" placeholder="" style="text-align: left" class="uif2_required" onblur="this.value = this.value.toUpperCase();" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertRejection"></div>
+        </div>
+    </div>
+    @*
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+    *@
+    <div class="uif-row">
+        <div class="pull-right">
+            <div class="uif-col-12">
+                <button id="CancelReject" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-remove"></i>  @Global.Cancel
+                </button>
+                <button id="SaveReject" class="btn btn-primary">
+                    <i class="fa fa-save" role="button"></i>  @Global.Accept
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+    
+
+
+
+

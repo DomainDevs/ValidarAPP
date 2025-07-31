@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="AccessoryView">
+  <collections>
+    <collection name="EndorsementRiskCoverage" type="Sistran.Core.Application.Issuance.Entities.EndorsementRiskCoverage, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskCoverDetail" type="Sistran.Core.Application.Issuance.Entities.RiskCoverDetail, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskDetail" type="Sistran.Core.Application.Issuance.Entities.RiskDetail, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskDetailAccessory" type="Sistran.Core.Application.Issuance.Entities.RiskDetailAccessory, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskDetailDescription" type="Sistran.Core.Application.Issuance.Entities.RiskDetailDescription, 
+                Core.Issuance.Entities"></collection>
+     
+  </collections>
+  <relations>
+    <relation source="EndorsementRiskCoverage" destination="RiskCoverDetail" name="RiskDetailAccessory" type="Inner">
+      <property left="RiskCoverId" type="Equal" right="RiskCoverId"></property>
+    </relation>
+    <relation source="RiskCoverDetail" destination="RiskDetail" name="RiskCoverDetail" type="Inner">
+      <property left="RiskDetailId" type="Equal" right="RiskDetailId"></property>
+    </relation>
+    <relation source="RiskCoverDetail" destination="RiskDetailAccessory" name="RiskCoverDetailAccessory" type="Inner">
+      <property left="RiskDetailId" type="Equal" right="RiskDetailId"></property>
+    </relation>
+    <relation source="RiskCoverDetail" destination="RiskDetailDescription" name="RiskCoverDetailDescription" type="left">
+      <property left="RiskDetailId" type="Equal" right="RiskDetailId"></property>
+    </relation>   
+  </relations>
+</view>

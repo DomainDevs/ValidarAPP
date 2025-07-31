@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="DelegationParametrizationView">
+  <collections>
+    <collection name="SubModules" type="Sistran.Core.Application.UniqueUser.Entities.Submodules, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Modules" type="Sistran.Core.Application.UniqueUser.Entities.Modules, 
+                Core.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="SubModules" destination="Modules" name="SubModulesModules" type="Inner">
+      <property left="ModuleCode" type="Equal" right="ModuleCode"></property>
+    </relation>
+  </relations>
+</view>

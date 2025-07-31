@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ParamCoverageView">
+  <collections>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, 
+                Core.Quotation.Entities"></collection>
+    <collection name="CoCoverage" type="Sistran.Core.Application.Quotation.Entities.CoCoverage, 
+                Core.Quotation.Entities"></collection>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, 
+                Core.Common.Entities"></collection>
+    <collection name="SubLineBusiness" type="Sistran.Core.Application.Common.Entities.SubLineBusiness, 
+                Core.Common.Entities"></collection>
+    <collection name="Peril" type="Sistran.Core.Application.Quotation.Entities.Peril, 
+                Core.Quotation.Entities"></collection>
+    <collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, 
+                Core.Quotation.Entities"></collection>
+    <collection name="ClauseLevel" type="Sistran.Core.Application.Quotation.Entities.ClauseLevel, 
+                Core.Quotation.Entities"></collection>
+    <collection name="CoverageDeductible" type="Sistran.Core.Application.Quotation.Entities.CoverageDeductible, 
+                Core.Quotation.Entities"></collection>    
+    <collection name="CoverDetailType" type="Sistran.Core.Application.Quotation.Entities.CoverDetailType, 
+                Core.Quotation.Entities"></collection>
+	<collection name="CoEquivalenceCoverage" type="Sistran.Core.Application.Integration.Entities.CoEquivalenceCoverage, 
+				Core.Integration.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Coverage" destination="CoCoverage" name="CoverageCoCoverage" type="Left">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>      
+    </relation>
+    <relation source="Coverage" destination="LineBusiness" name="CoverageLineBusiness" type="Left">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="Coverage" destination="SubLineBusiness" name="CoverageSubLineBusiness" type="Left">
+      <property left="SubLineBusinessCode" type="Equal" right="SubLineBusinessCode"></property>
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="Coverage" destination="Peril" name="CoveragePeril" type="Left">
+      <property left="PerilCode" type="Equal" right="PerilCode"></property>
+    </relation>
+    <relation source="Coverage" destination="InsuredObject" name="CoverageInsuredObject" type="Left">
+      <property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+    </relation>
+    <relation source="Coverage" destination="ClauseLevel" name="CoverageClauseLevel" type="Left">
+      <property left="CoverageId" type="Equal" right="ConditionLevelId"></property>
+    </relation>
+    <relation source="Coverage" destination="CoverageDeductible" name="CoverageCoverageDeductible" type="Left">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>    
+    <relation source="Coverage" destination="CoverDetailType" name="CoverageCoverDetailType" type="Left">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+	<relation source="Coverage" destination="CoEquivalenceCoverage" name="CoEquivalenceCoverage" type="Left">
+      <property left="CoverageId" type="Equal" right="Coverage3gId"></property>
+	</relation>
+  </relations>
+</view>

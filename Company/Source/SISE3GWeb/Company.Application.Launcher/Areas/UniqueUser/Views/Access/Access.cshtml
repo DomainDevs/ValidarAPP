@@ -1,0 +1,153 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.AccessModelsView
+@{
+    Layout = null;
+}
+<script id="AccessTemplate" type="text/template">
+    <div>Módulo: {{ModuleDescription}}  ({{Id}})</div>
+    <div> SubMódulo: {{SubModuleDescription}}</div>
+    {{#ifCond StatusType "==" 2}}
+    <div> Acceso: <strong class="success">{{Description}}</strong></div>
+    {{else ifCond StatusType "==" 3}}
+    <div>Acceso: <strong class="warning">{{Description}}</strong></div>
+    {{else ifCond StatusType "==" 4}}
+    <div>Acceso: <strong class="danger">{{Description}}</strong></div>
+    {{else}}
+    <div> Acceso: <strong>{{Description}}</strong></div>
+    {{/ifCond }}
+    <div>Tipo: <strong>{{AccessTypeDescription}}</strong></div>
+    <div><strong>{{EnabledDescription}}</strong></div>
+    <div class="hidden">{{StatusType}}</div>
+
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.Access
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputSearch", @placeholder = @Resources.Language.SearchAccess })
+        <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsAccess" class="footerAccess">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0698"))
+        {
+            <button class="btn btn-default" id="btnSendExcel">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ExportXLS
+            </button>
+        }
+
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0697"))
+        {
+            <button class="btn btn-primary" id="btnSaveAccess">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+            </button>
+        }
+
+    </div>
+</script>
+<form id="formAccess" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id, new { id = "hiddenId" })
+    @Html.HiddenFor(model => model.AccessObjectId, new { id = "hiddenAccessObjectId" })
+    <div id="modalAccess">
+        <div class="row">
+            <div class="uif-col-9 fit-col-main">
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelModule</label>
+                        <select class="uif-select form-control" id="selectModuleAccess" data-val="true"
+                                data-val-required="@Resources.Language.ErrorDocumentControlModule"
+                                data-id="Id" data-name="Description" name="ModuleId"
+                                data-filter="true" data-native="false"></select>
+                        @Html.ValidationMessageFor(model => model.ModuleId)
+                    </div>
+                    @*</div>
+                        <div class="uif-row">*@
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelSubmodule</label>
+                        <select class="uif-select form-control" id="selectSubModuleAccess" data-val="true"
+                                data-val-required="@Resources.Language.ErrorDocumentControlSubModule"
+                                data-id="Id" data-name="Description" name="SubModuleId"
+                                data-filter="true" data-native="false"></select>
+                        @Html.ValidationMessageFor(model => model.SubModuleId)
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.AccessType</label>
+                        <select class="uif-select form-control" id="selectAccessType" data-val="true"
+                                data-val-required="@Resources.Language.ErrorDocumentAccessType"
+                                data-id="Value" data-name="Text" name="TypeId"
+                                data-filter="true" data-native="false"></select>
+                        @Html.ValidationMessageFor(model => model.AccessTypeId)
+                    </div>
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.ParentAccess</label>
+                        <select class="uif-select form-control" id="selectParentAccess" data-val="true"
+                                data-id="Id" data-name="Description" name="ParentAccessId"
+                                data-filter="true" data-native="false"></select>
+                        @Html.ValidationMessageFor(model => model.ParentAccessTypeId)
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.Description</label>
+                        @Html.TextBoxFor(model => model.Description, new { id = "Description", placeholder = @Resources.Language.PlaceHolderKeyName, maxlength = 30 })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+
+                    <div class="uif-col-6">
+                        <br>
+                        <br>
+                        <input type="checkbox" id="chkDisabled" name="Disabled" />
+                        <label for="chkDisabled">@Resources.Language.Disabled</label>
+                    </div>
+
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label class="field-required" id="labelPath">@Resources.Language.Path</label>
+                        @Html.TextBoxFor(model => model.Path, new { id = "Path", placeholder = @Resources.Language.PlaceHolderKeyName })
+                        @Html.ValidationMessageFor(model => model.Path)
+                    </div>
+
+                </div>
+            </div>
+            <div class="uif-col-6 fit-col-secondary" id="panelAccess">
+                <div id="listAccess" class="uif-listview"></div>
+            </div>
+        </div>
+        <div class="row lineDividing">
+            <div class="uif-col-9  center-col-right" id="btnsAccess">
+                <div class="pull-right width-save">
+                    <button type="button" class="btn btn-default" id="btnNew">
+                        @Resources.Language.New
+                    </button>
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0696"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnAdd">
+                            @Resources.Language.Add
+                        </button>
+                    }
+
+                </div>
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-summary">
+                    <div class="items">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CollectControlView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CollectId">
+          <Column table-alias="Collect" name="CollectId" />
+        </SelectValue>
+        <SelectValue alias="CollectControlCode">
+          <Column table-alias="Collect" name="CollectControlCode" />
+        </SelectValue>
+        <SelectValue alias="Status">
+          <Column table-alias="CollectControl" name="Status" />
+        </SelectValue>
+        <SelectValue alias="RegisterDate">
+          <Column table-alias="Collect" name="RegisterDate" />
+        </SelectValue>        
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Collect, Core.Accounting.Entities" alias="Collect" />
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CollectControl, Core.Accounting.Entities" alias="CollectControl" />
+          <criteria>
+            <BinaryPredicate type="And">
+              <BinaryCriterion type="Equal">
+                <Column table-alias="CollectControl" name="CollectControlId" />
+                <Column table-alias="Collect" name="CollectControlCode" />
+              </BinaryCriterion>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="CollectControl" name="CollectControlId" />
+                <Column table-alias="Collect" name="CollectControlCode" />
+              </BinaryCriterion>
+            </BinaryPredicate>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

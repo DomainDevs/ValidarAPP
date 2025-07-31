@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="LineBusinessView">
+  <collections>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, 
+                 Core.Common.Entities"></collection>
+    <collection name="PerilLineBusiness" type="Sistran.Core.Application.Quotation.Entities.PerilLineBusiness, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="InsObjLineBusiness" type="Sistran.Core.Application.Quotation.Entities.InsObjLineBusiness, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="Peril" type="Sistran.Core.Application.Quotation.Entities.Peril, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, 
+                 Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="LineBusiness" destination="PerilLineBusiness" name="LineBusinessPerilLineBusiness" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="LineBusiness" destination="InsObjLineBusiness" name="LineBusinessInsObjLineBusiness" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="PerilLineBusiness" destination="Peril" name="PerilPerilLineBusiness" type="Inner">
+      <property left="PerilCode" type="Equal" right="PerilCode"></property>
+    </relation>
+    <relation source="InsObjLineBusiness" destination="InsuredObject" name="InsuredObjectInsObjLineBusinesss" type="Inner">
+      <property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+    </relation>
+  </relations>
+</view>

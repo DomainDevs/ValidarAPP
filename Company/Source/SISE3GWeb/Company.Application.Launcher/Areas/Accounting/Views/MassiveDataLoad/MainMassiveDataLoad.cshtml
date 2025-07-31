@@ -1,0 +1,138 @@
+﻿
+@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @ViewBag.EntryMassiveLoad;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.Billing</li>
+        <li class="active">@Global.EntryMassiveLoad</li>
+    </ol>
+}
+
+<!-- BillingClosure -->
+<div class="uif-modal" id="modalBillingClosure" style="display: none">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Accounting/Views/Billing/BillingClosureModal.cshtml")
+    </div>
+
+    <div class="uif-modalbuttons">
+        <button type="submit" class="btn btn-primary" id="AcceptClosureBilling" onclick="return false">@Global.Accept</button>
+    </div>
+</div>
+
+<!-- OpeningBilling -->
+<div class="uif-modal" id="modalOpeningBilling" style="display: none">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Accounting/Views/Billing/OpeningBillingModal.cshtml")
+    </div>
+
+    <div class="uif-modalbuttons">
+        <button type="submit" class="btn btn-primary" id="AcceptOpening" onclick=" return false ">@Global.Accept</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+    </div>
+</div>
+
+@*<form id="DataLoadForm" onsubmit=" return false ">*@
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label class="control-label">@Global.Branch</label>
+        @Html.DropDownList("MassiveBranch", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/BillSearch/LoadBranch"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_selectedid = @ViewBag.BranchDefault,
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+
+        <span class="text-danger" data-valmsg-for="MassiveBranch" data-valmsg-replace="true"></span>
+    </div>
+
+    <div class="uif-col-6">
+        <label class="control-label">@Global.File</label>
+        <input type="text" id="_fileLocation" name="_fileLocation" disabled="disabled" hidden="true" />
+
+        <form id="imageform" method="post" enctype="multipart/form-data" target="iframeUpload">
+            <input type="file" name="uploadDataLoadFile" id="uploadDataLoadFile"
+                   class="uif-inputfile" onchange="if (ValidateFileMassiveDataLoad()) uploadAjaxMassiveDataLoad(); " />
+
+        </form>
+    </div>
+
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div id="_infoFile"></div>
+    </div>
+</div>
+@*</form>*@
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="form-footer">
+            <button id="LoadCancel" class="btn btn-default" role="button">
+                <i class="glyphicon glyphicon-erase"></i> @Global.Clean
+            </button>
+            <button type="submit" id="LoadProcess" class="btn btn-primary" role="button" onclick="return false">
+                <i class="glyphicon glyphicon-cog"></i> @Global.Process
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <input type="hidden" id="_TotalRecords" name="_TotalRecords" disabled="disabled" style="text-align:right" />
+
+        <input type="hidden" id="_TotalValueRecords" name="_TotalValueRecords" disabled="disabled" style="text-align:right" />
+    </div>
+</div>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertDataLoad"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="StatisticalLoadFileTable" data-exporttocsv="false"
+               data-edit="false" data-delete="false" data-selectiontype="none" data-filter="false" data-paginate="true"
+               data-title="@Global.MassiveDataLoad">
+            <thead>
+                <tr>
+                    <th data-property="ProcessId">@Global.ProcessId</th>
+                    <th data-visible="false" data-property="Description">@Global.Description</th>
+                    <th data-property="UserName">@Global.User</th>
+                    <th data-property="BeginDate">@Global.Home</th>
+                    <th data-property="EndDate">@Global.End</th>
+                    <th data-property="TotalRecords">@Global.RecordsNumber</th>
+                    <th data-property="SuccessfulRecords">@Global.Successful</th>
+                    <th data-property="FailedRecords">@Global.Failed</th>
+                    <th data-property="PorcentageAdvance">@Global.ProcessAdvance</th>
+                    <th data-property="StateDescription">@Global.ProcessState</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagDateAccounting" value="@ViewBag.DateAccounting" />
+<input type="hidden" id="ViewBagAccountingDate" value="@ViewBag.AccountingDate" />
+<input type="hidden" id="ViewBagBillingClosureIdLink" value="@Url.Content(Global.BillingClosureIdLink)" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainMassiveDataLoad")
+}

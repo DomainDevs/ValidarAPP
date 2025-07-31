@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CollectConceptControlView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CollectId">
+          <Column table-alias="Collect" name="CollectId" />
+        </SelectValue>
+        <SelectValue alias="CollectControlCode">
+          <Column table-alias="Collect" name="CollectControlCode" />
+        </SelectValue>
+        <SelectValue alias="CollectConceptCode">
+          <Column table-alias="Collect" name="CollectConceptCode" />
+        </SelectValue>
+        <SelectValue alias="CollectConceptName">
+          <Column table-alias="CollectConcept" name="Description" />
+        </SelectValue>
+        <SelectValue alias="RegisterDate">
+          <Column table-alias="Collect" name="RegisterDate" />
+        </SelectValue>
+        <SelectValue alias="AccountingDate">
+          <Column table-alias="CollectControl" name="AccountingDate" />
+        </SelectValue>
+        <SelectValue alias="Status">
+          <Column table-alias="Collect" name="Status" />
+        </SelectValue>
+        <SelectValue alias="CollectControlStatus">
+          <Column table-alias="CollectControl" name="Status" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Collect, Core.Accounting.Entities" alias="Collect" />
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CollectControl, Core.Accounting.Entities" alias="CollectControl" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="CollectControl" name="CollectControlId" />
+                <Column table-alias="Collect" name="CollectControlCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CollectConcept, Core.Accounting.Entities" alias="CollectConcept" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="CollectConcept" name="CollectConceptId" />
+              <Column table-alias="Collect" name="CollectConceptCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

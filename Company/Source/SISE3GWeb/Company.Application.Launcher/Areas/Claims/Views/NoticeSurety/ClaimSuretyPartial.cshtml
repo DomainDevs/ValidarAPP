@@ -1,0 +1,39 @@
+﻿<h5>
+    <strong>@Resources.Language.ClaimNotice</strong>
+</h5>
+<div class="uif-alert" id="alertObjectedNumber"></div>
+<div class="row">
+    <div class="uif-col-3">
+        <label>@Resources.Language.NoticeDate</label>
+        <input type="text" id="_noticeDate" value="@System.DateTime.Today.ToString("dd/MM/yyyy")" class="uif-datepicker" disabled />
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.Language.NoticeNumber</label>
+        <input type="text" name="NoticeNumber" id="NoticeNumber" class="rightAlign uif-input" maxlength="50" style="font-weight: bold;" disabled />
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.Language.ObjectedNotice</label>
+        <input type="text" name="ObjectedNumber" id="ObjectedNumber" class="rightAlign uif-input" maxlength="10" />
+    </div>
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.Language.OcurrenceDate</label>
+        <input type="text" class="uif-datepicker" id="Date" name="Date" data-val="true" data-val-required="@Resources.Language.RequiredField" required />
+        <div class="uif-alert" id="alertDatePicker" ></div>
+        <span class="text-danger" data-valmsg-for="Date" data-valmsg-replace="true"></span>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <label class="field-required">@Resources.Language.IssueDescription</label>
+        <textarea id="Description" type="text" name="Descriptionissue" style="resize: none; width: 100%;" rows="3" maxlength=300
+                  data-val="true" data-val-required="@Resources.Language.RequiredField" required></textarea>
+        <span class="text-danger" data-valmsg-for="Descriptionissue" data-valmsg-replace="true"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-3">
+        <label class="field-required">@Resources.Language.ClaimNoticeClaimClaimedAmount</label>
+        <input type="text" name="ClaimedAmount" id="ClaimedAmount" maxlength="15" style="text-align: right;" onkeypress="return event.charCode >= 48 && event.charCode <= 58" required />
+        <span class="text-danger" data-valmsg-for="ClaimedAmount" data-valmsg-replace="true"></span>
+    </div>
+</div>

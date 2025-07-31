@@ -1,0 +1,55 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.PaymentMethodAccountType
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.Conduit</label>
+            @Html.DropDownList("selectPaymentMethod", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/Accounting/Common/GetPaymentMethods"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField,
+                        data_native = "true"
+                    })
+            <span class="text-danger" data-valmsg-for="selectPaymentMethod" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.AccountType</label>
+            @Html.DropDownList("selectAccountType", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/Accounting/Common/GetTransferAccountTypes"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField,
+                        data_native = "true"
+                    })
+            <span class="text-danger" data-valmsg-for="selectAccountType" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.DebitCode</label>
+            @Html.TextBox("DebitCode", "", new
+                {
+                  style = "text-align: left",
+                  maxlength = "10",
+                  data_val = "true",
+                  data_val_required = @Global.RequiredField
+                })
+            <span class="text-danger" data-valmsg-for="DebitCode" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-alert" id="alertForm"></div>
+    </div>
+</div>
+

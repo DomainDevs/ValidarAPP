@@ -1,0 +1,135 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AnalysisConceptKey;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameter</li>
+        <li>@Global.Analysis</li>
+        <li class="active">@Global.AnalysisConceptKey</li>
+    </ol>
+}
+
+@section Modals
+{
+    <!--Grabar Clave Concepto de Análisis-->
+    <form id="addConceptKeyForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("../AnalysisConceptKey/AnalysisConceptKeyModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-remove"></i> @Global.Cancel
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0763"))
+                {
+                    <button type="submit" class="btn btn-primary" id="SaveAddConceptKey" onclick="return false">
+                        <i class="fa fa-save"></i> @Global.Save
+                    </button>
+                }
+            </div>
+        </div>
+    </form>
+    <!-- Editar Clave Concepto de Análisis -->
+    <form id="editConceptKeyForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("../AnalysisConceptKey/AnalysisConceptKeyModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-remove"></i> @Global.Cancel
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0764"))
+                {
+                    <button type="submit" class="btn btn-primary" id="SaveEditConceptKey" onclick="return false">
+                        <i class="fa fa-save"></i> @Global.Save
+                    </button>
+                }
+                    
+                </div>
+        </div>
+    </form>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteConceptKey" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="deleteKeyModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="formConceptKey" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.AnalisysConcept
+            </label>
+            @Html.DropDownList("AnalysisConcept", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/GeneralLedger/Base/GetAnalysisConcepts"),
+                data_id = "AnalysisConceptId",
+                data_name = "Description",
+                data_val = "true",
+                headen = "headen",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="AnalysisConcept" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="ConceptKeyTable" data-exporttocsv="false" data-add="true" data-edit="true"
+                   data-delete="true" data-selectiontype="none" data-filter="true"
+                   data-paginate="true" data-title="@Global.AnalysisConceptKey">
+                <thead>
+                    <tr>
+                        <th data-property="Id">Id</th>
+                        <th data-property="AnalysisConceptId" data-visible="false">AnalysisConceptId</th>
+                        <th data-property="TableName">@Global.TableName</th>
+                        <th data-property="ColumnName">@Global.ColumnName</th>
+                        <th data-property="Description">@Global.Description</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/MainAnalysisConceptKey")
+}

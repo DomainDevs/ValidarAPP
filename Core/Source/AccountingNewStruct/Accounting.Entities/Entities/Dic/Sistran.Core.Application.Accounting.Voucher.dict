@@ -1,0 +1,24 @@
+<map version="2.0" type="class" name="Voucher" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="VOUCHER_ENTITY">
+  <properties>
+    <property name="VoucherId" type="Integer" key="true" description="VOUCHER_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="PaymentRequestCode" type="Integer" nullable="true" description="PAYMENT_REQUEST_CODE_PROPERTY" />
+    <property name="VoucherTypeCode" type="Integer" nullable="true" description="VOUCHER_TYPE_CODE_PROPERTY" />
+    <property name="Number" type="String" size="200" nullable="true" description="NUMBER_PROPERTY" />
+    <property name="Date" type="DateTime" nullable="true" description="DATE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+    <property name="ExchangeRate" type="Decimal" precision="18" scale="6" nullable="true" description="EXCHANGE_RATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="VOUCHER" schema="ACC" alias="VOUCHER" update="true">
+      <columns>
+        <column name="VOUCHER_ID" type="Int32" property="VoucherId" key="true" identity ="true"/>
+        <column name="PAYMENT_REQUEST_CD" type="Int32" property="PaymentRequestCode" />
+        <column name="VOUCHER_TYPE_CD" type="Int32" property="VoucherTypeCode" />
+        <column name="NUMBER" type="String" property="Number" size="200" />
+        <column name="DATE" type="DateTime" property="Date" />
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" />
+        <column name="EXCHANGE_RATE" type="Decimal" property="ExchangeRate" size="19" precision="18" scale="6" />
+      </columns>
+    </table>
+  </tables>
+</map>

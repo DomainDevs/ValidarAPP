@@ -1,0 +1,96 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Helpers;
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.ArticleLineTitle
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("ArticleLine", null, new { @class = "uif-input-search", id = "inputArticleLine", @placeholder = @Resources.Language.FindArticleLine })
+    </div>
+</script>
+
+<script id="ArticleLineTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+    <div><strong class="success"><strong>{{Description}}</strong> ({{ArticleLineCd}})</strong></div>
+    {{else ifCond Status "==" 4}}
+    <div><strong class="danger"><strong>{{Description}}</strong> ({{ArticleLineCd}})</strong></div>
+    {{else}}
+    <div><strong><strong>{{Description}}</strong> ({{ArticleLineCd}})</strong></div>
+    {{/ifCond}}
+    {{#ifCond Enabled "==" true}}
+    <div><strong class=""><strong>@Resources.Language.Active</strong></strong></div>
+    {{else ifCond Enabled "==" false}}
+    <div><strong class=""><strong>@Resources.Language.Inactive</strong></strong></div>
+    {{/ifCond}}
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExit
+            </span>
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExport
+            </span>
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+        </button>
+    </div>
+</script>
+
+<form id="formArticleLine" autocomplete="off" class="form form-space-adjusted">
+    <br />
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-6">
+                    <span class="" aria-hidden="true">@Resources.Language.LabelDescriptionLong</span>
+                    <input type="text" id="inputLongDescription" maxlength="20"  />
+
+                </div>
+                <div class="uif-col-6">
+                    <span class="" aria-hidden="true">@Resources.Language.LabelDescriptionShort</span>
+                    <input type="text" id="inputSmallDescription" maxlength="20"  />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <input type="checkbox" id="chkEnabledArticleLine" name="chkEnabledArticleLine" />
+                    <label for="chkEnabledArticleLine">@Resources.Language.Active</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 col-space-adjusted">
+            <div id="listViewArticleLine" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewObject">
+                    @Resources.Language.New
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAcceptObject">
+                    @Resources.Language.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

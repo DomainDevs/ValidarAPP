@@ -1,0 +1,112 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.WorkerTypeViewModel
+@section Title
+{
+    <div id="" class="row main-title">
+        <div id="tittle" class="column-70">
+            @Resources.Language.LabelWorkerType
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("WorkerType", null, new { @class = "uif-input-search", id = "inputWorkerType", @placeholder = @Resources.Language.SearchWorkerType })
+       </div>
+    </div>
+}
+
+
+    <script id="WorkerTypeTemplate" type="text/template">
+        {{#ifCond StatusTypeService "==" 2}}
+            <div><strong class="success">{{Description}}</strong></div>
+        {{else ifCond StatusTypeService "==" 3}}        
+            <div><strong class="warning">{{Description}} ({{Id}})</strong></div>
+        {{else}}
+            <div><strong>{{Description}} ({{Id}})</strong></div>        
+        {{/ifCond}}
+        <div>{{SmallDescription}}</div>
+        <div><strong>{{LabelWorkerTypeEnabled}}</strong></div>
+    </script>
+
+<form id="formWorkerType" autocomplete="off" class="form form-space-adjusted">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row row-space-adjusted"></div>
+            <div class="row row-space-adjusted">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputWorkerTypeDescription", placeholder = @Resources.Language.LabelDescription })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-6">
+                    <label  class="field-required">@Resources.Language.LabelDescriptionShort</label>
+                    @Html.TextBoxFor(model => model.SmallDescription, new { id = "inputWorkerTypeSmallDescription", placeholder = @Resources.Language.LabelDescriptionShort })
+                    @Html.ValidationMessageFor(model => model.SmallDescription)
+                </div>
+              </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <div>
+                        <label>@String.Empty</label>
+                    </div>
+                    <div class="row-space-adjusted">
+                        <input type="checkbox" id="chkIsEnabled" name="IsEnabled" />
+                        <label for="chkIsEnabled">@Resources.Language.LabelEnabled</label>
+                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 col-space-adjusted">
+            <div id="listViewWorkerType" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewWorkerType">
+                    @Resources.Language.New
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAddWorkerType">
+                    @Resources.Language.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right" id="buttonsWorkerTypePanel">
+            <button type="button" class="btn btn-default" id="btnExitWorkerType">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExit
+                </span>
+            </button>
+            <button class="btn btn-default" id="btnExportWorkerType">
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExport
+                </span>
+            </button>
+            <button class="btn btn-primary" id="btnSaveWorkerType">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+            </button>
+        </div>
+    </footer>
+}
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/WorkerType")
+}
+
+

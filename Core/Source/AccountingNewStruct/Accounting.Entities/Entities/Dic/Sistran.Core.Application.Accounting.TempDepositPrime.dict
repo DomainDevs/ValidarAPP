@@ -1,0 +1,18 @@
+<map version="2.0" type="class" name="TempDepositPrime" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="TEMP_DEPOSIT_PRIME_ENTITY">
+  <properties>
+    <property name="TempDepositPrimeCode" type="Integer" key="true" description="TEMP_DEPOSIT_PRIME_CODE_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="TempPremiumReceivableTransCode" type="Integer" nullable="true" description="TEMP_PREMIUM_RECEIVABLE_TRANS_CODE_PROPERTY" />
+    <property name="DepositPremiumTransactionCode" type="Integer" nullable="true" description="DEPOSIT_PREMIUM_TRANSACTION_CODE_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" nullable="true" description="AMOUNT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="TEMP_DEPOSIT_PRIME" schema="ACC" alias="TEMP_DEPOSIT_PRIME" update="true">
+      <columns>
+        <column name="TEMP_DEPOSIT_PRIME_CD" type="Int32" property="TempDepositPrimeCode" key="true" identity ="true"/>
+        <column name="TEMP_PREMIUM_RECEIVABLE_TRANS_CD" type="Int32" property="TempPremiumReceivableTransCode" />
+        <column name="DEPOSIT_PREMIUM_TRANSACTION_CD" type="Int32" property="DepositPremiumTransactionCode" />
+        <column name="AMOUNT" type="Decimal" property="Amount" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

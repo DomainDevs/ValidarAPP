@@ -1,0 +1,242 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = null;
+}
+
+<form id="VoucherSearchForm" class="form">
+    <div class="uif-col-12">
+        <ul class="uif-tab" id="tabMainVoucher">
+            <li class="active"><a href="#tabIncomeInformation">@Global.IssuingInformation</a></li>
+            <li><a href="#tabDepositInformation">@Global.DepositInformation</a></li>
+        </ul>
+        <div class="uif-tab-content">
+            <!-- Información de ingreso -->
+            <div class="tab-pane active" id="tabIncomeInformation">
+                <div class="uif-row">
+                    <h3><b> &nbsp;&nbsp;&nbsp;@Global.IssuingInformation</b></h3>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            @Global.Conduit
+                        </label>
+                        <input type="text" value="" id="CardVoucherDuct" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.Card</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherCardNumber" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.VoucherNumber</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherVoucherNumber" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            @Global.IncomeReceiptNum
+                        </label>
+                        <input type="text" value="" id="CardVoucherIncomeReceiptNumber" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.Status</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherCurrentStatus" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.InternalBallotDepositCardGridCardDate</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherCardDate" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.Currency</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherCurrency" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.Amount</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherAmount" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                </div>
+
+
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.NameOwnerCreditCard</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherBusinessNameCard" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.IncomeConcept</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherIncomeConcept" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.RegisterDate</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherRegisterDate" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.Branch</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherBranch" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label class="control-label">
+                            <b>@Global.IssuingBank</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherIssuingBank" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">
+                            <b>@Global.CommissionValue</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherCommission" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">
+                            <b>@Global.Depositor</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherPayer" placeholder="" style="text-align: left" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <table class="uif-table" id="tableTaxes" data-exporttocsv="false" data-exportname="cultura" data-add="false" data-edit="false" data-delete="false" data-filter="false" data-selectiontype="multiple" data-title="@Global.Taxes">
+                            <thead>
+                                <tr>
+                                    <th data-property="Description">@Global.Description</th>
+                                    <th data-property="TaxRate">@Global.TaxRate</th>
+                                    <th data-property="TaxAmount">@Global.TaxAmount</th>
+                                    <th data-property="PaymentId" data-visible="false">PaymentId</th>
+                                    <th data-property="TaxCode" data-visible="false">TaxCode</th>
+                                    <th data-property="PaymentTaxCode" data-visible="false">PaymentTaxCode</th>
+                                    <th data-property="TaxBase" data-visible="false">TaxBase</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Información depósito -->
+            <div class="tab-pane" id="tabDepositInformation">
+                <div class="uif-row">
+                    <h3><b> &nbsp;&nbsp;&nbsp;@Global.DepositInformation</b></h3>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            @Global.InternalBallotDate
+                        </label>
+                        <input type="text" value="" id="InternalBallotDateCardVoucher" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.InternalBallotNumber</b>
+                        </label>
+                        <input type="text" value="" id="InternalBallotNumberCardVoucher" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            <b>@Global.ReceivingBank</b>
+                        </label>
+                        <input type="text" value="" id="ReceivingBankCardVoucher" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="control-label">
+                            @Global.ReceivingBankAccountNumber
+                        </label>
+                        <input type="text" value="" id="ReceivingAccountNumberCardVoucher" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label class="control-label">
+                            @Global.DepositDate
+                        </label>
+                        <input type="text" value="" id="DateDepositCardVoucher" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">
+                            <b>@Global.DepositSlip</b>
+                        </label>
+                        <input type="text" value="" id="DepositBallotNumberCardVoucher" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">
+                            <b>@Global.DepositTransaction</b>
+                        </label>
+                        <input type="text" value="" id="DepositTransactionCardVoucher" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <h3><b>&nbsp;&nbsp;&nbsp;@Global.RejectInformation</b></h3>
+                    <div class="uif-col-4">
+                        <label class="control-label">
+                            @Global.RejectionDate
+                        </label>
+                        <input type="text" value="" id="CardVoucherDateRejection" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">
+                            <b>@Global.RejectionReason</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherReasonRejection" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">
+                            <b>@Global.RejectedTransaction</b>
+                        </label>
+                        <input type="text" value="" id="CardVoucherRejectedTransaction" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <h3><b>&nbsp;&nbsp;&nbsp;@Global.RegularizedInformation</b></h3>
+                    <div class="uif-col-6">
+                        <label class="control-label">
+                            @Global.RegularizedDate
+                        </label>
+                        <input type="text" value="" id="RegularizedDateCard" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="control-label">
+                            <b>@Global.RegularizedTransaction</b>
+                        </label>
+                        <input type="text" value="" id="RegularizedTransactionCard" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="modal-footer" style="padding: 10px 20px 10px">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-remove"></i> @Global.Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

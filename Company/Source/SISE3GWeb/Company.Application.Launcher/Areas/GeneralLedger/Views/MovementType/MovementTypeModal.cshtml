@@ -1,0 +1,21 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Application.GeneralLedgerServices.DTOs.AccountingConcepts.MovementTypeDTO
+
+
+    <div class="uif-row">
+        <div class="col-md-6">
+            @Html.HiddenFor(model => model.Id)
+            <label class="control-label" for="Description">
+                @Global.Description
+            </label>
+            <input class="form-control" placeholder='@Global.ExampleConcept' data-val="true" data-val-required="@Global.RequiredField"
+                   id="Description" name="Description"
+                   onblur="this.value = this.value.toUpperCase();"
+                   type="text" value="" />
+            <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+            @Html.HiddenFor(model => model.ConceptSource.Id)
+
+        </div>
+
+    </div>
+

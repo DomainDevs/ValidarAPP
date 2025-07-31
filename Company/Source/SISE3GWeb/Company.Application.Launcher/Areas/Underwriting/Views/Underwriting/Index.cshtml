@@ -1,0 +1,539 @@
+﻿@{
+    ViewBag.Title = "Index1";
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+<div class="row">
+    <div class="uif-col-12" id="main">
+    </div>
+</div>
+
+@section Title
+{
+    <div class="row main-title">
+        <div class="column">
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer></footer>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Global");
+    @Scripts.Render("~/bundle/js/Common");
+    @Scripts.Render("~/bundle/js/Sup");
+    @Scripts.Render("~/bundle/js/Underwriting");
+    @Scripts.Render("~/bundle/js/Printer");
+    @Scripts.Render("~/bundle/js/Temporal");
+    @Scripts.Render("~/bundle/js/Quotation");
+    @Scripts.Render("~/bundle/js/Risk");
+    @Scripts.Render("~/bundle/js/Vehicle");
+    @Scripts.Render("~/bundle/js/Fidelity");
+    @Scripts.Render("~/bundle/js/Coverage");
+    @Scripts.Render("~/bundle/js/ThirdPartyLiability");
+    @Scripts.Render("~/bundle/js/Property");
+    @Scripts.Render("~/bundle/js/Surety");
+    @Scripts.Render("~/bundle/js/CoverageSurety");
+    @Scripts.Render("~/bundle/js/JudicialSurety");
+    @Scripts.Render("~/bundle/js/Liability");
+    @Scripts.Render("~/bundle/js/Transport");
+    @Scripts.Render("~/bundle/js/Guarantees");
+    @Scripts.Render("~/bundle/js/Sarlaft");
+    @Scripts.Render("~/bundle/js/ConditionText");
+    @Scripts.Render("~/bundle/js/Person");
+    @Scripts.Render("~/bundle/js/Marine");
+    @Scripts.Render("~/bundle/js/Aircraft");
+    @*@Scripts.Render("~/bundle/js/SubscriptionSearch");*@
+    @Scripts.Render("~/bundle/js/CreditNote");
+    @Scripts.Render("~/bundle/js/Adjustment");
+    @Scripts.Render("~/bundle/js/Declaration");
+
+
+    <script type="text/javascript">
+        var router = uif2.router({ container: "#main" });
+
+
+        var ObjectCoverageRiskThirdPartyLiability;
+        var ObjectRiskPropertyInsured;
+
+        var AppResources;
+        var resourceManager = uif2.resourceManager({ path: rootPath + "Layout/GetResources" });
+        resourceManager.getResources().then(function (resources) {
+
+            AppResources = resources;
+        });
+
+        var afterCallTemporal = function (params, error) {
+            new UnderwritingTemporal();
+            afterCallUnderwriting();
+        };
+        router.add("prtTemporal", rootPath + "Underwriting/Underwriting/Temporal", afterCallTemporal);
+
+        var afterCallConditionText = function (params, error) {
+            new ConditionText();
+        };
+        router.add("prtConditionText", rootPath + "Parametrization/ConditionText/ConditionText", afterCallConditionText);
+
+        var afterCallSarlaft = function (params, error) {
+            new InternationalOperations();
+            new LegalRepresentative();
+            new Links();
+            new PartnersParam();
+            new Peps();
+            new SarlaftParam();
+            new SarlaftRequest();
+            
+        };
+
+        router.add("prtSarlaft", rootPath + "Sarlaft/Sarlaft/Sarlaft", afterCallSarlaft);
+        var afterCallQuotation = function (params, error) {
+            new UnderwritingQuotation();
+            new QuotationAdvancedSearch();
+            afterCallUnderwriting();
+        };
+        router.add("prtQuotation", rootPath + "Underwriting/Underwriting/Quotation", afterCallQuotation);
+
+        var afterCallUnderwriting = function (params, error) {
+            new Underwriting();
+            new UnderwritingAdditionalData();
+            new CommonAgent();
+            new UnderwritingAgent();
+            new UnderwritingClauses();
+            new UnderwritingText();
+            new UnderwritingCoInsurance();
+            new UnderwritingBeneficiaries();
+            new UnderwritingPaymentPlan();
+            new TemporalAdvancedSearch();
+            //new UnderwritingTableExpreses();
+            //new UnderwritingSurcharge();
+            //new UnderwritingTaxes();
+            //new UnderwritingDiscounts();
+            new UnderwritingPromissory();
+
+        };
+
+        var afterCallRiskVehicle = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskVehicle();
+                new RiskVehicleAdditionalData();
+                new RiskVehicleAccessories();
+                new RiskBeneficiary();
+                new RiskClause();
+                new RiskText();
+
+            } else {
+                ExecuteUnderwriting();
+            }
+        }
+        router.add("prtRiskVehicle", rootPath + "Underwriting/RiskVehicle/Vehicle", afterCallRiskVehicle);
+
+        var afterCallCoverageRiskVehicle = function (params, error) {
+            if (glbRisk != null && glbRisk.Id > 0) {
+                new RiskVehicleCoverage();
+                new TextsCoverage();
+                new ClausesCoverage();
+            } else {
+                ExecuteUnderwriting();
+            }
+        }
+        router.add("prtCoverageRiskVehicle", rootPath + "Underwriting/RiskVehicle/Coverage", afterCallCoverageRiskVehicle);
+
+        var afterCallRiskThirdPartyLiability = function (params, error) {
+
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskThirdPartyLiability();
+                new RiskBeneficiary();
+                new RiskClause();
+                new RiskText();
+                new RiskTPLAdditionalData();
+
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+        router.add("prtRiskThirdPartyLiability", rootPath + "Underwriting/RiskThirdPartyLiability/ThirdPartyLiability", afterCallRiskThirdPartyLiability);
+
+        var afterCallCoverageRiskThirdPartyLiability = function (params, error) {
+            if (glbRisk != null && glbRisk.Id > 0) {
+                new RiskThirdPartyLiabilityCoverage();
+                new TextsCoverage();
+                new ClausesCoverage();
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+        router.add("prtCoverageRiskThirdPartyLiability", rootPath + "Underwriting/RiskThirdPartyLiability/Coverage", afterCallCoverageRiskThirdPartyLiability);
+
+        var afterCallRiskProperty = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new Property();
+                new RiskBeneficiary();
+                new RiskClause();
+                new RiskText();
+                new RiskPropertyAdditionalData();
+
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+        router.add("prtRiskProperty", rootPath + "Underwriting/RiskProperty/Property", afterCallRiskProperty);
+
+        var afterCallInsuredObjectRiskProperty = function (params, error) {
+            if (glbRisk != null && glbRisk.Id > 0) {
+                new RiskPropertyInsuredObject();
+                ObjectRiskPropertyInsured = RiskPropertyInsuredObject;
+                new TextsCoverage();
+                new ClausesCoverage();
+                new DeductiblesCoverage();
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+        router.add("prtInsuredObjectRiskProperty", rootPath + "Underwriting/RiskProperty/InsuredObject", afterCallInsuredObjectRiskProperty);
+
+        var afterCallRiskSurety = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskSurety();
+                new RiskSuretyContract();
+                new RiskSuretyCrossGuarantees();
+                new OperationQuotaCumulus();
+                //new RiskSuretyCrossGuaranteesRequest();
+                new RiskBeneficiary();
+                new RiskClause();
+                new RiskText();
+
+            } else {
+                ExecuteUnderwriting();
+            }
+        }
+        router.add("prtRiskSurety", rootPath + "Underwriting/RiskSurety/Surety", afterCallRiskSurety);
+
+        var afterCallCoverageRiskSurety = function (params, error) {
+            if (glbRisk != null && glbRisk.Id > 0) {
+                new RiskSuretyCoverage();
+                new TextsCoverage();
+                new ClausesCoverage();
+            } else {
+                ExecuteUnderwriting();
+            }
+        }
+        router.add("prtCoverageRiskSurety", rootPath + "Underwriting/RiskSurety/Coverage", afterCallCoverageRiskSurety);
+
+        var afterCallRiskLiability = function (params, error) {
+
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskLiability();
+                new RiskBeneficiary();
+                new RiskClause();
+                new RiskText();
+
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+        router.add("prtRiskLiability", rootPath + "Underwriting/RiskLiability/Liability", afterCallRiskLiability);
+
+        var afterCallCoverageRiskLiability = function (params, error) {
+            if (glbRisk != null && glbRisk.Id > 0) {
+                new RiskLiabilityCoverage();
+                new TextsCoverage();
+                new ClausesCoverage();
+                new DeductiblesCoverage();
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+        router.add("prtCoverageRiskLiability", rootPath + "Underwriting/RiskLiability/Coverage", afterCallCoverageRiskLiability);
+
+        //Transports
+        var afterDeclaration = function () {
+            new Declaration();
+            new DeclarationRequest();
+
+        };
+
+        var afterCallRiskFidelity = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskFidelity();
+                new RiskBeneficiary();
+                new RiskClause();
+                new RiskText();
+                //new RiskConcepts();
+            }
+        }
+        router.add("prtRiskFidelity", rootPath + "Underwriting/RiskFidelity/Fidelity", afterCallRiskFidelity);
+
+        var afterCallCoverageRiskFidelity = function (params, error) {
+            if (glbRisk != null && glbRisk.Id > 0) {
+                new RiskFidelityCoverage();
+                new TextsCoverage();
+                new ClausesCoverage();
+                new ConceptsCoverage();
+            } else {
+                ExecuteUnderwriting();
+            }
+        }
+        router.add("prtCoverageRiskFidelity", rootPath + "Underwriting/RiskFidelity/Coverage", afterCallCoverageRiskFidelity);
+
+
+
+        var afterCallRiskJudicialSurety = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskJudicialSurety();
+                new RiskBeneficiary();
+                new RiskClause();
+                new RiskText();
+                new ObjectCrossGuaranteesRiskJudicialSurety();
+                new ObjectAdditionalDataRiskJudicialSurety();
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+        router.add("prtRiskJudicialSurety", rootPath + "Underwriting/RiskJudicialSurety/JudicialSurety", afterCallRiskJudicialSurety);
+
+        var afterAdjustment = function (params, error) {
+            new Adjustment();
+            new AdjustmentRequest();
+
+        };
+
+        var afterCreditNote = function (params, error) {
+            new CreditNote();
+            new CreditNoteRequest();
+        };
+
+        var afterCallRiskTransport = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskTransport();
+                new RiskBeneficiary();
+                new RiskClause();
+                new RiskText();
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+
+        var afterCallRiskTransportCoverage = function (params, error) {
+            if (glbRisk != null && glbRisk.Id > 0) {
+                new RiskTransportCoverage();
+                new TextsCoverage();
+                new ClausesCoverage();
+                new DeductiblesCoverage();
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+        //**********
+        var afterCallRiskJudicialSurety = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskJudicialSurety();
+                new RiskBeneficiary();
+                new RiskClause();
+                new RiskText();
+                new ObjectCrossGuaranteesRiskJudicialSurety();
+                new ObjectAdditionalDataRiskJudicialSurety();
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+        router.add("prtRiskJudicialSurety", rootPath + "Underwriting/RiskJudicialSurety/JudicialSurety", afterCallRiskJudicialSurety);
+
+        var afterCallCoverageRiskJudicialSurety = function (params, error) {
+            new CoverageJudicialSurety();
+            new TextsCoverage();
+            new ClausesCoverage();
+        };
+        router.add("prtCoverageRiskJudicialSurety", rootPath + "Underwriting/RiskJudicialSurety/CoverageJudicialSurety", afterCallCoverageRiskJudicialSurety);
+
+        //transports
+        router.add("prtRisktransport", rootPath + "Underwriting/RiskTransport/Transport", afterCallRiskTransport);
+        router.add("prtRisktransportCoverage", rootPath + "Underwriting/RiskTransport/RiskTransportCoverage", afterCallRiskTransportCoverage);
+        router.add("prtDeclaration", rootPath + "Endorsement/Declaration/Declaration", afterDeclaration);
+        router.add("prtAdjustment", rootPath + "Endorsement/Adjustment/Adjustment", afterAdjustment);
+        router.add("prtCreditNote", rootPath + "Endorsement/CreditNote/CreditNote", afterCreditNote);
+
+
+        var afterCallGuarantee = function (params, error) {
+
+            //new Mortage();
+
+            new Guarantee();
+            new GuaranteeRequest();
+            //new PromissoryNote();
+            //new BindPolicy();
+            //new Binnacle();
+            //new DocumentationReceived();
+            //new FixedTermDeposit();
+            //new Other();
+            //new PrefixAssocieted();
+            //new Guarantors();
+            objActions.bindEvents();
+            objPledge.bindEvents();
+            objPromissoryNote.bindEvents();
+            objBindPolicy.bindEvents();
+            objBinnacle.bindEvents();
+            objDocumentationReceived.bindEvents();
+            objFixedTermDeposit.bindEvents();
+            objGuarantors.bindEvents();
+            
+            objMortage.bindEvents();
+            objOther.bindEvents();
+            objPrefixAssocieted.bindEvents();
+            objPromissoryNote.bindEvents();
+
+        };
+
+           
+        router.add("prtGuaranteeE", rootPath + "Guarantees/Guarantees/Guarantees", afterCallGuarantee);
+
+            var afterCallPersonLegal = function (params, error) {
+                new PersonLegal();
+            }
+        router.add("prtPersonLegal", rootPath + "Person/Person/PersonLegal", afterCallPersonLegal);
+
+        var afterCallPersonNatural = function (params, error) {
+            new PersonNatural();
+        }
+        router.add("prtPersonNatural", rootPath + "Person/Person/PersonNatural", afterCallPersonNatural);        
+
+        var afterCallProspectusLegal = function (params, error) {
+            new ProspectusLegal();
+        }
+
+        var afterCallProspectusNatural = function (params, error) {
+            new ProspectusNatural();
+        }
+        router.add("prtProspectusNatural", rootPath + "Person/Person/ProspectusNatural", afterCallProspectusNatural);
+        router.add("prtProspectusLegal", rootPath + "Person/Person/ProspectusLegal", afterCallProspectusLegal);
+
+        var afterCallRiskTransport = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskTransport();
+                new RiskBeneficiary();
+                new RiskClause();
+                new RiskText();
+            } else {
+                ExecuteUnderwriting();
+            }
+        };
+        router.add("prtRisktransport", rootPath + "Underwriting/RiskTransport/Transport", afterCallRiskTransport);
+        var afterCallRiskMarine = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskMarine();
+                //new RiskConcepts();
+            } else {
+                ExecuteUnderwriting();
+            }
+        }
+        router.add("prtRiskmarine", rootPath + "Underwriting/RiskMarine/Marine", afterCallRiskMarine);
+
+
+        var afterCallRiskMarinesCoverage = function (params, error) {
+            if (glbPolicy != null && glbRisk.Id > 0) {
+                new RiskMarineCoverage();
+                new TextsCoverage();
+                new ClausesCoverage();
+                //new ConceptsCoverage();
+            } else {
+                ExecuteUnderwriting();
+            }
+        }
+        router.add("prtRiskmarineCoverage", rootPath + "Underwriting/RiskMarine/RiskMarineCoverage", afterCallRiskMarinesCoverage);
+
+        var afterCallRiskAircraft = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskAircraft();
+                //new RiskConcepts();
+            } else {
+                ExecuteUnderwriting();
+            }
+        }
+        router.add("prtRiskaircraft", rootPath + "Underwriting/RiskAircraft/Aircraft", afterCallRiskAircraft);
+
+
+        var afterCallRiskAircraftCoverage = function (params, error) {
+            if (glbRisk != null && glbRisk.Id > 0) {
+                new RiskAircraftCoverage();
+                new TextsCoverage();
+                new ClausesCoverage();
+                //new ConceptsCoverage();
+
+            } else {
+                ExecuteUnderwriting();
+            }
+        }
+        router.add("prtRiskaircraftCoverage", rootPath + "Underwriting/RiskAircraft/RiskAircraftCoverage", afterCallRiskAircraftCoverage);
+        var afterCallRiskTransportCoverage = function (params, error) {
+            if (glbPolicy != null && glbPolicy.Id > 0) {
+                new RiskTransportCoverage();
+                //new RiskBeneficiary();
+                //new RiskClause();
+                //new RiskText();
+                //new ObjectCrossGuaranteesRiskJudicialSurety();
+                //new ObjectAdditionalDataRiskJudicialSurety();
+            } else {
+                ExecuteUnderwriting();
+            }
+        }
+
+        //var afterCallSubscriptionSearch = function (params, error) {
+        //    new SubscriptionSearch();
+        //    new SubscriptionSearchRequest();
+        //    new QuotationSearch();
+        //    new QuotationSearchRequest();
+        //    new TemporalSearch();
+        //    new TemporalSearchRequest();
+        //    new PolicySearch();
+        //    new PolicySearchRequest();
+        //}
+        //router.add("prtSubscriptionSearch", rootPath + "Underwriting/SearchUnderwriting/SubscriptionSearch", afterCallSubscriptionSearch);
+
+
+        //var afterCallCoverageRiskTransport = function (params, error) {
+        //    //new Coverage();
+        //    //new TextsCoverage();
+        //    //new ClausesCoverage();
+        //}
+        //router.add("prtCoverageRiskTransport", rootPath + "Underwriting/RiskTransport/Coverage", afterCallCoverageRiskTransport);
+        var afterCallEndorsement = function (params, error) {
+            new Endorsement();
+        }
+        router.add("prtEndorsement", rootPath + "Underwriting/Underwriting/Temporal", afterCallEndorsement);
+        var GetQueryParameter = function (parameterName) {
+            var queryParameters = window.location.search.substring(1);
+            var parameters = queryParameters.split("&");
+            for (var i = 0; i < parameters.length; i++) {
+                var parameter = parameters[i].split("=");
+                if (parameter[0] == parameterName) {
+                    return parameter[1];
+                }
+            }
+        }
+
+
+
+        var ExecuteUnderwriting = function () {
+            if (GetQueryParameter('endorsementType') == EndorsementType.Modification) {
+                router.run("prtEndorsement");
+            }
+            else if (GetQueryParameter('type') == 1) {
+                router.run("prtQuotation");
+            }
+            else if (GetQueryParameter('type') == 2) {
+                router.run("prtTemporal");
+            }
+            //else if (GetQueryParameter('type') == 3) {
+            //    router.run("prtSubscriptionSearch");
+            //}
+        }
+        ExecuteUnderwriting();
+
+
+    </script>
+}
+
+
+
+

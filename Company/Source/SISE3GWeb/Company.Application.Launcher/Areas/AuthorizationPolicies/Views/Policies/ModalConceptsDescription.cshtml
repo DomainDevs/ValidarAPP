@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="display-template-ConceptsDescription" type="text/template">
+    <b>{{Concept.Description}}</b>  ({{EntityDescription}})
+</script>
+
+<div class="uif-modal" id="modalConceptsDescription">
+    <div class="uif-modalbody">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label>Entidad</label>
+                <select class="uif-select" id="ddlLevelConceptsDescription" name="ddlLevelConceptsDescription" data-val="true" data-id="EntityId" data-name="Description" data-native="false" required></select>
+            </div>
+            <div class="uif-col-6">
+                <label>Concepto</label>
+                <select class="uif-select form-control" id="ddlConcepts" data-filter="true" data-native="false" data-id="ConceptId" data-name="Description" name="ddlConcepts" required></select>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-10">
+            </div>
+            <div class="uif-col-2">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0644"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnAddConceptDescription">Agregar</button>
+                }
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-listview" id="lsvConceptsDescription"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0645"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSendConceptsDescription">@Resources.Language.ButtonSave</button>
+        }
+
+    </div>
+</div>

@@ -1,0 +1,179 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AuthorizationSector;
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Check</a></li>
+        <li class="active">@Global.MainPathCheckPrinting</li>
+        <li class="active">@Global.AuthorizationSector</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <div class="app-header">
+        <div class="pull-right">
+            <button class="btn btn-primary" id="Authorize"><span class="glyphicon glyphicon-ok"></span> @Global.Authorize</button>
+        </div>
+    </div>
+}
+
+<form id="AutorizationSectorForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Branch</label>
+            @Html.DropDownList("Branch", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_val = "true",
+                 data_val_required = @Global.RequiredField,
+                 data_native = "true"
+             })
+            <span class="text-danger" data-valmsg-for="Branch" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.Sector</label>
+            @Html.DropDownList("Sector", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Common/GetSectors"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_val = "true",
+                 data_val_required = @Global.RequiredField,
+                 data_native = "true"
+             })
+            <span class="text-danger" data-valmsg-for="Branch" data-valmsg-replace="true" />
+
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.EstimatedPaymentDate</label>
+            @Html.TextBox("DatePayment", "", new
+            {
+                @class = "uif-datepicker",
+                style = "text-align: left",
+                data_mask = "99/99/9999",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="DatePayment" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+
+<!--BUTTONS-->
+<div class="form-footer">
+    <button type="button" class="btn btn-primary" id="Search">
+        <span class="glyphicon glyphicon-search"></span>        @Global.Search
+    </button>
+    <button type="button" class="btn btn-primary" id="CleanSearch">
+        <span class="glyphicon glyphicon-remove"></span>@Global.Clean
+    </button>
+</div>
+<!--ALERT-->
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+<!--GRID-->
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="PaymentOrders" data-exporttocsv="false" data-edit="false" data-delete="false"
+               data-filter="false" data-paginate="true" data-selectiontype="multiple"
+               data-title="@Global.PaymentOrders">
+            <thead>
+                <tr>
+                    <th data-property="CheckNumber">@Global.CheckNumber</th>
+                    <th data-property="Payable">@Global.Depositor</th>
+                    <th data-property="FullName">@Global.FullName</th>
+                    <th data-property="PaymentDate">@Global.EstimatedPaymentDate</th>
+                    <th data-property="Import">@Global.Amount</th>
+                    <th data-property="Deductible">@Global.AssociationNumber</th>
+                    <th data-property="CurrencyName">@Global.Currency</th>
+                    <th data-property="Change">@Global.Exchange</th>
+                    <th data-property="ClaimDate">@Global.ClaimDate</th>
+                    <th data-property="ClaimNumber">@Global.ClaimNumber</th>
+                    <th data-property="User">@Global.User</th>
+                    <th data-property="CheckName">@Global.CheckPayableTo</th>
+                    <th data-property="Policies">@Global.Policies</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+    /*-----------------------------------------------------------------------------------------------------------------------------------------*/
+    //DEFINICIÓN DE OBJETOS / VARIABLES / ARRAYS
+    /*-----------------------------------------------------------------------------------------------------------------------------------------*/
+    var branchId = 0;
+    var sectorId = 0;
+    var paymentDate = "";
+    var userName = "";
+    var checkNumber = 0;
+
+    /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+    //ACCIONES / EVENTOS
+    /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+    $("#Search").on('click', function () {
+        $("#alert").hide();
+        $("#AutorizationSectorForm").validate();
+        $("#PaymentOrders").UifDataTable();
+        if ($("#AutorizationSectorForm").valid()) {
+            var controller = '@Url.Content("~/")' + "AuthorizationSector/GetSearchPaymentOrders?branchId=" + $('#Branch').val() +
+                             "&sectorId=" + $('#Sector').val() + "&paymentDate=" + $("#DatePayment").val() + "&userName="
+            $("#PaymentOrders").UifDataTable({ source: controller });
+        }
+    });
+
+
+    $("#Search").click(function () {
+        $("#PaymentOrders").dataTable().fnClearTable();
+
+        $("#Branch").val('');
+        $("#Sector").val('');
+        $("#DatePayment").val('');
+        
+    })
+
+
+    $('#Authorize').click(function () {
+        var rowids = $("#PaymentOrders").UifDataTable("getSelected");
+
+        if (rowids == null) {
+            $("#alert").UifAlert('show', '@Global.SelectOneItem', "warning");
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Content("~/")' + "AuthorizationSector/UpdateAuthorizationSector",
+                data: JSON.stringify({ "checkNumber": checkNumber }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data == null) {
+                            $("#alert").UifAlert('show', "@Global.ErrorToAuthorizeThePaymentOrder", "warning");
+                    }
+                    else {
+                            $("#alert").UifAlert('show', "@Global.PaymentOrderAuthorizedSuccessfully", "success");
+                        }
+                    }
+                });
+            }
+        });
+
+    </script>
+}

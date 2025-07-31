@@ -1,0 +1,32 @@
+<map version="2.0" type="class" name="MassiveProcessDataBill" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="MASSIVE_DATA_GENERATE_EXCEL_ENTITY">
+	<properties>
+		<property name="PayerId" type="Integer" nullable="true" description="PAYER_ID_PROPERTY" />
+		<property name="ComponentAmount" type="Decimal" precision="38" scale="2" nullable="true" description="COMPONENT_AMOUNT_PROPERTY" />
+		<property name="PolicyId" type="Integer" key="true" description="POLICY_ID_PROPERTY" />
+		<property name="EndorsementId" type="Integer" key="true" description="ENDORSEMENT_ID_PROPERTY" />
+    <property name="PolicyNumber" type="Integer" key="true" description="POLICY_NUMBER_PROPERTY" />
+    <property name="EndorsementNumber" type="Integer" key="true" description="ENDORSEMENT_NUMBER_PROPERTY" />
+		<property name="Quote" type="Integer" description="QUOTE_PROPERTY" />
+		<property name="PaymentIndividualId" type="Integer" nullable="true" description="PAYMENT_INDIVIDUAL_ID_PROPERTY" />
+		<property name="PaymentMethodCode" type="Integer" description="PAYMENT_METHOD_CODE_PROPERTY" />
+		<property name="IssueDate" type="DateTime" description="ISSUE_DATE_PROPERTY" />
+    <property name="BranchId" type="Integer" description="BRANCH_CD_PROPERTY" />
+	</properties>
+	<tables>
+		<table name="MASSIVE_DATA_GENERATE_EXCEL" schema="ACC" alias="MASSIVE_DATA_GENERATE_EXCEL" update="true">
+			<columns>
+				<column name="PAYER_ID" type="Int32" property="PayerId" />
+				<column name="COMPONENT_AMT" type="Decimal" property="ComponentAmount" size="19" precision="38" scale="2" />
+				<column name="POLICY_ID" type="Int32" property="PolicyId" key="true" />
+				<column name="ENDORSEMENT_ID" type="Int32" property="EndorsementId" key="true" />
+        <column name="POLICY_NUMBER" type="Int32" property="PolicyNumber" key="true" />
+        <column name="ENDORSEMENT_NUMBER" type="Int32" property="EndorsementNumber" key="true" />
+				<column name="QUOTE" type="Int32" property="Quote" allowNull="false" />
+        <column name="BRANCH_CD" type="Int32" property="BranchId" allowNull="false" />
+				<column name="PAYMENT_INDIVIDUAL_ID" type="Int32" property="PaymentIndividualId" />
+				<column name="PAYMENT_METHOD_CD" type="Int32" property="PaymentMethodCode" allowNull="false" />
+				<column name="ISSUE_DATE" type="DateTime" property="IssueDate" allowNull="false" />
+			</columns>
+		</table>
+	</tables>
+</map>

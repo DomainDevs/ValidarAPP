@@ -1,0 +1,123 @@
+@using Sistran.Core.Framework.UIF.Web.Resources
+<div class="uif-row">
+    <div class="uif-col-3">
+        <label>
+            <b>@Global.NewPaymentForm:</b>
+        </label>
+        <select class="uif-select form-control" id="FinancialNewPaymentMethod" data-id="Id" data-name="Description"
+                data-val-required='@Global.RequiredField'
+                data-source="null"
+                data-native="true"
+                data-val="true" name="FinancialNewPaymentMethod"></select>
+    </div>
+    <div class="uif-col-3">
+        <label>
+            <b>@Global.NewPaymentPlan:</b>
+        </label>
+        <select class="uif-select form-control" id="FinancialNewPaymentPlan" data-id="Id" data-name="Description"
+                data-val-required='@Global.RequiredField'
+                data-source="null"
+                data-native="true"
+                data-val="true" name="FinancialNewPaymentPlan"></select>
+    </div>
+    <div class="uif-col-3">
+        <label>
+            <b>
+                @Global.PlanCalculationStartDate
+            </b>
+        </label>
+        <input type="text" id="FinancialAccountDate" name="FinancialAccountDate" class="uif-datepicker" />
+    </div>
+    <div class="uif-col-3">
+        <label>
+            <b>
+                @Global.AnnualInterestRate
+            </b>
+        </label>
+        <input type="text" id="FinancialAnnualInterestRate" name="FinancialAnnualInterestRate" disabled="disabled" style="border: none" />
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="form-footer" style="float: right">
+            <button id="FinancialPlanCalculation" class="btn btn-primary" role="button">
+                <i class="fa fa-check"></i>@Global.Refinance
+            </button>
+        </div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table id="FinancialNewPaymentPlanTable" class="uif-table" data-title="@Global.PendingNewPlan" data-source="null" data-selectiontype="none" data-edit="false" data-delete="false" data-filter="false" data-paginate="true" data-add="false">
+            <thead>
+                <tr>
+                    <th data-property="Number">@Global.QuotaNumber</th>
+                    <th data-property="ExpirationDate">@Global.DueDate</th>
+                    <th data-property="Amount">@Global.QuotaValue</th>
+                    <th data-property="AmountPending">@Global.Recovery_RemainingAmount</th>
+                    <th data-property="Premium">@Global.Prime</th>
+                    <th data-property="Tax">@Global.Tax</th>
+                    <th data-property="Expenses">@Global.accExpenses</th>
+                    <th data-property="ExpensesOther">@Global.OtherChargesDiscounts</th>
+                    <th data-property="Financial">@Global.Financing</th>
+                    <th data-property="TotalAmount">@Global.Total</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <label><b>@Global.FeesTotal</b></label>
+    </div>
+</div>
+<div class="uif-row" id="SummaryNewFinancialInfo">
+    <div class="uif-col-2">
+        <label>
+            @Global.Prime
+        </label>
+        <input type="text" id="FinancialPremiumTotal" name="FinancialPremiumTotal" disabled="disabled" style="border: none" />
+    </div>
+    <div class="uif-col-2">
+        <label>
+            @Global.Tax
+        </label>
+        <input type="text" id="FinancialTaxTotal" name="FinancialTaxTotal" disabled="disabled" style="border: none" />
+    </div>
+    <div class="uif-col-2">
+        <label>
+            @Global.accExpenses
+        </label>
+        <input type="text" id="FinancialExpensesTotal" name="FinancialExpensesTotal" disabled="disabled" style="border: none" />
+    </div>
+    <div class="uif-col-2">
+        <label>
+            @Global.OtherChargesDiscounts
+        </label>
+        <input type="text" id="FinancialOtherChargesDiscountsTotal" name="FinancialOtherChargesDiscountsTotal" disabled="disabled" style="border: none" />
+    </div>
+    <div class="uif-col-2">
+        <label>
+            @Global.Financing
+        </label>
+        <input type="text" id="FinancialFinancingTotal" name="FinancialFinancingTotal" disabled="disabled" style="border: none" />
+    </div>
+    <div class="uif-col-2">
+        <label>
+            <b>
+                @Global.Total
+            </b>
+        </label>
+        <input type="text" id="FinancialTotal" name="FinancialTotal" disabled="disabled" style="border: none" />
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="form-footer" style="float: right">
+            <button id="FinancialPlanSave" class="btn btn-primary" type="button">
+                <i class="fa fa-check"></i>@Global.Save
+            </button>
+        </div>
+    </div>
+</div>

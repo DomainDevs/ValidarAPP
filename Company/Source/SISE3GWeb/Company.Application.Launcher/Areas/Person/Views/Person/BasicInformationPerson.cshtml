@@ -1,0 +1,84 @@
+﻿@model  Sistran.Core.Framework.UIF.Web.Areas.Person.Models.PersonBasicViewModel
+<form id="formPersonInfoBasic" class="form without-space">
+    <div class="uif-row fit-col-main">
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.DocumentType, htmlAttributes: new { @class = "control-label field-required" })
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="DocumentType" name="DocumentType"
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.LanguagePerson.ErrorDocumentDocumentType"></select>
+            <span class="text-danger" data-valmsg-for="DocumentType" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.DocumentNumber, htmlAttributes: new { @class = "control-label field-required" })
+            @Html.TextBoxFor(model => model.DocumentNumber, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DocumentNumber)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.PersonCode, htmlAttributes: new { @class = "control-label field-required" })
+            @Html.TextBoxFor(model => model.PersonCode, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PersonCode)
+        </div>
+    </div>
+    <div class="uif-row fit-col-main">
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label field-required" })
+            @Html.TextBoxFor(model => model.FirstName, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.LastName, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label field-required" })
+            @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label field-required" })
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="Gender" name="Gender"
+                    data-id="Value" data-name="Text"
+                    data-val="true"
+                    data-val-required="@Resources.LanguagePerson.ErrorDocumentGender"></select>
+            <span class="text-danger" data-valmsg-for="Gender" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="uif-row fit-col-main">
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.MaritalStatus, htmlAttributes: new { @class = "control-label field-required" })
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="MaritalStatus" name="MaritalStatus"
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.LanguagePerson.ErrorDocumentMaritalStatus"></select>
+            <span class="text-danger" data-valmsg-for="MaritalStatus" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.Birthdate, htmlAttributes: new { @class = "control-label field-required" })
+            @Html.TextBoxFor(model => model.Birthdate, htmlAttributes: new { @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.Birthdate)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label field-required" })
+            @Html.TextBoxFor(model => model.Age, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Age)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.BirthPlace, htmlAttributes: new { @class = "control-label field-required" })
+            @Html.TextBoxFor(model => model.BirthPlace, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.BirthPlace)
+        </div>
+    </div>
+    <div class="uif-row fit-col-main">
+        <div class="uif-col-3">
+            <label>@Resources.LanguagePerson.LastUpdate</label>
+            @Html.TextBoxFor(model => model.LastUpdate, htmlAttributes: new { @class = "uif-datepicker" })
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.UpdateBy, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.UpdateBy, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UpdateBy)
+        </div>
+    </div>
+</form>

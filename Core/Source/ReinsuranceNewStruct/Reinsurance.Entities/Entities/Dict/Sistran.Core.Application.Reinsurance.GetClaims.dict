@@ -1,0 +1,38 @@
+<map version="2.0" type="class" name="GetClaims" namespace="Sistran.Core.Application.Reinsurance" file-version="1.0" description="GET_CLAIMS_ENTITY">
+  <properties>
+    <property name="ClaimBranchCode" type="Integer" description="CLAIM_BRANCH_CODE_PROPERTY" />
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="PolicyNumber" type="String" size="30" description="POLICY_NUMBER_PROPERTY" />
+    <property name="ClaimCode" type="Integer" description="CLAIM_CODE_PROPERTY" />
+    <property name="ClaimModifyCode" type="Integer" description="CLAIM_MODIFY_CODE_PROPERTY" />
+    <property name="ClaimNumber" type="Integer" description="CLAIM_NUMBER_PROPERTY" />
+    <property name="ClaimDate" type="DateTime" nullable="true" description="CLAIM_DATE_PROPERTY" />
+    <property name="RegistrationDate" type="DateTime" nullable="true" description="REGISTRATION_DATE_PROPERTY" />
+    <property name="EstimationType" type="String" size="250" description="ESTIMATION_TYPE_PROPERTY" />
+    <property name="EstimationAmount" type="Decimal" precision="38" scale="6" description="ESTIMATION_AMOUNT_PROPERTY" />
+    <property name="MovementSourceId" type="Integer" description="MOVEMENT_SOURCE_ID_PROPERTY" />
+    <property name="ClaimCoverageCd" type="Integer" description="CLAIM_COVERAGE_CD_PROPERTY" />
+    <property name="SubClaim" type="Integer" description="SUB_CLAIM_PROPERTY" />
+    <property name="VersionCd" type="Integer" description="VERSION_CD_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="GET_CLAIMS" schema="REINS" alias="GET_CLAIMS" update="true">
+      <columns>
+        <column name="CLAIM_BRANCH_CD" type="Int32" property="ClaimBranchCode" allowNull="false"/>
+        <column name="PREFIX_CD" type="Int32" property="PrefixCode" allowNull="false"/>
+        <column name="POLICY_NUMBER" type="String" property="PolicyNumber" allowNull="false" size="30" />
+        <column name="CLAIM_CD" type="Int32" property="ClaimCode" allowNull="false" />
+        <column name="CLAIM_MODIFY_CD" type="Int32" property="ClaimModifyCode" allowNull="false" />
+        <column name="CLAIM_NUMBER" type="Int32" property="ClaimNumber" allowNull="false"/>
+        <column name="CLAIM_DATE" type="DateTime" property="ClaimDate" />
+        <column name="REGISTRATION_DATE" type="DateTime" property="RegistrationDate" />
+        <column name="ESTIMATION_TYPE" type="String" property="EstimationType" allowNull="false" size="250" />
+        <column name="ESTIMATION_AMOUNT" type="Decimal" property="EstimationAmount" allowNull="false" size="19" precision="38" scale="6" />
+        <column name="MOVEMENT_SOURCE_ID" type="Int32" property="MovementSourceId" allowNull="false" />
+        <column name="SUB_CLAIM" type="Int32" property="SubClaim" allowNull="false" />
+        <column name="CLAIM_COVERAGE_CD" type="Int32" property="ClaimCoverageCd" allowNull="false" />
+        <column name="VERSION_CD" type="Int32" property="VersionCd" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

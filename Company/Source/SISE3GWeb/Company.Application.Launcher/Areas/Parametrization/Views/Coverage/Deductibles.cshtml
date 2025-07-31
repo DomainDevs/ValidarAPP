@@ -1,0 +1,85 @@
+﻿@*Fields ListView*@
+<script id="tmpDeductiblesForAssign" type="text/template">
+    <div>
+        <label>
+            ({{Id}}):<br />
+            {{Description}}
+        </label>
+        <br />
+        <label class="font-highlight">
+            {{#if IsMandatory}}
+                @Resources.Language.LabelDefault
+            {{/if}}
+        </label>
+    </div>    
+</script>
+
+@*Fields ListView*@
+<script id="tmpForDeductibles" type="text/template">
+    <div>
+        <label>
+            ({{Id}}):<br />
+            {{Description}}
+        </label>        
+    </div>
+</script>
+
+@*Formulario Principal*@
+<form id="formDeductibles" class="form">
+    <div class="uif-row" id="mainModalDeductibles">
+        <div class="uif-col-12">
+            <div class="uif-row">
+                <div class="uif-col-5">
+                    <div class="uif-listview" id="listviewDeductibles">
+                    </div>
+                </div>
+                <div class="uif-col-2">
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalDeductiblesAssignAll">
+                                <span class="" aria-hidden="true">>></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalDeductiblesDeallocateAll">
+                                <span class="" aria-hidden="true"><<</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalDeductiblesAssign">
+                                <span class="" aria-hidden="true">></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalDeductiblesDeallocate">
+                                <span class="" aria-hidden="true"><</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-col-5">
+                    <div class="uif-listview" id="listviewDeductiblesAssing">
+                    </div>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-7">
+                </div>                
+                <div class="uif-col-5">
+                    <div class="without-label">
+                        <button type="button" class="btn btn-default secondary-Colombia" id="btnModalMarkCoverageDeductibleAsDefault">
+                            <span class="" aria-hidden="true">@Resources.Language.LabelDefault</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

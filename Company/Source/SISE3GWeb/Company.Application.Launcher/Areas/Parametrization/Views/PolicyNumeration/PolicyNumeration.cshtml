@@ -1,0 +1,90 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.PolicyNumerationViewModel
+@{
+    Layout = null;
+}
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column">
+        @Resources.Language.LabelTabPolicyNumeration
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default cancel" id="btnNewPolicyNumeration">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.New
+        </button>
+        <button type="button" class="btn btn-default" id="btnDelete">
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.Delete
+        </button>
+        <button type="button" class="btn btn-default" id="btnExport">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSavePolicyNumeration">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+
+    </div>
+</script>
+
+<form id="formPolicyNumeration" autocomplete="off" class="form without-space">
+    <div class="row">
+        <input type="hidden" name="Id" id="Id" />
+        <div class="uif-col-12">
+            <br />
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelBranch</label>
+                    <select class="uif-select form-control" id="selectBranch" data-id="Id" data-name="Description" 
+                            name="BranchId" data-filter="true" data-native="false"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentBranch"></select>
+                    @Html.ValidationMessageFor(model => model.BranchId)
+                </div>
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPrefix</label>
+                    <select class="uif-select form-control" id="selectPrefix" data-id="PrefixCode" data-name="PrefixDescription" name="PrefixId"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentPrefix"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.PrefixId)
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label class="field-required" >@Resources.Language.LastPolicy</label>
+                    @Html.TextBoxFor(model => model.LastPolicy, new { id = "inputLastPolicy" , maxlength = "12" })
+                    @Html.ValidationMessageFor(model => model.LastPolicy)
+                </div>
+                <div class="uif-col-2">
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.DateLastPolicy</label>
+                    @Html.TextBoxFor(model => model.DueDateTo, new { @id = "inputDueDateFrom", @class = "uif-datepicker" })
+                    @Html.ValidationMessageFor(model => model.DueDateTo)
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+

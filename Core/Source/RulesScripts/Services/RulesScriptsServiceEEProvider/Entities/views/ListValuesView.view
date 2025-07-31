@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ListValuesView">
+	<collections>
+		<collection name="ListConcepts" type="Sistran.Core.Application.RulesScriptsServices.EEProvider.Entities.ListConcept, 
+                Core.RulesScriptsServices.EEProvider"></collection>
+		<collection name="ListEntities" type="Sistran.Core.Application.RulesScriptsServices.EEProvider.Entities.ListEntity, 
+                Core.RulesScriptsServices.EEProvider"></collection>
+		<collection name="ListEntityValues" type=" Sistran.Core.Application.Script.Entities.ListEntityValue, 
+                Core.Script.Entities"></collection>
+	</collections>
+	<relations>
+		<relation source="ListConcepts" destination="ListEntities" name="ListConceptListEntity" type="Inner">
+			<property left="ListEntityCode" type="Equal" right="ListEntityCode"></property>
+		</relation>
+		<relation source="ListEntities" destination="ListEntityValues" name="ListEntityListEntityValue" type="Inner">
+			<property left="ListEntityCode" type="Equal" right="ListEntityCode"></property>
+		</relation>
+	</relations>
+</view>

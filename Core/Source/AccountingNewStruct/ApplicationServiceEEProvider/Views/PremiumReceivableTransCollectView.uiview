@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PremiumReceivableTransCollectView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+        <SelectValue alias="PrefixDescription">
+          <Column table-alias="Prefix" name="Description" />
+        </SelectValue>
+        <SelectValue alias="PolicyId">
+          <Column table-alias="Endorsement" name="PolicyId" />
+        </SelectValue>
+        <SelectValue alias="Endorsement">
+          <Column table-alias="ApplicationPremium" name="EndorsementCode" />
+        </SelectValue>
+        <SelectValue alias="QuoteNum">
+          <Column table-alias="ApplicationPremium" name="PaymentNum" />
+        </SelectValue>
+        <SelectValue alias="PayerCode">
+          <Column table-alias="ApplicationPremium" name="PayerCode" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="ApplicationPremium" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="CollectId">
+          <Column table-alias="Collect" name="CollectId" />
+        </SelectValue>
+        <SelectValue alias="Status">
+          <Column table-alias="Collect" name="Status" />
+        </SelectValue>
+        <SelectValue alias="AppPremiumCode">
+          <Column table-alias="ApplicationPremium" name="AppPremiumCode" />
+        </SelectValue>
+        <SelectValue alias="TechnicalTransaction">
+          <Column table-alias="Collect" name="TechnicalTransaction" />
+        </SelectValue>
+        <SelectValue alias="PremiumQuotaStatusCode">
+          <Column table-alias="ApplicationPremium" name="PremiumQuotaStatusCode" />
+        </SelectValue>        
+      </values>
+      <table>
+        <Join>
+            <Join>
+              <Join>
+                <Join>
+                  <Join>
+                  <Join>
+                    <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.ApplicationPremium,  Core.Accounting.Entities" alias="ApplicationPremium" />
+                    <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Application,  Core.Accounting.Entities" alias="Application" />
+                    <criteria>
+                      <BinaryCriterion type="Equal">
+                        <Column table-alias="Application" name="ApplicationCode" />
+                        <Column table-alias="ApplicationPremium" name="AppCode" />
+                      </BinaryCriterion>
+                    </criteria>
+                  </Join>
+                  <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Collect,  Core.Accounting.Entities" alias="Collect" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="Collect" name="CollectId" />
+                      <Column table-alias="Application" name="SourceCode" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Issuance.Entities.Endorsement, Core.Issuance.Entities" alias="Endorsement" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Endorsement" name="EndorsementId" />
+                    <Column table-alias="ApplicationPremium" name="EndorsementCode" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+                <ClassNameTable name="Sistran.Core.Application.Issuance.Entities.Policy, Core.Issuance.Entities" alias="Policy" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Policy" name="PolicyId" />
+                    <Column table-alias="Endorsement" name="PolicyId" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Common.Entities.Prefix, Core.Common.Entities" alias="Prefix" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="Prefix" name="PrefixCode" />
+                  <Column table-alias="Policy" name="PrefixCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Branch" name="BranchCode" />
+                <Column table-alias="Policy" name="BranchCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

@@ -1,0 +1,175 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.TributaryTypeView
+@{
+    Layout = null;
+}
+<script id="insuredItemTemplate" type="text/template">
+    <div>
+        Nro Documento:
+        <strong>{{DocumentNum}}</strong>
+    </div>
+    <div>
+        Cupo Operativo: <strong>{{OperationQuoteAmount}}</strong>
+    </div>
+    <div>
+        Fecha Vigencia: <strong>{{CurrentTo}}</strong>
+    </div>
+</script>
+<script id="title-template" type="text/template">
+    <div class="column-70" id="titleMain">
+        @Resources.Language.EconomicGroups
+    </div>
+    <div class="column-30 even" id="nameGroup">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "searchNameGroup", @placeholder = @Resources.Language.EconomicGroup })
+        <button class="btn btn-default" id="btnSearchGroup"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <label class="field-required">@Resources.Language.LabelGroupPoliciesDescription</label>
+        <input type="text" id="inputNameGroup" maxlength="100" />
+    </div>
+    <div class="uif-col-4">
+        <label class="field-required">@Resources.Language.LabelTypeDocument</label>
+        <select class="uif-select form-control" id="selectType" data-id="Id" data-name="Description"></select>
+    </div>
+    <div class="uif-col-4">
+        <label>@Resources.Language.LabelIdEconomicGroup</label>
+        <input type="text" id="lblIdGroup" maxlength="14" disabled />
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <label class="field-required">@Resources.Language.OperatingQuota</label>
+        <input type="text" id="inputOperatingQuota" style="text-align:right;" disabled maxlength="16" />
+    </div>
+    <div class="uif-col-4">
+        <label class="field-required">@Resources.Language.LabelDateQuoteValidity</label>
+        <input type="text" id="inputDateValidity" class="uif-datepicker" data-type="date" data-mask="99/99/9999" autocomplete="off" />
+    </div>
+    <div class="uif-col-4">
+        <label>@Resources.Language.Prefix</label>
+        <select class="uif-select form-control" id="selectPrefix" data-val="true"
+                data-id="Id" data-name="Description" name="PrefixId" data-native="false"></select>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <div class="without-label">
+            <input type="checkbox" name="rd" id="rdEnabledGroup" checked="checked">
+            <label for="rdEnabledGroup">@Resources.Language.Enabled</label>
+        </div>
+    </div>
+</div>
+
+<form id="formAddPersons">
+    <div class="uif-modal" id="ModalAddPersons">
+        <div class="uif-modalbody">
+            <div class="uif-alert" id="messageNoQuotaError"></div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="uif-col-12">
+                        <label class="field-required">@Resources.Language.InsuredName</label>
+                        <input type="text" id="SearchindividualId" , class="uif-input-search" placeholder="@Resources.Language.PlaceHolderDocumentName" />
+                        <label class="radio-inline">
+
+                        </label>
+                    </div>
+                    @*<div class="uif-col-6  fit-col-secondary" id="panelInsured">
+                            <div id="listViewInsuredGroup" class="uif-listview"></div>
+                        </div>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12" id="btnsTechnicalBranch">
+                    <div class="pull-right">
+                        <div class="uif-col-6">
+                            <label class="">@Resources.Language.DocumentType</label>
+                            <input type="text" id="inputDocumentType" disabled />
+                        </div>
+                        <div class="uif-col-6">
+                            <label class="">@Resources.Language.LabelNumberDocument</label>
+                            <input type="text" id="inputNroDocumento" disabled />
+                        </div>
+                        <div class="uif-col-12">
+                            <label>@Resources.Language.labelNameOrSocialReason</label>
+                            <input type="text" id="inputBusinessName" disabled />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="btnCancelModalRiskType" data-dismiss="modal">@Resources.Language.Close</button>
+            <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.SaveTechnicalBranch </button>
+        </div>
+    </div>
+
+</form>
+<div class="uif-row">
+    <div class="uif-col-3">
+    </div>
+    <div class="uif-col-3">
+
+    </div>
+    <div class="uif-col-12">
+        <div class="pull-right">
+            <br />
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0753"))
+            {
+                <button type="button" class="btn btn-primary" id="btnAddPerson">
+                    <span class="glyphicon glyphicon glyphicon-plus"></span>
+                </button>
+            }
+        </div>
+        <div class="active">
+            <table class="uif-table" data-title="Participantes" data-selectiontype="multiple" id="tableGroupEconomicResults" data-filter="false" data-paginate="true">
+                <thead>
+                    <tr>
+                        <th data-property="IndividualId" data-visible="false">@Resources.Language.LabelId</th>
+                        <th data-property="Description">@Resources.Language.ShortLabelName</th>
+                        <th data-property="DocumentType">@Resources.Language.ShortLabelTypeDocument</th>
+                        <th data-property="DocumentNum">@Resources.Language.ShortLabelDocumentNumber</th>
+                        <th data-property="CustomerTypeDescription">@Resources.Language.TypeOfPerson</th>
+                        <th data-property="OperationQuoteAmount" data-type="currency">@Resources.Language.ShortLabelOperatingQuota</th>
+                        <th data-property="CurrentTo">@Resources.Language.ShortValidSince</th>
+                        <th data-property="LineBusinessDescription">@Resources.Language.Prefix</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalInsuredSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/EconomicGroup/IndividualResults.cshtml")
+    </div>
+</div>
+
+<script id="footer-template" type="text/template">
+    <div id="btnBottomMain">
+        <button type="button" class="btn btn-default" id="btnCancelGroup">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0755"))
+        {
+            <button type="button" class="btn btn-default" id="btnNewGroup">
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                @Resources.Language.ButtonNewGroup
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0754"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSaveGroupEconomic">
+                <i class="fa fa-save" aria-hidden="true"></i>
+                @Resources.Language.LabelRecord
+            </button>
+        }
+    </div>
+</script>

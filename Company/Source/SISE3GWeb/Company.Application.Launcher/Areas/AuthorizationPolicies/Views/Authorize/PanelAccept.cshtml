@@ -1,0 +1,37 @@
+﻿<form id="formAccept" class="form">
+    <div id="AcceptOption" class="row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.LabelAuthorizationToBeApproved</label>
+            <select class="uif-select form-control" id="selectPoliciesToAcceptOption" data-id="Value" data-name="Text" name="PolicyOptionId" disabled="disabled" required></select>
+        </div>
+    </div>
+    <div id="divIndividualAccept" hidden>
+        <div class="row">
+            <div class="uif-col-12">
+                <textarea cols="20" id="inputPoliciesToAccept" name="PoliciesToAccept" rows="2" required></textarea>
+                <span class="field-validation-valid" data-valmsg-for="PoliciesToAccept" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+    <div id="divRangeAccept" hidden>
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelFromPrinter</label>
+                @Html.TextBox("RangeFrom", null, new { id = "inputPoliciesToAcceptRangeFrom", type = "number" })
+            </div>
+            <div class="uif-col-2">
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelToPrinter</label>
+                @Html.TextBox("RangeTo", null, new { id = "inputPoliciesToAcceptRangeTo", type = "number" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.LabelReason</label>
+            <textarea rows="4" id="txtReasonAccept" required="required" placeholder="@Resources.Language.PlaceHolderInputText"></textarea>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="button" id="btnSendAccept">@Resources.Language.ButtonSend</button>
+</form>

@@ -1,0 +1,420 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Application.ReinsuranceServices.DTOs.ContractDTO
+@{
+    int currencyId = 0;
+    int contractTypeId = 0;
+    int groupContract = 0;
+    int contractYear = 0;
+
+    int? epiType = null;
+    int? affectationType = null;
+    int? resettlementType = null;
+    string status = "";
+    string cssStatus = "";
+
+    string row_Type1 = "";
+    string row_TypePrimary1 = "";
+    string row_TypePrimary2 = "";
+    string col_MonthReserve = "";
+    string col_Risk = "";
+    string col_Coinsurance = "";
+
+
+    if (Model.Currency != null)
+    {
+        if (Model.Currency.Id > -1)
+        {
+            currencyId = Model.Currency.Id;
+        }
+    }
+
+    if (Model.ContractType.ContractTypeId > 0)
+    {
+        contractTypeId = Model.ContractType.ContractTypeId;
+    }
+
+    if (Model.GroupContract != null)
+    {
+        groupContract = Convert.ToInt32(Model.GroupContract);
+    }
+
+    if (Model.EPIType != null)
+    {
+        epiType = Model.EPIType.Id;
+    }
+
+    if (Model.AffectationType != null)
+    {
+        affectationType = Model.AffectationType.Id;
+    }
+
+    if (Model.ResettlementType != null)
+    {
+        resettlementType = Model.ResettlementType.Id;
+    }
+
+    if (Model.ContractId == 0)
+    {
+        status = "disabled";
+    }
+
+    if (Model.Enabled)
+    {
+        cssStatus = "glyphicon glyphicon-check";
+    }
+    else
+    {
+        cssStatus = "glyphicon glyphicon-unchecked";
+    }
+
+    if (Model.ContractType.ContractFunctionality.ContractFunctionalityId == 2)
+    {
+        row_Type1 = "show";
+        col_Risk = "hidden"; //  cantidad de riesgo
+        col_Coinsurance = "show"; //% capacidad coaseguro
+        row_TypePrimary1 = "hidden";
+        row_TypePrimary2 = "hidden";
+        col_MonthReserve = "show";
+    }
+    else if (Model.ContractType.ContractFunctionality.ContractFunctionalityId == 3 || Model.ContractType.ContractFunctionality.ContractFunctionalityId == 4)
+    {
+        // NO PROPORCIONAL O CATASTROFICO
+        row_Type1 = "show";
+        col_Risk = "show";
+        col_Coinsurance = "hidden";
+        row_TypePrimary1 = "show";
+        row_TypePrimary2 = "show";
+        col_MonthReserve = "hidden";
+    }
+    else
+    {
+        row_Type1 = "hidden";
+        col_Risk = "hidden";
+        col_Coinsurance = "hidden";
+        row_TypePrimary1 = "hidden";
+        row_TypePrimary2 = "hidden";
+        col_MonthReserve = "show";
+    }
+
+    if (Model.Year > 0)
+    {
+        contractYear = Convert.ToInt32(Model.Year);
+    }
+}
+
+<form id="formContract" onsubmit="return false" class="form">
+
+    <div class="uif-modalbody" disabled>
+
+        <div class="uif-row">
+
+            <div class="uif-col-2">
+                @Html.HiddenFor(model => model.ContractId)
+
+                <b class="field-required">@Global.ContractYear</b>
+                @Html.TextBoxFor(model => model.Year, new { @readonly = true })
+                <input type="hidden" id="ContractYear" name="ContractYear" value="@contractYear" />
+            </div>
+
+            <div class="uif-col-4">
+
+                <b class="field-required">@Global.ContractType</b>
+                <div id="divContractType" hidden="true">
+                    <select class="uif-select form-control" id="ContractType.ContractTypeId" name="ContractType.ContractTypeId"
+                            data-source='@Url.Content("~/Parameter/GetContractTypeEnabled")'
+                            data-id="ContractTypeId"
+                            data-name="Description"
+                            data-native="true"
+                            data-val="true"
+                            data-val-required='@Global.RequiredField'
+                            data-selectedid="@contractTypeId"></select>
+                </div>
+
+                @*Combo solo para mostrar deshabilitado*@
+                <select class="uif-select form-control" id="cmbContractType" name="ContractType.ContractTypeId"
+                        data-source='@Url.Content("~/Parameter/GetContractTypeEnabled")'
+                        data-id="ContractTypeId"
+                        data-name="Description"
+                        data-native="true"
+                        data-val="true"
+                        data-val-required='@Global.RequiredField'
+                        data-selectedid="@contractTypeId"></select>
+            </div>
+
+            <div class="uif-col-6">
+                <b class="field-required">@Global.SmallDescription</b>
+                <br />
+                @Html.TextBoxFor(model => model.SmallDescription, new
+                {
+                    @onchange = "convertToUpperCase(this);",
+                    data_val_required = @Global.RequiredField,
+                    data_val = "true",
+                    maxlength = "10"
+                })
+                @Html.ValidationMessage("SmallDescription")
+
+                <input type="hidden" id="CurrentDate" name="CurrentDate" value="@DateTime.Now.ToString("dd/MM/yyyy");" />
+            </div>
+
+        </div>
+
+        <div class="uif-row">
+
+            <div class="uif-col-9">
+                <b class="field-required">@Global.Description</b>
+                <br />
+                @Html.TextBoxFor(model => model.Description,
+                new
+                {
+                    @onchange = "convertToUpperCase(this);",
+                    data_val_required = @Global.RequiredField,
+                    data_val = "true"
+                })
+                @Html.ValidationMessage("Description")
+            </div>
+
+            <div class="uif-col-3">
+                <b class="field-required">@Global.Currency</b>
+                @Html.DropDownList("CurrencyId", Enumerable.Empty<SelectListItem>(),
+                new
+                {
+                    @class = "uif-select",
+                    data_source = @Url.Content("~/Parameter/GetCurrency"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_val_required = @Global.RequiredField,
+                    data_selectedid = currencyId,
+                })
+                @Html.ValidationMessage("CurrencyId", "")
+            </div>
+
+        </div>
+
+        <div class="uif-row">
+
+            <div class="uif-col-3">
+                <b class="field-required">@Global.DateFrom</b>
+                @Html.TextBoxFor(model => model.DateFrom, new
+                {
+                    @class = "uif-datepicker",
+                    @data_mask = "99/99/9999",
+                    maxlength = "10",
+                    data_val_required = @Global.RequiredField,
+                    data_val_date = @Global.WrongDateFormat,
+                    data_rule_lessThanDateTo = "#DateTo",
+                    data_msg_lessThanDateTo = @Global.ValidateDateFrom
+                })
+                @Html.ValidationMessage("DateFrom")
+            </div>
+
+            <div class="uif-col-3">
+                <b class="field-required">@Global.DateTo</b>
+                @Html.TextBoxFor(model => model.DateTo,
+                new
+                {
+                    @class = "uif-datepicker",
+                    @data_mask = "99/99/9999",
+                    maxlength = "10",
+                    data_val_required = @Global.RequiredField,
+                    data_val_date = @Global.WrongDateFormat,
+                    data_rule_greaterThanDateTo = "#DateFrom",
+                    data_msg_greaterThanDateTo = @Global.ValidateDateTo
+                })
+                @Html.ValidationMessage("DateTo")
+            </div>
+
+            <div class="uif-col-3">
+                <b>@Global.ContractGrouper</b>
+                <br />
+                <div id="divContractGroup">
+                    <select class="uif-select form-control"
+                            id="grouper" name="grouper"
+                            data-source='@Url.Content("~/Parameter/GetEnabledContracts")'
+                            data-id="ContractId"
+                            data-name="SmallDescription"
+                            data-selectedid="@groupContract"></select>
+                </div>
+            </div>
+
+            <div class="uif-col-3">
+                <br />
+                <span class="@cssStatus" id="checkstatus"></span><input type="checkbox" id="status" @status><b> @Global.Active</b>
+            </div>
+
+        </div>
+
+        <div class="uif-row" id="rowContractType1" @row_Type1>
+
+            <div class="uif-col-3" id="colCoinsurance" @col_Coinsurance>
+                <b>@Global.AcceptedCoinsuranceCapacity </b>
+                <br />
+                @Html.TextBoxFor(model => model.CoInsurancePercentage,
+                new
+                {
+                    id = "CoInsurancePercentage",
+                    maxlength = "5",
+                    @class = "rightAlign  input-money"
+
+                })
+            </div>
+
+            <div class="uif-col-3" id="colMonthReserve" @col_MonthReserve>
+                <b class="field-required">@Global.ReleaseTimeReserve</b>
+                @Html.TextBoxFor(model => model.ReleaseTimeReserve, new
+                {
+                    maxlength = "2",
+                    @onkeypress = "return JustNumbers(event)",
+                    data_val_required = @Global.RequiredField
+                })
+                @Html.ValidationMessage("ReleaseTimeReserve")
+            </div>
+
+        </div>
+
+        <div class="uif-row" id="rowContractTypePrimary2" @row_TypePrimary2>
+
+            <div class="uif-col-3" id="colRisk" @col_Risk>
+                <b>@Global.QuantityRisk </b>
+                <br />
+                @Html.TextBoxFor(model => model.RisksNumber,
+                  new
+                  {
+                      id = "quantityRisk",
+                      onkeypress = "return JustNumbers(event, this);",
+                      maxlength = "4"
+                  })
+            </div>
+
+            <div id="Affectation">
+                <div class="uif-col-3">
+                    <b class="field-required">@Global.Affectation</b>
+                    <select class="uif-select form-control required"
+                            id="affectationTypes" name="affectationTypes"
+                            data-source='@Url.Content("~/Parameter/GetAffectationTypes")'
+                            data-id="Id"
+                            data-name="Description"
+                            data-selectedid="@affectationType"
+                            data-val-required='@Global.RequiredField'
+                            data-val="true"></select>
+                    <span class="text-danger" data-valmsg-for="affectationTypes" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div id="Type">
+                <div class="uif-col-3">
+                    <b class="field-required">@Global.ReestablishmentType</b>
+                    <select class="uif-select form-control required"
+                            id="reestablishmentTypes" name="reestablishmentTypes"
+                            data-source='@Url.Content("~/Parameter/GetResettlementTypes")'
+                            data-id="Id"
+                            data-name="Description"
+                            data-selectedid="@resettlementType"
+                            data-val-required='@Global.RequiredField'
+                            data-val="true"></select>
+                    <span class="text-danger" data-valmsg-for="reestablishmentTypes" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-col-3">
+                <b class="field-required">@Global.EstimatedDate</b>
+                @Html.TextBoxFor(model => model.EstimatedDate,
+                 new
+                 {
+                     @class = "uif-datepicker",
+                     @data_mask = "99/99/9999",
+                     maxlength = "10",
+                     data_val_required = @Global.RequiredField,
+                     data_val = "true",
+                 })
+            </div>
+
+        </div>
+
+        <div class="uif-row" id="rowContractTypePrimary1" @row_TypePrimary1>
+
+            <div class="uif-col-3">
+                <b class="field-required">@Global.PremiumEstimated</b>
+                <select class="form-control required"
+                        id="epiTypes" name="epiTypes"
+                        data-source='@Url.Content("~/Parameter/GetEpiTypes")'
+                        data-id="Id"
+                        data-name="Description"
+                        data-selectedid="@epiType"
+                        data-val-required='@Global.RequiredField'
+                        data-val="true"></select>
+                <span class="text-danger" data-valmsg-for="epiTypes" data-valmsg-replace="true" />
+            </div>
+
+            <div class="uif-col-3">
+                <b class="field-required" id="premiumAmountLabel">@Global.EstimatedPremiumAmount</b>
+                @Html.TextBoxFor(model => model.PremiumAmount,
+                  new
+                  {
+                      id = "premiumAmount",
+                      onkeypress = "return OnlyDecimalNumber(event, this); ",
+                      maxlength = "15",
+                      style = "text-align: right",
+                      data_val_required = Global.RequiredField,
+                      data_val = "true",
+                      data_val_range_min = "0",
+                      data_val_range = Global.EstimatedPremiumAmountMinValue,
+                  })
+                @Html.ValidationMessage("PremiumAmount")
+            </div>
+
+            <div class="uif-col-3">
+                <b class="field-required" id="DepositPercentageAmountLabel">@Global.Percentage</b>
+                <br />
+                @Html.TextBoxFor(model => model.DepositPercentageAmount,
+                new
+                {
+                    id = "depositPercentageAmount",
+                    maxlength = "5",
+                    style = "text-align: right",
+                    onkeypress = " return OnlyDecimalNumber(event, this);",
+                    data_val_required =  Global.RequiredField,
+                    data_val_range_min = "0",
+                    data_val_range_max = "100",
+                    data_val_range = Global.ErrorPercentageHigher,
+                    data_val ="true"
+
+                })
+                @Html.ValidationMessage("DepositPercentageAmount")
+            </div>
+
+            <div class="uif-col-3">
+                <b class="field-required" id="premiumDepositLabel">@Global.PremiumDepositLabel</b>
+                @Html.TextBoxFor(model => model.DepositPremiumAmount,
+                 new
+                 {
+                     id = "depositPremiumAmount",
+                     onkeypress = " return OnlyDecimalNumber(event, this);",
+                     maxlength = "15",
+                     data_val_required = @Global.RequiredField,
+                     data_val ="true",
+                     style = "text-align: right",
+                     data_val_range_min = "0",
+                     data_val_range = Global.DepositPremiumAmountMinValue
+                 })
+                @Html.ValidationMessage("DepositPremiumAmount")
+            </div>
+
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alert"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0370") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0374"))
+        {
+            <button type="submit" class="btn btn-primary" id="btnSaveContract">@Global.Save</button>
+        }
+    </div>
+
+</form>

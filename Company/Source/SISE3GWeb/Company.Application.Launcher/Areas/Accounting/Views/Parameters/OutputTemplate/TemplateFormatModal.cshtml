@@ -1,0 +1,85 @@
+﻿
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.Format
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-8">
+            <label>@Global.Description</label>
+            @Html.TextBox("Description", "", new { id = "Description", data_val = "true", @onblur = " this.value=this.value.toUpperCase();", data_val_required = @Global.RequiredField, style = "text-align: left" })
+            <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.FileType</label>
+            @Html.DropDownList("selectFileType", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_id = "Id",
+                        data_source = @Url.Content("~/Accounting/Parameters/GetFileTypeList"),
+                        data_name = "Description",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField,
+                        data_native = "true"
+                    })
+            <span class="text-danger" data-valmsg-for="selectFileType" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row" id="divBankAccount">
+        <div class="uif-col-12">
+            <label>@Global.Bank</label>
+            <select class="uif-select form-control required" id="selectBank" name="selectBank" data-native="true"
+                    data-source='@Url.Content("~/Accounting/Common/GetBanks")' data-id="Id"
+                    data-name="Description" data-val="true" data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="selectBank" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+    <div class="uif-row" id="divAutomaticDebit">
+        <div class="uif-col-12">
+            <label>@Global.Net</label>
+            @Html.DropDownList("selectBankNetwork", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Accounting/Common/GetNets"),
+           data_id = "Id",
+           data_name = "Description",
+           data_val = "true",
+           data_val_required = @Global.RequiredField,
+           data_native = "true"
+       })
+            <span class="text-danger" data-valmsg-for="selectBankNetwork" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4" id="divFechaDesde">
+            <label>@Global.CurrentFrom</label>
+            <input class="uif-datepicker" type="text" 
+                   id="CurrentFrom" 
+                   name="CurrentFrom" 
+                   data-mask="99/99/9999" 
+                   data-min-date="@ViewBag.DateNow"
+                   required="" />
+            <span class="text-danger" data-valmsg-for="CurrentFrom" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-4" id="divFechaHasta">
+            <label>@Global.CurrentTo</label>
+            <input class="uif-datepicker" type="text" id="CurrentTo" 
+                   name="CurrentTo" 
+                   data-mask="99/99/9999" 
+                   data-min-date="@ViewBag.DateNow"
+                   required="" />
+            <span class="text-danger" data-valmsg-for="CurrentTo" data-valmsg-replace="true">
+            </span>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+</div>

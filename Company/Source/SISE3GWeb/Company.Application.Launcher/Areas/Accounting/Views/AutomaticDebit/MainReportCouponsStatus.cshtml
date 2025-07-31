@@ -1,0 +1,55 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.CouponsStatus;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AutomaticDebit</li>
+        <li>@Global.CouponsStatus</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="couponStatusCancel" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="couponStatusGenerate" class="btn btn-primary" role="button">
+            <i class="fa fa-list"></i>  @Global.Generate
+        </button>
+    </footer>
+}
+
+<form id="formCouponStatus" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.DateProcessFrom</label>
+            <input type="text" value="@ViewBag.CurrentDate" class="uif-datepicker" data-mask="99/99/9999" id="couponStatusDateProcessFrom"
+                   name="couponStatusDateProcessFrom" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="couponStatusDateProcessFrom" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.DateProcessTo</label>
+            <input type="text" value="@ViewBag.CurrentDate" class="uif-datepicker" data-mask="99/99/9999" id="couponStatusDateProcessTo"
+                   name="couponStatusDateProcessTo" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="couponStatusDateProcessTo" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+</form>
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainReportCouponsStatus")
+}

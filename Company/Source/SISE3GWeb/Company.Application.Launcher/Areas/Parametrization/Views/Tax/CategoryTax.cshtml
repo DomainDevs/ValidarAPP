@@ -1,0 +1,97 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.CategoryTaxViewModel
+<script id="CategoryTaxTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+    <div>
+        @Resources.Language.Category: <strong class="success">
+            {{DescriptionCategory}}
+            {{#ifCond IdCategory "!=" ""}}
+            ({{IdCategory}})
+            {{/ifCond}}
+        </strong>
+    </div>
+    {{else ifCond Status "==" 3}}
+    <div>
+        @Resources.Language.Category: <strong class="warning">
+            {{DescriptionCategory}}
+            {{#ifCond IdCategory "!=" ""}}
+            ({{IdCategory}})
+            {{/ifCond}}
+        </strong>
+    </div>
+    {{else ifCond Status "==" 4}}
+    <div>
+        @Resources.Language.Category: <strong class="danger">
+            {{DescriptionCategory}}
+            {{#ifCond IdCategory "!=" ""}}
+            ({{IdCategory}})
+            {{/ifCond}}
+        </strong>
+    </div>
+    {{else }}
+    <div>
+        @Resources.Language.Category: <strong>
+            {{DescriptionCategory}}
+            {{#ifCond IdCategory "!=" ""}}
+            ({{IdCategory}})
+            {{/ifCond}}
+        </strong>
+    </div>
+    {{/ifCond}}
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column column-30">
+        @Resources.Language.Categorys
+    </div>
+    <div class="column column-70">
+        <div>
+            <label id="titleTaxSelected"></label>
+        </div>
+    </div>
+</script>
+
+
+<div class="row">
+    <div class="uif-col-6">
+        <form id="formCategoryTax" class="form">
+            <div class="row">
+                <div class="uif-col-3">
+                    @Html.LabelFor(model => model.IdCategory, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.IdCategory, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdCategory)
+                </div>
+                <div class="uif-col-9">
+                    @Html.LabelFor(model => model.DescriptionCategory, htmlAttributes: new { @class = "control-label field-required" })
+                    @Html.TextBoxFor(model => model.DescriptionCategory, htmlAttributes: new { @class = "form-control " })
+                    @Html.ValidationMessageFor(model => model.DescriptionCategory)
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="uif-col-6 fit-col-secondary">
+        <div id="lvCategoryTax" class="uif-listview"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="uif-col-6">
+        <div class="pull-right">
+            <button type="button" class="btn btn-default" id="CancelCategory">@Resources.Language.ButtonCancel</button>
+            <button type="button" class="btn btn-primary" id="AddCategory">@Resources.Language.ButtonAdd</button>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="ExitCategory">
+            <i class="fa fa-times"></i> @Resources.Language.ButtonClose
+        </button>
+        <button type="button" class="btn btn-primary" id="SaveCategory">
+            <i class="fa fa-floppy-o"></i> @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>

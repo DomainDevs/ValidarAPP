@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{807C642C-3288-4D7A-9A5B-B3B854C206CC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.ProductParamService</RootNamespace>
+    <AssemblyName>Core.ProductParamService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core.CommonServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions">
+      <HintPath>..\..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ProductServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\Product\ProductServices\Core.ProductServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Utilities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IProductParamServiceWeb.cs" />
+    <Compile Include="Models\Base\BaseParamCopyProduct.cs" />
+    <Compile Include="Models\Base\BaseParamPrefixLineBusiness.cs" />
+    <Compile Include="Models\Base\BaseParamTechnicalPlan.cs" />
+    <Compile Include="Models\Base\BaseParamForm.cs" />
+    <Compile Include="Models\Base\BaseParamLimitsRC.cs" />
+    <Compile Include="Models\Base\BaseParamDeductibleProduct.cs" />
+    <Compile Include="Models\Base\BaseParamCommercialClass.cs" />
+    <Compile Include="Models\Base\BaseParamDeductibleCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamPaymentSchedule.cs" />
+    <Compile Include="Models\Base\BaseParamPaymentMethod.cs" />
+    <Compile Include="Models\Base\BaseParamFinancialPlan.cs" />
+    <Compile Include="Models\Base\BaseParamInsuredObject.cs" />
+    <Compile Include="Models\Base\BaseParamPrefix.cs" />
+    <Compile Include="Models\Base\BaseParamPolicyType.cs" />
+    <Compile Include="Models\Base\BaseParamCurrency.cs" />
+    <Compile Include="Models\Base\BaseParamCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamGroupCoverage.cs" />
+    <Compile Include="Models\Base\BaseParamAgencyCommiss.cs" />
+    <Compile Include="Models\Base\BaseParamAgent.cs" />
+    <Compile Include="Models\Base\BaseParamProduct.cs" />
+    <Compile Include="Models\Base\BaseParamRiskType.cs" />
+    <Compile Include="Models\ParamInsuredObject.cs" />
+    <Compile Include="Models\ParamCoverages.cs" />
+    <Compile Include="Models\ParamPrefix.cs" />
+    <Compile Include="Models\ParamGroupCoverage.cs" />
+    <Compile Include="Models\ParamCurrency.cs" />
+    <Compile Include="Models\ParamCoverage.cs" />
+    <Compile Include="Models\ParamPolicyType.cs" />
+    <Compile Include="Models\ParamRiskType.cs" />
+    <Compile Include="Models\ParamProduct.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Errors.Designer.cs">
+      <DependentUpon>Errors.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Errors.es.Designer.cs">
+      <DependentUpon>Errors.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Errors.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Errors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\ProductParam\ProductParamService\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

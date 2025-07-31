@@ -1,0 +1,122 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@*MAYORIZACION*@
+@{
+    ViewBag.Title = Global.Majorization;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+<ol class="breadcrumb global-header-breadcrumb">
+    <li>@Global.CentralAccounting</li>
+    <li class="active">@Global.AccountingEntry</li>
+    <li class="active">@Global.Majorization</li>
+</ol>
+}
+
+@section modals
+{
+    <div class="uif-modal" id="closureModal">
+        <div class="uif-modalbody">
+            <div class="form">
+                <label>@Global.MonthWillClose</label>
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="button" class="btn btn-primary" id="closureModalAccept">@Global.Accept</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="uif-alert" id="alert"></div>
+<form id="postingForm" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            @Html.Label(Global.Module, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownList("module", Enumerable.Empty<SelectListItem>(),
+                new
+                {
+                    @class = "uif-select form-control",
+                    data_source = @Url.Content("~/GeneralLedger/Base/GetModuleDates"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    id = "module",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField,
+                    data_native = "true"
+                })
+            <span class="text-danger" data-valmsg-for="module" data-valmsg-replace="true"></span>
+        </div>
+        <div class="col-md-3">
+            @Html.Label(Global.Day, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownList("processDay", Enumerable.Empty<SelectListItem>(),
+                    new
+                    {
+                        @class = "uif-select form-control",
+                        disabled = "disabled",
+                        data_id = "Id",
+                        data_name = "Description",
+                        id = "processDay"
+                    })
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Month</label>
+            <select class="uif-col-12 uif-select " id="processMonth" data-source="@Url.Content("~/GeneralLedger/Base/GetMonths")" data-id="Id" data-name="Description" name="processMonth" data-val-required='@Global.RequiredField' @*disabled="disabled"*@></select>
+            <span class="text-danger" data-valmsg-for="processMonth" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Year</label>
+            <input type="text" @*placeholder="@Global.Year"*@ id="processYear" name="processYear" data-val-required='@Global.RequiredField' disabled="disabled">
+        </div>
+    </div>
+    @*
+        <div class="uif-row">
+            <div class="uif-col-6">
+                @Html.Label(Global.Branch, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("SelectBranch", Enumerable.Empty<SelectListItem>(),
+                    new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/GeneralLedger/Base/GetBranches"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        id = "SelectBranch"
+                    })
+            </div>
+            <div class="uif-col-6">
+                @Html.Label(Global.Currency, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("SelectCurrency", Enumerable.Empty<SelectListItem>(),
+                    new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/GeneralLedger/Base/GetCurrencies"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        id = "SelectCurrency"
+                    })
+            </div>
+        </div>
+    *@
+    <div class="uif-row">
+        <div class="uif-col-3 ">
+            <a class="btn btn-primary" role="button" id="process" onclick="return false">@Global.Process</a>
+            <a class="btn btn-default" role="button" id="clear">@Global.Clean</a>
+        </div>
+    </div>
+</form>
+<div class="progress progress-striped active" id="progressBarPanel">
+    <div class="progress-bar" role="progressbar" id="progressBar"
+         aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+         style="width: 100%">
+        <span class="sr-only">45% completado</span>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/Posting")
+}
+
+
+

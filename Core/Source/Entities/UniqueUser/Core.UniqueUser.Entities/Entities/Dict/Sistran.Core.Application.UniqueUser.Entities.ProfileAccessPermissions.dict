@@ -1,0 +1,26 @@
+<map version="2.0" type="class" name="ProfileAccessPermissions" namespace="Sistran.Core.Application.UniqueUser.Entities" file-version="1.0" description="PROFILE_ACCESS_PERMISSIONS_ENTITY">
+  <properties>
+    <property name="Id" type="Integer" key="true" description="ID_PROPERTY"  autonumber="id" />
+    <property name="AccessPermissionsCode" type="Integer" description="ACCESS_PERMISSIONS_CODE_PROPERTY" />
+    <property name="ProfileCode" type="Integer" description="PROFILE_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PROFILE_ACCESS_PERMISSIONS" schema="UU" alias="PROFILE_ACCESS_PERMISSIONS" update="true">
+      <columns>
+        <column name="ID" type="Int32" property="Id" key="true" />
+        <column name="ACCESS_PERMISSIONS_CD" type="Int32" property="AccessPermissionsCode" allowNull="false" />
+        <column name="PROFILE_CD" type="Int16" property="ProfileCode" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="10030" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

@@ -1,0 +1,18 @@
+<map version="2.0" type="class" name="ExchangeRate" namespace="Sistran.Core.Application.GeneralLedgerServices.EEProvider" file-version="1.0" description="EXCHANGE_RATE_ENTITY">
+  <properties>
+    <property name="RateDate" type="DateTime" key="true" description="RATE_DATE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" key="true" description="CURRENCY_CODE_PROPERTY" />
+    <property name="SellAmount" type="Decimal" precision="10" scale="6" description="SELL_AMOUNT_PROPERTY" />
+    <property name="BuyAmount" type="Decimal" precision="10" scale="6" nullable="true" description="BUY_AMOUNT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="EXCHANGE_RATE" schema="COMM" alias="EXCHANGE_RATE" update="true">
+      <columns>
+        <column name="RATE_DATE" type="DateTime" property="RateDate" key="true" identity = "true"/>
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" key="true" identity = "true"/>
+        <column name="SELL_AMT" type="Decimal" property="SellAmount" allowNull="false" size="19" precision="10" scale="6" />
+        <column name="BUY_AMT" type="Decimal" property="BuyAmount" size="19" precision="10" scale="6" />
+      </columns>
+    </table>
+  </tables>
+</map>

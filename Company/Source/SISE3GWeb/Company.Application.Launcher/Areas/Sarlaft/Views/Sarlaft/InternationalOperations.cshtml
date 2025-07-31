@@ -1,0 +1,100 @@
+﻿@{
+    Layout = null;
+}
+
+
+<script id="ListInternationalOperationsTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+    <div>Tipo Operación : <strong class="success">{{OperationDescription}}</strong></div>
+    <div>Tipo Producto : <strong class="success">{{ProductDescription}}</strong></div>
+    <div>Nro. Producto : <strong class="success">{{ProductNum}}</strong></div>
+    <div>Entidad : <strong class="success">{{Entity}}</strong></div>
+    <div>Monto Producto : <strong class="success">{{ProductAmt}}</strong></div>
+    {{else ifCond Status "==" 3}}
+    <div>Tipo Operación : <strong class="warning">{{OperationDescription}}</strong></div>
+    <div>Tipo Producto : <strong class="warning">{{ProductDescription}}</strong></div>
+    <div>Nro. Producto : <strong class="warning">{{ProductNum}}</strong></div>
+    <div>Entidad : <strong class="warning">{{Entity}}</strong></div>
+    <div>Monto Producto : <strong class="warning">{{ProductAmt}}</strong></div>
+    {{else ifCond Status "==" 4}}
+    <div>Tipo Operación : <strong class="danger">{{OperationDescription}}</strong></div>
+    <div>Tipo Producto : <strong class="danger">{{ProductDescription}}</strong></div>
+    <div>Nro. Producto : <strong class="danger">{{ProductNum}}</strong></div>
+    <div>Entidad : <strong class="danger">{{Entity}}</strong></div>
+    <div>Monto Producto : <strong class="danger">{{ProductAmt}}</strong></div>
+    {{else ifCond Status "==" 1}}
+    <div>Tipo Operación : <strong>{{OperationDescription}} </strong></div>
+    <div>Tipo Producto : <strong>{{ProductDescription}}</strong></div>
+    <div>Nro. Producto : <strong>{{ProductNum}}</strong></div>
+    <div>Entidad : <strong>{{Entity}}</strong></div>
+    <div>Monto Producto : <strong>{{ProductAmt}}</strong></div>
+    {{/ifCond}}
+</script>
+
+
+<form class="form" id="formInternationalOperations">
+    <input type="hidden" name="StatusOperation" value="" id="StatusOperation" />
+    <input type="hidden" name="InternationalOperationId" value="" id="InternationalOperationId" />
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.OperationType</label>
+                    <select class="uif-select form-control" id="OperationType" data-val-required="true" required="required" data-native="false" data-id="Id" data-name="DescriptionShort"></select>
+                    @Html.ValidationMessage("OperationType", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Html.Raw(@Resources.Language.ProductType)</label>
+                    <select class="uif-select form-control" id="ProductType" data-id="Id" data-native="false" data-val="true" data-val-required="true" required="required" data-name="DescriptionLong"></select>
+                    @Html.ValidationMessage("ProductType", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.ProductNumber</label>
+                    <input type="text" value="" id="ProductNumber" name="ProductNumber" data-displaykey="Description" data-val="true" data-val-required="true" required="required" data-minlenght="3" data-maxlenght="100" class="rightAlign" />
+                    @Html.ValidationMessage("ProductNumber", Resources.Language.FieldRequired)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelEntity</label>
+                    <input type="text" value="" id="Entity" name="Entity" data-displaykey="Description" required="required" data-minlenght="3" data-maxlenght="100" />
+                    @Html.ValidationMessage("LabelEntity", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.ProductAmount</label>
+                    <input type="text" value="" id="ProductAmount" name="ProductAmount" data-displaykey="Description" required="required" data-minlenght="3" data-maxlenght="100" class="rightAlign" />
+                    @Html.ValidationMessage("ProductAmount", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Currency</label>
+                    <select class="uif-select form-control" id="Currency" data-id="Id" data-native="false" required="required" data-name="DescriptionLong"></select>
+                    @Html.ValidationMessage("Currency", Resources.Language.FieldRequired)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelCountryOrigin</label>
+                    <select class="uif-select form-control" id="CountryOrigin" data-id="Id" data-native="false" required="required" data-name="DescriptionLong" data-filter="true"></select>
+                    @Html.ValidationMessage("LabelCountryOrigin", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelState</label>
+                    <select class="uif-select form-control" id="State" data-id="Id" data-native="false" required="required" data-name="DescriptionLong" data-filter="true"></select>
+                    @Html.ValidationMessage("LabelState", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Town</label>
+                    <select class="uif-select form-control" id="Town" data-id="Id" data-native="false" required="required" data-name="Description" data-filter="true"></select>
+                    @Html.ValidationMessage("Town", Resources.Language.FieldRequired)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div class="uif-listview" id="listInternationalOperations"></div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnInternationalOperationsCancel" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnInternationalOperationsSave" onclick="return false">@Resources.Language.ButtonSave</button>
+    </div>
+</form>

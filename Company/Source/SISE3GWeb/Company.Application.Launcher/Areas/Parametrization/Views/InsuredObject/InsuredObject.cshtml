@@ -1,0 +1,103 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.InsurencesObjectsViewModel
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.TitleInsuranceObjects
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("InsuranceObject", null, new { @class = "uif-input-search", id = "inputInsuredObject", @placeholder = @Resources.Language.SearchInsuranceObject })
+
+    </div>
+</script>
+
+<script id="InsuredObjectTemplate" type="text/template">
+	{{#ifCond Status "==" 2}}
+	<div> <strong class="success">{{Description}}</strong></div>
+	{{else ifCond Status "==" 3}}
+	<div> <strong class="warning">{{Description}} ({{Id}})</strong></div>
+	{{else ifCond Status "==" 4}}
+	<div> <strong class="danger">{{Description}}</strong></div>
+	{{else}}
+	<div> <strong>{{Description}} ({{Id}})</strong></div>
+	{{/ifCond }}
+	<div>{{SmallDescription}}</div>
+	<div id="indexDeclarative"><strong>{{DeclarativeDescription}}</strong></></div>
+	<div class="hidden">
+		{{StatusType}}
+	</div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExit
+            </span>
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExport
+            </span>
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+        </button>
+    </div>
+</script>
+
+
+<form id="formInsuredObject" autocomplete="off" class="form form-space-adjusted">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" id="Id" />
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row row-space-adjusted">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.LabelLongDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputLongDescription", maxlength = "50", placeholder = @Resources.Language.LabelLongDescription })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelShortDescription</label>
+                    @Html.TextBoxFor(model => model.SmallDescription, new { id = "inputShortDescription", maxlength = "15", placeholder = @Resources.Language.LabelShortDescription })
+                    @Html.ValidationMessageFor(model => model.SmallDescription)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <input type="checkbox" id="chkIsDeclarative" name="IsDeclarative" />
+                    <label for="chkIsDeclarative">@Resources.Language.LabelIsDeclarative</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 col-space-adjusted">
+            <div id="listViewInsuredObject" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewObject">
+                    @Resources.Language.New
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAcceptObject">
+                    @Resources.Language.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

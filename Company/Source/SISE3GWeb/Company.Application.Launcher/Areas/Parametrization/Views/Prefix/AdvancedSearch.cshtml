@@ -1,0 +1,71 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.BusinessBranchViewModel
+@{
+    Layout = null;
+}
+
+<script id="searchTemplate" type="text/template">
+    <div>
+        Codigo Ramo: <strong>{{Id}}</strong>
+    </div>
+    <div>
+        Descripcion Larga: <strong>{{Description}}</strong>
+    </div>
+    <div>
+        Descripcion corta: <strong>{{SmallDescription}}</strong>
+    </div>
+    @*<div>
+        <br>
+        Tipo de ramo comercial: <strong>{{PrefixType.Description}}</strong>
+    </div>
+    <div>
+        <br>
+        Ramo técnico : <strong>{{LinesBusiness.Description}}</strong>
+    </div>*@
+</script>
+
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelNameofbranchCommercial</label>
+            @Html.TextBoxFor(model => model.Description, new { id = "inputCommercialBranchName", placeholder = @Resources.Language.LabelDescription })
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelCommercialBranchCode</label>
+            @Html.TextBoxFor(model => model.IdPrefix, new { id = "inputBranchCode", placeholder = @Resources.Language.LabelCommercialBranchCode })
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelTechnicalBranch</label>
+            <select class="uif-select form-control" id="ddlselectAdvanced" data-val="true" data-val-required="@Resources.Language.LabelTechnicalBranch"
+                    data-id="Id" data-name="Description" name="LineBusinessId" data-filter="true" data-native="false"></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <button class="btn btn-primary-Co width-container" id="btnAdvancedSearch" type="button"> @Resources.Language.search</button>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listviewSearch">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchScript" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoad" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>

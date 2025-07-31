@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="uif-alert" id="alertPolicy"></div>
+
+<h5>
+    <strong>@Resources.Language.PolicySearchCriteria</strong>
+</h5>
+<hr />
+<br />
+<form id="formSearchPolicies" class="form" autocomplete="off">
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.Branch</label>
+            <select class="uif-select form-control" id="selectBranchPolicy" data-val="true" data-id="Id" data-name="Description"
+                    name="BranchPolicy" data-native="false" data-filter="true"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.Prefix</label>
+            <select class="uif-select form-control" id="selectPrefixPolicy" data-val="true" data-id="Id" data-name="Description"
+                    name="PrefixPolicy" data-native="false" data-filter="true"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.Policy</label>
+            <input type="text" id="inputPolicy" name="Policy" class="rightAlign" data-val="true">
+            <span class="text-danger" data-valmsg-for="Policy" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.DateFrom</label>
+            <input type="text" class="uif-datepicker" id="inputDateFrom" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.DateTo</label>
+            <input type="text" class="uif-datepicker" id="inputDateTo" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.PolicyHolder</label>
+            <input type="text" id="inputHolderPolicy" class="uif-autocomplete" data-source="@Url.Content("~/Claims/ClaimSearch/GetHoldersByName")"
+                   data-displaykey="FullName" data-id="Id" name="dataFullNameId">
+        </div>
+    </div>
+    <div class="row" id="divPersonSearch">
+        <div class="uif-col-3">
+            <label>@Resources.Language.PersonType</label>
+            <select class="uif-select form-control" id="ddlSearchPersonType" data-val="true" data-id="Id" data-name="Description"
+                    name="selectSearchPersonType" data-native="false" data-filter="true"></select>
+        </div>
+        <div class="uif-col-9" style="display: block;">
+            <div id="divInsuredFullName">
+                <label>@Resources.Language.ClaimName</label>
+                <input type="text" id="insuredSearchName" name="insuredFullName" class="uif-autocomplete" data-val="true" maxlength="50"
+                       data-source="@Url.Content("~/ClaimSearch/GetInsuredsByName")" data-displaykey="FullName"
+                       data-id="IndividualId" placeholder="Digite Nro. Documento o Nombre"  />
+                <span class="text-danger" data-valmsg-for="insuredFullName" data-valmsg-replace="true"></span>
+            </div>
+            <div id="divParticipantSearchName" style="display: none;">
+                <label>@Resources.Language.ClaimName</label>
+                <input type="text" id="participantSearchName" name="participantSearchName" class="uif-autocomplete" data-val="true" maxlength="50"
+                       data-source="@Url.Content("~/ClaimSearch/GetParticipantsByName")" data-displaykey="Fullname"
+                       data-id="Id" placeholder="Digite Nro. Documento o Nombre" />
+                <span class="text-danger" data-valmsg-for="participantSearchName" data-valmsg-replace="true"></span>
+            </div>
+            <div id="divHolderSearchName" style="display: none;">
+                <label>@Resources.Language.ClaimName</label>
+                <input type="text" id="holderSearchName" name="holderSearchName" class="uif-autocomplete" data-val="true" maxlength="50"
+                       data-source="@Url.Content("~/ClaimSearch/GetHoldersByName")" data-displaykey="FullName"
+                       data-id="IndividualId" placeholder="Digite Nro. Documento o Nombre" />
+                <span class="text-danger" data-valmsg-for="holderSearchName" data-valmsg-replace="true"></span>
+            </div>
+            <div id="divSuretySearchName" style="display: none;">
+                <label>@Resources.Language.ClaimName</label>
+                <input type="text" id="suretySearchName" name="holderSearchName" class="uif-autocomplete" data-val="true" maxlength="50"
+                       data-source="@Url.Content("~/ClaimSearch/GetInsuredsByName")" data-displaykey="FullName"
+                       data-id="IndividualId" placeholder="Digite Nro. Documento o Nombre" />
+                <span class="text-danger" data-valmsg-for="holderSearchName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+</form>

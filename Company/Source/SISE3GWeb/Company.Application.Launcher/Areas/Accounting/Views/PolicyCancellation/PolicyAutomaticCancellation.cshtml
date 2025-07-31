@@ -1,0 +1,677 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.PolicyAutomaticCancellation;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.PolicyAutomaticCancellation</a></li>
+        <li class="active">@Global.PolicyAutomaticCancellation</li>
+    </ol>
+}
+
+
+@section Modals
+{
+    <!-- Modal confirmación de generación -->
+    <div class="modal fade" id="modalSave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="saveMessageTitle">@Global.GeneratingPolicyAutomaticCancellation</label></h4>
+                </div>
+                <div class="modal-body" id="saveMessageModal">
+                    <p>@Global.MessageGeneratingPolicyAutomaticCancellation</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="GenerateModalCancellation">
+                        <i class="fa fa-check"></i> @Global.Accept
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal confirmación de eliminación -->
+    <div class="modal fade" id="modalDeleteCredit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="DeleteModalAutomaticCancellation">
+                        <i class="fa fa-check"></i> @Global.Accept
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+     <!-- ImportExcelPolicy -->
+    <div class="uif-modal" id="modalPolicyImport" style="display: none">
+        <div class="uif-modalbody">
+            <form id="policyImportForm" onsubmit="return false" class="form">
+                <label>@Global.File</label>
+                <input type="file" id="LoadFilePolicy" class="uif-inputfile" data-input="true" name="LoadFilePolicy"
+                       data-val="true" data-val-required='@Global.RequiredField'>
+                <span class="text-danger" data-valmsg-for="LoadFilePolicy" data-valmsg-replace="true" />
+            </form>
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="SelectFilePolicy" onclick="return false">@Global.Load</button>
+        </div>
+    </div>
+
+     <!-- ImportExcelCancellation -->
+    <div class="uif-modal" id="modalCancellationImport" style="display: none">
+        <div class="uif-modalbody">
+            <form id="cancellationImportForm" onsubmit="return false" class="form">
+                <label>@Global.File</label>
+                <input type="file" id="LoadFileCancellation" class="uif-inputfile" data-input="true" name="LoadFileCancellation"
+                       data-val="true" data-val-required='@Global.RequiredField'>
+                <span class="text-danger" data-valmsg-for="LoadFileCancellation" data-valmsg-replace="true" />
+            </form>
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="SelectFileCancellation" onclick="return false">@Global.Load</button>
+        </div>
+    </div>
+
+    <!-- ImportExcelMistake -->
+    <div class="uif-modal" id="modalMistakeImport" style="display: none">
+        <div class="uif-modalbody">
+            <form id="mistakeImportForm" onsubmit="return false" class="form">
+                <label>@Global.File</label>
+                <input type="file" id="LoadFileMistake" class="uif-inputfile" data-input="true" name="LoadFileMistake"
+                       data-val="true" data-val-required='@Global.RequiredField'>
+                <span class="text-danger" data-valmsg-for="LoadFileMistake" data-valmsg-replace="true" />
+            </form>
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="SelectFileMistake" onclick="return false">@Global.Load</button>
+        </div>
+    </div>
+
+    <!-- SearchInsured -->
+    <div class="uif-modal" id="modalSearchInsured" style="display: none">
+        <div class="uif-modalbody">
+            <table class="uif-table" id="tableInsured" data-exporttocsv="false" data-edit="false" data-delete="false" 
+                   data-selectiontype="single" data-filter="true" data-paginate="true">
+                <thead>
+                    <tr>
+                        <th data-property="Id" data-visible="false">Id</th>
+                        <th data-property="IndividualId" data-visible="false">IndividualId</th>
+                        <th data-property="DocumentTypeId" data-visible="false">DocumentTypeId</th>
+                        <th data-property="DocumentNumber">@Global.DocumentNumber</th>
+                        <th data-property="InsuredName">@Global.InsuredName</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        @*
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+            <button type="submit" class="btn btn-primary" id="SelectFileMistake" onclick="return false">@Global.Load</button>
+        </div>
+        *@
+    </div>
+
+    <!-- SearchIntermediary -->
+    <div class="uif-modal" id="modalSearchIntermediary" style="display: none">
+        <div class="uif-modalbody">
+            <table class="uif-table" id="tableIntermediary" data-exporttocsv="false" data-edit="false" data-delete="false"
+                    data-selectiontype="single" data-filter="true" data-paginate="true">
+                <thead>
+                    <tr>
+                        <th data-property="Id" data-visible="false">Id</th>
+                        <th data-property="IndividualId" data-visible="false">IndividualId</th>
+                        <th data-property="DocumentTypeId" data-visible="false">DocumentTypeId</th>
+                        <th data-property="DocumentNumber">@Global.DocumentNumber</th>
+                        <th data-property="IntermediaryName">@Global.IntermediaryName</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <!-- SearchGrouper -->
+    <div class="uif-modal" id="modalSearchGrouper" style="display: none">
+        <div class="uif-modalbody">
+            <table class="uif-table" id="tableGroupers" data-exporttocsv="false" data-edit="false" data-delete="false"
+                    data-selectiontype="single" data-filter="true" data-paginate="true">
+                <thead>
+                    <tr>
+                        <th data-property="Id">Id</th>
+                        <th data-property="Description">@Global.Description</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+}
+
+@section Toolbar
+{
+    <footer>
+        <!-- Pestaña selección de pólizas -->
+        <button id="PolicyCancel" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="PolicyExportExcel" class="btn btn-primary" role="button">
+            <i class="fa fa-file-excel-o"></i>  @Global.ExportToExcel
+        </button>
+        <button id="PolicyImportExcel" class="btn btn-primary" role="button">
+            <i class="fa fa-file-excel-o"></i>  @Global.ImportFromExcel
+        </button>
+        <button id="PolicyProcessCancellation" class="btn btn-primary" role="button">
+            <i class="fa fa-hand-o-down"></i>  @Global.ProcessCancellation
+        </button>
+        
+        <!-- Pestaña cancelaciones procesadas -->
+        <button id="CancellationCancel" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="CancellationExportExcel" class="btn btn-primary" role="button">
+            <i class="fa fa-file-excel-o"></i>  @Global.ExportToExcel
+        </button>
+        <button id="CancellationImportExcel" class="btn btn-primary" role="button">
+            <i class="fa fa-file-excel-o"></i>  @Global.ImportFromExcel
+        </button>
+        <button id="ProcessCrossingCollections" class="btn btn-primary" role="button">
+            <i class="fa fa-hand-o-down"></i>  @Global.ProcessCrossingCollections
+        </button>
+
+        <!-- Pestaña error al cancelar -->
+        <button id="ErrorCancel" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="ErrorExportExcel" class="btn btn-primary" role="button">
+            <i class="fa fa-file-excel-o"></i>  @Global.ExportToExcel
+        </button>
+        <button id="ErrorImportExcel" class="btn btn-primary" role="button">
+            <i class="fa fa-file-excel-o"></i>  @Global.ImportFromExcel
+        </button>
+        <button id="ReprocessCancellation" class="btn btn-primary" role="button">
+            <i class="fa fa-save"></i>  @Global.ReprocessCancellation
+        </button>
+
+        <!-- Pestaña cancelaciones aplicadas -->
+        <button id="AppliedExportExcel" class="btn btn-primary" role="button">
+            <i class="fa fa-file-excel-o"></i>  @Global.ExportToExcel
+        </button>
+
+    </footer>
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001; opacity: .8; filter: alpha(opacity=70);display:none">
+            <p style="position: absolute; top: 30%; left: 45%; color: White; font-size:large">
+                @Global.MessageWaiting<img src="@Url.Content("~/Images/loader.gif")" />
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <ul class="uif-tab" id="tabMainPolicyAutomaticCancellation">
+            <li class="active"><a href="#tabProcess">@Global.Processes</a></li>
+            <li><a href="#tabPolicies">@Global.SelectionPolicies</a></li>
+            <li><a href="#tabCancellationsProcessed">@Global.CancellationsProcessed</a></li>
+            <li><a href="#tabErrorWhenCanceling">@Global.ErrorWhenCanceling</a></li>
+            <li><a href="#tabCancellationsApplied">@Global.CancellationsApplied</a></li>
+        </ul>
+        <div class="uif-tab-content">
+            <div class="tab-pane active" id="tabProcess">
+
+                <form id="formCancellation" onsubmit="return false" class="form">
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label>@Global.Branch</label>
+                            <select class="uif-select form-control" id="SelectBranchAutomatic" name="SelectBranchAutomatic"
+                                    data-selectedid="@ViewBag.BranchDefault"
+                                    data-val="true"
+                                    data-val-required='@Global.RequiredField'
+                                    data-native="true"
+                                    data-id="Id"
+                                    data-name="Description"></select>
+                            <span class="text-danger" data-valmsg-for="SelectBranchAutomatic" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.SalePoint</label>
+                            <select class="uif-select form-control" id="SelectSalePoint" name="SelectSalePoint"
+                                    data-val="false"
+                                    data-val-required='@Global.RequiredField'
+                                    data-id="Id"
+                                    data-name="Description"
+                                    data-native="true"></select>
+                            <span class="text-danger" data-valmsg-for="SelectSalePointNo" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.Prefix</label>
+                            <select class="uif-select form-control" id="SelectPrefix"
+                                    data-native="true"
+                                    data-source='@Url.Content("~/Accounting/Common/GetPrefixes")'
+                                    data-id="Id"
+                                    data-name="Description"></select>
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.Policy</label>
+                            <input type="text" value="" id="PolicyNumber" placeholder="" data-pattern="000000000000000" class="uif-mask" />
+                        </div>
+                    </div>
+
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label class="control-label" for="InsuredSearch">@Global.Insured</label>
+                            <input class="uif-input-search" type="text" id="InsuredSearch" name="InsuredSearch" data-val="false"
+                                   data-val-required='@Global.RequiredField' placeholder="@Global.PlaceHolderInsured" />
+                            <span class="text-danger" data-valmsg-for="InsuredSearchNo" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="control-label" for="IntermediarySearch">@Global.Intermediary</label>
+                            <input class="uif-input-search" type="text" id="IntermediarySearch" name="IntermediarySearch" data-val="false"
+                                   data-val-required='@Global.RequiredField' placeholder="@Global.PlaceHolderIntermediary" />
+                            <span class="text-danger" data-valmsg-for="IntermediarySearchNo" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.Grouper</label>
+                            <input class="uif-input-search" type="text" id="GrouperSearch" name="GrouperSearch" data-val="false"
+                                   data-val-required='@Global.RequiredField' placeholder="@Global.PlaceHolderGrouper" />
+                            <span class="text-danger" data-valmsg-for="GrouperSearchNo" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.Business</label>
+                            <select class="uif-select form-control" id="SelectBusiness" name="SelectBusiness"
+                                    data-val="false"
+                                    data-val-required='@Global.RequiredField'
+                                    data-source='@Url.Content("~/Accounting/PolicyCancellation/GetBusiness")'
+                                    data-id="Id"
+                                    data-name="Description"
+                                    data-native="true"></select>
+                            <span class="text-danger" data-valmsg-for="SelectBusinessNo" data-valmsg-replace="true" />
+                        </div>
+                    </div>
+
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label>@Global.CutDate</label>
+                            <input type="text" id="PickerCutDate" name="PickerCutDate"
+                                   data-mask-date="99/99/9999" class="uif-datepicker" maxlength="10" data-max-date="@ViewBag.IssueDate" data-val="true" data-val-required='@Global.RequiredField' />
+                            <span class="text-danger" data-valmsg-for="PickerCutDate" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.IssueDateFrom</label>
+                            <input type="text" id="PickerIssueDateFrom" name="PickerIssueDateFrom"
+                                   data-mask-date="99/99/9999" class="uif-datepicker" maxlength="10" />
+                            <span class="text-danger" data-valmsg-for="PickerIssueDateFrom" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.IssueDateTo</label>
+                            <input type="text" id="PickerIssueDateTo" name="PickerIssueDateTo"
+                                   data-mask-date="99/99/9999" class="uif-datepicker" maxlength="10" />
+                            <span class="text-danger" data-valmsg-for="PickerIssueDateTo" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Global.CancellationToBeMade</label>
+                            <select class="uif-select form-control" id="SelectCancellationToBeMade" name="SelectCancellationToBeMade"
+                                    data-val="true"
+                                    data-val-required='@Global.RequiredField'
+                                    data-source='@Url.Content("~/Accounting/PolicyCancellation/GetCancellationTypes")'
+                                    data-id="Id"
+                                    data-name="Description"
+                                    data-native="true"></select>
+                            <span class="text-danger" data-valmsg-for="SelectCancellationToBeMade" data-valmsg-replace="true" />
+                        </div>
+                    </div>
+                    @*
+                    <div class="uif-row">
+                    </div>
+                    *@
+
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <div class="form-footer">
+                                <button id="CleanSearch" class="btn btn-default" role="button">
+                                    <i class="fa fa-paint-brush"></i> @Global.Clean
+                                </button>
+                                <button type="submit" id="AutoCancellationGenerate" class="btn btn-primary" role="button" onclick=" return false ">
+                                    <i class="fa fa-search"></i> @Global.Generate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alert"></div>
+                    </div>
+                </div>
+
+                <table class="uif-table" id="tablePendingProcesses" data-exporttocsv="false" data-edit="false" data-delete="false" data-selectiontype="single" data-filter="false"
+                       data-paginate="true" @*data-title="@Global.PendingProcesses"*@>
+                    <thead>
+                        <tr>
+                            <th data-property="Id">@Global.ProcessNumber</th>
+                            <th data-property="ProcessDate">@Global.ProcessDate</th>
+                            <th data-property="TotalRecords">@Global.Records</th>
+                            <th data-property="TotalPremium" data-type="currency" data-visible="false">@Global.TotalPremium</th>
+                            <th data-property="UserName">@Global.User</th>
+                            <th data-property="IsActive">@Global.ProcessState</th>
+                            <th data-property="Progress">@Global.Progress</th>
+                            <th data-property="Finalized" data-visible="false">Finalized</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <!-- Selección pólizas a cancelar -->
+            <div id="tabPolicies" class="tab-pane">
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label>@Global.ProcessNumber</label>
+                        <input class="uif-input-search" type="text" id="PolicyProcessNumber" onkeypress="return JustNumbers(event, this);" maxlength="10" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.User</label>
+                        <input type="text" value="" id="PolicyUserName" placeholder="" disabled />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.Date</label>
+                        <input type="text" value="" id="PolicyProcessDate" placeholder="" disabled />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.Records</label>
+                        <input type="text" value="" id="PolicyTotalRecords" placeholder="" style="text-align: right" disabled />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.TotalPremium</label>
+                        <input type="text" value="" id="PolicyTotalPremium" placeholder="" style="text-align: right" disabled />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertPolicyProcess"></div>
+                    </div>
+                </div>
+
+                <table class="uif-table" id="tablePolicies" data-exporttocsv="false" data-edit="false" data-delete="false" data-selectiontype="multiple" data-filter="true"
+                       data-paginate="true" @*data-title="@Global.PendingApplication"*@>
+                    <thead>
+                        <tr>
+                            <th data-property="Id" data-visible="false">Id</th>
+                            <th data-property="ProcessNumber" data-visible="false">ProcessNumber</th>
+                            <th data-property="Annul">@Global.Annul</th>
+                            <th data-property="CancellationMark" data-visible="false">CancellationMark</th>
+                            <th data-property="ExclusionReason">@Global.ExclusionReason</th>
+                            <th data-property="ExclusionReasonCode" data-visible="false">ExclusionReasonCode</th>
+                            <th data-property="QuoteDueDate">@Global.QuoteDueDate</th>
+                            <th data-property="BranchId" data-visible="false">BranchId</th>
+                            <th data-property="Branch">@Global.Branch</th>
+                            <th data-property="SalePointId" data-visible="false">SalePointId</th>
+                            <th data-property="SalePoint" data-visible="false">@Global.SalePoint</th>
+                            <th data-property="PrefixId" data-visible="false">PrefixId</th>
+                            <th data-property="Prefix">@Global.Prefix</th>
+                            <th data-property="PolicyId" data-visible="false">PolicyId</th>
+                            <th data-property="Policy">@Global.Policy</th>
+                            <th data-property="InsuredId" data-visible="false">InsuredId</th>
+                            <th data-property="Insured">@Global.Insured</th>
+                            <th data-property="IntermediaryTypeId" data-visible="false">IntermediaryTypeId</th>
+                            <th data-property="IntermediaryId" data-visible="false">IntermediaryId</th>
+                            <th data-property="Intermediary">@Global.Intermediary</th>
+                            <th data-property="IssueDate">@Global.IssueDate</th>
+                            <th data-property="IssueDateFrom">@Global.IssueDateFrom</th>
+                            <th data-property="IssueDateTo">@Global.IssueDateTo</th>
+                            <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+                            <th data-property="Currency" data-visible="false">@Global.Currency</th>
+                            <th data-property="Amount" data-type="currency">@Global.TotalPremium</th>
+                            <th data-property="ExchangeRate" data-type="currency" data-visible="false">@Global.Exchange</th>
+                            <th data-property="LocalAmount" data-type="currency" data-visible="false">@Global.LocalAmount</th>
+                            <th data-property="ProcessingMark" data-visible="false">ProcessingMark</th>
+                            <th data-property="Processed">@Global.Processed</th>
+                            <th data-property="Observations">@Global.Observations</th>
+                            <th data-property="ExclusionAllowsToCancel" data-visible="false">ExclusionAllowsToCancel</th>
+                            <th data-property="MotherPolicyId" data-visible="false">MotherPolicyId</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <!-- Cancelaciones Procesadas -->
+            <div id="tabCancellationsProcessed" class="tab-pane">
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label>@Global.ProcessNumber</label>
+                        <input class="uif-input-search" type="text" id="ProcessedProcessNumber" onkeypress="return JustNumbers(event, this);" maxlength="10" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.User</label>
+                        <input type="text" value="" id="ProcessedUserName" placeholder="" disabled />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.Date</label>
+                        <input type="text" value="" id="ProcessedProcessDate" placeholder="" disabled />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.Records</label>
+                        <input type="text" value="" id="ProcessedTotalRecords" placeholder="" style="text-align: right" disabled />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.TotalPremium</label>
+                        <input type="text" value="" id="ProcessedTotalPremium" placeholder="" style="text-align: right" disabled />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertProcessedProcess"></div>
+                    </div>
+                </div>
+
+                <table class="uif-table" id="tableProcessed" data-exporttocsv="false" data-edit="false" data-delete="false" data-selectiontype="multiple" data-filter="true"
+                       data-paginate="true" @*data-title="@Global.PendingApplication"*@>
+                    <thead>
+                        <tr>
+                            <th data-property="Id" data-visible="false">Id</th>
+                            <th data-property="ProcessNumber" data-visible="false">ProcessNumber</th>
+                            <th data-property="AppliesCollection">@Global.AppliesCollection</th>
+                            <th data-property="AppliesCollectionMark" data-visible="false">AppliesCollectionMark</th>
+                            <th data-property="QuoteDueDate">@Global.QuoteDueDate</th>
+                            <th data-property="BranchId" data-visible="false">BranchId</th>
+                            <th data-property="Branch">@Global.Branch</th>
+                            <th data-property="SalePointId" data-visible="false">SalePointId</th>
+                            <th data-property="SalePoint" data-visible="false">@Global.SalePoint</th>
+                            <th data-property="PrefixId" data-visible="false">PrefixId</th>
+                            <th data-property="Prefix">@Global.Prefix</th>
+                            <th data-property="PolicyId" data-visible="false">PolicyId</th>
+                            <th data-property="Policy">@Global.Policy</th>
+                            <th data-property="InsuredId" data-visible="false">InsuredId</th>
+                            <th data-property="Insured">@Global.Insured</th>
+                            <th data-property="IntermediaryTypeId" data-visible="false">IntermediaryTypeId</th>
+                            <th data-property="IntermediaryId" data-visible="false">IntermediaryId</th>
+                            <th data-property="Intermediary">@Global.Intermediary</th>
+                            <th data-property="IssueDate">@Global.IssueDate</th>
+                            <th data-property="IssueDateFrom">@Global.IssueDateFrom</th>
+                            <th data-property="IssueDateTo">@Global.IssueDateTo</th>
+                            <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+                            <th data-property="Currency" data-visible="false">@Global.Currency</th>
+                            <th data-property="Amount" data-type="currency">@Global.CancellationBalance</th>
+                            <th data-property="ExchangeRate" data-type="currency" data-visible="false">@Global.Exchange</th>
+                            <th data-property="LocalAmount" data-type="currency" data-visible="false">@Global.LocalAmount</th>
+                            <th data-property="ApplicationTemporaryId">@Global.ApplicationTemporaryId</th>
+                            <th data-property="MotherPolicyId" data-visible="false">MotherPolicyId</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <!-- Error al cancelar -->
+            <div id="tabErrorWhenCanceling" class="tab-pane">
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label>@Global.ProcessNumber</label>
+                        <input class="uif-input-search" type="text" id="ErrorProcessNumber" onkeypress="return JustNumbers(event, this);" maxlength="10" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.User</label>
+                        <input type="text" value="" id="MistakeUserName" placeholder="" disabled />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.Date</label>
+                        <input type="text" value="" id="MistakeProcessDate" placeholder="" disabled />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.Records</label>
+                        <input type="text" value="" id="MistakeTotalRecords" placeholder="" style="text-align: right" disabled />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.TotalPremium</label>
+                        <input type="text" value="" id="MistakeTotalPremium" placeholder="" style="text-align: right" disabled />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertMistakeProcess"></div>
+                    </div>
+                </div>
+
+                <table class="uif-table" id="tableMistakes" data-exporttocsv="false" data-edit="false" data-delete="false" data-selectiontype="multiple" data-filter="true"
+                       data-paginate="true" @*data-title="@Global.PendingApplication"*@>
+                    <thead>
+                        <tr>
+                            <th data-property="Id" data-visible="false">Id</th>
+                            <th data-property="ProcessNumber" data-visible="false">ProcessNumber</th>
+                            <th data-property="Reprocess">@Global.Reprocess</th>
+                            <th data-property="ReprocessMark" data-visible="false">ReprocessMark</th>
+                            <th data-property="QuoteDueDate">@Global.QuoteDueDate</th>
+                            <th data-property="BranchId" data-visible="false">BranchId</th>
+                            <th data-property="Branch">@Global.Branch</th>
+                            <th data-property="SalePointId" data-visible="false">SalePointId</th>
+                            <th data-property="SalePoint" data-visible="false">@Global.SalePoint</th>
+                            <th data-property="PrefixId" data-visible="false">PrefixId</th>
+                            <th data-property="Prefix">@Global.Prefix</th>
+                            <th data-property="PolicyId" data-visible="false">PolicyId</th>
+                            <th data-property="Policy">@Global.Policy</th>
+                            <th data-property="Insured">@Global.Insured</th>
+                            <th data-property="Intermediary">@Global.Intermediary</th>
+                            <th data-property="IssueDate">@Global.IssueDate</th>
+                            <th data-property="IssueDateFrom">@Global.IssueDateFrom</th>
+                            <th data-property="IssueDateTo">@Global.IssueDateTo</th>
+                            <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+                            <th data-property="Currency" data-visible="false">@Global.Currency</th>
+                            <th data-property="Amount" data-type="currency">@Global.TotalPremium</th>
+                            <th data-property="ExchangeRate" data-type="currency" data-visible="false">@Global.Exchange</th>
+                            <th data-property="LocalAmount" data-type="currency" data-visible="false">@Global.LocalAmount</th>
+                            <th data-property="Description">@Global.Description</th>
+                            <th data-property="MotherPolicyId" data-visible="false">MotherPolicyId</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <!--Cancelaciones Aplicadas -->
+            <div id="tabCancellationsApplied" class="tab-pane">
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label>@Global.ProcessNumber</label>
+                        <input class="uif-input-search" type="text" id="AppliedProcessNumber" onkeypress="return JustNumbers(event, this);" maxlength="10" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.User</label>
+                        <input type="text" value="" id="AppliedUserName" placeholder="" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.Date</label>
+                        <input type="text" value="" id="AppliedProcessDate" placeholder="" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.Records</label>
+                        <input type="text" value="" id="AppliedTotalRecords" placeholder="" style="text-align: right" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.TotalPremium</label>
+                        <input type="text" value="" id="AppliedTotalPremium" placeholder="" style="text-align: right" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertAppliedProcess"></div>
+                    </div>
+                </div>
+
+                <table class="uif-table" id="tableAppliedCancellation" data-exporttocsv="false" data-edit="false" data-delete="false"
+                       data-selectiontype="none" data-filter="true"
+                       data-paginate="true" @*data-title="@Global.PendingApplication"*@>
+                    <thead>
+                        <tr>
+                            <th data-property="Id" data-visible="false">Id</th>
+                            <th data-property="ProcessNumber" data-visible="false">ProcessNumber</th>
+                            <th data-property="BranchId" data-visible="false">BranchId</th>
+                            <th data-property="Branch">@Global.Branch</th>
+                            <th data-property="SalePointId" data-visible="false">SalePointId</th>
+                            <th data-property="SalePoint" data-visible="false">@Global.SalePoint</th>
+                            <th data-property="PrefixId" data-visible="false">PrefixId</th>
+                            <th data-property="Prefix">@Global.Prefix</th>
+                            <th data-property="PolicyId" data-visible="false">PolicyId</th>
+                            <th data-property="Policy">@Global.Policy</th>
+                            <th data-property="Insured">@Global.Insured</th>
+                            <th data-property="Intermediary">@Global.Intermediary</th>
+                            <th data-property="CollectionDate">@Global.CollectionDate</th>
+                            <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+                            <th data-property="Currency" data-visible="false">@Global.Currency</th>
+                            <th data-property="Amount" data-type="currency">@Global.TotalPremium</th>
+                            <th data-property="ExchangeRate" data-type="currency" data-visible="false">@Global.Exchange</th>
+                            <th data-property="LocalAmount" data-type="currency" data-visible="false">@Global.LocalAmount</th>
+                            <th data-property="ApplicationReceiptNumber">@Global.ApplicationReceiptNumber</th>
+                            <th data-property="EntryNumber">@Global.JournalEntryNumber</th>
+                            <th data-property="MotherPolicyId" data-visible="false">MotherPolicyId</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagActiveIssueDate" value="@ViewBag.ActiveIssueDate" />
+<input type="hidden" id="ViewBagIssueDate" value="@ViewBag.IssueDate" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainPolicyAutomaticCancellation")
+}
+
+
+
+

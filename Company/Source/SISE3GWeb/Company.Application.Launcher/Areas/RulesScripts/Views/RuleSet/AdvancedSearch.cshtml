@@ -1,0 +1,59 @@
+﻿<script id="template-RuleSetListAdvSearch" type="text/template">
+
+    <div>
+        Id <strong>{{RuleSetId}}</strong>
+        <br>
+        Descripcion <strong>{{Description}}</strong>
+        <br>
+        Nivel <strong>{{Level.Description}}</strong>
+        <br>
+        Modulo <strong>{{Package.Description}}</strong>
+    </div>
+    <div class="text-right vertical-center">
+    </div>
+
+</script>
+<form class="form" id="panelFilterRuleSets">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <!-- filter  -->
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelPackages</label>
+            <select class="uif-select form-control"
+                    id="selectPackage"
+                    data-selectedid="0"
+                    data-filter="true"
+                    data-id="PackageId"
+                    data-name="Description"
+                    data-native="false"></select>
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelLevels</label>
+            <select class="uif-select form-control" id="selectLevel"
+                    data-selectedid="0" data-source="" data-id="LevelId" data-name="Description"
+                    data-native="false"></select>
+        </div>
+
+    </div>
+
+    <!-- /filter  -->
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="RuleSetListAdvSearch" class="uif-listview">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCloseSearchAdv" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoadRuleSet" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CurrencyDifferencesView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="CurrencyDifference" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="Currency" name="Description" />
+        </SelectValue>
+        <SelectValue alias="MaximumDifference">
+          <Column table-alias="CurrencyDifference" name="MaximumDifference" />
+        </SelectValue>
+        <SelectValue alias="PercentageDifference">
+          <Column table-alias="CurrencyDifference" name="PercentageDifference" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Currency, Core.Common.Entities" alias="Currency" />
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CurrencyDifference, Core.Accounting.Entities" alias="CurrencyDifference" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="CurrencyDifference" name="CurrencyCode" />
+              <Column table-alias="Currency" name="CurrencyCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

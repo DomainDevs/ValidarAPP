@@ -1,0 +1,32 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.AnalysisModel
+
+@{
+    ViewBag.Title = "AnalysisModal";
+}
+
+<div class="form">
+    <div class="uif-alert" id="entryAnalysisAlert"></div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            @Html.LabelFor(m => m.AnalysisId)
+            @Html.DropDownListFor(obj => obj.AnalysisId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetAnalyses"), data_id = "AnalysisCodeId", data_name = "Description" })
+            @Html.ValidationMessageFor(model => model.AnalysisId)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(m => m.AnalysConceptId)
+            @Html.DropDownListFor(obj => obj.AnalysConceptId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_id = "AnalysisConceptId", data_name = "AnalysisConceptDescription" })
+            @Html.ValidationMessageFor(model => model.AnalysConceptId)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(m => m.Key)
+            @Html.TextBoxFor(m => m.Key)
+            @Html.ValidationMessageFor(m => m.Key)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(m => m.Description)
+            @Html.TextBoxFor(m => m.Description)
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,91 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column" id="titleRecovery">
+        <div class="column">
+            @Resources.Language.Recoveries
+        </div>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0337"))
+    {
+        <button class="btn btn-default new" id="btnClearRecovery">
+            <span class="" aria-hidden="true">@Resources.Language.Clean</span>
+        </button>
+    }
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0336"))
+    {
+        <button class="btn btn-primary new" id="btnSaveRecovery">
+            <span class="" aria-hidden="true">@Resources.Language.Save</span>
+        </button>
+    }
+</script>
+@section Modals{
+
+    <div class="uif-modal" id="modalDeleteRecoveries">
+        <div class="uif-modalbody">
+            @Resources.Language.WantDeleteRegister
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="btnDeleteNo" data-dismiss="modal">@Resources.Language.No</button>
+            <button type="button" class="btn btn-primary" id="btnDeleteYes" data-dismiss="modal">@Resources.Language.Yes</button>
+        </div>
+    </div>
+}
+
+@section ToolBar{
+    <footer>
+        <div>
+            <button id="btnClearPaymentRequest" class="btn btn-default">
+                <i class="fa fa-eraser" aria-hidden="true"></i> @Resources.Language.Clean
+            </button>
+            <button id="btnSavePaymentRequest" class="btn btn-primary">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> @Resources.Language.Save
+            </button>
+        </div>
+    </footer>
+}
+
+
+@section Title{
+    <div class="row main-title">
+        <div class="column">
+            @Resources.Language.Recoveries
+        </div>
+    </div>
+}
+
+<a id="top"></a>
+<div>
+    <div class="uif-alert" id="Alert"></div>
+
+    <ul class="uif-tab">
+        <li class="active"><a href="#tabRecovery">@Resources.Language.Recoveries</a></li>
+        <li><a href="#tabRecoverySummary">@Resources.Language.RecoverySummary</a></li>
+    </ul>
+    <div class="uif-tab-content">
+        <div class="active" id="tabRecovery">
+            <div class="row">
+                <div class="uif-col-12">
+                    @Html.Partial("RecoveryPartial")
+                </div>
+            </div>
+        </div>
+        <div id="tabRecoverySummary">
+            <div class="row">
+                <div class="uif-col-12">
+                    @Html.Partial("RecoverySummaryPartial")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uif-modal" id="modalPolicyConsult">
+    <div class="uif-modalbody">
+        @Html.Partial("../Claim/ModalPolicyConsult")
+    </div>
+</div>

@@ -1,0 +1,127 @@
+﻿
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.GenerationReclassification;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.AccountingReclassification</a></li>
+        <li class="active">@Global.GenerationReclassification</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-primary" role="button" id="GenerateReclassification" onclick="return false">
+            <span class="glyphicon glyphicon-cog"></span>
+            @Global.Generate
+        </button>
+        <button class="btn btn-primary" role="button" id="PrintReclassification" onclick="return false" disabled="disabled">
+            <span class="glyphicon glyphicon-print"></span>
+            @Global.PrintReport
+        </button>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary" role="button" id="ExcelReclassification" href="#" disabled="disabled">
+            <span class="glyphicon glyphicon-export"></span>
+            @Global.ExportToExcel
+        </a>
+        <button class="btn btn-primary" role="button" id="PrintEntryReclassification" onclick="return false" disabled="disabled">
+            <span class="glyphicon glyphicon-print"></span>
+            @Global.PrintEntryReport
+        </button>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary" role="button" id="ExcelEntryReclassification" href="#" disabled="disabled">
+            <span class="glyphicon glyphicon-export"></span>
+            @Global.ExportEntryToExcel
+        </a>
+        <button class="btn btn-primary" role="button" id="AccountingReclassification" onclick="return false" disabled="disabled">
+            <span class="glyphicon glyphicon-usd"></span>
+            @Global.Accounting
+        </button>
+
+    </footer>
+}
+
+@section modals{
+    <div class="modal fade" id="modalPrint">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">
+                        <label id="deleteMessageTitle">@Global.Print</label>
+                    </h4>
+                </div>
+                <div class="modal-body" id="printMessageModal">
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                    <button type="submit" class="btn btn-primary" id="btnPrintModal" onclick="return false">@Global.Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="generationReclassificationForm">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Month</label>
+            @Html.DropDownList("GenerationReclassificationMonth", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_id = "Id",
+           data_name = "Description",
+           data_val = "true",
+           data_val_required = @Global.RequiredField,
+           data_native = "true"
+       })
+            <span class="text-danger" data-valmsg-for="GenerationReclassificationMonth" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.Year</label>
+            <input type="text" id="GenerationReclassificationYear" name="GenerationReclassificationYear" onkeypress="return JustNumbers(event, this) "
+                   maxlength="4" value="@ViewBag.Year" data-val="true" data-val-required="@Global.RequiredField" />
+            <span class="text-danger" data-valmsg-for="GenerationReclassificationYear" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-panel" id="panelId" data-title="@Global.ProcessState">
+            <table class="uif-table" data-title="" id="tblReports" data-add="false" data-edit="false"
+                   data-delete="false" data-filter="false" data-paginate="false" data-pagesize="false"
+                   data-selectiontype="none">
+                <thead>
+                    <tr>
+                        <th data-property="Year">@Global.Year</th>
+                        <th data-property="Month">@Global.Month</th>
+                        <th data-property="StartDate">@Global.StartDate</th>
+                        <th data-property="EndDate">@Global.EndDate</th>
+                        <th data-property="Delay">@Global.Duration</th>
+                        <th data-property="InProgress">@Global.ProcessState</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+<input type="hidden" id="ViewBagMonthDefault" value="@ViewBag.Month" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/MainGenerationReclassification")
+}

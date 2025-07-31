@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TaxAccountingConceptTaxView">
+  <collections>
+    <collection name="TaxRate" type="Sistran.Core.Application.Tax.Entities.TaxRate, 
+                Core.Tax.Entities"></collection>
+    <collection name="TaxPeriodRate" type="Sistran.Core.Application.Tax.Entities.TaxPeriodRate, 
+                Core.Tax.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="TaxRate" destination="TaxPeriodRate" name="TaxRateTaxPeriodRate" type="Inner">
+      <property left="TaxRateId" type="Equal" right="TaxRateId"></property>
+    </relation>
+  </relations>
+</view>

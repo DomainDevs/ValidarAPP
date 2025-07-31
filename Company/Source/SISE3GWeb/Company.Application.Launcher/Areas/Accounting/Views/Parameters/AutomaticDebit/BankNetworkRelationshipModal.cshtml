@@ -1,0 +1,51 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.PaymentMethodBankNetwork
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.Conduit</label>
+            @Html.DropDownList("selectPaymentMethod", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/Accounting/Common/GetPaymentMethods"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField,
+                        data_native = "true"
+                    })
+            <span class="text-danger" data-valmsg-for="selectPaymentMethod" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.Bank</label>
+            @Html.DropDownList("selectAccountBank", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/Accounting/Common/GetBanks"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField,
+                        data_native = "true"
+                    })
+            <span class="text-danger" data-valmsg-for="selectAccountBank" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <br />
+            <span class="glyphicon glyphicon-check" id="checkGenerate"></span><input type="checkbox" id="GenerateCheck" name="GenerateCheck"> @Global.Generate            
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+</div>
+
+

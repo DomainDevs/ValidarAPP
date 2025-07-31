@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="IndividualTax" namespace="Sistran.Core.Application.Tax" file-version="1.0" description="INDIVIDUAL_TAX_ENTITY">
+  <properties>
+    <property name="IndividualTaxId" key="true" type="Integer" description="INDIVIDUAL_TAX_ID_PROPERTY" autonumber="id"/>
+    <property name="IndividualId" type="Integer" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="TaxRateCode" type="Integer" description="TAX_RATE_CD_PROPERTY" />
+    <property name="RoleCode" type="Integer" nullable="true" description="ROLE_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="INDIVIDUAL_TAX" schema="TAX" alias="INDIVIDUAL_TAX" update="true">
+      <columns>
+        <column name="INDIVIDUAL_TAX_ID" type="Int32" property="IndividualTaxId" allowNull="false" key="true" />
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId"/>
+        <column name="TAX_RATE_CD" type="Int32" property="TaxRateCode"/>
+        <column name="ROLE_CD" type="Int32" property="RoleCode" />
+      </columns>
+    </table>
+  </tables>
+   <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Int32" value="16" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

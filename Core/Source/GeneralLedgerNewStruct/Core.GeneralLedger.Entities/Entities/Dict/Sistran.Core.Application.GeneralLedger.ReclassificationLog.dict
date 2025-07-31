@@ -1,0 +1,26 @@
+<map version="2.0" type="class" name="ReclassificationLog" namespace="Sistran.Core.Application.GeneralLedger" file-version="1.0" description="RECLASSIFICATION_LOG_ENTITY">
+  <properties>
+    <property name="ReclassificationLogId" type="Integer" key="true" description="RECLASSIFICATION_LOG_ID_PROPERTY" nullable ="false" autonumber="Identity" />
+    <property name="ModuleCode" type="Decimal" precision="4" scale="2" description="MODULE_CODE_PROPERTY" />
+    <property name="ProcessYear" type="Integer" description="PROCESS_YEAR_PROPERTY" />
+    <property name="ProcessMonth" type="Integer" description="PROCESS_MONTH_PROPERTY" />
+    <property name="UserCode" type="Integer" description="USER_CODE_PROPERTY" />
+    <property name="StartDate" type="DateTime" description="START_DATE_PROPERTY" />
+    <property name="EndDate" type="DateTime" nullable="true" description="END_DATE_PROPERTY" />
+    <property name="ProcessStatus" type="Integer" description="PROCESS_STATUS_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="RECLASSIFICATION_LOG" schema="GL" alias="RECLASSIFICATION_LOG" update="true">
+      <columns>
+        <column name="RECLASSIFICATION_LOG_ID" type="Int32" property="ReclassificationLogId" key="true" identity ="true" />
+        <column name="MODULE_CD" type="Decimal" property="ModuleCode" allowNull="false" size="19" precision="4" scale="2" />
+        <column name="PROCESS_YEAR" type="Int32" property="ProcessYear" allowNull="false" />
+        <column name="PROCESS_MONTH" type="Int32" property="ProcessMonth" allowNull="false" />
+        <column name="USER_CD" type="Int32" property="UserCode" allowNull="false" />
+        <column name="START_DATE" type="DateTime" property="StartDate" allowNull="false" />
+        <column name="END_DATE" type="DateTime" property="EndDate" />
+        <column name="PROCESS_STATUS" type="Int32" property="ProcessStatus" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

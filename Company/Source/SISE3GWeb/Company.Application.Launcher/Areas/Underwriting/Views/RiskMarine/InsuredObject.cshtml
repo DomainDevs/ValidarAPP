@@ -1,0 +1,47 @@
+﻿@model Sistran.Company.Application.Marines.MarineApplicationService.DTOs.InsuredObjectDTO
+<form id="formObjectMarine" class="form without-space">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="row">
+        <div class="uif-col-12">
+            <h4 id="globalTitle"></h4>
+        </div>
+    </div>
+    <div class="row" id="modalObject">
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelInsuredObjects</label>
+            <select class="uif-select form-control" id="selectInsuredObject" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlInsuranceObject"
+                    data-id="Id" data-name="Description" name="Id"></select>
+            @Html.ValidationMessageFor(model => model.Id)
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelAmount</label>
+            @Html.TextBoxFor(model => model.InsuredLimitAmount, "{0:#.#}", new { id = "inputInsuredLimit", maxLength = 20, @class = "rightAlign input-money" })
+            @Html.ValidationMessageFor(model => model.InsuredLimitAmount, Resources.Language.ErrorValidateLimitAmount)
+        </div>
+        @*<div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelDepositPremium</label>
+            @Html.TextBoxFor(model => model.DepositPremiumPercentage, "{0:#.#}", new { id = "inputInsuredDepositPremiumPercent", maxLength = 3, @class = "rightAlign input-money" })
+            @Html.ValidationMessageFor(model => model.DepositPremiumPercentage, @Resources.Language.ErrorValidateDepositPremiumPercent)
+        </div>*@
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelRateType</label>
+            <select class="uif-select form-control" id="selectInsuredRate" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlRateType"
+                    data-id="Id" data-name="Description" name="RateTypeId"></select>
+            @Html.ValidationMessageFor(model => model.RateTypeId)
+        </div>
+        <div class="uif-col-1">
+            <label class="field-required">@Resources.Language.LabelRate</label>
+            @Html.TextBoxFor(model => model.Rate, "{0:#.#}", new { id = "inputInsuretRate", maxLength = 11, @class = "rightAlign" })
+            @Html.ValidationMessageFor(model => model.Rate, @Resources.Language.ErrorDocumentControlRate)
+        </div>
+        <div class="uif-col-3 fit-col-secondary">
+            <div class="without-label">
+                <button type="button" class="btn btn-default secondary-Colombia" id="btnAcceptObject">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.ButtonAccept
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

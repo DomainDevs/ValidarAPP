@@ -1,0 +1,142 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.ParamAuthorizationPolicies.Models.DelegationViewModel
+
+@{
+    Layout = null;
+}
+
+<script id="templateDelegation" type="text/templateDelegation">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div><div>@Resources.Language.Model:{{ModuleText}}</div></div>
+    <div><div>@Resources.Language.LabelSubmodule:{{SubModuleText}}</div></div>
+    <div><div>@Resources.Language.Hierarchy:{{HierarchyText}}</div></div>
+    <div><div>@Resources.Language.Description:<strong class="success">{{Description}}</strong></div></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div><div>@Resources.Language.Model:{{ModuleText}}</div></div>
+    <div><div>@Resources.Language.LabelSubmodule:{{SubModuleText}}</div></div>
+    <div><div>@Resources.Language.Hierarchy:{{HierarchyText}}</div></div>
+    <div><div>@Resources.Language.Description:<strong class="warning">{{Description}}</strong></div></div>
+    {{else}}
+    <div><div>@Resources.Language.Model:{{ModuleServiceQueryModel.Description}}</div></div>
+    <div><div>@Resources.Language.LabelSubmodule:{{SubModuleServicesQueryModel.Description}}</div></div>
+    <div><div>@Resources.Language.Hierarchy:{{HierarchyServiceQueryModel.Description}}</div></div>
+    <div><div>@Resources.Language.Description:<strong>{{Description}}</strong></div></div>
+    {{/ifCond }}
+</script>
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column-40">
+        @Resources.Language.Delegation
+    </div>
+    <div class="column-30">
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("delegationSearch", null, new { @class = "uif-input-search", id = "inputDelegationSearch", placeholder = Resources.Language.SearchDelegation })
+    </div>
+</script>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitDelegation">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0625"))
+        {
+            <button class="btn btn-default" id="btnExportDelegation">
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.ButtonExport
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0624"))
+        {
+            <button class="btn btn-primary" id="btnSaveDelegation">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.ButtonSave
+            </button>
+        }
+
+    </div>
+</script>
+
+@*Formulario Principal*@
+<form id="formDelegation" class="form without-space">
+    <div class="row">
+        <div class="uif-col-6 fit-col-main">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelModule</label>
+                    <select class="uif-select" name="Module" id="IdModule" data-id="Id" data-name="Description" data-native="false" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Module, Resources.Language.Required)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelSubmodule</label>
+                    <select class="uif-select" name="SubModule" id="IdSubModule" data-id="Id" data-name="Description" data-native="false" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.SubModule, Resources.Language.Required)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.Hierarchy</label>
+                    <select class="uif-select" name="Hierarchy" id="IdHierarchy" data-id="Id" data-name="Description" data-native="false" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Hierarchy, Resources.Language.Required)
+                </div>
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6 checkbox"> <!--
+                    <br>-->
+                    <input type="checkbox" id="IsExclusionary" name="Required" />
+                    <label for="IsExclusionary">@Resources.Language.Exclusion</label>
+                </div>
+                <div class="uif-col-6 checkbox">
+                    <br>
+                    <input type="checkbox" id="IsEnabled" name="Required" />
+                    <label for="IsEnabled">@Resources.Language.LabelAlliancePrintFormatIsEnable</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listDelegation" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnDelegationNew">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.NewForm
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0623"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnDelegationAccept">
+                        <span aria-hidden="true"></span>
+                        @Resources.Language.AddForm
+                    </button>
+                }
+
+            </div>
+        </div>
+        <div class="uif-col-6" id="summaryAgent">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="uif-modal" id="modalListSearchDelegation">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/ParamAuthorizationPolicies/Views/Delegation/ListDelegation.cshtml")
+    </div>
+</div>

@@ -1,0 +1,87 @@
+﻿@*AVISOS DE CANCELACION ES SOLO PARA BE*@
+
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.PaymentReminder;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.CancellationNotices</a></li>
+        <li class="active">@Global.PaymentReminder</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="CleanPaymentReminder">
+            <i class="fa fa-paint-brush"></i> @Global.Clean
+        </button>
+        <button type="submit" class="btn btn-primary" id="ReportPaymentReminder" onclick="return false" data-role="button">
+            <i class="fa fa-print"></i> @Global.Accept
+        </button>
+    </footer>
+}
+
+<form id="PaymentReminder" onsubmit="return false">
+    <div class="uif-panel" data-title='@Global.Dates'>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="control-label" for="cancellationDate">
+                    @Global.RequestDate
+                </label>
+                <input type="text" id="cancellationDate" name="cancellationDate" maxlength="10" class="uif-datepicker" data-mask="99/99/9999" data-val="true" data-val-required='@Global.RequiredField' />
+                <span class="text-danger" data-valmsg-for="cancellationDate" data-valmsg-replace="true"> </span>
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label" for="daysFrom">
+                    @Global.DaysFrom
+                </label>
+                <input type="text" id="daysFrom" name="daysFrom" maxlength="3" onkeypress="return OnlyDecimalNumber(event,this)" />
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label" for="daysFrom">
+                    @Global.DaysTo
+                </label>
+                <input type="text" id="daysTo" name="daysFrom" maxlength="3" onkeypress="return OnlyDecimalNumber(event,this)" />
+            </div>
+        </div>
+    </div>    
+
+    <div class="uif-panel" data-title='@Global.Intermediaries'>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertPaymentReminder"></div>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <input type="radio" id="allIntermediaries" name="oneIntermediary" value="0" checked>
+                <label class="control-label" for="allIntermediaries">@Global.AllIntermediaries</label>
+            </div>
+            <div class="uif-col-6">
+                <input type="radio" id="oneIntermediary" name="oneIntermediary" value="1">
+                <label class="control-label" for="oneIntermediary">@Global.OneIntermediary</label>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label" for="AgentDocumentNumber">
+                    @Global.DocumentNumberIntermediary
+                </label>
+                <input class="uif-autocomplete" type="text" id="AgentDocumentNumber" name="AgentDocumentNumber" data-source="@Url.Action("GetAgentByDocumentNumber", "Common")" data-displaykey="DocumentNumberName" onkeypress="return OnlyDecimalNumber(event,this)" />
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label" for="AgentName">@Global.IntermediaryName</label>
+                <input class="uif-autocomplete" type="text" id="AgentName" name="AgentName" data-source="@Url.Action("GetAgentByName", "Common")" data-displaykey="DocumentNumberName" />
+            </div>
+        </div>
+    </div>
+</form>
+   

@@ -1,0 +1,127 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column" id="titleVehicle">
+        @Resources.Language.VehicleNotice
+    </div>
+    <div class="column" id="TitleSurety">
+        @Resources.Language.NoticeSurety
+    </div>
+    <div class="column" id="TitleProperty">
+        @Resources.Language.PropertyNotice
+    </div>
+    <div class="column" id="TitleTransport">
+        @Resources.Language.NoticeTransport
+    </div>
+    <div class="column" id="TitleAirCraft">
+        @Resources.Language.NoticeAirCraft
+    </div>
+    <div class="column" id="TitleFidelity">
+        @Resources.Language.NoticeFidelity
+    </div>
+    <div class="column-20 hideSearchClaim">
+        @Resources.Language.Policy:&nbsp;<span id="inputSearchPolicyByclaims"> </span>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0310"))
+    {
+        <button class="btn btn-default new" id="btnObjectClaimNotice">
+            <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.LabelObject</span>
+        </button>
+    }
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0309"))
+    {
+        <button class="btn btn-default new" id="btnScheduleClaimNotice">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.LabelScheduleNotice</span>
+        </button>
+    }
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0308"))
+    {
+        <button id="btnConvertClaimNoticeToClaim" disabled="disabled" class="btn btn-default">
+            <i class="fa fa-comment" aria-hidden="true"></i> @Resources.Language.ConvertToClaim
+        </button>
+    }
+    <button class="btn btn-default" id="btnCleanFormNotice">
+        <i class="fa fa-eraser" aria-hidden="true"></i>
+        <span class="" aria-hidden="true">@Resources.Language.ButtonClear</span>
+    </button>
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0307"))
+    {
+        <button class="btn btn-primary new" id="btnSaveClaimNotice">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.SaveNotice</span>
+        </button>
+    }
+
+</script>
+<div>
+    <!--Vista Parcial del Aviso segun el PageName-->
+    <div div class="row">
+        <div class="uif-col-12">
+            @{
+                {
+                    string PageName = ViewBag.Page;
+                    @Html.Partial(PageName);
+                }
+            }
+            @*<div class="row">
+                    <div class="uif-col-12">
+                        <div id="coveragespanel">
+                            <h5>
+                                <strong>@Resources.Language.AffectedCoverages</strong>
+                            </h5>
+                            @Html.Partial("CoveragesPartial")
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+@* // -- // Modales // -- // *@
+<div class="uif-modal" id="modalSchedule">
+    <div class="uif-modalbody">
+        @Html.Partial("ScheduleDialog")
+    </div>
+    <div class="uif-modalbuttons">
+        <button id="btnCancelSchedule" class="btn btn-default">@Resources.Language.Cancel</button>
+        <button id="btnSchedule" class="btn btn-primary">@Resources.Language.Schedule</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalObjected">
+    <div class="uif-modalbody">
+        @Html.Partial("ClaimNoticeObjectedPartial")
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnObjectedNo" onclick="return false">@Resources.Language.No</button>
+        <button type="button" class="btn btn-primary" id="btnObjectedYes" data-dismiss="modal">@Resources.Language.Yes</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalCoverage">
+    <form id="formCoverage" class="form">
+        <div class="uif-modalbody">
+            @Html.Partial("CoveragesDialog")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="" data-dismiss="modal">@Resources.Language.Cancel</button>
+            <button type="button" class="btn btn-primary" id="btnAddCoverage">@Resources.Language.Accept</button>
+        </div>
+    </form>
+</div>
+
+<div class="uif-modal" id="modalClaimNoticeMap">
+    <div class="uif-modalbody">
+        @Html.Partial("../Notice/ClaimNoticeMap")
+    </div>
+
+    <div class="uif-modalbuttons">
+        <button id="btnCancelNoticeMap" class="btn btn-default" data-dismiss="modal"> @Resources.Language.Cancel</button>
+        <button id="btnsaveNoticeMap" class="btn btn-primary"> @Resources.Language.Schedule </button>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<map version="2.0" type="class" name="RiskCoverage" namespace="Sistran.Core.Application.Quotation" file-version="1.0" description="RISK_COVERAGE_ENTITY">
+  <properties>
+    <property name="QuotationId" type="Integer" key="true" description="QUOTATION_ID_PROPERTY" />
+    <property name="RiskId" type="Integer" key="true" description="RISK_ID_PROPERTY" />
+    <property name="CoverageId" type="Integer" key="true" description="COVERAGE_ID_PROPERTY" />
+    <property name="CoverNum" type="Integer" description="COVER_NUM_PROPERTY" />
+    <property name="IsDeclarative" type="Boolean" description="IS_DECLARATIVE_PROPERTY" />
+    <property name="IsMinPremiumDeposit" type="Boolean" description="IS_MIN_PREMIUM_DEPOSIT_PROPERTY" />
+    <property name="FirstRiskTypeCode" type="Integer" description="FIRST_RISK_TYPE_CODE_PROPERTY" />
+    <property name="CalculationTypeCode" type="Integer" description="CALCULATION_TYPE_CODE_PROPERTY" />
+    <property name="DeclaredAmount" type="Decimal" precision="18" scale="2" description="DECLARED_AMOUNT_PROPERTY" />
+    <property name="PremiumAmount" type="Decimal" precision="18" scale="2" description="PREMIUM_AMOUNT_PROPERTY" />
+    <property name="LimitAmount" type="Decimal" precision="18" scale="2" description="LIMIT_AMOUNT_PROPERTY" />
+    <property name="SublimitAmount" type="Decimal" precision="18" scale="2" description="SUBLIMIT_AMOUNT_PROPERTY" />
+    <property name="LimitInExcess" type="Decimal" precision="18" scale="2" description="LIMIT_IN_EXCESS_PROPERTY" />
+    <property name="LimitOccurrenceAmount" type="Decimal" precision="18" scale="2" description="LIMIT_OCCURRENCE_AMOUNT_PROPERTY" />
+    <property name="LimitClaimantAmount" type="Decimal" precision="18" scale="2" description="LIMIT_CLAIMANT_AMOUNT_PROPERTY" />
+    <property name="AccPremiumAmount" type="Decimal" precision="18" scale="2" description="ACC_PREMIUM_AMOUNT_PROPERTY" />
+    <property name="AccLimitAmount" type="Decimal" precision="18" scale="2" description="ACC_LIMIT_AMOUNT_PROPERTY" />
+    <property name="AccSublimitAmount" type="Decimal" precision="18" scale="2" description="ACC_SUBLIMIT_AMOUNT_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" description="CURRENT_FROM_PROPERTY" />
+    <property name="RateTypeCode" type="Integer" description="RATE_TYPE_CODE_PROPERTY" />
+    <property name="Rate" type="Decimal" precision="18" scale="4" nullable="true" description="RATE_PROPERTY" />
+    <property name="CurrentTo" type="DateTime" nullable="true" description="CURRENT_TO_PROPERTY" />
+    <property name="MainCoverageId" type="Integer" nullable="true" description="MAIN_COVERAGE_ID_PROPERTY" />
+    <property name="MainCoveragePercentage" type="Decimal" precision="7" scale="4" nullable="true" description="MAIN_COVERAGE_PERCENTAGE_PROPERTY" />
+    <property name="ShortTermCode" type="Integer" nullable="true" description="SHORT_TERM_CODE_PROPERTY" />
+    <property name="ShortTermPercentage" type="Decimal" precision="7" scale="4" nullable="true" description="SHORT_TERM_PERCENTAGE_PROPERTY" />
+    <property name="ConditionText" type="String" size="2147483647" nullable="true" description="CONDITION_TEXT_PROPERTY" />
+    <property name="IsAutoReinstSum" type="Boolean" description="IS_AUTO_REINST_SUM_PROPERTY" />
+    <property name="IsFacultative" type="Boolean" description="IS_FACULTATIVE_PROPERTY" />
+    <property name="SurchargeAmount" type="Decimal" precision="18" scale="2" nullable="true" description="SURCHARGE_AMOUNT_PROPERTY" />
+    <property name="DiscountAmount" type="Decimal" precision="18" scale="2" nullable="true" description="DISCOUNT_AMOUNT_PROPERTY" />
+    <property name="SurchargeRate" type="Decimal" precision="18" scale="4" nullable="true" description="SURCHARGE_RATE_PROPERTY" />
+    <property name="DiscountRate" type="Decimal" precision="18" scale="4" nullable="true" description="DISCOUNT_RATE_PROPERTY" />
+    <property name="SurchargeRateTypeCode" type="Integer" nullable="true" description="SURCHARGE_RATE_TYPE_CODE_PROPERTY" />
+    <property name="DiscountRateTypeCode" type="Integer" nullable="true" description="DISCOUNT_RATE_TYPE_CODE_PROPERTY" />
+    <property name="DiffMinPremiumAmount" type="Decimal" precision="18" scale="2" nullable="true" description="DIFF_MIN_PREMIUM_AMOUNT_PROPERTY" />
+    <property name="EndorsementLimitAmount" type="Decimal" precision="18" scale="2" nullable="true" description="ENDORSEMENT_LIMIT_AMOUNT_PROPERTY" />
+    <property name="EndorsementSublimitAmount" type="Decimal" precision="18" scale="2" nullable="true" description="ENDORSEMENT_SUBLIMIT_AMOUNT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="RISK_COVERAGE" schema="QUO" alias="RISK_COVERAGE" update="true">
+      <columns>
+        <column name="QUOTATION_ID" type="Int32" property="QuotationId" key="true" />
+        <column name="RISK_ID" type="Int32" property="RiskId" key="true" />
+        <column name="COVERAGE_ID" type="Int32" property="CoverageId" key="true" />
+        <column name="COVER_NUM" type="Int16" property="CoverNum" allowNull="false" />
+        <column name="IS_DECLARATIVE" type="Boolean" property="IsDeclarative" allowNull="false" />
+        <column name="IS_MIN_PREMIUM_DEPOSIT" type="Boolean" property="IsMinPremiumDeposit" allowNull="false" />
+        <column name="FIRST_RISK_TYPE_CD" type="Byte" property="FirstRiskTypeCode" allowNull="false" />
+        <column name="CALCULATION_TYPE_CD" type="Int16" property="CalculationTypeCode" allowNull="false" />
+        <column name="DECLARED_AMT" type="Decimal" property="DeclaredAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="PREMIUM_AMT" type="Decimal" property="PremiumAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="LIMIT_AMT" type="Decimal" property="LimitAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="SUBLIMIT_AMT" type="Decimal" property="SublimitAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="LIMIT_IN_EXCESS" type="Decimal" property="LimitInExcess" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="LIMIT_OCCURRENCE_AMT" type="Decimal" property="LimitOccurrenceAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="LIMIT_CLAIMANT_AMT" type="Decimal" property="LimitClaimantAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="ACC_PREMIUM_AMT" type="Decimal" property="AccPremiumAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="ACC_LIMIT_AMT" type="Decimal" property="AccLimitAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="ACC_SUBLIMIT_AMT" type="Decimal" property="AccSublimitAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" allowNull="false" />
+        <column name="RATE_TYPE_CD" type="Byte" property="RateTypeCode" allowNull="false" />
+        <column name="RATE" type="Decimal" property="Rate" size="19" precision="18" scale="4" />
+        <column name="CURRENT_TO" type="DateTime" property="CurrentTo" />
+        <column name="MAIN_COVERAGE_ID" type="Int32" property="MainCoverageId" />
+        <column name="MAIN_COVERAGE_PCT" type="Decimal" property="MainCoveragePercentage" size="19" precision="7" scale="4" />
+        <column name="SHORT_TERM_CD" type="Byte" property="ShortTermCode" />
+        <column name="SHORT_TERM_PCT" type="Decimal" property="ShortTermPercentage" size="19" precision="7" scale="4" />
+        <column name="CONDITION_TEXT" type="String" property="ConditionText" size="2147483647" />
+        <column name="IS_AUTO_REINST_SUM" type="Boolean" property="IsAutoReinstSum" allowNull="false" />
+        <column name="IS_FACULTATIVE" type="Boolean" property="IsFacultative" allowNull="false" />
+        <column name="SURCHARGE_AMT" type="Decimal" property="SurchargeAmount" size="19" precision="18" scale="2" />
+        <column name="DISCOUNT_AMT" type="Decimal" property="DiscountAmount" size="19" precision="18" scale="2" />
+        <column name="SURCHARGE_RATE" type="Decimal" property="SurchargeRate" size="19" precision="18" scale="4" />
+        <column name="DISCOUNT_RATE" type="Decimal" property="DiscountRate" size="19" precision="18" scale="4" />
+        <column name="SURCHARGE_RATE_TYPE_CD" type="Byte" property="SurchargeRateTypeCode" />
+        <column name="DISCOUNT_RATE_TYPE_CD" type="Byte" property="DiscountRateTypeCode" />
+        <column name="DIFF_MIN_PREMIUM_AMT" type="Decimal" property="DiffMinPremiumAmount" size="19" precision="18" scale="2" />
+        <column name="ENDORSEMENT_LIMIT_AMT" type="Decimal" property="EndorsementLimitAmount" size="19" precision="18" scale="2" />
+        <column name="ENDORSEMENT_SUBLIMIT_AMT" type="Decimal" property="EndorsementSublimitAmount" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

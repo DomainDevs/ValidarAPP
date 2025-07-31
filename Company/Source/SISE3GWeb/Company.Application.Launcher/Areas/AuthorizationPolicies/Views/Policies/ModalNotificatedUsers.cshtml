@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+<div class="uif-modal" id="modalNotificatedUsers">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-6">
+                <label>Jerarquia</label>
+                <select class="uif-select" id="ddlHierarchyNotUsers" data-val="true" data-id="Id" data-native="false" data-name="Description"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <form class="uif-inline" id="editUserNot">
+                    <input type="hidden" name="hdnmIndexNotUser" id="hdnmIndexNotUser" value="" />
+                    <div class="row">
+                        <div class="column">
+                            <input type="checkbox" name="chkNotNotificated" id="chkNotNotificated" value=""/>
+                            <label for="chkNotNotificated">Notificador</label>
+                        </div>
+                        <div class="column">
+                            <input type="checkbox" name="chkNotDefault" id="chkNotDefault" value=""/>
+                            <label for="chkNotDefault">Default</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div  class="uif-col-12">
+                <table class="uif-table" id="tableNotUsers"
+                       data-title=""
+                       data-add="false"
+                       data-edit="true"
+                       data-delete="false"
+                       data-filter="false"
+                       data-sort="true"
+                       data-selectiontype="none"
+                       data-paginate="true">
+                    <thead>
+                    <tr>
+                        <th data-property="Account">Usuario</th>
+                        <th data-property="Notificated" data-type="boolean">Notificador</th>
+                        <th data-property="Default" data-type="boolean">Default</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0642"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSendNotificatedUsers">@Resources.Language.ButtonSave</button>
+        }
+
+    </div>
+</div>

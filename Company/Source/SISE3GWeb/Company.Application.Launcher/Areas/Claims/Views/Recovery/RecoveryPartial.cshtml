@@ -1,0 +1,377 @@
+﻿@{
+    Layout = null;
+}
+<form id="formRecoveryClaims" class="form form-space-adjusted" autocomplete="off">
+    <div>
+        <h5>
+            <strong>@Resources.Language.RecoverySearchClaim</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-2">
+                <label>@Resources.Language.Branch</label>
+                <select class="uif-select form-control" id="selectBranch" data-id="Id" data-name="Description" name="BranchId"
+                        data-val="true" data-native="false" data-filter="true"></select>
+                <span class="text-danger" data-valmsg-for="BranchId" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.Prefix</label>
+                <select class="uif-select form-control" id="selectPrefix" data-id="Id" data-name="Description" name="PrefixId"
+                        data-val="true" data-native="false" data-filter="true"></select>
+                <span class="text-danger" data-valmsg-for="PrefixId" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.LabelNumberPolicy</label>
+                <input type="text" class="uif-input rightAlign" id="inputPolicyDocumentNumber" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                       data-name="Description" name="PolicyDocumentNumber" required onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+                <span class="text-danger" data-valmsg-for="PolicyDocumentNumber" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.ClaimNumber</label>
+                <input type="text" id="claimRecoverySearchClaimNumber" name="claimRecoverySearchClaimNumber" maxlength="9"
+                       data-val-required="@Resources.Language.RequiredField" data-val="true" class="uif-input rightAlign" required />
+                <span class="text-danger" data-valmsg-for="claimRecoverySearchClaimNumber" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="uif-col-2">
+                <div class="without-label">
+                    <button id="Search" class="btn btn-default secondary-Colombia" type="button">  <i class="fa fa-search" aria-hidden="true"></i>@Resources.Language.search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div id="accPolicyInformation">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <h5>
+                <strong>@Resources.Language.PolicyInformation</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.Branch</label>
+            <input type="text" name="_branch" value="" id="_branch" class="uif-input" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.Prefix</label>
+            <input type="text" name="_prefix" value="" id="_prefix" class="uif-input" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelNumberPolicy</label>
+            <input type="text" name="_policy" value="" id="_policy" class="uif-input rightAlign" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.PolicyEndorsementNumber</label>
+            <input type="text" name="_endorsement" value="" id="_endorsement" class="uif-input rightAlign" disabled="disabled" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelTaker</label>
+            <input type="text" name="_nameInsured" value="" id="_nameInsured" class="uif-input" disabled="disabled" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="without-label">
+                <button id="btnGetPolicyInfo" tabindex="0" class="btn btn-default secondary-Colombia" type="button"> <i class="fa fa-search" aria-hidden="true"></i> @Resources.Language.PolicyConsult </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <h5>
+        <strong>@Resources.Language.SubClaims</strong>
+    </h5>
+    <div class="row">
+        <div class="uif-col-12">
+            <table id="tblSubClaims" class="uif-table" data-title="<b>@Resources.Language.SubClaims</b>" data-source="null" data-edit="false" data-delete="false" data-filter="false" data-add="false" data-paginate="true" data-selectiontype="null">
+                <thead>
+                    <tr>
+                        <th data-property="SubClaim"><b>@Resources.Language.SubClaim</b></th>
+                        <th data-property="RiskDescription"><b>@Resources.Language.Risk</b></th>
+                        <th data-property="CoverageDescription"><b>@Resources.Language.Coverage</b></th>
+                        <th data-property="Insured"><b>@Resources.Language.InsuredOrThird</b></th>
+                        <th data-property="Currency"><b>@Resources.Language.Currency</b></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h5>
+        <strong>@Resources.Language.Recoveries</strong>
+    </h5>
+    <div class="row">
+        <div class="uif-col-12">
+            <table id="tblRecoveries" class="uif-table" data-title="<b>@Resources.Language.Recoveries</b>" data-source="null" data-edit="true" data-delete="false" data-filter="false" data-add="false" data-paginate="true" data-selectiontype="none" data-select="false">
+                <thead>
+                    <tr>
+                        <th data-property="Id"><b>@Resources.Language.RecoveryNumber</b></th>
+                        <th data-property="RecoveryTypeDescription"><b>@Resources.Language.RecoveryType</b></th>
+                        <th data-property="Description"><b>@Resources.Language.RecoveryDescription</b></th>
+                        <th data-property="DebtorFullName"><b>@Resources.Language.Debtor</b></th>
+                        <th data-property="TotalAmount" data-type="currency"><b>@Resources.Language.RecoveryAmount</b></th>
+                        <th data-property="TotalAmount" data-type="currency"><b>@Resources.Language.RemainingAmount</b></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<form id="RecoveryForm" class="form form-space-adjusted" autocomplete="off">
+    <div>
+        <h5>
+            <strong>@Resources.Language.RecoveryInitialInformation</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-6">
+                <label>@Resources.Language.RecoveryNumber</label>
+                <input type="text" id="recoveryNumber" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.AdmissionDate</label>
+                <input type="text" id="recoveryCreatedDate" data-val-required="@Resources.Language.RequiredField" data-val="true" data-max-date="@DateTime.Now.ToString("dd/MM/yyyy")" name="recoveryCreatedDate" class="uif-datepicker" required />
+                <span class="text-danger" data-valmsg-for="recoveryCreatedDate" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h5>
+            <strong>@Resources.Language.RecoveryDescription</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-12">
+                <textarea id="_recoveryDescription" name="_recoveryDescription" rows="6" cols="85" maxlength="200"></textarea>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="accCancellationRecovery">
+        <h5>
+            <strong>@Resources.Language.RecoveryCancellation</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-6">
+                <label>@Resources.Language.CancellationDate</label>
+                <input type="text" id="recoveryCancellationdDate" name="recoveryCancellationdDate" data-val="true" class="uif-datepicker" />
+            </div>
+
+            <div class="uif-col-6">
+                <label>@Resources.Language.CancellationReason</label>
+                <select class="uif-select form-control" id="selectCancellationReasons" data-id="Id" data-name="Description" name="selectCancellationReasons" data-val="true" data-native="false" data-filter="true"></select>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <h5>
+            <strong>@Resources.Language.RecoveryRecuperator</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.DocumentNumber</label>
+                <input type="text" id="_DocumentNumber" name="_DocumentNumber" maxlength="10" class="uif-autocomplete"
+                       data-source="@Url.Content("~/Recovery/GetRecuperatorsByNameDocumentNumber")" data-val-required="@Resources.Language.RequiredField"
+                       data-displaykey="DocumentNumber" placeholder="@Resources.Language.PlaceHolderDocumentNumber" data-val="true" required />
+                <span class="text-danger" data-valmsg-for="_DocumentNumber" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.FullName</label>
+                <input type="text" id="_FullName" name="_FullName" maxlength="80" class="uif-autocomplete"
+                       data-source="@Url.Content("~/Recovery/GetRecuperatorsByNameDocumentNumber")" data-val-required="@Resources.Language.RequiredField"
+                       data-displaykey="FullName"   placeholder="@Resources.Language.PlaceHolderNameSurname"  data-val="true" required />
+                <span class="text-danger" data-valmsg-for="_FullName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h5>
+            <strong>@Resources.Language.RecoveryDetail</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.RecoveryType</label>
+                <select class="uif-select form-control" id="selectRecoveryType" data-id="Id" data-name="Description" name="selectRecoveryType"
+                        data-val="true" data-val-required="@Resources.Language.RequiredField" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="selectRecoveryType" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.PrescriptionDate</label>
+                <input type="text" id="_recoveryPrescriptionDate" name="_recoveryPrescriptionDate" class="uif-datepicker" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.Company</label>
+                <input type="text" id="_recoveryCompany" name="_recoveryCompany" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.Receipt</label>
+                <input type="text" id="_recoveryReceipt" name="_recoveryReceipt" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="uif-col-6">
+                <label>@Resources.Language.RecoveryClass</label>
+                <div class="row">
+                    <div class="uif-col-6">
+                        <input id="radioRecoveryClassJudicial" type="radio" name="RecoveryClass" value="RecoveryClassJudicial" checked="checked" />
+                        <label for="radioRecoveryClassJudicial">@Resources.Language.Judicial</label>
+                    </div>
+                    <div class="uif-col-6">
+                        <input id="radioRecoveryClassExtraJudicial" type="radio" name="RecoveryClass" value="RecoveryClassExtraJudicial" />
+                        <label for="radioRecoveryClassExtraJudicial">@Resources.Language.ExtraJudicial</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="uif-col-6">
+                <label>@Resources.Language.ResponsibleOfLack</label>
+                <input type="text" id="_recoveryLossResponsible" name="_recoveryLossResponsible" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.AssignedCourt</label>
+                <input type="text" id="_recoveryAssignedCourt" name="_recoveryAssignedCourt" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.ExpedientNumber</label>
+                <input type="text" id="_recoveryExpedientNumber" name="_recoveryExpedientNumber" />
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="uif-col-3">
+                    <label>@Resources.Language.AttorneyAssignmentDate</label>
+                    <input type="text" id="_recoveryAttorneyAssignmentDate" name="_recoveryAttorneyAssignmentDate" class="uif-datepicker" />
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.LastReportDate</label>
+                    <input type="text" id="_recoveryLastReportDate" name="_recoveryLastReportDate" class="uif-datepicker" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <h5>
+            <strong>@Resources.Language.Debtor</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.DocumentNumber</label>
+                <input type="text" id="_DebtorDocumentNumber" name="_DebtorDocumentNumber" class="uif-autocomplete" maxlength="10" data-source="@Url.Content("~/Recovery/GetDebtorsByNameDocumentNumber")"
+                       data-displaykey="DocumentNumber" placeholder="@Resources.Language.PlaceHolderDocumentNumber" data-val-required="@Resources.Language.RequiredField" required />
+                <span class="text-danger" data-valmsg-for="_DebtorDocumentNumber" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.FullName</label>
+                <input type="text" id="_DebtorFullName" class="uif-autocomplete" data-source="@Url.Content("~/Recovery/GetDebtorsByNameDocumentNumber")" name="_DebtorFullName"
+                       maxlength="80" data-displaykey="FullName" placeholder="@Resources.Language.PlaceHolderNameSurname" required />
+                <span class="text-danger" data-valmsg-for="_DebtorFullName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-6">
+                <label>@Resources.Language.Address</label>
+                <input type="text" id="_recoveryDebtorAddress" name="_recoveryDebtorAddress" />
+            </div>
+
+            <div class="uif-col-3">
+                <label>@Resources.Language.Phone</label>
+                <input type="text" id="_recoveryDebtorPhone" name="_recoveryDebtorPhone" />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h5>
+            <strong>@Resources.Language.RecoveryPaymentPlan</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-3">
+                <label >@Resources.Language.PaymentClass</label>
+                <select class="uif-select form-control" id="selectPaymentClass" data-id="Id" data-name="Description" name="selectPaymentClass"
+                        data-val="true"  data-native="false" ></select>
+                <span class="text-danger" data-valmsg-for="selectPaymentClass" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.Currency</label>
+                <select class="uif-select form-control" id="selectCurrency" data-id="Id" data-name="Description" name="selectCurrency"
+                        data-val="true" data-native="false" ></select>
+                <span class="text-danger" data-valmsg-for="selectCurrency" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.NetAmount</label>
+                <input class="rightAlign" type="text" id="_RecoveryNetAmount" name="_RecoveryNetAmount" data-val="true" maxlength="21" data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,16)" />
+                <span class="text-danger" data-valmsg-for="_RecoveryNetAmount" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.Iva</label>
+                <input type="text" id="_RecoveryTax" name="_RecoveryTax" maxlength="2" data-val="true"  />
+                <span class="text-danger" data-valmsg-for="_RecoveryTax" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-2">
+                <label >@Resources.Language.Total</label>
+                <input class="rightAlign uif-input" type="text" id="_RecoveryTotal" name="_RecoveryTotal" disabled="disabled" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="uif-col-4">
+                <label >@Resources.Language.FirstPaymentDue</label>
+                <input type="text" id="_RecoveryFirtPaymentDue" name="_RecoveryFirtPaymentDue" class="uif-datepicker" data-val="true" />
+                <span class="text-danger" data-valmsg-for="_RecoveryFirtPaymentDue" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label >@Resources.Language.RecoveryPaymentsNumber</label>
+                <input class="rightAlign uif-input" type="text" id="_RecoveryPaymentsNumber" name="_RecoveryPaymentsNumber" data-val="true"  maxlength="2"/>
+                <span class="text-danger" data-valmsg-for="_RecoveryPaymentsNumber" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="uif-col-6">
+        <table id="tblAgreedPlan" class="uif-table" data-title="<b>@Resources.Language.AgreedPlan</b>" data-source="null" data-selectiontype="null" data-filter="true" data-paginate="10">
+            <thead>
+                <tr>
+                    <th data-property="Number"><b>@Resources.Language.RecoveryPaymentNumber</b></th>
+                    <th data-property="ExpirationDate"><b>@Resources.Language.DueDate</b></th>
+                    <th data-property="CurrencyDescription"><b>@Resources.Language.Currency</b></th>
+                    <th data-property="Amount" data-type="currency"><b>@Resources.Language.RecoveryAmount</b></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="uif-col-6">
+        <table id="tblPayedPlan" class="uif-table" data-title="<b>@Resources.Language.PlayedPlan</b>" data-edit="false" data-delete="false" data-filter="true" data-add="false" data-paginate="10" data-selectiontype="null">
+            <thead>
+                <tr>
+                    <th data-property="PaymentNumber"><b>@Resources.Language.RecoveryPaymentNumber</b></th>
+                    <th data-property="ReceiptNumber"><b>@Resources.Language.RecoveryReceiptNumber</b></th>
+                    <th data-property="ReceiptDate"><b>@Resources.Language.ReceiptDate</b></th>
+                    <th data-property="Amount" data-type="currency"><b>@Resources.Language.RecoveryAmount</b></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

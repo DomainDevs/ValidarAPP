@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="CostCenterEntryItem" namespace="Sistran.Core.Application.GeneralLedger" file-version="1.0" description="COST_CENTER_ENTRY_ITEM_ENTITY">
+  <properties>
+    <property name="CostCenterEntryItemId" type="Integer" key="true" description="COST_CENTER_ENTRY_ITEM_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="EntryItemId" type="Integer" nullable="true" description="ENTRY_ITEM_ID_PROPERTY" />
+    <property name="CostCenterId" type="Integer" nullable="true" description="COST_CENTER_ID_PROPERTY" />
+    <property name="CostCenterPercentage" type="Decimal" precision="16" scale="2" nullable="true" description="COST_CENTER_PERCENTAGE_PROPERTY" />
+    <property name="IsJournalEntry" type="Boolean" nullable="true" description="IS_JOURNAL_ENTRY_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="COST_CENTER_ENTRY_ITEM" schema="GL" alias="COST_CENTER_ENTRY_ITEM" update="true">
+      <columns>
+        <column name="COST_CENTER_ENTRY_ITEM_ID" type="Int32" property="CostCenterEntryItemId" key="true" identity ="true"/>
+        <column name="ENTRY_ITEM_ID" type="Int32" property="EntryItemId" />
+        <column name="COST_CENTER_ID" type="Int32" property="CostCenterId" />
+        <column name="COST_CENTER_PERCENTAGE" type="Decimal" property="CostCenterPercentage" size="19" precision="16" scale="2" />
+        <column name="IS_JOURNAL_ENTRY" type="Boolean" property="IsJournalEntry" />
+      </columns>
+    </table>
+  </tables>
+</map>

@@ -1,0 +1,224 @@
+﻿<script id="searchNaturalTemplate" type="text/template">
+    <div>
+        <strong> @Resources.LanguagePerson.Names: </strong> {{Surname}} {{MotherLastName}} {{Names}}
+    </div>
+    <div>
+        <strong> @Resources.LanguagePerson.LabelTypeDocument </strong>  {{DocumentTypeId}}
+        <strong>@Resources.LanguagePerson.LabelDocumentNumber: </strong>  {{IdCardNo}} {{Document}}
+    </div>
+</script>
+
+
+<script id="searchLegalTemplate" type="text/template">
+    <div>
+        <strong> @Resources.LanguagePerson.Names: </strong>  {{Name}}
+    </div>
+    <div>
+        <strong> @Resources.LanguagePerson.LabelTypeDocument </strong>   {{IdentificationDocument.DocumentType.Id}} 
+        <strong>@Resources.LanguagePerson.LabelDocumentNumber: </strong> {{IdentificationDocument.Number}}
+
+    </div>
+</script>
+
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.LanguagePerson.QueryPerson</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.LanguagePerson.PersonType</label>
+            <select class="uif-select" id="selectTypePerson" data-val="true" data-val-required="@Resources.Language.ErrorDocumentPersonType"
+                    data-id="Value" data-name="Text" name="PersonTypeId"></select>
+        </div>
+    </div>
+    <div id="panelSearchPerson">
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.Surname</label>
+                <input type="text" id="inputSurnameAdv" maxlength="20" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.Secondsurname</label>
+                <input type="text" id="inputSecondsurnameAdv" maxlength="20" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.Names</label>
+                <input type="text" id="inputNamesAdv" maxlength="30" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.LanguagePerson.LabelTypeDocument</label>
+                <select class="uif-select form-control" id="selectDocumentTypePnSearch" data-id="Id" data-name="SmallDescription"></select>
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.LabelDocumentNumber</label>
+                <input type="text" id="inputDocumentPersonAdv" maxlength="14" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.codePerson</label>
+                <input type="text" id="inputCodePersonAdv" class="OnlyNumber" maxlength="14" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-4">
+                <div class="without-label">
+                    <button class="btn btn-primary-Co width-container" id="btnsearchPersonAdv" type="button">
+                        <span aria-hidden="true"></span>
+                        @Resources.LanguagePerson.search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelSearchCompany">
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.TradeName</label>
+                <input type="text" id="inputTradeNameAdv" maxlength="120" />
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.LanguagePerson.LabelTypeDocument</label>
+                <select class="uif-select form-control" id="selectCompanyTypePnSearch" data-id="Id" data-name="SmallDescription"></select>
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.LabelDocumentNumber</label>
+                <input type="text" id="inputDocumentCompanyAdv" maxlength="14" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.codePerson</label>
+                <input type="text" id="inputCodePersonCompanyAdv" class="OnlyNumber" maxlength="14" />
+            </div>
+            <div class="uif-col-4">
+                <div class="without-label">
+                    <button class="btn btn-primary-Co width-container" id="btnsearchCompanyAdv" type="button">
+                        <span aria-hidden="true"></span>
+                        @Resources.LanguagePerson.search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listviewSearchPerson">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchPerson" type="button">@Resources.LanguagePerson.Cancel</button>
+                <button class="btn btn-primary" id="btnLoadPerson" type="button">@Resources.LanguagePerson.Accept</button>
+            </div>
+
+        </div>
+    </div>
+
+</form><form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.LanguagePerson.QueryPerson</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.LanguagePerson.PersonType</label>
+            <select class="uif-select" id="selectTypePerson" data-val="true" data-val-required="@Resources.Language.ErrorDocumentPersonType"
+                              data-id="Value" data-name="Text" name="PersonTypeId">
+            </select>
+        </div>
+    </div>
+    <div id="panelSearchPerson">
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.Surname</label>
+                <input type="text" id="inputSurnameAdv" maxlength="20" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.Secondsurname</label>
+                <input type="text" id="inputSecondsurnameAdv" maxlength="20" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.Names</label>
+                <input type="text" id="inputNamesAdv" maxlength="30" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.LanguagePerson.LabelTypeDocument</label>
+                <select class="uif-select form-control" id="selectDocumentTypePnSearch" data-id="Id" data-name="SmallDescription"></select>
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.LabelDocumentNumber</label>
+                <input type="text" id="inputDocumentPersonAdv" maxlength="14" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.codePerson</label>
+                <input type="text" id="inputCodePersonAdv" class="OnlyNumber" maxlength="14" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-4">
+                <div class="without-label">
+                    <button class="btn btn-primary-Co width-container" id="btnsearchPersonAdv" type="button">
+                        <span aria-hidden="true"></span>
+                        @Resources.LanguagePerson.search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelSearchCompany">
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.TradeName</label>
+                <input type="text" id="inputTradeNameAdv" maxlength="120" />
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.LanguagePerson.LabelTypeDocument</label>
+                <select class="uif-select form-control" id="selectCompanyTypePnSearch" data-id="Id" data-name="SmallDescription"></select>
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.LabelDocumentNumber</label>
+                <input type="text" id="inputDocumentCompanyAdv" maxlength="14" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.LanguagePerson.codePerson</label>
+                <input type="text" id="inputCodePersonCompanyAdv" class="OnlyNumber" maxlength="14" />
+            </div>
+            <div class="uif-col-4">
+                <div class="without-label">
+                    <button class="btn btn-primary-Co width-container" id="btnsearchCompanyAdv" type="button">
+                        <span aria-hidden="true"></span>
+                        @Resources.LanguagePerson.search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listviewSearchPerson">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchPerson" type="button">@Resources.LanguagePerson.Cancel</button>
+                <button class="btn btn-primary" id="btnLoadPerson" type="button">@Resources.LanguagePerson.Accept</button>
+            </div>
+
+        </div>
+    </div>
+
+</form>

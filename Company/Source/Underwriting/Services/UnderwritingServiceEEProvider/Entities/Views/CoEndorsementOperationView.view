@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CoEndorsementOperationView">
+  <collections>
+    <collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, 
+                Core.Issuance.Entities"></collection>
+    <collection name="EndorsementOperation" type="Sistran.Core.Application.Issuance.Entities.EndorsementOperation, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="TempPolicyControl" type="Sistran.Core.Application.Issuance.Entities.TempPolicyControl, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Endorsement" destination="EndorsementOperation" name="EndorsementEndorsementOperation" type="Inner">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="Endorsement" destination="Policy" name="EndorsementPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Endorsement" destination="TempPolicyControl" name="EndorsementTempPolCtrl" type="Left">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+  </relations>
+</view>

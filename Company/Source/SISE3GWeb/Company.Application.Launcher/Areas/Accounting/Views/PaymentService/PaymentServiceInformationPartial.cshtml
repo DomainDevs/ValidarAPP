@@ -1,0 +1,108 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+<style>
+    #uploadAgentFile {
+        z-index: -999;
+    }
+</style>
+
+<div class="uif-row" id="cata">
+    <div class="uif-col-6">
+        <input id="_radioInsured" type="radio" class="cPersonType" name="TipoPersona" value="2" checked="checked"/>@Global.Insured
+        <input id="_radioAgent" type="radio" class="cPersonType" name="TipoPersona" value="1"/>@Global.Agent
+    </div>
+</div>
+<br/>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        @*AUTOCOMPLETES POR ASEGURADO*@
+        <div id="insuredSearch" class="uif-row">
+            <div class="uif-col-4">
+                <label class="control-label">@Global.DocNumInsured</label>
+                <br/>
+                <input class="uif-autocomplete" type="text"
+                       data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                       data-displaykey="DocumentNumber" 
+                       placeholder='@Global.EnterInsurdeDocument'
+                       id="InsuredDocumentNumber"
+                       name="InsuredDocumentNumber" 
+                       data-val-required='@Global.RequiredField'
+                       data-val="true" 
+                       maxlength="20"/>
+                <span class="text-danger" data-valmsg-for="InsuredDocumentNumber" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label">@Global.InsuredName</label>
+                <br/>
+                <input class="uif-autocomplete" type="text"
+                       data-source="@Url.Action("GetInsuredByInsuredName", "Common")"
+                       data-displaykey="Name"
+                       placeholder='@Global.EnterInsurdeName' 
+                       id="PaymentServiceInsuredName"
+                       data-val-required='@Global.RequiredField'
+                       data-val="true" 
+                       name="PaymentServiceInsuredName"/>
+                <span class="text-danger" data-valmsg-for="PaymentServiceInsuredName" data-valmsg-replace="true">
+                </span>
+            </div>
+        </div>
+
+        @*AUTOCOMPLETES POR AGENTE*@
+        <div id="agentSearch" class="uif-row">
+            <div class="uif-col-4">
+                <label class="control-label">@Global.AgentDocumentNumber</label>
+                <br />
+                <input class="uif-autocomplete" type="text"
+                       data-source="@Url.Action("GetAgentByDocumentNumber", "Common")"
+                       data-displaykey="DocumentNumber" 
+                       placeholder='@Global.EnterInsurdeDocument'
+                       id="_documentNumber"
+                       name="_documentNumber" 
+                       data-val-required='@Global.RequiredField'
+                       data-val="true" 
+                       maxlength="20" />
+                <span class="text-danger" data-valmsg-for="_documentNumber" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label">@Global.AgentName</label>
+                <br />
+                <input class="uif-autocomplete" type="text"
+                       data-source="@Url.Action("GetAgentByName", "Common")"
+                       data-displaykey="Name"
+                       placeholder='@Global.EnterInsurdeName' 
+                       id="_names"
+                       data-val-required='@Global.RequiredField'
+                       data-val="true" 
+                       name="_names" />
+                <span class="text-danger" data-valmsg-for="_names" data-valmsg-replace="true">
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*texto del nombre*@
+<div class="uif-row">
+    <div class="uif-col-4">
+        <b id="information">@Global.MainPaymentServiceInformationInsured</b>
+        <br/>
+        <input type="text" id="_informationData" name="_informationData" disabled="disabled"/>
+    </div>
+    <div class="uif-col-6" id="AddFileButton">
+        <b>@Global.File</b>
+        <input type="text" id="_fileLocation" name="_fileLocation" disabled="disabled" hidden="hidden" />
+        <form id="imageform" method="post" enctype="multipart/form-data" target="iframeUpload">
+            <input type="file" name="uploadAgentFile" id="uploadAgentFile" class="uif-inputfile"
+                   onchange="if (ValidateFileAgentPaymentService()) uploadAjaxAgentPaymentService(); "/>
+        </form>
+        <input type="text" id="btnFilesDialog" name="btnFilesDialog" disabled="disabled" hidden="true" />
+    </div>
+    <div class="uif-col-2">
+        <br/>
+        <button class="btn btn-default" id="btnExcel">
+            <i class="fa fa-save"></i> @Global.Generation
+        </button>
+    </div>
+</div>

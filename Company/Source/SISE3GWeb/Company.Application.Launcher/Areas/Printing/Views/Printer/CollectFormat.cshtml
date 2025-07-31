@@ -1,0 +1,126 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Printing.Models.PrinterModelsView
+
+@section Title
+{
+    <div class="row main-title">
+        <div class="column">
+            Impresion formato de recaudo
+        </div>
+    </div>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div>
+            <button type="button" class="btn btn-default" id="btnClose"><i class="fa fa-times-circle" aria-hidden="true"></i>@Resources.Language.ButtonExit</button>
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0661"))
+            {
+                <button type="button" class="btn btn-primary" id="btnPrintFormat" disabled="disabled">
+                    <i class="fa fa-print" aria-hidden="true"></i>@Resources.Language.LabelPrinter
+                </button>
+            }
+
+        </div>
+    </footer>
+}
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formCollectPrinting" class="form without-peripheral">
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelBranch</label>
+            <select class="uif-select form-control" id="selectBranch" data-val="true" data-native="false" data-source='@Url.Content("~/Printer/GetBranches")'
+                    @*data-val-required="@Resources.Language.ErrorDocumentControlBranch"*@ data-id="Id" data-name="Description" name="BranchId" data-selectedId="@Model.BranchId"></select>
+            @Html.ValidationMessageFor(model => model.BranchId)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelPrefixCommercial</label>
+            <select class="uif-select form-control" id="selectPrefixCommercial" data-val="true" data-native="false" data-source='@Url.Content("~/Printer/GetPrefixes")'
+                    @*data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"*@ data-id="Id" data-name="Description" name="PrefixId" data-selectedId="@Model.PrefixId"></select>
+            @Html.ValidationMessageFor(model => model.PrefixId)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelNumberPolicy</label>
+            @Html.TextBoxFor(model => model.PolicyNumber, new { id = "inputPolicyNumber", @class = "uif-input-search" })
+            @Html.ValidationMessageFor(model => model.PolicyNumber)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelEndorsement</label>
+            <select class="uif-select form-control" id="selectEndorsement" data-id="Id" data-native="false" data-name="Description"
+                    name="EndorsementId" data-val="true" data-val-required="@Resources.Language.ErrorDocumentEndorsement" data-selectedId="@Model.EndorsementId"></select>
+            @Html.ValidationMessageFor(model => model.EndorsementId)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-3">
+                <div class="without-label">
+                    <input type="checkbox" id="checkEmail" name="checkEmail" />
+                    <label for="checkEmail">@Resources.Language.LabelSendEmail</label>
+                </div>
+            </div>
+            <div class="uif-col-6">
+                <div class="without-label">
+                    <div class="uif-col-9">
+                        <input type="text" id="inputEmail" data-val-maxlength-max="60" disabled="disabled" placeholder="Email..." />
+                    </div>
+                    <div class="uif-col-3">
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0660"))
+                        {
+                            <a id="btnSendMail" class="btn btn-primary-Co" style="display:none"><i class="fa fa-send" style="color:white"></i><span> Enviar</span></a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row" style="display:none" id="divQuotes">
+        <div class="uif-col-12">
+            <table data-paginate="false" data-selectiontype="multiple" data-filter="false" class="uif-table" id="tableQuote" data-title="Cuotas del endoso" data-add="false">
+                <thead>
+                    <tr>
+                        <th data-property="QuoteNumber" data-visible="true">N.Cuota</th>
+                        <th data-property="Date" data-visible="true">Fecha Vencimiento</th>
+                        <th data-property="TotalValue" data-visible="true">Prima Total</th>
+                        <th data-property="State" data-visible="true">Estado</th>
+                        <th data-property="QuoteValue" data-visible="true">Saldo</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" style="display:none" id="divDownload">
+        @*<div class="uif-col-12">*@
+        <div class="uif-col-3">
+            <div class="without-label">
+                <label>@Resources.Language.ProcessPrinting</label>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <div class="without-label">
+                <a href="" id="hrfPathPdf" class="btn btn-primary" download="" target="_blank">
+                    <i class="fa fa-download"></i>
+                    <span id="hrfPathName" style="padding-left:5px"></span>
+                </a>
+            </div>
+        </div>
+        @*</div>*@
+    </div>
+    <div>
+        <iframe src="" type="application/pdf" id="embed" width="100%" height="400px" style="display:none"> </iframe>
+    </div>
+</form>
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/CollectFormat");
+}

@@ -1,0 +1,42 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.BinnacleViewModel
+
+<form id="AddBinnacle" name="AddBinnacle">
+
+    @Html.AntiForgeryToken()
+    <div class="row uif-row-pc" style="padding-top:5px;">
+        @Html.HiddenFor(model => model.ContractorId)
+        @Html.HiddenFor(model => model.GuaranteeId)
+        @Html.HiddenFor(model => model.SecureName, new { id = "inputBinacleSecureName" })
+        @Html.HiddenFor(model => model.NumberDocument, new { id = "Binnacle-NumberDocument" })
+        <div class="uif-col col-md-2">
+            <label>@Resources.Language.LabelGuarantee</label>
+        </div>
+        <div class="uif-col col-md-6">
+            <input type="text" id="inputTypeGuarantee" disabled="disabled" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div id="listBinnacle" class="uif-listview"></div>
+        </div>
+    </div>
+
+    @Html.TextBox("DateNow", DateTime.Now.Date, "{0:dd/MM/yyyy}", new { @class = "uif-datepicker", disabled = "disabled" })
+
+    <br />
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.LabelObservations</label>
+            @Html.TextAreaFor(model => model.Observation, new { cols = "12", rows = "10", style = "resize: none", @class = "changeToUpper" })
+            @Html.ValidationMessageFor(model => model.Observation)
+        </div>
+    </div>
+</form>
+
+<script id="display-binnacle" type="text/template">
+    <div>{{LogDate}} - {{UserName}}</div>
+    <div>{{Description}}</div>
+
+</script>

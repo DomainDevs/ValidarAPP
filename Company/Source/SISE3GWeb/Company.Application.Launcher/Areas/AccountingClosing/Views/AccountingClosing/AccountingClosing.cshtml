@@ -1,0 +1,141 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+    ViewBag.Title = Global.MonthlyProcess;
+}
+
+@section breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.MonthlyProcess</li>
+    </ol>
+}
+
+@section Toolbar
+{
+<footer>
+    <button class="btn btn-primary" role="button" id="processAccountingClosing" onclick="return false" disabled="disabled">
+        <span class="glyphicon glyphicon-cog"></span>
+        @Global.Generate
+    </button>
+    <button class="btn btn-primary" role="button" id="printAccountingClosing" onclick="return false" disabled="disabled">
+        <span class="glyphicon glyphicon-print"></span>
+        @Global.PrintReport
+    </button>&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-primary" role="button" id="excelAccountingClosing" href="#">
+        <span class="glyphicon glyphicon-export"></span>
+        @Global.ExportToExcel
+    </a>
+    <button class="btn btn-primary" role="button" id="accountingAccountingClosing" onclick="return false" disabled="disabled">
+        <span class="glyphicon glyphicon-usd"></span>
+        @Global.Accounting
+    </button>
+</footer>
+}
+
+@section modals{
+    <div class="modal fade" id="modalPrint">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">
+                        <label id="deleteMessageTitle">@Global.Print</label>
+                    </h4>
+                </div>
+                <div class="modal-body" id="printMessageModal">
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                    <button type="submit" class="btn btn-primary" id="btnPrintModal" onclick="return false">@Global.Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="uif-panel" id="id" data-title="@Global.MonthlyClosure">
+    <div class="uif-panel">
+        <div class="uif-row">
+            <div class="col-md-3">
+                @Html.Label(Global.Module, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("module", Enumerable.Empty<SelectListItem>(),
+                new
+                {
+                    @class = "uif-select form-control",
+                    data_source = @Url.Content("~/AccountingClosing/Base/GetModuleDates"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    id = "module"
+                })
+            </div>
+            <div class="col-md-3">
+                @Html.Label(Global.Day, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("day", Enumerable.Empty<SelectListItem>(),
+                    new
+                    {
+                        @class = "uif-select form-control",
+                        //data_source = @Url.Content("~/AccountingClosing/Base/GetMonths"),
+                        disabled = "disabled",
+                        data_id = "Id",
+                        data_name = "Description",
+                        id = "day"
+                    })
+            </div>
+
+            <div class="col-md-3">
+                @Html.Label(Global.Month, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("month", Enumerable.Empty<SelectListItem>(),
+                    new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/AccountingClosing/Base/GetMonths"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        id = "month"
+                    })
+            </div>
+            <div class="uif-col-3">
+                @Html.Label(Global.Year, htmlAttributes: new { @class = "control-label" })
+                <input type="text" name="Year" id="YearAccountingClosing" disabled="disabled" class="form-control" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertAccountingClosing"></div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-panel" id="idPanel" data-title="Datos">
+        <table class="uif-table" data-title="@Global.ProcessState" id="tblReports" data-add="false" data-edit="false"
+               data-delete="false" data-filter="false" data-paginate="false" data-pagesize="false"
+               data-selectiontype="multiple">
+            <thead>
+                <tr>
+                    <th data-property="Module">@Global.Module</th>
+                    <th data-property="StartDate">@Global.StartDate</th>
+                    <th data-property="EndDate">@Global.EndDate</th>
+                    <th data-property="Delay">@Global.Elapsed</th>
+                    <th data-property="InProgress">@Global.ProcessState</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001; opacity: .8; filter: alpha(opacity=70);display:none">
+    <p style="position: absolute; top: 30%; left: 45%; color: White;">
+        @Global.MessageWaiting<img src="@Url.Content("~/Images/loader.gif")">
+    </p>
+</div>
+
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagIncomeAndExpensesModule" value="@ViewBag.IncomeAndExpensesModule" />
+
+@section scripts
+{
+    @Scripts.Render("~/accountingClosing/bundles/AccountingClosing")
+}

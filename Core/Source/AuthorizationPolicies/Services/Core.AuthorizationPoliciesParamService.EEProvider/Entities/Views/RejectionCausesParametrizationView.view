@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RejectionCausesParametrizationView">
+  <collections> 
+    <collection name="RejectionCauses" type="Sistran.Core.Application.AuthorizationPolicies.Entities.RejectionCauses, 
+                Core.AuthorizationPolicies.Entities"></collection>
+    <collection name="GroupPolicies" type="Sistran.Core.Application.AuthorizationPolicies.Entities.GroupPolicies, 
+                Core.AuthorizationPolicies.Entities"></collection>
+  
+  </collections>
+  <relations>
+    <relation source="RejectionCauses" destination="GroupPolicies" name="RejectionCausesGroupPolicies" type="Inner">
+      <property left="GroupPoliciesId" type="Equal" right="GroupPoliciesId"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="LevelPayment" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="LEVEL_PAYMENT_ENTITY">
+  <properties>
+    <property name="LevelPaymentId" type="Integer" key="true" description="LEVEL_PAYMENT_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="LevelCode" type="Integer" description="LEVEL_CODE_PROPERTY" />
+    <property name="PaymentNumber" type="Integer" description="PAYMENT_NUMBER_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" description="AMOUNT_PROPERTY" />
+    <property name="PaymentDate" type="DateTime" description="PAYMENT_DATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="LEVEL_PAYMENT" schema="REINS" alias="LEVEL_PAYMENT" update="true">
+      <columns>
+        <column name="LEVEL_PAYMENT_ID" type="Int32" property="LevelPaymentId" key="true" identity ="true"/>
+        <column name="LEVEL_CD" type="Int32" property="LevelCode" allowNull="false" />
+        <column name="PAYMENT_NUMBER" type="Int32" property="PaymentNumber" allowNull="false" />
+        <column name="AMOUNT" type="Decimal" property="Amount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="PAYMENT_DATE" type="DateTime" property="PaymentDate" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

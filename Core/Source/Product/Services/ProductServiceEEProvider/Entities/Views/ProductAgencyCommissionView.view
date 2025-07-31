@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ProductAgencyCommissionView">
+
+  <collections>
+    <collection name="Agent" type="Sistran.Core.Application.UniquePerson.Entities.Agent, Core.UniquePerson.Entities"></collection>
+    <collection name="ProductAgent" type="Sistran.Core.Application.Product.Entities.ProductAgent, Core.Product.Entities"></collection>    
+    <collection name="ProductAgencyCommiss" type="Sistran.Core.Application.Product.Entities.ProductAgencyCommiss, Core.Product.Entities"></collection>
+    <collection name="AgentAgency" type="Sistran.Core.Application.UniquePerson.Entities.AgentAgency,Core.UniquePerson.Entities"></collection>
+    <collection name="AgentType" type="Sistran.Core.Application.Parameters.Entities.AgentType,Core.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Agent" destination="ProductAgent" name="AgentProductAgent" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>  
+    <relation source="ProductAgent" destination="ProductAgencyCommiss" name="ProductAgentProductAgencyCommiss" type="Left">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="ProductAgencyCommiss" destination="AgentAgency" name="ProductAgencyCommissAgentAgency" type="Left">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+      <property left="AgentAgencyId" type="Equal" right="AgentAgencyId"></property>
+    </relation>
+    <relation source="AgentType" destination="AgentAgency" name="AgentTypeAgentAgency" type="left">
+      <property left="AgentTypeCode" type="Equal" right="AgentTypeCode"></property>
+    </relation>
+  </relations>
+</view>

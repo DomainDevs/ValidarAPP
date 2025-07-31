@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CoverageTechnicalPlanView">
+  <collections>
+    <collection name="TechnicalPlanCoverage" type="Sistran.Core.Application.Product.Entities.TechnicalPlanCoverage, Core.Product.Entities"></collection>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, Core.Quotation.Entities"></collection>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, Core.Common.Entities"></collection>
+    <collection name="SubLineBusiness" type="Sistran.Core.Application.Common.Entities.SubLineBusiness, Core.Common.Entities"></collection>
+    <collection name="AllyCoverage" type="Sistran.Core.Application.Quotation.Entities.AllyCoverage, Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Coverage" destination="TechnicalPlanCoverage" name="CoverageTechnicalPlanCoverage" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="LineBusiness" destination="Coverage" name="LineBusinessCoverage" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="SubLineBusiness" destination="Coverage" name="SubLineBusinessCoverage" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+      <property left="SubLineBusinessCode" type="Equal" right="SubLineBusinessCode"></property>
+    </relation>
+    <relation source="AllyCoverage" destination="Coverage" name="AllyCoverageCoverage" type="Left">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+  </relations>
+</view>

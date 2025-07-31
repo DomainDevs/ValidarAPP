@@ -1,0 +1,58 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.PropertyAdditionalDataViewModel
+<form id="formAdditionalData" class="form">
+    @Html.AntiForgeryToken()
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-col-4">
+                <input type="checkbox" id="checkPrincipalRisk" name="PrincipalRisk" />
+                <label for="checkPrincipalRisk">@Resources.Language.PrincipalRisk</label>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelRiskAge</label>
+                @Html.TextBoxFor(@model => @model.RiskAge, new { id = "inputRiskAge", maxlength = "4", disabled = false })
+                @Html.ValidationMessageFor(@model => @model.RiskAge)
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.RiskType</label>
+                <select class="uif-select" data-id="Id" data-name="Description" id="selectRiskType" name="RiskUse"> </select>
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelConstructionClass</label>
+                <select class="uif-select" data-id="Id" data-name="Description" id="selectConstructionType" name="ConstructionType"> </select>
+                @Html.ValidationMessageFor(@model => @model.ConstructionType)
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelPML</label>
+                @Html.TextBoxFor(@model => @model.PML, new { id = "inputPML", maxlength = "4", disabled = false, value = 100 })
+                @Html.ValidationMessageFor(@model => @model.ConstructionYear)
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelHomeType </label>
+                <select class="uif-select" data-id="Id" data-name="Description" id="selectHomeType" name="HomeType"> </select>
+                @Html.ValidationMessageFor(@model => @model.HomeType)
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelHomeUse</label>
+                <select class="uif-select" data-id="Id" data-name="Description" id="selectHomeUse" name="HomeUse"> </select>
+                @Html.ValidationMessageFor(@model => @model.HomeUse)
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelSquare</label>
+                @Html.TextBoxFor(@model => @model.Square, new { id = "inputSquare", disabled = false })
+                @Html.ValidationMessageFor(@model => @model.Square)
+            </div>
+        </div>
+    </div>
+</form>

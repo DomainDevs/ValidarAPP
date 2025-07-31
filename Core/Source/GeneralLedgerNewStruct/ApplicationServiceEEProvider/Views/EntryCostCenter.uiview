@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="EntryCostCenter">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="AccountingAccountId">
+          <Column table-alias="LedgerEntryItem" name="AccountingAccountId" />
+        </SelectValue>	  
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="LedgerEntryItem" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="CostCenterId">
+          <Column table-alias="CostCenterEntryItem" name="CostCenterId" />
+        </SelectValue>
+        <SelectValue alias="AccountingDate">
+          <Column table-alias="LedgerEntry" name="AccountingDate" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="LedgerEntry" name="BranchCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join type="Left">
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.LedgerEntry, Core.GeneralLedger.Entities" alias="LedgerEntry" />
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.LedgerEntryItem, Core.GeneralLedger.Entities" alias="LedgerEntryItem" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="LedgerEntryItem" name="LedgerEntryId" />
+                <Column table-alias="LedgerEntry" name="LedgerEntryId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.CostCenterEntryItem, Core.GeneralLedger.Entities" alias="CostCenterEntryItem" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="CostCenterEntryItem" name="EntryItemId" />
+              <Column table-alias="LedgerEntryItem" name="LedgerEntryItemId" />
+            </BinaryCriterion>
+          </criteria>			  
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

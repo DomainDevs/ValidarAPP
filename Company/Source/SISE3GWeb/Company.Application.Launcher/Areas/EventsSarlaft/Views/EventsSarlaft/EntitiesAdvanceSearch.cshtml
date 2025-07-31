@@ -1,0 +1,106 @@
+﻿
+@{
+    Layout = null;
+}
+
+<script id="templateAdvanceEntities" type="text/template">
+    <div>
+        <div>
+            <strong>ID Entidad:</strong> {{Id}} | <strong>Nombre Entidad: </strong> {{EntityDescription}}
+        </div>
+        <div>
+            <strong>Tipo de Consulta:</strong> {{selectTypeConsultId}} | <strong>Nivel:</strong> {{selectLevelId}}
+        </div>
+        <div>
+            <strong>Tabla Origen:</strong> {{SourceTable}}
+        </div>
+        <div>
+            <strong>Tabla Unión (Join):</strong> {{JoinTable}}
+        </div>
+        <div>
+            <strong>Tipo de Validación:</strong> {{selectValidationTypeCode}}
+        </div>
+        <div>
+            <strong>Procedimiento Almacenado:</strong> {{ValidationProcedure}}
+        </div>
+        <div>
+            <strong>Tabla de Validación:</strong> {{ValidationTable}}
+        </div>
+    </div>
+</script>
+<form class="form" id="formAdvanceEntities">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>Búsqueda Avanzada de Entidades</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>ID Entidad</label>
+            <input class="text" type="text" id="inputIdEntitieAdv" name="Id" data-val="true" data-id="Id" onkeypress="return event.charCode >= 48 && event.charCode <= 58">
+        </div>
+        <div class="uif-col-4">
+            <label>Nombre Entidad</label>
+            <input type="text" id="inputNameEntitieAdv" name="EntityDescription" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetNameEntity", "EventsSarlaft")" data-displaykey="Description" data-id="Id" data-val="true"/>
+        </div>
+        <div class="uif-col-4">
+            <label>Tipo de Consulta</label>
+            <select class="uif-select form-control" id="selectTypeConsultAdv" name="selectTypeConsultId" data-val="true"
+                    data-id="Id" data-name="Description" data-native="false" data-filter="true" required></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>Nivel</label>
+            <select class="uif-select form-control" id="selectLevelAdv" name="selectLevelId" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                    data-id="Id" data-name="Description" data-native="false" data-filter="true" required></select>
+        </div>
+        <div class="uif-col-4">
+            <label>Tabla origen</label>
+            <input type="text" id="inputOriginTableAdv" name="SourceTable" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetTables", "EventsSarlaft")"
+                   data-displaykey="Description" data-id="Id" data-val="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>Tabla Unión (Join)</label>
+            <input type="text" id="inputJoinTableAdv" name="JoinTable" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetTables", "EventsSarlaft")"
+                   data-displaykey="Description" data-id="Id" data-val="true" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>Tipo de Validación</label>
+            <select class="uif-select form-control" id="selectTypeValidationAdv" name="selectValidationTypeCode" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                    data-id="Id" data-name="Description" data-native="false" data-filter="true" required></select>
+        </div>
+        <div class="uif-col-4">
+            <label>Procedimiento Almacenado</label>
+            <input type="text" id="inputStoredProcedureAdv" name="ValidationProcedure" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetStoreProcedures", "EventsSarlaft")"
+                   data-displaykey="Description" data-id="Id" data-val="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>Tabla de Validación</label>
+            <input type="text" id="inputValidationsTablesAdv" name="ValidationTable" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetTables", "EventsSarlaft")"
+                   data-displaykey="Description" data-id="Id" data-val="true" />
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="uif-col-12">
+        <button type="button" name="name" id="btnAdvancedSearchEntities" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-12">
+        <div class="uif-listview" id="listViewAdvanceEntities"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-12">
+        <div class="pull-right width-save">
+            <button class="btn btn-default" id="btnCancelAdvanceEntities" data-dismiss="modal" type="button">@Resources.Language.Close</button>
+            <button class="btn btn-primary" id="btnAcceptdAdvanceEntities" type="button">@Resources.Language.Accept</button>
+        </div>
+    </div>
+</div>
+
+

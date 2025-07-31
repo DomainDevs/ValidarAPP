@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="EndorsementRiskCoverageView">
+  <collections>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="EndorsementRiskCoverage" type="Sistran.Core.Application.Issuance.Entities.EndorsementRiskCoverage, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskCoverage" type="Sistran.Core.Application.Issuance.Entities.RiskCoverage, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Risk" type="Sistran.Core.Application.Issuance.Entities.Risk, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="EndorsementRisk" destination="EndorsementRiskCoverage" name="EndorsementRiskEndorsementRiskCoverage" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="EndorsementRiskCoverage" destination="RiskCoverage" name="EndorsementRiskCoverageRiskCoverage" type="Inner">
+      <property left="RiskCoverId" type="Equal" right="RiskCoverId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="Risk" name="EndorsementRiskRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+  </relations>
+</view>

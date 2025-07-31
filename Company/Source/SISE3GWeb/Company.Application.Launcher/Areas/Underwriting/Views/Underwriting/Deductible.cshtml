@@ -1,0 +1,74 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.DeductibleModelsView
+
+<form id="formDeductibles" class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Value</label>
+                    @Html.TextBoxFor(model => model.DeductValue, new { id = "inputDeductValue", @class = "rightAlign  input-money" })
+                    @Html.ValidationMessageFor(model => model.DeductValue, @Resources.Language.ErrorDeclaredValue)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Unit </label>
+                    <select class="uif-select form-control" data-native="false" id="selectDeductUnitCd" data-source="" data-id="Id" data-name="Description" name="DeductUnitCd" data-val="true" data-val-required="@Resources.Language.ErrorDocumentUnitOfMeasure"></select>
+                    @Html.ValidationMessageFor(model => model.DeductUnitCd)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.ApplyOn</label>
+                    <select class="uif-select form-control" data-native="false" id="selectDeductSubjectCd" data-source="" data-id="Id" data-name="Description" name="DeductSubjectCd" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlApplyOn"></select>
+                    @Html.ValidationMessageFor(model => model.DeductSubjectCd)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="">@Resources.Language.Min</label>
+                    @Html.TextBoxFor(model => model.MinDeductValue, new { id = "inputMinDeductValue", @class = "rightAlign  input-money" })
+                    @Html.ValidationMessageFor(model => model.MinDeductValue, @Resources.Language.ErrorDeclaredValue)
+                </div>
+                <div class="uif-col-4">
+                    <label class="">@Resources.Language.UnitMin </label>
+                    <select class="uif-select form-control" data-native="false" id="selectMinDeductUnitCd" data-source="" data-id="Id" data-name="Description" name="MinDeductUnitCd" data-val="true"></select>
+                    @Html.ValidationMessageFor(model => model.MinDeductUnitCd)
+                </div>
+                <div class="uif-col-4">
+                    <label class="">@Resources.Language.ApplyOnMin</label>
+                    <select class="uif-select form-control" data-native="false" id="selectMinDeductSubjectCd" data-source="" data-id="Id" data-name="Description" name="MinDeductSubjectCd" data-val="true"></select>
+                    @Html.ValidationMessageFor(model => model.MinDeductSubjectCd)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.Max</label>
+                    @Html.TextBoxFor(model => model.MaxDeductValue, new { id = "inputMaxDeductValue", @class = "rightAlign  input-money" })
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.UnitMax </label>
+                    <select class="uif-select form-control" data-native="false" id="selectMaxDeductUnitCd" data-source="" data-id="Id" data-name="Description" name="MaxDeductUnitCd" data-val="true"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.ApplyOnMax</label>
+                    <select class="uif-select form-control" data-native="false" id="selectMaxDeductSubjectCd" data-source="" data-id="Id" data-name="Description" name="MaxDeductSubjectCd" data-val="true"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.RateType </label>
+                    <select class="uif-select form-control" data-native="false" id="selectRateTypeDeduct" data-source="" data-id="Value" data-name="Text" name="RateTypeDeduct" data-val="true"></select>
+                           @*data-val-required="@Resources.Language.ErrorDocumentType" data-selectedid="@Model.RateType"></select>*@
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Rate</label>
+                    @Html.TextBoxFor(model => model.RateDeduct, new { id = "rateDeductible", @class = "rightAlign" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.TotalDescription</label>
+                    <input type="text" id="Description" name="Description" disabled="disabled" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

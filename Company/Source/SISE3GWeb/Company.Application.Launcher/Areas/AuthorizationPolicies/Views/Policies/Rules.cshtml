@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="template-policies-rules" type="text/template">
+    <h5>{{Description}}</h5>
+</script>
+
+
+<script id="template-policies-rules-Condition" type="text/template">
+    <div>
+        {{#each ExpressionStr}}
+        <div>{{this}}</div>
+        {{/each}}
+    </div>
+</script>
+
+<script id="template-policies-rules-Action" type="text/template">
+    <div>
+        {{#each ExpressionStr}}
+        <div>{{this}}</div>
+        {{/each}}
+    </div>
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="col-md-12">
+        <div id="Title"></div>
+    </div>
+</script>
+
+
+<script id="footer-template" type="text/template">
+    <button class="btn btn-default" id="btnBackToPolicies">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <span class="" aria-hidden="true">@Resources.Language.ButtonGoBack</span>
+
+    </button>
+    <button type="button" class="btn btn-default" id="btnExportRule">
+        <i class="fa fa-download" aria-hidden="true"></i>
+        <span class="" aria-hidden="true">@Resources.Language.ButtonExport</span>
+    </button>
+    <label class="btn btn-default btn-sm">
+        <input type="file" id="btnLoadFromFile" accept=".rule" style=" display: none;" />
+        <i class="fa fa-upload" aria-hidden="true"></i>
+        <span aria-hidden="true">@Resources.Language.UploadFromFile</span>
+    </label>
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0649"))
+    {
+        <button class="btn btn-primary" id="btnSavePoliciesRules">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+        </button>
+    }
+    </script>
+
+
+<div class="row">
+    <div class="uif-col-6">
+        <div class="uif-listview" id="lsvRules"></div>
+    </div>
+    <div class="uif-col-6">
+        <div class="uif-listview" id="lsvCondition"></div>
+        <div class="uif-listview" id="lsvAction"></div>
+    </div>
+</div>
+
+
+@*Modales*@
+@{ Html.RenderAction("ModalRule", "RuleSet", new { area = "RulesAndScripts" });}
+@{ Html.RenderAction("ModalConditionRule", "RuleSet", new { area = "RulesAndScripts" });}
+@{ Html.RenderAction("ModalActionRule", "RuleSet", new { area = "RulesAndScripts" });}
+<div class="uif-modal" id="modalRulesAndScriptsResults">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/RulesAndScripts/Views/RuleSet/RulesAndScriptsResult.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalConceptTableResult">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/RulesAndScripts/Views/RuleSet/ModalConceptTableResult.cshtml")
+    </div>
+</div>
+@**@

@@ -1,0 +1,263 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "PaymentRequestVariousMovements";
+}
+
+<script id="request-various-display-template" type="text/template">
+    <div>
+        <strong>{{BranchName}}</strong> | {{BeneficiaryDocumentNumber}} | {{CurrencyName}} <br>
+        <strong>{{RegistrationDate}}</strong> | {{EstimatedDate}}
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"><span class="text-danger">{{TotalAmount}}</span></div>
+    </div>
+</script>
+
+<script id="various-display-template" type="text/template">
+    <div>
+        <strong>{{PaymentRequestNumber}}</strong> | {{Branch}} | {{BeneficiaryDocumentNumber}} | {{ RegisterDateLabel }}  {{RegistrationDate}} | {{ EstimatedDateLabel }} {{EstimatedDate}}
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"><span class="text-danger">{{Amount}} | {{CurrencyName}}</span></div>
+    </div>
+</script>
+
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <ul class="uif-tab" id="tabMainVarious">
+                <li class="active"><a href="#tabVariousSearch">@Global.SearchLabel</a></li>
+                <li><a href="#tabSelectedVarious">@Global.Requests</a></li>
+            </ul>
+            <div class="uif-tab-content">
+                <!-- Búsqueda -->
+                <div class="tab-pane active" id="tabVariousSearch">
+                    <!--left col-->
+                    <div class="uif-col-6">
+                        <div class="uif-row">
+                            <div class="uif-col-6">
+                                <label>@Global.SearchBy</label>
+                                <select class="uif-select form-control" id="selectVariousSearchBy" data-id="Id" data-name="Description"></select>
+                                <span class="text-danger" data-valmsg-for="selectVariousSearchBy" data-valmsg-replace="true" />
+                            </div>
+                            <div class="uif-col-6" id="TitleAgentNumber">
+                                <label>@Global.AgentDocumentNumber</label>
+                                @Html.TextBox("VariousAgentDocumentNumber", "", new
+                                {
+                                    id = "VariousAgentDocumentNumber",
+                                    maxlength = "20",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetAgentByDocumentNumber"),
+                                    data_displaykey = "DocumentNumber",
+                                    placeholder = @Global.EnterAgentDocument,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                <span class="text-danger" data-valmsg-for="VariousAgentDocumentNumber" data-valmsg-replace="true" />
+                            </div>
+                            <div class="uif-col-6" id="TitleEmployeeNumber">
+                                <label>@Global.EmployeeDocumentNumber</label>
+                                @Html.TextBox("VariousEmployeeDocumentNumber", "", new
+                                {
+                                    id = "VariousEmployeeDocumentNumber",
+                                    maxlength = "20",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetEmployeeByDocumentNumber"),
+                                    data_displaykey = "DocumentNumber",
+                                    placeholder = @Global.EnterEmployeeDocument,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                <span class="text-danger" data-valmsg-for="VariousEmployeeDocumentNumber" data-valmsg-replace="true" />
+                            </div>
+                            <div class="uif-col-6" id="TitleSupplierNumber">
+                                <label>@Global.SupplierDocumentNumber</label>
+                                @Html.TextBox("VariousSupplierDocumentNumber", "", new
+                                {
+                                    id = "VariousSupplierDocumentNumber",
+                                    maxlength = "20",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetSuppliersByDocumentNumber"),
+                                    data_displaykey = "DocumentNumber",
+                                    placeholder = @Global.EnterProviderDocument,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                <span class="text-danger" data-valmsg-for="VariousSupplierDocumentNumber" data-valmsg-replace="true" />
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-12" id="TitleAgentName">
+                                <label>@Global.AgentName</label>
+                                @Html.TextBox("VariousAgentName", "", new
+                                {
+                                    id = "VariousAgentName",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetAgentByName"),
+                                    data_displaykey = "Name",
+                                    placeholder = @Global.EnterAgentName,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                <span class="text-danger" data-valmsg-for="VariousAgentName" data-valmsg-replace="true" />
+                            </div>
+                            <div class="uif-col-12" id="TitleEmployeeName">
+                                <label>@Global.EmployeeName</label>
+                                @Html.TextBox("VariousEmployeeName", "", new
+                                {
+                                    id = "VariousEmployeeName",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetEmployeeByName"),
+                                    data_displaykey = "Name",
+                                    placeholder = @Global.EnterEmployeeName,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                <span class="text-danger" data-valmsg-for="VariousEmployeeName" data-valmsg-replace="true" />
+                            </div>
+                            <div class="uif-col-12" id="TitleSupplierName">
+                                <label>@Global.SupplierName</label>
+                                @Html.TextBox("VariousSupplierName", "", new
+                                {
+                                    id = "VariousSupplierName",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetSuppliersByName"),
+                                    data_displaykey = "Name",
+                                    placeholder = @Global.EnterProviderName,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                <span class="text-danger" data-valmsg-for="VariousSupplierName" data-valmsg-replace="true" />
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-12">
+                                <label>@Global.Branch</label>
+                                <select class="uif-select form-control" id="selectVariousBranch" data-id="Id" data-name="Description"></select>
+                                <input type="hidden" id="MovementBillNumber" />
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="col-xs-12">
+                                <label>@Global.Company</label>
+                                <select class="uif-select form-control" id="selectVariousCompany" data-id="Id" data-name="Description"></select>
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-6">
+                                <label>@Global.RequestNumber</label>
+                                @Html.TextBox("VariousRequestNumber", "", new
+                                    {
+                                        @onkeypress = "return JustNumbers(event,this)",
+                                        style = "text-align: right",
+                                        maxlength = "9",
+                                    })
+                            </div>
+                            <div class="uif-col-6">
+                                <label>@Global.VoucherNumber</label>
+                                @Html.TextBox("VariousVoucherNumber", "", new
+                                    {
+                                        @onkeypress = "return JustNumbers(event,this)",
+                                        style = "text-align: right",
+                                        maxlength = "10",
+                                    })
+                            </div>
+                        </div>
+
+                        <div class="uif-row">
+                            <div class="uif-col-6">
+                                <label>@Global.DateIncomeFrom</label>
+                                <input type="text"
+                                       class="uif-datepicker"
+                                       data-mask="99/99/9999"
+                                       id="VariousDateIncomeFrom"
+                                       name="VariousDateIncomeFrom"
+                                       value="@ViewBag.DateAccounting"
+                                       data-val="false" />
+                            </div>
+                            <div class="uif-col-6">
+                                <label>@Global.DateIncomeTo</label>
+                                <input type="text"
+                                       class="uif-datepicker"
+                                       data-mask="99/99/9999"
+                                       id="VariousDateIncomeTo"
+                                       name="VariousDateIncomeTo"
+                                       value="@ViewBag.DateAccounting"
+                                       data-val="false" />
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-alert" id="alertForm"></div>
+                        </div>
+
+                        <div class="uif-row">
+                            <div class="pull-right">
+                                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0511"))
+                                {
+                                    <button type="button" class="btn btn-primary" id="VariousSearch">@Global.Search</button>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--End left col-->
+                    <!--right col-->
+                    <div class="uif-col-6">
+                        <div class="uif-panel" data-title="@Global.VariousPaymentRequest">
+                            <div class="has-scrolldd">
+                                <div id="requestVariousListView" class="uif-listview">
+                                    <div class="footer">
+                                        <div class="uif-col-6">
+                                            @Global.Total
+                                        </div>
+                                        <div class="text-right col-number">
+                                            <b id="TotalRequestVariousMovement">$0.00</b><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End right col-->
+                </div>
+
+                <!-- Items -->
+                <div class="tab-pane" id="tabSelectedVarious">
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <div class="uif-panel" data-title="@Global.ApplyRequest">
+                                <div class="has-scrolldd">
+                                    <div id="variousListView" class="uif-listview">
+                                        <div class="footer">
+                                            <div class="uif-col-6">
+                                                @Global.Total
+                                            </div>
+                                            <div class="text-right col-number">
+                                                <b id="TotalVariousMovement">$0.00</b><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="pull-right">
+        <div class="uif-modalbuttons">
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0501"))
+            {
+                <button type="button" class="btn btn-default" id="VariousAcceptMovement">@Global.Accept</button>
+            }
+        </div>
+    </div>
+</div>
+
+

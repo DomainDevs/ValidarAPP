@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="PaymentSchedule" namespace="Sistran.Core.Application.ClaimServices.EEProvider" file-version="1.0" description="PAYMENT_SCHEDULE_ENTITY">
+  <properties>
+    <property name="PaymentScheduleCode" type="Integer" key="true" description="PAYMENT_SCHEDULE_CODE_PROPERTY" autonumber="Identity"/>
+    <property name="PaymentPlanCode" type="Integer" description="PAYMENT_PLAN_CODE_PROPERTY" />
+    <property name="PaymentNum" type="Integer" description="PAYMENT_NUM_PROPERTY" />
+    <property name="NetAmount" type="Decimal" precision="18" scale="6" description="NET_AMOUNT_PROPERTY" />
+    <property name="ExpirationDate" type="DateTime" description="EXPIRATION_DATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_SCHEDULE" schema="PAYM" alias="PAYMENT_SCHEDULE" update="true">
+      <columns>
+        <column name="PAYMENT_SCHEDULE_CD" type="Int32" property="PaymentScheduleCode" key="true" identity ="true" />
+        <column name="PAYMENT_PLAN_CD" type="Int32" property="PaymentPlanCode" allowNull="false" />
+        <column name="PAYMENT_NUM" type="Int32" property="PaymentNum" allowNull="false" />
+        <column name="NET_AMOUNT" type="Decimal" property="NetAmount" allowNull="false" size="19" precision="18" scale="6" />
+        <column name="EXPIRATION_DATE" type="DateTime" property="ExpirationDate" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

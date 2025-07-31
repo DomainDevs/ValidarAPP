@@ -1,0 +1,62 @@
+<map version="2.0" type="class" name="Policy" namespace="Sistran.Core.Application.Issuance" file-version="1.0" description="POLICY_ENTITY">
+  <properties>
+    <property name="PolicyId" type="Integer" key="true" description="POLICY_ID_PROPERTY" />
+    <property name="DocumentNumber" type="Decimal" precision="12" scale="5" description="DOCUMENT_NUM_PROPERTY" />
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+    <property name="IssueDate" type="DateTime" description="ISSUE_DATE_PROPERTY" />
+    <property name="IsPolicyholderBill" type="Boolean" description="IS_POLICYHOLDER_BILL_PROPERTY" />
+    <property name="PolicyholderId" type="Integer" nullable="true" description="POLICYHOLDER_ID_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" description="CURRENT_FROM_PROPERTY" />
+    <property name="CurrentTo" type="DateTime" nullable="true" description="CURRENT_TO_PROPERTY" />
+    <property name="PrevPolicyId" type="Integer" nullable="true" description="PREV_POLICY_ID_PROPERTY" />
+    <property name="NextPolicyId" type="Integer" nullable="true" description="NEXT_POLICY_ID_PROPERTY" />
+    <property name="MailAddressId" type="Integer" nullable="true" description="MAIL_ADDRESS_ID_PROPERTY" />
+    <property name="SalePointCode" type="Decimal" precision="5" scale="5" nullable="true" description="SALE_POINT_CODE_PROPERTY" />
+    <property name="ProductId" type="Integer" nullable="true" description="PRODUCT_ID_PROPERTY" />
+    <property name="BillingPeriodCode" type="Integer" nullable="true" description="BILLING_PERIOD_CODE_PROPERTY" />
+    <property name="BillingGroupCode" type="Integer" nullable="true" description="BILLING_GROUP_CODE_PROPERTY" />
+    <property name="PolicyFolderId" type="Integer" nullable="true" description="POLICY_FOLDER_ID_PROPERTY" />
+    <property name="SubscriptionReqId" type="Integer" nullable="true" description="SUBSCRIPTION_REQ_ID_PROPERTY" />
+    <property name="MailAgentAddressId" type="Integer" nullable="true" description="MAIL_AGENT_ADDRESS_ID_PROPERTY" />
+    <property name="MailAgentIndId" type="Integer" nullable="true" description="MAIL_AGENT_IND_ID_PROPERTY" />
+    <property name="PolicyNum1g" type="Integer" nullable="true" description="POLICY_NUM1G_PROPERTY" />
+    <property name="CalculateMinPremium" type="Boolean" description="CALCULATE_MIN_PREMIUM_PROPERTY" />
+    <property name="BusinessTypeCode" type="Integer" description="BUSINESS_TYPE_CODE_PROPERTY" />
+    <property name="CoissuePercentage" type="Decimal" precision="18" scale="4" nullable="true" description="COISSUE_PERCENTAGE_PROPERTY" />
+    <property name="NameNum" type="Integer" nullable="true" description="NAME_NUM_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="POLICY" schema="ISS" alias="POLICY" update="true">
+      <columns>
+        <column name="POLICY_ID" type="Int32" property="PolicyId" key="true" />
+        <column name="DOCUMENT_NUM" type="Decimal" property="DocumentNumber" allowNull="false" size="19" precision="12" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" allowNull="false" />
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" allowNull="false" />
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" allowNull="false" />
+        <column name="ISSUE_DATE" type="DateTime" property="IssueDate" allowNull="false" />
+        <column name="IS_POLICYHOLDER_BILL" type="Boolean" property="IsPolicyholderBill" allowNull="false" />
+        <column name="POLICYHOLDER_ID" type="Int32" property="PolicyholderId" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" allowNull="false" />
+        <column name="CURRENT_TO" type="DateTime" property="CurrentTo" />
+        <column name="PREV_POLICY_ID" type="Int32" property="PrevPolicyId" />
+        <column name="NEXT_POLICY_ID" type="Int32" property="NextPolicyId" />
+        <column name="MAIL_ADDRESS_ID" type="Int16" property="MailAddressId" />
+        <column name="SALE_POINT_CD" type="Decimal" property="SalePointCode" size="19" precision="5" />
+        <column name="PRODUCT_ID" type="Int32" property="ProductId" />
+        <column name="BILLING_PERIOD_CD" type="Byte" property="BillingPeriodCode" />
+        <column name="BILLING_GROUP_CD" type="Int32" property="BillingGroupCode" />
+        <column name="POLICY_FOLDER_ID" type="Int32" property="PolicyFolderId" />
+        <column name="SUBSCRIPTION_REQ_ID" type="Int32" property="SubscriptionReqId" />
+        <column name="MAIL_AGENT_ADDRESS_ID" type="Int16" property="MailAgentAddressId" />
+        <column name="MAIL_AGENT_IND_ID" type="Int32" property="MailAgentIndId" />
+        <column name="POLICY_NUM_1G" type="Int32" property="PolicyNum1g" />
+        <column name="CALCULATE_MIN_PREMIUM" type="Boolean" property="CalculateMinPremium" allowNull="false" />
+        <column name="BUSINESS_TYPE_CD" type="Byte" property="BusinessTypeCode" allowNull="false" />
+        <column name="COISSUE_PCT" type="Decimal" property="CoissuePercentage" size="19" precision="18" scale="4" />
+        <column name="NAME_NUM" type="Int16" property="NameNum" />
+      </columns>
+    </table>
+  </tables>
+</map>

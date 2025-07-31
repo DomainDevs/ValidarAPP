@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskRenewalView">
+  <collections>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk,
+                Core.Issuance.Entities"></collection>
+    <collection name="Risk" type="Sistran.Core.Application.Issuance.Entities.Risk,
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskVehicle" type="Sistran.Core.Application.Issuance.Entities.RiskVehicle, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskLocation" type="Sistran.Core.Application.Issuance.Entities.RiskLocation, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskSurety" type="Sistran.Core.Application.Issuance.Entities.RiskSurety, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="EndorsementRisk" destination="Risk" name="EndorsementRiskRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="Risk" destination="RiskVehicle" name="RiskRiskVehicle" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="Risk" destination="RiskLocation" name="RiskRiskLocation" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="Risk" destination="RiskSurety" name="RiskRiskSurety" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+  </relations>
+</view>

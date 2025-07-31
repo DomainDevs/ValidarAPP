@@ -1,0 +1,48 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<form id="DepositBankForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <b>@Global.TotalToPay:</b>
+            <input type="text" id="_totalDepositPayment" name="_totalDepositPayment" 
+                   disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-6">
+            @Global.AccountNumber
+            <input type="text" id="_accountNumber" name="_accountNumber"
+                   data-val="true" data-val-required='@Global.RequiredField' onkeypress=" return JustNumbers(event, this);"
+                   maxlength="12" />
+            <span class="text-danger" data-valmsg-for="_accountNumber" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.ReceivingBank</label>
+            @Html.DropDownList("ReceivingBankDrop", Enumerable.Empty<SelectListItem>(), new
+                                                                                       {
+                                                                                           @class = "uif-select form-control",
+                                                                                           data_source = @Url.Content("~/Accounting/Common/GetAccountBanks"),
+                                                                                           data_id = "Id",
+                                                                                           data_name = "Description",
+                                                                                           data_val = "true",
+                                                                                           data_native = "true",
+                                                                                           data_val_required = @Global.ValidationRequired
+                                                                                       })
+            <span class="text-danger" data-valmsg-for="ReceivingBankDrop" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            @Global.BallotNumber
+            <input type="text" id="_numberBallot" name="_numberBallot"
+                   data-val="true" data-val-required='@Global.RequiredField' onkeypress=" return JustNumbers(event, this);"
+                   maxlength="12"/>
+            <span class="text-danger" data-valmsg-for="_numberBallot" data-valmsg-replace="true" />
+
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertDepositBank"></div>
+        </div>
+    </div>
+
+</form>

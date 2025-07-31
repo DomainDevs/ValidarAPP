@@ -1,0 +1,288 @@
+﻿<input id="_policyId" hidden="hidden">
+<input id="_businessTypeId" hidden="hidden">
+<input id="_endorsementId" hidden="hidden">
+<input id="_riskId" hidden="hidden">
+<input id="_number" hidden="hidden">
+<input id="_individualId" hidden="hidden">
+<input id="_claimId" hidden="hidden">
+<input id="_position" hidden="hidden">
+<input id="_documentNumber" hidden="hidden" />
+<input id="_inputDateIncident" hidden="hidden" />
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column" id="titleClaimVehicle">
+        @Resources.Language.SetClaimReserve
+    </div>
+    <div class="column-20" id="divLabelInformationPolicy" style="display:none;">
+        @Resources.Language.Policy:&nbsp;<span id="inputInformClaimReserve"> </span>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0331"))
+    {
+        <button class="btn btn-default new" id="btnClearFormReserve">
+            <span class="" aria-hidden="true">@Resources.Language.Clean</span>
+        </button>
+    }
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0330"))
+    {
+        <button class="btn btn-primary new" id="btnSaveClaimReserve">
+            <span class="" aria-hidden="true">@Resources.Language.Save</span>
+        </button>
+    }
+</script>
+<div class="uif-col-12">
+    <div class="uif-row">
+        <h5>
+            <strong>@Resources.Language.ClaimSearch</strong>
+        </h5>
+    </div>
+    <div class="uif-row">
+        <form id="formClaimSearch" class="form form-space-adjusted" autocomplete="off">
+            <div class="uif-col-3">
+                <label>@Resources.Language.LabelBranch</label>
+                <select class="uif-select" id="selectBranch" data-val="true"
+                        data-id="Id" data-name="Description" name="Branch"
+                        data-filter="true" data-native="false"></select>
+                <span class="text-danger" data-valmsg-for="Branch" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.LabelPrefix</label>
+                <select class="uif-select" id="selectPrefix" data-val="true"
+                        data-id="Id" data-name="Description" name="Prefix"
+                        data-filter="true" data-native="false"></select>
+                <span class="text-danger" data-valmsg-for="Prefix" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-2">
+                <label class="field-required">@Resources.Language.LabelNumberPolicy</label>
+                <input type="text" class="uif-input rightAlign" id="inputPolicyDocumentNumber" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                       data-name="Description" name="PolicyDocumentNumber" required onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+                <span class="text-danger" data-valmsg-for="PolicyDocumentNumber" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-2">
+                <label class="field-required">@Resources.Language.ClaimNumber</label>
+                <input type="text" class="uif-input rightAlign" id="InputClaimNumberSearch" data-val="true" data-val-required="@Resources.Language.ErrorRequired"
+                       data-name="Description" maxlength="10" name="ClaimNum" required onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+                <span class="text-danger" data-valmsg-for="ClaimNum" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-2">
+                <div class="without-label">
+                    <button class="btn btn-default secondary-Colombia notice" type="button" id="btnSearchClaim" tabindex="0">
+                        <i class="fa fa-search" aria-hidden="true"></i> @Resources.Language.search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="uif-row" id="accPolicy">
+        <h5>
+            <strong>@Resources.Language.PolicyInformation</strong>
+        </h5>
+        <div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label> @Resources.Language.Policy</label>
+                    <input type="text" id="InputPolicyDocumentNumber" disabled="disabled" />
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.PolicyEndorsementNumber</label>
+                    <input type="text" id="InputPolicyEndorsement" disabled="disabled" />
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.IssuingCurrency</label>
+                    <input type="text" id="InputPolicyCurrency" disabled="disabled" />
+                </div>
+                <div class="uif-col-2">
+                    <div class="without-label">
+                        <button id="btnViewDataPolicy" class="btn btn-default secondary-Colombia" type="button">
+                            <i class="fa fa-search" aria-hidden="true"></i>   @Resources.Language.PolicyConsult
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-10">
+                    <label>@Resources.Language.PolicyHolder</label>
+                    <input type="text" id="InputPolicyHolder" disabled="disabled" />
+                </div>
+
+                <div class="uif-col-2">
+                    <div class="without-label">
+                        <button id="btnHistoryReserve" disabled="disabled" class="btn btn-default secondary-Colombia" type="button">
+                            <i class="fa fa-search" aria-hidden="true"></i> @Resources.Language.HistoryReserve
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="row">
+                    <div class="uif-col-12">
+                        <table class="uif-table" id="tblEstimation" data-alignactions="left" data-edit="true" data-pagesize="10" data-title="<b>Estimación Original</b>" data-selectiontype="single">
+                            <thead>
+                                <tr>
+                                    <th data-property="RiskDescription"><b>@Resources.Language.Risk</b></th>
+                                    <th data-property="CoverageDescription"><b>@Resources.Language.Coverage</b></th>
+                                    <th data-property="InsuredAmountTotal" data-type="currency"><b>@Resources.Language.InsuredAmount</b></th>
+                                    <th data-property="Affected"><b>@Resources.Language.InsuredOrThird</b></th>
+                                    <th data-property="Currency"><b>@Resources.Language.Currency</b></th>
+                                    <th data-property="CurrencyId" data-visible="false"><b></b></th>
+                                    <th data-property="EstimationType"><b>@Resources.Language.EstimationConcept</b></th>
+                                    <th data-property="OriginalEstimation" data-type="currency"><b>@Resources.Language.Estimation</b></th>
+                                    <th data-property="DeductibleAmount" data-type="currency"><b>@Resources.Language.Deductible</b></th>
+                                    <th data-property="PaymentValue" data-type="currency"><b>@Resources.Language.Payments</b></th>
+                                    <th data-property="OriginalReserve" data-type="currency"><b>@Resources.Language.Reserve Original</b></th>
+                                    <th data-property="Reserve" data-type="currency"><b>@Resources.Language.NewReserve</b></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <form class="form" id="editForm">
+                    <div class="uif-inline-pc well animated" id="editAction" style="display: block;">
+                        <div class="row">
+                            <div class="uif-col-4">
+                                <label>@Resources.Language.LabelCoverage</label>
+                                <input type="text" id="inputCoverage" name="Coverage" readonly="readonly">
+                            </div>
+                            <div class="uif-col-4">
+                                <label>@Resources.Language.Estimation</label>
+                                <input type="text" id="inputEstimation" name="Estimation" readonly="readonly" class="rightAlign">
+                            </div>
+                            <div class="uif-col-4">
+                                <label class="field-required">@Resources.Language.AmountType</label>
+                                <select class="uif-select form-control" id="selectAmountType" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                                        data-id="Id" data-name="Description" name="selectAmountType" data-filter="true" data-native="false" required></select>
+                                <span class="text-danger" data-valmsg-for="selectAmountType" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-6">
+                                <label class="field-required">@Resources.Language.StateCode</label>
+                                <select class="uif-select form-control" id="selectStateCode" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                                        data-id="Id" data-name="Description" name="StateCodeId"
+                                        data-filter="true" data-native="false" required></select>
+                                <span class="text-danger" data-valmsg-for="StateCodeId" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="uif-col-6">
+                                <label class="field-required">@Resources.Language.LabelReason</label>
+                                <select class="uif-select form-control" id="selectReason" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                                        data-id="Id" data-name="Description" name="ReasonId"
+                                        data-filter="true" data-native="false" required></select>
+                                <span class="text-danger" data-valmsg-for="ReasonId" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-4">
+                                <label class="field-required">@Resources.Language.ClaimCurrency</label>
+                                <select class="uif-select form-control" id="selectClaimCurrency" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                                        data-id="Id" data-name="Description" name="ClaimCurrencyid"
+                                        data-filter="true" data-native="false" required></select>
+                                <span class="text-danger" data-valmsg-for="ClaimCurrencyid" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="uif-col-4">
+                                <label class="field-required">@Resources.Language.LabelSalaryNumber</label>
+                                <input type="text" class="disabled rightAlign" id="inputSalaryNumeric" required />
+                            </div>
+                            <div class="uif-col-4">
+                                <label class="field-required" id="LabelEstimation">@Resources.Language.Reserve</label>
+                                <input type="text" class="rightAlign" id="inputReserve" name="inputEstimation" data-val="true" maxlength="21"
+                                       data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,16)" required />
+                                <span class="text-danger" data-valmsg-for="inputReserve" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="pull-right" style="text-align:end; float: none !important;">
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0329"))
+                            {
+                                <button class="btn btn-default btn-cancel" type="button" id="btnCancelEditReserve">@Resources.Language.ButtonCancel</button>
+                            }
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0328"))
+                            {
+                                <button class="btn btn-primary btn-acept" type="button" id="btnSaveEditReserve">@Resources.Language.ButtonSave</button>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-summary field-summary-alignment">
+                    <div class="items">
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.Estimation</div>
+                                <div id="labelEstimation"></div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelPayments</div>
+                                <div id="labelPayments"></div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelIncome</div>
+                                <div id="labelIncome"></div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelReservations</div>
+                                <div id="labelReservations"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <table class="uif-table" id="tblLimits" data-pagesize="10" data-title="<b>Limites</b>" data-selectiontype="none">
+                    <thead>
+                        <tr>
+                            <th data-property="InsuredAmount" data-type="currency"><b>@Resources.Language.InsuredAmount</b></th>
+                            <th data-property="Payment" data-type="currency"><b>@Resources.Language.LabelPayments</b></th>                            
+                            <th data-property="Reserve" data-type="currency"><b>@Resources.Language.PendantReserve</b></th>                           
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <table class="uif-table" id="tblDeductibles" data-pagesize="10" data-title="<b>Deducibles</b>" data-selectiontype="none">
+                    <thead>
+                        <tr>                            
+                            <th data-property="Description"><b>@Resources.Language.LabelTextDeductible</b></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal consulta de póliza-->
+<div class="uif-modal" id="modalPolicyConsult">
+    <div class="uif-modalbody">
+        @Html.Partial("../Claim/ModalPolicyConsult")
+    </div>
+</div>
+
+<!--Modal consulta de Historial de Reserva-->
+<div class="uif-modal" id="modalHistoryClaim" data-size="xl">
+    <div class="uif-modalbody">
+        @Html.Partial("../SetClaimReserve/ModalHistoryClaim")
+    </div>
+</div>

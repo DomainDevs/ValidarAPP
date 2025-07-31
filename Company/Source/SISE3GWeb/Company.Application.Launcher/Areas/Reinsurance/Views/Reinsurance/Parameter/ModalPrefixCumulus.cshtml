@@ -1,0 +1,56 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.Reinsurance.Models.PrefixCumulusModel
+
+<div class="form">
+    <div class="uif-row">
+        <input type="hidden" name="PrefixCumulusID" value="0">
+
+        <div class="uif-col-3">
+            <label>@Global.Prefix</label>
+            @Html.DropDownList("SelectLineBusiness",
+                Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select",
+                    data_source = @Url.Content("~/Reinsurance/Parameter/GetLineBusiness"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+            @Html.ValidationMessage("SelectLineBusiness")
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.PrefixCumulus</label>
+            @Html.DropDownList("SelectLineBusinessCumulus",
+                Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select",
+                    data_source = @Url.Content("~/Reinsurance/Parameter/GetLineBusiness"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+            @Html.ValidationMessage("SelectLineBusinessCumulus")
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.TypeExercice</label>
+            @Html.DropDownList("SelectTypeExercice",
+                Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select",
+                    data_source = @Url.Content("~/Reinsurance/Parameter/GetTypeExercises"),
+                    data_id = "TypeExerciseId",
+                    data_name = "TypeExerciceDescription",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+            @Html.ValidationMessage("SelectTypeExercice")
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.Location</label>
+            <br />
+            <span class="glyphicon glyphicon-check" id="Enable"><input type="checkbox" id="chkEnabled"></span>
+        </div>
+    </div>
+</div>

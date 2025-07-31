@@ -1,0 +1,54 @@
+<map version="2.0" type="class" name="RetentionHistory" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="RETENTION_HISTORY_ENTITY">
+  <properties>
+    <property name="RetentionHistoryId" type="Integer" key="true" description="RETENTION_HISTORY_ID_PROPERTY" autonumber="Identity" />
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="PolicyId" type="Integer" description="POLICY_ID_PROPERTY" />
+    <property name="PolicyNumber" type="Decimal" precision="12" scale="5" description="POLICY_NUMBER_PROPERTY" />
+    <property name="EndorsementNumber" type="Integer" description="ENDORSEMENT_NUMBER_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+    <property name="ExcahngeRate" type="Decimal" precision="18" scale="6" description="EXCAHNGE_RATE_PROPERTY" />
+    <property name="IncomeAmount" type="Decimal" precision="18" scale="2" description="INCOME_AMOUNT_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" description="AMOUNT_PROPERTY" />
+    <property name="PersonTypeCode" type="Integer" nullable="true" description="PERSON_TYPE_CODE_PROPERTY" />
+    <property name="IndividualId" type="Integer" nullable="true" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="InvoiceNumber" type="String" size="20" description="INVOICE_NUMBER_PROPERTY" />
+    <property name="InvoiceDate" type="DateTime" description="INVOICE_DATE_PROPERTY" />
+    <property name="AuthorizationNumber" type="String" size="20" description="AUTHORIZATION_NUMBER_PROPERTY" />
+    <property name="VoucherNumber" type="String" size="20" description="VOUCHER_NUMBER_PROPERTY" />
+    <property name="IssueDate" type="DateTime" description="ISSUE_DATE_PROPERTY" />
+    <property name="ExpirationDate" type="DateTime" description="EXPIRATION_DATE_PROPERTY" />
+    <property name="ReceiptNumber" type="Integer" description="RECEIPT_NUMBER_PROPERTY" />
+    <property name="PerceivedRetentionCode" type="Integer" description="PERCEIVED_RETENTION_CODE_PROPERTY" />
+    <property name="RegisterDate" type="DateTime" description="REGISTER_DATE_PROPERTY" />
+    <property name="UserCode" type="Integer" description="USER_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="RETENTION_HISTORY" schema="ACC" alias="RETENTION_HISTORY" update="true">
+      <columns>
+        <column name="RETENTION_HISTORY_ID" type="Int32" property="RetentionHistoryId" key="true" identity ="true" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" allowNull="false" />
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" allowNull="false" />
+        <column name="POLICY_ID" type="Int32" property="PolicyId" allowNull="false" />
+        <column name="POLICY_NUMBER" type="Decimal" property="PolicyNumber" allowNull="false" size="19" precision="12" />
+        <column name="ENDORSEMENT_NUMBER" type="Int32" property="EndorsementNumber" allowNull="false" />
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" allowNull="false" />
+        <column name="EXCAHNGE_RATE" type="Decimal" property="ExcahngeRate" allowNull="false" size="19" precision="18" scale="6" />
+        <column name="INCOME_AMOUNT" type="Decimal" property="IncomeAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="AMOUNT" type="Decimal" property="Amount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="PERSON_TYPE_CD" type="Int32" property="PersonTypeCode" />
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" />
+        <column name="INVOICE_NUMBER" type="String" property="InvoiceNumber" allowNull="false" size="20" />
+        <column name="INVOICE_DATE" type="DateTime" property="InvoiceDate" allowNull="false" />
+        <column name="AUTHORIZATION_NUMBER" type="String" property="AuthorizationNumber" allowNull="false" size="20" />
+        <column name="VOUCHER_NUMBER" type="String" property="VoucherNumber" allowNull="false" size="20" />
+        <column name="ISSUE_DATE" type="DateTime" property="IssueDate" allowNull="false" />
+        <column name="EXPIRATION_DATE" type="DateTime" property="ExpirationDate" allowNull="false" />
+        <column name="RECEIPT_NUMBER" type="Int32" property="ReceiptNumber" allowNull="false" />
+        <column name="PERCEIVED_RETENTION_CD" type="Int32" property="PerceivedRetentionCode" allowNull="false" />
+        <column name="REGISTER_DATE" type="DateTime" property="RegisterDate" allowNull="false" />
+        <column name="USER_CD" type="Int32" property="UserCode" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

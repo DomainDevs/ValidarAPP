@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F96D4452-D927-4AC5-9A86-782DA30E1807}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Company.Application.Utilities</RootNamespace>
+    <AssemblyName>Company.Utilities</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.BAF">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.BAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF.Engine">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Queries">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Rules">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Rules.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Rules.Engine">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Rules.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Rules.Integration">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Rules.Integration.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Constants\CompanyFieldPropertyName.cs" />
+    <Compile Include="Constants\CompanyTemplatePropertyName.cs" />
+    <Compile Include="DTO\ErrorDTO.cs" />
+    <Compile Include="DTO\ExcelFileDTO.cs" />
+    <Compile Include="Enums\ErrorType.cs" />
+    <Compile Include="Error\ErrorModel.cs" />
+    <Compile Include="Error\Result.cs" />
+    <Compile Include="Error\ResultError.cs" />
+    <Compile Include="Error\ResultUnit.cs" />
+    <Compile Include="Error\ResultValue.cs" />
+    <Compile Include="Error\Unit.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\ExceptionHelper.cs" />
+    <Compile Include="Helpers\JsonHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RulesEngine\CompanyRuleConceptCoverage.cs" />
+    <Compile Include="RulesEngine\CompanyRuleConceptGeneral.cs" />
+    <Compile Include="RulesEngine\CompanyRuleConceptPolicies.cs" />
+    <Compile Include="RulesEngine\CompanyRuleConceptRisk.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\dict\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Application\Company\Utilities\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

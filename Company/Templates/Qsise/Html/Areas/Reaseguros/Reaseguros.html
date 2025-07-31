@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="section cols primary">
+    <div>
+      <h2>Póliza: {{poliza.[0].DOCUMENT_NUM}} / {{poliza.[poliza.length - 1].ENDORSEMENT_TYPE}}</h2>
+      <table>
+        <tr>
+          <td>
+            Sucursal:
+          </td>
+          <td>
+            <span class = "info">{{poliza.[0].BRANCH}}</span> Ramo: <span class="info">{{poliza.[0].PREFIX}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Endoso:
+          </td>
+          <td>
+            <span class="info">{{poliza.[0].ENDORSEMENT_NUM}}</span>      
+          </td>
+        </tr>      
+        <tr>
+          <td>
+            Tomador:
+          </td>
+          <td>
+            <span class="info">{{poliza.[0].ID_HOLDER}} / {{poliza.[0].HOLDER_NAME}}</span>      
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Moneda:   
+          </td>
+          <td>
+            <span class="info">{{poliza.[0].CURRENCY}}</span>  
+          </td>
+        </tr>      
+      </table>
+    </div>
+    <div>
+      <h2> </h2>
+      <table>
+        <tr>
+          <td>
+            Fecha de Emisión:
+          </td>
+          <td>
+            <span class="info">{{formatDate poliza.[0].ISSUE_DATE}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Vigencia:
+          </td>  
+          <td>
+            <span class="info">{{formatDate  poliza.[0].CURRENT_FROM}}</span> - <span class="info">{{formatDate poliza.[0].CURRENT_TO}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Asegurado:
+          </td>
+          <td>
+            <span class="info">{{poliza.[0].HOLDER_NAME}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Suma Asegura:      
+          </td>
+          <td>
+            <span class="info">{{formatNumber poliza.[0].LIMIT_AMT}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Prima:      
+          </td>
+          <td>
+            <span class="info">{{formatNumber poliza.[0].PREMIUM_AMT}}</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div></div>
+    <div></div>
+  </div>  
+    <div class="section rows primary">
+    <h3>REASEGUROS</h3>
+    <table class="table">
+      <tr>
+        <th style="text-align: center">Nro. Reseguro</th>
+        <th style="text-align: center">Linea</th>
+        <th style="text-align: center">Contrato</th>
+        <th style="text-align: center">Suma Reasegurada</th>
+        <th style="text-align: center">Prima</th>
+        <th style="text-align: center">Comisión</th>
+     </tr>
+      {{#each reaseguros}}
+        <tr class="client__row" data-reinsuranceId={{ISSUE_REINSURANCE_ID}} style="cursor:pointer;">
+          <td>{{REINSURANCE_NUMBER}}</td>
+          <td style="text-align: left">{{DESCRIPTION_LINE}}</td>
+          <td style="text-align: left">{{CONTRACT}} - {{DESCRIPTION_CONTRACT}}</td>
+          <td style="text-align: right">{{formatNumber AMOUNT minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          <td style="text-align: right">{{formatNumber PREMIUM minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          <td style="text-align: right">{{formatNumber COMMISSION minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+        <tr>
+      {{/each}}
+    </table>
+  </div>  
+</div>
+
+
+
+
+
+
+
+  <div class="section rows primary">
+    <h3>REASEGUROS</h3>
+    <table class="table">
+      <tr>
+        <th style="text-align: center">Nro. Reseguro</th>
+        <th style="text-align: center">Linea</th>
+        <th style="text-align: center">Contrato</th>
+        <th style="text-align: center">Suma Reasegurada</th>
+        <th style="text-align: center">Prima</th>
+        <th style="text-align: center">Comisión</th>
+        <th style="text-align: center">Suma Retenida</th>
+        <th style="text-align: center">Prima Retenida</th>
+        <th style="text-align: center">Comision Retenida</th>
+        <th style="text-align: center">Suma Cedida</th>
+        <th style="text-align: center">Prima Cedida</th>
+        <th style="text-align: center">Porcentaje Participacion</th>
+     </tr>
+      {{#each reaseguros}}
+        <tr class="client__row" data-reinsuranceId={{ISSUE_REINSURANCE_ID}} style="cursor:pointer;">
+          <td>{{REINSURANCE_NUMBER}}</td>
+          <td style="text-align: left">{{DESCRIPTION_LINE}}</td>
+          <td style="text-align: left">{{CONTRACT}} - {{DESCRIPTION_CONTRACT}}</td>
+          <td style="text-align: right">{{formatNumber AMOUNT minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          <td style="text-align: right">{{formatNumber PREMIUM minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          <td style="text-align: right">{{formatNumber COMMISSION minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          <td style="text-align: right">{{formatNumber AMOUNT_RETENCION minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          <td style="text-align: right">{{formatNumber PREMIUM_RETENCION minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          <td style="text-align: right">{{formatNumber COMMISSION_RETENCION minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          <td style="text-align: right">{{formatNumber AMOUNT_ASS_PART minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          <td style="text-align: right">{{formatNumber COMMISSION_ASS_PART minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          <td style="text-align: right">{{formatNumber PARTICIPATION_PERCENTAGE_ASS minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+        <tr>
+      {{/each}}
+    </table>
+  </div>  
+

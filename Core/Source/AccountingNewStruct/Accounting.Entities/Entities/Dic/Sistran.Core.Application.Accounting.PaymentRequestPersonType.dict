@@ -1,0 +1,52 @@
+<map version="2.0" type="class" name="PaymentRequestPersonType" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="GET_PAYMENT_REQUEST_VARIOUS_ENTITY">
+  <properties>
+    <property name="PaymentRequestCode" type="Integer" key="true" description="PAYMENT_REQUEST_CODE_PROPERTY" />
+    <property name="PaymentRequestNumber" type="Integer" nullable="true" description="PAYMENT_REQUEST_NUMBER_PROPERTY" />
+    <property name="VoucherNumber" type="String" size="30" nullable="true" description="VOUCHER_NUMBER_PROPERTY" />
+    <property name="BranchCode" type="Integer" nullable="true" description="BRANCH_CODE_PROPERTY" />
+    <property name="BranchDescription" type="String" size="50" description="BRANCH_DESCRIPTION_PROPERTY" />
+    <property name="PrefixCode" type="Integer" nullable="true" description="PREFIX_CODE_PROPERTY" />
+    <property name="PrefixDescription" type="String" size="50" description="PREFIX_DESCRIPTION_PROPERTY" />
+    <property name="PersonTypeCode" type="Integer" nullable="true" description="PERSON_TYPE_CODE_PROPERTY" />
+    <property name="PersonTypeDescription" type="String" size="250" nullable="true" description="PERSON_TYPE_DESCRIPTION_PROPERTY" />
+    <property name="PaymentSourceCode" type="Integer" nullable="true" description="PAYMENT_SOURCE_CODE_PROPERTY" />
+    <property name="PaymentSourceDescription" type="String" size="250" nullable="true" description="PAYMENT_SOURCE_DESCRIPTION_PROPERTY" />
+    <property name="IdPayBeneficiary" type="Integer" nullable="true" description="ID_PAY_BENEFICIARY_PROPERTY" />
+    <property name="DocNumPayBeneficiary" type="String" size="14" description="DOC_NUM_PAY_BENEFICIARY_PROPERTY" />
+    <property name="NamePayBeneficiary" type="String" size="120" description="NAME_PAY_BENEFICIARY_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+    <property name="CurrencyDescription" type="String" size="50" description="CURRENCY_DESCRIPTION_PROPERTY" />
+    <property name="TotalAmount" type="Decimal" precision="18" scale="6" nullable="true" description="TOTAL_AMOUNT_PROPERTY" />
+    <property name="RegistrationDate" type="DateTime" nullable="true" description="REGISTRATION_DATE_PROPERTY" />
+    <property name="EstimatedDate" type="DateTime" nullable="true" description="ESTIMATED_DATE_PROPERTY" />
+    <property name="PaymentDate" type="DateTime" nullable="true" description="PAYMENT_DATE_PROPERTY" />
+    <property name="StatusPayment" type="Integer" nullable="true" description="STATUS_PAYMENT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="GET_PAYMENT_REQUEST_VARIOUS" schema="ACC" alias="GET_PAYMENT_REQUEST_VARIOUS" update="true">
+      <columns>
+        <column name="PAYMENT_REQUEST_CD" type="Int32" property="PaymentRequestCode" key="true" />
+        <column name="PAYMENT_REQUEST_NUMBER" type="Int32" property="PaymentRequestNumber" />
+        <column name="VOUCHER_NUMBER" type="String" property="VoucherNumber" size="30" />
+        <column name="BRANCH_CD" type="Int32" property="BranchCode" />
+        <column name="BRANCH_DESCRIPTION" type="String" property="BranchDescription" allowNull="false" size="50" />
+        <column name="PREFIX_CD" type="Int32" property="PrefixCode" />
+        <column name="PREFIX_DESCRIPTION" type="String" property="PrefixDescription" allowNull="false" size="50" />
+        <column name="PERSON_TYPE_CD" type="Int32" property="PersonTypeCode" />
+        <column name="PERSON_TYPE_DESCRIPTION" type="String" property="PersonTypeDescription" size="250" />
+        <column name="PAYMENT_SOURCE_CD" type="Int32" property="PaymentSourceCode" />
+        <column name="PAYMENT_SOURCE_DESCRIPTION" type="String" property="PaymentSourceDescription" size="250" />
+        <column name="ID_PAY_BENEFICIARY" type="Int32" property="IdPayBeneficiary" />
+        <column name="DOC_NUM_PAY_BENEFICIARY" type="String" property="DocNumPayBeneficiary" allowNull="false" size="14" />
+        <column name="NAME_PAY_BENEFICIARY" type="String" property="NamePayBeneficiary" allowNull="false" size="120" />
+        <column name="CURRENCY_CD" type="Int32" property="CurrencyCode" />
+        <column name="CURRENCY_DESCRIPTION" type="String" property="CurrencyDescription" allowNull="false" size="50" />
+        <column name="TOTAL_AMOUNT" type="Decimal" property="TotalAmount" size="19" precision="18" scale="6" />
+        <column name="REGISTRATION_DATE" type="DateTime" property="RegistrationDate" />
+        <column name="ESTIMATED_DATE" type="DateTime" property="EstimatedDate" />
+        <column name="PAYMENT_DATE" type="DateTime" property="PaymentDate" />
+        <column name="STATUS_PAYMENT" type="Int32" property="StatusPayment" />
+      </columns>
+    </table>
+  </tables>
+</map>

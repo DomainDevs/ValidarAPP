@@ -1,0 +1,150 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ReverseConciliation;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.BankConciliation</li>
+        <li>@Global.ReverseConciliation</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0577"))
+        {
+            <button id="btnCancelReverse" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Cancel
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0576"))
+        {
+            <button id="btnReverseConciliation" class="btn btn-primary" role="button">
+                <i class="fa fa-save"></i>  @Global.Reverse
+            </button>
+        }
+    </footer>
+}
+
+
+@section Modals
+{
+    <div class="uif-modal" id="modalViewReverse" style="display: none">
+      <div class="uif-modalbody" >
+         @Html.Partial("ReverseReconciliationModal")
+       </div>
+       <div class="uif-modalbuttons">
+           <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+        </div>
+    </div>
+
+    <!-- Modal confirmación de reversión -->
+    <div class="modal fade" id="modalReverse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="saveMessageTitle">@Global.MessageReverseConciliationTitle</label></h4>
+                </div>
+                <div class="modal-body" id="saveMessageModal">
+                    <p>@Global.MessageReverseConciliationDialog</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0568"))
+                    {
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                        </button>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0568"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnSaveModalReverse">
+                            <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                        </button>
+                    }
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+
+@*
+    <div class="uif-row">
+        <div class="pull-right">
+            <button id="btnReverseConciliation" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-floppy-disk"></span>  @Global.Reverse
+            </button>
+            <button id="btnCancel" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-remove"></span>  @Global.Cancel
+            </button>
+        </div>
+    </div>
+*@
+
+<form id="formReverseConciliation" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.ConciliationNumber</label>
+            <input type="text" placeholder="@Global.ConciliationNumber" id="ConciliationNumber" data-pattern="0000000000"
+                   class="uif-mask" name="ConciliationNumber" data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="ConciliationNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.ReversalDate</label>
+            <input type="text" value="@ViewBag.AccountingDate" class="uif-datepicker" data-mask="99/99/9999" id="ReversalDate"
+                   name="ReversalDate" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="ReversalDate" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div id="container">
+            <p><img src="@Url.Content("~/Images/loader.gif")" /> @Global.Processing</p>
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertReverse"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableReverseConciliation" data-exporttocsv="false" data-edit="true" data-delete="false" data-selectiontype="multiple" data-filter="true"
+               data-paginate="true" data-title="@Global.ConciliationMovement">
+            <thead>
+                <tr>
+                    <th data-property="ConciliationId">Id</th>
+                    <th data-property="GroupId" data-visible="false">@Global.Group</th>
+                    <th data-property="BankingMovementTypeId">@Global.Code</th>
+                    <th data-property="BankingMovementTypeDescription">@Global.DocumentType</th>
+                    <th data-property="VoucherNumber">@Global.DocumentNumber</th>
+                    <th data-property="MovementDate">@Global.Date</th>
+                    <th data-property="MovementBankAmount" data-type="currency">@Global.Bank</th>
+                    <th data-property="MovementAccountingAmount" data-type="currency">@Global.Accounting</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagAccountingDateReverse" value="@ViewBag.AccountingDate" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainReverseReconciliation")
+}

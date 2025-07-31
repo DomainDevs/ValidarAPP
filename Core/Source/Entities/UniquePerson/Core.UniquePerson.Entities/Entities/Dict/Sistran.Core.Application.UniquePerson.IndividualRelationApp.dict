@@ -1,0 +1,30 @@
+<map version="2.0" type="class" name="IndividualRelationApp" namespace="Sistran.Core.Application.UniquePerson" file-version="1.0" description="INDIVIDUAL_RELATION_APP_ENTITY">
+  <properties>
+    <property name="IndividualRelationAppId" type="Integer" key="true" description="INDIVIDUAL_RELATION_APP_ID_PROPERTY"  autonumber="id"  />
+    <property name="ParentIndividualId" type="Integer" description="PARENT_INDIVIDUAL_ID_PROPERTY" />
+    <property name="ChildIndividualId" type="Integer" description="CHILD_INDIVIDUAL_ID_PROPERTY" />
+    <property name="RelationTypeCode" type="Integer" description="RELATION_TYPE_CODE_PROPERTY" />
+    <property name="AgentAgencyId" type="Integer" description="AGENT_AGENCY_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="INDIVIDUAL_RELATION_APP" schema="UP" alias="INDIVIDUAL_RELATION_APP" update="true">
+      <columns>
+        <column name="INDIVIDUAL_RELATION_APP_ID" type="Int32" property="IndividualRelationAppId" key="true" />
+        <column name="PARENT_INDIVIDUAL_ID" type="Int32" property="ParentIndividualId" allowNull="false" />
+        <column name="CHILD_INDIVIDUAL_ID" type="Int32" property="ChildIndividualId" allowNull="false" />
+        <column name="RELATION_TYPE_CD" type="Int16" property="RelationTypeCode" allowNull="false" />
+        <column name="AGENT_AGENCY_ID" type="Int16" property="AgentAgencyId" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+ <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Int32" value="145" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

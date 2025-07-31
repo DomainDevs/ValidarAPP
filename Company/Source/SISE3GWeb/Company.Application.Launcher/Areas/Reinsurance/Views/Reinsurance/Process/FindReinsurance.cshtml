@@ -1,0 +1,431 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.ReinsuranceManual</li>
+        <li>@Global.FindReinsurance</li>
+    </ol>
+}
+
+@*BOTONES DE LA BARRA INFERIOR*@
+@section Toolbar
+{
+    <footer>
+        <button id="btnDeleteReinsurance" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-remove-sign"></span>  @Global.DeleteReinsurance
+        </button>
+    </footer>
+}
+
+<div id="tabs">
+    <ul class="uif-tab" id="tabsIssReinsurance">
+        <li class="active"><a href="#tabGeneral">@Global.Endorsement</a></li>
+        <li><a href="#claimTab">@Global.Claim</a></li>
+        <li><a href="#paymentReinsuranceTab">@Global.PaymentReins</a></li>
+    </ul>
+</div>
+
+<div class="uif-tab-content">
+    <div id="tabGeneral" class="active">
+        <div class="uif-col-12">
+            <div class="uif-row">
+                <div class="uif-col-2">
+                    @Global.Branch
+                    @Html.DropDownList("selectBranch", Enumerable.Empty<SelectListItem>(), new {@class = "uif-select form-control", data_source = @Url.Content("~/Accounting/Common/GetBranchs"), data_id = "Id", data_name = "Description", data_val = "true", data_native = "true",
+                    })
+                </div>
+                <div class="uif-col-2">
+                    @Global.Prefix
+                    <select class="uif-select form-control" id="selectPrefix" name="selectPrefix"
+                            data-source='@Url.Content("~/Reinsurance/Process/GetPrefix")'
+                            data-id="Id"
+                            data-native="true"
+                            data-val="true"
+                            data-name="Description"></select>
+                </div>
+                <div class="uif-col-2">
+                    @Global.PolicyNumber
+                    <input type="text" id="policyNumber" name="policyNumber" maxlength="12"
+                           onkeypress=" return JustNumbers(event); " />
+                </div>
+                <div class="uif-col-2">
+                    @Global.EndorsementNumber
+                    <input type="text" id="endorsementNumber" name="endorsementNumber" maxlength="12" onkeypress=" return JustNumbers(event); " />
+                </div>
+                <div class="uif-col-2">
+                </div>
+                <div class="uif-col-2">
+                    <br />
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0455"))
+                    {
+                        <button class="btn btn-primary btn-block" id="FindReinsuranceSearch">
+                            <span class="glyphicon glyphicon-search"></span> @Global.Search
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <div class="uif-alert" id="alertSearch"></div>
+            <div class="uif-alert" id="alertReinsurePolicy"></div>
+
+            <div class="active" id="tabSingle1">
+                <table data-title="<b>@Global.Endorsements</b>" class="uif-table" id="tableEndorsement"
+                       data-add="false" data-paginate="false" data-filter="false">
+                    <thead>
+                        <tr>
+                            <th data-visible="false" data-property="EndorsementId">EndorsementId</th>
+                            <th data-visible="false" data-property="PolicyId">PolicyId</th>
+                            <th data-property="EndorsementNumber">@Global.EndorsementNumber</th>
+                            <th data-property="Description">@Global.EndorsementType</th>
+                            <th data-property="IssueDate" data-type="date">@Global.IssueDate</th>
+                            <th data-property="CurrentFrom" data-type="date">@Global.CurrentFrom</th>
+                            <th data-property="CurrentTo" data-type="date">@Global.CurrentTo</th>
+                            <th data-property="Currency">@Global.Currency</th>
+                            <th data-property="InsuredAmount" data-type="currency">@Global.InsuredAmount</th>
+                            <th data-property="Prime" data-type="currency">@Global.Prime</th>
+                            <th data-property="ResponsibilityMaximumAmount" data-type="currency">@Global.MaximumLiabilityAmount</th>
+                            <th data-property="OperationType">@Global.OperationType</th>
+                            <th data-property="InsuredCd">@Global.InsuredCode</th>
+                            <th data-property="InsuredName">@Global.InsuredName</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div id="panelReinsurances">
+                <table data-title="<b>@Global.Reinsurance</b>" class="uif-table" id="tableReinsurances" data-filter="false">
+                    <thead>
+                        <tr>
+                            <th data-property="EndorsementId" data-visible="false">@Global.EndorsementCode</th>
+                            <th data-property="IssueLayerId">@Global.Layer</th>
+                            <th data-property="ReinsuranceNumber">@Global.ReinsuranceNumber</th>
+                            <th data-property="Description">@Global.Description</th>
+                            <th data-property="ProcessDate" data-type="date">@Global.ProcessDate</th>
+                            <th data-property="IssueDate" data-type="date">@Global.IssueDate</th>
+                            <th data-property="ValidityFrom" data-type="date">@Global.CurrentFrom</th>
+                            <th data-property="ValidityTo" data-type="date">@Global.CurrentTo</th>
+                            <th data-property="IsAutomatic">@Global.Automatic</th>
+                            <th data-property="UserName">@Global.User</th>
+                            <th data-property="LayerNumber">@Global.LayerNumber</th>
+                            <th data-property="LayerPercentage">@Global.PercentageInsuredAmount</th>
+                            <th data-property="PremiumPercentage">@Global.PremiumPercentage</th>
+                            <th data-property="Amount" data-type="currency">@Global.Amount</th>
+                            <th data-property="Premium" data-type="currency">@Global.Premium</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <table data-title="<b>@Global.Distributions</b>" class="uif-table" id="tableDistributions" data-selectionType="none" data-paginate="true" data-filter="false">
+                    <thead>
+                        <tr>
+                            <th data-visible="false" data-property="IssueLayerId">@Global.Line</th>
+                            <th data-property="Line">@Global.Line</th>
+                            <th data-property="CumulusKey">@Global.CumulusKey</th>
+                            <th data-property="Description">@Global.Currency</th>
+                            <th data-property="IsFacultative">@Global.Facultative</th>
+                            <th data-property="Contract">@Global.Contract</th>
+                            <th data-property="LevelNumber">@Global.LevelNumber</th>
+                            <th data-property="Broker">@Global.Agent</th>
+                            <th data-property="Reinsurer">@Global.Reinsurer</th>
+                            <th data-property="ParticipationPercentage">@Global.ParticipationPercentage</th>
+                            <th data-property="Amount" data-type="currency">@Global.Sum</th>
+                            <th data-property="Premium" data-type="currency">@Global.Prime</th>
+                            <th data-property="Commission" data-type="currency">@Global.Commission</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @*SINIESTRO*@
+    <div id="claimTab">
+        <div class="uif-col-12">
+            <div class="uif-row">
+                <form id="formSearchClaimsReinsure" class="form">
+                    <div class="uif-col-2">
+                        <label class="field-required">@Global.Branch</label>
+                        <select class="uif-select form-control"
+                                id="claimSelectBranch"
+                                name="claimSelectBranch"
+                                data-source='@Url.Content("~/Reinsurance/Process/GetBranch")'
+                                data-id="Id"
+                                data-name="Description"
+                                data-native="true"
+                                data-val="true"
+                                data-val-required="@Resources.Language.RequiredField"></select>
+                        <span class="text-danger" data-valmsg-for="claimSelectBranch" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-2">
+                        <label class="field-required">@Global.Prefix</label>
+                        <select class="uif-select form-control"
+                                id="claimSelectPrefix"
+                                name="claimSelectPrefix"
+                                data-source='@Url.Content("~/Reinsurance/Process/GetPrefix")'
+                                data-id="Id"
+                                data-name="Description"
+                                data-native="true"
+                                data-val="true"
+                                data-val-required="@Resources.Language.RequiredField"></select>
+                        <span class="text-danger" data-valmsg-for="claimSelectPrefix" data-valmsg-replace="true"></span>
+
+                    </div>
+                    <div class="uif-col-2">
+                        <label class="field-required">@Global.PolicyNumber</label>
+                        <input type="text"
+                               id="claimPolicyNumber"
+                               name="claimPolicyNumber"
+                               maxlength="15"
+                               onkeypress="return JustNumbers(event);"
+                               data-val="true"
+                               data-val-required="@Resources.Language.RequiredField" />
+                        <span class="text-danger" data-valmsg-for="claimPolicyNumber" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Global.Claim</label>
+                        <input type="text" id="claimNumber"
+                               name="claimNumber"
+                               maxlength="15"
+                               onkeypress="return JustNumbers(event);" />
+                    </div>
+                    <div class="uif-col-2">
+                    </div>
+                    <div class="uif-col-2">
+                        <br />
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0459"))
+                        {
+                            <button type="button" class="btn btn-primary btn-block" id="searchClaimsReinsure">
+                                <span class="glyphicon glyphicon-search"></span> @Global.Search
+                            </button>
+                        }
+                    </div>
+                </form>
+            </div>
+
+            <div class="uif-row">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0460"))
+                {
+                    <table class="uif-table" id="tableClaims" data-selectiontype="single"
+                           data-add="false" data-paginate="true" data-filter="false"
+                           data-title="<b>@Global.Claims</b>">
+                        <thead>
+                            <tr>
+                                <th data-visible="false" data-property="Modifications[0].Coverages[0].Estimations[0].Type.Id">Id</th>
+                                <th data-visible="false" data-property="Modifications[0].Coverages[0].Id">Id</th>
+                                <th data-visible="false" data-property="Branch.Id">Id</th>
+                                <th data-visible="false" data-property="Prefix.Id">Id</th>
+                                <th data-visible="false" data-property="Endorsement.PolicyNumber">Id</th>
+                                <th data-visible="false" data-property="Id">Id</th>
+                                <th data-visible="false" data-property="Modifications[0].Id">Id</th>
+                                <th data-property="Number">@Global.Claim</th>
+                                <th data-property="Modifications[0].Coverages[0].SubClaim">@Global.SubClaim</th>
+                                <th data-property="OccurrenceDate" data-type="date">@Global.ClaimDate</th>
+                                <th data-property="Modifications[0].RegistrationDate" data-type="date">@Global.RegistrationDate</th>
+                                <th data-property="Modifications[0].Coverages[0].Estimations[0].Type.Description">@Global.EstimationType</th>
+                                <th data-property="Modifications[0].Coverages[0].Estimations[0].PaymentAmount" data-type="currency">@Global.EstimationAmount</th>
+                                <th data-property="Modifications[0].Coverages[0].Estimations[0].Version">@Global.LabelVersion</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                }
+            </div>
+
+            <div class="uif-row">
+                <table data-title="Capas de Reaseguros" class="uif-table" id="tableReinsuredClaimsLayer" data-selectiontype="single"
+                       data-add="false" data-paginate="true" data-filter="false">
+                    <thead>
+                        <tr>
+                            <th data-property="ClaimId" data-visible="false">ClaimCode</th>
+                            <th data-property="ClaimLayerId" data-visible="false">ClaimLayerId</th>
+                            <th data-property="ReinsuranceNumber">@Global.ReinsuranceNumber</th>
+                            <th data-property="Description">@Global.Description</th>
+                            <th data-property="ProcessDate" data-type="date">@Global.ProcessDate</th>
+                            <th data-property="RegistrationDate" data-type="date">@Global.RegistrationDate</th>
+                            <th data-property="IsAutomatic">@Global.Automatic</th>
+                            <th data-property="LayerNumber">@Global.LayerNumber</th>
+                            <th data-property="Amount" data-type="currency">@Global.Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="uif-row">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0461"))
+                {
+                    <table data-title="Distribución de Reaseguro" class="uif-table" id="tableReinsuredClaimsDistribution"
+                           data-add="false" data-paginate="true" data-filter="false" data-selectionType="none">
+                        <thead>
+                            <tr>
+                                <th data-property="ClaimLayerId" data-visible="false">ClaimLayerId</th>
+                                <th data-property="Line">@Global.Line</th>
+                                <th data-property="CumulusKey">@Global.CumulusKey</th>
+                                <th data-property="Description">@Global.MovementSource</th>
+                                <th data-property="CurrencyDescription">@Global.Currency</th>
+                                <th data-property="IsFacultative">@Global.Facultative</th>
+                                <th data-property="Contract">@Global.Contract</th>
+                                <th data-property="LevelNumber">@Global.LevelNumber</th>
+                                <th data-property="Broker">@Global.Broker</th>
+                                <th data-property="Reinsurer">@Global.Reinsurer</th>
+                                <th data-property="Amount" data-type="currency">@Global.Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+
+    @*PAYMENT REINSURANCE*@
+    <div id="paymentReinsuranceTab">
+        <div class="uif-col-12">
+            <div class="uif-row">
+                <form id="formSearchPaymentsReinsure" class="form">
+                    <div class="uif-row">
+                        <div class="uif-col-2">
+                            <label class="field-required">@Global.Branch</label>
+                            <select class="uif-select form-control"
+                                    id="paymentSelectBranch"
+                                    name="paymentSelectBranch"
+                                    data-source='@Url.Content("~/Reinsurance/Process/GetBranch")'
+                                    data-id="Id"
+                                    data-name="Description"
+                                    data-native="true"
+                                    data-val="true"
+                                    data-val-required="@Resources.Language.RequiredField"></select>
+                            <span class="text-danger" data-valmsg-for="paymentSelectBranch" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-2">
+                            <label class="field-required">@Global.Prefix</label>
+                            <select class="uif-select form-control"
+                                    id="paymentSelectPrefix"
+                                    name="paymentSelectPrefix"
+                                    data-source='@Url.Content("~/Reinsurance/Process/GetPrefix")'
+                                    data-id="Id"
+                                    data-name="Description"
+                                    data-native="true"
+                                    data-val="true"
+                                    data-val-required="@Resources.Language.RequiredField"></select>
+                            <span class="text-danger" data-valmsg-for="paymentSelectPrefix" data-valmsg-replace="true"></span>
+
+                        </div>
+                        <div class="uif-col-2">
+                            <label class="field-required">@Global.PolicyNumber</label>
+                            <input type="text"
+                                   id="paymentPolicyNumber"
+                                   name="paymentPolicyNumber"
+                                   maxlength="15"
+                                   onkeypress="return JustNumbers(event);"
+                                   data-val="true"
+                                   data-val-required="@Resources.Language.RequiredField" />
+                            <span class="text-danger" data-valmsg-for="paymentPolicyNumber" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-2">
+                            <label class="field-required">@Global.Claim</label>
+                            <input type="text"
+                                   id="paymentClaimNumber"
+                                   name="paymentClaimNumber"
+                                   maxlength="15"
+                                   onkeypress="return JustNumbers(event);"
+                                   data-val="true"
+                                   data-val-required="@Resources.Language.RequiredField" />
+                            <span class="text-danger" data-valmsg-for="paymentClaimNumber" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-2">
+                            <label>
+                                @Global.RequestPayment
+                            </label>
+                            <input type="text" id="paymentRequestNumber" name="paymentRequestNumber" maxlength="15" onkeypress="return JustNumbers(event,this);" />
+                        </div>
+                        <div class="uif-col-2">
+                            <br />
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0466"))
+                            {
+                                <button type="button" class="btn btn-primary btn-block" id="searchPaymentsReinsure">
+                                    <span class="glyphicon glyphicon-search"></span> @Global.Search
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="uif-row">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0463"))
+                {
+                    <table data-title="<b>@Global.RequestPayments</b>" class="uif-table" id="tablePaymentsRequest"
+                           data-add="false" data-paginate="false" data-filter="false" data-selectiontype="single">
+                        <thead>
+                            <tr>
+                                <th data-property="ClaimNumber">@Global.Claim</th>
+                                <th data-property="PaymentRequestNumber">@Global.RequestPayment</th>
+                                <th data-property="ConceptSourceDescription">@Global.Source</th>
+                                <th data-property="PaymentDate" data-type="date">@Global.Date</th>
+                                <th data-property="TotalAmount" data-type="currency">@Global.Amount</th>
+                                <th data-property="PaymentRequestId" data-visible="false">PaymentRequestId</th>
+                                <th data-property="ConceptSourceId" data-visible="false">Id</th>
+                                <th data-property="SubClaim">@Global.SubClaim</th>
+                                <th data-property="ClaimCoverageCd" data-visible="false"></th>
+                                <th data-property="PaymentVoucherConceptCd" data-visible="false">@Global.VoucherNumber</th>
+                                <th data-property="Description">@Global.Description</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                }
+            </div>
+
+            <div class="uif-row">
+                <table data-title="<b>@Global.ReinsuranceLayers</b>" class="uif-table" id="tableReinsuredPaymentsLayer"
+                       data-add="false" data-paginate="false" data-filter="false" data-selectiontype="single">
+                    <thead>
+                        <tr>
+                            <th data-visible="false" data-property="PaymentRequestId">@Global.Claim</th>
+                            <th data-property="PaymentLayerId">@Global.PaymentLayer</th>
+                            <th data-property="ReinsuranceNumber">@Global.ReinsuranceNumber</th>
+                            <th data-property="Description">@Global.MovementType</th>
+                            <th data-property="ProcessDate" data-type="date">@Global.ProcessDate</th>
+                            <th data-property="RegistrationDate" data-type="date">@Global.CurrentFrom</th>
+                            <th data-property="IsAutomatic">@Global.Automatic</th>
+                            <th data-property="LayerNumber">@Global.LayerNumber</th>
+                            <th data-property="Amount" data-type="currency">@Global.Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="uif-row">
+                <table data-title="<b>@Global.ReinsuranceDistribution</b>" class="uif-table" id="tableReinsuredPaymentsDistribution"
+                       data-add="false" data-paginate="false" data-filter="false" data-selectiontype="none">
+                    <thead>
+                        <tr>
+                            <th data-visible="false" data-property="PaymentLayerId"></th>
+                            <th data-property="Line">@Global.Line</th>
+                            <th data-property="CumulusKey">@Global.CumulusKey</th>
+                            <th data-property="MovementSource">@Global.MovementSource</th>
+                            <th data-property="CurrencyDescription">@Global.Currency</th>
+                            <th data-property="IsFacultative">@Global.Facultative</th>
+                            <th data-property="Contract">@Global.Contract</th>
+                            <th data-property="LevelNumber">@Global.LayerNumber</th>
+                            <th data-property="Broker">@Global.Intermediary</th>
+                            <th data-property="Reinsurer">@Global.Reinsurer</th>
+                            <th data-property="Amount" data-type="currency">@Global.Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/reinsurance/bundles/FindReinsurance")
+}
+<input type="hidden" id="ViewBagReinsuranceDate" value="@ViewBag.ReinsuranceDate" />

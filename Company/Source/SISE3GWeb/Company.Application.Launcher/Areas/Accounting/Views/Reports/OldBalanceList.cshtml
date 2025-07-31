@@ -1,0 +1,168 @@
+﻿@*@using Sistran.Core.Framework.UIF.Web.Resources
+    @{
+        ViewBag.Title = @Global.OldBalance;
+        Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+    }
+
+    @section Breadcrumb
+    {
+        <ol class="breadcrumb global-header-breadcrumb">
+            <li><a href="/Home">@Global.Reports</a></li>
+            <li class="active">@Global.OldBalance</li>
+        </ol>
+    }
+
+    <form id="ReportForm" onsubmit=" return false ">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label">
+                    @Global.Branch
+                </label>
+                @Html.DropDownList("Branch", Enumerable.Empty<SelectListItem>(), new
+                 {
+                     @class = "uif-select form-control",
+                     data_source = @Url.Content("~/Accounting/Common/GetListBranchesbyUserName"),
+                     data_id = "Id",
+                     data_name = "Description",
+                     data_selectedid = @ViewBag.BranchDefault,
+                     data_val = "true",
+                     data_native = "true",
+                     data_val_required = @Global.RequiredField
+                 })
+                <span class="text-danger" data-valmsg-for="Branch" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label">
+                    @Global.Prefix
+                </label>
+                @Html.DropDownList("Prefix", Enumerable.Empty<SelectListItem>(), new
+                 {
+                     @class = "uif-select form-control",
+                     data_source = @Url.Content("~/Accounting/Common/GetPrefixes"),
+                     data_id = "Id",
+                     data_name = "Description",
+                     data_val = "true",
+                     data_native = "true",
+                  })
+                <span class="text-danger" data-valmsg-for="Prefix" data-valmsg-replace="true" />
+            </div>
+
+
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label>@Global.DateTo</label>
+                <input type="text" id="EndDate" name="EndDate" class="uif-datepicker" data-mask="99/99/9999" />
+            </div>
+            <div class="uif-col-8">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="options" id="normal" value="N" checked>
+                        @Global.Ordinary
+                    </label>
+                    <label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="options" id="summary" value="S">
+                        @Global.Summary
+                    </label>
+                    <label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="options" id="excel" value="E">
+                        @Global.Excel
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertForm"></div>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="options1" id="allInsureds" value="AI" checked>
+                        @Global.AllInsureds
+                    </label>
+                    <label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="options1" id="insured" value="I">
+                        @Global.Insured
+                    </label>
+                </div>
+                    @Html.TextBox("Insured", "", new
+                 {
+                     id = "Insured",
+                     @class = "uif-autocomplete",
+                     data_source = @Url.Content("~/Accounting/Common/GetInsuredByInsuredName"),
+                     data_displaykey = "Name",
+                     placeholder = @Global.EnterInsurdeName,
+                     data_val = "true",
+                     //data_val_required = @Global.RequiredField
+                 })
+                    <span class="text-danger" data-valmsg-for="insured" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-6">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="options2" id="allBroker" value="AB" checked>
+                        @Global.AllIntermediaries
+                    </label>
+                    <label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="options2" id="broker" value="B">
+                        @Global.Broker
+                    </label>
+                </div>
+                    @Html.TextBox("Broker", "", new
+                        {
+                            id = "BrokerName",
+                            maxlength = "50",
+                            @class = "uif-autocomplete",
+                            data_source = @Url.Content("~/Accounting/Common/GetBrokerByName"),
+                            data_displaykey = "BrokerName",
+                            placeholder = "Tipea nombre broker.",
+                            data_val = "true",
+                            //data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="Broker" data-valmsg-replace="true" />
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="options3" id="premium" value="P" checked>
+                        @Global.Premium
+                    </label>
+
+
+                </div>
+            </div>
+        </div>
+
+        @section Toolbar
+    {
+            <footer>
+                <button id="CancelOldBalanceList" class="btn btn-default" role="button">
+                    <i class="fa fa-remove"></i>  @Global.Cancel
+                </button>
+                <button id="GenerateOldBalanceList" class="btn btn-primary" role="button">
+                    <i class="fa fa-file-pdf-o"></i>  @Global.Generate
+                </button>
+            </footer>
+        }
+    </form>
+
+    @section scripts
+    {
+        @Scripts.Render("~/accounting/bundles/OldBalanceList")
+    }*@

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="IndividualLinkView">
+  <collections>
+    <collection name="IndividualLink" type="Sistran.Company.Application.UniquePerson.Entities.IndividualLink, 
+                Company.UniquePerson.Entities"></collection>
+    <collection name="LinkType" type="Sistran.Company.Application.UniquePerson.Entities.LinkType, 
+                Company.UniquePerson.Entities"></collection>
+    <collection name="RelationshipSarlaft" type="Sistran.Company.Application.UniquePerson.Entities.RelationshipSarlaft, 
+                Company.UniquePerson.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="IndividualLink" destination="LinkType" name="IndividualLinkLinkType" type="Inner">
+      <property left="LinkTypeCode" type="Equal" right="LinkTypeCode"></property>
+    </relation>
+    <relation source="IndividualLink" destination="RelationshipSarlaft" name="IndividualLinkRelationshipSarlaft" type="Inner">
+      <property left="RelationshipSarlaftCode" type="Equal" right="RelationshipSarlaftCode"></property>
+    </relation>
+  </relations>
+</view>

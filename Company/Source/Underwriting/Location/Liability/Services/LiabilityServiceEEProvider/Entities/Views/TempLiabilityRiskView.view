@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TempLiabilityRiskView">
+  <collections>
+    <collection name="TempRisk" type="Sistran.Core.Application.Temporary.Entities.TempRisk, 
+                Core.Temporary.Entities"></collection>
+    <collection name="CoTempRisk" type="Sistran.Core.Application.Temporary.Entities.CoTempRisk, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskLocation" type="Sistran.Core.Application.Temporary.Entities.TempRiskLocation, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskBeneficiary" type="Sistran.Core.Application.Temporary.Entities.TempRiskBeneficiary, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskClause" type="Sistran.Core.Application.Temporary.Entities.TempRiskClause, 
+                Core.Temporary.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="TempRisk" destination="CoTempRisk" name="TempRiskCoTempRisk" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskLocation" name="TempRiskTempRiskLocation" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskBeneficiary" name="TempRiskTempRiskBeneficiary" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskClause" name="TempRiskTempRiskClause" type="Left">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+  </relations>
+</view>

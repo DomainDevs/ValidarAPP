@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TechnicalPlanCoveragesView">
+	<collections>
+		<collection name="TechnicalPlanCoverage" type="Sistran.Core.Application.Product.Entities.TechnicalPlanCoverage, Core.Product.Entities"></collection>
+		<collection name="TechnicalPlanRelatedCoverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, Core.Quotation.Entities"></collection>
+		<collection name="TechnicalPlanPrincipalCoverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, Core.Quotation.Entities"></collection>
+		<collection name="TechnicalPlanRelatedAllyCoverage" type="Sistran.Core.Application.Quotation.Entities.AllyCoverage, Core.Quotation.Entities"></collection>
+		<collection name="TechnicalPlanAllyCoverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, Core.Quotation.Entities"></collection>
+		<collection name="TechnicalPlanInsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, Core.Quotation.Entities"></collection>
+	</collections>
+	<relations>
+		<relation source="TechnicalPlanCoverage" destination="TechnicalPlanRelatedCoverage" name="RelCoveragesCoverage" type="Left">
+			<property left="CoverageId" type="Equal" right="CoverageId"></property>
+		</relation>
+		<relation source="TechnicalPlanCoverage" destination="TechnicalPlanPrincipalCoverage" name="RelCoveragesPrincipalCoverage" type="Left">
+			<property left="MainCoverageId" type="Equal" right="CoverageId"></property>
+		</relation>
+		<relation source="TechnicalPlanCoverage" destination="TechnicalPlanRelatedAllyCoverage" name="RelTechnicalPlanAllyCoverages" type="Left">
+			<property left="CoverageId" type="Equal" right="CoverageId"></property>
+		</relation>
+		<relation source="TechnicalPlanRelatedAllyCoverage" destination="TechnicalPlanAllyCoverage" name="RelCoveragesAllyCoverage" type="Left">
+			<property left="AllyCoverageId" type="Equal" right="CoverageId"></property>
+		</relation>
+		<relation source="TechnicalPlanRelatedCoverage" destination="TechnicalPlanInsuredObject" name="RelCoveragesInsuredObjects" type="Left">
+			<property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+		</relation>
+	</relations>
+</view>

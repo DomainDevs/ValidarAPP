@@ -1,0 +1,53 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label>@Global.Code</label>
+        <br />
+        @Html.TextBox("BankMovementCode", "", new {
+            data_val = "true",
+            maxlength = "15",
+            data_val_required = @Global.RequiredField,
+            @onblur = "this.value = this.value.toUpperCase();"
+        })
+        <span class="text-danger" data-valmsg-for="BankMovementCode" data-valmsg-replace="true" />
+    </div>
+    <div class="uif-col-6">
+        <label>@Global.Description</label>
+        <br />
+        @Html.TextBox("Description", "", new {
+            data_val = "true",
+            maxlength = "30",
+            data_val_required = @Global.RequiredField,
+            @onblur = "this.value = this.value.toUpperCase();"
+        })
+        <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true" />
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label>@Global.SmallDescription</label>
+        <br />
+        @Html.TextBox("ShortDescription", "", new {
+            data_val = "true",
+            maxlength = "5",
+            data_val_required = @Global.RequiredField,
+            @onblur = "this.value = this.value.toUpperCase();"
+        })
+        <span class="text-danger" data-valmsg-for="ShortDescription" data-valmsg-replace="true" />
+    </div>
+    <div class="uif-col-6">
+        <label>@Global.AccountingNatureCompany</label>
+        <select class="uif-select form-control" id="selectAccountingNature" name="selectAccountingNature" data-native="true"
+                data-source='@Url.Content("~/Accounting/Common/GetNatures")' data-id="Id" data-name="Description"
+                data-val="true" data-val-required='@Global.RequiredField'></select>
+        <span class="text-danger" data-valmsg-for="selectAccountingNature" data-valmsg-replace="true" />
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertForm"></div>
+    </div>
+</div>
+
+

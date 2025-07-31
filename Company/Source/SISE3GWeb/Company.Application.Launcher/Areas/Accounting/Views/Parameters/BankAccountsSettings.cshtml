@@ -1,0 +1,186 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = Global.BankAccounts;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameters</li>
+        <li>@Global.Billing</li>
+        <li>@Global.BankAccounts</li>
+    </ol>
+}
+
+@section Modals{
+
+@*MODAL BORRADO DE REGISTRO*@
+<div class="modal fade" id="BankAccountsDeleteDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><b>@Global.BankAccounts</b></h4>
+            </div>
+            <div class="modal-body">
+                @Global.DeletedMultipleRecords
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> @Global.No
+                </button>
+                <button type="button" class="btn btn-primary" id="BankAccountsDeleteAccountDialog">
+                    <span class="glyphicon glyphicon-ok"> @Global.Yes</span>
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+}
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <b>@Global.DocumentNumber</b>
+        <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetPersonByDocumentNumber", "Billing")" data-displaykey="DocumentName" placeholder="" id="numberAccountAccountantAccountSettings" />
+        <input type="hidden" id="individualIdAccountSettings" name="individualIdAccountSettings" />
+    </div>
+    <div class="uif-col-6">
+        <b>@Global.FullName</b>
+        <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetPersonByName", "Billing")" data-displaykey="Name" placeholder="" id="nameAccountAccountantAccountSettings" />
+    </div>
+</div>
+@*
+<div class="uif-row" id="BankAccountsForm4">
+    <div class="pull-left">
+        <div class="uif-col-6">
+            <button id="SearchAccountAccountSettings" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-search"></span>  @Global.Search
+            </button>
+        </div>
+        <div class="uif-col-6">
+            <button id="NewAccountAccountSettings" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-plus"></span>  @Global.NewBankAccount
+            </button>
+        </div>
+    </div>
+</div>
+*@
+<form id="MainPersonBankAccountAddForm" onsubmit="return false" class="form">
+    <div class="uif-row" id="BankAccountsForm1">
+        <div class="uif-col-4">
+            <b>@Global.BankName</b>
+            <input type="hidden" id="ReceivingBankAccountSettings" name="ReceivingBankAccountSettings" />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "checkinternaldepositslip")" data-displaykey="bankDescription"
+                    placeholder="" id="bankNameAccountSettings" name="bankNameAccountSettings" data-val="true" data-val-required="@Global.RequiredField" />
+            <span class="text-danger" data-valmsg-for="bankNameAccountSettings" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <b>@Global.AccountType</b>
+            @Html.DropDownList("AccountTypeAccountSettings", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/Common/GetAccountTypes"),
+                data_id = "AccountTypeId",
+                data_name = "AccountTypeDescription",
+                data_val_required = @Global.RequiredField,
+                data_val = "true",
+                required = ""
+            })
+            <span class="text-danger" data-valmsg-for="AccountTypeAccountSettings" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <b>@Global.AccountNumber</b>
+            <input type="text" id="accountNumberAccountSettings" name="accountNumberAccountSettings" class="uif2_required"
+                   onblur="this.value = this.value.toUpperCase();" maxlength="15" data-val="true" data-val-required="@Global.RequiredField" />
+            <span class="text-danger" data-valmsg-for="accountNumberAccountSettings" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row" id="BankAccountsForm2">
+        <div class="uif-col-4">
+            <b>@Global.Currency</b>
+            @Html.DropDownList("CurrencyAccountSettings", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                data_id = "Id",
+                data_name = "Description",
+                data_val_required = @Global.RequiredField,
+                data_val = "true",
+                required = ""
+            })
+            <span class="text-danger" data-valmsg-for="CurrencyAccountSettings" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-3">
+            <b>@Global.IsActive</b>
+            <div class="checkbox">
+                <input type="checkbox" id="checkEnableAccountSettings">
+                <label for="checkEnableAccountSettings"></label>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <b>@Global.IsDefault</b>
+            <div class="checkbox">
+                <input type="checkbox" id="checkDefaultAccountSettings">
+                <label for="checkDefaultAccountSettings"></label>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row" id="BankAccountsForm3">
+        <div class="pull-left">
+            <div class="uif-col-6">
+                <button id="AcceptAccountSettings" class="btn btn-primary" role="button">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>  @Global.Accept
+                </button>
+            </div>
+            <div class="uif-col-6">
+                <button id="CancelAccountSettings" class="btn btn-default" role="button">
+                    <span class="glyphicon glyphicon-remove"></span>@Global.Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertBankAccountSettings"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" data-source="null"
+               data-title="" id="tableBankAccounts"
+               data-edit="true" data-delete="true" data-filter="false" data-paginate="true"
+               data-selectiontype="none" data-pagesize="10" data-add="true">
+            <thead>
+                <tr>
+                    <th data-property="BankAccountCode" data-visible="false">BankAccountCode</th>
+                    <th data-property="IndividualId" data-visible="false">IndividualId</th>
+                    <th data-property="AccountTypeCode" data-visible="false">AccountTypeCode</th>
+                    <th data-property="AccountNumber">@Global.AccountNumber</th>
+                    <th data-property="BankCode" data-visible="false">BankCode</th>
+                    <th data-property="Enabled" data-type="boolean">@Global.IsActive</th>
+                    <th data-property="Default" data-type="boolean">@Global.IsDefault</th>
+                    <th data-property="CurrencyCode" data-visible="false">CurrencyCode</th>
+                    <th data-property="CurrencyDescription">@Global.Currency</th>
+                    <th data-property="BankDescription">@Global.Bank</th>
+                    <th data-property="AccountTypeDescription">@Global.AccountType</th>
+                    <th data-property="DocumentNumber">@Global.DocumentNumber</th>
+                    <th data-property="PersonName">@Global.FullName</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/BankAccountsSettings")
+}

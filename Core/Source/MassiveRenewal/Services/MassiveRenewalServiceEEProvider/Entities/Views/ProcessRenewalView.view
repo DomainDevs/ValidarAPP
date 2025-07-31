@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PolicyRenewalView">
+  <collections>
+     <collection name="AsynchronousProcess" type="Sistran.Core.Application.Common.Entities.AsynchronousProcess,
+                Core.Common.Entities"></collection>
+    <collection name="ProccesRenewal" type="Sistran.Core.Application.Massive.Entities.ProcessRenewal,
+                Core.Massive.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="CoPolicy" type="Sistran.Core.Application.Issuance.Entities.CoPolicy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, 
+                Core.Issuance.Entities"></collection>
+    <collection name="GroupEndorsement" type="Sistran.Core.Application.Issuance.Entities.GroupEndorsement, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Product" type="Sistran.Core.Application.Product.Entities.Product, 
+                Core.Product.Entities"></collection>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, 
+                Core.Common.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                Core.Common.Entities"></collection>   
+    <collection name="PolicyAgent" type="Sistran.Core.Application.Issuance.Entities.PolicyAgent, 
+                Core.Issuance.Entities"></collection>   
+    <collection name="CoRequest" type="Sistran.Core.Application.Request.Entities.CoRequest,
+                Core.Request.Entities"></collection>
+
+  </collections>
+  <relations>
+     <relation source="AsynchronousProcess" destination="ProccesRenewal" name="AsynchronousProcessProccesRenewal" type="Inner">
+      <property left="ProcessId" type="Equal" right="ProcessId"></property>
+    </relation>
+     <relation source="ProccesRenewal" destination="Policy" name="ProccesRenewalPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Policy" destination="CoPolicy" name="PolicyCoPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Policy" destination="Endorsement" name="PolicyEndorsement" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="Policy" destination="Product" name="PolicyProduct" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="Endorsement" destination="GroupEndorsement" name="EndorsementGroupEndorsement" type="Inner">     
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="Policy" destination="Branch" name="PolicyBranch" type="Inner">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="Policy" destination="Prefix" name="PolicyPrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>   
+    <relation source="Endorsement" destination="PolicyAgent" name="EndorsementPolicyAgent" type="Inner">    
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="CoRequest" destination="Policy" name="CoRequestPolicy" type="Inner">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+  </relations>
+</view>

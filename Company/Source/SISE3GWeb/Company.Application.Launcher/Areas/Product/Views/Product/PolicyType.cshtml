@@ -1,0 +1,54 @@
+﻿<script id="PolicyTypeTemplate" type="text/template">
+    <div><strong>@Resources.Language.LabelPolicyType: {{Description}}</strong></div>
+    {{#if IsDefault}}
+    <div class="danger">@Resources.Language.LabelDefault: Si</div>
+    {{else}}
+    <div class="danger">@Resources.Language.LabelDefault: No</div>
+    {{/if}}
+    <div class="hidden">
+        {{StatusTypeService}}
+    </div>
+</script>
+<form id="formPolicyType" class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-10">
+                    <label>@Resources.Language.LabelPolicyType</label>
+                    <select class="uif-select form-control" id="selectModalPolicyType" data-val="true"
+                            data-val-required="@Resources.Language.ErrorDocumentControlPolicyType"
+                            data-id="Id" data-name="Description" name="selectPolicyTypeId"  data-filter="true" data-native="false"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <input type="checkbox" id="chkModalDefaultPolicyType" name="modalDefaultPolicyType" />
+                    <label for="chkModalDefaultPolicyType">@Resources.Language.LabelDefault</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-listview" id="listModalPolicyType">
+            </div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnCancelPolicyType">
+                    <span class="" aria-hidden="true">@Resources.Language.NewForm</span>
+                </button>
+                <button type="button" class="btn btn-primary" id="btnModalAddPolicyType">
+                    <span class="" aria-hidden="true">@Resources.Language.AddForm</span>
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

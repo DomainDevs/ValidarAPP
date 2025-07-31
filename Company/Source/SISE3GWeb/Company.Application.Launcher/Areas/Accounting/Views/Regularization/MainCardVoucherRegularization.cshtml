@@ -1,0 +1,148 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Card</a></li>
+        <li class="active">@Global.CardRegularization</li>
+    </ol>
+}
+
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-default" id="CancelBilling">
+            <i class="fa fa-remove"></i> @Global.Cancel
+        </button>
+        <button class="btn btn-primary" id="SaveBilling">
+            <i class="fa fa-check"></i>  @Global.Accept
+        </button>
+    </footer>
+}
+
+@section Modals
+{
+    <!-- SaveBill -->
+    <form id="addSaveBillForm" class="form">
+        <div class="uif-modal" id="modalSaveBillCardRegularization">
+            <div class="uif-modalbody">
+                @Html.Partial("../Billing/SaveBillSuccessModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" @*data-dismiss="modal"*@ id="CancelSaveSuccess">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Global.Close&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                <button type="submit" class="btn btn-danger" id="ApplyBill" onclick="return false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Global.Apply&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                <button type="submit" class="btn btn-primary" id="PrintDetail" onclick="return false">@Global.PrintDetail</button>
+            </div>
+        </div>
+    </form>
+    <!-- End SaveBill -->
+
+    <!-- OpeningBilling -->
+    <form id="addOpeningForm" class="form">
+        <div class="uif-modal" id="modalOpeningBilling">
+            <div class="uif-modalbody">
+                @Html.Partial("../Billing/OpeningBillingModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="submit" class="btn btn-primary" id="AcceptOpening" onclick="return false">@Global.Accept</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+            </div>
+        </div>
+    </form>
+    <!-- End OpeningBilling -->
+
+    <!-- BillingClosure -->
+    <form id="addClosureForm" class="form">
+        <div class="uif-modal" id="modalBillingClosure">
+            <div class="uif-modalbody">
+                @Html.Partial("../Billing/BillingClosureModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="submit" class="btn btn-primary" id="AcceptClosure" onclick="return false">@Global.Accept</button>
+            </div>
+        </div>
+    </form>
+    <!-- End BillingClosure -->
+}
+
+
+<div id="MainCardVoucherRegularization">
+
+    <div id="GeneralInformation">
+        <h3>
+            <b>@Global.GeneralInformation</b>
+        </h3>
+        <hr/>
+        @Html.Partial("CardVoucherGeneralInformationPartial")
+    </div>
+
+    <div id="RejectedCardVoucher">
+        <h3>
+            <a style="color: Black"><b>@Global.InformationCard</b></a>
+        </h3>
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("RejectedCardVoucherInformationPartial")
+        </div>
+    </div>
+    <div id="CardVoucherSummary">
+        <h3>
+            <a style="color: Black"><b>@Global.Summary</b></a>
+        </h3>
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("CardPaymentSumaryPartial")
+        </div>
+    </div>
+    <div id="CardVoucherPaymentType">
+        <h3>
+            <a style="color: Black"><b>@Global.PaymentMethod</b></a>
+        </h3>
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("../Billing/PaymentMethodsPartial")
+        </div>
+    </div>
+</div>
+<script src="@Url.Content("~/Scripts/common-validations.js")"></script>
+@*<script src="@Url.Content("~/Areas/Accounting/Scripts/Regularization/MainCardVoucherRegularization.js")"></script>*@
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagAccountingDate" value="@ViewBag.AccountingDate" />
+<input type="hidden" id="ViewBagUserNick" value="@ViewBag.UserNick"/>
+<input type="hidden" id="ViewBagOpeningBilling" value="@ViewBag.OpeningBilling"/>
+<input type="hidden" id="ViewBagParamPaymentMethodCash" value="@ViewBag.ParamPaymentMethodCash"/>
+<input type="hidden" id="ViewBagParamPaymentMethodDirectConection" value="@ViewBag.ParamPaymentMethodDirectConection"/>
+<input type="hidden" id="ViewBagParamPaymentMethodTransfer" value="@ViewBag.ParamPaymentMethodTransfer" />
+<input type="hidden" id="ViewBagParamPaymentMethodCreditableCreditCard" value="@ViewBag.ParamPaymentMethodCreditableCreditCard"/>
+<input type="hidden" id="ViewBagParamPaymentMethodUncreditableCreditCard" value="@ViewBag.ParamPaymentMethodUncreditableCreditCard"/>
+<input type="hidden" id="ViewBagParamPaymentMethodDataphone" value="@ViewBag.ParamPaymentMethodDataphone" />
+<input type="hidden" id="ViewBagParamPaymentMethodElectronicPayment" value="@ViewBag.ParamPaymentMethodElectronicPayment"/>
+<input type="hidden" id="ViewBagParamPaymentMethodCurrentCheck" value="@ViewBag.ParamPaymentMethodCurrentCheck"/>
+<input type="hidden" id="ViewBagParamPaymentMethodPostdatedCheck" value="@ViewBag.ParamPaymentMethodPostdatedCheck"/>
+<input type="hidden" id="ViewBagParamPaymentMethodDebit" value="@ViewBag.ParamPaymentMethodDebit"/>
+<input type="hidden" id="ViewBagDateAccounting" value="@ViewBag.DateAccounting"/>
+<input type="hidden" id="ViewBagLocalCurrencyId" value="@ViewBag.localCurrencyId"/>
+<input type="hidden" id="ViewBagParamPaymentMethodDepositVoucher" value="@ViewBag.ParamPaymentMethodDepositVoucher"/>
+<input type="hidden" id="ViewBagParamPaymentConsignmentCheck" value="@ViewBag.ParamPaymentConsignmentCheck" />
+<input type="hidden" id="ViewBagParamPaymentMethodRetentionReceipt" value="@ViewBag.ParamPaymentMethodRetentionReceipt"/>
+<input type="hidden" id="ViewBagParamPaymentMethodPaymentArea" value="@ViewBag.ParamPaymentMethodPaymentArea"/>
+<input type="hidden" id="ViewBagParamPaymentMethodPaymentCard" value="@ViewBag.ParamPaymentMethodPaymentCard"/>
+<input type="hidden" id="ViewBagPaymentId" value="@ViewBag.PaymentId"/>
+<input type="hidden" id="ViewBagVoucherNumber" value="@ViewBag.VoucherNumber"/>
+<input type="hidden" id="ViewBagBranchIdOrigin" value="@ViewBag.BranchIdOrigin"/>
+<input type="hidden" id="ViewBagCardRegularization" value="true" />
+<input type="hidden" id="ViewBagInternalCardVoucher" value="@Url.Content(Global.InternalCardVoucher)"/>
+<input type="hidden" id="ViewBagBillingClosureIdLink" value="@Url.Content(Global.BillingClosureIdLink)" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/ApplicationRegularization")
+}
+
+

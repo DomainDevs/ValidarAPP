@@ -1,0 +1,30 @@
+<map version="2.0" type="class" name="Application" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="APPLICATION_ENTITY">
+  <properties>
+    <property name="ApplicationCode" type="Integer" key="true" description="APPLICATION_CODE_PROPERTY" nullable="false" autonumber="Identity" />
+    <property name="ModuleCode" type="Integer" description="MODULE_CODE_PROPERTY" />
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="SourceCode" type="Integer" nullable="true" description="SOURCE_CODE_PROPERTY" />
+    <property name="RegisterDate" type="DateTime" description="REGISTER_DATE_PROPERTY" />
+    <property name="AccountingDate" type="DateTime" description="ACCOUNTING_DATE_PROPERTY" />
+    <property name="IndividualCode" type="Integer" description="INDIVIDUAL_CODE_PROPERTY" />
+    <property name="UserCode" type="Integer" description="USER_CODE_PROPERTY" />
+    <property name="Description" type="String" size="50" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="TechnicalTransaction" type="Integer" nullable="true" description="TECHNICAL_TRANSACTION_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="APPLICATION" schema="ACC" alias="APPLICATION" update="true">
+      <columns>
+        <column name="APPLICATION_CD" type="Int32" property="ApplicationCode" key="true" identity="true" />
+        <column name="MODULE_CD" type="Int32" property="ModuleCode" allowNull="false" />
+        <column name="BRANCH_CD" type="Int32" property="BranchCode" allowNull="false" />
+        <column name="SOURCE_CD" type="Int32" property="SourceCode" />
+        <column name="REGISTER_DATE" type="DateTime" property="RegisterDate" allowNull="false" />
+        <column name="ACCOUNTING_DATE" type="DateTime" property="AccountingDate" allowNull="false" />
+        <column name="INDIVIDUAL_CD" type="Int32" property="IndividualCode" allowNull="false" />
+        <column name="USER_CD" type="Int32" property="UserCode" allowNull="false" />
+        <column name="DESCRIPTION" type="String" property="Description" size="50" />
+        <column name="TECHNICAL_TRANSACTION" type="Int32" property="TechnicalTransaction" />
+      </columns>
+    </table>
+  </tables>
+</map>

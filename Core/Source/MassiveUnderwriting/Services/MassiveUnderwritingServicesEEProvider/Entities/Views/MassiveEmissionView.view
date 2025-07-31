@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="MassiveEmissionView">
+  <collections>
+    <collection name="MassiveEmission" type="Sistran.Core.Application.Massive.Entities.MassiveEmission, 
+                 Core.Massive.Entities"></collection>
+    <collection name="MassiveLoad" type="Sistran.Core.Application.Massive.Entities.MassiveLoad, 
+                 Core.Massive.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="MassiveLoad" destination="MassiveEmission" name="MassiveLoadMassiveEmission" type="Inner">
+      <property left="Id" type="Equal" right="MassiveLoadId"></property>
+    </relation>
+  </relations>
+</view>

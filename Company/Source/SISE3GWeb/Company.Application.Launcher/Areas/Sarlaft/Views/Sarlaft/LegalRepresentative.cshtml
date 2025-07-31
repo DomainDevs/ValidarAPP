@@ -1,0 +1,316 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.Sarlaft.Models.LegalRepresentativeView
+
+@*Titulo*@
+<script id="title-template" type="text/template">
+    <div class="column column-100">
+        @Resources.Language.LabelLegalRepresentative
+    </div>
+</script>
+
+<form class="form" id="formLegalRepresentative">
+    @*<div class="tab-content">*@
+
+    <div class="row">
+        <div class="uif-col-2">
+        </div>
+        <div class="uif-col-2">
+            <label class="radio-inline">
+                <input type="radio" name="chkPrincipal" id="chkPrincipal" checked="checked">
+                Principal
+            </label>
+        </div>
+        <div class="uif-col-2">
+            <label class="radio-inline">
+                <input type="radio" name="chkPrincipal" id="chkAlternate">
+                Suplente
+            </label>
+        </div>
+        <div class="uif-col-4">
+            <select class="uif-select form-control" id="selectTypeOfOption" data-id="Id" data-name="Description" data-native="false" data-val="true" disabled="disabled"></select>
+        </div>
+    </div>
+    <div id="tabMainRepresentative">
+
+        <div class="uif-row fit-col-main">
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.LabelTypeDocument</label>
+                <select class="uif-select form-control" id="MainLegalDocumentType" name="MainLegalDocumentType" data-id="Id" data-name="DescriptionLong" data-native="false" data-val="true" data-val-required="@Resources.Language.RequiredField"></select>
+                @Html.ValidationMessageFor(model => model.MainLegalDocumentType)
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.LabelNumberDocument</label>
+                <input type="text" value="" id="MainDocumentNumber" name="MainDocumentNumber" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" data-val-required="@Resources.Language.RequiredField" class="rightAlign" />
+                @Html.ValidationMessageFor(model => model.MainDocumentNumber)
+            </div>
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.LabelFullName</label>
+                <input type="text" value="" id="MainFullName" name="MainFullName" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" data-val-required="@Resources.Language.RequiredField" />
+                @Html.ValidationMessageFor(model => model.MainFullName)
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.LabelExpeditionDate</label>
+                <input type="text" class="uif-datepicker" id="MainExpeditionDate" name="MainExpeditionDate" data-val="true" data-val-required="@Resources.Language.RequiredField" data-min-date="01/01/1910" data-max-date=DateTime.Now />
+                @Html.ValidationMessageFor(model => model.MainExpeditionDate)
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.ExpeditionPlace</label>
+                <input type="text" value="" id="MainInputPlaceOfExpeditionRepresentLegal" name="MainPlaceOfExpeditionRepresentLegal" data-displaykey="Description" data-minlenght="3" data-maxlenght="100"  data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" />
+                @Html.ValidationMessageFor(model => model.MainPlaceOfExpeditionRepresentLegal)
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.Birthdate</label>
+                <input type="text" class="uif-datepicker" id="MainBirthdate" name="MainBirthdate"  data-val="true" data-val-required="@Resources.Language.RequiredField" data-min-date="01/01/1910" data-max-date=DateTime.Now />
+                @Html.ValidationMessageFor(model => model.MainBirthdate)
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.Birthplace</label>
+                <input type="text" value="" id="MainBirthplace" name="MainBirthplace" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" />
+                @Html.ValidationMessageFor(model => model.MainBirthplace)
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.LanguagePerson.LabelNationality</label>
+                <select class="uif-select" id="MainNationality" name="MainNationality" data-id="Id" data-name="Description"
+                        data-val-required="Campo requerido" required="required"></select>
+                @Html.ValidationMessageFor(model => model.MainNationality)
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.LanguagePerson.LabelNationality 2</label>
+                <select class="uif-select" id="selectNationalityOtherLr" name="MainSelectNationalityOtherLr" data-id="Id" data-name="Description"
+                        data-val-required="Campo requerido" required="required"></select>
+                @Html.ValidationMessageFor(model => model.MainSelectNationalityOtherLr)
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.LabelOffice</label>
+                <input type="text" value="" id="MainOffice" name="MainOffice" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" />
+                @Html.ValidationMessageFor(model => model.MainOffice)
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.Phone</label>
+                <input type="text" value="" id="MainPhone" name="MainPhone" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" class="rightAlign" />
+                @Html.ValidationMessageFor(model => model.MainPhone)
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Resources.Language.LabelCell</label>
+                <input type="text" value="" id="MainCell" name="MainCell" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" class="rightAlign" />
+                @Html.ValidationMessageFor(model => model.MainCell)
+            </div>
+
+
+
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.Country</label>
+                <select class="uif-select form-control" id="MainSelectLegalCountry" name="MainSelectLegalCountry" data-native="false" data-id="Id" data-name="DescriptionLong" data-val="true" data-filter="true" required="required" data-val-required="@Resources.Language.RequiredField"></select>
+                @Html.ValidationMessageFor(model => model.MainSelectLegalCountry)
+            </div>
+
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.LabelState</label>
+                <select class="uif-select form-control" id="MainSelectState" name="MainSelectState" data-id="Id" data-native="false" data-name="DescriptionLong" data-val="true" data-filter="true" required="required" data-val-required="@Resources.Language.RequiredField"></select>
+                @Html.ValidationMessageFor(model => model.MainSelectState)
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.Town</label>
+                <select class="uif-select form-control" data-native="false" id="MainSelectTown" name="MainSelectTown" data-id="Id" data-name="Description" data-val="true" data-filter="true" required="required" data-val-required="@Resources.Language.RequiredField"></select>
+                @Html.ValidationMessageFor(model => model.MainSelectTown)
+            </div>
+
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.LabelEmail</label>
+                <input type="text" value="" id="MainEmail" name="MainEmail" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" />
+                @Html.ValidationMessageFor(model => model.MainEmail)
+            </div>
+
+
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.Address</label>
+                <input type="text" value="" id="MainAddress" name="MainAddress" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" />
+                @Html.ValidationMessageFor(model => model.MainAddress)
+            </div>
+            @*  <div class="uif-col-3">
+                    <div class="without-label">
+                        <input type="checkbox" name="MainLegalRepresentative" id="MainLegalRepresentative" checked="checked" disabled>
+                        <label for="MainLegalRepresentative">@Resources.Language.Main</label>
+                    </div>
+                </div>*@
+        </div>
+
+        <div class="row">
+            <div class="uif-col-8">
+                <h4><strong>@Resources.Language.Faculties</strong></h4>
+            </div>
+        </div>
+        <div class="uif-row">
+
+            <div class="uif-col-3">
+                <label>@Resources.Language.Faculties</label>
+                <input type="text" value="" id="MainInputAuthoAmt" name="AssignedCoinsurerName" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" class="uif-mask rightAlign" data-pattern="0000000,00" />
+            </div>
+
+            <div class="uif-col-3">
+                <label>@Resources.Language.UnitType</label>
+                <select class="uif-select form-control" data-native="false" id="MainSelectLegalCurrency" data-id="Id" data-name="DescriptionLong"></select>
+            </div>
+
+            <div class="uif-col-6">
+                <label>@Resources.Language.LabelObservations</label>
+                <input type="text" value="" id="MainInputObservations" name="AssignedCoinsurerName" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" />
+            </div>
+
+        </div>
+
+        @* <div id="tabSubstituteRepresentative" hidden>
+                <div class="uif-row fit-col-main">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelTypeDocument</label>
+                        <select class="uif-select form-control" id="SubstituteLegalDocumentType" data-id="Id" data-name="DescriptionLong" data-native="false" data-val="true" data-val-required="@Resources.Language.RequiredField"></select>
+
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelNumberDocument</label>
+                        <input type="text" value="" id="SubstituteDocumentNumber" name="DocumentNumber" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" data-val-required="@Resources.Language.RequiredField" class="rightAlign" />
+
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelFullName</label>
+                        <input type="text" value="" id="SubstituteFullName" name="FullName" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" data-val-required="@Resources.Language.RequiredField" />
+
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelExpeditionDate</label>
+                        <input type="text" class="uif-datepicker" id="SubstituteExpeditionDate" data-val="true" data-val-required="@Resources.Language.RequiredField" data-min-date="01/01/1910" data-max-date=DateTime.Now />
+                    </div>
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.ExpeditionPlace</label>
+                        <input type="text" value="" id="SubstituteInputPlaceOfExpeditionRepresentLegal" name="ExpeditionDate" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.Birthdate</label>
+                        <input type="text" class="uif-datepicker" id="SubstituteBirthdate" data-min-date="01/01/1910" data-max-date=DateTime.Now />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.Birthplace</label>
+                        <input type="text" value="" id="SubstituteBirthplace" name="Birthplace" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelNationality</label>
+                        <input type="text" value="COLOMBIANO" id="SubstituteNationality" name="Nationality" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" required="required" data-val="true" data-val-required="@Resources.Language.RequiredField" />
+
+                    </div>
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelNationality 2</label>
+                        <input type="text" value="" id="MainNationalitySAlt" name="Nationality" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" required="required" data-val="true" data-val-required="@Resources.Language.RequiredField" />
+
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.Phone</label>
+                        <input type="text" value="" id="SubstitutePhone" name="Phone" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" class="rightAlign" />
+
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelOffice</label>
+                        <input type="text" value="" id="SubstituteOffice" name="office" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelCell</label>
+                        <input type="text" value="" id="SubstituteCell" name="Cell" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" class="rightAlign" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelEmail</label>
+                        <input type="text" value="" id="SubstituteEmail" name="Email" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" />
+                    </div>
+
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.Country</label>
+                        <select class="uif-select form-control" id="SubstituteSelectLegalCountry" data-native="false" data-id="Id" data-name="DescriptionLong" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField"></select>
+                    </div>
+
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelState</label>
+                        <select class="uif-select form-control" id="SubstituteSelectState" data-id="Id" data-native="false" data-name="DescriptionLong" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField"></select>
+                    </div>
+
+
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.Town</label>
+                        <select class="uif-select form-control" data-native="false" id="SubstituteSelectTown" data-id="Id" data-name="DescriptionLong" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField"></select>
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.Address</label>
+                        <input type="text" value="" id="SubstituteAddress" name="Address" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="uif-col-12">
+                        <h5><strong>@Resources.Language.Faculties</strong></h5>
+                    </div>
+                </div>
+                <div class="uif-row">
+
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.Faculties</label>
+                        <input type="text" value="" id="SubstituteInputAuthoAmt" name="AssignedCoinsurerName" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" class="uif-mask rightAlign" data-pattern="0000000,00" />
+                    </div>
+
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.UnitType</label>
+                        <select class="uif-select form-control" data-native="false" id="SubstituteSelectLegalCurrency" data-id="Id" data-name="DescriptionLong"></select>
+                    </div>
+
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.LabelObservations</label>
+                        <input type="text" value="" id="SubstituteInputObservations" name="AssignedCoinsurerName" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" />
+                    </div>
+
+                </div>
+            </div> *@
+    </div>
+
+    <div class="row">
+        <h4> <strong> @Resources.Language.RepresentlegalSub</strong></h4>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelTypeDocument</label>
+            <select class="uif-select form-control" id="SubstituteLegalDocumentType" name="SubstituteLegalDocumentType" data-id="Id" data-name="DescriptionLong" data-native="false" data-val="true" data-val-required="@Resources.Language.RequiredField"></select>
+            @Html.ValidationMessageFor(model => model.SubstituteLegalDocumentType)
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelNumberDocument</label>
+            <input type="text" value="" id="SubstituteDocumentNumber" name="SubstituteDocumentNumber" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" data-val-required="@Resources.Language.RequiredField" class="rightAlign" />
+            @Html.ValidationMessageFor(model => model.SubstituteDocumentNumber)
+        </div>
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelFullName</label>
+            <input type="text" value="" id="SubstituteFullName" name="SubstituteFullName" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" data-val-required="@Resources.Language.RequiredField" />
+            @Html.ValidationMessageFor(model => model.SubstituteFullName)
+        </div>
+    </div>
+    </div>
+
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnLegalCancel" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnLegalSave" onclick="return false">@Resources.Language.ButtonSave</button>
+    </div>
+
+</form>

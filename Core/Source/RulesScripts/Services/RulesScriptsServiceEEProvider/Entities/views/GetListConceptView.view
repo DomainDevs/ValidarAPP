@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="GetListConceptView">
+  <collections>
+    <collection name="Concept" type=" Sistran.Core.Application.Script.Entities.Concept, 
+              Core.Script.Entities"></collection>
+
+    <collection name="ListConcept" type="Sistran.Core.Application.Script.Entities.ListConcept, 
+              Core.Script.Entities"></collection>
+
+    <collection name="ListEntity" type="Sistran.Core.Application.Script.Entities.ListEntity, 
+              Core.Script.Entities"></collection>
+
+    <collection name="ListEntityValue" type="Sistran.Core.Application.Script.Entities.ListEntityValue, 
+              Core.Script.Entities"></collection>
+
+  </collections>
+  <relations>
+    <relation source="Concept" destination="ListConcept" name="Concept_ListConcept" type="Left">
+      <property left="ConceptId" type="Equal" right="ConceptId"></property>
+      <property left="EntityId" type="Equal" right="EntityId"></property>
+    </relation>
+
+    <relation source="ListConcept" destination="ListEntity" name="ListConcept_ListEntity" type="Left">
+      <property left="ListEntityCode" type="Equal" right="ListEntityCode"></property>
+    </relation>
+
+    <relation source="ListEntity" destination="ListEntityValue" name="ListEntity_ListEntityValue" type="Left">
+      <property left="ListEntityCode" type="Equal" right="ListEntityCode"></property>
+    </relation>
+  </relations>
+</view>
+
+

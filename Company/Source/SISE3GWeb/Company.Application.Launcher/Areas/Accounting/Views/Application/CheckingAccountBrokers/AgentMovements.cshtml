@@ -1,0 +1,167 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "AgentMovements";
+}
+
+<script id="agent-display-template" type="text/template">
+    <div>
+        <strong>{{BranchName}}</strong> | {{SalePointName}} | {{ConceptName}} <br>
+        <span class="text-danger"><strong>{{NatureName}}</strong></span>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"> {{Amount}}</div>
+    </div>
+</script>
+
+<div class="form">
+    <div class="uif-row">
+        <!--left col-->
+        <div class="uif-col-6">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.Branch</label>
+                    <select class="uif-select form-control" id="selectAgentBranch" data-id="Id" data-name="Description"></select>
+                        <input type="hidden" id="MovementBillNumber" />
+                        <span class="text-danger" data-valmsg-for="selectAgentBranch" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.SalePoint</label>
+                    <select class="uif-select form-control" id="selectAgentSalePoint" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectAgentSalePoint" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.Company</label>
+                    @Html.DropDownList("selectAgentCompany", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetAccountingCompanies"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="selectAgentCompany" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.MovementDescription</label>
+                    @Html.TextBox("AgentMovementDescription", "", new
+                        {
+                            style = "text-align: left",
+                            maxlength = "40",
+                            @onblur = "this.value = this.value.toUpperCase();",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="AgentMovementDescription" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.AgentDocumentNumber</label>
+                    @Html.TextBox("AgentDocumentNumber", "", new
+                    {
+                        id = "AgentDocumentNumber",
+                        maxlength = "20",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetAgentByDocumentNumber"),
+                        data_displaykey = "DocumentNumber",
+                        placeholder = @Global.EnterAgentDocument,
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="AgentDocumentNumber" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.AgentName</label>
+                    @Html.TextBox("AgentName", "", new
+                    {
+                        id = "AgentName",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetAgentByName"),
+                        data_displaykey = "Name",
+                        placeholder = @Global.EnterAgentName,
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="AgentName" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.AccountingAccountConceptCode</label>
+                    <select class="uif-select form-control" id="selectAgentAccountingAccountConcept" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectAgentAccountingAccountConcept" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.Nature</label>
+                    <select class="uif-select form-control" id="selectAgentNature" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectAgentNature" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Currency</label>
+                    <select class="uif-select form-control" id="selectAgentCurrency" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectAgentCurrency" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.AmountExchange</label>
+                    <input type="text" id="AgentExchangeRate" style="text-align: right" />
+                    <input type="hidden" id="MovementMessageDuplicate" name="MovementMessageDuplicate" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Amount</label>
+                    @Html.TextBox("AgentAmount", "", new
+                        {
+                            @onkeypress = "return OnlyDecimalNumber(event,this)",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <input type="hidden" id="AgentLocalAmount" />
+                    <span class="text-danger" data-valmsg-for="AgentAmount" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="uif-alert" id="alertForm"></div>
+                </div>
+            </div>
+        </div>
+        <!--End left col-->
+        <!--right col-->
+        <div class="uif-col-6">
+            <div id="agentsListView" class="uif-listview">
+                <div class="footer">
+                    <label>@Global.Credit</label>
+                    <b id="TotalAgentMovementCredit">$0.00</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>@Global.Debit</label>
+                    <b id="TotalAgentMovementDebit">$0.00</b>
+                </div>
+            </div>
+        </div>
+        <!--End right col-->
+    </div>
+    <div class="uif-row">
+        <div class="pull-right">
+            <div class="uif-modalbuttons">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0497"))
+                {
+                    <button type="submit" class="btn btn-primary" id="AgentAdd" onclick="return false">@Global.Add</button>
+                }
+                <button type="button" class="btn btn-default" id="AgentAcceptMovement">@Global.Accept</button>
+            </div>
+        </div>
+    </div>
+</div>
+

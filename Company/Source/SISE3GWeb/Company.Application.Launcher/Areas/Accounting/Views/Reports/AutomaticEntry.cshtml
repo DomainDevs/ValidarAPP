@@ -1,0 +1,93 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AutomaticEntry;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Reports</a></li>
+        <li class="active">@Global.AutomaticEntry</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="AEReportCancel" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-remove"></span>  @Global.Clean
+            </button>
+            <button id="AEReportGenerate" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+
+@section modals{
+    <!-- Modal Confirma proceso de masivos-->
+    <div class="modal fade" id="modalConfirmAE" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.AutomaticEntry</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="AEModalConfirm">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="AEReportForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.Year</label>
+            <input type="text" id="AEReportYear" name="AEReportYear" data-val="true" data-val-required="@Global.RequiredField"
+                   onkeypress="return JustNumbers(event, this) " maxlength="4" min="1900" />
+            <span class="text-danger" data-valmsg-for="AEReportYear" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Month
+            </label>
+
+            <select class="uif-select form-control required" id="AEReportMonth" name="AEReportMonth"
+                    data-source='@Url.Content("~/Accounting/Common/GetYearMonths")' data-id="Id"
+                    data-name="Description" data-val="true"
+                    data-val-required='@Global.RequiredField' data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="AEReportMonth" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertAE"></div>
+        </div>
+    </div>
+
+</form>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/AutomaticEntry")
+}
+

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="GetEndorsementReinsurance">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="IssueLayerId">
+          <Column table-alias="IssueLayer" name="IssueLayerId" />
+        </SelectValue>
+        <SelectValue alias="ReinsuranceNumber">
+          <Column table-alias="IssueReinsurance" name="ReinsuranceNumber" />
+        </SelectValue>
+        <SelectValue alias="EndorsementId">
+          <Column table-alias="IssueReinsurance" name="EndorsementId" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="MovementType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="ProcessDate">
+          <Column table-alias="IssueReinsurance" name="ProcessDate" />
+        </SelectValue>
+        <SelectValue alias="IssueDate">
+          <Column table-alias="IssueReinsurance" name="IssueDate" />
+        </SelectValue>
+        <SelectValue alias="ValidityFrom">
+          <Column table-alias="IssueReinsurance" name="ValidityFrom" />
+        </SelectValue>
+        <SelectValue alias="ValidityTo">
+          <Column table-alias="IssueReinsurance" name="ValidityTo" />
+        </SelectValue>
+        <SelectValue alias="IsAutomatic">
+          <Column table-alias="IssueReinsurance" name="IsAutomatic" />
+        </SelectValue>
+        <SelectValue alias="AccountName">
+          <Column table-alias="UniqueUsers" name="AccountName" />
+        </SelectValue>
+        <SelectValue alias="LayerNumber">
+          <Column table-alias="IssueLayer" name="LayerNumber" />
+        </SelectValue>
+        <SelectValue alias="LayerPercentage">
+          <Column table-alias="IssueLayer" name="LayerPercentage" />
+        </SelectValue>
+        <SelectValue alias="PremiumPercentage">
+          <Column table-alias="IssueLayer" name="PremiumPercentage" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="IssueAllocation" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="Premium">
+          <Column table-alias="IssueAllocation" name="Premium" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join type="Left">
+          <Join>
+            <Join>
+              <Join>
+                <Join>
+                  <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.IssueReinsurance, 
+                            Core.Reinsurance.Entities" alias="IssueReinsurance" />
+                  <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.IssueLayer,
+                            Core.Reinsurance.Entities" alias="IssueLayer" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="IssueReinsurance" name="IssueReinsuranceId" />
+                      <Column table-alias="IssueLayer" name="IssueReinsuranceId" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.IssueLayerLine,
+                          Core.Reinsurance.Entities" alias="IssueLayerLine" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="IssueLayer" name="IssueLayerId" />
+                    <Column table-alias="IssueLayerLine" name="IssueLayerId" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.IssueAllocation,
+                          Core.Reinsurance.Entities" alias="IssueAllocation" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="IssueLayerLine" name="IssueLayerLineId" />
+                  <Column table-alias="IssueAllocation" name="IssueLayerLineId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.MovementType,
+                          Core.Reinsurance.Entities" alias="MovementType" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="IssueReinsurance" name="MovementTypeId" />
+                <Column table-alias="MovementType" name="MovementTypeId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, Core.UniqueUser.Entities" alias="UniqueUsers" />          
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="IssueReinsurance" name="UserId" />
+              <Column table-alias="UniqueUsers" name="UserId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

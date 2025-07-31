@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CollectListPersonView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CollectId">
+          <Column table-alias="Collect" name="CollectId" />
+        </SelectValue>
+        <SelectValue alias="CollectStatus">
+          <Column table-alias="Collect" name="Status" />
+        </SelectValue>
+        <SelectValue alias="PaymentsTotal">
+          <Column table-alias="Collect" name="PaymentsTotal" />
+        </SelectValue>
+        <SelectValue alias="AccountName">
+          <Column table-alias="UniqueUsers" name="AccountName" />
+        </SelectValue>
+        <SelectValue alias="RegisterDate">
+          <Column table-alias="Collect" name="RegisterDate" />
+        </SelectValue>
+        <SelectValue alias="AccountingDate">
+          <Column table-alias="CollectControl" name="AccountingDate" />
+        </SelectValue>
+        <SelectValue alias="IndividualId">
+          <Column table-alias="Collect" name="IndividualId" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="CollectControl" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="CollectConceptCode">
+          <Column table-alias="Collect" name="CollectConceptCode" />
+        </SelectValue>
+        <SelectValue alias="UserId">
+          <Column table-alias="CollectControl" name="UserId" />
+        </SelectValue>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CollectControlId">
+          <Column table-alias="CollectControl" name="CollectControlId" />
+        </SelectValue>
+        <SelectValue alias="Payer">
+          <Column table-alias="ListPersons" name="Name" />
+        </SelectValue>
+        <SelectValue alias="DocumentNumber">
+          <Column table-alias="ListPersons" name="DocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="TechnicalTransaction">
+          <Column table-alias="Collect" name="TechnicalTransaction" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join type="Left">
+          <Join>
+            <Join>
+              <Join>
+                <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Collect, Core.Accounting.Entities" alias="Collect" />
+                <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CollectControl, Core.Accounting.Entities" alias="CollectControl" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="CollectControl" name="CollectControlId" />
+                    <Column table-alias="Collect" name="CollectControlCode" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, Core.UniqueUser.Entities" alias="UniqueUsers" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="UniqueUsers" name="UserId" />
+                  <Column table-alias="CollectControl" name="UserId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Branch" name="BranchCode" />
+                <Column table-alias="CollectControl" name="BranchCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.UniquePersonV1.Entities.ListPersons, Core.UniquePersonV1.Entities" alias="ListPersons" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="ListPersons" name="IndividualId" />
+              <Column table-alias="Collect" name="IndividualId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

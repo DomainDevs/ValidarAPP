@@ -1,0 +1,56 @@
+<map version="2.0" type="class" name="CoRequestEndorsement" namespace="Sistran.Core.Application.Request" file-version="1.0" description="CO_REQUEST_ENDORSEMENT_ENTITY">
+  <properties>
+    <property name="RequestEndorsementId" type="Integer" key="true" autonumber="id" description="REQUEST_ENDORSEMENT_ID_PROPERTY"  />
+    <property name="RequestId" type="Integer" description="REQUEST_ID_PROPERTY" />
+    <property name="EndoTypeCode" type="Integer" description="ENDO_TYPE_CODE_PROPERTY" />
+    <property name="DocumentNum" type="Integer" description="DOCUMENT_NUM_PROPERTY" />
+    <property name="EndorsementDate" type="DateTime" description="ENDORSEMENT_DATE_PROPERTY" />
+    <property name="PolicyHolderId" type="Integer" description="POLICY_HOLDER_ID_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" description="CURRENT_FROM_PROPERTY" />
+    <property name="CurrentTo" type="DateTime" description="CURRENT_TO_PROPERTY" />
+    <property name="MonthlyPayDay" type="Integer" nullable="true" description="MONTHLY_PAY_DAY_PROPERTY" />
+    <property name="IssueExpensesAmount" type="Decimal" precision="18" scale="2" description="ISSUE_EXPENSES_AMOUNT_PROPERTY" />
+    <property name="UserId" type="Integer" nullable="true" description="USER_ID_PROPERTY" />
+    <property name="IsOpenEffect" type="Boolean" description="IS_OPEN_EFFECT_PROPERTY" />
+    <property name="PaymentScheduleId" type="Integer" description="PAYMENT_SCHEDULE_ID_PROPERTY" />
+    <property name="Annotations" type="String" size="2147483647" nullable="true" description="ANNOTATIONS_PROPERTY" />
+    <property name="ProductId" type="Integer" nullable="true" description="PRODUCT_ID_PROPERTY" />
+    <property name="PrefixCode" type="Integer" nullable="true" description="PREFIX_CODE_PROPERTY" />
+    <property name="PolicyTypeCode" type="Integer" nullable="true" description="POLICY_TYPE_CODE_PROPERTY" />
+    <property name="AmtGift" type="Decimal" precision="18" scale="2" nullable="true" description="AMT_GIFT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CO_REQUEST_ENDORSEMENT" schema="REQ" alias="CO_REQUEST_ENDORSEMENT" update="true">
+      <columns>
+        <column name="REQUEST_ENDORSEMENT_ID" type="Int32" property="RequestEndorsementId" key="true" />
+        <column name="REQUEST_ID" type="Int32" property="RequestId" allowNull="false" />
+        <column name="ENDO_TYPE_CD" type="Int16" property="EndoTypeCode" allowNull="false" />
+        <column name="DOCUMENT_NUM" type="Int32" property="DocumentNum" allowNull="false" />
+        <column name="ENDORSEMENT_DATE" type="DateTime" property="EndorsementDate" allowNull="false" />
+        <column name="POLICY_HOLDER_ID" type="Int32" property="PolicyHolderId" allowNull="false" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" allowNull="false" />
+        <column name="CURRENT_TO" type="DateTime" property="CurrentTo" allowNull="false" />
+        <column name="MONTHLY_PAY_DAY" type="Int16" property="MonthlyPayDay" />
+        <column name="ISSUE_EXPENSES_AMT" type="Decimal" property="IssueExpensesAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="USER_ID" type="Int32" property="UserId" />
+        <column name="IS_OPEN_EFFECT" type="Boolean" property="IsOpenEffect" allowNull="false" />
+        <column name="PAYMENT_SCHEDULE_ID" type="Int32" property="PaymentScheduleId" allowNull="false" />
+        <column name="ANNOTATIONS" type="String" property="Annotations" size="2147483647" />
+        <column name="PRODUCT_ID" type="Int32" property="ProductId" />
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" />
+        <column name="POLICY_TYPE_CD" type="Int16" property="PolicyTypeCode" />
+        <column name="AMT_GIFT" type="Decimal" property="AmtGift" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="CO_PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Int32" value="1024" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

@@ -1,0 +1,93 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.TechnicalPlanCoverageViewModel
+<script id="ListAssignCoverageTemplate" type="text/template">
+    <div>
+        @Resources.Language.LabelTechnicalPlanInsuredObject: {{InsuredObjectDescription}}({{InsuredObjectId}})
+    </div>   
+    <div>
+        @Resources.Language.LabelTechnicalPlanCoverage:
+        {{#ifCond Status "==" 2}}
+            <strong class="success">{{CoverageDescription}} ({{CoverageId}})</strong>
+        {{else ifCond Status "==" 3}}
+            <strong class="warning">{{CoverageDescription}} ({{CoverageId}})</strong>
+        {{else ifCond Status "==" 4}}
+            <strong class="danger">{{CoverageDescription}} ({{CoverageId}})</strong>
+        {{else}}
+            <strong>{{CoverageDescription}} ({{CoverageId}})</strong>
+        {{/ifCond }}        
+    </div>
+    {{#ifCond PrincipalCoverageId ">" 0}}
+        <div> @Resources.Language.SumPercentage: {{CoveragePercentage}}% </div>
+    {{else}}
+        <div> @Resources.Language.LabelPrincipalCheckBox </div>
+    {{/ifCond }}
+</script>
+
+<form id="FormCoverage" class="form modal-Colombia">
+    <div class="row">
+        @Html.Hidden("CoverageIndex")
+        @Html.Hidden("TechnicalPlanId")
+        @Html.Hidden("ProcessStatus")
+        <div class="uif-col-6">
+            <div class="row panelAssigned">
+                <div class="uif-col-12">
+                    <div class="uif-row">
+                        <div class="uif-col-6">
+                            @Html.LabelFor(m => m.InsuredObjectId, new { @class = "field-required" })
+                            @Html.DropDownListFor(m => m.InsuredObjectId, new List<SelectListItem>(), new { @class = "uif-select form-control", @id = "CoverageInsuredObject" })
+                            @Html.ValidationMessageFor(m => m.InsuredObjectId)
+                        </div>
+                        <div class="uif-col-6">
+                            @Html.LabelFor(m => m.CoverageId, new { @class = "field-required" })
+                            @Html.DropDownListFor(m => m.CoverageId, new List<SelectListItem>(), new { @class = "uif-select form-control", @id = "CoverageId" })
+                            @Html.ValidationMessageFor(m => m.CoverageId)
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-6">
+                            @Html.LabelFor(m => m.PrincipalCoverageId, new { @id = "PrincipalCoverageLabel" })
+                            @Html.DropDownListFor(m => m.PrincipalCoverageId, new List<SelectListItem>(), new { @class = "uif-select form-control", @id = "CoveragePrincipalCoverageId" })
+                            @Html.ValidationMessageFor(m => m.PrincipalCoverageId)
+                        </div>
+                        <div class="uif-col-6">
+                            @Html.LabelFor(m => m.CoveragePercentage, new { @id = "CoveragePercentageLabel" })
+                            @Html.TextBoxFor(model => model.CoveragePercentage, new { @id = "CoveragePercentage" })
+                            @Html.ValidationMessageFor(model => model.CoveragePercentage)
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <button type="button" class="btn btn-default" id="BtnModalAlliedCoverages">
+                                <span class="" aria-hidden="true">@Resources.Language.LabelTechnicalPlanAlliedCoverages</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6" id="PanelCoverages">
+            <div id="ListAssignCoverages" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6" id="BtnsCoverage">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="BtnNewCoverage">
+                    @Resources.Language.New
+                </button>
+                <button type="button" class="btn btn-primary" id="BtnAddCoverage">
+                    @Resources.Language.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div id="ButtonsTechnicalPlanCoverages" class="uif-modalbuttons width-save">
+    <button type="button" class="btn btn-default" data-dismiss="modal" id="BtnModalCoverageClose">@Resources.Language.ButtonClose</button>
+    <button type="button" class="btn btn-primary" id="BtnModalCoverageSave">@Resources.Language.ButtonSave</button>
+</div>

@@ -1,0 +1,156 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.AuthorizationPolicies.Models.AuthorizationSuspectOperationModelView
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column">
+        <div id="Title">Autorización Eventos Especiales - Operaciones Sospechosas</div>
+    </div>
+</script>
+
+<div class="uif-col-12">
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelEventGroups</label>
+            <select class="uif-select" id="selectSarlaftEventGroup" data-val="true" data-val-required="" data-id="Id" data-name="Description" name="EventGroup"></select>
+        </div>
+    </div>
+    <form id="formSearchSuspectOp" class="form without-peripheral">
+        <div class="row">
+            <div class="uif-col-2">
+                <label>@Resources.Language.LabelHeaderDocumentNumber</label>
+                <input type="text" value="" id="inpDocumentNo" />
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.FormNumber</label>
+                <input type="text" value="" id="inpFormNumber" />
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.YearOfEntry</label>
+                <input type="text" value="" id="inpSignYear" />
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.IndividualId</label>
+                <input type="text" value="" id="inpDocumentNumber" />
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.Users</label>
+                <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/WorkFlowPolicies/GetUsersByDescription")" data-displaykey="AccountName" placeholder="" data-displayrecords="5" id="autocompleteUsers">
+            </div>
+            <div class="uif-col-2">
+                <div class="without-label">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0628"))
+                    {
+                        <button id="btnSearchSarlaftOperation" tabindex="0" class="btn btn-default secondary" type="button"> <i class="fa fa-search" aria-hidden="true"></i> Buscar </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-7">
+                <table id="tblAuthorizationSarlaftOperation" class="uif-table" data-source="" data-exporttocsv="false" data-add="false" data-edit="false" data-delete="false" data-filter="false" data-selectiontype="single">
+                    <thead>
+                        <tr>
+                            <th data-property="Year">Año Ingreso</th>
+                            <th data-property="FormNumber">@Resources.Language.FormNumber</th>
+                            <th data-property="User">@Resources.Language.Users</th>
+                            <th data-property="DocumentType">@Resources.Language.DocumentType</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <form id="formSendSuspectOp" class="form without-peripheral">
+                <div class="uif-col-5">
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <h5><strong>@Resources.Language.Request</strong></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <div class="uif-col-3">
+                                <label>Fecha/Hora</label>
+                            </div>
+                            <div class="uif-col-9">
+                                <input type="text" value="" class="uif-datepicker" id="EventDate" data-max-date="15/01/2025" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <div class="uif-col-2">
+                                <label>@Resources.Language.LabelDetail</label>
+                            </div>
+                            <div class="uif-col-10">
+                                <input type="text" value="" id="inpDetail" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <div class="uif-col-2">
+                                <label>@Resources.Language.Request</label>
+                            </div>
+                            <div class="uif-col-10">
+                                <input type="text" value="" id="RequestDetail" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <label class="field-required">@Resources.Language.Reasons</label>
+                            <select class="uif-select" id="selectReasons" data-val="true" data-val-required="Campo requerido" data-id="Id" data-name="Description" name="AuthorizeReasonId"></select>
+                            @Html.ValidationMessageFor(x => x.AuthorizeReasonId)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <label class="field-required">@Resources.Language.IncomeValue</label>
+                            @Html.TextBoxFor(x => x.Assets, new { id= "inpIncome" })
+                            @Html.ValidationMessageFor(x => x.Assets)
+                            @*<input type="text" value="" data-val-required="true" id="inpIncome" />*@
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <label class="field-required">@Resources.Language.LabelObservations</label>
+                            @Html.TextAreaFor(x => x.Description, new { id = "txtObservations", rows = "8" })
+                            @Html.ValidationMessageFor(x => x.Description)
+                            @*<textarea rows="8" id="txtObservations" data-val-required="true"></textarea>*@
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitSarlaftOperation">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0629"))
+        {
+            <button class="btn btn-primary" id="btnRejectSarlaftOperation">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                Rechazar
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0630"))
+        {
+            <button class="btn btn-primary" id="            btnAcceptSarlaftOperation">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.Accept
+            </button>
+        }
+    </div>
+</script>
+

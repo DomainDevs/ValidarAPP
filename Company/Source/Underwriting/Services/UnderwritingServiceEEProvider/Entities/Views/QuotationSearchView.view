@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="QuotationSearchView">
+  <collections>
+    <collection name="TempSubscription" type="Sistran.Core.Application.Temporary.Entities.TempSubscription, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskVehicle" type="Sistran.Core.Application.Temporary.Entities.TempRiskVehicle, 
+                Core.Temporary.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                Core.Common.Entities"></collection>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, 
+                Core.Common.Entities"></collection>
+    <collection name="Currency" type="Sistran.Core.Application.Common.Entities.Currency, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="TempSubscription" destination="TempRiskVehicle" name="TempSubscriptionTempRiskVehicle" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+    </relation>
+    <relation source="TempSubscription" destination="Prefix" name="TempSubscriptionPrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="TempSubscription" destination="Branch" name="TempSubscriptionBranch" type="Inner">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="TempSubscription" destination="Currency" name="TempSubscriptionCurrency" type="Inner">
+      <property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+    </relation>
+  </relations>
+</view>

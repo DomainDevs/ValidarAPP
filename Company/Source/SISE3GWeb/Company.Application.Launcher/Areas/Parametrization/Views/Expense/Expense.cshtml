@@ -1,0 +1,142 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.ExpenseViewModel
+@{
+    Layout = null;
+}
+<template id="SectionExpensesTemplate">
+	{{#ifCond StatusTypeService "==" 2}}
+	<div class="success"><p>@Resources.Language.Description: <b>{{SmallDescription}} ({{TinyDescripcion}})</b></p></div>
+	{{else ifCond StatusTypeService "==" 3}}
+	<div class="warning"><p>@Resources.Language.Description: <b>{{SmallDescription}} ({{TinyDescripcion}})</b></p></div>
+	{{else ifCond StatusTypeService "==" 4}}
+	<div class="danger"><p>@Resources.Language.Description: <b>{{SmallDescription}} ({{TinyDescripcion}})</b></p></div>
+	{{else}}
+	<div><p>@Resources.Language.Description: <b>{{SmallDescription}} ({{TinyDescripcion}})</b></p></div>
+	{{/ifCond}}
+	<div><p><b>{{MandatoryValue}}</b></p></div>
+	<div><p><b>{{InitiallyValue}}</b></p></div>
+	<div><p><b>{{Execution}}</b></p></div>
+</template>
+
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column">
+        @Resources.Language.LabelExpenses
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Expense", null, new { @class = "uif-input-search", id = "inputSearchIssuanceExpenses", @placeholder = Resources.Language.SearchExpense })
+
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsPrefix" class="footerModule">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ExportXLS
+        </button>
+        <button class="btn btn-primary" id="btnSaveExpense">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+@using (Html.BeginForm("Expense", "", FormMethod.Post, new { @id = "formExpense", @autocomplete = "off", @class = "form" }))
+{
+    <div class="uif-col-6">
+        <div class="row">
+            <div class="uif-col-4">
+                @Html.Label(Resources.Language.LabelDescription, new { @class = "field-required" })
+                @Html.TextBoxFor(model => model.Description, new { @Id = "inputDescription", @Placeholder = Resources.Language.LabelDescription.ToString(), @data_val = "true", @data_val_required = Resources.Language.ErrorIsRrequired })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="uif-col-4">
+                @Html.Label(Resources.Language.LabelAbbreviation, new { @class = "field-required" })
+                @Html.TextBoxFor(model => model.Abbreviation, new { @Id = "inputAbbreviation", @Placeholder = Resources.Language.LabelAbbreviation.ToString(), @data_val = "true", @data_val_required = Resources.Language.ErrorIsRrequired })
+                @Html.ValidationMessageFor(model => model.Abbreviation)
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="uif-col-4">
+                @Html.Label(Resources.Language.LabelExecutionType, new { @class = "field-required" })
+                <select class="uif-select form-control" name="ExecutionType" id="selectExecutionType" data-val="true" data-val-required="@Resources.Language.ErrorExecutionType"
+                        data-id="Value" data-name="Text"  data-filter="true" data-native="false"></select>
+                @Html.ValidationMessageFor(model => model.ExecutionType)
+            </div>
+            <div class="uif-col-4 ">
+                <input type="checkbox" id="checkInitiallyIncluded" />
+                @Html.Label(Resources.Language.LabelInitialInclude, new { @for = "checkInitiallyIncluded" })
+            </div>
+            <div class="uif-col-4 ">
+                <input type="checkbox" id="checkMandatory" />
+                @Html.Label(Resources.Language.LabelMandatory, new { @for = "checkMandatory" })
+            </div>
+        </div>
+
+        <div class="row" id="groupRateTypes">
+            <div class="uif-col-4">
+                @Html.Label(Resources.Language.LabelRateType, new { @class = "field-required" })
+                <select class="uif-select form-control" name="RateType" id="selectRateType" data-val="true" data-val-required="@Resources.Language.ErrorIsRrequired"
+                        data-id="Id" data-name="description"
+                        data-filter="true" data-native="false"></select>
+                @Html.ValidationMessageFor(model => model.RateType)
+            </div>
+            <div class="uif-col-3">
+                @Html.Label(Resources.Language.LabelRate, new { @class = "field-required" })
+                @Html.TextBoxFor(model => model.Rate, new { @Id = "inputRate", @Placeholder = Resources.Language.LabelRate.ToString(), @data_val = "true", @data_val_required = Resources.Language.ErrorRate, })
+                @Html.ValidationMessageFor(model => model.Rate)
+            </div>
+        </div>
+
+        <div class="row" id="groupRuleTypes">
+            <div class="uif-col-8">
+                @Html.Label(Resources.Language.LabelRulesPackage, new { @class = "field-required" })
+
+                @Html.TextBoxFor(model => model.RuleSetName, new { @Id = "inputRuleSet", @class = "uif-input-search", @placeholder = Resources.Language.LabelRulesPackage.ToString(), @data_val = "true", @data_val_required = Resources.Language.ErrorRunningPreRules })
+                @Html.ValidationMessageFor(model => model.RuleSetName)
+            </div>
+            <div class="uif-col-3">
+
+            </div>
+        </div>
+    </div>
+    <div class="uif-col-6">
+        <div class="uif-listview" id="listviewSectionExpenses">
+
+        </div>
+    </div>
+    <div class="uif-col-6 center-col-right" id="btnsSubBranch">
+        <div class="pull-right width-save">
+            <button type="button" class="btn btn-default" id="btnNewExpense">Nuevo</button>
+            <button type="button" class="btn btn-primary" id="btnExpenseAccept">Agregar </button>
+        </div>
+    </div>
+}
+
+<div class="uif-modal" id="modalDefaultSearchRules">
+    <div class="uif-modalbody">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="active">
+                    <table class="uif-table" data-title="" data-selectiontype="none" id="tableResultsSearchsRules" data-filter="false" data-paginate="true">
+                        <thead>
+                            <tr>
+                                <th data-property="Id">Id</th>
+                                <th data-property="description">@Resources.Language.LabelDescription</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

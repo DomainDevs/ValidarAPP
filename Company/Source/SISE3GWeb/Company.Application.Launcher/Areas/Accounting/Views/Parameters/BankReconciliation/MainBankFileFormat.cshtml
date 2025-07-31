@@ -1,0 +1,126 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.BankStatementFormat;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.BankConciliation</li>
+        <li>@Global.BankStatementFormat</li>
+    </ol>
+}
+
+@section Modals
+{
+    <!-- FormatDetails -->
+    <form id="addBankFieldFormat" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalBankAddFieldFormat">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/BankReconciliation/FieldFormatModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveBankAddFieldFormat" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="editBankFieldFormat" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalBankEditFieldFormat">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/BankReconciliation/FieldFormatModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveEditBankFieldFormat" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteFormat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="deleteFieldModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<form id="MainBankFileFormatForm" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Bank</label>
+            <select class="uif-select form-control required" id="selectBank" name = "selectBank" data-native="true"
+                    data-source='@Url.Content("~/Accounting/Common/GetBanks")' data-id="Id"
+                    data-name="Description" data-val="true" data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="selectBank" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.FileType</label>
+            <select class="uif-select form-control required" id="selectFormatType" name="selectFormatType" data-native="true"
+                    data-source='@Url.Content("~/Accounting/Networks/GetFormatTypes")' data-id="Id"
+                    data-name="Description" data-val="true" data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="selectFormatType" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Separator</label>
+            <input type="text" id="Separator" maxlength="1" />
+        </div>
+    </div>
+    <br />
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertBankFileFormat"></div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="formatDetails" data-exporttocsv="false" data-add="true" data-edit="true"
+                   data-delete="true" data-selectiontype="none" data-filter="true"
+                   data-source="" data-paginate="true" data-title="@Global.BankStatementFormatDetail">
+                <thead>
+                    <tr>
+                        <th data-property="Order">@Global.Order</th>
+                        <th data-property="Field">@Global.Field</th>
+                        <th data-property="Description">@Global.Description</th>
+                        <th data-property="ColumnNumber">@Global.ColumnNumber</th>
+                        <th data-property="RowNumber">@Global.RowNumber</th>
+                        <th data-property="Length">@Global.Length</th>
+                        <th data-property="Required" data-type="boolean">@Global.Required</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagControlFieldExtractBank" value="@ViewBag.ControlFieldExtractBank" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainBankFileFormat")
+}

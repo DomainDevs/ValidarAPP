@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CoCoverageValueView">
+  <collections>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, 
+               Core.Quotation.Entities"></collection>
+
+    <collection name="CoCoverageValue" type="Sistran.Core.Application.Quotation.Entities.CoCoverageValue, 
+               Core.Quotation.Entities"></collection>
+    
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="CoCoverageValue" destination="Coverage" name="CoCoverageValueCoverage" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="CoCoverageValue" destination="Prefix" name="CoCoverageValuePrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+  </relations>
+</view>

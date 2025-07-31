@@ -1,0 +1,118 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.ParamAuthorizationPolicies.Models.BaseRejectionCausesViewModel
+@{
+    Layout = null;
+}
+
+<script id="templateGroundsRejection" type="text/templateGroundsRejection">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div><div>@Resources.Language.GroupPolicies : {{GroupPolicies.description}}</div></div>
+    <div><div><b>@Resources.Language.RejectionCauses : <strong class="success">{{description}}</strong></b></div></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div><div>@Resources.Language.GroupPolicies : {{GroupPolicies.description}}</div></div>
+    <div><div><b>@Resources.Language.RejectionCauses : <strong class="warning">{{description}}</strong></b></div></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div><div>@Resources.Language.GroupPolicies : {{GroupPolicies.description}}</div></div>
+    <div><div><b>@Resources.Language.RejectionCauses : <strong class="danger">{{description}}</strong></b></div></div>
+    {{else}}
+    <div><div>@Resources.Language.GroupPolicies : {{GroupPolicies.description}}</div></div>
+    <div><div><b>@Resources.Language.RejectionCauses : <strong>{{description}}</strong></b></div></div>
+    {{/ifCond }}
+</script>
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column-40">
+        @Resources.Language.LabelGroundsRejection
+    </div>
+    <div class="column-30">
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("GroundsRejectionSearch", null, new { @class = "uif-input-search", id = "inputGroundsRejectionSearch", placeholder = Resources.Language.SearchGroundsRejection })
+        <button class="btn btn-default" id="btnSearchAdvScript"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitGroundsRejection">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0636"))
+        {
+            <button class="btn btn-default" id="btnExportGroundsRejection">
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.ButtonExport
+            </button>
+        }
+
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0635"))
+        {
+            <button class="btn btn-primary" id="btnSaveGroundsRejection">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.ButtonSave
+            </button>
+        }
+
+    </div>
+    
+</script>
+
+@*Formulario Principal*@
+<form id="formGroundsRejection" class="form without-space">
+    <div class="row">
+        <div class="uif-col-6 fit-col-main">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.LabelPolicyGroup</label>
+                    <select class="uif-select" name="GroupPolicies" id="IdPolicyGroup" data-id="id" data-name="description" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.GroupPolicies)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.LabelDescriptionRejection</label>
+                    @Html.TextBoxFor(model => model.Description, new { @Id = "IdDescriptionRejection" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listGroundsRejection" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnGroundsRejectionNew">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.NewForm
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0634"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnGroundsRejectionAccept">
+                        <span aria-hidden="true"></span>
+                        @Resources.Language.AddForm
+                    </button>
+                }
+
+            </div>
+        </div>
+        <div class="uif-col-6" id="summaryAgent">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="uif-modal" id="modalListSearchDelegation">
+    <div class="uif-modalbody">
+        @* @Html.Partial("~/Areas/Parametrization/AuthorizationPolicies/Delegation/Views/Delegation/ListDelegation.cshtml")*@
+    </div>
+</div>

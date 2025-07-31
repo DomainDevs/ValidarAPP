@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ClaimCoverageView">
+  <collections>
+    <collection name="ClaimCoverage" type="Sistran.Core.Application.Claims.Entities.ClaimCoverage, 
+                Core.Claims.Entities"></collection>
+    <collection name="ClaimCoverageAmount" type="Sistran.Core.Application.Claims.Entities.ClaimCoverageAmount, 
+                Core.Claims.Entities"></collection>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, 
+                Core.Quotation.Entities"></collection>
+    <collection name="Currency" type="Sistran.Core.Application.Common.Entities.Currency, 
+                Core.Common.Entities"></collection>
+    <collection name="EstimationType" type="Sistran.Core.Application.Parameters.Entities.EstimationType, 
+                Core.Parameters.Entities"></collection>
+    <collection name="EstimationTypeStatus" type="Sistran.Core.Application.Parameters.Entities.EstimationTypeStatus, 
+                Core.Parameters.Entities"></collection>
+    <collection name="EstimationTypeInternalStatus" type="Sistran.Core.Application.Parameters.Entities.EstimationTypeInternalStatus, 
+                Core.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="ClaimCoverage" destination="ClaimCoverageAmount" name="ClaimCoverageClaimCoverageAmount" type="Inner">
+      <property left="ClaimCoverageCode" type="Equal" right="ClaimCoverageCode"></property>
+    </relation>
+    <relation source="ClaimCoverage" destination="Coverage" name="ClaimCoverageCoverage" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="ClaimCoverageAmount" destination="Currency" name="ClaimCoverageAmountCurrency" type="Inner">
+      <property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+    </relation>
+    <relation source="ClaimCoverageAmount" destination="EstimationType" name="ClaimCoverageAmountEstimationType" type="Inner">
+      <property left="EstimationTypeCode" type="Equal" right="EstimateTypeCode"></property>
+    </relation>
+    <relation source="ClaimCoverageAmount" destination="EstimationTypeStatus" name="ClaimCoverageAmountEstimationTypeStatus" type="Inner">
+      <property left="EstimationTypeStatusCode" type="Equal" right="EstimationTypeStatusCode"></property>
+    </relation>
+    <relation source="EstimationTypeStatus" destination="EstimationTypeInternalStatus" name="EstimationTypeStatusEstimationTypeInternalStatus" type="Inner">
+      <property left="InternalStatusCode" type="Equal" right="InternalStatusCode"></property>
+    </relation>
+  </relations>
+</view>

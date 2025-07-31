@@ -1,0 +1,186 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.MainPathCheckReprinting;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.MainPathCheckReprinting</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="CancelCheckReprinting">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="AcceptCheckReprinting" class="btn btn-primary" role="button">
+            <i class="fa fa-check"></i>  @Global.Accept
+        </button>
+    </footer>
+}
+
+
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                CODIGO HTML
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------  *@
+<form id="CheckReprintingForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Branch</label>
+            @Html.DropDownList("BranchCheckReprinting", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_selectedid = @ViewBag.BranchDefault,
+                 data_native = "true",
+                 data_val = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="BranchCheckReprinting" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.BankName</label>
+            @Html.DropDownList("BankNameCheckReprinting", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_native = "true",
+                 data_val = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="BankNameCheckReprinting" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-4">
+            <label>@Global.BankAccountNumber</label>
+            @Html.DropDownList("AccountNumberCheckReprinting", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_id = "Id",
+                 data_name = "Number",
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="AccountNumberCheckReprinting" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.PaymentSource</label>
+            @Html.DropDownList("OriginPaymentCheckReprinting", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",           
+           data_source = @Url.Content("~/GeneralLedger/Base/GetPaymentSources"),
+           data_id = "Id",
+           data_name = "Description",
+           data_val = "true",
+           data_native = "true",
+           data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="OriginPaymentCheckReprinting" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.LabelNumberCheckFrom</label>
+            @Html.TextBox("CheckNumberFromCheckReprinting", "", new
+            {
+                @onkeypress = "return JustNumbers(event, this) ",
+                maxlength = "15",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="CheckNumberFromCheckReprinting" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-2">
+            <label>@Global.LabelNumberCheckTo</label>
+            @Html.TextBox("CheckNumberToCheckReprinting", "", new
+            {
+                @onkeypress = "return JustNumbers(event, this) ",
+                maxlength = "15",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="CheckNumberToCheckReprinting" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-4">
+            <label>@Global.Currency</label>
+            @Html.TextBox("CurrencyCheckReprinting", "", new
+            {
+                disabled = "disabled",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="CurrencyCheckReprinting" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+
+<div class="form-footer">
+    <button type="button" class="btn btn-default" id="CleanCheckReprinting">
+        <i class="fa fa-paint-brush"></i>        @Global.Clean
+    </button>
+    <button type="button" class="btn btn-primary" id="SearchCheckReprinting">
+        <i class="fa fa-search"></i>        @Global.Search
+    </button>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertCheckReprinting"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="CheckReprinting" data-exporttocsv="false" data-edit="false" data-delete="true"
+               data-filter="false" data-paginate="true" data-selectiontype="multiple"
+               data-title="@Global.MenuCheks">
+            <thead>
+                <tr>
+                    <th data-property="CheckNumber">@Global.CheckNumber</th>
+                    <th data-property="NumberPaymentOrder">@Global.PaymentOrderNumber</th>
+                    <th data-property="BeneficiaryName">@Global.BeneficiaryName</th>
+                    <th data-property="EstimatedPaymentDate">@Global.EstimatedDate</th>
+                    <th data-property="Amount">@Global.Amount</th>
+                    <th data-visible="false" data-property="CompanyName">CompanyName</th>
+                    <th data-visible="false" data-property="AddressCompany">AddressCompany</th>
+                    <th data-visible="false" data-property="CheckPaymentOrderCode">CheckPaymentOrderCode</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="printReady" hidden="true" style="visibility: hidden">
+    <iframe id="printFrame" width="100%" height="500" scrolling="auto" frameborder="0"></iframe>
+</div>
+
+<input type="hidden" id="ViewBagBranchDisableReprinting" value="@ViewBag.BranchDisable" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/CheckReprinting")
+}
+
+
+
+
+
+
+
+

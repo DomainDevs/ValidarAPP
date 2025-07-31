@@ -1,0 +1,124 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Audit.Models.AuditModelView
+@section Title{
+    <div id="mainAudit" class="row main-title">
+        <div class="column">
+            <div id="Title">@Resources.Language.TitleAudit</div>
+        </div>
+    </div>
+}
+<link href="@Url.Content("~/Content/jsoneditor.min.css")" rel="stylesheet" type="text/css" />
+@section styles{
+<style type="text/css">
+    #ValueBefore .different_element {
+        background-color: greenyellow !important;
+    }
+    #ValueAfter .different_element {
+        background-color: green !important;
+    }
+</style>
+}
+@*Footer Botones*@
+@section Toolbar
+{
+    <footer>
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0681"))
+    {
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ExportXLS
+            </button>
+        </div>
+    }
+    </footer>
+}
+<form class="form without-space" id="formAudit">
+    <div>
+        <br />
+        <div class="row">
+            <div class="uif-col-3">
+                <label>@Resources.Language.LabelFrom</label>
+                @Html.TextBoxFor(model => model.CurrentFrom, new { id = "inputFrom", @class = "uif-datepicker" })
+                @Html.ValidationMessageFor(model => model.CurrentFrom)
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.LabelTo</label>
+                @Html.TextBoxFor(model => model.CurrentTo, new { id = "inputTo", @class = "uif-datepicker" })
+                @Html.ValidationMessageFor(model => model.CurrentTo)
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.Schema</label>
+                <select class="uif-select form-control" id="selectSchema"
+                        data-val="true" data-val-required="@Resources.Language.ErrorSchema"
+                        data-id="Id" data-name="Description"></select>
+                @Html.ValidationMessageFor(model => model.SchemaId)
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.SelectUser</label><input class="uif-autocomplete" type="text" data-queryParameter="userName" data-displaykey="AccountName" data-id="UserId" data-minLenght="3"
+                                                                    maxlength="100" placeholder="Ingrese El usuario" id="inputUserAudit"
+                                                                    data-source="@Url.Action("GetUserByAccountName", "../Audit/Audit")" name="userName" autocomplete="on" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-3">
+                <label>@Resources.Language.TypeTransaction</label>
+
+                <select class="uif-select form-control" id="selectTypeTransaction" data-native="false" data-val-required="@Resources.Language.ErrorSchema"
+                        data-id="Value" data-name="Text" name="TransaccionId"></select>
+                @Html.ValidationMessageFor(model => model.TransaccionId)
+            </div>
+            <div class="uif-col-6">
+                <label>@Resources.Language.Object</label>
+                <input type="text" value="" id="inputObjectAudit" name="Object" />
+            </div>
+            <div class="uif-col-3 pull-right">
+                <br />
+                <br />
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0680"))
+                {
+                    <button type="button" class="btn btn-default secondary-Colombia pull-right" id="btnSearchAudit">
+                        <span class="rightAlign pull-right" aria-hidden="true">@Resources.Language.search</span>
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12" id="divAudit">
+                <table data-paginate="true" data-selectiontype="none" class="uif-table" id="tableAudit" data-title="" data-filter="true">
+                    <thead>
+                        <tr>
+                            <th data-property="RegisterDate">@Resources.Language.RegisterDate</th>
+                            <th data-property="User.Description">@Resources.Language.UserName</th>
+                            <th data-property="ColumnDescription">@Resources.Language.Description</th>
+                            <th data-property="ActionTypeName">@Resources.Language.ActionType</th>
+                            <th data-property="ObjectName">@Resources.Language.ObjectName</th>
+                            <th data-property="Detail">@Resources.Language.ButtonDetail</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+</form>
+
+@*Modales*@
+<div class="uif-modal" id="modalAuditDetail">
+    <div class="uif-modalbody">
+        @Html.Partial("AuditDetail")
+    </div>
+    <div id="buttonsAudit" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnAuditDetailClose">@Resources.Language.ButtonClose</button>
+    </div>
+</div>
+<script src="@Url.Content("~/Scripts/jsoneditor/jsoneditor.min.js")"></script>
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Audit");
+
+}

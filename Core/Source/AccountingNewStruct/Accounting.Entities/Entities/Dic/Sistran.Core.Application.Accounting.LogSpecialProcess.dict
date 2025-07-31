@@ -1,0 +1,46 @@
+<map version="2.0" type="class" name="LogSpecialProcess" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="LOG_SPECIAL_PROCESS_ENTITY">
+  <properties>
+    <property name="LogSpecialProcessId" type="Integer" key="true" description="LOG_SPECIAL_PROCESS_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="ProcessDate" type="DateTime" description="PROCESS_DATE_PROPERTY" />
+    <property name="BranchId" type="Integer" nullable="true" description="BRANCH_ID_PROPERTY" />
+    <property name="ProcessTypeId" type="Integer" description="PROCESS_TYPE_ID_PROPERTY" />
+    <property name="IncomeAmount" type="Decimal" precision="18" scale="2" description="INCOME_AMOUNT_PROPERTY" />
+    <property name="ExchangeRate" type="Decimal" precision="18" scale="6" description="EXCHANGE_RATE_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" description="AMOUNT_PROPERTY" />
+    <property name="UserId" type="Integer" description="USER_ID_PROPERTY" />
+    <property name="ImputationId" type="Integer" description="IMPUTATION_ID_PROPERTY" />
+    <property name="TempImputationId" type="Integer" description="TEMP_IMPUTATION_ID_PROPERTY" />
+    <property name="ImputationReceiptNumber" type="Integer" nullable="true" description="IMPUTATION_RECEIPT_NUMBER_PROPERTY" />
+    <property name="LowUserId" type="Integer" nullable="true" description="LOW_USER_ID_PROPERTY" />
+    <property name="LowDate" type="DateTime" nullable="true" description="LOW_DATE_PROPERTY" />
+    <property name="StartDate" type="DateTime" description="START_DATE_PROPERTY" />
+    <property name="EndDate" type="DateTime" nullable="true" description="END_DATE_PROPERTY" />
+    <!--<property name="Applied" type="Boolean" nullable="true" description="APPLIED_PROPERTY" />-->
+    <property name="Status" type="Integer" nullable="true" description="STATUS_PROPERTY" />
+    <property name="RecordsProcessed" type="Integer" nullable="true" description="RECORDS_PROCESSED_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="LOG_SPECIAL_PROCESS" schema="ACC" alias="LOG_SPECIAL_PROCESS" update="true">
+      <columns>
+        <column name="LOG_SPECIAL_PROCESS_ID" type="Int32" property="LogSpecialProcessId" key="true" identity ="true" />
+        <column name="PROCESS_DATE" type="DateTime" property="ProcessDate" allowNull="false" />
+        <column name="BRANCH_ID" type="Int32" property="BranchId" />
+        <column name="PROCESS_TYPE_ID" type="Int32" property="ProcessTypeId" allowNull="false" />
+        <column name="INCOME_AMOUNT" type="Decimal" property="IncomeAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="EXCHANGE_RATE" type="Decimal" property="ExchangeRate" allowNull="false" size="19" precision="18" scale="6" />
+        <column name="AMOUNT" type="Decimal" property="Amount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="USER_ID" type="Int32" property="UserId" allowNull="false" />
+        <column name="IMPUTATION_ID" type="Int32" property="ImputationId" allowNull="false" />
+        <column name="TEMP_IMPUTATION_ID" type="Int32" property="TempImputationId" allowNull="false" />
+        <column name="IMPUTATION_RECEIPT_NUMBER" type="Int32" property="ImputationReceiptNumber" />
+        <column name="LOW_USER_ID" type="Int32" property="LowUserId" />
+        <column name="LOW_DATE" type="DateTime" property="LowDate" />
+        <column name="START_DATE" type="DateTime" property="StartDate" allowNull="false" />
+        <column name="END_DATE" type="DateTime" property="EndDate" />
+        <!--<column name="APPLIED" type="Boolean" property="Applied" />-->
+        <column name="STATUS" type="Int32" property="Status" />
+        <column name="RECORDS_PROCESSED" type="Int32" property="RecordsProcessed" />
+      </columns>
+    </table>
+  </tables>
+</map>

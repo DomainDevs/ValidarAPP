@@ -1,0 +1,34 @@
+<map version="2.0" type="class" name="GetIssDistribution" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="GET_ISS_DISTRIBUTION_ENTITY">
+  <properties>
+    <property name="EndorsementId" type="Integer" description="ENDORSEMENT_ID_PROPERTY" />
+    <property name="LayerNumber" type="Integer" description="LAYER_NUMBER_PROPERTY" />
+    <property name="LayerPercentage" type="Decimal" precision="12" scale="2" description="LAYER_PERCENTAGE_PROPERTY" />
+    <property name="LineDescription" type="String" size="100" description="LINE_DESCRIPTION_PROPERTY" />
+    <property name="CumulusKey" type="String" size="100" description="CUMULUS_KEY_PROPERTY" />
+    <property name="ContractId" type="Integer" key="true" description="CONTRACT_ID_PROPERTY" />
+    <property name="ContractDescription" type="String" size="100" description="CONTRACT_DESCRIPTION_PROPERTY" />
+    <property name="LevelNumber" type="Integer" description="LEVEL_NUMBER_PROPERTY" />
+    <property name="TradeName" type="String" size="120" description="TRADE_NAME_PROPERTY" />
+    <property name="AmountSum" type="Decimal" precision="38" scale="2" nullable="true" description="AMOUNT_SUM_PROPERTY" />
+    <property name="PremiumSum" type="Decimal" precision="38" scale="2" nullable="true" description="PREMIUM_SUM_PROPERTY" />
+    <property name="IsFacultative" type="Integer" description="IS_FACULTATIVE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="GET_ISS_DISTRIBUTION" schema="REINS" alias="GET_ISS_DISTRIBUTION" update="true">
+      <columns>
+        <column name="ENDORSEMENT_ID" type="Int32" property="EndorsementId" allowNull="false" />
+        <column name="LAYER_NUMBER" type="Int32" property="LayerNumber" allowNull="false" />
+        <column name="LAYER_PERCENTAGE" type="Decimal" property="LayerPercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="LINE_DESCRIPTION" type="String" property="LineDescription" allowNull="false" size="100" />
+        <column name="CUMULUS_KEY" type="String" property="CumulusKey" allowNull="false" size="100" />
+        <column name="CONTRACT_ID" type="Int32" property="ContractId" key="true" />
+        <column name="CONTRACT_DESCRIPTION" type="String" property="ContractDescription" allowNull="false" size="100" />
+        <column name="LEVEL_NUMBER" type="Int32" property="LevelNumber" allowNull="false" />
+        <column name="TRADE_NAME" type="String" property="TradeName" allowNull="false" size="120" />
+        <column name="AMOUNT_SUM" type="Decimal" property="AmountSum" size="19" precision="38" scale="2" />
+        <column name="PREMIUM_SUM" type="Decimal" property="PremiumSum" size="19" precision="38" scale="2" />
+        <column name="IS_FACULTATIVE" type="Int32" property="IsFacultative" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

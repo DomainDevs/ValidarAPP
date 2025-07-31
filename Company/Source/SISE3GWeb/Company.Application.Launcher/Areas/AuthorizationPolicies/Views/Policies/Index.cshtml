@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="display-template-Policies" type="text/template">
+    <div><p>{{Description}}</p></div>
+    <div><p><b> @Resources.Language.LabelModule :</b>{{GroupPolicies.Module.Description}}</p></div>
+    <div><p><b> @Resources.Language.LabelSubmodule : </b>{{GroupPolicies.SubModule.Description}}</p></div>
+    <div><p><b> @Resources.Language.LabelLevels : </b>{{GroupPolicies.EntityDescription}}</p></div>
+
+    {{#if Enabled}}
+    {{else}}
+    <div><p><b style="color:orange">Deshabilitado</b></p></div>
+    {{/if}}
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-50">
+        <div id="Title">Politicas</div>
+    </div>
+    <div class="column-20 no-padding">
+        <select class="uif-select" id="ddlGroupPolicies" data-val="true" data-native="false" data-id="IdGroupPolicies" data-name="Description"></select>
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "txtSearchPolicies" })
+        <button class="btn btn-default" id="btnSearchAdvPolicies"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <button class="btn btn-default" id="btnExitPolicies">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <span class="" aria-hidden="true"></span>
+        @Resources.Language.ButtonExit 
+    </button>
+</script>
+
+<div class="uif-row">
+    <div class="uif-col-8">
+        <div class="uif-col-10">
+            <div class="uif-listview" id="lsvPolicies"></div>
+        </div>
+    </div>
+    <div class="uif-col-4">
+        <div class="uif-right-bar">
+            <ul>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0639"))
+                {
+                    <li>
+                        <a href="#" id="linkAuthorizedUsers">@Resources.Language.AuthorizedUsers</a>
+                    </li>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0641"))
+                {
+                    <li>
+                        <a href="#" id="linkNotificatedUsers">Usuarios Notificadores</a>
+                    </li>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0643"))
+                {
+                    <li>
+                        <a href="#" id="linkConceptsDescription">Conceptos Descripcion</a>
+                    </li>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0646"))
+                {
+                    <li>
+                        <a href="#" id="btnPoliciesRules">@Resources.Language.Rules</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+@*Modales*@
+
+
+@{ Html.RenderAction("ModalPolicie", "Policies", new { area = "AuthorizationPolicies" });}
+@{ Html.RenderAction("ModalAuthorizedUsers", "Policies", new { area = "AuthorizationPolicies" });}
+@{ Html.RenderAction("ModalNotificatedUsers", "Policies", new { area = "AuthorizationPolicies" });}
+@{ Html.RenderAction("ModalConceptsDescription", "Policies", new { area = "AuthorizationPolicies" });}
+

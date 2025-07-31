@@ -1,0 +1,82 @@
+﻿@helper RenderModulesR2(IEnumerable<Sistran.Core.Application.SecurityServices.Models.Module> modules)
+{
+    if (modules != null)
+    {
+        foreach (var module in modules)
+        {
+            <li class="@(Request.Url.PathAndQuery == module.Path ? "active" : "")">
+                @if (module.SubModules != null)
+                {
+                    if (module.SubModules.Any())
+                    {
+                        <a href="#" class="has-submenu">
+                            @if (module.Image != string.Empty)
+                            {
+                                <i class="@module.Image"></i>
+                            }
+                            @module.Title <i class="zmdi zmdi-plus drop-icon"></i>
+                        </a>
+
+
+                        <ul class="@(hasChildOpen(Request.Url.PathAndQuery, module.SubModules) ? "open" : "")">
+
+                            @RenderModulesR2(module.SubModules)
+                        </ul>
+                    }
+                    else
+                    {
+                        <a href="@module.Path">
+                            @if (module.Image != string.Empty)
+                            {
+                                <i class="@module.Image"></i>
+                            }
+                   
+                            @module.Title
+                        </a>
+                    }
+                }
+                else
+                    {
+                        <a href="@module.Path">
+                            @if (module.Image != string.Empty)
+                            {
+                                <i class="@module.Image"></i>
+                            }
+                   
+                            @module.Title
+                        </a>
+                    }
+            </li>
+        }
+    }
+}
+
+@functions
+{
+    public static bool hasChildOpen(string path, IEnumerable<Sistran.Core.Application.SecurityServices.Models.Module> modules)
+    {
+        bool result = false;
+
+        foreach (var module in modules)
+        {
+            if (module.SubModules != null)
+            {
+                if (module.SubModules.Any())
+                {
+                    result = result || module.SubModules.Exists(s => s.Path == path);
+                }
+                else
+                {
+                    result = result || module.Path == path;
+                }
+            }
+            else
+            {
+                result = result || module.Path == path;
+            }
+        }
+
+        return result;
+    }
+
+}

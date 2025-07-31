@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PaymentOrdersCommissionView">
+	<selection>
+		<SelectQuery>
+			<values>
+				<SelectValue alias="PaymentOrderCode">
+					<Column table-alias="PaymentOrder" name="PaymentOrderCode" />
+				</SelectValue>
+				<SelectValue alias="BranchCode">
+					<Column table-alias="PaymentOrder" name="BranchCode" />
+				</SelectValue>
+				<SelectValue alias="CompanyCode">
+					<Column table-alias="PaymentOrder" name="CompanyCode" />
+				</SelectValue>
+				<SelectValue alias="CurrencyCode">
+					<Column table-alias="PaymentOrder" name="CurrencyCode" />
+				</SelectValue>
+				<SelectValue alias="CurrencyName">
+					<Column table-alias="Currency" name="Description" />
+				</SelectValue>
+				<SelectValue alias="IndividualId">
+					<Column table-alias="PaymentOrder" name="IndividualId" />
+				</SelectValue>
+				<SelectValue alias="DocumentNumber">
+					<Column table-alias="ListPersons" name="DocumentNumber" />
+				</SelectValue>
+				<SelectValue alias="Name">
+					<Column table-alias="ListPersons" name="Name" />
+				</SelectValue>
+				<SelectValue alias="PersonTypeCode">
+					<Column table-alias="PaymentOrder" name="PersonTypeCode" />
+				</SelectValue>
+				<SelectValue alias="EstimatedPaymentDate">
+					<Column table-alias="PaymentOrder" name="EstimatedPaymentDate" />
+				</SelectValue>
+				<SelectValue alias="PaymentSourceCode">
+					<Column table-alias="PaymentOrder" name="PaymentSourceCode" />
+				</SelectValue>
+				<SelectValue alias="ExchangeRate">
+					<Column table-alias="PaymentOrder" name="ExchangeRate" />
+				</SelectValue>
+				<SelectValue alias="IncomeAmount">
+					<Column table-alias="PaymentOrder" name="IncomeAmount" />
+				</SelectValue>
+				<SelectValue alias="Amount">
+					<Column table-alias="PaymentOrder" name="Amount" />
+				</SelectValue>
+			</values>
+			<table>
+				<Join>
+					<Join>
+						<ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentOrder, Core.Accounting.Entities" alias="PaymentOrder" />
+						<ClassNameTable name="Sistran.Core.Application.UniquePersonV1.Entities.ListPersons, Core.UniquePersonV1.Entities" alias="ListPersons" />						<criteria>
+						    <BinaryCriterion type="Equal">
+								<Column table-alias="ListPersons" name="IndividualId" />
+								<Column table-alias="PaymentOrder" name="IndividualId" />
+							</BinaryCriterion>
+						</criteria>
+					</Join>
+					<ClassNameTable name="Sistran.Core.Application.Common.Entities.Currency, Core.Common.Entities" alias="Currency" />
+					<criteria>
+						<BinaryCriterion type="Equal">
+							<Column table-alias="Currency" name="CurrencyCode" />
+							<Column table-alias="PaymentOrder" name="CurrencyCode" />
+						</BinaryCriterion>
+					</criteria>
+				</Join>
+			</table>
+		</SelectQuery>
+	</selection>
+</uiview>

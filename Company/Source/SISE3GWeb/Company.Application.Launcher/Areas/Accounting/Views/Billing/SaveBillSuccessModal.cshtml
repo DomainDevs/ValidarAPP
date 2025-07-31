@@ -1,0 +1,75 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "SaveBillSuccessModal";
+}
+
+<form id="addSaveBillForm" class="form">
+    <div class="main-content">
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label>@Global.TransactionNumber</label>
+                <br />
+                <label id="TransactionNumber" />
+                <input type="text" id="TransactionNumber" disabled="disabled"  style="border: none" />
+            </div>
+            <div class="uif-col-4" hidden="hidden">
+                <label id="BillingId" />
+                <input type="text" id="BillingId" disabled="disabled" style="border: none" />
+            </div>
+            <div class="uif-col-8">
+                @Html.Label(@Global.Description)
+                <br />
+                <label id="ReceiptDescription" style="word-wrap: break-word; -ms-word-break: break-all;" />
+                <input type="text" id="ReceiptDescription" disabled="disabled" style="border: none" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                @Html.Label(@Global.Total)
+                <br />
+                <label id="ReceiptTotalAmount" />
+                <input type="text" id="ReceiptTotalAmount" disabled="disabled" style="border: none" />
+            </div>
+            <div class="uif-col-4">
+                @Html.Label(@Global.Date)
+                <br />
+                <input type="hidden" id="BillingDate" disabled="disabled" style="border: none" />
+                <input type="text" value="@ViewBag.DateAccounting" data-mask="99/99/9999" id="Dateaccounting"
+                       name="dateacoun" data-val="true" disabled="disabled" style="border: none" />
+            </div>
+            <div class="uif-col-4">
+                @Html.Label(@Global.User)
+                <br />
+                <label id="ReceiptUser" />
+                <input type="text" id="ReceiptUser" disabled="disabled" style="border: none" />
+            </div>
+        </div> <br />
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div id="accountingLabelDiv">
+                    @Global.AccountingIntegration
+                </div>
+            </div>
+        </div>        
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div id="accountingMessageDiv">
+                    <input type="text" id="accountingMessage" disabled="disabled" style="border: none;" />                    
+                </div>
+            </div>
+        </div> <br />       
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div id="applicationIntegration">
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            @Global.ApplicationAccountingIntegrationLabel
+                            <input type="text" id="accountingIntegrationMessage" disabled="disabled" style="border: none;" />
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

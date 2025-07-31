@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.RecoveryRequest
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+
+    <div id="buttonsRescue" class="footerUnderwriting">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0342"))
+        {
+            <button id="btnClearChargeRequest" class="btn btn-default">
+                <i class="fa fa-eraser" aria-hidden="true"></i>&nbsp;@Resources.Language.Clean
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0341"))
+        {
+            <button id="btnSaveCharge" class="btn btn-primary">
+                <span class="fa fa-floppy-o" aria-hidden="true">&nbsp;@Resources.Language.ButtonSave</span>
+            </button>
+        }
+    </div>
+</script>
+<form id="formCharge" class="form form-space-adjusted" autocomplete="off">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <h5><strong>@Resources.Language.tabProsecutionsInformation</strong></h5>
+                </div>
+            </div>
+            @Html.Partial("ChargeInformationPartial")
+            <div class="uif-row">
+                <br />
+                <div class="uif-col-12">
+                    <h5><strong>@Resources.Language.Claims</strong></h5>
+                </div>
+            </div>
+            @Html.Partial("ClaimsRecoveryPartial")
+        </div>
+    </div>
+</form>
+
+@* MODAL DE INFORMACIÓN DE FACTURACIÓN PARA MOSTRAR CONCEPTOS DE PAGO *@
+<div class="uif-modal" id="modalSingleBillingInformation">
+    <div class="uif-modalbody">
+        @Html.Partial("ModalSingleBillingInformation")
+    </div>
+    <div class="uif-modalbuttons">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0345"))
+        {
+            <button type="button" class="btn btn-default" id="btnPaymentConceptClose" data-dismiss="modal">@Resources.Language.Cancel</button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0344"))
+        {
+            <button type="button" class="btn btn-primary" id="btnPaymentConcept">@Resources.Language.Accept</button>
+        }
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿<script id="ComissionTemplate" type="text/template">
+    <div>{{AgencyId}} - {{agency}}</div>
+    <div> {{prefix }}</div>
+    <div> {{lineBusiness}}</div>
+    <div><strong>{{PercentageCommission}}%</strong></div>
+</script>
+<form id="formcomission" class="form modal-Colombia">
+    <div class="uif-alert" id="alert"></div>
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelAgency</label>
+                    <select class="uif-select form-control" id="selectAgencyComission" data-id="Id" data-name="FullName"></select>
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelPrefixCommercial</label>
+                    <select class="uif-select form-control" id="selectAgencyBranchComission" data-id="Id" data-name="Description" name="prefixId"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelPrefixTechnical</label>
+                    <select class="uif-select form-control" id="selectPrefixTechnicalComission" data-id="Id" data-name="Description"></select>
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelTechnicalSubBranch</label>
+                    <select class="uif-select form-control" id="selectTechnicalSubLineComission" data-id="Id" data-name="Description"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-3" style="padding-right: 0px !important">
+                    <label class="field-required">@Resources.LanguagePerson.LabelPercentageCommission</label>
+                    <input type="text" id="PercentageCommission" />
+                </div>
+                <div class="uif-col-3" >
+                    <label>@Resources.LanguagePerson.LabelPercentageCommissionAditionals</label>
+                    <input type="text" id="PercentageCommissionAditionals" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.LabelEffectiveDate</label>
+                    <input type="text" class="uif-datepicker" data-type="date" ata-mask="99/99/9999" id="InputEffectiveDate" />
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listAgentComisson" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0089"))
+                {
+                    <button type="button" class="btn btn-default" id="btnNewAgentComission">
+                        <span class="" aria-hidden="true">
+                            @Resources.LanguagePerson.NewForm
+                    </button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0090"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnacceptAgentComission">
+                        <span class="" aria-hidden="true"></span>
+                        @Resources.LanguagePerson.AddForm
+                    </button>
+                }
+                </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

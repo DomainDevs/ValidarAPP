@@ -1,0 +1,94 @@
+﻿@{
+    Layout = null;
+}
+
+
+@*Titulo*@
+<script id="title-template" type="text/template">
+    <div class="column column-100">
+        @Resources.Language.Peps
+    </div>
+</script>
+
+<form class="form" id="formPeps">
+    <div>
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="row">
+                    <div class="uif-col-8">
+                        <label> @Resources.Language.LabelPepsasks</label>
+                    </div>
+                    <div class="uif-col-2">
+                        <label class="radio-inline">
+                            <input type="radio" name="chkExposed" checked="checked" id="chkExposedS">
+                            Si
+                        </label>
+                    </div>
+                    <div class="uif-col-2">
+                        <label class="radio-inline">
+                            <input type="radio" name="chkExposed" id="chkExposedN">
+                            no
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelCategory PEPS</label>
+                        <select class="uif-select form-control" id="Category" name="Category" data-id="Id" data-name="Description" data-native="false" data-val="true" data-val-required="Campo requerido" required="required"></select>
+                        @Html.ValidationMessage("Category", Resources.Language.FieldRequired)
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelLink</label>
+                        <select class="uif-select form-control" id="Link" name="Link" data-id="Id" data-name="Description" data-native="false" data-val="true" data-val-required="Campo requerido" required="required"></select>
+                        @Html.ValidationMessage("Link", Resources.Language.FieldRequired)
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelAffinity</label>
+                        <select class="uif-select form-control" id="Affinity" name="Affinity" data-id="Id" data-name="Description" data-native="false"  data-filter="true" data-val="true" data-val-required="Campo requerido" required="required"></select>
+                        @Html.ValidationMessage("Affinity", Resources.Language.FieldRequired)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-8">
+                        <label class="field-required">@Resources.Language.NamePEPS</label>
+                        <input type="text" value="" id="NamePeps" name="Trade_Name" data-minlenght="3" data-maxlenght="100" data-val="true" data-val-required="Campo requerido" required="required" />
+                        @Html.ValidationMessage("Trade_Name", Resources.Language.FieldRequired)
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.EntityPEPS</label>
+                        <input type="text" id="Entit" name="Entity" data-minlenght="3" data-maxlenght="100" data-val-required="Campo requerido" required="required" />
+                        @Html.ValidationMessage("Entity", Resources.Language.FieldRequired)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.JobOffice</label>
+                        <input type="text" id="inputJobOffice" name="JobOffice" required="required" data-val-required="Campo requerido"  />
+                        @Html.ValidationMessage("JobOffice", Resources.Language.FieldRequired)
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelUnlinked</label>
+                        <select class="uif-select form-control" id="Unlinked" name="Unlinked" data-id="Id" data-name="Description" data-native="false" data-val="true" data-val-required="Campo requerido" required="required"></select>
+                        @Html.ValidationMessage("Unlinked", Resources.Language.FieldRequired)
+                    </div>
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelDateUnlinked</label>
+                        <input type="text" class="uif-datepicker" id="Unlinked_DATE" name="Unlinked_DATE" data-min-date="01/01/1910" data-max-date=DateTime.Now data-val-required="Campo requerido" />
+                        @* @Html.ValidationMessage("Unlinked_DATE", Resources.Language.FieldRequired) *@
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label>@Resources.Language.Observations</label>
+                        <input type="text" value="" id="Observations" name="Observations" data-minlenght="3" data-maxlenght="100"  />
+                    </div>
+                </div>
+                </div>
+            </div>
+    </div>
+</form>
+<div class="uif-modalbuttons">
+    <button type="button" class="btn btn-default" id="btnPEPSCancel" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+    <button type="button" class="btn btn-primary" id="btnPEPSSave" onclick="return false">@Resources.Language.ButtonSave</button>
+</div>

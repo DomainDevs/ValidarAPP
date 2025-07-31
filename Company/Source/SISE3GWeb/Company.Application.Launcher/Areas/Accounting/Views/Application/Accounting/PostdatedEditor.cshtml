@@ -1,0 +1,21 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label>@Global.ValueType</label>
+        @Html.DropDownList("PostdatedValueType", Enumerable.Empty<SelectListItem>(), new { id = "PostdatedValueType", @class = "uif-select form-control", data_source = @Url.Content("~/Common/GetValueTypes"), data_id = "Id",data_native = "true", data_name = "Description", required = "" })
+        @Html.ValidationMessage("PostdatedValueType", @Global.ValidationRequired)
+    </div>
+    <div class="uif-col-6">
+        <label>@Global.ValueNumber</label>
+        @Html.TextBox("PostdatedValueNumber", "", new { id = "PostdatedValueNumber", @class = "uif-autocomplete", data_source = @Url.Content("~/Common/GetValueNumber"), data_displaykey = "Value", placeholder = @Global.EnterNumberValue, required = "" })
+        @Html.ValidationMessage("PostdatedValueNumber", @Global.ValidationRequired)
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <label>@Global.Amount</label>
+        @Html.TextBox("PostdatedAmount", "", new { id = "PostdatedAmount", required = "", onkeypress = " return OnlyDecimalNumber(event, this); ", maxlength = "20" })
+        @Html.ValidationMessage("PostdatedAmount", @Global.ValidationRequired)
+    </div>
+</div>

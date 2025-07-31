@@ -1,0 +1,22 @@
+<map version="2.0" type="class" name="ClmRecoveryControl" namespace="Sistran.Core.Application.Integration" file-version="1.0" description="CLM_RECOVERY_CONTROL_ENTITY">
+  <properties>
+    <property name="RecoveryControlId" type="Integer" key="true" description="RECOVERY_CONTROL_ID_PROPERTY" autonumber="Identity" />
+    <property name="RecoveryCode" type="Integer" description="RECOVERY_CODE_PROPERTY" />
+    <property name="PaymentPlanCode" type="Integer" nullable="true" description="PAYMENT_PLAN_CODE_PROPERTY" />
+    <property name="AppSource" type="Integer" description="APP_SOURCE_PROPERTY" />
+    <property name="RecoveryOrigin" type="Integer" description="RECOVERY_ORIGIN_PROPERTY" />
+    <property name="Action" type="String" size="1" description="ACTION_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CLM_RECOVERY_CONTROL" schema="INT" alias="CLM_RECOVERY_CONTROL" update="true">
+      <columns>
+        <column name="RECOVERY_CONTROL_ID" type="Int32" property="RecoveryControlId" key="true" identity="true" />
+        <column name="RECOVERY_CD" type="Int32" property="RecoveryCode" allowNull="false" />
+        <column name="PAYMENT_PLAN_CD" type="Int32" property="PaymentPlanCode" />
+        <column name="APP_SOURCE" type="Int16" property="AppSource" allowNull="false" />
+        <column name="RECOVERY_ORIGIN" type="Int16" property="RecoveryOrigin" allowNull="false" />
+        <column name="ACTION" type="String" property="Action" allowNull="false" size="1" />
+      </columns>
+    </table>
+  </tables>
+</map>

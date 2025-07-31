@@ -1,0 +1,58 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.EmailViewModel
+<script id="emailTemplate" type="text/template">
+    <div><strong>{{EmailType.Description}}</strong></div>
+    <div>{{Description}}</div>
+    <div><br>Actualizado por {{UpdateUser}} - Fecha: {{UpdateDate}} </div>
+    {{#if IsMailingAddress}}
+    <div class="warning">Principal</div>
+    {{/if}}
+</script>
+<form id="formEmail" class="form modal-Colombia">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.LabelEmailType</label>
+                    <select class="uif-select form-control" id="selectEmailType" data-id="Id" data-name="Description">
+                    </select>
+                </div>
+                <div class="uif-col-6">
+                    <br />
+                    <div class="checkbox">
+                        <input type="checkbox" id="chkEmailPrincipal" />
+                        <label for="chkEmailPrincipal">@Resources.LanguagePerson.LabelPrincipalCheckBox</label>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.Email</label>
+                    <input type="text" id="inputEmail" maxlength="60" style="text-transform: lowercase"/>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listEmails" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnNewEmail">
+                    <span aria-hidden="true"></span>
+                    @Resources.LanguagePerson.Clean
+                </button>
+                <button type="button" class="btn btn-primary" id="btnCreateEmail">
+                    <span aria-hidden="true"></span>
+                    @Resources.LanguagePerson.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

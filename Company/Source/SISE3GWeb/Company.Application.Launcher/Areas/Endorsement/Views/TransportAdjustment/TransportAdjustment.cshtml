@@ -1,0 +1,276 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Company.Application.Transports.Endorsement.Adjustment.ApplicationServices.DTOs.AdjustmentDTO
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.EndorsementAdjustment
+    </div>
+    <div class="column-30">
+        <div class="important">
+            <div class="date">
+                <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate"></span>
+                @Resources.Language.LabelNumberTemporal<span id="labelTemporalId"></span>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <footer>
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" id="btnCancel">@Resources.Language.Close</button>
+                    <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.SaveAdjustment</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+</script>
+<div class="row">
+    <div class="uif-col-12">
+        <h5 id="globalTitle"></h5>
+    </div>
+</div>
+<div class="uif-summary field-summary-alignment">
+    <div class="title">@Resources.Language.LabelCurrentStatusPolicy</div>
+    <div class="items">
+        <div class="item">
+            <div>
+                <div>@Resources.Language.LabelTableRisk</div>
+                <div id="labelCurrentRisk">0</div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div>@Resources.Language.LabelTableSum</div>
+                <div id="labelCurrentSum">0</div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div>@Resources.Language.LabelTablePremium</div>
+                <div id="labelCurrentPremium">0</div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div>@Resources.Language.LabelTableExpenses</div>
+                <div id="labelCurrentExpenses">0</div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div>@Resources.Language.LabelSurcharge</div>
+                <div id="labelCurrentSurcharges">0</div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div>@Resources.Language.LabelDiscount</div>
+                <div id="labelCurrentDiscounts">0</div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div>@Resources.Language.LabelTableTaxes</div>
+                <div id="labelCurrentTaxes">0</div>
+            </div>
+        </div>
+        <div class="item primary">
+            <div>
+                <div>@Resources.Language.LabelTableTotalPremium</div>
+                <div id="labelCurrentTotalPremium">0</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<form id="formAdjustment" class="form without-space" autocomplete="off">
+    <div id="modalAjustment">     
+
+        <div class="row">
+
+            <div class="uif-col-12 fit-col-main">
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <div class="uif-summary field-summary-alignment">
+                            @*  <div class="title">@Resources.Language.LabelAdjustmentData</div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-2">
+                        <label class="field-required">@Resources.Language.LabelFrom</label>
+                        @Html.TextBoxFor(model => model.CurrentFrom, new { id = "inputFrom", @class = "uif-datepicker" })
+                        @Html.ValidationMessageFor(model => model.CurrentFrom)
+                    </div>
+                    <div class="uif-col-2">
+                        <label class="field-required">@Resources.Language.LabelTo</label>
+                        @Html.TextBoxFor(model => model.CurrentTo, new { id = "inputTo", @class = "uif-datepicker" })
+                        @Html.ValidationMessageFor(model => model.CurrentTo)
+                    </div>
+                    <div class="uif-col-2">
+                        <label class="field-required">@Resources.Language.LabelEffectiveDays</label>
+                        @Html.TextBoxFor(model => model.Days, new { id = "inputDays", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Days)
+                    </div>
+                    <div class="uif-col-2">
+                        <label class="field-required">@Resources.Language.LabelFilingNumber</label>
+                        @Html.TextBoxFor(model => model.TicketNumber, new { id = "inputTicketNumber", type = "text", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TicketNumber)
+
+                    </div>
+                    <div class="uif-col-2">
+                        <label class="field-required">@Resources.Language.LabelFilingDate</label>
+                        @Html.TextBoxFor(model => model.TicketDate, new { id = "inputTicketDate", @class = "uif-datepicker" })
+                        @Html.ValidationMessageFor(model => model.TicketDate)
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.LabelText</label>
+                        @Html.TextAreaFor(model => model.Text, new { id = "InputText", rows = "5", style = "text-transform:uppercase" })
+                    </div>
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.LabelObservations</label>
+                        @Html.TextAreaFor(model => model.Observation, new { id = "InputObservation", rows = "5", style = "text-transform:uppercase" })
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelRisk</label>
+                        <select class="uif-select form-control" id="selectRisk" data-val="true" data-id="RiskId" data-name="Description"
+                                name="RiskId" data-val-required="@Resources.Language.ErrorDocumentControlRisks"></select>
+                        @*@Html.ValidationMessageFor(model => model.RiskId)*@
+                    </div>
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelTechnicalPlanInsuredObject</label>
+                        <select class="uif-select form-control" id="selectInsuredObject" data-id="Id" data-name="Description"
+                                name="InsuranceObjectId" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlSelectInsuredObject"></select>
+                        @*@Html.ValidationMessageFor(model => model.InsuranceObjectId)*@
+                    </div>
+                    <div class="uif-col-3">
+                        <div class="without-label">
+                            <a id="btnDetail" style="text-decoration-line:underline; font-size:18px; cursor:pointer;">
+                                @Resources.Language.LabelDetails
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-col-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary btn-calculate" id="btnCalculate">
+                            <div>
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <div>
+                                    @Resources.Language.LabelButtonCalculate
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-summary field-summary-alignment">
+                            <div class="title">
+                                @Resources.Language.LabelSummaryAdjustment
+                            </div>
+                            <div class="items">
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableRisk</div>
+                                        <div id="labelRisk">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableSum</div>
+                                        <div id="labelSum">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTablePremium</div>
+                                        <div id="labelPremium">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableExpenses</div>
+                                        <div id="labelExpenses">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableSurcharges</div>
+                                        <div id="labelTableSurcharge">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableExpenses</div>
+                                        <div id="labelExpenses">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelDiscount</div>
+                                        <div id="labelDiscount">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableTaxes</div>
+                                        <div id="labelTaxes">0</div>
+                                    </div>
+                                </div>
+                                <div class="item primary">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableTotalPremium</div>
+                                        <div id="labelTotalPremium"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<div class="uif-modal" id="modalDetailAdjustment">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Endorsement/Views/TransportAdjustment/DetailAdjustment.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonDetailAdjustment">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCoInsuranceClose">@Resources.Language.ButtonClose</button>
+    </div>
+</div>
+
+@*@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Printer");
+    @Scripts.Render("~/bundle/js/TransportAdjustment");
+    <script type="text/javascript">
+         var SearchModel = @Html.Raw(Json.Encode(Model));
+         var glbPersonOnline = null;
+        var glbPolicy = null;
+        var glbRisk = null;
+        var glbCoverage = null;
+        var glbUser = null;
+        var glbPersonIndividualId = null;
+        var router = uif2.router({ container: "#main" });
+        var AppResources;
+        var resourceManager = uif2.resourceManager({ path: rootPath + "Layout/GetResources" })
+        resourceManager.getResources().then(function (resources) {
+            AppResources = resources;
+        });
+        new TransportAdjustment();
+        new TransportAdjustmentRequest();
+    </script>
+}*@
+

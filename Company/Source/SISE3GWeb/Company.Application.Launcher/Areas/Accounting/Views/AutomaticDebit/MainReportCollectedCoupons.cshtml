@@ -1,0 +1,90 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.CollectedCoupons;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AutomaticDebit</li>
+        <li>@Global.CollectedCoupons</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="collectedCouponsCancel" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="collectedCouponsGenerate" class="btn btn-primary" role="button">
+            <i class="fa fa-list"></i>  @Global.Generate
+        </button>
+    </footer>
+}
+
+<form id="formCollectedCoupons" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.DateProcessFrom</label>
+            <input type="text" value="@ViewBag.CurrentDate" class="uif-datepicker" data-mask="99/99/9999" id="collectedCouponsDateProcessFrom"
+                   name="collectedCouponsDateProcessFrom" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="collectedCouponsDateProcessFrom" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.DateProcessTo</label>
+            <input type="text" value="@ViewBag.CurrentDate" class="uif-datepicker" data-mask="99/99/9999" id="collectedCouponsDateProcessTo"
+                   name="collectedCouponsDateProcessTo" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="collectedCouponsDateProcessTo" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Prefix</label>
+            <select class="uif-select form-control" id="collectedCouponsPrefix" data-native="true"
+                    data-source='@Url.Content("~/Accounting/Common/GetPrefixes")' data-id="Id" data-name="Description"></select>
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.Agent</label>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetAgentByName", "Common")" data-displaykey="Name" placeholder="@Global.TypeAgentName." id="collectedCouponsAgent">
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.ReportType</label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="collectedCouponsCollected" value="C" checked>
+                    @Global.Collected
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="collectedCouponsUncollected" value="U">
+                    @Global.Uncollected
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="collectedCouponsAll" value="A">
+                    @Global.All
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainReportCollectedCoupons")
+}

@@ -1,0 +1,32 @@
+<map version="2.0" type="class" name="TechnicalPlan" namespace="Sistran.Core.Application.Product" file-version="1.0" description="TECHNICAL_PLAN_ENTITY">
+  <properties>
+    <property name="TechnicalPlanId" type="Integer" key="true" description="TECHNICAL_PLAN_ID_PROPERTY" autonumber="id"/>
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="SmallDescription" type="String" size="15" description="SMALL_DESCRIPTION_PROPERTY" />
+    <property name="CoveredRiskTypeCode" type="Integer" description="COVERED_RISK_TYPE_CODE_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" description="CURRENT_FROM_PROPERTY" />
+    <property name="CurrentTo" type="DateTime" nullable="true" description="CURRENT_TO_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="TECHNICAL_PLAN" schema="PROD" alias="TECHNICAL_PLAN" update="true">
+      <columns>
+        <column name="TECHNICAL_PLAN_ID" type="Int32" property="TechnicalPlanId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="SMALL_DESCRIPTION" type="String" property="SmallDescription" allowNull="false" size="15" />
+        <column name="COVERED_RISK_TYPE_CD" type="Byte" property="CoveredRiskTypeCode" allowNull="false" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" allowNull="false" />
+        <column name="CURRENT_TO" type="DateTime" property="CurrentTo" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="27" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

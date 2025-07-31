@@ -1,0 +1,678 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<script id="AnalysisCodesList-display-template" type="text/template">
+    <div>
+        <strong>@Global.AnalysisCode:</strong>  {{AnalysisId}}<br />
+        <strong>@Global.AnalysisConcept @Global.Code:</strong> {{AnalysisConcept.AnalysisConceptId}}<br>
+        <strong>@Global.Description:</strong> {{Description}}<br>
+        <strong>@Global.Key @Global.Concept:</strong> {{ConceptKey}}<br />
+    </div>
+</script>
+<script id="CostCenterList-display-template" type="text/template">
+    <div>
+        <strong>@Global.CostCenter:</strong>  {{CostCenter.CostCenterId}}<br />
+        <strong>@Global.CostCenter:</strong>  {{CostCenter.Description}}<br />
+        <strong>@Global.Percentage:</strong> {{Percentage}}<br>
+    </div>
+</script>
+
+<script id="accountingMovementsList-display-template" type="text/template">
+    <strong>@Global.Branch:</strong>  {{Branch.Description}}
+    <br>
+    <strong>@Global.SalePoint:</strong> {{SalePoint.Description}}
+    <strong>@Global.Concept:</strong> {{AccountingConcept.Description}}
+    <br>
+    <strong>@Global.AccountingAccount:</strong> {{BookAccount.AccountNumber}}
+    <br>
+    <strong>@Global.Nature:</strong> {{AccountingNatureDescription}} |
+    <strong>@Global.Currency:</strong> {{Amount.Currency.Description}}
+    <br>
+    <div class="number">
+        <strong>@Global.ExchangeRate:</strong> {{ExchangeRate.SellAmount}} | <strong>@Global.Amount:</strong> {{FormatAmount}}
+    </div>
+    <strong>@Global.Description:</strong> {{Description}}
+    <strong>@Global.AnalysisCode: </strong>
+    {{#ifCond ItHasCodeAnalysis "==" true }}
+    @Global.Yes
+    {{else ifCond ItHasCodeAnalysis "==" false}}
+    @Global.No
+    {{/ifCond}}
+    <br />
+    <strong>@Global.CostCenter: </strong>
+    {{#ifCond ItHasCostCenter "==" true }}
+    @Global.Yes
+    {{else ifCond ItHasCostCenter "==" false}}
+    @Global.No
+    {{/ifCond}}
+    <br />
+
+</script>
+
+<script id="accountingPostdatedList-display-template" type="text/template">
+    <div>
+        <strong>{{BranchName}}</strong> | {{SalePointName}} | {{ConceptName}} <br>
+        <span class="text-danger"><strong>{{NatureName}}</strong></span>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"> {{Amount}}</div>
+    </div>
+</script>
+<script id="postdatedAdd-template" type="text/template">
+    @Html.Partial("~/Areas/Accounting/Views/Application/Accounting/PostdatedEditor.cshtml")
+</script>
+<script id="accountingCostCenterList-display-template" type="text/template">
+    <div>
+        <strong>{{BranchName}}</strong> | {{SalePointName}} | {{ConceptName}} <br>
+        <span class="text-danger"><strong>{{NatureName}}</strong></span>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"> {{Amount}}</div>
+    </div>
+</script>
+<script id="costCenterAdd-template" type="text/template">
+    @Html.Partial("~/Areas/Accounting/Views/Application/Accounting/CostCenterEditor.cshtml")
+</script>
+<script id="accountingAnalysisList-display-template" type="text/template">
+    <div>
+        <strong>{{BranchName}}</strong> | {{SalePointName}} | {{ConceptName}} <br>
+        <span class="text-danger"><strong>{{NatureName}}</strong></span>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"> {{Amount}}</div>
+    </div>
+</script>
+@*<script id="accountingAnalysisCode-display-template" type="text/template">
+        <div>
+            <strong>{{AnalysisDescription}}</strong> | {{AnalysisConceptDescription}} | {{AnalysisKey}}
+        </div>
+    </script>*@
+<script id="accountingCostCenter-display-template" type="text/template">
+    <div>
+        <strong>{{CostCenterDescription}} </strong> | {{Percentage}} %
+    </div>
+</script>
+
+
+<div class="uif-panel">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <ul class="uif-tab">
+                <li class="active"><a href="#Accounting">@Global.Accounting</a></li>
+                <li class=""><a href="#tabAnalysisCode">@Global.AnalysisCode</a></li>
+                <li class=""><a href="#tabCostCenter">@Global.CostCenter</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="Accounting" class="tab-pane active">
+                    <!-- Contabilidad -->
+                    <div id="tabAccounting">
+                        <div class="scroll" style="text-align: left;  height: 570px;">
+                            @*Left Column*@
+                            <div class="uif-col-12">
+                                <form id="addAccountingMovementForm" onsubmit="return false" class="form">
+                                    <div class="uif-row">
+                                        <div class="uif-col-6">
+                                            <label>@Global.Branch</label>
+                                            <select class="uif-select form-control" id="AccountingBranch" data-id="Id" data-name="Description" data-val="true" data-val-required="@Global.RequiredField"></select>
+
+                                            <span class="text-danger" data-valmsg-for="AccountingBranch" data-valmsg-replace="true" />
+                                        </div>
+                                        <div class="uif-col-6">
+
+                                            <label>@Global.SalePoint</label>
+                                            <select class="uif-select form-control" name="AccountingSalePoint" id="AccountingSalePoint" data-id="Id" data-name="Description" data-val="true" data-val-required="@Global.RequiredField"></select>
+                                            <span class="text-danger" data-valmsg-for="AccountingSalePoint" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+                                    <div class="uif-row" id="rowAccPerson">
+                                        <div class="uif-col-12">
+                                            <label>@Global.DocumentNumber</label>
+                                            @Html.TextBox("AccountingDocumentNumber", "", new
+                                            {
+                                                id = "AccountingDocumentNumber",
+                                                maxlength = "20",
+                                                @class = "uif-autocomplete",
+                                                data_source = @Url.Content("~/Accounting/Billing/GetPersonByDocumentNumber"),
+                                                data_displaykey = "DocumentNumber",
+                                                placeholder = @Global.EnterDocumentNumber,
+                                                data_val = "true",
+                                                data_val_required = @Global.RequiredField
+                                            })
+                                            <span class="text-danger" data-valmsg-for="AccountingDocumentNumber" data-valmsg-replace="true" />
+                                        </div>
+                                        <br />
+                                        <div class="uif-col-12">
+                                            <label>@Global.FullName</label>
+                                            @Html.TextBox("AccountingName", "", new
+                                            {
+                                                id = "AccountingName",
+                                                @class = "uif-autocomplete",
+                                                data_source = @Url.Content("~/Accounting/Billing/GetPersonByName"),
+                                                data_displaykey = "Name",
+                                                placeholder = @Global.EnterName,
+                                                data_val = "true",
+                                                data_val_required = @Global.RequiredField
+                                            })
+                                            <span class="text-danger" data-valmsg-for="AccountingName" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+                                    <div class="uif-row" id="rowAccAgent">
+                                        <div class="uif-col-12">
+                                            <label for="">@Global.DocumentNumber</label>
+                                            <input class="uif-autocomplete" type="text"
+                                                   data-source="@Url.Action("GetAgentByDocumentNumber", "Common")"
+                                                   @*onkeypress="return OnlyNumbers(event,this)"*@
+                                                   data-displaykey="DocumentNumber"
+                                                   placeholder='@Global.EnterDocumentNumber'
+                                                   id="accountingAgentDocumentNumber"
+                                                   name="accountingAgentDocumentNumber"
+                                                   data-val="true"
+                                                   maxlength="20"
+                                                   data-val-required='@Global.RequiredField'>
+                                            <span class="text-danger" data-valmsg-for="accountingAgentDocumentNumber" data-valmsg-replace="true" />
+                                        </div>
+                                        <br />
+                                        <div class="uif-col-12">
+                                            <label for="">
+                                                @Global.AgentName
+                                            </label>
+                                            <input class="uif-autocomplete"
+                                                   type="text" data-source="@Url.Action("GetAgentByName", "Common")"
+                                                   data-displaykey="Name"
+                                                   placeholder='@Global.EnterName'
+                                                   id="accountingAgentName"
+                                                   name="accountingAgentName"
+                                                   data-val="true"
+                                                   maxlength="100"
+                                                   data-val-required='@Global.RequiredField'>
+                                            <span class="text-danger" data-valmsg-for="accountingAgentName" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+
+                                    <div class="uif-row" id="rowAccCoinsurance">
+                                        <div class="uif-col-12">
+                                            <label for="">
+                                                @Global.DocumentNumber
+                                            </label>
+                                            <input class="uif-autocomplete"
+                                                   type="text"
+                                                   data-source="@Url.Action("GetCoinsuranceByDocumentNumber", "Common")"
+                                                   @*onkeypress="return OnlyNumbers(event,this)"*@
+                                                   data-displaykey="DocumentNumber"
+                                                   placeholder='@Global.EnterDocumentNumber'
+                                                   id="accountingCompanyDocumentNumber"
+                                                   name="accountingCompanyDocumentNumber"
+                                                   data-val="true"
+                                                   maxlength="20"
+                                                   data-val-required='@Global.RequiredField'>
+                                            <span class="text-danger" data-valmsg-for="accountingCompanyDocumentNumber" data-valmsg-replace="true" />
+                                        </div>
+                                        <br />
+                                        <div class="uif-col-12">
+                                            <label for="">
+                                                @Global.Company
+                                            </label>
+                                            <div class="input-with-buttons">
+                                                <input class="uif-autocomplete"
+                                                       type="text"
+                                                       data-source="@Url.Action("GetCoinsurerByName", "Common")"
+                                                       data-displaykey="Name"
+                                                       placeholder='@Global.EnterName'
+                                                       id="accountingCompanyName"
+                                                       name="accountingCompayName"
+                                                       data-val="true"
+                                                       maxlength="100"
+                                                       data-val-required='@Global.RequiredField'>
+                                            </div>
+                                            <span class="text-danger" data-valmsg-for="accountingCompayName" data-valmsg-replace="true" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="uif-row" id="rowAccInsured">
+                                        <div class="uif-col-12">
+                                            <label for="">
+                                                @Global.DocumentNumber
+                                            </label>
+                                            <input class="uif-autocomplete"
+                                                   type="text" data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                                                   @*onkeypress="return OnlyNumbers(event,this)"*@
+                                                   data-displaykey="DocumentNumber"
+                                                   placeholder='@Global.EnterDocumentNumber'
+                                                   id="accountingInsuredDocumentNumber"
+                                                   name="accountingInsuredDocumentNumber"
+                                                   data-val="true"
+                                                   maxlength="20"
+                                                   data-val-required='@Global.RequiredField'>
+                                            <span class="text-danger" data-valmsg-for="accountingInsuredDocumentNumber" data-valmsg-replace="true" />
+                                        </div>
+                                        <br />
+                                        <div class="uif-col-12">
+                                            <label for="">
+                                                @Global.InsuredName
+                                            </label>
+                                            <input class="uif-autocomplete"
+                                                   type="text" data-source="@Url.Action("GetInsuredByInsuredName", "Common")"
+                                                   data-displaykey="Name"
+                                                   placeholder='@Global.EnterName'
+                                                   id="accountingInsuredName"
+                                                   name="accountingInsuredName"
+                                                   data-val="true"
+                                                   maxlength="100"
+                                                   data-val-required='@Global.RequiredField'>
+                                            <span class="text-danger" data-valmsg-for="accountingInsuredName" data-valmsg-replace="true" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="uif-row" id="rowAccReinsurance">
+                                        <div class="uif-col-12">
+                                            <label for="">
+                                                @Global.DocumentNumber
+                                            </label>
+                                            <input class="uif-autocomplete"
+                                                   type="text" data-source="@Url.Action("GetReinsurerByDocumentNumber", "Common")"
+                                                   data-displaykey="DocumentNumber"
+                                                   placeholder='@Global.EnterDocumentNumber'
+                                                   id="accountingReinsuranceDocumentNumber"
+                                                   name="accountingReinsuranceDocumentNumber"
+                                                   data-val="true"
+                                                   maxlength="25"
+                                                   data-val-required='@Global.RequiredField'>
+                                            <span class="text-danger" data-valmsg-for="accountingReinsuranceDocumentNumber" data-valmsg-replace="true" />
+                                        </div>
+                                        <br />
+                                        <div class="uif-col-12">
+                                            <label for="">
+                                                @Global.ReinsuranceCompany
+                                            </label>
+                                            <div class="input-with-buttons">
+                                                <input class="uif-autocomplete"
+                                                       type="text"
+                                                       data-source="@Url.Action("GetReinsurerByName", "Common")"
+                                                       data-displaykey="Name"
+                                                       placeholder='@Global.EnterName'
+                                                       id="accountingReinsuranceName"
+                                                       name="accountingReinsuranceName"
+                                                       data-val="true"
+                                                       maxlength="100"
+                                                       data-val-required='@Global.RequiredField'>
+                                            </div>
+                                            <span class="text-danger" data-valmsg-for="accountingReinsuranceName" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+
+                                    <div class="uif-row" id="rowAccSupplier">
+                                        <div class="uif-col-12">
+                                            <label for="accountingSupplierDocumentNumber">
+                                                @Global.DocumentNumber
+                                            </label>
+                                            <input class="uif-autocomplete"
+                                                   type="text"
+                                                   data-source="@Url.Action("GetSuppliersByDocumentNumber", "Common")" ,
+                                                   onkeypress="return OnlyNumbers(event,this)"
+                                                   data-displaykey="DocumentNumber"
+                                                   placeholder='@Global.EnterDocumentNumber'
+                                                   id="accountingSupplierDocumentNumber"
+                                                   name="accountingSupplierDocumentNumber"
+                                                   data-val="true"
+                                                   maxlength="20"
+                                                   data-val-required='@Global.RequiredField'>
+                                            <span class="text-danger" data-valmsg-for="inputSupplierDocumentNumber" data-valmsg-replace="true" />
+                                        </div>
+                                        <br />
+                                        <div class="uif-col-12">
+                                            <label for="">
+                                                @Global.SupplierName
+                                            </label>
+                                            <input class="uif-autocomplete"
+                                                   type="text" data-source="@Url.Action("GetSuppliersByName", "Common")"
+                                                   data-displaykey="Name"
+                                                   placeholder='@Global.EnterName'
+                                                   id="accountingtSupplierName"
+                                                   name="accountingSupplierName"
+                                                   data-val="true"
+                                                   maxlength="100"
+                                                   data-val-required='@Global.RequiredField'>
+                                            <span class="text-danger" data-valmsg-for="accountingSupplierName" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-12">
+                                            <label>@Global.CodeConcept</label>
+                                            @Html.TextBox("AccountingPaymentConceptId", "", new
+                                            {
+                                                id = "AccountingPaymentConceptId",
+                                                @class = "uif-autocomplete",
+                                                data_source = @Url.Content("~/Accounting/Accounting/GetAccountingConcepstByFilter"),
+                                                data_displaykey = "Id",
+                                                placeholder = @Global.EnterConceptCode,
+                                                onkeypress = "return JustNumbers(event, this);",
+                                                data_val = "true",
+                                                data_val_required = @Global.RequiredField,
+                                                data_minlenght = "1"
+
+                                            })
+                                            <span class="text-danger" data-valmsg-for="AccountingPaymentConceptId" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-12">
+                                            <label>@Global.PaymentConcepts</label>
+                                            @Html.TextBox("AccountingPaymentConceptDescription", "", new
+                                            {
+                                                id = "AccountingPaymentConceptDescription",
+                                                @class = "uif-autocomplete",
+                                                data_source = @Url.Content("~/Accounting/Accounting/GetPaymentConceptByDescription"),
+                                                data_displaykey = "Description",
+                                                placeholder = @Global.EnterConceptName,
+                                                data_val = "true",
+                                                data_val_required = @Global.RequiredField,
+                                                @onblur = "this.value = this.value.toUpperCase();"
+                                            })
+                                            <span class="text-danger" data-valmsg-for="AccountingPaymentConceptDescription" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-12">
+                                            <label>@Global.AccountingAccountNumber</label>
+                                            @Html.TextBox("AccountingAccountNumber", "", new
+                                            {
+                                                id = "AccountingAccountNumber",
+                                                onkeypress = "return JustNumbers(event, this);",
+                                                @class = "uif-autocomplete",
+                                                data_source = @Url.Content("~/Accounting/Accounting/GetAccountingAccountByNumber"),
+                                                data_displaykey = "AccountingNumber",
+                                                placeholder = @Global.EnterNumberAccount,
+                                                data_val = "true",
+                                                data_val_required = @Global.RequiredField
+                                            })
+                                            <span class="text-danger" data-valmsg-for="AccountingAccountNumber" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-12">
+                                            <label>@Global.AccountingAccountName</label>
+                                            @Html.TextBox("AccountingAccountName", "", new
+                                            {
+                                                id = "AccountingAccountName",
+                                                @class = "uif-autocomplete",
+                                                data_source = @Url.Content("~/Accounting/Accounting/GetAccountingAccountByDescription"),
+                                                data_displaykey = "AccountingName",
+                                                placeholder = @Global.EnterAccounName,
+                                                data_val = "true",
+                                                data_val_required = @Global.RequiredField
+                                            })
+                                            <span class="text-danger" data-valmsg-for="AccountingAccountName" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-6">
+                                            <label>@Global.Nature</label>
+                                            <select class="uif-select form-control" id="AccoutingNature" data-id="Id" data-name="Description"></select>
+
+                                            <span class="text-danger" data-valmsg-for="AccoutingNature" data-valmsg-replace="true" />
+                                        </div>
+                                        <div class="uif-col-6">
+                                            <label>@Global.Currency</label>
+                                            <select class="uif-select form-control" id="AccountingCurrency" data-id="Id" data-name="Description"></select>
+                                            <span class="text-danger" data-valmsg-for="AccountingCurrency" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-6">
+                                            <label>@Global.ExchangeRate</label>
+                                            @Html.TextBox("AccountingExchangeRate", "", new
+                                            {
+                                                id = "AccountingExchangeRate",
+                                                disabled = "disabled",
+                                                data_val = "true",
+                                                data_val_required = @Global.RequiredField,
+                                                style = "text-align: right"
+                                            })
+                                            <span class="text-danger" data-valmsg-for="AccountingExchangeRate" data-valmsg-replace="true" />
+                                        </div>
+                                        <div class="uif-col-6">
+                                            <label>@Global.Amount</label>
+                                            @Html.TextBox("AccountingAmount", "", new
+                                            {
+                                                id = "AccountingAmount",
+                                                onkeypress = " return OnlyDecimalNumber(event, this); ",
+                                                maxlength = "20",
+                                                data_val = "true",
+                                                data_val_required = @Global.RequiredField,
+                                                style = "text-align: right"
+                                            })
+                                            <span class="text-danger" data-valmsg-for="AccountingAmount" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-12">
+                                            <label>@Global.MovementDescription</label>
+                                            @Html.TextBox("AccountingDescription", "", new
+                                            {
+                                                id = "AccountingDescription",
+                                                data_val = "true",
+                                                data_val_required = @Global.RequiredField,
+                                                @onblur = "this.value = this.value.toUpperCase();",
+                                                maxlength = "100"
+                                            })
+                                            <span class="text-danger" data-valmsg-for="AccountingDescription" data-valmsg-replace="true" />
+                                        </div>
+                                    </div>
+                                    <div id="AccountingBankAccount">
+                                        <div class="uif-row">
+                                            <div class="uif-col-12">
+                                                <label>@Global.BankConciliation</label>
+                                                @Html.DropDownList("AccountingBankConciliation", Enumerable.Empty<SelectListItem>(), new
+                                                {
+                                                    id = "AccountingBankConciliation",
+                                                    @class = "uif-select form-control",
+                                                    data_source = @Url.Content("~/Accounting/Common/LoadBankReconciliations"),
+                                                    data_id = "Id",
+                                                    data_native = "true",
+                                                    data_name = "Description"
+                                                })
+                                            </div>
+
+                                        </div>
+                                        <div class="uif-row">
+                                            <div class="uif-col-6">
+                                                <label>@Global.BillingSummaryPayRetentionSerialVoucherNumber</label>
+                                                @Html.TextBox("AccountingVoucherNumber", "", new { id = "AccountingVoucherNumber", maxlength = "9", onkeypress = "return JustNumbers(event, this)" })
+                                            </div>
+
+                                            <div class="uif-col-6">
+                                                <label>@Global.DateVoucher</label>
+                                                @Html.TextBox("AccountingVoucherDate", "", new { id = "AccountingVoucherDate", @class = "uif-datepicker", @data_mask = "99/99/9999", @maxlength = "10" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uif-row">
+                                        <div class="uif-col-9">
+                                            <div class="uif-alert padded" id="alertAnalysis"></div>
+                                        </div>
+                                        <div class="uif-col-3">
+                                            <div class="pull-right">
+                                                <button type="submit" class="btn btn-primary" id="AddAccountingMovement" onclick=" return false ">@Global.Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            @*End Left Column*@
+                        </div>
+                    </div>
+                </div>
+                <div id="tabAnalysisCode" class="tab-pane">
+
+                    <!-- Código de Análisis -->
+                    @*Left Column*@
+                    <form id="addAnalysisMovementForm" onsubmit="return false" class="form">
+                        <div class="uif-col-12">
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <label>@Global.AnalysisCode</label>
+                                    <select class="uif-select form-control"
+                                            id="AccountingAnalysisCode"
+                                            data-id="AnalysisCodeId"
+                                            data-name="Description" disabled></select>
+                                    <span class="text-danger" data-valmsg-for="AccountingAnalysisCode" data-valmsg-replace="true" />
+                                </div>
+
+                            </div>
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <label>@Global.AnalysisConcept</label>
+                                    @Html.DropDownList("AccountingAnalysisConcept", Enumerable.Empty<SelectListItem>(),
+                                              new
+                                              {
+                                                  id = "AccountingAnalysisConcept",
+                                                  @class = "uif-select form-control",
+                                                  data_id = "AnalysisConceptId",
+                                                  data_name = "AnalysisConceptDescription",
+                                                  data_native = "true",
+                                                  required = ""
+                                              })
+                                    <span class="text-danger" data-valmsg-for="AccountingAnalysisConcept" data-valmsg-replace="true" />
+                                </div>
+                            </div>
+
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <div id="KeyFields"></div>
+                                </div>
+                            </div>
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <label>@Global.MovementDescription</label>
+                                    @Html.TextBox("AccountingAnalysisDescription", "",
+                                              new
+                                              {
+                                                  id = "AccountingAnalysisDescription",
+                                                  data_val = "true",
+                                                  data_val_required = @Global.RequiredField,
+                                                  @onblur = "this.value = this.value.toUpperCase();",
+                                                  maxlength = "100"
+                                              })
+                                    <span class="text-danger" data-valmsg-for="AccountingAnalysisDescription" data-valmsg-replace="true" />
+                                </div>
+                            </div>
+
+
+                            <div class="uif-row">
+                                <div id="DynamicFields" style="overflow:auto">
+
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <div class="uif-alert" id="analysisCodeAlert"></div>
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="pull-right">
+                                    <button class="btn btn-default" id="CancelAddAccountingAnalysisMovement">@Global.New</button>
+                                    <button type="submit" class="btn btn-primary" id="AddAccountingAnalysisMovement" onclick=" return false ">@Global.Add</button>
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <div id="AnalysisCodesList" class="uif-listview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    @*End Left Column*@
+                    @*Right Column*@
+
+                    @*End Right Column*@
+                </div>
+                <div id="tabCostCenter" class="tab-pane">
+                    <!-- Centro de Costos -->
+
+                    <form id="addCostcenterMovementForm" onsubmit="return false" class="form">
+
+                        <div class="uif-row">
+                            <div class="uif-col-12">
+                                <label>@Global.CostCenter</label>
+                                <select class="uif-select form-control"
+                                        id="AccountingCostCenter"
+                                        data-id="CostCenterId"
+                                        data-name="Description"></select>
+                                <span class="text-danger" data-valmsg-for="AccountingCostCenter" data-valmsg-replace="true" />
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-12">
+                                <label>@Global.Percentage</label>
+                                @Html.TextBox("AccountingPercentageAmount", "",
+                                          new
+                                          {
+                                              id = "AccountingPercentageAmount",
+                                              data_val = "true",
+                                              data_val_required = @Global.RequiredField,
+                                              @onkeypress = "return OnlyDecimalNumber(event,this)",
+                                              maxlength = "3"
+                                          })
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-12">
+                                <div class="uif-alert" id="costCenterAlert"></div>
+                            </div>
+                        </div>
+
+                        <div class="uif-row">
+                            <div class="uif-col-12">
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-primary" id="AddAccountingCostCenterMovement" onclick=" return false ">@Global.Add</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-12">
+                                <div id="CostCenterList" class="uif-listview">
+                                    <div class="footer">
+                                        <label>@Global.Total @Global.Percentage:</label>
+                                        <b id="TotalPercentage">0.00</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+        @*Right Column*@
+        <div class="uif-col-6">
+            <div class="uif-panel" data-title="@Global.AccountingMovements">
+                <div id="accountingMovementsList" class="uif-listview">
+                    <div class="footer">
+                        <label>@Global.Credit</label>
+                        <b id="TotalAccountingMovement">$0.00</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>@Global.Debit</label>
+                        <b id="TotalDebitAccountingMovement">$0.00</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*End Right Column*@
+    </div>
+    <div class="uif-row">
+        <div class="pull-right">
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" id="AccountingAcceptMovement">@Global.Accept</button>
+            </div>
+        </div>
+    </div>
+</div>
+

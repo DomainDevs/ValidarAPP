@@ -1,0 +1,171 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.DepositSlip;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                    CODIGO HTML
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------  *@
+
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.AccountingAdministrative</li>
+        <li class="active">@Global.CheckAdministration</li>
+        <li class="active">@Global.DepositSlip</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="CancelTicket" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="SaveTicketDepositSlip" class="btn btn-primary" role="button" type="submit">
+            <i class="fa fa-save"></i>  @Global.Save
+        </button>
+    </footer>
+}
+
+@section Modals
+{
+
+    <div class="uif-modal" id="modalSaveSuccess" style="display: none">
+        <div class="uif-modalbody">          
+            @Html.Partial("DepositSlipSaveSuccessDialog")
+        </div>
+
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="btnSaveModal" data-dismiss="modal">
+                <i class="fa fa-close"></i> @Global.Close
+            </button>
+        </div>
+    </div>
+}
+
+
+<form id="ballotForm" onsubmit="return false">
+    <h3></h3>
+
+    <div class="uif-alert" id="alert"></div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            <select class="uif-select form-control" id="Branch" data-id="Id" data-name="Description"></select>
+
+            <span class="text-danger" data-valmsg-for="Branch" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.ReceivingBank
+            </label>
+            <select class="uif-select form-control" id="ddlReceivingBank" name="ddlReceivingBank"
+                    data-native="true" data-id="Id" data-name="Description"
+                    data-val="true" data-val-required="@Global.RequiredField"></select>
+            <span class="text-danger" data-valmsg-for="ddlReceivingBank" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>
+                @Global.AccountNumber:
+            </label>
+            <br />
+            <select class="uif-select form-control"
+                    id="ddlReceivingAccountNumber"
+                    name="ddlReceivingAccountNumber"
+                    data-id="AccountingAccountId"
+                    data-name="Number"
+                    data-val="true" data-native="true" data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="ddlReceivingAccountNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>
+                @Global.AccountCurrency:
+            </label>
+            <br />
+            <input type="text" id="accountCurrency" name="accountCurrency" style="text-align: left" disabled="disabled" />
+            <input type="hidden" id="accountCurrencyCd" name="accountCurrencyCd" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>
+                @Global.BankNumberBallot:
+            </label>
+            <br />
+            <input type="text" id="bankBallotNumber" name="bankBallotNumber" maxlength="16" style="text-align: right" class="required"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="bankBallotNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>
+                @Global.BankDate:
+            </label>
+            <br />
+            <input type="text" class="uif-datepicker required" id="bankDate" name="bankDate" maxlength="16" data-mask="99/99/9999" data-min-date="@ViewBag.AccountingDate"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="bankDate" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>
+                @Global.BankTotalAmount:
+            </label>
+            <br />
+            <input type="text" id="bankTotal" name="bankTotal" maxlength="28" data-msg-maxlength="Por favor, no escribas más de 20 caracteres." style="text-align: right" class="required"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="bankTotal" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>
+                @Global.BallotTotalAmount:
+            </label>
+            <br />
+            <input type="text" id="ballotTotal" name="ballotTotal" maxlength="16" style="text-align: right" disabled="disabled" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12"></div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" data-title="@Global.PendingToDepositInternalBallots"
+                   data-source="" id="checksDialog" data-selectiontype="multiple" data-filter="true" data-paginate="true">
+                <thead>
+                    <tr>
+                        <th data-property="Status" data-visible="false">Status</th>
+                        <th data-property="UserId" data-visible="false">UserId</th>
+                        <th data-property="DepositBallotBankId" data-visible="false">bankCd</th>
+                        <th data-property="DepositBallotBankDescription">@Global.IssuingBank</th>
+                        <th data-property="DepositBallotAccountNumber">@Global.BankAccountNumber</th>
+                        <th data-property="DepositBallotId">@Global.BallotNumber</th>
+                        <th data-property="DepositBallotAmount">@Global.Amount @Global.Check</th>
+                        <th data-property="DepositBallotCashAmount">@Global.Amount @Global.Cash</th>
+                        <th data-property="Currency">@Global.Currency</th>
+                        <th data-property="DepositBallotRegisterDate">@Global.BallotDate</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagPercentageParameter" value="@ViewBag.PercentageParameter" />
+<input type="hidden" id="ViewBagUserId" value="@ViewBag.userId" />
+<input type="hidden" id="BranchDefault" value="@ViewBag.BranchDefault" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCheckDepositSlip")
+}

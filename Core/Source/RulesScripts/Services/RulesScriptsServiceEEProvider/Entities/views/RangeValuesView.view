@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RangeValuesView">
+	<collections>
+		<collection name="RangeConcepts" type="Sistran.Core.Application.Script.Entities.RangeConcept, 
+                Core.Script.Entities"></collection>
+		<collection name="RangeEntities" type="Sistran.Core.Application.RulesScriptsServices.EEProvider.Entities.RangeEntity, 
+                Sistran.Core.Application.RulesScriptsServices.EEProvider"></collection>
+		<collection name="RangeEntityValues" type="Sistran.Core.Application.RulesScriptsServices.EEProvider.Entities.RangeEntityValue, 
+                Sistran.Core.Application.RulesScriptsServices.EEProvider"></collection>		
+	</collections>
+	<relations>
+		<relation source="RangeConcepts" destination="RangeEntities" name="RangeConceptRangeEntity" type="Inner">
+			<property left="RangeEntityCode" type="Equal" right="RangeEntityCode"></property>
+		</relation>
+		<relation source="RangeEntities" destination="RangeEntityValues" name="RangeEntityRangeEntityValue" type="Inner">
+			<property left="RangeEntityCode" type="Equal" right="RangeEntityCode"></property>
+		</relation>	
+	</relations>
+</view>

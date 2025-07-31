@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="EstimationTypesClaimView ">
+  <collections>
+    <collection name="ClaimModify" type="Sistran.Core.Application.Claims.Entities.ClaimModify, 
+                Core.Claims.Entities"></collection>    
+    <collection name="ClaimCoverage" type="Sistran.Core.Application.Claims.Entities.ClaimCoverage, 
+                Core.Claims.Entities"></collection>    
+    <collection name="ClaimCoverageAmount" type="Sistran.Core.Application.Claims.Entities.ClaimCoverageAmount, 
+                Core.Claims.Entities"></collection>    
+    <collection name="EstimationType" type="Sistran.Core.Application.Parameters.Entities.EstimationType, 
+                  Core.Parameters.Entities"></collection>    
+    <collection name="EstimationTypeStatus" type="Sistran.Core.Application.Parameters.Entities.EstimationTypeStatus, 
+                  Core.Parameters.Entities"></collection>
+    <collection name="EstimationTypeInternalStatus" type="Sistran.Core.Application.Parameters.Entities.EstimationTypeInternalStatus, 
+                  Core.Parameters.Entities"></collection>
+    <collection name="EstimationTypeStatusReason" type="Sistran.Core.Application.Parameters.Entities.EstimationTypeStatusReason, 
+                  Core.Parameters.Entities"></collection>
+    <collection name="Currency" type="Sistran.Core.Application.Common.Entities.Currency, 
+                Core.Common.Entities"></collection>
+    <collection name="PaymentRequestClaim" type="Sistran.Core.Application.Claims.Entities.PaymentRequestClaim, 
+                Core.Claims.Entities"></collection>    
+    <collection name="PaymentRequest" type="Sistran.Core.Application.Claims.Entities.PaymentRequest, 
+                  Core.Claims.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="ClaimCoverage" destination="ClaimModify" name="ClaimCoverageClaimModify" type="Inner">
+      <property left="ClaimModifyCode" type="Equal" right="ClaimModifyCode"></property>
+    </relation>
+    <relation source="ClaimCoverageAmount" destination="ClaimCoverage" name="ClaimCoverageAmountClaimCoverage" type="Inner">
+      <property left="ClaimCoverageCode" type="Equal" right="ClaimCoverageCode"></property>
+    </relation>
+    <relation source="EstimationType" destination="ClaimCoverageAmount" name="EstimationTypeClaimCoverageAmount" type="Inner">
+      <property left="EstimateTypeCode" type="Equal" right="EstimationTypeCode"></property>
+    </relation>
+    <relation source="EstimationTypeStatus" destination="ClaimCoverageAmount" name="EstimationTypeStatusClaimCoverageAmount" type="Inner">
+      <property left="EstimationTypeStatusCode" type="Equal" right="EstimationTypeStatusCode"></property>
+    </relation>
+    <relation source="EstimationTypeStatus" destination="EstimationTypeInternalStatus" name="EstimationTypeStatusEstimationTypeInternalStatus" type="Inner">
+      <property left="InternalStatusCode" type="Equal" right="InternalStatusCode"></property>
+    </relation>
+    <relation source="EstimationTypeStatusReason" destination="ClaimCoverageAmount" name="EstimationTypeStatusReasonClaimCoverageAmount" type="Inner">
+      <property left="EstimationTypeStatusReasonCode" type="Equal" right="EstimationTypeStatusReasonCode"></property>
+    </relation>
+    <relation source="Currency" destination="ClaimCoverageAmount" name="ClaimCoverageAmountCurrency" type="Inner">
+      <property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+    </relation>    
+    <relation source="PaymentRequestClaim" destination="ClaimModify" name="PaymentRequestClaimClaimModify" type="Left">
+      <property left="ClaimCode" type="Equal" right="ClaimCode"></property>
+    </relation>
+    <relation source="PaymentRequestClaim" destination="PaymentRequest" name="PaymentRequestClaimPaymentRequest" type="Left">
+      <property left="PaymentRequestCode" type="Equal" right="PaymentRequestCode"></property>
+    </relation>
+  </relations>
+</view>

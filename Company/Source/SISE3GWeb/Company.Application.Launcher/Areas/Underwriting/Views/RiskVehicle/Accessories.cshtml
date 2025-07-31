@@ -1,0 +1,89 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.AccessoryModelsView
+
+<form id="formAccesories" class="form modal-Colombia">
+    <script id="accessoryTemplate" type="text/template">
+        <div><strong>{{Description}} {{Make}}</strong></div>
+        <br />
+        <div>@Resources.Language.LabelSumInsured: <span class="warning">{{Amount}}</span></div>
+        <br />
+        <div><strong>{{Original}}</strong></div>
+        <br />
+        <div>@Resources.Language.LabelStatus: {{StatusDescription}}</div>
+    </script>
+    @Html.HiddenFor(model => model.AccumulatedPremium, new { id = "hiddenAccumulatedPremium" })
+    <input type="hidden" id="hiddenTotalNoOriginals" />
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelAccessory</label>
+                    <select class="uif-select form-control" id="selectAccessory" data-native="false" data-source='@Url.Content("~/Underwriting/RiskVehicle/GetAccessories")'
+                            data-id="Id" data-name="Description" name="Id" data-val="true" data-val-required="@Resources.Language.ErrorDocumentAccessory"></select>
+                    @Html.ValidationMessageFor(model => model.Id)
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelSum</label>
+                    @Html.TextBoxFor(model => model.Amount, new { id = "inputAccessoryAmount", @class = "rightAlign" })
+                </div>
+                
+            </div>
+
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelAccessoryMake</label>
+                    @Html.TextBoxFor(model => model.Make, new { id = "inputAccessoryMake" })
+                </div>                
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="chkIsOriginal" name="IsOriginal" />
+                        <label for="chkIsOriginal">@Resources.Language.LabelIsOriginal</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelRateType</label>
+                    <select class="uif-select form-control" id="selectAccessoryRateType" data-native="false" data-source="" data-id="Value" data-name="Text" disabled="disabled" name="RateType"></select>
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelRate</label>
+                    @Html.TextBoxFor(model => model.Rate, new { id = "inputAccessoryRate", @class = "rightAlign", disabled = "disabled" })
+                </div>
+                <div class="uif-col-4"  hidden="hidden">
+                    <label>@Resources.Language.LabelPremium</label>
+                    @Html.TextBoxFor(model => model.Premium, new { id = "inputAccessoryPremium", @class = "rightAlign", disabled = "disabled" })
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listAccesories" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnAccessoryCancel">@Resources.Language.NewForm</button>
+                <button type="button" class="btn btn-primary" id="btnAccessoryAccept">@Resources.Language.AddForm</button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelInsuredValue</div>
+                            <div id="labelInsuredValue">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelPremium</div>
+                            <div id="labelPremium">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

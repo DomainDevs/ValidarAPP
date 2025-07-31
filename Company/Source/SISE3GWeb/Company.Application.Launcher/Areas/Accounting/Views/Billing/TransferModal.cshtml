@@ -1,0 +1,207 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = null;
+}
+
+<script id="transfer-display-template" type="text/template">
+    <div>
+        <strong>{{RecievingBankName}}</strong> | @Global.AccountNumber: {{RecievingBankAccountNumber}} | @Global.BillingNumTransfer: {{DocumentNumber}} <br>
+        @Global.Amount: {{Amount}} | {{IssuerName}}
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number">@Global.TotalLocalCurrency: {{LocalAmount}}</div>
+    </div>
+</script>
+
+<form id="addTransferForm" onsubmit="return false" class="form">
+    <div class="main-content">
+        <div class="uif-row">
+            <!--left col-->
+            <div class="uif-col-6">
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Currency</label>
+                        @Html.DropDownList("selectTransferCurrency", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="selectTransferCurrency" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.AmountExchange</label>
+                        <br />
+                        @Html.TextBox("TransferExchangeRate", "", new
+                         {
+                             @onkeypress = "return OnlyDecimalNumber(event,this)",
+                             style = "text-align: right;",
+                             required = "",
+                             disabled = "disable",
+                             maxlength ="26"
+                         })
+                        <span class="text-danger" data-valmsg-for="TransferExchangeRate" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Amount</label>
+                        <br />
+                        @Html.TextBox("TransferAmount", "", new
+                   {
+                       @onkeypress = "return OnlyDecimalNumber(event,this)",
+                       style = "text-align: right",
+                       data_val = "true",
+                       data_val_required = @Global.RequiredField,
+                       maxlength = "26"
+                   })
+                        <span class="text-danger" data-valmsg-for="TransferAmount" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.TotalLocalCurrency</label>
+                        <br />
+                        <input type="text" id="TransferLocalAmount" disabled="disabled" style="text-align: right" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.IssuingBank</label>
+                        <br />
+                        <input class="uif-autocomplete" type="text" 
+                               data-source="@Url.Action("GetBanks", "Billing")" 
+                               data-displaykey="Value" 
+                               placeholder='@Global.EnterIssuingBank'
+                               id="inputTransferIssuingBank" 
+                               name="inputTransferIssuingBank" 
+                               data-val="true" 
+                               data-val-required='@Global.RequiredField' />
+                        <input type="hidden" id="HiddenIssuingBankId" />
+                        <span class="text-danger" data-valmsg-for="inputTransferIssuingBank" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.AccountNumber</label>
+                        <br />
+                        @Html.TextBox("TransferAccountNumber", "", new
+                        {
+                            @class = "uif-mask",
+                            data_pattern = "000000000000000",
+                            style = "text-align: right",
+                            maxlength = "15",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="TransferAccountNumber" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenTransferAccountNumber" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.DocumentNumber</label>
+                        <br />
+                        @Html.TextBox("TransferDocumentNumber", "", new
+                        {
+                            @class = "uif-mask",
+                            data_pattern = "000000000",
+                            style = "text-align: right",
+                            maxlength = "9",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="TransferDocumentNumber" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenTransferDocumentNumber" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.ReceivingBank</label>
+                        <br />
+                        @Html.DropDownList("selectTransferReceivingBank", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetAccountBanks"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="selectTransferReceivingBank" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenReceivingBankName" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.AccountNumber</label>
+                        <br />
+
+                        @Html.DropDownList("selectTransferAccountNumber", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="selectTransferAccountNumber" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenAccountNumber" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.SummaryPayTransferPerson</label>
+                        <br />
+                        @Html.TextBox("TransferHolderName", "", new
+                        {
+                            style = "text-align: left",
+                            maxlength = "40",
+                            @onblur = "this.value = this.value.toUpperCase();",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="TransferHolderName" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Date</label>
+                        <br />
+                        <input type="text"
+                               value="@ViewBag.DateAccounting"
+                               data-mask="99/99/9999" 
+                               id="TransferDate"
+                               name="TransferDate"
+                               data-val="true" 
+                               data-val-required='@Global.RequiredField' />
+                        <span class="text-danger" data-valmsg-for="TransferDate" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertForm"></div>
+                    </div>
+                </div>
+            </div>
+            <!--End left col-->
+            <!--right col-->
+            <div class="uif-col-6">
+                <div class="uif-listview" id="transferListView">
+                    <div class="footer">
+                        <div class="uif-col-xs-6">
+                            @Global.Total
+                        </div>
+                        <div class="uif-col-xs-6 text-right">
+                            <b id="TotalTransfer">$ 0.00</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End right col-->
+        </div>
+    </div>
+</form>

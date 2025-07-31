@@ -1,0 +1,49 @@
+﻿<form id="formReassign" class="form">
+    <div id="ReassingOption" class="row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.LabelAuthorizationToBeReassigned</label>
+            <select class="uif-select form-control" id="selectPoliciesToReassignOption" data-id="Value" data-name="Text" name="PolicyOptionId" disabled="disabled" required></select>
+        </div>
+    </div>
+    <div id="divIndividualReassign" hidden>
+        <div class="row">
+            <div class="uif-col-12">
+                <textarea cols="20" id="inputPoliciesToReassign" name="PoliciesToReassign" rows="2" required></textarea>
+                <span class="field-validation-valid" data-valmsg-for="PoliciesToReassign" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+    <div id="divRangeReassign" hidden>
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelFromPrinter</label>
+                @Html.TextBox("RangeFrom", null, new { id = "inputPoliciesToReassignRangeFrom", type = "number" })
+            </div>
+            <div class="uif-col-2">
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelToPrinter</label>
+                @Html.TextBox("RangeTo", null, new { id = "inputPoliciesToReassignRangeTo", type = "number" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.Hierarchy</label>
+            <select id="ddlHierarchy" data-id="Id" data-name="Description" required="required"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="field-required">@Resources.Language.LabelUser</label>
+        <select id="ddlHierarchyUser" data-id="IdUser" data-name="UserName" required="required"></select>
+    </div>
+    <div class="form-group">
+        <label class="field-required">@Resources.Language.LabelReason</label>
+        <textarea rows="4" id="txtReasonReasign" required="required" placeholder="@Resources.Language.PlaceHolderInputText"></textarea>
+    </div>
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0700"))
+    {
+        <button class="btn btn-primary" type="button" id="btnSendReassign">@Resources.Language.ButtonSend</button>
+    }
+
+</form>

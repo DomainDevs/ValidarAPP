@@ -1,0 +1,124 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.Endorsement.Models.ChangeTextViewModel
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        <div>@Resources.Language.LabelEndorsementTextChange</div>
+    </div>
+    <div class="column-30">
+        <div class="important">
+            <div class="date">
+                <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate"></span>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnCancel">@Resources.Language.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0719"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.ModificationSave</button>
+        }
+    </div>
+</script>
+
+
+<form id="formTexts" class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h5 id="globalTitle"></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <h5><strong>@Resources.Language.EndorsementTextChangeData</strong></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelCurrentFrom</label>
+            @Html.TextBoxFor(model => model.CurrentFrom, new { id = "inputCurrentFrom" })
+            @Html.ValidationMessageFor(model => model.CurrentFrom)
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelCurrentTo</label>
+            @Html.TextBoxFor(model => model.CurrentTo, new { id = "inputCurrentTo", disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.CurrentTo)
+        </div>
+        <div class="uif-col-1">
+            <label>@Resources.Language.LabelDays</label>
+            @Html.TextBoxFor(model => model.Days, new { id = "inputDays", disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.Days)
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelEndorsement</label>
+            <select class="uif-select form-control" id="selectEndorsement" data-native="false" data-id="Id" data-name="Description"
+                    name="selectEndorsement" data-val="true" data-val-required="@Resources.Language.ErrorDocumentEndorsement"></select>
+            @Html.ValidationMessageFor(model => model.EndorsementId)
+        </div>
+        <div class="uif-col-2" id="divCoInsuranceAccepted">
+            <label>Nro. anexo cia lider</label>
+            @Html.TextBoxFor(model => model.BusinessTypeDescription, new { id = "inputBusinessTypeDescription" })
+            @Html.ValidationMessageFor(model => model.BusinessTypeDescription)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelFilingNumber</label>
+            @Html.TextBoxFor(model => model.TicketNumber, new { id = "inputFilingNumber", type = "text", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TicketNumber)
+
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelFilingDate</label>
+            @Html.TextBoxFor(model => model.TicketDate, new { id = "inputFilingDate" })
+            @Html.ValidationMessageFor(model => model.TicketDate)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-7">
+            <label id="labelPrecataloged">@Resources.Language.LabelTextPrecataloged</label>
+            @Html.TextBoxFor(model => model.TextPrecataloged, new { id = "inputTextPrecataloged", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderText })
+            @Html.ValidationMessageFor(model => model.TextPrecataloged)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelText</label>
+            @Html.TextAreaFor(model => model.Text, new { id = "inputText", cols = "12", rows = "10", @class = "textarea" })
+        </div>
+    </div>
+    <br />
+    <div class="row" id="Observations">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelObservations</label>
+            @Html.TextAreaFor(model => model.Observations, new { id = "inputTextObservations", cols = "12", rows = "5", @class = "textarea" })
+        </div>
+    </div>
+    <div class="row" id="Record">
+        <div class="uif-col-12">
+            <label>@Resources.Language.RecordObservations</label>
+            <textarea cols="12" id="inputTextRecord" name="inputTextRecord" rows="5" required></textarea>
+        </div>
+    </div>
+</form>
+
+<div class="uif-modal" id="modalTextSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/TextsResults.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalChangeText">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-12">
+                <span id="alert"></span>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons" id="buttons">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnModalClose">@Resources.Language.ButtonClose</button>
+    </div>
+</div>

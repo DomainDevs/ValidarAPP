@@ -1,0 +1,176 @@
+﻿<form id="formRulesAndScripts" class="form without-space">
+	<div class="uif-panel">
+		<div class="uif-row">
+			<div class="uif-col-12">
+				<ul class="uif-tab" id="tabs">
+					<li class="active"><a href="#tabRules" id="tab1">@Resources.Language.LabelRules</a></li>
+					<li><a href="#tabScripts" id="tab2">@Resources.Language.LabelScript</a></li>
+				</ul>
+				<div class="uif-tab-content">
+					<div class="active" id="tabRules">
+						<div class="row">
+							<div class="uif-col-4">
+								<label><strong>@Resources.Language.RulesGeneral</strong></label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelInitialRulesPackage</label>
+								<input class="uif-input-search" type="text" id="inputModalGeneralInitialRulesPackage">
+							</div>
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelEndRulesPackage</label>
+								<input class="uif-input-search" type="text" id="inputModalGeneralEndRulesPackage">
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="uif-col-4">
+								<label><strong>@Resources.Language.RulesRisk</strong></label>
+							</div>
+						</div>
+						<div class="uif-row">
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelInitialRulesPackage</label>
+								<input class="uif-input-search" type="text" id="inputModalRiskInitialRulesPackage">
+							</div>
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelEndRulesPackage</label>
+								<input class="uif-input-search" type="text" id="inputModalRiskEndRulesPackage">
+							</div>
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelRiskType</label>
+								<select class="uif-select form-control" id="selectModalRiskTypeRules" data-id="Id" data-name="Description" name="RulesRiskTypeId" data-native="false" data-filter="true"></select>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="uif-col-4">
+								<label><strong>@Resources.Language.RulesCoverage</strong></label>
+							</div>
+						</div>
+						<div class="uif-row">
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelInitialRulesPackage</label>
+								<input class="uif-input-search" type="text" id="inputModalCoverageInitialRulesPackage">
+							</div>
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelEndRulesPackage</label>
+								<input class="uif-input-search" type="text" id="inputModalCoverageEndRulesPackage">
+							</div>
+							<div class="uif-col-4">
+                                <div class="without-label">
+                                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0596"))
+                                    {
+                                        <button type="button" class="btn btn-default secondary-Colombia" id="btnModalAssignRules">
+                                            <span class="" aria-hidden="true">@Resources.Language.LabelAssign</span>
+                                        </button>
+                                    }
+                                </div>
+							</div>
+						</div>
+						<div class="uif-row">
+							<div class="uif-col-12">
+								<div style="overflow-x: scroll;">
+									<table class="uif-table" data-source="" id="tableNone" data-selectiontype="multiple" data-filter="true">
+										<thead>
+											<tr>
+												<th data-property="GroupCoverageId" data-visible="false"></th>
+												<th data-property="CoverageId" data-visible="false"></th>
+												<th data-property="GroupCoverage">@Resources.Language.LabelGroupCoverage</th>
+												<th data-property="LineBusiness">@Resources.Language.LabelLineBusiness</th>
+												<th data-property="SubLineBusiness">@Resources.Language.LabelSubLineBusiness</th>
+												<th data-property="Amparo">@Resources.Language.LabelProtection</th>
+												<th data-property="ObjetoSeguro">@Resources.Language.LabelInsuranceObject</th>
+												<th data-property="InitialBusinessRulesId" data-visible="false"></th>
+												<th data-property="InitialBusinessRules">@Resources.Language.LabelInitialBusinessRules</th>
+												<th data-property="EndBusinessRulesId" data-visible="false"></th>
+												<th data-property="EndBusinessRules">@Resources.Language.LabelEndBusinessRules</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div id="tabScripts">
+						<div class="row">
+							<div class="uif-col-4">
+								<label><strong>@Resources.Language.LabelScript - @Resources.Language.LabelGeneralLevel</strong></label>
+							</div>
+						</div>
+						<div class="uif-row">
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelScript </label>
+								<input class="uif-input-search" type="text" id="inputModalGeneralInitialScriptPackage">
+							</div>
+							<div class="uif-col-4">
+							</div>
+						</div>
+						<hr />
+						<div class="row">
+							<div class="uif-col-4">
+								<label><strong>@Resources.Language.LabelScript  @Resources.Language.LabelRiskLevel</strong></label>
+							</div>
+						</div>
+						<div class="uif-row">
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelScript</label>
+								<input class="uif-input-search" type="text" id="inputModalRiskInitialScriptPackage">
+							</div>
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelRiskType</label>
+								<select class="uif-select form-control" id="selectModalRiskTypeScript" data-id="Id" data-name="Description" name="ScriptsRiskTypeId" data-native="false" data-filter="true"></select>
+							</div>
+							<div class="uif-col-4">
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="uif-col-4">
+								<label><strong>@Resources.Language.LabelScript  @Resources.Language.LabelCoverageLevel</strong></label>
+							</div>
+						</div>
+						<div class="uif-row">
+							<div class="uif-col-4">
+								<label>@Resources.Language.LabelScript </label>
+								<input class="uif-input-search" type="text" id="inputModalCoverageInitialScriptPackage">
+							</div>
+							<div class="uif-col-2">
+								<br />
+								<button type="button" class="btn btn-default secondary-Colombia" id="btnModalAssignScript">
+									<span class="" aria-hidden="true">@Resources.Language.LabelAssign</span>
+								</button>
+							</div>
+						</div>
+						<div class="uif-row">
+							<div class="uif-col-12">
+								<div style="overflow-x: scroll;">
+									<table class="uif-table" data-source="" id="tableNoneNew" data-selectiontype="multiple" data-filter="true">
+										<thead>
+											<tr>
+												<th data-property="GroupCoverageId" data-visible="false"></th>
+												<th data-property="CoverageId" data-visible="false"></th>
+												<th data-property="GroupCoverage">@Resources.Language.LabelGroupCoverage</th>
+												<th data-property="LineBusiness">@Resources.Language.LabelLineBusiness</th>
+												<th data-property="SubLineBusiness">@Resources.Language.LabelSubLineBusiness</th>
+												<th data-property="Amparo">@Resources.Language.LabelProtection</th>
+												<th data-property="ObjetoSeguro">@Resources.Language.LabelInsuranceObject</th>
+												<th data-property="InitialBusinessScriptsId" data-visible="false"></th>
+												<th data-property="InitialBusinessScripts">@Resources.Language.LabelScript</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

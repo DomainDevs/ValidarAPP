@@ -1,0 +1,39 @@
+﻿@{ 
+    Layout = null;
+}
+
+<h5>
+    <strong>@Resources.Language.ChargeRequestSearch</strong>
+</h5>
+<hr />
+<form id="formSearchChargeRequests" class="form" autocomplete="off">
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.PaymentRequestPaymentSource</label>
+            <select class="uif-select form-control" id="selectChargeSource" data-val="true" data-id="Id" data-name="Description"
+                    name="selectChargeSource" data-native="false" data-filter="true"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.RecoveryBranch</label>
+            <select class="uif-select form-control" id="selectBranchCharge" data-val="true" data-id="Id"
+                    data-name="Description" name="BranchCharge" data-native="false" data-filter="true"></select>
+            <span class="text-danger" data-valmsg-for="BranchCharge" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.PaymentRequestNumber</label>
+            <input type="text" id="inputChargeRequestNumber" name="ChargeRequestNumber" class="rightAlign" maxlength="15" data-val="true">
+            <span class="text-danger" data-valmsg-for="ChargeRequestNumber" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="row">        
+        <div class="uif-col-6">
+            <label>@Resources.Language.ChargeRequestBeneficiary</label>
+            <input type="text" id="inputBeneficiaryChargeDocumentNum" class="uif-autocomplete" data-source="@Url.Content("~/Claims/Claim/GetPaymentBeneficiariesByDescription")"
+                   data-displaykey="DocumentNumber" data-id="Id" name="inputBeneficiaryDocumentNum">
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.BeneficiaryName</label>
+            <input type="text" id="inputBeneficiaryChargeName" class="uif-input" />
+        </div>
+    </div>
+</form>

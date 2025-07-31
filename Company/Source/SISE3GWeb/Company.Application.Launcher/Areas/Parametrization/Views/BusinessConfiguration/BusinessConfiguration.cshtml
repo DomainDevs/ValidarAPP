@@ -1,0 +1,245 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.BusinessConfigurationViewModel
+<script id="BusinessConfigurationTemplate" type="text/template">
+    {{#ifCond StatusType "==" 2}}
+    <div class="success"><strong>{{Description}}</strong></div>
+    {{else ifCond StatusType "==" 3}}
+    <div class="warning"><strong>{{Description}} ({{BusinessId}})</strong></div>
+    {{else ifCond StatusType "==" 4}}
+    <div class="danger"><strong>{{Description}} ({{BusinessId}})</strong></div>
+    {{else}}
+    <div><strong>{{Description}} ({{BusinessId}})</strong></div>
+    {{/ifCond}}
+    <div>
+        Ramo Comercial: {{PrefixCodeText}}
+    </div>
+    <div>
+        {{#if IsEnabled}}
+        <div><strong>Habilitado</strong></div>
+        {{else}}
+        <div><strong>Deshabilitado</strong></div>
+        {{/if}}
+    </div>
+    <div class="hidden">
+        <br>
+        PrefixData: <strong>{{PrefixCode}}</strong>
+    </div>
+    <div class="hidden">
+        <br>
+        BusinessConfigurationData: <strong>{{ListBusinessConfigurationQueryViewModel}}</strong>
+    </div>
+    <div class="hidden">
+        <br>
+        Status: <strong>{{StatusType}}</strong>
+    </div>
+    <div class="hidden">
+        <br>
+        Enable: <strong>{{IsEnabled}}</strong>
+        {{Create}}{{Update}}{{Origin}}
+    </div>
+</script>
+<script id="BusinessConfigurationQueryTemplate" type="text/template">
+    {{#ifCond StatusType "==" 2}}
+        <div class="success"> <strong>{{RequestIdCode}} - {{ProductText}}({{ProductCode}})</strong> </div>
+    {{else ifCond StatusType "==" 3}}
+        <div class="warning"> <strong>{{RequestIdCode}} - {{ProductText}}({{ProductCode}})</strong> </div>
+    {{else}}
+        <div> <strong>{{RequestIdCode}} - {{ProductText}}({{ProductCode}})</strong></div>
+    {{/ifCond}}
+    <div>
+        {{GroupCoverageText}}({{GroupCoverageCode}}) - {{AssistanceText}}({{AssistanceCode}})
+    </div>
+    <div class="warning">
+        {{ProductIdResponse}}
+    </div>
+    <div class="hidden">
+        Request: {{Request}}
+    </div>
+    <div class="hidden">
+        Product: {{Product}}
+    </div>
+    <div class="hidden">
+        GroupCoverage: {{GroupCoverage}}
+    </div>
+    <div class="hidden">
+        Assistance: {{Assistance}}
+    </div>
+    <div class="hidden">
+        StatusType: {{StatusType}}
+    </div>    
+</script>
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.LabelBusiness
+        </div>
+        <div class="column-30 even">
+            <input type="text" name="Id" id="inputSearchBusinessConfiguration" class="uif-input-search" placeholder="@Resources.Language.EnterBusiness" />
+            <button class="btn btn-default" id="btnSearchAdvBusinessConfiguration"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExport
+            </button>
+
+            <button class="btn btn-primary" id="btnSaveBusinessConfiguration" @*style="display: none"*@>
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonSave
+            </button>
+
+        </div>
+
+    </footer>
+}
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formBusinessConfiguration" autocomplete="off" class="form without-space">
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.CodeBusiness</label>
+                    <input type="text" id="inputId" readonly disabled />
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPrefixCommercial</label>
+                    <select class="uif-select form-control" id="selectPrefixCode" data-val="true" 
+                            data-val-required="@Resources.Language.ErrorPrefix" data-id="PrefixCode" 
+                            data-name="PrefixDescription" name="PrefixCode.PrefixCode"
+                            data-filter="true" data-native="false"></select>
+                    @Html.HiddenFor(model => model.PrefixCode.PrefixCode)
+                    @Html.ValidationMessageFor(model => model.PrefixCode.PrefixCode)
+                </div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelBusinessDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", placeholder = @Resources.Language.LabelDescription })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="inputIsEnable" name="inputIsEnable" />
+                        <label for="inputIsEnable">@Resources.Language.LabelEnabled</label>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="row pull-left">
+                &nbsp; &nbsp; &nbsp;<button type="button" class="btn btn-default" id="btnBusinessConfigurationQuery" disabled>Acuerdos</button>
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary" id="panelBusinessConfiguration">
+            <div id="listBusinessConfiguration" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsBusinessConfiguration">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewBusinessConfiguration">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnBusinessConfigurationAccept">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="uif-modal" id="modalBusinessConfigurationQuery">
+    <div class="uif-modalbody">
+        <form id="formBusinessConfigurationQuery" autocomplete="off" class="form without-space">
+           <div class="row">
+
+           </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <input type="hidden" id="inputIdBusinessConfiguration" readonly />
+                    <div class="row">
+                        <div class="uif-col-6">
+                            <label>@Resources.Language.LabelRequestGroup</label>
+                            <div class="input-group uif-inputsearch-group">
+                                <input type="text" class="uif-input-search uif-inputsearch-pc form-control" id="inputSearchRequest" onKeyPress="return checknumber(event,value)" placeholder="Digite número de solicitud">
+                                <button type="button" class="btn btn-default" id="btnSearchRequest">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="uif-col-6">
+                            <label class="field-required">@Resources.Language.LabelCommercialProduct</label>
+                            <select class="uif-select form-control" id="selectProductCode" data-val="true" 
+                                    data-val-required="@Resources.Language.ErrorSelectedProduct" data-id="ProductId" 
+                                    data-name="ProductDescription" 
+                                    name="ListBusinessConfigurationQueryViewModel[0].Product.ProductId"
+                                    data-filter="true" data-native="false"></select>
+                            @Html.HiddenFor(model => model.ListBusinessConfigurationQueryViewModel[0].Product.ProductId)
+                            @Html.ValidationMessageFor(model => model.ListBusinessConfigurationQueryViewModel[0].Product.ProductId)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-6">
+                            <label class="field-required">@Resources.Language.LabelGroupCoverage</label>
+                            <select class="uif-select form-control" data-filter="true" data-native="false" id="selectGroupCoverage" data-val="true" data-val-required="@Resources.Language.ErrorSelectCoverage" data-id="GroupCoverageId" data-name="GroupCoverageSmallDescription" name="ListBusinessConfigurationQueryViewModel[0].GroupCoverage.GroupCoverageId"></select>
+                            @Html.HiddenFor(model => model.ListBusinessConfigurationQueryViewModel[0].GroupCoverage.GroupCoverageId)
+                            @Html.ValidationMessageFor(model => model.ListBusinessConfigurationQueryViewModel[0].GroupCoverage.GroupCoverageId)
+                        </div>
+                        <div class="uif-col-6">
+                            <label class="field-required">@Resources.Language.LabelTypeOfAssistance</label>
+                            <select class="uif-select form-control" data-filter="true" data-native="false" id="selectAssistance" data-val="true" data-val-required="@Resources.Language.ErrorSelectCoverage" data-id="AssistanceCode" data-name="AssistanceDescription" name="ListBusinessConfigurationQueryViewModel[0].Assistance.AssistanceCode"></select>
+                            @Html.HiddenFor(model => model.ListBusinessConfigurationQueryViewModel[0].Assistance.AssistanceCode)
+                            @Html.ValidationMessageFor(model => model.ListBusinessConfigurationQueryViewModel[0].Assistance.AssistanceCode)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-6">
+                            <label>@Resources.Language.LabelProductIdResponse</label>
+                            <input type="text" id="inputProductIdResponse" />
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-col-6  fit-col-secondary" id="panelBusinessConfigurationQuery">
+                    <div id="listBusinessConfigurationQuery" class="uif-listview"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6" id="btnsBusinessConfigurationQuery">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" id="btnNewBusinessConfigurationQuery">@Resources.Language.New</button>
+                        <button type="button" class="btn btn-primary" id="btnAddBusinessConfigurationQuery">@Resources.Language.Add</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomBusinessConfigurationQuery">
+        <button type="button" class="btn btn-default" id="btnCancelBusinessConfigurationQuery" data-dismiss="modal">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-primary  btn-main " id="btnAceptBusinessConfigurationQuery">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="@Url.Content("~/bundle/js/BusinessConfiguration")"></script>
+}

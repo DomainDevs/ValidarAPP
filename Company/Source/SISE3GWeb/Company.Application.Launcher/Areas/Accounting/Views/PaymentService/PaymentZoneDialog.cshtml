@@ -1,0 +1,154 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+<script type="text/javascript">
+    
+      
+    //Valida tasas de cambio
+    @*function setCurrencyNoMsg(ddlIn, txtOut) {
+
+        var ddlCurrency = $("#" + ddlIn).val();
+        var txtExchangeRate = $("#" + txtOut);
+
+        if (ddlCurrency >= 0) {
+            var resp;
+            resp = getCurrencyRateBilling("@ViewBag.DateAccounting", ddlCurrency);
+
+            txtExchangeRate.setValue(resp[0]);
+            txtExchangeRate.currency({ region: 'USD', thousands: ',', decimal: '.', decimals: 6 });
+
+        } else {
+            txtExchangeRate.setValue("");
+        }
+    }*@
+
+    
+   </script>
+
+<form id="PaymentZoneForm" onsubmit=" return false ">
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            @Global.Currency
+            <br />
+            @Html.DropDownList("TransferCurrencyDrop", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+            <span class="text-danger" data-valmsg-for="TransferCurrencyDrop" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            @Global.Amount
+            <br />
+            <input type="text" id="_TransferAmount" name="_TransferAmount" disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-3">
+            @Global.ExchangeRate
+            <br/>
+            <input type="text" id="_TransferExchangeRate" disabled="disabled" style="text-align: right"/>
+        </div>
+        <div class="uif-col-3">
+            @Global.Date
+            <br />
+            <input type="text" id="_TransferDate" name="_TransferDate" disabled="disabled" />
+        </div>
+   
+    </div>
+
+    <div class="uif-row">
+     
+        <div class="uif-col-6">
+            @Global.SummaryPayTransferPerson
+            <br/>
+            <input type="text" id="_TransferHolderName" name="_TransferHolderName" disabled="disabled"/>
+
+        </div>
+        <div class="uif-col-6">
+            @Global.LocalAmount
+            <br/>
+            <input type="text" id="_TransferLocalAmount" disabled="disabled" style="text-align: right"/>
+
+        </div>
+        
+      </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            @Global.ReceivingBank
+            <br />
+            @*EL BANCO RECEPTOR DEBE ESTAR PREDEFINIDO ES EL QUE RECIBE EL PAGO*@
+            @Html.DropDownList("ddlTransferReceivingBank", Enumerable.Empty<SelectListItem>(), new
+                                                         {
+                                                         @class = "uif-select form-control",
+                                                         data_source = @Url.Content("~/Accounting/Common/GetAccountBanks"),
+                                                         data_id = "Id",
+                                                         data_name = "Description",
+                                                         data_native = "true",
+                                                         data_val = "true",
+                                                         data_val_required = @Global.RequiredField
+                                                         })
+            <span class="text-danger" data-valmsg-for="ddlTransferReceivingBank" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            @Global.ReceivingBankAccountNumber
+            <br />
+            @*LA CUENTA DEL BANCO RECEPTOR DEBE ESTAR PREDEFINIDO ES EL QUE RECIBE EL PAGO*@
+            @Html.DropDownList("ddlAccountNumberReceivingBank", Enumerable.Empty<SelectListItem>(), new
+                                                            {
+                                                            @class = "uif-select form-control",
+                                                            data_id = "Id",
+                                                            data_name = "Description",
+                                                            data_native = "true",
+                                                            data_val = "true",
+                                                            data_val_required = @Global.RequiredField
+                                                            })
+            <span class="text-danger" data-valmsg-for="ddlAccountNumberReceivingBank" data-valmsg-replace="true" />
+
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            @Global.IssuingBank
+            <br />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "Billing")"
+                   data-displaykey="Value" placeholder='@Global.EnterIssuingBank'
+                   id="inputTransferIssuingBank" name="inputTransferIssuingBank"
+                   data-val="true" data-val-required='@Global.RequiredField'/>
+
+            <span class="text-danger" data-valmsg-for="inputTransferIssuingBank" data-valmsg-replace="true" />
+
+          </div>
+        <div class="uif-col-3">
+
+            @Global.IssuingAccountNumber
+            <br/>
+            <input type="text" id="_TransferIssuingAccountNumber" name="_TransferIssuingAccountNumber" 
+                   onkeypress=" return JustNumbers(event, this);" maxlength="15"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="_TransferIssuingAccountNumber" data-valmsg-replace="true" />
+
+
+        </div>
+        <div class="uif-col-3">
+            @Global.DocumentNumber
+            <br />
+            <input type="text" id="_TransferDocumentNumber" name="_TransferDocumentNumber"
+                   onkeypress=" return JustNumbers(event, this);" maxlength="15"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="_TransferDocumentNumber" data-valmsg-replace="true" />
+
+        </div>
+
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertPaymentZone"></div>
+        </div>
+    </div>
+
+</form>

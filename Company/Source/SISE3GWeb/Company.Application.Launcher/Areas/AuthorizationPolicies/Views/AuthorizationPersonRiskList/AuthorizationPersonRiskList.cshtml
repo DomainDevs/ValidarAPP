@@ -1,0 +1,134 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.AuthorizationPolicies.Models.AuthorizationRiskListModelView
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column">
+        <div id="Title">Autorización Eventos Especiales - Autorización Listas de Riesgo</div>
+    </div>
+</script>
+<div class="uif-col-12">
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelEventGroups</label>
+            <select class="uif-select" id="selectSarlaftEventGroup" data-val="true" data-val-required="" data-id="Id" data-name="Description" name="EventGroup"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelHeaderDocumentNumber</label>
+            <input type="text" value="" id="inpDocumentNo" />
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.DocumentType</label>
+            <select class="uif-select" id="selectDocumentType" data-val="true" data-val-required="" data-id="Id" data-name="DescriptionLong" name="EventGroup"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.RequestDate</label>
+            <input type="text" value="" class="uif-datepicker" id="dateRiskList" data-max-date="15/01/2025" />
+        </div>
+        <div class="uif-col-3">
+            <div class="without-label">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0631"))
+                {
+                    <button id="btnSearchSarlaftOperation" tabindex="0" class="btn btn-default secondary" type="button"> <i class="fa fa-search" aria-hidden="true"></i> Buscar </button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-6">
+                <table id="tblAuthorizationPersonRiskList" class="uif-table" data-source="" data-exporttocsv="false" data-add="false" data-edit="false" data-delete="false" data-filter="false" data-selectiontype="single">
+                    <thead>
+                        <tr>
+                            <th data-property="DocumentNumber">@Resources.Language.LabelHeaderDocumentNumber</th>
+                            <th data-property="DocumentType">@Resources.Language.DocumentType</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <form id="formSendRiskList" class="form without-peripheral">
+                <div class="uif-col-6">
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <h5><strong>Solicitudes</strong></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <div class="uif-col-2">
+                                <label>Fecha/Hora</label>
+                            </div>
+                            <div class="uif-col-10">
+                                <input type="text" value="" class="uif-datepicker" id="riskEventDate" data-max-date="15/01/2025" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <div class="uif-col-2">
+                                <label>@Resources.Language.LabelDetail</label>
+                            </div>
+                            <div class="uif-col-10">
+                                <input type="text" value="" id="inpDetail" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <div class="uif-col-2">
+                                <label>Solicitud</label>
+                            </div>
+                            <div class="uif-col-10">
+                                <input type="text" value="" id="riskDetailRequest" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <label class="field-required">Motivos</label>
+                            <select class="uif-select" id="selectRiskAuthReason" data-val="true" data-val-required="Campo Requerido" data-id="Id" data-name="Description" name="AuthorizeReasonId"></select>
+                            @Html.ValidationMessageFor(x => x.AuthorizeReasonId)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <label class="field-required">@Resources.Language.LabelObservations</label>
+                            @Html.TextAreaFor(x => x.Description, new { id = "txtObservations", rows = "8" })
+                            @Html.ValidationMessageFor(x => x.Description)
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitSarlaftOperation">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0633"))
+        {
+            <button class="btn btn-primary" id="btnRejectSarlaftOperation">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                Rechazar
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0632"))
+        {
+            <button class="btn btn-primary" id="btnAcceptSarlaftOperation">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.Accept
+            </button>
+        }
+
+    </div>
+</script>

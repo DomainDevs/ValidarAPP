@@ -1,0 +1,34 @@
+<map version="2.0" type="class" name="Reinsurer" namespace="Sistran.Core.Application.UniquePersonV1" file-version="1.0" description="REINSURER_ENTITY">
+  <properties>
+    <property name="IndividualId" type="Integer" key="true" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="ReinsurerCode" type="Integer" autonumber="id" description="REINSURER_CODE_PROPERTY" key="true"/>
+    <property name="EnteredDate" type="DateTime" size="23" description="ENTERED_DATE_PROPERTY" />
+    <property name="ModifyDate" type="DateTime" size="23" nullable="true" description="MODIFY_DATE_PROPERTY" />
+    <property name="DeclinedDate" type="DateTime" size="23" nullable="true" description="DECLINED_DATE_PROPERTY" />
+    <property name="DeclinedTypeCode" type="Integer" nullable="true" description="DECLINED_TYPE_CODE_PROPERTY" />
+    <property name="Annotations" type="String" size="100" nullable="true" description="ANNOTATIONS_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="REINSURER" schema="UP" alias="REINSURER" update="true">
+      <columns>
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" key="true" />
+        <column name="REINSURER_CD" type="Int32" property="ReinsurerCode" allowNull="false" key="true"/>
+        <column name="ENTERED_DATE" type="DateTime" property="EnteredDate" allowNull="false" size="23" />
+        <column name="MODIFY_DATE" type="DateTime" property="ModifyDate" size="23" />
+        <column name="DECLINED_DATE" type="DateTime" property="DeclinedDate" size="23" />
+        <column name="DECLINED_TYPE_CD" type="Byte" property="DeclinedTypeCode" />
+        <column name="ANNOTATIONS" type="String" property="Annotations" size="100" />
+      </columns>
+    </table>
+  </tables>
+<autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="88" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

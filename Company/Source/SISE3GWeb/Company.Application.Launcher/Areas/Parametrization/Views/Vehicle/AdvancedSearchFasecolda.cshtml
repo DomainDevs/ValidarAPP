@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = null;
+}
+<script id="searchTemplateFasecolda" type="text/template">
+    <div>
+        <br>
+        Marca: <strong>{{makeVehicle.Description}} ({{MakeVehicleCode}})</strong>
+    </div>
+    <div>
+        <br>
+        Modelo - versión: <strong>{{modelVehicle.Description}}  </strong><strong>{{versionVehicle.Description}} ({{ModelVehicleCode}})</strong>
+    </div>
+</script>
+
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.LabelSearchAdvancedFasecolda</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelMake</label>
+            <select class="uif-select form-control" id="selectBrandVehicleAdvSearch"
+                    data-id="Id" data-name="Description" name="Make" data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentControlMake"
+                    data-filter="true" data-native="false"></select>
+        </div>
+
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelModel</label>
+            <select class="uif-select form-control" id="selectModelVehicleAdvSearch" data-id="Id" data-name="Description" name="Model" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlModel" data-filter="true" data-native="false"></select>
+        </div>
+
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelVersion</label>
+            <select class="uif-select form-control" id="selectVersionVehicleAdvSearch" data-id="Id" data-name="Description" name="Version" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlVersion" data-filter="true" data-native="false"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelBrandCodeFasecolda</label>
+            @*@Html.TextBoxFor(model => model.IdPrefix, new { id = "inputMakeCodeFasecoldaAdvSearch" })*@
+            <input class='upperCase-co' type="text" id="inputMakeCodeFasecoldaAdvSearch" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelModelCodeFasecolda</label>
+            @*@Html.TextBoxFor(model => model.IdPrefix, new { id = "inputModeloCodeFasecoldaAdvSearch" })*@
+            <input class='upperCase-co' type="text" id="inputModeloCodeFasecoldaAdvSearch" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="without-label">
+                <button class="btn btn-primary-Co width-container" id="btnAdvancedSearchFasecolda" type="button"> @Resources.Language.search</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listviewSearchADvFasecolda">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchFasecolda" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnAcceptAdvancedSearchFasecolda" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>

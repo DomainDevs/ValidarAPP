@@ -1,0 +1,72 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="display-template-PoliciesSummary" type="text/template">
+    <div>
+        <div class="process-name" style="text-transform: uppercase; white-space: normal;text-align: justify;"><b>{{Description}}</b></div>
+        <div class="uif-col-12">Cantidad: {{Count}}</div>
+        {{#if DescriptionRequest}}
+        <div class="uif-col-12"> Autorizadores:
+            {{#each usersAutorization}}
+                {{#if this.Default}}
+                    {{this.UserName}}
+                {{/if}}
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+</script>
+
+
+<div class="uif-modal" id="modalPoliciesSummary">
+    <div class="uif-modalbody">
+        <div class="form modal-Colombia">
+            <form id="formPolicies">
+                <input type="hidden" id="hdnIndexPolicies" />
+                <input type="hidden" id="hdnKey" />
+                <input type="hidden" id="hdnFunctionType" />
+                <div class="row">
+                    <div class="uif-col-6">
+                        <div class="form-group">
+                            <label class="field-required">Autorizadores</label>
+                            <select class="uif-multiselect" data-id="IdUser" data-name="UserName" data-native="false" multiple="multiple" id="ddlUserAutorization" required="required"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Notificadores</label>
+                            <select class="uif-multiselect" data-id="IdUser" data-name="UserName" data-native="false" multiple="multiple" id="ddlUserNotification"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="field-required">Razón de la solicitud</label>
+                            <textarea class="form-control" id="txtReason" cols="5" rows="5" style="height: 100%" disabled></textarea>
+                        </div>
+                    </div>
+                    <div class="uif-col-6">
+                        <div class="uif-listview" id="lvwPoliciesSummary"></div>
+                    </div>
+                </div>
+                <div class="row lineDividing">
+                    <div class="uif-col-6">
+                        <div class="pull-right width-save">
+                            <button type="button" class="btn btn-default" id="btnCancelFormPolicies" disabled>@Resources.Language.Cancel</button>
+                            <button type="button" class="btn btn-primary" id="btnSaveFormPolicies"   disabled>@Resources.Language.Accept</button>
+                        </div>
+                    </div>
+                    <div class="uif-col-6">
+                        <div class="uif-summary">
+                            <div class="items">
+                                <div class="item">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-primary" id="btnSendRequestsPolicies">@Resources.Language.ButtonSave</button>
+    </div>
+</div>

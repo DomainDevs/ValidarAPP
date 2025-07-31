@@ -1,0 +1,29 @@
+﻿using System;
+using Sistran.Core.Framework.DAF;
+using Sistran.Core.Framework.Views;
+
+namespace Sistran.Core.Application.AuthorizationPoliciesParamService.EEProvider.Entities.Views
+{
+    [Serializable()]
+    public class ModuleParametrizationView : BusinessView
+    {
+
+        public BusinessCollection SubModules
+        {
+            get
+            {
+                return this["SubModules"];
+            }
+        }
+
+        public BusinessCollection Modules
+        {
+            get
+            {
+                return this["Modules"];
+            }
+        }
+
+
+    }
+}

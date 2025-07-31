@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sistran.Core.Application.OperationQuotaServices.EEProvider.Models.OperationQuota
+{
+    [DataContract]
+    public class ApplyEndorsement
+    {
+        [DataMember]
+        public int PolicyID { get; set; }
+
+        [DataMember]
+        public int Endorsement { get; set; }
+
+        [DataMember]
+        public int RiskId { get; set; }
+
+        [DataMember]
+        public int IndividualId { get; set; }
+
+        [DataMember]
+        public int EndorsementType { get; set; }
+
+        [DataMember]
+        public int CurrencyType { get; set; }
+
+        [DataMember]
+        public string CurrencyTypeDesc { get; set; }
+
+        [DataMember]
+        public decimal ParticipationPercentage { get; set; }
+
+        [DataMember]
+        public decimal AmountCoverage { get; set; }
+
+        [DataMember]
+        public int CoverageId { get; set; }
+
+        [DataMember]
+        public bool IsSeriousOffer { get; set; }
+
+        [DataMember]
+        public bool IsConsortium { get; set; }
+    }
+}

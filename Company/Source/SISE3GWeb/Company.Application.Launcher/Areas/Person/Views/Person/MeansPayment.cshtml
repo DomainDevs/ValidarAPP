@@ -1,0 +1,70 @@
+﻿<script id="PaymentMeansTemplate" type="text/template">
+    <div><strong> {{Method.Description}}</strong></div>
+    <div>
+        {{Account.Bank.Description}}  -
+        {{Account.BankBranch.Description}}
+    </div>
+    <div>
+        {{Account.Type.Description}} - {{Account.Number}}
+    </div>
+</script>
+<div class="uif-alert" id="alert"></div>
+<form class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.LanguagePerson.Methodpayment</label>
+                    <select class="uif-select form-control" id="selectMethodpayment" data-id="Id" data-name="Description" required></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.Bank</label>
+                    <select class="uif-select form-control" id="selectBank" data-id="Id" data-name="Description" required></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.Office</label>
+                    <select class="uif-select form-control" id="selectOffice" data-id="Id" data-name="Description"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.AccountType</label>
+                    <select class="uif-select form-control" id="selectAccountType" data-id="Id" data-name="Description"></select>
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.AccountNumber</label>
+                    <input class="form-control required digits" type="text" id="inputAccountNumber" maxlength="20" />
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listMeansPayment" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0045"))
+                {
+                    <button type="button" class="btn btn-default" id="btnrNewMeansPayment">
+                        <span aria-hidden="true"></span>
+                        @Resources.LanguagePerson.NewForm
+                    </button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0046"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnCreateMeansPayment">
+                        <span aria-hidden="true"></span>
+                        @Resources.LanguagePerson.AddForm
+                    </button>
+                }
+                </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

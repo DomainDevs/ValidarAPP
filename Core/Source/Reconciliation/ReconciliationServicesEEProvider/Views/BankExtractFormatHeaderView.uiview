@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="BankExtractFormatHeaderView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="ExtractFormatCode"><Column table-alias="ExtractFormat" name="ExtractFormatCode" /></SelectValue>
+        <SelectValue alias="Description"><Column table-alias="ExtractFormat" name="Description" /></SelectValue>
+        <SelectValue alias="FormatTypeCode"><Column table-alias="ExtractFormat" name="FormatTypeCode" /></SelectValue>
+        <SelectValue alias="Separator"><Column table-alias="ExtractFormat" name="Separator" /></SelectValue>
+        <SelectValue alias="AccountBankCode"><Column table-alias="AccountBankExtractFormat" name="AccountBankCode" /></SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.AccountingServices.EEProvider.Entities.ExtractFormat, Core.AccountingServices.EEProvider" alias="ExtractFormat" />
+          <ClassNameTable name="Sistran.Core.Application.AccountingServices.EEProvider.Entities.AccountBankExtractFormat, Core.AccountingServices.EEProvider" alias="AccountBankExtractFormat" />
+          <criteria><BinaryCriterion type="Equal"><Column table-alias="AccountBankExtractFormat" name="ExtractFormatCode" />
+          <Column table-alias="ExtractFormat" name="ExtractFormatCode" />
+          </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

@@ -1,0 +1,96 @@
+﻿@model Sistran.Core.Application.RulesScriptsServices.Models.DecisionTableComposite
+
+@{
+//ViewBag.Title = "Guiones";
+}
+
+<form class="form">
+    <div class="uif-panel">
+        <div class="uif-row">
+            <div class="uif-col-12" id="ConceptSearchCombo">
+                <h4 class="text-center">@Model.RuleBase.Description</h4>
+                <div style="overflow-x:scroll">
+                    <table id="tableData" data-add="true" data-order="false" data-filter="true">
+                        <thead>
+                            <tr></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.RuleBase.RuleBaseId)
+</form>
+
+
+
+<!-- start footer -->
+@section Toolbar
+{
+    <footer>
+        <div class="app-header">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div id="buttonsUnderwriting" class="pull-right">
+                        <button type="button" class="btn btn-default btn-sm" id="btnExit">
+                            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.ButtonClose</span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" id="btnPost">
+                            <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.Publish</span>
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm" id="btnRecord">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+}
+<!-- end footer -->
+
+@section Modals
+{
+    <form id="formRulesModalEditAddData" class="form">
+        <div class="uif-modal" id="BodyModalTableEditAddData">
+            <div class="uif-modalbody">
+                @Html.Partial("BodyModalTableEditAddData")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="submit" class="btn btn-primary" id="btnSaveRulesModalEditAddData" onclick="return false">@Resources.Language.ButtonSave</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Cancel</button>
+            </div>
+        </div>
+    </form>
+}
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/SearchCombo/Obj.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/DecisionTable/BodyTableDecision.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/SearchCombo/SearchCombo.js")"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

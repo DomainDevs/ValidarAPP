@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CollectView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CollectStatus">
+          <Column table-alias="Collect" name="Status" />
+        </SelectValue>
+        <SelectValue alias="CollectControlCode">
+          <Column table-alias="Collect" name="CollectControlCode" />
+        </SelectValue>
+        <SelectValue alias="CollectId">
+          <Column table-alias="Collect" name="CollectId" />
+        </SelectValue>
+        <SelectValue alias="UserId">
+          <Column table-alias="CollectControl" name="UserId" />
+        </SelectValue>
+        <SelectValue alias="AccountName">
+          <Column table-alias="UniqueUsers" name="AccountName" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="CollectControl" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Status">
+          <Column table-alias="CollectControl" name="Status" />
+        </SelectValue>
+        <SelectValue alias="DateTransaction">
+          <Column table-alias="Collect" name="RegisterDate" />
+        </SelectValue>
+        <SelectValue alias="CollectItemId">
+          <Column table-alias="CollectItem" name="CollectItemId" />
+        </SelectValue>
+        <SelectValue alias="Policy">
+          <Column table-alias="Policy" name="DocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="Endorsement">
+          <Column table-alias="CollectItem" name="Column2" />
+        </SelectValue>
+        <SelectValue alias="Quota">
+          <Column table-alias="CollectItem" name="Column3" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="CollectItem" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="AmountReceived">
+          <Column table-alias="CollectItem" name="PaidAmount" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="CollectItem" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CollectConceptId">
+          <Column table-alias="CollectConcept" name="CollectConceptId" />
+        </SelectValue>
+        <SelectValue alias="CollectConceptDescription">
+          <Column table-alias="CollectConcept" name="Description" />
+        </SelectValue>
+        <SelectValue alias="NamePayer">
+          <Column table-alias="ListPersons" name="Name" />
+        </SelectValue>
+        <SelectValue alias="AccountingDate">
+          <Column table-alias="CollectControl" name="AccountingDate" />
+        </SelectValue>        
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <Join>
+                <Join>
+                  <Join>
+                    <Join>
+                      <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CollectControl, Core.Accounting.Entities" alias="CollectControl" />
+                      <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Collect, Core.Accounting.Entities" alias="Collect" />
+                      <criteria>
+                        <BinaryCriterion type="Equal">
+                          <Column table-alias="Collect" name="CollectControlCode" />
+                          <Column table-alias="CollectControl" name="CollectControlId" />
+                        </BinaryCriterion>
+                      </criteria>
+                    </Join>
+                    <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CollectItem, Core.Accounting.Entities" alias="CollectItem" />
+                    <criteria>
+                      <BinaryCriterion type="Equal">
+                        <Column table-alias="CollectItem" name="CollectCode" />
+                        <Column table-alias="Collect" name="CollectId" />
+                      </BinaryCriterion>
+                    </criteria>
+                  </Join>
+                  <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="Branch" name="BranchCode" />
+                      <Column table-alias="CollectControl" name="BranchCode" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Issuance.Entities.Policy, Core.Issuance.Entities" alias="Policy" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Policy" name="PolicyId" />
+                    <Column table-alias="CollectItem" name="Column1" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, Core.UniqueUser.Entities" alias="UniqueUsers" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="UniqueUsers" name="UserId" />
+                  <Column table-alias="CollectControl" name="UserId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CollectConcept, Core.Accounting.Entities" alias="CollectConcept" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="CollectConcept" name="CollectConceptId" />
+                <Column table-alias="Collect" name="CollectConceptCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.UniquePersonV1.Entities.ListPersons, Core.UniquePersonV1.Entities" alias="ListPersons" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="ListPersons" name="IndividualId" />
+              <Column table-alias="CollectItem" name="Column4" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

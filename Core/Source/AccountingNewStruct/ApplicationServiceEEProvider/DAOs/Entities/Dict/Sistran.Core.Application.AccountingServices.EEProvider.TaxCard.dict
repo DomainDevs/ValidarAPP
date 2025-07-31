@@ -1,0 +1,45 @@
+<map version="2.0" type="class" name="TaxCardView" 
+     namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="GET_TAX_CARD_ENTITY">
+  <properties>
+    <property name="CreditCardTypeCode" type="Integer" key="true" description="CREDIT_CARD_TYPE_CODE_PROPERTY" />
+    <property name="Conducto" type="String" size="250" nullable="true" description="CONDUCTO_PROPERTY" />
+    <property name="Commission" type="Decimal" precision="16" scale="2" nullable="true" description="COMMISSION_PROPERTY" />
+    <property name="CreditCardTypeTaxCode" type="Integer" key="true" description="CREDIT_CARD_TYPE_TAX_CODE_PROPERTY" />
+    <property name="TaxCode" type="Integer" key="true" description="TAX_CODE_PROPERTY" />
+    <property name="IsRetention" type="Boolean" description="IS_RETENTION_PROPERTY" />
+    <property name="TaxDescription" type="String" size="50" description="TAX_DESCRIPTION_PROPERTY" />
+    <property name="SmallDescription" type="String" size="15" description="SMALL_DESCRIPTION_PROPERTY" />
+    <property name="TaxConditionCode" type="Integer" description="TAX_CONDITION_CODE_PROPERTY" />
+    <property name="TaxCondition" type="String" size="50" description="TAX_CONDITION_PROPERTY" />
+    <property name="TaxCategoryCode" type="Integer" description="TAX_CATEGORY_CODE_PROPERTY" />
+    <property name="TaxCategory" type="String" size="50" description="TAX_CATEGORY_PROPERTY" />
+    <property name="BranchCode" type="Integer" nullable="true" description="BRANCH_CODE_PROPERTY" />
+    <property name="BranchDescription" type="String" size="50" description="BRANCH_DESCRIPTION_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" description="CURRENT_FROM_PROPERTY" />
+    <property name="Rate" type="Decimal" precision="18" scale="4" description="RATE_PROPERTY" />
+    <property name="TaxRateId" type="Integer" description="TAX_RATE_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="GET_TAX_CARD" schema="COMM" alias="GET_TAX_CARD" update="true">
+      <columns>
+        <column name="CREDIT_CARD_TYPE_CD" type="Int32" property="CreditCardTypeCode" key="true" />
+        <column name="CONDUCTO" type="String" property="Conducto" size="250" />
+        <column name="COMMISSION" type="Decimal" property="Commission" size="19" precision="16" scale="2" />
+        <column name="CREDIT_CARD_TYPE_TAX_CD" type="Int32" property="CreditCardTypeTaxCode" key="true" />
+        <column name="TAX_CD" type="Int16" property="TaxCode" key="true" />
+        <column name="IS_RETENTION" type="Boolean" property="IsRetention" allowNull="false" />
+        <column name="TAX_DESCRIPTION" type="String" property="TaxDescription" allowNull="false" size="50" />
+        <column name="SMALL_DESCRIPTION" type="String" property="SmallDescription" allowNull="false" size="15" />
+        <column name="TAX_CONDITION_CD" type="Byte" property="TaxConditionCode" allowNull="false" />
+        <column name="TAX_CONDITION" type="String" property="TaxCondition" allowNull="false" size="50" />
+        <column name="TAX_CATEGORY_CD" type="Byte" property="TaxCategoryCode" allowNull="false" />
+        <column name="TAX_CATEGORY" type="String" property="TaxCategory" allowNull="false" size="50" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" />
+        <column name="BRANCH_DESCRIPTION" type="String" property="BranchDescription" allowNull="false" size="50" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" allowNull="false" />
+        <column name="RATE" type="Decimal" property="Rate" allowNull="false" size="19" precision="18" scale="4" />
+        <column name="TAX_RATE_ID" type="Int32" property="TaxRateId" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-90">
+        <div id="Title">@Resources.Language.LabelVehicleQuotationIndicators</div>
+    </div>
+    <div class="column-10"></div>
+</script>
+<script id="footer-template" type="text/template">
+    <button class="btn btn-default" id="btnExitQuotationAuto">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <span class="" aria-hidden="true"></span>
+        @Resources.Language.LabelQuit
+    </button>
+    <button class="btn btn-default" id="btnExportQuotationAuto">
+        <i class="fa fa-cloud-download" aria-hidden="true"></i>
+        <span class="" aria-hidden="true"></span>
+        @Resources.Language.ButtonExport
+    </button>
+    <button class="btn btn-default" id="btnNewQuotationAuto">
+        <i class="fa fa-file-o" aria-hidden="true"></i>
+        <span class="" aria-hidden="true"></span>
+        @Resources.Language.New
+    </button>
+</script>
+<form id="formQuotationSearchVehicleIndicators" class="form without-space" autocomplete="off">
+    <div class="row">
+        <div class="uif-col-12">
+            <br />
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.Office</label>
+                    <select class="uif-multiselect form-control" id="SelectOffice" data-native="false" name="SelectOffice" multiple="multiple"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.Agent</label>
+                    <input class="uif-input-search" type="text" id="searchAgent" name="searchAgent"></input>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelSalesPoint</label>
+                    <select class="uif-select" data-filter="true" id="SelectSalesPoint" data-native="false" name="SelectSalesPoint"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.TitleProduct</label>
+                    <select class="uif-select" data-filter="true" id="SelectProduct" data-native="false" name="SelectProduct"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelMake</label>
+                    <select class="uif-select" data-filter="true" id="SelectMake" data-native="false" name="SelectMake"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelModel</label>
+                    <select class="uif-select" data-filter="true" id="SelectModel" data-native="false" name="SelectModel"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelTypeVehicle</label>
+                    <select class="uif-select" data-filter="true" id="SelectTypeVehicle" data-native="false" name="SelectTypeVehicle"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelBodyType</label>
+                    <select class="uif-select" data-filter="true" id="SelectBodyType" data-native="false" name="SelectBodyType"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelTypeService</label>
+                    <select class="uif-select" data-filter="true" id="SelectTypeService" data-native="false" name="SelectTypeService"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.DateQuotationFrom</label>
+                    <input type="text" class="uif-datepicker" id="dateStart" name="dateStart" required />
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.DateQuotationTo</label>
+                    <input type="text" class="uif-datepicker" id="dateEnd" name="dateEnd" required />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelQuotation</label>
+                    <input type="text" class="uif-mask" name="Quotation" id="Quotation" data-pattern="0000000000">
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelEffectiveSale</label>
+                    <select class="uif-select" data-filter="true" id="SelectEffectiveSale" data-native="false" name="SelectEffectiveSale"></select>
+                </div>
+                <div class="uif-col-4"></div>
+                <div class="uif-col-4">
+                    <div class="uif-col-6"></div>
+                    <div class="uif-col-6">
+                        <button type="button" class="btn btn-primary" id="btnSearchQuotationAuto">@Resources.Language.ButtonSearch</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="uif-col-12">
+        <div id="tabInfoPolice" class="form tab-pane">
+            <div class="row">
+                <div class="uif-col-12">
+                    <table data-paginate="true" class="uif-table" id="TableQuotationAuto" data-filter="false">
+                        <thead>
+                            <tr>
+                                <th data-property="Quotation">@Resources.Language.LabelQuotation</th>
+                                <th data-property="Version">@Resources.Language.LabelVersion</th>
+                                <th data-property="Branch">@Resources.Language.LabelBranch</th>
+                                <th data-property="DateIssuance">@Resources.Language.LabelDateIssuance</th>
+                                <th data-property="Product">@Resources.Language.LabelProduct</th>
+                                <th data-property="Plate">@Resources.Language.LabelPlate</th>
+                                <th data-property="NumberDays">@Resources.Language.LabelNumberDays</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

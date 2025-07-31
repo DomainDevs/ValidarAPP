@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="MinPremiunRelationView">
+  <collections>
+    <collection name="MinPremiumRelation" type="Sistran.Company.Application.Common.Entities.MinPremiumRelation, Company.Common.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, Core.Common.Entities"></collection>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities"></collection>
+    <collection name="EndorsementType" type="Sistran.Core.Application.Parameters.Entities.EndorsementType, Core.Parameters.Entities"></collection>
+    <collection name="Currency" type="Sistran.Core.Application.Common.Entities.Currency, Core.Common.Entities"></collection>
+    <collection name="Product" type="Sistran.Core.Application.Product.Entities.Product, Core.Product.Entities"></collection>
+  </collections>
+  <relations>  
+    <relation source="MinPremiumRelation" destination="Prefix" name="MinPremiumRelation_Prefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="MinPremiumRelation" destination="Branch" name="MinPremiumRelation_Branch" type="Left">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="MinPremiumRelation" destination="EndorsementType" name="MinPremiumRelation_EndorsementType" type="Inner">
+      <property left="EndoTypeCode" type="Equal" right="EndoTypeCode"></property>
+    </relation>
+    <relation source="MinPremiumRelation" destination="Currency" name="MinPremiumRelation_Currency" type="Inner">
+      <property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+    </relation>
+    <relation source="MinPremiumRelation" destination="Product" name="MinPremiumRelation_Product" type="Inner">
+      <property left="Key1" type="Equal" right="ProductId"></property>
+    </relation>
+  </relations>
+</view>

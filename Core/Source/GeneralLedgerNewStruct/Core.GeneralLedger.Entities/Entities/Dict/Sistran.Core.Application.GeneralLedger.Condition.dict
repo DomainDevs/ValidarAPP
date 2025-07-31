@@ -1,0 +1,26 @@
+<map version="2.0" type="class" name="Condition" namespace="Sistran.Core.Application.GeneralLedger" file-version="1.0" description="CONDITION_ENTITY">
+  <properties>
+    <property name="ConditionId" type="Integer" key="true" description="CONDITION_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="AccountingRuleId" type="Integer" nullable="true" description="ACCOUNTING_RULE_ID_PROPERTY" />
+    <property name="ParameterId" type="Integer" nullable="true" description="PARAMETER_ID_PROPERTY" />
+    <property name="Operator" type="String" size="3" nullable="true" description="OPERATOR_PROPERTY" />
+    <property name="Value" type="Decimal" precision="16" scale="2" nullable="true" description="VALUE_PROPERTY" />
+    <property name="RightConditionId" type="Integer" nullable="true" description="RIGHT_CONDITION_ID_PROPERTY" />
+    <property name="LeftConditionId" type="Integer" nullable="true" description="LEFT_CONDITION_ID_PROPERTY" />
+    <property name="ResultId" type="Integer" nullable="true" description="RESULT_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CONDITION" schema="GL" alias="CONDITION" update="true">
+      <columns>
+        <column name="CONDITION_ID" type="Int32" property="ConditionId" key="true" identity ="true"/>
+        <column name="ACCOUNTING_RULE_ID" type="Int32" property="AccountingRuleId" />
+        <column name="PARAMETER_ID" type="Int32" property="ParameterId" />
+        <column name="OPERATOR" type="String" property="Operator" size="3" />
+        <column name="VALUE" type="Decimal" property="Value" size="19" precision="16" scale="2" />
+        <column name="RIGHT_CONDITION_ID" type="Int32" property="RightConditionId" />
+        <column name="LEFT_CONDITION_ID" type="Int32" property="LeftConditionId" />
+        <column name="RESULT_ID" type="Int32" property="ResultId" />
+      </columns>
+    </table>
+  </tables>
+</map>

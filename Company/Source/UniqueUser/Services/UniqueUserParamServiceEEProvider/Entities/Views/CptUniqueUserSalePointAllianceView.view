@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CptUniqueUserSalePointAllianceView">
+  <collections>
+    <collection name="CptAllianceBranchSalePoint" type="Sistran.Company.Application.UniquePerson.Entities.CptAllianceBranchSalePoint, 
+                Company.UniquePerson.Entities"></collection>
+    <collection name="CptBranchAlliance" type="Sistran.Company.Application.UniquePerson.Entities.CptBranchAlliance, 
+                Company.UniquePerson.Entities"></collection>
+    <collection name="CptAgentAlliance" type="Sistran.Company.Application.UniquePerson.Entities.CptAgentAlliance, 
+                Company.UniquePerson.Entities"></collection>
+    <collection name="CptUniqueUserSalePointAlliance" type="Sistran.Company.Application.UniqueUser.Entities.CptUniqueUserSalePointAlliance, 
+                Company.UniqueUser.Entities"></collection>    
+  </collections>
+  <relations>
+    <relation source="CptAllianceBranchSalePoint" destination="CptBranchAlliance" name="CptAllianceBranchSalePoinBranchAllytRel" type="Inner">
+      <property left="AllianceId" type="Equal" right="AllianceId"></property>
+      <property left="BranchId" type="Equal" right="BranchId"></property>
+    </relation>
+    <relation source="CptAllianceBranchSalePoint" destination="CptAgentAlliance" name="CptAllianceBranchSalePoinAgentAllytRel" type="Inner">
+      <property left="AllianceId" type="Equal" right="AllianceId"></property>
+    </relation>
+    <relation source="CptAllianceBranchSalePoint" destination="CptUniqueUserSalePointAlliance" name="CptAllianceBranchSalePoinUniqueUserSalePointAllytRel" type="Inner">
+      <property left="SalePointId" type="Equal" right="SalePointAllianceId"></property>
+    </relation>
+  </relations>
+</view>

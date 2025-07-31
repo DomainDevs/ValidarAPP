@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="Question" namespace="Sistran.Core.Application.RulesScriptsServices.EEProvider" file-version="1.0" description="QUESTION_ENTITY">
+  <properties>
+    <property name="QuestionId" type="Integer" key="true" description="QUESTION_ID_PROPERTY" autonumber="id" />
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="ConceptId" type="Integer" description="CONCEPT_ID_PROPERTY" />
+    <property name="EntityId" type="Integer" description="ENTITY_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="QUESTION" schema="SCR" alias="QUESTION" update="true">
+      <columns>
+        <column name="QUESTION_ID" type="Int32" property="QuestionId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="CONCEPT_ID" type="Int32" property="ConceptId" allowNull="false" />
+        <column name="ENTITY_ID" type="Int32" property="EntityId" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="35" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

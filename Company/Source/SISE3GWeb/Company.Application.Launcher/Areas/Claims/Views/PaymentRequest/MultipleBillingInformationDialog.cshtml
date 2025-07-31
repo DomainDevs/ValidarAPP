@@ -1,0 +1,61 @@
+﻿<div class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <table data-title="<b>@Resources.Language.PaymentConcepts</b>" id="tblBillingInformation">
+                <thead>
+                    <tr>
+                        <th data-property="VoucherTypeDescription"><b>@Resources.Language.VoucherType</b></th>
+                        <th data-property="Number"><b>@Resources.Language.VoucherNumberAbbreviation</b></th>
+                        <th data-property="Date"><b>@Resources.Language.Date</b></th>
+                        <th data-property="CurrencyDescription"><b>@Resources.Language.BillCurrency</b></th>
+                        <th data-property="ExchangeRate" data-type="currency" data-visible="true"><b>@Resources.Language.ExchangeRate</b></th>
+                        <th data-property="ConceptValue" data-type="currency"><b>@Resources.Language.ConceptValue</b></th>
+                        <th data-property="TaxValue" data-type="currency"><b>@Resources.Language.TotalOfTax</b></th>
+                        <th data-property="Retention" data-type="currency"><b>@Resources.Language.TotalOfRetentions</b></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="uif-alert" id="alertMultiPaymentConcept"></div>
+            <form id="editFormMultiPaymentConcept" class="form">
+                <div class="uif-inline" id="editActionMulti">
+                    <div class="row">
+                        <div class="uif-col-4">
+                            @Html.Label(@Resources.Language.VoucherType)
+                            <select class="uif-select form-control" id="VoucherType" data-id="Id" data-name="Description"></select>
+                            <input type="text" id="Id" name="Id" hidden="hidden" />
+                        </div>
+                        <div class="uif-col-4">
+                            @Html.Label(@Resources.Language.VoucherNumber)
+                            <input type="text" id="VoucherNumber" name="VoucherNumber" style="text-align: right" maxlength="10" />
+                        </div>
+                        <div class="uif-col-3">
+                            @Html.Label(@Resources.Language.Date)
+                            <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="Date" name="Date" style="text-align: right" />
+                        </div>
+                        <div class="uif-col-3">
+                            @Html.Label(@Resources.Language.BillCurrency)
+                            <select class="uif-select form-control" id="Currency" data-id="Id" data-name="Description"></select>
+                        </div>
+                        <div class="uif-col-3">
+                            @Html.Label(@Resources.Language.ExchangeRate)
+                            <input type="text" id="ExchangeRate" style="text-align:right" name="ExchangeRate" disabled="disabled" />
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-1">
+                            <input type="text" id="ConceptValue" style="text-align:right" name="ConceptValue" hidden="hidden" />
+                            <input type="text" id="VoucherTypeDescription" name="VoucherTypeDescription" hidden="hidden" />
+                            <input type="text" id="CurrencyDescription" name="CurrencyDescription" hidden="hidden" />
+                        </div>
+                        <div class="uif-col-1">
+                            <input type="text" id="TaxValue" style="text-align:right" name="TaxValue" hidden="hidden" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>

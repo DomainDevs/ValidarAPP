@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskPropertyView">
+  <collections>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskLocation" type="Sistran.Core.Application.Issuance.Entities.RiskLocation, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Risk" type="Sistran.Core.Application.Issuance.Entities.Risk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskInsuredObject" type="Sistran.Core.Application.Issuance.Entities.RiskInsuredObject, 
+                 Core.Issuance.Entities"></collection>
+    <collection name="RiskBeneficiary" type="Sistran.Core.Application.Issuance.Entities.RiskBeneficiary, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskClause" type="Sistran.Core.Application.Issuance.Entities.RiskClause, 
+                Core.Issuance.Entities"></collection>
+    <collection name="ConstructionCategory" type="Sistran.Core.Application.Quotation.Entities.ConstructionCategory, 
+                Core.Quotation.Entities"></collection>
+    <collection name="RiskUseEarthquakes" type="Sistran.Core.Application.Common.Entities.RiskUseEarthquake, 
+                Core.Common.Entities"></collection>
+    <collection name="Country" type="Sistran.Core.Application.Common.Entities.Country, 
+                Core.Common.Entities"></collection>
+    <collection name="State" type="Sistran.Core.Application.Common.Entities.State, 
+                Core.Common.Entities"></collection>
+    <collection name="City" type="Sistran.Core.Application.Common.Entities.City, 
+                Core.Common.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, 
+                Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="EndorsementRisk" destination="RiskLocation" name="EndorsementLocation" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="Policy" name="EndorsementPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="ConstructionCategory" destination="RiskLocation" name="ConstructionCategoryRiskLocation" type="Left">
+      <property left="ConstructionCategoryCode" type="Equal" right="ConstructionCategoryCode"></property>
+    </relation>
+    <relation source="RiskUseEarthquakes" destination="RiskLocation" name="RiskUseEarthquakesRiskLocation" type="Left">
+      <property left="RiskUseCode" type="Equal" right="RiskUseCode"></property>
+    </relation>
+    <relation source="Country" destination="RiskLocation" name="CountryRiskLocation" type="Left">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+    </relation>
+    <relation source="State" destination="RiskLocation" name="StateRiskLocation" type="Left">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+      <property left="StateCode" type="Equal" right="StateCode"></property>
+    </relation>
+    <relation source="City" destination="RiskLocation" name="CityRiskLocation" type="Left">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+      <property left="StateCode" type="Equal" right="StateCode"></property>
+      <property left="CityCode" type="Equal" right="CityCode"></property>
+    </relation>
+    <relation source="Risk" destination="EndorsementRisk" name="EndorsementRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="Risk" destination="RiskInsuredObject" name="RiskRiskInsuredObject" type="left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskBeneficiary" destination="EndorsementRisk" name="EndorsementRiskBeneficiary" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="RiskClause" name="EndorsementRiskClause" type="left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskInsuredObject" destination="InsuredObject" name="RiskInsuredObjectInsuredObject" type="Inner">
+      <property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,31 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.TechnicalBranchViewModel
+<script id="RiskTypeTechnicalBranchTemplate" type="text/template">
+    
+    <div>ID: <strong>{{ IdLineBusiness}}</strong></div>
+    <br />
+    <div>Tipo de Riesgo Cubierto:<strong>{{IdRiskType}}</strong></div>
+</script>
+<form class="form" id="formRiskTypeTechicalBranch">
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelRiskType</label>
+            <select class="uif-select form-control" id="selectRiskTypeTechnical" data-id="Value" data-name="Text" name="MessageRiskType"
+                    data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlRiskTypeCovered"
+                    data-filter="true" data-native="false"></select>
+            @Html.ValidationMessageFor(model => model.RiskTypeId)
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-listview" id="listViewRiskTypeTechnicalBranch">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6" id="btnsRiskTypeTechnical">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnCancelModal">@Resources.Language.Cancel</button>
+                <button type="button" class="btn btn-primary" id="btnSaveModal">@Resources.Language.SaveTechnicalBranch </button>
+            </div>
+        </div>
+
+    </div>
+</form>

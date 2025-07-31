@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="AccountTypeRelationshipPaymentMethodView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PaymentMethodCode">
+          <Column table-alias="PaymentMethodAccountType" name="PaymentMethodCode" />
+        </SelectValue>
+        <SelectValue alias="PaymentMethodDescription">
+          <Column table-alias="PaymentMethod" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AccountTypeCode">
+          <Column table-alias="PaymentMethodAccountType" name="AccountTypeCode" />
+        </SelectValue>
+        <SelectValue alias="AccountTypeDescription">
+          <Column table-alias="AccountType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="DebitCode">
+          <Column table-alias="PaymentMethodAccountType" name="DebitCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.AutomaticDebitServices.EEProvider.Entities.PaymentMethodAccountType, Core.AutomaticDebitServices.EEProvider" alias="PaymentMethodAccountType" />            
+            <ClassNameTable name="Sistran.Core.Application.Common.Entities.PaymentMethod, Core.Common.Entities" alias="PaymentMethod" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="PaymentMethod" name="PaymentMethodCode" />
+                <Column table-alias="PaymentMethodAccountType" name="PaymentMethodCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.AccountingServices.EEProvider.Entities.AccountType, Core.AccountingServices.EEProvider" alias="AccountType" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="AccountType" name="AccountTypeCode" />
+              <Column table-alias="PaymentMethodAccountType" name="AccountTypeCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

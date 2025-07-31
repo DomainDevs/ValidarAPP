@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="SalvageRecoveryView">
+  <collections>
+    <collection name="PaymentRecovery" type="Sistran.Core.Application.Claims.Entities.PaymentRecovery, 
+                Core.Claims.Entities"></collection>
+    <collection name="Salvage" type="Sistran.Core.Application.Claims.Entities.Salvage, 
+                Core.Claims.Entities"></collection>
+    <collection name="Recovery" type="Sistran.Core.Application.Claims.Entities.Recovery, 
+                Core.Claims.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="PaymentRecovery" destination="Salvage" name="PaymentRecoverySalvage" type="Left">
+      <property left="SalvageCode" type="Equal" right="SalvageCode"></property>
+    </relation>
+    <relation source="PaymentRecovery" destination="Recovery" name="PaymentRecoveryRecovery" type="Left">
+      <property left="RecoveryCode" type="Equal" right="RecoveryCode"></property>
+    </relation>
+  </relations>
+</view>

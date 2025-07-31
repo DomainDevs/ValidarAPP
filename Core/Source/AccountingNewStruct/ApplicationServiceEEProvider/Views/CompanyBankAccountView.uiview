@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CompanyBankAccountView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="BankAccountCompanyId">
+          <Column table-alias="BankAccountCompany" name="BankAccountCompanyId" />
+        </SelectValue>
+        <SelectValue alias="AccountTypeCode">
+          <Column table-alias="BankAccountCompany" name="AccountTypeCode" />
+        </SelectValue>
+        <SelectValue alias="AccountTypeDescription">
+          <Column table-alias="AccountType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AccountNumber">
+          <Column table-alias="BankAccountCompany" name="AccountNumber" />
+        </SelectValue>
+        <SelectValue alias="BankCode">
+          <Column table-alias="BankAccountCompany" name="BankCode" />
+        </SelectValue>
+        <SelectValue alias="BankDescription">
+          <Column table-alias="BankBranch" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Enabled">
+          <Column table-alias="BankAccountCompany" name="Enabled" />
+        </SelectValue>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="BankAccountCompany" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="CurrencyDescription">
+          <Column table-alias="Currency" name="Description" />
+        </SelectValue>
+        
+        <SelectValue alias="AccountingAccountId">
+          <Column table-alias="BankAccountCompany" name="AccountingAccountId" />
+        </SelectValue>
+        <SelectValue alias="AccountingAccountNumber">
+          <Column table-alias="AccountingAccount" name="AccountNumber" />
+        </SelectValue>
+        <SelectValue alias="AccountName">
+          <Column table-alias="AccountingAccount" name="AccountName" />
+        </SelectValue>
+        
+        <SelectValue alias="DisabledDate">
+          <Column table-alias="BankAccountCompany" name="DisabledDate" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="BankAccountCompany" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="BankAccountCompany" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Default">
+          <Column table-alias="BankAccountCompany" name="Default" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join type="Left">
+            <Join>
+              <Join>
+                <Join>
+                  <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.BankAccountCompany, Core.Accounting.Entities" alias="BankAccountCompany" />
+                  <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="Branch" name="BranchCode" />
+                      <Column table-alias="BankAccountCompany" name="BranchCode" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+              <ClassNameTable name="Sistran.Core.Application.Common.Entities.AccountType, Core.Common.Entities" alias="AccountType" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="AccountType" name="AccountTypeCode" />
+                  <Column table-alias="BankAccountCompany" name="AccountTypeCode" />
+                </BinaryCriterion>
+              </criteria>
+              </Join>
+            <ClassNameTable name="Sistran.Core.Application.Common.Entities.Currency, Core.Common.Entities" alias="Currency" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Currency" name="CurrencyCode" />
+                <Column table-alias="BankAccountCompany" name="CurrencyCode" />
+              </BinaryCriterion>
+            </criteria>
+            </Join>
+          <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AccountingAccount, Core.GeneralLedger.Entities" alias="AccountingAccount" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="AccountingAccount" name="AccountingAccountId" />
+              <Column table-alias="BankAccountCompany" name="AccountingAccountId" />
+            </BinaryCriterion>
+          </criteria>
+          </Join>
+        <ClassNameTable name="Sistran.Core.Application.Common.Entities.BankBranch, Core.Common.Entities" alias="BankBranch" />
+        <criteria>
+          <BinaryPredicate type="And">
+             <BinaryCriterion type="Equal">
+               <Column table-alias="BankBranch" name="BankCode" />
+               <Column table-alias="BankAccountCompany" name="BankCode" />
+             </BinaryCriterion>
+             <BinaryCriterion type="Equal">
+               <Column table-alias="BankBranch" name="BankBranchCode" />
+               <Column table-alias="BankAccountCompany" name="BranchCode" />
+             </BinaryCriterion>
+          </BinaryPredicate>
+        </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

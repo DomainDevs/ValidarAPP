@@ -1,0 +1,83 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Collective.Models.EndorsementModelView
+
+<div class="uif-alert" id="alert"></div>
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formEndorsementModification" autocomplete="off">
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div id="modalCollective">
+        <br />
+
+        <div class="row">
+            <div class="uif-col-3">
+                <label>@Resources.Language.LabelBranch</label>
+                <select class="uif-select form-control" id="selectBranch" data-val="true" data-native="false" data-source='@Url.Content("~/Collective/Collective/GetBranches")' 
+                data-val-required="@Resources.Language.ErrorDocumentControlBranch" data-id="Id" data-name="Description" name="BranchId">
+                </select>
+                @Html.ValidationMessageFor(model => model.BranchId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-3">
+                <label>@Resources.Language.LabelPrefixCommercial</label>
+                <select class="uif-select form-control" id="selectPrefixCommercial" data-val="true" data-native="false" data-source='@Url.Content("~/Collective/Collective/GetPrefixes")' 
+                data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial" data-id="Id" data-name="Description" name="PrefixId">
+                </select>
+                @Html.ValidationMessageFor(model => model.PrefixId)
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.Policy</label>
+                @Html.TextBoxFor(model => model.PolicyNumber, new { id = "inputPolicyNumber", @class = "uif-input-search" })
+                @Html.ValidationMessageFor(model => model.PolicyNumber)
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.LabelEndorsement</label>
+                <select class="uif-select form-control" id="selectEndorsement" data-id="Id" data-native="false" data-name="Description"
+                name="EndorsementId" data-val="true" data-val-required="@Resources.Language.ErrorDocumentEndorsement">
+                </select>
+                @Html.ValidationMessageFor(model => model.EndorsementId)
+            </div>
+        </div>
+
+    </div>
+    <!--tabla estado cargue-->
+    <div class="row">
+        <div class="uif-col-12">
+
+            <table class="uif-table" data-title="@Resources.Language.TitleTablePrinter" data-selectiontype="none" id="uif-summary" data-filter="false" data-paginate="false">
+                <thead>
+                    <tr>
+                        <th data-property="RiskCount">@Resources.Language.LabelTableRisk</th>
+                        <th data-property="AmountInsured">@Resources.Language.LabelTableSum</th>
+                        <th data-property="Premium">@Resources.Language.LabelTablePremium</th>
+                        <th data-property="Expenses">@Resources.Language.LabelTableExpenses</th>
+                        <th data-property="Taxes">@Resources.Language.LabelTableTaxes</th>
+                        <th data-property="FullPremium">@Resources.Language.LabelTableTotalPremium</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelTexts</label>
+            <input type="text" disabled="disabled" id="inputTexts" />
+        </div>
+    </div>
+
+</form>
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/EndorsementConsultation");    
+}

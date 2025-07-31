@@ -1,0 +1,37 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = "DayPrefixModal";
+}
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-8">
+            <label>@Global.Prefix</label>
+            @Html.DropDownList("selectDayPrefix", Enumerable.Empty<SelectListItem>(), new
+            {
+               @class = "uif-select form-control",
+               data_id = "Id",
+               data_name = "Description",
+               data_val = "true",
+               data_val_required = @Global.RequiredField,
+               data_native = "true"
+            })
+            <span class="text-danger" data-valmsg-for="selectDayPrefix" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-4">
+            <label>@Global.Event_Grid_Days:</label>
+            <br />
+            <input class="form-control" placeholder='@Global.ExampleDaysPrefix' data-val="true" data-val-required="@Global.RequiredField"
+                   id="DaysCancelation" name="DaysCancelation" type="text" onkeypress="return JustNumbers(event, this);" maxlength="3" max="365" min="1"/>
+            <span class="text-danger" data-valmsg-for="DaysCancelation" data-valmsg-replace="true"></span>
+     </div>
+
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertDayPrefixModal"></div>
+        </div>
+    </div>
+</div>
+

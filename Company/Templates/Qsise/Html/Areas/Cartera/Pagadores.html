@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="section cols primary">
+    <div>
+      <h2>Póliza: {{poliza.[0].DOCUMENT_NUM}} / {{poliza.[0].ENDORSEMENT_TYPE}}</h2>
+      <table>
+        <tr>
+          <td>
+            Sucursal:
+          </td>
+          <td>
+            <span class = "info">{{poliza.[0].BRANCH}}</span>
+          </td>
+          <td>
+            Fecha de Emisión:
+          </td>
+          <td>
+            <span class="info">{{endorsements.[0].SUFFIX}}</span>
+          </td>
+          <td>
+            Endoso:
+          </td>
+          <td>
+            <span class="info">{{endorsementDetail.[0].ENDORSEMENT_NUM}}</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <sise-tabs>
+    <sise-tab title="Pagadores">
+      <div class="section rows primary">
+        <table class="table">
+          <tr>
+            <th style="text-align: center">Endoso Nro.</th>
+            <th style="text-align: center">Pagador</th>
+            <th style="text-align: center">Apellidos y nombres</th>
+            <th style="text-align: center">Medios de pago</th>
+          </tr>
+          {{#each payersByEndorsement}}
+            <tr>
+              <td style="text-align: center">{{DOCUMENT_NUM}}</td>
+              <td style="text-align: center">{{PAYER_ID}}</td>
+              <td style="text-align: center">{{PAYER_NAME}}</td>
+              <td style="text-align: center">{{PAYMENT_SCHEDULE}}</td>
+            <tr>
+          {{/each}}
+        </table>
+      </div>
+    </sise-tab>
+    <sise-tab title="Pagos">
+      <div class="section rows primary">
+        <table class="table">
+          <tr>
+            <th style="text-align: center">N&uacute;mero de pago</th>
+            <th style="text-align: center">Fecha vencimiento</th>
+            <th style="text-align: center">Prima neta ($)</th>
+            <th style="text-align: center">Recargos ($)</th>
+            <th style="text-align: center">Derechos de emisión ($)</th>
+            <th style="text-align: center">IVA ($)</th>
+            <th style="text-align: center">Descuentos ($)</th>
+            <th style="text-align: center">Prima total ($)</th>
+          </tr>
+          {{#each paymentsByEndorsement}}
+            <tr>
+              <td style="text-align: center">{{PAYMENT_NUM}}</td>
+              <td style="text-align: center">{{formatDate PAY_EXP_DATE minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber COMPONENT minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber SURCHARGES minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber EXPENSES minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber TAXES minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber DISCOUNTS minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber AMOUNT minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+            <tr>
+          {{/each}}
+        </table>
+      </div>
+    </sise-tab><sise-tab title="Pagos realizados">
+      <div class="section rows primary">
+        <table class="table">
+          <tr>
+            <th style="text-align: center">N&uacute;mero de pago</th>
+            <th style="text-align: center">Fecha vencimiento</th>
+            <th style="text-align: center">Prima neta ($)</th>
+            <th style="text-align: center">Recargos ($)</th>
+            <th style="text-align: center">Derechos de emisión ($)</th>
+            <th style="text-align: center">IVA ($)</th>
+            <th style="text-align: center">Descuentos ($)</th>
+            <th style="text-align: center">Prima total ($)</th>
+          </tr>
+          {{#each paymentsByEndorsementPayed}}
+            <tr>
+              <td style="text-align: center">{{PAYMENT_NUM}}</td>
+              <td style="text-align: center">{{formatDate PAY_EXP_DATE minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber COMPONENT minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber SURCHARGES minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber EXPENSES minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber TAXES minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber DISCOUNTS minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+              <td style="text-align: right">{{formatNumber AMOUNT minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+            <tr>
+          {{/each}}
+        </table>
+      </div>
+    </sise-tab>
+  </sise-tabs>
+</div>

@@ -1,0 +1,262 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+<form id="formQueryCumulus" class="form">
+    <div class="uif-row">
+        <div class="uif-col-9">
+            <label class="field-required">@Resources.Language.InsuredConsolidated</label>
+            <input type="text" id="insuredFullName" name="insuredFullName" class="uif-input-search"
+                   data-val="true" maxlength="100" data-displaykey="FullName"
+                   data-id="FirstLastName" placeholder="@Resources.Language.PlaceHolderDocumentName" data-val-required="@Resources.Language.RequiredField" />
+            <span class="text-danger" data-valmsg-for="insuredFullName" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.DocumentNumber</label>
+            <input type="text" id="insuredDocumentNumber" name="insuredDocumentNumber" disabled maxlength="50" data-val="true"
+                   data-source="@Url.Content("~/Reinsurance/Process/GetInsuredsByDescriptionInsuredSearchTypeCustomerType")" data-displaykey="DocumentNumber"
+                   data-id="documentNumber" data-val-required="@Resources.Language.RequiredField" />
+            <span class="text-danger" data-valmsg-for="insuredDocumentNumber" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-2">
+            <label></label>
+            <div class="checkbox">
+                <input type="checkbox" id="chkByLineBusiness" name="chkSurety" />
+                <label for="chkByLineBusiness">Por ramo tecnico</label>
+            </div>
+        </div>
+        <div class="uif-col-2">
+            <label></label>
+            <div class="checkbox">
+                <input type="checkbox" id="chkByPrefix" name="chkSurety" />
+                <label for="chkByPrefix">Por ramo comercial</label>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row" id="DivLineBusiness">
+        <div class="uif-col-7">
+            <label class="field-required">
+                @Resources.Language.LabelLineBusiness
+            </label>
+            <select class="uif-select form-control" id="selectLineBusiness" name="selectLineBusiness"
+                    data-val="true" data-val-required="@Resources.Language.RequiredField"
+                    data-id="Id" data-name="Description" data-filter="true" data-native="false" required></select>
+            <span class="text-danger" data-valmsg-for="selectLineBusiness" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-5">
+            <label>
+                @Resources.Language.LabelTabTechnicalSubBranch
+            </label>
+            <select class="uif-select form-control" id="selectSubLineBusiness" name="selectSubLineBusiness"
+                    data-id="Id" data-name="Description" data-filter="true" data-native="false"></select>
+        </div>
+    </div>
+    <div class="uif-row" id="DivPrefix">
+        <div class="uif-col-7">
+            <label class="field-required">
+                @Resources.Language.LabelPrefixCommercial
+            </label>
+            <select class="uif-select form-control" id="selectPrefix" name="selectPrefix"
+                    data-val="true" data-val-required="@Resources.Language.RequiredField"
+                    data-id="Id" data-name="Description" data-filter="true" data-native="false" required></select>
+            <span class="text-danger" data-valmsg-for="selectPrefix" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-7">
+            <label class="field-required">
+                @Resources.Language.DateCuteCumulus
+            </label>
+            <input type="text" class="uif-datepicker"
+                   data-mask="99/99/9999" value="@DateTime.Now" id="cumulusDate" name="cumulusDate"
+                   data-val="true" data-val-required="@Resources.Language.RequiredField" />
+            <span class="text-danger" data-valmsg-for="cumulusDate" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-2">
+            <br />
+            <input type="checkbox" id="chkIncludeFuture" name="chkIncludeFuture" checked />
+            <label for="chkIncludeFuture">@Resources.Language.IncludeFuture</label>
+        </div>
+        <div class="uif-col-3">
+            <br />
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0467"))
+            {
+                <button type="button" class="btn btn-primary" id="btnQueryCumulus" style="float:right;">
+                    @Resources.Language.ButtonConsult
+                </button>
+            }
+        </div>
+    </div>
+    <div id="tabs">
+        <ul class="uif-tab">
+            <li class="active"><a href="#tabAcumulateTypeContract" id="tab1">@Resources.Language.AcumulateTypeContract</a></li>
+            <li><a href="#tabDetail" id="tab2">@Resources.Language.ButtonDetail</a></li>
+        </ul>
+        <div class="uif-tab-content">
+            <div class="active" id="tabAcumulateTypeContract">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <table class="uif-table" id="tableAcumulateTypeContract" data-paginate="true" data-selectiontype="none">
+                            <thead>
+                                <tr>
+                                    <th data-property="Contract.SmallDescription">@Resources.Language.Contract</th>
+                                    <th data-property="Contract.Currency.Description">@Resources.Language.Currency</th>
+                                    <th data-property="LevelLimit" data-type="currency">@Resources.Language.CapacityCurrencyContract</th>
+                                    <th data-property="AssignmentAmount" data-type="currency">@Resources.Language.CumulusCurrencyContract</th>
+                                    <th data-property="AmountLocalCurrency" data-type="currency">@Resources.Language.CumulusPesos</th>
+                                    <th data-property="RetentionAmount" data-type="currency">@Resources.Language.RetentionCurrencyContract</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <footer>
+                            <div class="uif-col-8">
+                                <button type="button" class="btn btn-primary" id="btnClear" style="float:right;">
+                                    @Resources.Language.ButtonClear
+                                </button>
+                            </div>
+                            <div class="uif-col-2">
+                                <button type="button" class="btn btn-primary" id="btnReport" style="float:right;">
+                                    @Resources.Language.ButtonReport
+                                </button>
+                            </div>
+                            <div class="uif-col-2">
+                                <button type="button" class="btn btn-primary" id="btnExit">
+                                    @Resources.Language.ButtonExit
+                                </button>
+                            </div>
+                        </footer>
+                    </div>
+
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-8">
+                        <b class="text-uppercase" style="float:right;">@Resources.Language.TotalCumuloPesos </b>
+                    </div>
+                    <div class="uif-col-4">
+                        <input class="rightAlign input-money" type="text" id="TotalCumuloPesos" name="TotalCumuloPesos"
+                               maxlength="15" onkeypress=" return JustNumbers(event);" disabled="disabled" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="tabDetail">
+                <div class="uif-row">
+                    <div class="uif-col-2">
+                        <br />
+                        <input type="checkbox" id="chkEconomicGroup" name="chkEconomicGroup" />
+                        <label for="chkEconomicGroup">@Resources.Language.EconomicGroup</label>
+                    </div>
+                    <div class="uif-col-4">
+                        @Resources.Language.CumulusTotal
+                        <input class="rightAlign  input-money" type="text" id="AssignmentTotal" name="AssignmentTotal"
+                               maxlength="15" onkeypress="return JustNumbers(event);" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-4">
+                        @Resources.Language.RetentionTotal
+                        <input class="rightAlign  input-money" type="text" id="RetentionTotal" name="RetentionTotal"
+                               maxlength="15" onkeypress=" return JustNumbers(event);" disabled="disabled" />
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <table data-title="" class="uif-table uif-col-12 center" id="tableDetailCumulus" data-paginate="true">
+                        <thead>
+                            <tr>
+                                <th data-property="Id" data-visible="false">@Global.Id</th>
+                                <th data-property="CumulusDetail.Description">@Resources.Language.LabelAccumulation</th>
+                                <th data-property="RetentionAmount" data-type="currency">@Resources.Language.Retention</th>
+                                <th data-property="AssigmentAmount" data-type="currency">@Resources.Language.Cumulu</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="uif-row">
+                    <table data-title="" class="uif-table uif-col-12" id="tablePolicy"
+                           data-add="false" data-paginate="true" data-filter="false" data-selectiontype="none">
+                        <thead>
+                            <tr>
+                                <th data-property="DocumentNum">@Resources.Language.LabelPolicy</th>
+                                <th data-property="Consortium.FullName">@Resources.Language.NameConsortium</th>
+                                <th data-property="Coverage.Description">@Resources.Language.LabelCoverageValue</th>
+                                <th data-property="CoverageCurrentFrom" data-type="date">@Resources.Language.ValidatyFrom</th>
+                                <th data-property="CoverageCurrentTo" data-type="date">@Resources.Language.ValidatyUntil</th>
+                                <th data-property="Coverage.LimitAmount.Value" data-type="currency">@Resources.Language.ValueInsuredPesos</th>
+                                <th data-property="Currency.Description">@Resources.Language.Currency</th>
+                                <th data-property="Insured.FullName">@Resources.Language.NameInsured</th>
+                                <th data-property="Branch.Description">@Resources.Language.Branch</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="uif-row">
+                    <footer>
+                        <div class="uif-col-8">
+                            <button type="button" class="btn btn-primary" id="btnClear2" style="float:right;">
+                                @Resources.Language.ButtonClear
+                            </button>
+                        </div>
+                        <div class="uif-col-2">
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0469"))
+                            {
+                                <button type="button" class="btn btn-primary" id="btnExport" style="float:right;">
+                                    @Resources.Language.ButtonExport
+                                </button>
+                            }
+                            </div>
+                        <div class="uif-col-2">
+                            <button type="button" class="btn btn-primary" id="btnDetailExit">
+                                @Resources.Language.ButtonExit
+                            </button>
+                        </div>
+                    </footer>
+                </div>
+
+                <div class="uif-row">
+                    <div id="divEconomicGroup">
+                        <table class="uif-table uif-col-12" id="tableEconomicGroup" data-title="" data-add="false" data-paginate="true" data-filter="false" data-selectiontype="none" data-exporttoexcel="true">
+                            <thead>
+                                <tr>
+                                    <th data-property="EconomicGroup.EconomicGroupName">@Resources.Language.EconomicGroup</th>
+                                    <th data-property="EconomicGroup.TributaryIdNo">@Resources.Language.IdentEconomicGroup</th>
+                                    <th data-property="Insured.FullName">@Resources.Language.PartEconomicGroup</th>
+                                    <th data-property="EconomicGroupDetail.IndividualId">@Resources.Language.IdentPartEconomicGroup</th>
+                                    <th data-property="TotalCumulusIndividual" data-type="currency">@Resources.Language.CumuloTotalPart</th>
+                                    <th data-property="Enable" data-type="boolean">  @Resources.Language.StatusPart</th>
+                                    <th data-property="DateUpdated" data-type="date">@Resources.Language.DateUpgrade</th>
+                                    <th data-property="TotalCumulusEconomicGroup" data-type="currency">@Resources.Language.TotalCumulusEconomicGroup</th>
+                                    <th data-property="AssignmentTotalCumulusIndividual" data-type="currency">@Resources.Language.CumulusGivePart</th>
+                                    <th data-property="RetentionTotalCumulusIndividual" data-type="currency">@Resources.Language.CumulusDetainedPart</th>
+                                    <th data-property="TotalPremiumsIndividual" data-type="currency">@Resources.Language.TotalPremiumPart</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="uif-modal" id="modalIndividualDetail">
+    <div class="uif-modalbody">
+        <table class="uif-table" data-selectiontype="single" id="tblIndividualDetail" data-paginate="true">
+            <thead>
+                <tr>
+                    <th data-property="IndividualId">@Resources.Language.LabelId</th>
+                    <th data-property="FullName">@Resources.Language.LabelDescription</th>
+                    <th data-property="DocumentNumber">@Resources.Language.DocumentNumber</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/reinsurance/bundles/QueryCumulus")
+}    

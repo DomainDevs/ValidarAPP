@@ -1,0 +1,73 @@
+﻿
+<script id="electronicBillingTemplate" type="text/template">
+    <div><strong>@Resources.LanguagePerson.LabelId:</strong> {{FiscalResponsibilityId}}</div>
+    <div><strong>@Resources.LanguagePerson.LabelDescription:</strong>  {{FiscalResponsibilityDescription}}</div>
+</script>
+
+<form class="form modal-Colombia" id="formElectronicBilling">
+    <input type="hidden" id="status" />
+    @*<input type="hidden" id="Id" />*@
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <label class="field-required" for="RegimeType">@Resources.LanguagePerson.RegimeType</label>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="radio-inline">
+                        <input type="radio" name="rbRegimeType" id="ResponsibleForVat" value="1">@Resources.LanguagePerson.ResponsibleForVat
+                    </label>
+                </div>
+                <div class="uif-col-6">
+                    <label class="radio-inline">
+                        <input type="radio" name="rbRegimeType" checked="checked" id="NotResponsibleForVat" value="2">@Resources.LanguagePerson.NotResponsibleForVat
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.FiscalResponsibility</label>
+                    <select class="uif-select" id="selectFiscalResponsibility" data-id="Id" data-name="Description" name="FiscalResponsibilityId"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <br />
+                    <input type="checkbox" checked="checked" id="rdElectronicBiller" />
+                    <label for="rdElectronicBiller">@Resources.LanguagePerson.ElectronicBiller</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-listview" id="listElectronicBilling"> </div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6" id="btnsAgent">
+            <div class="pull-right width-save">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0803"))
+                {
+                    <button type="button" class="btn btn-default" id="btnElectronicBillingNew">
+                        @Resources.LanguagePerson.NewForm
+                    </button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0804"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnElectronicBillingAdd">
+                        @Resources.LanguagePerson.AddForm
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

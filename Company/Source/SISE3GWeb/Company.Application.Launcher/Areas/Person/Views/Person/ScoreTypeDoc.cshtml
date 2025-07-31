@@ -1,0 +1,126 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.ScoreTypeDocViewModel
+<script id="ScoreTypeDocTemplate" type="text/template">
+    {{#ifCond StatusType "==" 4}}
+    <div class="danger"><strong>{{Description}} ({{IdCardTypeScore}})</strong></div>
+    {{else}}
+    <div><strong>{{Description}} ({{IdCardTypeScore}})</strong></div>
+    <div>
+        Homologación SISE: {{NoneSISEDescription}} {{SISEDescription}}
+    </div>
+    <div class="hidden">
+        Descripción: <strong>{{Description}}</strong>
+    </div>
+    <div class="hidden">
+        Descripción Corta: <strong>{{SmallDescription}}</strong>
+    </div>
+    <div class="hidden">
+        Documento SISE: <strong>{{IdCardTypeCode}}</strong>
+    </div>
+    <div class="hidden">
+        Homologación SISE: <strong>{{IdScore3g}}</strong>
+    </div>
+    <div class="hidden">
+        {{StatusType}}
+    </div>
+    {{/ifCond}}
+</script>
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.LanguagePerson.LabelScoreTypeDoc
+        </div>
+        <div class="column-30 even">
+            <input type="text" name="Id" id="inputSearchScoreTypeDoc" class="uif-input-search" maxlength="30" placeholder="@Resources.LanguagePerson.EnterScoreTypeDocToSearch" />
+            <button class="btn btn-default" id="btnSearchAdvScoreTypeDoc"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.LanguagePerson.ButtonExit
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.LanguagePerson.ExportXLS
+            </button>
+
+            <button class="btn btn-primary" id="btnSaveScoreTypeDoc" @*style="display: none"*@>
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.LanguagePerson.ButtonSave
+            </button>
+
+        </div>
+
+    </footer>
+}
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formScoreTypeDoc" autocomplete="off" class="form without-space">
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelCodeScoreTypeDoc</label>
+					@Html.TextBoxFor(model => model.IdCardTypeScore, new { id = "inputId", placeholder = @Resources.LanguagePerson.LabelCodeScoreTypeDoc })
+					@Html.ValidationMessageFor(model => model.IdCardTypeScore)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", placeholder = @Resources.LanguagePerson.LabelDescription })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelDescriptionShort</label>
+                    @Html.TextBoxFor(model => model.SmallDescription, new { id = "inputSmallDescription", placeholder = @Resources.LanguagePerson.LabelDescriptionShort })
+                    @Html.ValidationMessageFor(model => model.SmallDescription)
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.LabelSISEHomologation</label>
+                    <select class="uif-select form-control" id="selectDocumentTypeCode" data-id="Id" data-name="Description"></select>
+                    @Html.HiddenFor(model => model.IdScore3g, new { id = "inputIdScore3g" })
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary" id="panelScoreTypeDoc">
+            <div id="listScoreTypeDoc" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsScoreTypeDoc">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewScoreTypeDoc">@Resources.LanguagePerson.New</button>
+                <button type="button" class="btn btn-primary" id="btnScoreTypeDocAccept">@Resources.LanguagePerson.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/bundle/js/ScoreTypeDoc")"></script>
+}

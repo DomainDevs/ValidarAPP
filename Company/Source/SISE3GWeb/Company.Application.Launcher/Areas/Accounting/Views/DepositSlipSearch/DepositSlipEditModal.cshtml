@@ -1,0 +1,136 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<form id="checkToDepositForm" class="form">
+    <div class="main-content" style="overflow-y:auto;height:450px">
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Global.BallotNumber</label>
+                <input type="text" id="DepositSlipEditPaymentTicketCode" name="DepositSlipEditPaymentTicketCode" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.Branch</label>
+                <input type="text" id="DepositSlipEditBranch" name="DepositSlipEditBranch" disabled="disabled" />
+            </div>
+            <div class="uif-col-6">
+                <label>@Global.ReceivingBank</label>
+                <br />
+                <input type="text" id="DepositSlipEditReceivingBank" name="DepositSlipEditReceivingBank" disabled="disabled" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Global.AccountNumber</label>
+                <br />
+                <input type="text" id="DepositSlipEditReceivingAccountNumber" name="DepositSlipEditReceivingAccountNumber" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.Currency</label>
+                <br />
+                <input type="text" id="DepositSlipEditCurrency" name="DepositSlipEditCurrency" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.CashAmount</label>
+                <br />
+                <input type="text" id="DepositSlipEditCashAmount" name="DepositSlipEditCashAmount" style="text-align: right" onkeypress="return OnlyDecimalNumber(event,this)" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.CheckAmount</label>
+                <br />
+                <input type="text" id="DepositSlipEditCheckAmount" name="DepositSlipEditCheckAmount" disabled="disabled" style="text-align: right" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <h4>@Global.SearchChecksToDeposit</h4>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label>@Global.PaymentType</label>
+                        <select class="uif-select form-control" id="DepositSlipEditPaymentMethod" name="DepositSlipEditPaymentMethod"
+                                data-source='@Url.Content("~/DepositSlipSearch/GetEnabledPaymentMethodTypes")' data-id="Id"
+                                data-name="Description" data-val="true" data-val-required='@Global.RequiredField'></select>
+                        <span class="text-danger" data-valmsg-for="DepositSlipEditPaymentMethod" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label>@Global.IssuingBank</label>
+                        <input class="uif-autocomplete" type="text" id="DepositSlipEditIssuingBank" name="DepositSlipEditIssuingBank" data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value" placeholder="@Global.Bank" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label>@Global.CheckNumber</label>
+                        <input type="text" id="DepositSlipEditCheckNumber" name="DepositSlipEditCheckNumber" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="pull-right">
+                            <button id="depositSlipEditClear" class="btn btn-default" role="button">
+                                <i class="fa fa-paint-brush"></i>  @Global.Clean
+                            </button>
+                            <button type="submit" id="depositSlipEditSearch" class="btn btn-primary" role="button" onclick="return false">
+                                <i class="fa fa-search"></i>  @Global.Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <table class="uif-table" data-title="@Global.ChecksToDeposit" data-source="null" id="SearchedChecksToDeposit" data-add="true"
+                       data-edit="false" data-delete="false" data-selectiontype="multiple" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="PaymentCode" data-visible="false">PaymentCode</th>
+                            <th data-property="PaymentMethodTypeCode" data-visible="false">PaymentMethodTypeCode</th>
+                            <th data-property="CurrencyCode" data-visible="false">CurrencyCode</th>
+                            <th data-property="BranchCode" data-visible="false">BranchCode</th>
+                            <th data-property="BranchName" data-visible="false">BranchName</th>
+                            <th data-property="BankName">@Global.IssuingBank</th>
+                            <th data-property="IssuingAccountNumber">@Global.BankAccountNumber</th>
+                            <th data-property="CheckNumber">@Global.CheckNumber</th>
+                            <th data-property="ReceiptNumber">@Global.BillNum</th>
+                            <th data-property="CurrencyName">@Global.Currency</th>
+                            <th data-property="IncomeAmount">@Global.Amount</th>
+                            <th data-property="CheckDate">@Global.CheckDate</th>
+                            <th data-property="Holder">@Global.Holder</th>
+                            <th data-property="PaymentTicketItemId" data-visible="false">PaymentTicketItemId</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="duplicateAlert"></div>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <table class="uif-table" data-title="@Global.SelectedChecks" data-source="null" id="SelectedChecksToDeposit" data-add="false" data-edit="false" data-delete="true" data-selectiontype="none" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="PaymentCode" data-visible="false">PaymentCode</th>
+                            <th data-property="PaymentMethodTypeCode" data-visible="false">PaymentMethodTypeCode</th>
+                            <th data-property="CurrencyCode" data-visible="false">CurrencyCode</th>
+                            <th data-property="BankName">@Global.IssuingBank</th>
+                            <th data-property="IssuingAccountNumber">@Global.BankAccountNumber</th>
+                            <th data-property="CheckNumber">@Global.CheckNumber</th>
+                            <th data-property="ReceiptNumber">@Global.BillNum</th>
+                            <th data-property="CurrencyName">@Global.Currency</th>
+                            <th data-property="IncomeAmount">@Global.Amount</th>
+                            <th data-property="CheckDate">@Global.CheckDate</th>
+                            <th data-property="Holder">@Global.Holder</th>
+                            <th data-property="PaymentTicketItemCode" data-visible="false">PaymentTicketItemCode</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

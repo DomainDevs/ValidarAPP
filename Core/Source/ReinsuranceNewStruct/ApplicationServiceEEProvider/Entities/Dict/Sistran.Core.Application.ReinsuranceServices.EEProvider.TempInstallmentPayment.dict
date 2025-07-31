@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="TempInstallmentPayment" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="TEMP_INSTALLMENT_PAYMENT_ENTITY">
+  <properties>
+    <property name="TempInstallementPaymentsId" type="Integer" key="true" description="TEMP_INSTALLEMENT_PAYMENTS_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="TempInstallementCompanyCode" type="Integer" description="TEMP_INSTALLEMENT_COMPANY_CODE_PROPERTY" />
+    <property name="FeeNumber" type="Integer" description="FEE_NUMBER_PROPERTY" />
+    <property name="PaymentDate" type="DateTime" description="PAYMENT_DATE_PROPERTY" />
+    <property name="PaymentAmount" type="Decimal" precision="18" scale="2" description="PAYMENT_AMOUNT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="TEMP_INSTALLMENT_PAYMENT" schema="REINS" alias="TEMP_INSTALLMENT_PAYMENT" update="true">
+      <columns>
+        <column name="TEMP_INSTALLEMENT_PAYMENTS_ID" type="Int32" property="TempInstallementPaymentsId" key="true" identity ="true"/>
+        <column name="TEMP_INSTALLEMENT_COMPANY_CD" type="Int32" property="TempInstallementCompanyCode" allowNull="false" />
+        <column name="FEE_NUMBER" type="Int32" property="FeeNumber" allowNull="false" />
+        <column name="PAYMENT_DATE" type="DateTime" property="PaymentDate" allowNull="false" />
+        <column name="PAYMENT_AMOUNT" type="Decimal" property="PaymentAmount" allowNull="false" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

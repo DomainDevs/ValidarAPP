@@ -1,0 +1,50 @@
+<map version="2.0" type="class" name="Contract" namespace="Sistran.Core.Application.Reinsurance" file-version="1.0" description="CONTRACT_ENTITY">
+	<properties>
+		<property name="ContractId" type="Integer" key="true" description="CONTRACT_ID_PROPERTY" nullable = "false" autonumber="Identity" />
+		<property name="ContractTypeId" type="Integer" description="CONTRACT_TYPE_ID_PROPERTY" />
+		<property name="CurrencyId" type="Integer" description="CURRENCY_ID_PROPERTY" />
+		<property name="SmallDescription" type="String" size="15" description="SMALL_DESCRIPTION_PROPERTY" />
+		<property name="Description" type="String" size="100" description="DESCRIPTION_PROPERTY" />
+		<property name="Year" type="Integer" description="YEAR_PROPERTY" />
+		<property name="DateFrom" type="DateTime" nullable="true" description="DATE_FROM_PROPERTY" />
+		<property name="DateTo" type="DateTime" nullable="true" description="DATE_TO_PROPERTY" />
+		<property name="ReleaseTimeReserve" type="Integer" nullable="true" description="RELEASE_TIME_RESERVE_PROPERTY" />
+		<property name="AffectationTypeCode" type="Integer" nullable="true" description="AFFECTATION_TYPE_CODE_PROPERTY" />
+		<property name="ReestablishmentTypeCode" type="Integer" nullable="true" description="REESTABLISHMENT_TYPE_CODE_PROPERTY" />
+		<property name="Epi" type="Decimal" precision="18" scale="2" nullable="true" description="EPI_PROPERTY" />
+		<property name="EpiTypeCode" type="Integer" nullable="true" description="EPI_TYPE_CODE_PROPERTY" />
+		<property name="Status" type="Boolean" nullable="true" description="STATUS_PROPERTY" />
+		<property name="Grouper" type="String" size="15" nullable="true" description="GROUPER_PROPERTY" />
+		<property name="CoinsurancePercentage" type="Decimal" precision="10" scale="2" nullable="true" description="COINSURANCE_PERCENTAGE_PROPERTY" />
+		<property name="QuantityRisk" type="Integer" nullable="true" description="QUANTITY_RISK_PROPERTY" />
+		<property name="EstimatedDate" type="DateTime" nullable="true" description="ESTIMATED_DATE_PROPERTY" />
+    <property name="DepositPremiumAmount" type="Decimal" precision="18" scale="2" nullable="true" description="IMP_DEPOSIT_PREMIUM_PROPERTY" />
+    <property name="PercentageDepositPremium" type="Decimal" precision="10" scale="2" nullable="true" description="PCT_DEPOSIT_PREMIUM" />
+	</properties>
+	<tables>
+		<table name="CONTRACT" schema="REINS" alias="CONTRACT" update="true">
+			<columns>
+				<column name="CONTRACT_ID" type="Int32" property="ContractId" key="true" identity ="true" />
+				<column name="CONTRACT_TYPE_ID" type="Int32" property="ContractTypeId" allowNull="false" />
+				<column name="CURRENCY_ID" type="Int32" property="CurrencyId" allowNull="false" />
+				<column name="SMALL_DESCRIPTION" type="String" property="SmallDescription" allowNull="false" size="15" />
+				<column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="100" />
+				<column name="YEAR" type="Int32" property="Year" allowNull="false" />
+				<column name="DATE_FROM" type="DateTime" property="DateFrom" />
+				<column name="DATE_TO" type="DateTime" property="DateTo" />
+				<column name="RELEASE_TIME_RESERVE" type="Int32" property="ReleaseTimeReserve" />
+				<column name="AFFECTATION_TYPE_CD" type="Int32" property="AffectationTypeCode" />
+				<column name="REESTABLISHMENT_TYPE_CD" type="Int32" property="ReestablishmentTypeCode" />
+				<column name="EPI" type="Decimal" property="Epi" size="19" precision="18" scale="2" />
+				<column name="EPI_TYPE_CD" type="Int32" property="EpiTypeCode" />
+				<column name="STATUS" type="Boolean" property="Status" />
+				<column name="GROUPER" type="String" property="Grouper" size="15" />
+				<column name="COINSURANCE_PERCENTAGE" type="Decimal" property="CoinsurancePercentage" size="19" precision="10" scale="2" />
+				<column name="QUANTITY_RISK" type="Int32" property="QuantityRisk" />
+				<column name="ESTIMATED_DATE" type="DateTime" property="EstimatedDate" />
+        <column name="IMP_DEPOSIT_PREMIUM" type="Decimal" property="DepositPremiumAmount" size="19" precision="18" scale="2" />
+        <column name="PCT_DEPOSIT_PREMIUM" type="Decimal" property="PercentageDepositPremium" size="19" precision="10" scale="2" />
+			</columns>
+		</table>
+	</tables>
+</map>

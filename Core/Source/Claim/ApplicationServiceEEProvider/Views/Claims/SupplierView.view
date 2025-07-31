@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="SupplierView ">
+  <collections>
+    <collection name="Supplier" type="Sistran.Core.Application.UniquePersonV1.Entities.Supplier, 
+                Core.UniquePersonV1.Entities"></collection>
+    <collection name="Individual" type="Sistran.Core.Application.UniquePersonV1.Entities.Individual, 
+                Core.UniquePersonV1.Entities"></collection>
+    <collection name="Person" type="Sistran.Core.Application.UniquePersonV1.Entities.Person, 
+                Core.UniquePersonV1.Entities"></collection>
+    <collection name="Company" type="Sistran.Core.Application.UniquePersonV1.Entities.Company, 
+                Core.UniquePersonV1.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Supplier" destination="Individual" name="SupplierIndividual" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="Individual" destination="Person" name="IndividualPerson" type="left">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="Individual" destination="Company" name="IndividualCompany" type="left">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+  </relations>
+</view>

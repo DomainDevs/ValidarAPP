@@ -1,0 +1,235 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.Endorsement.Models.ChangeCoinsuranceViewModel
+
+<script id="ChangeCoinsuranceTemplate" type="text/template">
+    <div><strong>{{Description}}</strong></div>
+    <div><strong> Participacion Lider {{ParticipationPercentage}}%</strong></div>
+    <div><strong> @Resources.Language.Expenses {{ExpensesPercentage}}%</strong></div>
+    @*<div><strong>{{PolicyHolderEmail}}</strong></div>*@
+</script>
+
+<script id="ChangeCoinsuranceModifyTemplate" type="text/template">
+    <div><strong>{{Description}}</strong></div>
+    <div><strong> Participacion Lider {{ParticipationPercentage}}%</strong></div>
+    <div><strong> @Resources.Language.Expenses {{ExpensesPercentage}}%</strong></div>
+    @*<div><strong>{{PolicyHolderEmail}}</strong></div>*@
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-60">
+        @Resources.Language.ChangeCoinsuranceEndorsement
+    </div>
+    <div class="column-40">
+        <div class="important">
+            <div class="date">
+                <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate"></span>
+                @Resources.Language.LabelNumberTemporal<span id="labelTemporalId"></span>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" id="btnCancel">@Resources.Language.ButtonClose</button>
+                    <button type="button" class="btn btn-default" id="btnPrintTemporalCoInsurance">
+                        <i class="fa fa-print" aria-hidden="true"></i>
+                        <span class="" aria-hidden="true"></span>
+                        @Resources.Language.PrintTemporal
+                    </button>
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0745"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.ModificationSave</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<div class="uif-modal" id="modalCoInsurance" style="overflow-y: scroll;">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Coinsurance.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonsCoInsurance">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCoInsuranceClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0746"))
+        {
+            <button type="button" class="btn btn-primary" id="btnCoInsuranceSave">@Resources.Language.ButtonSave</button>
+        }
+        </div>
+</div>
+
+<form id="formChangeCoinsurance" class="without-peripheral">
+    <div class="row">
+        <div class="uif-col-9">
+            <h5 id="globalTitle"></h5>
+        </div>
+        <div class=" uif-col-3">
+            <strong>@Resources.Language.BusinessType </strong> <div id="BusinessType"> </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-summary field-summary-alignment">
+                <div class="items">
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableRisk</div>
+                            <div id="labelCurrentRisk">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableSum</div>
+                            <div id="labelCurrentSum">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTablePremium</div>
+                            <div id="labelCurrentPremium">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableExpenses</div>
+                            <div id="labelCurrentExpenses">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelSurcharge</div>
+                            <div id="labelCurrentSurcharges">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelDiscount</div>
+                            <div id="labelCurrentDiscounts">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableTaxes</div>
+                            <div id="labelCurrentTaxes">0</div>
+                        </div>
+                    </div>
+                    <div class="item primary">
+                        <div>
+                            <div>@Resources.Language.LabelTableTotalPremium</div>
+                            <div id="labelCurrentTotalPremium">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <h5><strong>@Resources.Language.CoInsurance</strong></h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="listChangeCoinsurance" class="uif-listview"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <h5><strong>@Resources.Language.LabelDataChangeCoinsurance</strong></h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelDateStart</label>
+
+            @Html.TextBoxFor(model => model.CurrentFrom, new { id = "inputCurrentFrom", @class = "uif-datepicker", @required = "required" })
+            @Html.ValidationMessageFor(model => model.CurrentFrom)
+        </div>
+        <div class="uif-col-1">
+            <label>@Resources.Language.LabelDays</label>
+            @Html.TextBoxFor(model => model.Days, new { id = "inputDays", disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.Days)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelFilingNumber</label>
+            @Html.TextBoxFor(model => model.TicketNumber, new { id = "inputTicketNumber" })
+            @Html.ValidationMessageFor(model => model.TicketNumber)
+
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelFilingDate</label>
+            @Html.TextBoxFor(model => model.TicketDate, new { id = "inputTicketDate", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.TicketDate)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelText</label>
+            @Html.TextAreaFor(model => model.Text, new { id = "inputText", rows = "5", style = "text-transform:uppercase" })
+            @Html.ValidationMessageFor(model => model.Text)
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelObservations</label>
+            @Html.TextAreaFor(model => model.Observations, new { id = "inputObservations", rows = "5", style = "text-transform:uppercase" })
+            @Html.ValidationMessageFor(model => model.Observations)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.RecordObservations</label>
+            <textarea id="inputRecord" name="inputRecord" rows="5" required></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0744"))
+                {
+                    <button type="button" class="btn btn-default secondary-Colombia" id="btnChangeCoinsuranceEndorsement">
+                        @Resources.Language.Modify
+                    </button>
+                }
+                </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <h5><strong>@Resources.Language.NewConditions</strong></h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="listChangeCoinsuranceModify" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.Percent</label>
+            <input type="text" class="disabled" id="InputPercent" required />
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelExpenses</label>
+            <input type="text" class="disabled" id="InputExchange" required />
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+        </div>
+    </div>
+</form>

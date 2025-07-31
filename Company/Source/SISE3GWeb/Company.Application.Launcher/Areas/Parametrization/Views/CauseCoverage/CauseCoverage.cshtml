@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-90">
+        @Resources.Language.TitleCausesClaimByPeril
+    </div>
+    <div class="column-10 even">
+
+    </div>
+</script>
+
+<form id="formCauseCoverage" autocomplete="off" class="form form-space-adjusted">
+    <br />
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.Prefix</label>
+            <select class="uif-select form-control" id="selectPrefix"
+                    data-id="Id" data-name="Description" name="PrefixId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelLineBusiness</label>
+            <select class="uif-select form-control" id="selectLineBusiness"
+                    data-id="Id" data-name="Description" name="LineBusinessId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelSubLineBusiness</label>
+            <select class="uif-select form-control" id="selectSubLineBusiness"
+                    data-id="Id" data-name="Description" name="SubLineBusinessId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelCause</label>
+            <select class="uif-select form-control" id="selectCause"
+                    data-id="Id" data-name="Description" name="CauseId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="uif-col-6">
+            <table id="tableCoverages" class="uif-table" data-title="@Resources.Language.ExistingCoverages"
+                   data-edit="false" data-delete="false" data-add="false" data-paginate="true">
+                <thead>
+                    <tr>
+                        <th data-property="Id" data-visible="false">Id</th>
+                        <th data-property="Description">@Resources.Language.LabelCoverage</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="uif-col-6">
+            <table id="tableCauseCoverages" class="uif-table" data-title="@Resources.Language.AssignedCoverages"
+                   data-edit="false" data-delete="false" data-add="false" data-paginate="true">
+                <thead>
+                    <tr>
+                        <th data-property="Id" data-visible="false">Id</th>
+                        <th data-property="Description">@Resources.Language.LabelCoverage</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>

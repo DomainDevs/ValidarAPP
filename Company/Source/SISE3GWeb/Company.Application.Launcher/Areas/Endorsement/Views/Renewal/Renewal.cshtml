@@ -1,0 +1,252 @@
+﻿@{
+ Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.Endorsement.Models.RenewalViewModel
+<script id="title-template" type="text/template">
+    <div class="column-60">
+        <div> @Resources.Language.RenewalPolicy</div>
+    </div>
+    <div class="column-40">
+        <div class="important">
+            <div class="date">
+                <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate"></span>
+                @Resources.Language.LabelNumberTemporal<span id="labelTemporalId"></span>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsIdenticalCondition" style="display:none">
+        <div class="pull-right">
+            <button type="button" class="btn btn-default" id="btnCancel">@Resources.Language.Close</button>
+            <button type="button" class="btn btn-default" id="btnPrintTemporalRenewal">
+                <i class="fa fa-print" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.PrintTemporal
+            </button>
+            <button type="button" class="btn btn-primary" id="btnSaveRenewal">@Resources.Language.ButonSaveItem</button>
+        </div>
+    </div>
+
+    <div id="buttonTemporalOption">
+        <div class="pull-right">
+            <button type="button" class="btn btn-primary" id="btnIdenticalCondition">@Resources.Language.LabelIf</button>
+            <button type="button" class="btn btn-primary" id="btnOtherCondition">@Resources.Language.LabelNot</button>
+            <button type="button" class="btn btn-danger" id="btnCancelTemp">@Resources.Language.ButtonCancel</button>
+        </div>
+    </div>
+</script>
+<div class="uif-alert" id="alert"></div>
+
+<div id="panelRenewalIdenticalCondition" style="display:none">
+    <form id="formRenewal" class="without-peripheral">
+        @Html.AntiForgeryToken()
+
+
+        <div class="row">
+            <div class="uif-col-12">
+                <h5 id="globalTitle"></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <h5><strong>@Resources.Language.LabelCurrentStatusPolicy</strong></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="uif-summary field-summary-alignment">
+                    <div class="items">
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelTableRisk</div>
+                                <div id="labelCurrentRisk">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelTableSum</div>
+                                <div id="labelCurrentSum">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelTablePremium</div>
+                                <div id="labelCurrentPremium">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelTableExpenses</div>
+                                <div id="labelCurrentExpenses">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelSurcharge</div>
+                                <div id="labelCurrentSurcharges">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelDiscount</div>
+                                <div id="labelCurrentDiscounts">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelTableTaxes</div>
+                                <div id="labelCurrentTaxes">0</div>
+                            </div>
+                        </div>
+                        <div class="item primary">
+                            <div>
+                                <div>@Resources.Language.LabelTableTotalPremium</div>
+                                <div id="labelCurrentTotalPremium">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="uif-col-12">
+                <h5><strong>@Resources.Language.LabelRenewalData</strong></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-2">
+                <label>@Resources.Language.LabelCurrentFrom</label>
+                @Html.TextBoxFor(model => model.ModifyFrom, "{0:dd/MM/yyyy}", new { id = "inputModifyFrom", @class = "uif-datepicker" })
+                @Html.ValidationMessageFor(model => model.ModifyFrom)
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.LabelCurrentTo</label>
+                @Html.TextBoxFor(model => model.ModifyTo, "{0:dd/MM/yyyy}", new { id = "inputModifyTo", @class = "uif-datepicker" })
+                @Html.ValidationMessageFor(model => model.ModifyTo)
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.LabelEffectiveDays</label>
+                <input type="text" id="inputModifyDays" disabled="disabled" class="rightAlign" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-6">
+                <label>@Resources.Language.LabelText</label>
+                @Html.TextAreaFor(model => model.Text, new { id = "inputText", rows = "5", style = "text-transform:uppercase" })
+                @Html.ValidationMessageFor(model => model.Text)
+            </div>
+            <div class="uif-col-6">
+                <label>@Resources.Language.LabelObservations</label>
+                @Html.TextAreaFor(model => model.Observations, new { id = "inputObservations", rows = "5", style = "text-transform:uppercase" })
+                @Html.ValidationMessageFor(model => model.Observations)
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-6">
+                <label>@Resources.Language.RecordObservations</label>
+                <textarea cols="12" id="inputRecord" name="inputRecord" rows="5" required></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-2">
+                <label class="field-required">@Resources.Language.LabelFilingNumber</label>
+                @Html.TextBoxFor(model => model.TicketNumber, new { id = "inputFilingNumber", type = "text", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TicketNumber)
+            </div>
+            <div class="uif-col-2">
+                <label class="field-required">@Resources.Language.LabelFilingDate</label>
+                @Html.TextBoxFor(model => model.TicketDate, new { id = "inputFilingDate", @class = "uif-datepicker" })
+                @Html.ValidationMessageFor(model => model.TicketDate)
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12" id="panelSummaryRenewal">
+                <div class="row">
+                    <div class="uif-col-6">
+                        <h5><strong>@Resources.Language.LabelSummaryRenewal</strong></h5>
+                    </div>
+                    <div class="uif-col-6">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        <div class="uif-summary field-summary-alignment">
+                            <div class="items">
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableRisk</div>
+                                        <div id="labelRisk">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableSum</div>
+                                        <div id="labelSum">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTablePremium</div>
+                                        <div id="labelPremium">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableExpenses</div>
+                                        <div id="labelExpenses">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelSurcharge</div>
+                                        <div id="labelCurrentSurcharges">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelDiscount</div>
+                                        <div id="labelCurrentDiscounts">0</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableTaxes</div>
+                                        <div id="labelTaxes">0</div>
+                                    </div>
+                                </div>
+                                <div class="item primary">
+                                    <div>
+                                        <div>@Resources.Language.LabelTableTotalPremium</div>
+                                        <div id="labelTotalPremium">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="panelOptionRenewal" style="display:none">
+    <div class="row">
+        <div class="uif-col-2"></div>
+        <div class="uif-col-8">
+            <h3> @Resources.Language.LabelRenewalPolicyIdenticalConditions</h3>
+            <p style="text-align: justify;">@Resources.Language.TextRenewalPolicyIdenticalConditions</p>
+        </div>
+        <div class="uif-col-2"></div>
+    </div>
+    <div class="row">
+        <div class="uif-col-2"></div>
+        <div class="uif-col-8">
+            <h3>
+                @Resources.Language.LabelRenewalPolicyOtherConditions
+            </h3>
+            <p style="text-align: justify;">@Resources.Language.TextRenewalPolicyOtherConditions</p>
+        </div>
+        <div class="uif-col-2"></div>
+    </div>
+</div>

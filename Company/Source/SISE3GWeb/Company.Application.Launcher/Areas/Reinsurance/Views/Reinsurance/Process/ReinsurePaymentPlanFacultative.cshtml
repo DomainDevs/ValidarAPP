@@ -1,0 +1,101 @@
+﻿@using System.Web.Mvc.Html
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = null;
+}
+
+<script id="facultative-template" type="text/template">
+    <div class="uif-row">
+        <div class="uif-col-5">
+            <strong>@Global.QuotaNumber:</strong>
+        </div>
+        <div class="uif-col-2">
+            <span class="label label-success">{{QuotaNumber}} </span>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-5">
+            <strong>@Global.DueDate:</strong>
+        </div>
+        <div class="uif-col-6">
+            &nbsp;{{DueDate}}"
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-5">
+            <strong>@Global.Amount:</strong>
+        </div>
+        <div class="uif-col-6">
+            $ {{Amount.Value}}
+        </div>
+    </div>
+</script>
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <!--left col-->
+        <div class="uif-col-5">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <b class="field-required">@Global.QuotaNumber: </b>
+                    <input type="text" id="PaymentFacultativeNumber" style="text-align: left" disabled="disabled" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <b class="field-required">@Global.DueDate: </b>
+                    <input type="text" value="@ViewBag.CurrentDate"
+                           class="uif-datepicker"
+                           data-mask="99/99/9999"
+                           id="DueDateReinsFacultative"
+                           name="DueDateReinsFacultative"
+                           data-val="true" data-val-required='@Global.RequiredField' />
+                    <span class="text-danger" data-valmsg-for="DueDateReinsFacultative" data-valmsg-replace="true" />
+                </div>
+                <br />
+                <div class="uif-col-6">
+                    <b class="field-required">@Global.Amount: </b>
+                    <input type="text" class="form-control" id="AmountReinsFacultative" name="AmountReinsFacultative"
+                           data-val="true" data-val-required="@Global.RequiredField" style="text-align:right"
+                           maxlength="24" onkeypress="return OnlyDecimalNumber(event, this)" />
+                    <span class="text-danger" data-valmsg-for="AmountReinsFacultative" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="uif-alert" id="alertPayentPlan"></div>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="pull-right">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0423"))
+                    {
+                        <button type="button" class="btn btn-default" id="CancelPlanFacultative">@Global.Cancel</button>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0422"))
+                    {
+                        <button type="submit" class="btn btn-primary" id="SavePlanFacultative" onclick="return false">@Global.Record</button>
+                    }
+                </div>
+            </div>
+        </div>
+        <!--right col-->
+        <div class="uif-col-7">
+            <div class="uif-panel" data-title="">
+                <div id="PaymentPlanFacultativelistview" class="uif-listview">
+                    <div class="footer">
+                        <div class="col-xs-6 text-left col-number">
+                            <label>@Global.TotalAmount</label>
+                            <b id="totalPaymentPlanFacultative">$0.00</b>
+                        </div>
+                        <div class="col-xs-6 text-left col-number">
+                            <b>@Global.RemainingValue</b>
+                            <b id="residuePaymentPlanFacultative">$0.00</b><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

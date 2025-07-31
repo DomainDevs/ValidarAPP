@@ -1,0 +1,97 @@
+﻿
+@{
+    Layout = null;
+}
+<form id="formEventEdit" class="form">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+            <input type="text" name="Index" id="indexEvent" hidden />
+            <input type="text" name="chkWorkFlow" hidden>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>ID - Nombre del Evento</label>
+                    <input class="text" type="text" id="inputEventName" name="Description" data-val="true" data-id="Id">
+                </div>
+                <div class="uif-col-6">
+                    <label>Grupo de Eventos</label>
+                    <select class="uif-select form-control" id="selectEventsGroup" name="selectEventsGroup" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                            data-id="Id" data-name="GroupEventDescription" data-native="false" data-filter="true"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>Condición</label>
+                    <select class="uif-select form-control" id="selectCondition" name="selectEventConditionGroup" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+                <div class="uif-col-6">
+                    <label>Tipo de Validación</label>
+                    <select class="uif-select form-control" id="selectValidationType" name="selectValidationType" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>Nombre Procedimiento Almacenado</label>
+                    @*onkeypress="return event.charCode == 32 "*@
+                    <input type="text" id="inputNameProcedure" name="ProcedureName" class="uif-autocomplete" data-displayrecords="20" data-source="@Url.Action("GetNameEntity", "EventsSarlaft")" data-val-required="@Resources.Language.ErrorEmptyRequiredFields" 
+                           data-displaykey="Description" data-id="Id" data-val="true" required />
+                </div>
+                <div class="uif-col-8">
+                    <label>Mensaje de Error</label>
+                    <input class="text" type="text" id="inputErrorMessage" name="DescriptionErrorMessage" data-val="true" data-id="Id">
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <div class="without-label">
+                        <input id="chkEnabledEvent" name="chkEnabled" type="checkbox">
+                        <label class="control-label col-md-offset-1" for="chkEnabledEvent">Habilitado</label>
+                    </div>
+                </div>
+                <div class="uif-col-4">
+                    <div class="without-label">
+                        <input  id="chkStop" name="chkEnabledStop" type="checkbox">
+                        <label class="control-label col-md-offset-1" for="chkStop">Detiene Ejecución (Restrictivo)</label>
+                    </div>
+                </div>
+                <div class="uif-col-4">
+                    <div class="without-label">
+                        <input id="chkAuthorize" name="chkEnabledAuthorize" type="checkbox">
+                        <label class="control-label col-md-offset-1" for="chkAuthorize">Requiere Autorización</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <table class="uif-table table-fixed min" id="tablePrefix" data-exporttocsv="false" data-exportname="cultura" data-add="false" data-edit="false" data-delete="false" data-filter="true" data-selectiontype="multiple"
+                           data-paginate="false" data-sort="true">
+                        <thead>
+                            <tr>
+                                <th data-property="Description">Sucursal</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="uif-col-6">
+                    <table class="uif-table table-fixed min" id="tableExecution" data-exporttocsv="false" data-exportname="cultura" data-add="false" data-edit="false" data-delete="false" data-filter="true" data-selectiontype="multiple"
+                           data-paginate="false" data-sort="true">
+                        <thead>
+                            <tr>
+                                <th data-property="Description">Asignar Puntos de Ejecución</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="uif-modalbuttons width-save">
+                <button type="button" class="btn btn-default" id="btnCancel" data-dismiss="modal">@Resources.Language.ButtonExit</button>
+                <button type="button" class="btn btn-primary" id="btnSaveEvent">@Resources.Language.ButtonSave</button>
+            </div>
+        </div>
+    </div>
+</form>

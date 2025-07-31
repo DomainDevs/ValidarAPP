@@ -1,0 +1,163 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.BusinessBranchViewModel
+@{
+    Layout = null;
+}
+<script id="BusinessTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+    <div>@Resources.Language.LabelPrefixCd: <strong class="success">{{Description}}</strong></div>
+    {{else ifCond Status "==" 3}}
+    <div>@Resources.Language.LabelPrefixCd: <strong class="warning">{{Description}} ({{Id}})</strong></div>
+    {{else ifCond Status "==" 4}}
+    <div>@Resources.Language.LabelPrefixCd: <strong class="danger">{{Description}} ({{Id}})</strong></div>
+    {{else}}
+    <div>@Resources.Language.LabelPrefixCd: <strong>{{Description}} ({{Id}})</strong></div>
+    {{/ifCond}}
+    <div class="hidden">
+        <br>
+        Descripcion corta: <strong>{{SmallDescription}}</strong>
+    </div>
+    <div class="hidden">
+        <br>
+        TinyDescription: <strong>{{TinyDescription}}</strong>
+    </div>
+    <div class="hidden">
+        <br>
+        TypeBusiness: <strong>{{PrefixTypeId}}</strong>
+    </div>
+    <div class="hidden">
+        <br>
+        TechnicalBranch : <strong>{{LineBusinessId}}</strong>
+    </div>
+    <div class="hidden">
+        <br>
+        Status : <strong>{{Status}}</strong>
+    </div>
+    <div class="hidden">
+        <strong>{{EnabledDescription}}</strong>
+    </div>
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.TitleBusinessBranch
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputProcess", @placeholder = @Resources.Language.LabelSearchBusinessBranch })
+        <button class="btn btn-default" id="btnSearchAdvScript"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsPrefix" class="footerModule">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        @*<button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>*@
+    </div>
+</script>
+<div class="uif-modal" id="ModalTechnicalBranch">
+    <div class="uif-modalbody">
+        @Html.Partial("TechnicalBranchBusiness")
+    </div>
+    <div class="uif-modalbuttons width-saveRule" id="buttonsAddMassive">
+        <button type="button" class="btn btn-default" id="btnCancelTechnicalBranch" data-dismiss="modal">@Resources.Language.ButtonCancel</button>
+        <button type="button" class="btn btn-primary" id="btnSaveTechnicalBranch">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+<form id="formBusinessBranch" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelCommercialBranchCode</label>
+                    @Html.TextBoxFor(model => model.IdPrefix, new { id = "inputCommercialBranchCode", placeholder = @Resources.Language.LabelCommercialBranchCode })
+                    @Html.ValidationMessageFor(model => model.IdPrefix)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", maxlength = "50", placeholder = @Resources.Language.LabelDescription })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDescriptionShort</label>
+                    @Html.TextBoxFor(model => model.SmallDescription, new { id = "inputDescriptionShortBusiness", maxlength = "15", placeholder = @Resources.Language.LabelDescriptionShort })
+                    @Html.ValidationMessageFor(model => model.SmallDescription)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelAbbreviation</label>
+                    @Html.TextBoxFor(model => model.TinyDescription, new { id = "inputTiny", maxlength = "3", placeholder = @Resources.Language.LabelAbbreviation })
+                    @Html.ValidationMessageFor(model => model.TinyDescription)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPrefixType</label>
+                    <select class="uif-select form-control" id="ddlBusinessType" data-id="Id" data-name="Description" name="PrefixTypeCode"
+                            data-val="true" data-filter="true" data-native="false" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"></select>
+                    @Html.HiddenFor(model => model.PrefixTypeCode)
+                    @Html.ValidationMessageFor(model => model.PrefixTypeCode)
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelTechnicalBranch</label>
+                    <div class="input-with-buttons">
+                        <select class="uif-select form-control" id="ddlBusinessBranch" data-id="Id" data-name="Description" name="LineBusinessId"
+                                data-val="true" data-filter="true" data-native="false" data-val-required="@Resources.Language.ErrorDocumentControlPrefixTechnical"></select>
+                        @Html.HiddenFor(model => model.LineBusinessId)
+                        @Html.ValidationMessageFor(model => model.LineBusinessId)
+                        <button type="button" class="btn btn-primary" id="btnTechnicalBranch">
+                            <span class="glyphicon glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="inputDetailCommission" name="inputDetailCommission" />
+                        <label for="inputDetailCommission">@Resources.Language.DetailCommissions</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listViewBusinessBranch" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                @*<button type="button" class="btn btn-default" id="btnNewBusinessBrach">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAcceptBusinessBrach">@Resources.Language.Add </button>*@
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="uif-modal" id="modalAditionalInformation">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/Prefix/AditionalInformation.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomAditionalInformation">
+        <button type="button" class="btn btn-default" id="btnCancelAditionalInformation" data-dismiss="modal">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-primary  btn-main " id="btnAceptAditionalInformation">@Resources.Language.ButtonSave</button>
+    </div>
+</div>

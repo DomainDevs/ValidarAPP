@@ -1,0 +1,135 @@
+﻿
+@{
+    Layout = null;
+}
+
+@*Titulo *@
+<br>
+<script id="title-template" type="text/template">
+    <div id="title" class="column">
+        @Resources.Language.LabelReportRenovation
+    </div>
+</script>
+
+<form class="form without-space" id="formReportRenovation">
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelPrefix</label>
+                <select class="uif-select form-control" id="Prefix" name="Prefix"
+                        data-source=""
+                        data-id="Id" data-name="Description"
+                        data-val="true"
+                        data-val-required="Campo requerido"
+                        data-filter="true" data-native="false"></select>
+                <span class="text-danger" data-valmsg-for="Prefix" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.Office</label>
+                <select class="uif-select form-control" id="Branch" name="Branch"
+                        data-source=""
+                        data-id="Id" data-name="Description"
+                        data-val="true"
+                        data-filter="true" data-native="false"></select>
+                <span class="text-danger" data-valmsg-for="Branch" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelSalesPoint</label>
+                <select class="uif-select form-control" id="SalePoint" name="SalePoint"
+                        data-source=""
+                        data-id="Id" data-name="Description"
+                        data-val="true"
+                        data-filter="true" data-native="false"></select>
+                <span class="text-danger" data-valmsg-for="SalePoint" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-4">
+                <label>@Resources.Language.Agent</label>
+                @Html.TextBox("IntermediaryId", null, new { @class = "uif-input-search", id = "IntermediaryId", @placeholder = @Resources.Language.PlaceHolderKeyName })
+                
+
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelDirector</label>       
+                @Html.TextBox("DirectorId", null, new { @class = "uif-input-search", id = "DirectorId", @placeholder = @Resources.Language.PlaceHolderDocumentName })
+                
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.LabelRenewed</label>
+                <select class="uif-select form-control" id="Renewed" name="Renewed"
+                        data-val="true"
+                        data-filter="true" data-native="false">
+                    <option></option>
+                    <option value="true"></option>
+                    <option value="false"></option>
+                </select>
+                <span class="text-danger" data-valmsg-for="Renewed" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelInitialExpirationDateFrom</label>
+                @Html.TextBox("SinceDate", null, new { id = "SinceDate", @class = "uif-datepicker" })
+                @Html.ValidationMessage(@Resources.Language.LabelValidateDateInitial)
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelInitialExpirationDateUntil</label>
+                @Html.TextBox("UntilDate", null, new { id = "UntilDate", @class = "uif-datepicker" })
+                @Html.ValidationMessage(@Resources.Language.LabelValidateDateFinal)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">            
+            <button type="button" class="btn btn-primary" id="btnNewReportRenovation">
+                <span aria-hidden="true"></span>
+                @Resources.Language.ButtonConsult
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="active">
+                <table class="uif-table" data-selectiontype="none" id="tableReportRenovation" data-filter="false" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="NumberTemporary" data-visible="true">@Resources.Language.LabelNumberTemporary</th>
+                            <th data-property="GenerationTemporayDate" data-visible="true">@Resources.Language.LabelGenerationTemporayDate</th>
+                            <th data-property="Taker" data-visible="true">@Resources.Language.LabelTaker</th>
+                            <th data-property="RiskIdentifier" data-visible="true">@Resources.Language.LabelRiskIdentifier</th>
+                            <th data-property="TotalBonus" data-visible="true">@Resources.Language.LabelTotalBonus</th>
+                            <th data-property="Hierarchy" data-visible="true">@Resources.Language.LabelHierarchy</th>
+                            <th data-property="Level" data-visible="true">@Resources.Language.LabelLevel</th>
+                            <th data-property="Renewed" data-visible="true">@Resources.Language.LabelRenewed</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitReportRenovation">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExportReportRenovation">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnNewReportRenovation">
+            <span aria-hidden="true"></span>
+            @Resources.Language.NewForm
+        </button>
+    </div>
+</script>

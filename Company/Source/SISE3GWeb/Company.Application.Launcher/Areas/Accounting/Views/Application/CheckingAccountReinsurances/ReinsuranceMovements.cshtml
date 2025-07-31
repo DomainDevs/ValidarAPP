@@ -1,0 +1,332 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "ReinsuranceMovements";
+}
+<script id="reinsurance-display-template" type="text/template">
+    <div>
+        <strong>{{BranchName}}</strong> | {{SalePointName}} | {{ConceptName}} <br>
+        <span class="text-danger"><strong>{{NatureName}}</strong></span>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"> {{Amount}}</div>
+    </div>
+</script>
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <!--left col-->
+        <div class="uif-col-6">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.Branch</label>
+                    <select class="uif-select form-control" id="selectReinsuranceBranch" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceBranch" data-valmsg-replace="true" />
+                    <input type="hidden" id="MovementBillNumber" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.SalePoint</label>
+                    <select class="uif-select form-control" id="selectReinsuranceSalePoint" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceSalePoint" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.Company</label>
+                    <select class="uif-select form-control" id="selectReinsuranceCompany" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceCompany" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.TechnicalPrefix</label>
+
+                    <select class="uif-select form-control" id="selectReinsurancePrefix" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsurancePrefix" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.SubPrefix</label>
+                    <select class="uif-select form-control" id="selectReinsuranceSubPrefix" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceSubPrefix" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.ReinsurerDocumentNumber</label>
+                    @Html.TextBox("ReinsurerDocumentNumber", "", new
+                    {
+                        id = "ReinsurerDocumentNumber",
+                        name = "ReinsurerDocumentNumber",
+                        maxlength = "20",
+                        @class = "uif-autocomplete",
+                        type = "text",
+                        data_source = @Url.Content("~/Accounting/Common/GetReinsurerByDocumentNumber"),
+                        onkeypress = "return JustNumbers(event, this);",
+                        hidden = "hidden",
+                        data_displaykey = "ReinsurerDocumentNumber",
+                        placeholder = @Global.EnterReinsuranceDocumentNumber,
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="ReinsurerDocumentNumber" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.ReinsurerName</label>
+                    @Html.TextBox("ReinsurerName", "", new
+                    {
+                        id = "ReinsurerName",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetReinsurerByName"),
+                        data_displaykey = "ReinsurerName",
+                        placeholder = @Global.EnterReinsuranceName,
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="ReinsurerName" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.ContractType</label>
+                    <select class="uif-select form-control" id="selectReinsuranceContractType" data-id="ContractTypeId" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceContractType" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Contract</label>
+                    <input type="text"
+                           data-displaykey="Name"
+                           placeholder='@Global.MessageSelectContract'
+                           id="ReinsurerContract"
+                           name="ReinsurerContract"
+                           data-val="true"
+                           data-val-required='@Global.RequiredField' disabled="disabled">
+                    <span class="text-danger" data-valmsg-for="ReinsurerContract" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.Stretch</label>
+                    <select class="uif-select form-control" id="selectReinsuranceStretch" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceStretch" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.BrokerDocumentNumber</label>
+                    @Html.TextBox("BrokerDocumentNumber", "", new
+               {
+                   id = "BrokerDocumentNumber",
+                   @class = "uif-autocomplete",
+                   data_source = @Url.Content("~/Accounting/Common/GetBrokerByDocumentNumber"),
+                   onkeypress = "return JustNumbers(event, this);",
+                   data_displaykey = "BrokerDocumentNumber",
+                   placeholder = "Tipea documento broker.",
+                   data_val = "true",
+                   data_val_required = @Global.RequiredField
+               })
+                    <span class="text-danger" data-valmsg-for="BrokerDocumentNumber" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.BrokerName</label>
+                    @Html.TextBox("BrokerName", "", new
+                    {
+                        id = "BrokerName",
+                        maxlength = "50",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetBrokerByName"),
+                        data_displaykey = "BrokerName",
+                        placeholder = "Tipea nombre broker.",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="BrokerName" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.MovementDescription</label>
+                    @Html.TextBox("ReinsuranceMovementDescription", "", new
+                        {
+                            style = "text-align: left",
+                            maxlength = "40",
+                            @onblur = "this.value = this.value.toUpperCase();",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="ReinsuranceMovementDescription" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.AccountingAccountConceptCode</label>
+                    <select class="uif-select form-control" id="selectReinsuranceAccountingAccountConcept" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceAccountingAccountConcept" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.Nature</label>
+                    <select class="uif-select form-control" id="selectReinsuranceNature" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceNature" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Currency</label>
+                    <select class="uif-select form-control" id="selectReinsuranceCurrency" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceCurrency" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.AmountExchange</label>
+                    <input type="text" id="ReinsuranceExchangeRate" disabled="disabled" style="text-align: right" />
+                    <input type="hidden" id="MovementMessageDuplicate" name="MovementMessageDuplicate" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Amount</label>
+                    @Html.TextBox("ReinsuranceAmount", "", new
+                        {
+                            @onkeypress = "return OnlyDecimalNumber(event,this)",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="ReinsuranceAmount" data-valmsg-replace="true" />
+                    <input type="hidden" id="ReinsuranceLocalAmount" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.ApplicationYear</label>
+                    @Html.TextBox("ReinsuranceApplicationYear", "", new
+                        {
+                            @onkeypress = "return JustNumbers(event,this)",
+                            style = "text-align: left",
+                            maxlength = "4",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="ReinsuranceApplicationYear" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.ApplicationMonth</label>
+                    <select class="uif-select form-control" id="selectReinsuranceApplicationMonth" data-id="Id" data-name="Description"></select>
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceApplicationMonth" data-valmsg-replace="true" />
+                </div>
+            </div>
+            @* optional *@
+            <div class="uif-row" id="OptionalOne">
+                <div class="uif-col-6">
+                    <label>@Global.PolicyBranch</label>
+                    @Html.DropDownList("selectReinsurancePolicyBranch", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="selectReinsurancePolicyBranch" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.PolicyPrefix</label>
+                    @Html.DropDownList("selectReinsurancePolicyPrefix", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetPrefixes"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="selectReinsurancePolicyPrefix" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row" id="OptionalThree">
+                <div class="uif-col-4">
+                    <label>@Global.Policy</label>
+                    @Html.TextBox("ReinsurancePolicy", "", new
+                        {
+                            @onkeypress = "return JustNumbers(event,this)",
+                            style = "text-align: left",
+                            maxlength = "10",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="ReinsurancePolicy" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Global.Endorsement</label>
+                    @Html.TextBox("ReinsuranceEndorsement", "", new
+                        {
+                            @onkeypress = "return JustNumbers(event,this)",
+                            style = "text-align: left",
+                            maxlength = "5",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="ReinsuranceEndorsement" data-valmsg-replace="true" />
+                </div>
+
+                <div class="uif-col-4">
+                    <label>@Global.SlipNumber</label>
+                    @Html.DropDownList("selectReinsuranceSlip", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="selectReinsuranceSlip" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="uif-alert" id="alertForm"></div>
+                </div>
+            </div>
+        </div>
+        <!--End left col-->
+        <!--right col-->
+        <div class="uif-col-6">
+            <div id="reinsurancesListView" class="uif-listview">
+                <div class="footer">
+                    <label>@Global.Credit</label>
+                    <b id="TotalReinsuranceMovement">$0.00</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>@Global.Debit</label>
+                    <b id="TotalDebitReinsuranceMovement">$0.00</b>
+                </div>
+            </div>
+        </div>
+        <!--End right col-->
+    </div>
+    <div class="uif-row">
+        <div class="pull-right">
+            <div class="uif-modalbuttons">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0499"))
+                {
+                    <button type="submit" class="btn btn-primary" id="ReinsuranceAdd" onclick="return false">@Global.Add</button>
+                }
+                <button type="button" class="btn btn-default" id="ReinsuranceAcceptMovement">@Global.Accept</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

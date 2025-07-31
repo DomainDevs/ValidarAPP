@@ -1,0 +1,24 @@
+<map version="2.0" type="class" name="Reinsurer" namespace="Sistran.Core.Application.UniquePerson" file-version="1.0" description="REINSURER_ENTITY">
+  <properties>
+    <property name="IndividualId" type="Integer" key="true" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="ReinsurerCode" type="Integer" description="REINSURER_CODE_PROPERTY" autonumber="Identity" key="true" />
+    <property name="EnteredDate" type="DateTime" description="ENTERED_DATE_PROPERTY" />
+    <property name="ModifyDate" type="DateTime" nullable="true" description="MODIFY_DATE_PROPERTY" />
+    <property name="DeclinedDate" type="DateTime" nullable="true" description="DECLINED_DATE_PROPERTY" />
+    <property name="DeclinedTypeCode" type="Integer" nullable="true" description="DECLINED_TYPE_CODE_PROPERTY" />
+    <property name="Annotations" type="String" size="100" nullable="true" description="ANNOTATIONS_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="REINSURER" schema="UP" alias="REINSURER" update="true">
+      <columns>
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" key="true" />
+        <column name="REINSURER_CD" type="Int32" property="ReinsurerCode" allowNull="false" identity="true" key="true" />
+        <column name="ENTERED_DATE" type="DateTime" property="EnteredDate" allowNull="false" />
+        <column name="MODIFY_DATE" type="DateTime" property="ModifyDate" />
+        <column name="DECLINED_DATE" type="DateTime" property="DeclinedDate" />
+        <column name="DECLINED_TYPE_CD" type="Byte" property="DeclinedTypeCode" />
+        <column name="ANNOTATIONS" type="String" property="Annotations" size="100" />
+      </columns>
+    </table>
+  </tables>
+</map>

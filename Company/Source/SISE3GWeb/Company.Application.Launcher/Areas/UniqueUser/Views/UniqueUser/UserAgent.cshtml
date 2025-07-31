@@ -1,0 +1,48 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.AgentModelsView
+@using Sistran.Core.Framework.UIF.Web.Helpers;
+
+<script id="agencyTemplate" type="text/template">
+    <div><strong>{{FullName}}</strong></div>
+    <div>
+        <br> <strong class="warning">({{Code}})</strong>
+    </div>
+    <div class="hidden">
+        {{StatusType}}
+    </div>
+</script>
+
+<form id="formAgent" class="form modal-Colombia">
+    @Html.HiddenFor(model => model.AgencyId, new { id = "AgencyId" })
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.Agent</label>
+            @Html.TextBoxFor(model => model.AgentName, new { id = "inputAgent", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderKeyName })
+            @Html.ValidationMessageFor(model => model.AgentName)
+        </div>
+        <div class="uif-col-6">
+            <div id="listAgent" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6" id="btnsAgent">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewAgent">
+                    @Resources.Language.New
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0693"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnAgentAccept">
+                        @Resources.Language.Add
+                    </button>
+                }
+
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

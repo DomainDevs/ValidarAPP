@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="PaymentTax" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="PAYMENT_TAX_ENTITY">
+  <properties>
+    <property name="PaymentTaxCode" type="Integer" key="true" description="PAYMENT_TAX_CODE_PROPERTY" nullable = "false" autonumber="Identity" />
+    <property name="PaymentCode" type="Integer" nullable="true" description="PAYMENT_CODE_PROPERTY" />
+    <property name="TaxCode" type="Integer" nullable="true" description="TAX_CODE_PROPERTY" />
+    <property name="TaxCategoryCode" type="Integer" nullable="true" description="TAX_CATEGORY_CODE_PROPERTY" />
+    <property name="TaxConditionCode" type="Integer" nullable="true" description="TAX_CONDITION_CODE_PROPERTY" />
+    <property name="TaxRate" type="Decimal" precision="16" scale="2" nullable="true" description="TAX_RATE_PROPERTY" />
+    <property name="TaxAmount" type="Decimal" precision="16" scale="2" nullable="true" description="TAX_AMOUNT_PROPERTY" />
+    <property name="TaxBase" type="Decimal" precision="16" scale="2" nullable="true" description="TAX_BASE_PROPERTY" />
+    <property name="Retention" type="Boolean" nullable="true" description="RETENTION_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_TAX" schema="ACC" alias="PAYMENT_TAX" update="true">
+      <columns>
+        <column name="PAYMENT_TAX_CD" type="Int32" property="PaymentTaxCode" key="true" identity ="true" />
+        <column name="PAYMENT_CD" type="Int32" property="PaymentCode" />
+        <column name="TAX_CD" type="Int32" property="TaxCode" />
+        <column name="TAX_CATEGORY_CD" type="Int32" property="TaxCategoryCode" />
+        <column name="TAX_CONDITION_CD" type="Int32" property="TaxConditionCode" />
+        <column name="TAX_RATE" type="Decimal" property="TaxRate" size="19" precision="16" scale="2" />
+        <column name="TAX_AMOUNT" type="Decimal" property="TaxAmount" size="19" precision="16" scale="2" />
+        <column name="TAX_BASE" type="Decimal" property="TaxBase" size="19" precision="16" scale="2" />
+        <column name="RETENTION" type="Boolean" property="Retention" />
+      </columns>
+    </table>
+  </tables>
+</map>

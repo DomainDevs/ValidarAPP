@@ -1,0 +1,84 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AccountBlockadeSpreading;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.AccountBlockadeSpreading</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="Cancel">
+            <i class="fa fa-times"></i> @Global.Cancel
+        </button>
+        <button type="button" class="btn btn-primary" id="Spread">
+            <i class="fa fa-check"></i> @Global.Record
+        </button>
+    </footer>
+}
+
+@section Modals
+{
+    <div class="uif-modal" id="SpreadConfirmationModal">
+        <div class="uif-modalbody">
+            @Global.MsgWantContinue
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="spreadConfirmationCancel" data-dismiss="modal">@Global.No</button>
+            <button type="submit" class="btn btn-primary" id="spreadConfirmationAccept">@Global.Yes</button>
+        </div>
+    </div>
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="blockadeSpreadingAlert"></div>
+    </div>
+</div>
+
+<form id="blockadeSpreadingForm">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label for="">@Global.AccountToBeDuplicated</label>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBlockadeSpreadingAccountingAccounts", "AccountingAccount")"
+                   data-displaykey="FullName"
+                   placeholder='@Global.EnterNumberAccount' id="SourceAccount"
+                   name="SourceAccount" data-val="true"
+                   data-minlenght="1"
+                   data-val-required='@Global.RequiredField'
+                   value=""/>
+            <span class="text-danger" data-valmsg-for="SourceAccount" data-valmsg-replace="true" ></span>
+        </div>
+        
+        <div class="uif-col-4"></div>
+        <div class="uif-col-4"></div>
+    </div>
+    <div class="uif-row"></div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label for="">@Global.ToAccount</label>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBlockadeSpreadingAccountingAccounts", "AccountingAccount")"
+                   data-displaykey="FullName"
+                   placeholder='@Global.EnterNumberAccount' id="DestinationAccount"
+                   name="DestinationAccount" data-val="true"
+                   data-minlenght="1"
+                   data-val-required='@Global.RequiredField'/>
+            <span class="text-danger" data-valmsg-for="DestinationAccount" data-valmsg-replace="true"> </span>
+        </div>
+        
+        <div class="uif-col-4"></div>
+        <div class="uif-col-4"></div>
+    </div>
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/AccountBlockadeSpreading")
+}

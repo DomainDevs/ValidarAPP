@@ -1,0 +1,90 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.AddressViewModel
+<script id="addresTemplate" type="text/template">
+    <div><strong>{{AddressType.Description}}</strong></div>
+    <div><br>{{Description}}</div>
+    <div><br>{{StateDescription}} - {{CityDescription}}</div>
+    {{#if IsMailAddress}}
+    <div class="warning"><br>Principal</div>
+    {{/if}}
+    <div><br>Actualizado por {{UpdateUser}} - Fecha: {{UpdateDate}} </div>
+
+</script>
+<form id="formAddress" class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelTypeAddress</label>
+                    <select class="uif-select form-control" id="selectAddress" data-id="Id" data-name="Description"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelFullAddress</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputAddressAll", @class = "upperCase-co", maxlength = 60 })
+                </div>
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <div class="checkbox">
+                            <input type="checkbox" id="rdPrincipal" checked="checked" />
+                            <label for="rdPrincipal">@Resources.LanguagePerson.LabelPrincipalCheckBox</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelCountry</label>
+                    <input class="uif-input-search"
+                           data-val="true" id="inputCountryAdPn" name="inputCountryAdPn" placeholder="@Resources.LanguagePerson.NameCountry" type="text">
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.LabelCodDaneCity</label>
+                    <input type="text" value="" id="inputDaneCode" name="DaneCode" maxlength="5" placeholder="@Resources.LanguagePerson.EnterCodeDANE" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelState</label>
+                    <input class="uif-input-search"
+                           data-val="true" id="inputStateAdPn" name="inputStateAdPn" placeholder="@Resources.LanguagePerson.NameDepartment" type="text">
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelCity</label>
+                    <input class="uif-input-search"
+                           data-val="true" id="inputCityAdPn" name="inputCityAdPn" placeholder="@Resources.LanguagePerson.NameCity" type="text">
+                </div>
+                <!--
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelDistrict</label>
+                    <input class="uif-input-search"
+                           data-val="true" id="inputCityAdPn" name="inputCityAdPn" placeholder="@Resources.LanguagePerson.NameCity" type="text">
+                </div>
+                -->
+            </div>
+        </div>
+        <div class="uif-col-6" id="listAddress">
+            <div id="listAddresses" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnNewAddress">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.LanguagePerson.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btnCreateAddress">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.LanguagePerson.AddForm
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

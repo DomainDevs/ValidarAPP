@@ -1,0 +1,131 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Externals.Models.QuerySISAViewModel
+@{
+    Layout = null;
+}
+@*@section Title
+    {
+        <div id="" class="row main-title">
+            <div id="tittle" class="column-70">
+                @Resources.Language.TitleSISAQuery
+            </div>
+        </div>
+    }*@
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.TitleSISAQuery
+    </div>
+    <div class="column-30 important">
+    </div>
+</script>
+
+<form id="formFasecolda" autocomplete="off" class="form form-space-adjusted">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="row row-space-adjusted"></div>
+            <div class="row row-space-adjusted">
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelPlate</label>
+                    <!--<input class="uif-autocomplete" type="text" data-source="Externals/FasecoldaSISA/GetLicensePlate" data-displaykey="Empresa"
+           placeholder=@Resources.Language.LabelPlate data-displayrecords="5" id="inputPlate">-->
+                    @Html.TextBoxFor(model => model.Plate, new { id = "inputPlate", placeholder = @Resources.Language.LabelPlate })
+                    @Html.ValidationMessageFor(model => model.Plate)
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.LabelEngine</label>
+                    @Html.TextBoxFor(model => model.Engine, new { id = "inputEngine", placeholder = @Resources.Language.LabelEngine })
+                    @Html.ValidationMessageFor(model => model.Engine)
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.LabelChassis</label>
+                    @Html.TextBoxFor(model => model.Chassis, new { id = "inputChassis", placeholder = @Resources.Language.LabelChassis })
+                    @Html.ValidationMessageFor(model => model.Chassis)
+                </div>
+                @*<div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelCodValid</label>
+                        @Html.TextBox("txtName2", null, new { id = "inputVerificationCode", placeholder = @Resources.Language.LabelCodValid })
+                    </div>*@
+                @*<div class="uif-col-6">
+                        <div class="form-group" style="text-align:center"></div>
+                        <div class="form-group" style="text-align:center">
+                            <img style="height:30px; width:110px; padding-right:5px;" src="@Url.Content("~/Account/Captcha")" alt="Image" id="captchaImage" />
+                            <input type="button" class="btn btn-primary" id="btnReloadCaptcha">
+                        </div>
+                    </div>*@
+                <div class="uif-col-3">
+                    <div class="form-group" style="text-align:center"></div>
+                    <button type="button" class="btn btn-primary" id="btnSearch">
+                        @Resources.Language.search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="uif-col col-md-12">
+        <ul class="nav nav-tabs uif-tab-pc" id="tabs">
+            <li class="tabGuarantee" id="optionPromissoryNote">
+                <a href="#tabPromissoryNote" id="linkPromissoryNote" data-toggle="tab" class=""> @Resources.Language.LabelPoliceInformation</a>
+            </li>
+            <li class="tabGuarantee" id="optionPledge">
+                <a href="#tabPledge" id="linkPledge" data-toggle="tab" class=""> @Resources.Language.LabelClaims</a>
+            </li>
+            <li class="tabGuarantee" id="optionCDT">
+                <a href="#tabCDT" id="linkCDT" data-toggle="tab" class=""> @Resources.Language.LabelValuesGuide</a>
+            </li>
+            <li class="tabGuarantee" id="optionOthers">
+                <a href="#tabOthers" id="linkOthers" data-toggle="tab" class=""> @Resources.Language.LabelVINVerification</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="tabPromissoryNote" class="tab-pane">
+                @Html.Partial("PoliciesInformation", Model)
+            </div>
+
+            <div id="tabPledge" class="tab-pane">
+                @Html.Partial("~/Areas/Externals/Views/FasecoldaSISA/Claims.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.PledgeViewModel())
+            </div>
+
+            <div id="tabCDT" class="tab-pane">
+                @Html.Partial("~/Areas/Externals/Views/FasecoldaSISA/ValuesGuide.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.FixedTermDepositViewModel())
+            </div>
+
+            <div id="tabOthers" class="tab-pane">
+                @Html.Partial("~/Areas/Externals/Views/FasecoldaSISA/VINVerification.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.OthersViewModel())
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@section Toolbar
+    {
+        <footer>
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnExitSISA">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    <span class="" aria-hidden="true">
+                        @Resources.Language.ButtonExit
+                    </span>
+                </button>
+            </div>
+        </footer>
+    }*@
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnExitSISA">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">
+                @Resources.Language.ButtonExit
+            </span>
+        </button>
+    </div>
+</script>
+
+@*@section Scripts
+    {
+    @Scripts.Render("~/bundle/js/FasecoldaSISA")
+}*@

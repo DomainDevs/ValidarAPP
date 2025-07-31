@@ -1,0 +1,139 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.ChannelViewModel
+
+<script id="ChannelTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+    <div><strong class="success">{{DetailDescription}}</strong></div>
+    {{else ifCond Status "==" 3}}
+    <div><strong class="warning">{{DetailDescription}} ({{Id}})</strong></div>
+    {{else ifCond Status "==" 4}}
+    <div><strong class="danger">{{DetailDescription}} ({{Id}})</strong></div>
+    {{else}}
+    <div><strong>{{DetailDescription}} ({{Id}})</strong></div>
+    {{/ifCond}}
+    {{servicios}}
+</script>
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.LabelTabChannel
+        </div>
+        <div class="column-30 even">
+            <input type="text" name="Id" id="inputSearchChannel" maxlength="30" class="uif-input-search" placeholder="@Resources.Language.EnterTextChannelToSearch" />
+            <button class="btn btn-default" id="btnSearchAdvChannel"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExport
+            </button>
+
+            <button class="btn btn-primary" id="btnSaveChannel">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonSave
+            </button>
+
+        </div>
+
+    </footer>
+}
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formChannel" autocomplete="off" class="form without-space">
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+				<input type="hidden" id="inputId" name="Id" />
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.DetailDescription, new { id = "inputDescription" })
+                    @Html.ValidationMessageFor(model => model.DetailDescription)
+                </div>
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <input type="checkbox" id="inputIsEnabled" checked="checked"/>
+                        <label for="inputIsEnabled">@Resources.Language.LabelEnabled</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <h5><strong>@Resources.Language.LabelServiceInquiry</strong></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-3">
+                    <input type="checkbox" id="inputIsScore" />
+                    <label for="inputIsScore">@Resources.Language.LabelDataCredit</label>
+                </div>
+                <div class="uif-col-3">
+                    <input type="checkbox" id="inputIsFine" />
+                    <label for="inputIsFine">@Resources.Language.LabelTransitTaxes</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="without-label">
+                        <button type="button" class="btn btn-default secondary-Colombia" id="btnValuesDefault">@Resources.Language.ButtonValuesDefault</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary" id="panelChannel">
+            <div id="listChannel" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsChannel">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewChannel">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnChannelAccept">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@*--Vistas Parciales*@
+
+@* -- Periferico Moneda -- *@
+<div class="uif-modal" id="modalValuesDefault">
+    <div class="uif-modalbody">
+        @Html.Partial("ValuesDefault")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomValuesDefault">
+        <button type="button" class="btn btn-default" id="btnCancelValuesDefault" data-dismiss="modal">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-primary btn-main" id="btnAcceptValuesDefault">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Channel")
+}
+
+
+

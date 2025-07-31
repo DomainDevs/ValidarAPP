@@ -1,0 +1,380 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model  Sistran.Core.Application.ReinsuranceServices.DTOs.LevelDTO
+
+
+@{
+    ViewBag.Title = "ContractLevelDialog";
+    string rowType1 = "";
+    string rowType2 = "";
+    string rowType3 = "";
+
+    string divAssignmentPercentage = "";
+    string lblRetentionLimit = "visible";
+    string retentionLimit = "text";
+    string lblPriority = "hidden";
+    string lblLinesNumber = "";
+    string divLinesNumber = "";
+    string linesNumberReadonly = "";
+    string assignmentPercentageReadonly = "";
+    string contractLimitReadonly = "";
+    string divContractLimit = "";
+    string divRetentionLimit = "";
+
+    int contractLevelCode = 0;
+    if (Model.ContractLevelId > 0)
+    {
+        contractLevelCode = Model.ContractLevelId;
+    }
+
+    int contractCode = 0;
+    if (Model.Contract.ContractId > 0)
+    {
+        contractCode = Model.Contract.ContractId;
+    }
+
+    int levelNumber = 0;
+    if (Model.Number > 0)
+    {
+        levelNumber = Model.Number;
+    }
+
+    decimal assignmentPercentage = 0;
+    if (Model.AssignmentPercentage > 0)
+    {
+        assignmentPercentage = Model.AssignmentPercentage;
+    }
+
+    decimal? lineNumber = 0;
+    if (Model.LinesNumber > 0)
+    {
+        lineNumber = Convert.ToDecimal(Model.LinesNumber);
+    }
+
+    decimal contractLimit = 0;
+    if (Model.ContractLimit > 0)
+    {
+        contractLimit = Convert.ToDecimal(Model.ContractLimit);
+    }
+
+    int calculationType = 0;
+    if (Model.CalculationType != 0)
+    {
+        calculationType = Convert.ToInt32(Model.CalculationType);
+    }
+
+    int applyOnType = 0;
+    if (Model.ApplyOnType != 0)
+    {
+        applyOnType = Convert.ToInt32(Model.ApplyOnType);
+    }
+
+    int premiumType = 0;
+    if (Model.PremiumType != 0)
+    {
+        premiumType = Convert.ToInt32(Model.PremiumType);
+    }
+
+
+    if (Model.Contract.ContractType.ContractFunctionality.ContractFunctionalityId == 3)
+    {
+        rowType1 = "show";
+        rowType2 = "show";
+        rowType3 = "show";
+    }
+    else
+    {
+        rowType1 = "hidden";
+        rowType2 = "hidden";
+        rowType3 = "hidden";
+    }
+
+    if ((Model.Contract.ContractType.ContractTypeId == 1))
+    {
+        divRetentionLimit = "hidden";
+    }
+
+
+    if ((Model.Contract.ContractType.ContractTypeId == 4) || (Model.Contract.ContractType.ContractTypeId == 2) || (Model.Contract.ContractType.ContractTypeId == 3) ||
+        (Model.Contract.ContractType.ContractTypeId == 5) || (Model.Contract.ContractType.ContractTypeId == 6))
+    {
+        divAssignmentPercentage = "hidden";  // div percentage
+    }
+
+    if ((Model.Contract.ContractType.ContractTypeId == 1))
+    {
+        lblRetentionLimit = "hidden";
+        retentionLimit = "hidden";
+    }
+
+    if ((Model.Contract.ContractType.ContractTypeId == 3) || (Model.Contract.ContractType.ContractTypeId == 5))
+    {
+        lblRetentionLimit = "hidden";
+        lblPriority = "visible";
+    }
+
+    if ((Model.Contract.ContractType.ContractTypeId == 4) || (Model.Contract.ContractType.ContractTypeId == 2) || (Model.Contract.ContractType.ContractTypeId == 6))
+    {
+        lblLinesNumber = "visible";
+        divLinesNumber = "text";
+
+    }
+    else
+    {
+        lblLinesNumber = "hidden";
+        divLinesNumber = "hidden";
+    }
+
+    if (Model.Contract.ContractType.ContractTypeId == 6)
+    {
+        divContractLimit = "hidden";
+        linesNumberReadonly = "readOnly";
+    }
+
+    if ((Model.Contract.ContractType.ContractTypeId == 4) || (Model.Contract.ContractType.ContractTypeId == 2))
+    {
+        contractLimitReadonly = "readOnly";
+    }
+}
+
+<form id="formContractLevel" onsubmit="return false" class="form">
+    
+    <div class="uif-modalbody">
+        
+        <div class="uif-row">
+            <div class="uif-col-4">
+                @Html.HiddenFor(model => model.ContractLevelId)
+                @Html.ValidationMessage("ContractLevelId")
+
+                <b>@Global.LevelNumber</b>
+                @Html.TextBoxFor(model => model.Number, new { @readonly = true })
+
+                <input type="hidden" id="ContractLevelNumber" name="ContractLevelNumber" value="@levelNumber" />
+            </div>
+
+            <div class="uif-col-4" @divContractLimit>
+
+                <input type="hidden" id="ContractCode" name="ContractCode" value="@contractCode" />
+                
+                <b id="lblContractLimit" class="field-required">@Global.ContractLimit</b>
+                <input type="text"
+                       id="ContractLimit"
+                       name="ContractLimit"
+                       maxlength="22"
+                       onkeypress="return OnlyDecimalNumber(event, this);"
+                       data-val-required='@Global.RequiredField'
+                       data-val="true"
+                       data-val-range-min = "1"
+                       data-val-range = '@Global.MinValueContractLimit'
+                       data-msg-lessThan = '@Global.ContractLimitMinValue',
+                       data-rule-lessThan = "#RetentionLimit"
+                       value="@contractLimit"
+                       style="text-align: right"
+                       @contractLimitReadonly />
+                <span class="text-danger" data-valmsg-for="ContractLimit" data-valmsg-replace="true" />
+
+                <input type="hidden" id="ContractType" name="ContractType" value="@Model.Contract.ContractType.ContractTypeId" />
+            </div>
+
+            <div class="uif-col-4" @divAssignmentPercentage>
+                <b id="lblAssignmentPercentage" class="field-required">@Global.AssignmentPercentage</b>
+                <input type="text"
+                       id="Percentage"
+                       name="Percentage"
+                       maxlength="5"
+                       onkeypress="return OnlyDecimalNumber(event, this);"
+                       data-val-required='@Global.RequiredField'
+                       data-val="true"
+                       data-val-range-min = "1"
+                       data-val-range-max = "100"
+                       data-val-range = '@Global.ErrorPercentageHigher'
+                       value='@Convert.ToDecimal(assignmentPercentage)'
+                       style="text-align: right"
+                       @assignmentPercentageReadonly
+                       />
+                <span class="text-danger" data-valmsg-for="Percentage" data-valmsg-replace="true" />
+            </div>
+        </div>
+        
+        <div class="uif-row">
+            <div class="uif-col-4" @divRetentionLimit>
+                <b id="lblRetentionLimit" class="field-required" @lblRetentionLimit>@Global.RetentionLimit</b>
+                <b id="lblPriority" @lblPriority class="field-required">@Global.Priority</b>
+                @Html.TextBoxFor(model => model.RetentionLimit, new
+                {
+                    @onkeypress = "return OnlyDecimalNumber(event, this);",
+                    data_val_required = @Global.RequiredField,
+                    style = "text-align: right",
+                    data_val = "true",
+                    maxlength = "22",
+                    @type = @retentionLimit,
+                    data_val_range_min = "1",
+                    data_val_range = @Global.RetentionLimitMinValue,
+                    data_msg_greaterThan = @Global.RetentionLimitMaxValue,
+                    data_rule_greaterThan = "#ContractLimit"
+                })
+                @Html.ValidationMessage("RetentionLimit")
+            </div>
+
+            <div class="uif-col-4">
+                <b id="lblLinesNumber" class="field-required" @lblLinesNumber>@Global.FullRetention</b>
+                <input 
+                       id="LinesNumber"
+                       name="LinesNumber"
+                       maxlength="5"
+                       data-val-required='@Global.RequiredField'
+                       onkeypress="return OnlyDecimalNumber(event, this)"
+                       data-val="true"
+                       value='@Convert.ToDecimal(lineNumber)'
+                       data-val-range-min = "1",
+                       data-val-range = '@Global.FullRetentionMinValue'
+                       @linesNumberReadonly />
+                <span class="text-danger" data-valmsg-for="LinesNumber" data-valmsg-replace="true" />
+            </div>
+
+            <div class="uif-col-4">
+                <b>@Global.EventLimit</b>
+                @Html.TextBoxFor(model => model.EventLimit,
+                new
+                {
+                    @onkeypress = "return OnlyDecimalNumber(event, this)",
+                    style = "text-align: right",
+                    maxlength = "22",
+                    data_val="true"
+                })
+            </div>
+        </div>
+        
+        <div class="uif-row" id="rowLevel" @rowType1>
+            <div class="uif-col-4">
+                <b>@Global.FixedRate</b>
+                @Html.TextBoxFor(model => model.FixedRatePercentage, new
+                {
+                    @onkeypress = "return OnlyDecimalNumber(event, this)",
+                    data_val_required = @Global.RequiredField,
+                    @onchange = "validatePercentage(this);",
+                    id = "fixedRatePercentage",
+                    maxlength = "5",
+                    style = "text-align: right"
+                })
+                <span id="fixedRatePercentageMsg" class="field-validation-error"></span>
+            </div>
+
+            <div class="uif-col-4">
+                <b>@Global.MinimumRate</b>
+                @Html.TextBoxFor(model => model.MinimumRatePercentage, new
+                {
+                    @onkeypress = "return OnlyDecimalNumber(event, this)",
+                    data_val_required = @Global.RequiredField,
+                    @onchange = "validatePercentage(this);",
+                    id = "minimumRatePercentage",
+                    maxlength = "5",
+                    style = "text-align: right"
+                })
+                <span id="minimumRatePercentageMsg" class="field-validation-error"></span>
+            </div>
+
+            <div class="uif-col-4">
+                <b>@Global.MaximumRate</b>
+                @Html.TextBoxFor(model => model.MaximumRatePercentage, new
+                {
+                    @onkeypress = "return OnlyDecimalNumber(event, this)",
+                    @onchange = "validatePercentage(this);",
+                    id = "maximumRatePercentage",
+                    maxlength = "5",
+                    style = "text-align: right"
+                })
+                <span id="maximumRatePercentageMsg" class="field-validation-error"></span>
+            </div>
+        </div>
+
+        <div class="uif-row" @rowType2>
+            <div class="uif-col-4">
+                <b>@Global.AdjustmentPercentage</b>
+                @Html.TextBoxFor(model => model.AdjustmentPercentage, new
+                {
+                    @onkeypress = "return OnlyDecimalNumber(event, this)",
+                    @onchange = "validatePercentage(this);",
+                    id = "adjustmentPercentage",
+                    maxlength = "5",
+                    style = "text-align: right"
+                })
+                <span id="adjustmentPercentageMsg" class="field-validation-error"></span>
+            </div>
+
+            <div class="uif-col-4">
+                <b>@Global.LifeRate</b>
+                @Html.TextBoxFor(model => model.LifeRate, new
+                {
+                    @onkeypress = "return OnlyDecimalNumber(event, this)",
+                    @onchange = "validatePercentage(this);",
+                    id = "lifeRate",
+                    maxlength = "5",
+                    style = "text-align: right"
+                })
+                <span id="lifeRateMsg" class="field-validation-error"></span>
+            </div>
+
+            <div class="uif-col-4">
+                <b> @Global.CalculationType</b>
+                <select class="uif-select form-control"
+                        id="calculationTypes" name="calculationTypes"
+                        data-source='@Url.Content("~/Parameter/GetCalculationTypes")'
+                        data-id="Id"
+                        data-name="Description"
+                        data-selectedid="@calculationType"></select>
+            </div>
+        </div>
+
+        <div class="uif-row" @rowType3>
+
+            <div class="uif-col-4">
+                <b>@Global.ApplyOn</b>
+                <select class="uif-select form-control"
+                        id="applyOnTypes" name="applyOnTypes"
+                        data-source='@Url.Content("~/Parameter/GetApplyOnTypes")'
+                        data-id="Id"
+                        data-name="Description"
+                        data-selectedid="@applyOnType"></select>
+            </div>
+
+            <div class="uif-col-4">
+                <b>@Global.AnnualAddedLimit</b>
+                @Html.TextBoxFor(model => model.AnnualAddedLimit,
+                new
+                {
+                    maxlength = "15",
+                    @onkeypress = "return OnlyDecimalNumber(event, this)",
+                    id = "annualAddedLimit",
+                    style = "text-align: right"
+                })
+            </div>
+
+            <div class="uif-col-4">
+                <b>@Global.PremiumType </b>
+                <select class="uif-select form-control"
+                        id="premiumTypes" name="premiumTypes"
+                        data-source='@Url.Content("~/Parameter/GetPremiumTypes")'
+                        data-id="Id"
+                        data-name="Description"
+                        data-selectedid="@premiumType"></select>
+            </div>
+
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertLayer"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0376") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0380"))
+        {
+            <button type="submit" class="btn btn-primary" id="btnSaveContractLevel">@Global.Save</button>
+        }
+    </div>
+
+</form>

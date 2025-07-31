@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="AccountigParametersView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CollectId">
+          <Column table-alias="Collect" name="CollectId" />
+        </SelectValue>
+        <SelectValue alias="CollectConceptCode">
+          <Column table-alias="Collect" name="CollectConceptCode" />
+        </SelectValue>
+        <SelectValue alias="RegisterDate">
+          <Column table-alias="Collect" name="RegisterDate" />
+        </SelectValue>
+        <SelectValue alias="PaymentCode">
+          <Column table-alias="Payment" name="PaymentCode" />
+        </SelectValue>
+        <SelectValue alias="PaymentMethodTypeCode">
+          <Column table-alias="Payment" name="PaymentMethodTypeCode" />
+        </SelectValue>
+        <SelectValue alias="IssuingBankCode">
+          <Column table-alias="Payment" name="IssuingBankCode" />
+        </SelectValue>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="Payment" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="ExchangeRate">
+          <Column table-alias="Payment" name="ExchangeRate" />
+        </SelectValue>
+        <SelectValue alias="IncomeAmount">
+          <Column table-alias="Payment" name="IncomeAmount" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="Payment" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="IndividualId">
+          <Column table-alias="Collect" name="IndividualId" />
+        </SelectValue>
+        <SelectValue alias="DocumentNumber">
+          <Column table-alias="ListPersons" name="DocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="CollectControlId">
+          <Column table-alias="CollectControl" name="CollectControlId" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="CollectControl" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="UserId">
+          <Column table-alias="CollectControl" name="UserId" />
+        </SelectValue>
+        <SelectValue alias="PaymentsTotal">
+          <Column table-alias="Collect" name="PaymentsTotal" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Collect, Core.Accounting.Entities" alias="Collect" />
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Payment, Core.Accounting.Entities" alias="Payment" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="Payment" name="CollectCode" />
+                  <Column table-alias="Collect" name="CollectId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CollectControl, Core.Accounting.Entities" alias="CollectControl" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="CollectControl" name="CollectControlId" />
+                <Column table-alias="Collect" name="CollectControlCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.UniquePersonV1.Entities.ListPersons, Core.UniquePersonV1.Entities" alias="ListPersons" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="ListPersons" name="IndividualId" />
+              <Column table-alias="Collect" name="IndividualId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

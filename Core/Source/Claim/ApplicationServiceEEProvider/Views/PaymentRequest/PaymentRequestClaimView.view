@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PaymentRequestClaimView">
+  <collections>
+
+    <collection name="PaymentRequestClaim" type="Sistran.Core.Application.Claims.Entities.PaymentRequestClaim,
+                Core.Claims.Entities"></collection>
+    <collection name="PaymentRequest" type="Sistran.Core.Application.Claims.Entities.PaymentRequest,
+                Core.Claims.Entities"></collection>
+    <collection name="Claim" type="Sistran.Core.Application.Claims.Entities.Claim, 
+                Core.Claims.Entities"></collection>
+    <collection name="Currency" type="Sistran.Core.Application.Common.Entities.Currency,
+                Core.Common.Entities"></collection>
+    <collection name="PaymentMethod" type="Sistran.Core.Application.Claims.Entities.PaymentMethod,
+                Core.Claims.Entities"></collection>
+    <collection name="PaymentRequestCoinsurance" type="Sistran.Core.Application.Claims.Entities.PaymentRequestCoinsurance, 
+                Core.Claims.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="PaymentRequestClaim" destination="PaymentRequest" name="PaymentRequestClaimPaymentRequest" type="Inner">
+      <property left="PaymentRequestCode" type="Equal" right="PaymentRequestCode"></property>
+    </relation>
+    <relation source="PaymentRequestClaim" destination="Claim" name="PaymentRequestClaimClaim" type="Inner">
+      <property left="ClaimCode" type="Equal" right="ClaimCode"></property>
+    </relation>
+    <relation source="PaymentRequest" destination="Currency" name="PaymentRequestCurrency" type="Inner">
+      <property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+    </relation>
+    <relation source="PaymentRequest" destination="PaymentMethod" name="PaymentRequestPaymentMethod" type="Left">
+      <property left="PaymentMethodCode" type="Equal" right="PaymentMethodCode"></property>
+    </relation>
+    <relation source="PaymentRequest" destination="PaymentRequestCoinsurance" name="PaymentRequestPaymentCoinsurances" type="Left">
+      <property left="PaymentRequestCode" type="Equal" right="PaymentRequestCode"></property>
+    </relation>
+  </relations>
+</view>

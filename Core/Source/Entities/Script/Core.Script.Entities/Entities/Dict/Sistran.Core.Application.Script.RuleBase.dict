@@ -1,0 +1,40 @@
+<map version="2.0" type="class" name="RuleBase" namespace="Sistran.Core.Application.Script" file-version="1.0" description="RULE_BASE_ENTITY">
+  <properties>
+    <property name="RuleBaseId" type="Integer" key="true" description="RULE_BASE_ID_PROPERTY" autonumber="id"/>
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="RuleBaseTypeCode" type="Integer" description="RULE_BASE_TYPE_CODE_PROPERTY" />
+    <property name="PackageId" type="Integer" description="PACKAGE_ID_PROPERTY" />
+    <property name="LevelId" type="Integer" description="LEVEL_ID_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" description="CURRENT_FROM_PROPERTY" />
+    <property name="RuleBaseVersion" type="Integer" description="RULE_BASE_VERSION_PROPERTY" />
+    <property name="IsPublished" type="Boolean" description="IS_PUBLISHED_PROPERTY" />
+    <property name="RuleEnumerator" type="Integer" description="RULE_ENUMERATOR_PROPERTY" />
+    <property name="IsEvent" type="Boolean" description="IS_EVENT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="RULE_BASE" schema="SCR" alias="RULE_BASE" update="true">
+      <columns>
+        <column name="RULE_BASE_ID" type="Int32" property="RuleBaseId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="RULE_BASE_TYPE_CD" type="Byte" property="RuleBaseTypeCode" allowNull="false" />
+        <column name="PACKAGE_ID" type="Int32" property="PackageId" allowNull="false" />
+        <column name="LEVEL_ID" type="Int16" property="LevelId" allowNull="false" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" allowNull="false" />
+        <column name="RULE_BASE_VERSION" type="Byte" property="RuleBaseVersion" allowNull="false" />
+        <column name="IS_PUBLISHED" type="Boolean" property="IsPublished" allowNull="false" />
+        <column name="RULE_ENUMERATOR" type="Int16" property="RuleEnumerator" allowNull="false" />
+        <column name="IS_EVENT" type="Boolean" property="IsEvent" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="200" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

@@ -1,0 +1,211 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Areas.Massive.Models
+@model RequestGroupingViewModel
+
+@section title
+{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.RenewalRequestGrouping
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputRenewalRequest", @placeholder = @Resources.Language.NumberRequestGroup })
+            <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div id="buttonsRequestGrouping">
+            <button type="button" class="btn btn-default" id="btnExit">
+                <span aria-hidden="true"></span>
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                @Resources.Language.ButtonExit
+            </button>
+            <button type="button" class="btn btn-default" id="btnNewRenewal">
+                <span class="" aria-hidden="true"></span>
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                @Resources.Language.NewRenewal
+            </button>
+            <button type="button" class="btn btn-primary" id="btnRequestGroupingSave">
+                <span aria-hidden="true"></span>
+                <i class="fa fa-save" aria-hidden="true"></i>
+                @Resources.Language.ButtonRenovate
+            </button>
+        </div>
+    </footer>
+
+}
+<div class="uif-alert" id="alert"></div>
+<div class="uif-modal" id="modalCoInsurance">
+    <div class="uif-modalbody">
+        @Html.Partial("CoInsurance", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.CoInsuranceModelsView())
+    </div>
+    <div class="uif-modalbuttons width-save" id="buttonsCoInsurance">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCoInsuranceClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnCoInsuranceSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+<div class="uif-modal" id="modalAgents">
+    <div class="uif-modalbody">
+        @Html.Partial("Agents", new AgentViewModel())
+    </div>
+    <div id="buttonsAgents" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnAgentsClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnAgentsSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+<form id="RenewalrequestForm" name="RenewalrequestForm" class="form">
+    <div class="row">
+        <div class="uif-col-9 fit-col-main">
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelBranch</label>
+                    <select class="uif-select form-control" data-native="false" id="selectBranch" data-val="true" data-name="Description" name="Branch"
+                            data-val-required="@Resources.Language.ErrorDocumentControlBranch" data-id="Id" disabled="disabled"></select>
+                    @Html.ValidationMessageFor(model => model.Branch)
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelRequestGrouping</label>
+                    @Html.TextBoxFor(model => model.DescriptionRequest, new { id = "inputRequest", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.DescriptionRequest)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelRequestGroupingDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelHolder</label>
+                    @Html.TextBoxFor(model => model.PolicyHolder, new { id = "inputHolder", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.PolicyHolder)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelAgentPrincipal</label>
+                    @Html.TextBoxFor(model => model.PrincipalAgent, new { id = "inputAgentPrincipal", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.PrincipalAgent)
+                </div>
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelAgentAgency</label>
+                    <select class="uif-select form-control" id="selectMainAgentAgency" data-native="false" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlAgency"
+                            data-id="Id" data-name="FullName" name="AgencyId" , disabled="disabled"></select>
+                    @Html.ValidationMessageFor(model => model.AgencyId)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelPrefixCommercial</label>
+                    <select class="uif-select form-control" id="selectPrefix" data-val="true" data-native="false" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"
+                            data-id="Id" data-name="Description" name="Prefix" , disabled="disabled"></select>
+                    @Html.ValidationMessageFor(model => model.Prefix)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelCommercialProduct</label>
+                    <select class="uif-select form-control" id="selectProduct" data-val="true" data-native="false" data-val-required="@Resources.Language.ErrorDocumentControlProduct"
+                            data-id="Id" data-name="Description" name="Product" , disabled="disabled"></select>
+                    @Html.ValidationMessageFor(model => model.Product)
+                </div>
+
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelPolicyType</label>
+                    <select class="uif-select form-control" id="selectPolicyType" data-val="true" data-native="false" data-val-required="@Resources.Language.ErrorDocumentControlPolicyType"
+                            data-id="Id" data-name="Description" name="PolicyType" , disabled="disabled"></select>
+                    @Html.ValidationMessageFor(model => model.PolicyType)
+                </div>
+
+                <div class="uif-col-3">
+                    <label>@Resources.Language.LabelPaymentPlan</label>
+                    <select class="uif-select form-control" id="selectPaymentPlan" data-id="Id" data-native="false" data-name="Description"></select>
+                    @Html.ValidationMessageFor(model => model.PaymentShedule)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <label class="radio-inline">
+                            <input type="radio" name="effect" value="Open" id="Open" disabled="disabled">@Resources.Language.labelOpenValidity
+                        </label>
+                    </div>
+                </div>
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <label class="radio-inline">
+                            <input type="radio" name="effect" value="Closed" id="Closed" disabled="disabled">@Resources.Language.LabelClosed
+                        </label>
+                    </div>
+                </div>
+
+                <div class="uif-col-3">
+                    <label>@Resources.Language.LabelFrom</label>
+                    @Html.TextBoxFor(model => model.CurrentFrom, "{0:dd/MM/yyyy}", new { id = "CurrentFrom", @class = "uif-datepicker", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.CurrentFrom)
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.LabelTo</label>
+                    @Html.TextBoxFor(model => model.CurrentTo, "{0:dd/MM/yyyy}", new { id = "CurrentTo", @class = "uif-datepicker" })
+                    @Html.ValidationMessageFor(model => model.CurrentTo)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelObservations</label>
+                    @Html.TextAreaFor(model => model.Annotations, new { cols = "12", rows = "10", style = "resize: none" })
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-3 fit-col-secondary">
+            <div class="uif-right-bar" id="panelButtonsRight">
+                <ul>
+                    <li>
+                        <a href="#" id="btnAgents">@Resources.Language.LabelAgents</a>
+                        <p id="selectedAgents"></p>
+                    </li>
+                    <li>
+                        <a href="#" id="btnBusinessType">@Resources.Language.LabelBusinessType</a>
+                        <p id="selectedBusinessType"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Modals
+{
+    <form id="modalForm">
+        <div class="uif-modal" id="modalDialogList">
+            <div class="uif-modalbody">
+                <div class="row">
+                    <div class="uif-col-12">
+                        <div class="active">
+                            <table class="uif-table" data-title="" data-selectiontype="none" id="tableResults" data-filter="false" data-paginate="true">
+                                <thead>
+                                    <tr>
+                                        <th data-property="Id">@Resources.Language.LabelId</th>
+                                        <th data-property="Code">@Resources.Language.LabelCode</th>
+                                        <th data-property="Description">@Resources.Language.LabelDescription</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+
+
+@section Scripts
+{
+   @*@Scripts.Render("~/bundle/js/RenewalRequestGrouping");*@  
+}

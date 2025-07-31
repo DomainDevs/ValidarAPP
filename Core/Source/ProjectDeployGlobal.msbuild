@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+		<DeployBranchPath>$(MSBuildThisFileDirectory)\..\Bin\</DeployBranchPath>
+        <DeployRootPath>$(DeployBranchPath)</DeployRootPath>
+        <DeployRootPathConst>$(DeployBranchPath)\CoreDeploy\</DeployRootPathConst>
+        <DeployPath>$(DeployRootPath)$(DeployPartialPath)</DeployPath>
+        <DeployPathCompany>$(DeployRootPathConst)$(DeployPartialPath)</DeployPathCompany>
+        <ReferencePath>$(DeployRootPath)</ReferencePath>
+    </PropertyGroup>
+    <Target Name="AfterBuild" Condition="'$(RunPostBuildEvent)'!='OnOutputUpdated' or '$(_AssemblyTimestampBeforeCompile)'!='$(_AssemblyTimestampAfterCompile)'">
+        <PropertyGroup>
+			<PS Condition=" '$(PS)'=='' ">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PS>
+			<SL Condition=" '$(SL)'=='' ">$(MSBuildThisFileDirectory)\..\.githooks\build\partialDeploy.ps1</SL>
+		</PropertyGroup>
+		<Message Text="Compilacion: $(Configuration)" Importance="high" />
+        <CreateItem Include="@(Content);@(None);@(Compile)">
+            <Output TaskParameter="Include" ItemName="BuildDeployDicts" Condition="'%(Extension)' == '.dict'" />
+        </CreateItem>
+        <CreateItem Include="@(Content);@(None);@(Compile)">
+            <Output TaskParameter="Include" ItemName="BuildDeployViews" Condition="('%(Extension)' == '.view') Or ('%(Extension)' == '.uiview')" />
+        </CreateItem>
+        <CreateItem Include="@(Content);@(None);@(Compile)">
+            <Output TaskParameter="Include" ItemName="BuildDeploySchemas" Condition="'%(Extension)' == '.xsd'" />
+        </CreateItem>
+        <Message Text="Publicando $(MSBuildProjectName) -&gt; $(DeployPath)" Importance="High" />
+        <!-- Copy the build product (.dll or .exe). -->
+        <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(DeployPath)" SkipUnchangedFiles="true">
+            <Output TaskParameter="DestinationFiles" ItemName="MainAssembly" />
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy the additional modules. -->
+        <Copy SourceFiles="@(AddModules)" DestinationFolder="$(DeployPath)" SkipUnchangedFiles="true">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy the serialization assembly if it exists. -->
+        <Copy SourceFiles="$(IntermediateOutputPath)$(_SGenDllName)" SkipUnchangedFiles="true" DestinationFiles="$(DeployPath)$(_SGenDllName)" Condition="'$(_SGenDllCreated)'=='true'">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy the debug information file (.pdb), if any -->
+        <Copy SourceFiles="$(IntermediateOutputPath)$(TargetName).pdb" DestinationFiles="$(DeployPath)$(TargetName).pdb" SkipUnchangedFiles="true" Condition="'$(_DebugSymbolsProduced)'=='true'">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <Message Text="$(csBuildPath)" Importance="high" />
+        <!-- Copy the resulting XML documentation file, if any. -->
+        <Copy SourceFiles="@(FinalDocFile)" SkipUnchangedFiles="true" DestinationFiles="@(FinalDocFile-&gt; '$(DeployPath)%(FileName)%(Extension)')" Condition="'$(_DocumentationFileProduced)'=='true'">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy satellite assemblies. -->
+        <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath-&gt;'$(DeployPath)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy dict files.-->
+        <Copy SourceFiles="@(BuildDeployDicts)" SkipUnchangedFiles="true" DestinationFiles="@(BuildDeployDicts-&gt;'$(DeployPath)Dict\%(FileName)%(Extension)')">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy view files.-->
+        <Copy SourceFiles="@(BuildDeployViews)" SkipUnchangedFiles="true" DestinationFiles="@(BuildDeployViews-&gt;'$(DeployPath)Views\%(FileName)%(Extension)')">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy config files.-->
+        <Copy SourceFiles="@(AppConfigWithTargetPath)" SkipUnchangedFiles="false" DestinationFiles="@(AppConfigWithTargetPath-&gt;'$(DeployPath)%(TargetPath)')">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy schema files.-->
+        <Copy SourceFiles="@(BuildDeploySchemas)" SkipUnchangedFiles="true" DestinationFiles="@(BuildDeploySchemas-&gt;'$(DeployPath)%(FileName)%(Extension)')">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <Message Text="Publicando $(MSBuildProjectName) -&gt; $(DeployPathCompany)" Importance="High" />
+        <!-- Copy the build product (.dll or .exe). -->
+        <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(DeployPathCompany)" SkipUnchangedFiles="true">
+            <Output TaskParameter="DestinationFiles" ItemName="MainAssembly" />
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy the additional modules. -->
+        <Copy SourceFiles="@(AddModules)" DestinationFolder="$(DeployPathCompany)" SkipUnchangedFiles="true">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy the serialization assembly if it exists. -->
+        <Copy SourceFiles="$(IntermediateOutputPath)$(_SGenDllName)" SkipUnchangedFiles="true" DestinationFiles="$(DeployPathCompany)$(_SGenDllName)" Condition="'$(_SGenDllCreated)'=='true'">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy the debug information file (.pdb), if any -->
+        <Copy SourceFiles="$(IntermediateOutputPath)$(TargetName).pdb" DestinationFiles="$(DeployPathCompany)$(TargetName).pdb" SkipUnchangedFiles="true" Condition="'$(_DebugSymbolsProduced)'=='true'">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <Message Text="$(csBuildPath)" Importance="high" />
+        <!-- Copy the resulting XML documentation file, if any. -->
+        <Copy SourceFiles="@(FinalDocFile)" SkipUnchangedFiles="true" DestinationFiles="@(FinalDocFile-&gt; '$(DeployPathCompany)%(FileName)%(Extension)')" Condition="'$(_DocumentationFileProduced)'=='true'">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy satellite assemblies. -->
+        <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath-&gt;'$(DeployPathCompany)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy dict files.-->
+        <Copy SourceFiles="@(BuildDeployDicts)" SkipUnchangedFiles="true" DestinationFiles="@(BuildDeployDicts-&gt;'$(DeployPathCompany)Dict\%(FileName)%(Extension)')">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy view files.-->
+        <Copy SourceFiles="@(BuildDeployViews)" SkipUnchangedFiles="true" DestinationFiles="@(BuildDeployViews-&gt;'$(DeployPathCompany)Views\%(FileName)%(Extension)')">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy config files.-->
+        <Copy SourceFiles="@(AppConfigWithTargetPath)" SkipUnchangedFiles="false" DestinationFiles="@(AppConfigWithTargetPath-&gt;'$(DeployPathCompany)%(TargetPath)')">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+        <!-- Copy schema files.-->
+        <Copy SourceFiles="@(BuildDeploySchemas)" SkipUnchangedFiles="true" DestinationFiles="@(BuildDeploySchemas-&gt;'$(DeployPathCompany)%(FileName)%(Extension)')">
+            <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
+        </Copy>
+		<Exec Condition="'$(BuildingInsideVisualStudio)' == 'true'" Command="$(PS) -NonInteractive -executionpolicy Unrestricted -command &quot;&amp; invoke-command -scriptblock { $(SL) &apos;$(DeployPartialPath)&apos; } &quot;"/>  
+    </Target>
+</Project>

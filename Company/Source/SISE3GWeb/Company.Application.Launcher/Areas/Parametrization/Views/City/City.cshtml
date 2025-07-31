@@ -1,0 +1,103 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.CityViewModel
+
+@{
+    Layout = null;
+}
+
+@* script busqueda simple *@
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.TituloCiudades
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "searchCity", @placeholder = @Resources.Language.LabelSearchCities })
+
+        <button class="btn background-dark" id="btnSearchAdvCity"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+
+
+
+@*template de listview de ciudades *@
+<script id="template-cities" type="text/template">
+    <div>
+
+        <div>
+            <strong>Pais: </strong> {{Country.Description}}
+        </div>
+        <div>
+            <strong>Departamento: </strong> {{State.Description}}
+        </div>
+        <div>
+            <strong>Ciudad: </strong> {{Description}}
+        </div>
+
+    </div>
+</script>
+
+<br>
+<form id="formcities" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.Country</label>
+                    @Html.HiddenFor(model => model.Id, new { id = "IdCityH" })
+                    <select data-filter="true" data-native="false" class="uif-select form-control" id="ddlCountries" name="Country.Id"
+                            data-id="Id" data-name="DescriptionLong"
+                            data-val="true"
+                            data-val-required="@Resources.Language.ErrorfieldCountries"></select>
+                    @Html.ValidationMessageFor(model => model.Country.Id)
+
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.TitleState</label>
+                    <select data-filter="true" data-native="false" class="uif-select form-control" id="ddlStates" name="State.Id"
+                            data-id="Id" data-name="DescriptionLong"
+                            data-val="true"
+                            data-val-required="@Resources.Language.ErrorfieldState"></select>
+                    @Html.ValidationMessageFor(model => model.State.Id)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.Description</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "Description", placeholder = @Resources.Language.PlaceHoldercities, maxlength = 50, minLenght = 3 })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelSmallDescription</label>
+                    @Html.TextBoxFor(model => model.SmallDescription, new { id = "SmallDescription", placeholder = @Resources.Language.PlaceHoldercities, maxlength = 15, minLenght = 3 })
+                    @Html.ValidationMessageFor(model => model.SmallDescription)
+                </div>
+            </div>
+
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="lsvCities" class="uif-listview">
+            </div>
+            <h6>@Resources.Language.AlertMaxTableSearch</h6>
+        </div>
+    </div>
+
+    
+    <script id="footer-template" type="text/template">
+        <div class="pull-right">
+            <button type="button" class="btn btn-default" id="btnSalir">@Resources.Language.ButtonExit </button>
+            <button type="button" class="btn btn-default" id="btnExportCity">
+                <span class="fa fa-download"></span>
+                @Resources.Language.ButtonExport
+            </button>
+            <button type="button" class="btn btn-default" id="btnNew">@Resources.Language.New</button>
+            <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.BtnSave </button>
+
+
+        </div>
+    </script>
+ 
+</form>
+

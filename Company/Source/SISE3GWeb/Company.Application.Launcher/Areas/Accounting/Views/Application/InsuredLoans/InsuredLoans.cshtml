@@ -1,0 +1,174 @@
+﻿@*@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "InsuredLoans";
+}
+
+<script id="loan-display-template" type="text/template">
+    <div>
+        <strong>{{InsuredDocumentNumber}}</strong> | {{InsuredName}} <br>
+        <strong> @Global.LoanNumber: </strong>{{LoanNumber}}
+        <br>
+        <span class="text-danger"><strong>{{NatureName}}</strong></span>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"> {{PreviousInterest}}</div>
+    </div>
+</script>
+
+<div class="form">
+    <div class="uif-row">
+        <!--left col-->
+        <div class="uif-col-6">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.LoanNumber</label>
+                    @Html.TextBox("LoanNumber", "", new
+                    {
+                        id = "LoanNumber",
+                        maxlength = "10",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/InsuredLoans/GetInsuredLoanByNumber"),
+                        data_displaykey = "LoanNumber",
+                        placeholder = @Global.EnterLoanNumber,
+                        onkeypress = " return JustNumbers(event, this); ",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField,
+                        data_minlenght = 1
+                    })
+                    <span class="text-danger" data-valmsg-for="LoanNumber" data-valmsg-replace="true" />
+                    <input type="hidden" id="MovementBillNumber" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.DocNumInsured</label>
+                    @Html.TextBox("InsuredDocumentNumber", "", new
+                        {
+                            style = "text-align: left",
+                            maxlength = "20",
+                            @onblur = "this.value = this.value.toUpperCase();",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="InsuredDocumentNumber" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.InsuredName</label>
+                    @Html.TextBox("InsuredName", "", new
+                        {
+                            style = "text-align: left",
+                            maxlength = "60",
+                            @onblur = "this.value = this.value.toUpperCase();",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="InsuredName" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.Nature</label>
+                    @Html.DropDownList("LoanNature", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetNatures"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="LoanNature" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Currency</label>
+                    @Html.DropDownList("LoanCurrency", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="LoanCurrency" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.AmountExchange</label>
+                    <input type="text" id="LoanExchangeRate" disabled="disabled" style="text-align: right" />
+                    <input type="hidden" id="MovementMessageDuplicate" name="MovementMessageDuplicate" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.Amount</label>
+                    @Html.TextBox("LoanAmount", "", new
+                        {
+                            @onkeypress = "return OnlyDecimalNumber(event,this)",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <input type="hidden" id="LoanLocalAmount" />
+                    <span class="text-danger" data-valmsg-for="LoanAmount" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Global.CurrentYearInterest</label>
+                    @Html.TextBox("LoanCurrentInterest", "", new
+                        {
+                            @onkeypress = "return OnlyDecimalNumber(event,this)",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="LoanCurrentInterest" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label>@Global.PreviousYearInterest</label>
+                    @Html.TextBox("LoanPreviousInterest", "", new
+                        {
+                            @onkeypress = "return OnlyDecimalNumber(event,this)",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                    <span class="text-danger" data-valmsg-for="LoanPreviousInterest" data-valmsg-replace="true" />
+                </div>
+            </div>
+            
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="uif-alert" id="alertForm"></div>
+                </div>
+            </div>
+        </div>
+        <!--End left col-->
+        <!--right col-->
+        <div class="uif-col-6">
+            <div id="loansListView" class="uif-listview">
+                <div class="footer">
+                    <label>@Global.Credit</label>
+                    <b id="TotalLoanMovementCredit">$0.00</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>@Global.Debit</label>
+                    <b id="TotalLoanMovementDebit">$0.00</b>
+                </div>
+            </div>
+        </div>
+        <!--End right col-->
+    </div>
+    <div class="uif-row">
+        <div class="pull-right">
+            <div class="uif-modalbuttons">
+                <button type="submit" class="btn btn-primary" id="InsuredLoanAdd" onclick="return false">@Global.Add</button>
+                <button type="button" class="btn btn-default" id="InsuredLoanAcceptMovement">@Global.Accept</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+

@@ -1,0 +1,129 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.SearchCheckPendingDeposit;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.CheckAdministration</li>
+        <li>@Global.MenuCheks @Global.PendingToDeposit</li>
+    </ol>
+}
+
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-primary" id="Report">
+            <i class="fa fa-print"></i> @Global.BtnReport
+        </button>
+    </footer>
+}
+
+
+<form id="MaincheckPending" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Bank</label>
+
+            @Html.TextBox("Bank", "", new
+       {
+           id = "Bank",
+           maxlength = "50",
+           @class = "uif-autocomplete",
+           data_source = @Url.Content("~/Accounting/Common/GetBanksByName"),
+           data_displaykey = "description",
+           placeholder = @Global.EnterBankName,
+           data_val = "true"
+           //data_val_required = @Global.RequiredField
+       })
+            @*<span class="text-danger" data-valmsg-for="Bank" data-valmsg-replace="true" />*@
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.DateFrom </label>
+            <input type="text" id="dateFrom" name="dateFrom" class="uif-datepicker" data-mask="99/99/9999 99:99" style="text-align: left" />
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.DateTo</label>
+            <input type="text" id="dateTo" name="dateTo" class="uif-datepicker" data-mask="99/99/9999 99:99" style="text-align: left" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.Branch</label>
+            @Html.DropDownList("branch", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Billing/GetBranchByOpenStatus"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_native = "true"
+             })
+
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+    <!-- BOTONES -->
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer">
+                <button id="Clean" class="btn btn-default" role="button">
+                    <i class="fa fa-paint-brush"></i>  @Global.Clean
+                </button>
+                <button id="SearchPendingDeposit" class="btn btn-primary" role="button" type="submit">
+                    <i class="fa fa-search"></i>  @Global.Search
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!--TABLA-->
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="CheckPendingDepositTbl" data-exporttocsv="false" data-add="false" data-edit="false"
+               data-delete="false" data-selectiontype="none" data-filter="true"
+               data-source="" data-paginate="true" data-title="">
+            <thead>
+                <tr>
+
+                    <th data-property="PaymentCode" data-visible="false">UserId</th>
+                    <th data-property="PaymentMethodTypeCode" data-visible="false">bankCd</th>
+                    <th data-property="BranchCode" data-visible="false">BranchCode</th>
+                    <th data-property="BranchDescription">@Global.Branch</th>
+                    <th data-property="IssuingBankCode" data-visible="false">IssuingBankCode</th>
+                    <th data-property="BankDescription">@Global.Bank</th>
+                    <th data-property="TechnicalTransaction">@Global.TransactionNumber</th>
+                    <th data-property="BillCode"  data-visible="false">@Global.BillNum</th>
+                    <th data-property="ReceivingAccountNumber">@Global.AccountNumberCurrent</th>
+                    <th data-property="DocumentNumber">@Global.CheckNumber</th>
+                    <th data-property="DatePayment">@Global.CheckDate</th>
+                    <th data-property="CurrencyCode" data-visible="false">@Global.BallotDate</th>
+                    <th data-property="CurrencyDescription" data-visible="false">@Global.Currency</th>
+                    <th data-property="Amount">@Global.Amount</th>
+                    <th data-property="Status" data-visible="false">@Global.BallotDate</th>
+                    <th data-property="StatusDescription">@Global.Status</th>
+                    <th data-property="Holder" data-visible="false">Holder</th>
+                    <th data-property="ExchangeRate" data-visible="false">ExchangeRate</th>
+
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCheckPendingDeposit")
+}

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="SupplierBranchAccountingConceptView">
+  <collections>
+    <collection name="AccountingConcept" type="Sistran.Core.Application.GeneralLedger.Entities.AccountingConcept, 
+                Core.GeneralLedger.Entities"></collection>
+    <collection name="BranchAccountingConcept" type="Sistran.Core.Application.GeneralLedger.Entities.BranchAccountingConcept, 
+                Core.GeneralLedger.Entities"></collection>
+    <collection name="SupplierAccountingConcept" type="Sistran.Core.Application.UniquePersonV1.Entities.SupplierAccountingConcept, 
+                Core.UniquePersonV1.Entities"></collection>
+    <collection name="Supplier" type="Sistran.Core.Application.UniquePersonV1.Entities.Supplier, 
+                Core.UniquePersonV1.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="SupplierAccountingConcept" destination="BranchAccountingConcept" name="SupplierAccountingConceptBranchAccountingConcept" type="Inner">
+      <property left="AccountingConceptCode" type="Equal" right="AccountingConceptCode"></property>
+    </relation>
+    <relation source="BranchAccountingConcept" destination="AccountingConcept" name="BranchAccountingConceptAccountingConcept" type="Inner">
+      <property left="AccountingConceptCode" type="Equal" right="AccountingConceptCode"></property>
+    </relation>
+    <relation source="SupplierAccountingConcept" destination="Supplier" name="SupplierAccountingConceptSupplier" type="Inner">
+      <property left="SupplierCode" type="Equal" right="SupplierCode"></property>
+    </relation>
+  </relations>
+</view>

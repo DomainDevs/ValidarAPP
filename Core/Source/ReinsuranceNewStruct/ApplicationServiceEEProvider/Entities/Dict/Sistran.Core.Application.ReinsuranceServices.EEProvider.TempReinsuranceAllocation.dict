@@ -1,0 +1,38 @@
+<map version="2.0" type="class" name="TempReinsuranceAllocation" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="TEMP_REINSURANCE_ALLOCATION_ENTITY">
+  <properties>
+    <property name="TempReinsuranceAllocationId" type="Integer" key="true" description="TEMP_REINSURANCE_ALLOCATION_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="TempReinsuranceLineCode" type="Integer" description="TEMP_REINSURANCE_LINE_CODE_PROPERTY" />
+    <property name="IsFacultative" type="Boolean" description="IS_FACULTATIVE_PROPERTY" />
+    <property name="ContractLevelId" type="Integer" description="CONTRACT_LEVEL_ID_PROPERTY" />
+    <property name="CurrencyId" type="Integer" description="CURRENCY_ID_PROPERTY" />
+    <property name="LevelLimit" type="Decimal" precision="18" scale="2" description="LEVEL_LIMIT_PROPERTY" />
+    <property name="AssignmentPercentage" type="Decimal" precision="12" scale="2" nullable="true" description="ASSIGNMENT_PERCENTAGE_PROPERTY" />
+    <property name="RetentionLimit" type="Decimal" precision="18" scale="2" nullable="true" description="RETENTION_LIMIT_PROPERTY" />
+    <property name="LinesNumber" type="Integer" nullable="true" description="LINES_NUMBER_PROPERTY" />
+    <property name="CumulusAmount" type="Decimal" precision="18" scale="2" nullable="true" description="CUMULUS_AMOUNT_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" nullable="true" description="AMOUNT_PROPERTY" />
+    <property name="Premium" type="Decimal" precision="18" scale="2" nullable="true" description="PREMIUM_PROPERTY" />
+    <property name="CalculatedAmount" type="Decimal" precision="18" scale="2" nullable="true" description="CALCULATED_AMOUNT_PROPERTY" />
+    <property name="CalculatedPremium" type="Decimal" precision="18" scale="2" nullable="true" description="CALCULATED_PREMIUM_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="TEMP_REINSURANCE_ALLOCATION" schema="REINS" alias="TEMP_REINSURANCE_ALLOCATION" update="true">
+      <columns>
+        <column name="TEMP_REINSURANCE_ALLOCATION_ID" type="Int32" property="TempReinsuranceAllocationId" key="true" identity ="true"/>
+        <column name="TEMP_REINSURANCE_LINE_CD" type="Int32" property="TempReinsuranceLineCode" allowNull="false" />
+        <column name="IS_FACULTATIVE" type="Boolean" property="IsFacultative" allowNull="false" />
+        <column name="CONTRACT_LEVEL_ID" type="Int32" property="ContractLevelId" allowNull="false" />
+        <column name="CURRENCY_ID" type="Int32" property="CurrencyId" allowNull="false" />
+        <column name="LEVEL_LIMIT" type="Decimal" property="LevelLimit" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="ASSIGNMENT_PERCENTAGE" type="Decimal" property="AssignmentPercentage" size="19" precision="12" scale="2" />
+        <column name="RETENTION_LIMIT" type="Decimal" property="RetentionLimit" size="19" precision="18" scale="2" />
+        <column name="LINES_NUMBER" type="Int32" property="LinesNumber" />
+        <column name="CUMULUS_AMOUNT" type="Decimal" property="CumulusAmount" size="19" precision="18" scale="2" />
+        <column name="AMOUNT" type="Decimal" property="Amount" size="19" precision="18" scale="2" />
+        <column name="PREMIUM" type="Decimal" property="Premium" size="19" precision="18" scale="2" />
+        <column name="CALCULATED_AMOUNT" type="Decimal" property="CalculatedAmount" size="19" precision="18" scale="2" />
+        <column name="CALCULATED_PREMIUM" type="Decimal" property="CalculatedPremium" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

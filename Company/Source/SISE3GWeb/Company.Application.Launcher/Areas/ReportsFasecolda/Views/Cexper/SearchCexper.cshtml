@@ -1,0 +1,111 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.ReportsFasecolda.Models.CexperViewModel
+
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-90">
+        <div id="Title">@Resources.Language.LabelConsultationCexper</div>
+    </div>
+    <div class="column-10"></div>
+</script>
+<script id="footer-template" type="text/template">
+    <button class="btn btn-default" id="btnExitSearchCexper">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <span class="" aria-hidden="true"></span>
+        @Resources.Language.LabelQuit
+    </button>
+</script>
+<form id="formSearchCexper" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-12">
+            <br />
+            <div class="row">
+                <div class="uif-col-2">
+                    <label class="field-required">@Resources.Language.LabelLicencesePlate</label>
+                    @Html.TextBoxFor(model => model.DesPlate, new { id = "inputPlate" })
+                    @Html.ValidationMessageFor(model => model.DesPlate)
+                </div>
+                <div class="uif-col-2">
+                    <label>@Resources.Language.LabelTypeDocument</label>
+                    <select class="uif-select" id="TypeDocument" data-native="false" name="SelectTypeDocument"></select>
+                </div>
+                <div class="uif-col-2">
+                    <label>@Resources.Language.lblDocumentNumber</label>
+                    @Html.TextBoxFor(model => model.DocumentNumber, new { id = "InputDocumentNumber" })
+                    @Html.ValidationMessageFor(model => model.DocumentNumber)
+                </div>
+                <div class="uif-col-2">
+                    <label class="field-required">Captchat</label>
+                    @Html.TextBoxFor(model => model.Captcha, new { id = "Inputcaptcha" })
+                    @Html.ValidationMessageFor(model => model.Captcha)
+                </div>
+                <div>
+                    <label class="field-required">CaptchatImg</label>
+                </div>
+                <div class="uif-col-2">
+                    <button type="button" class="btn btn-primary" id="btnSearchCexper">@Resources.Language.ButtonSearch</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="uif-row">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-col-2">
+                <select class="uif-select" id="TypeDocumentFilter" data-native="false" name="SelectTypeDocumentFilter"></select>
+            </div><div class="uif-col-10"></div>
+            <div class="col-md-12">
+                <table data-paginate="true" class="uif-table" id="TablePolicies" data-filter="false">
+                    <thead>
+                        <tr>
+                            <th data-property="Consulta">@Resources.Language.Query</th>
+                            <th data-property="Compañia">@Resources.Language.LabelCompany</th>
+                            <th data-property="NroPolicy">@Resources.Language.LabelNroPolicy</th>
+                            <th data-property="Plate">@Resources.Language.LabelPlate</th>
+                            <th data-property="Chassis">@Resources.Language.LabelChassis</th>
+                            <th data-property="StartValidateDate">@Resources.Language.StartValidateDate</th>
+                            <th data-property="EndValidateDate">@Resources.Language.EndValidateDate</th>
+                            <th data-property="EndorsementValid">@Resources.Language.LabelEndorsementValid.ToString().ToLower()</th>
+                            <th data-property="Insured">@Resources.Language.LabelInsured</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-col-2">
+                <label>Historical Sinister</label>
+                <select class="uif-select" id="TypeDocumentHistoricalSinister" data-native="false" name="TypeDocumentHistoricalSinister"></select>
+            </div><div class="uif-col-10"></div>
+            <div class="col-md-12">
+                <table data-paginate="true" class="uif-table" id="TableHistoricalSinister" data-filter="false">
+                    <thead>
+                        <tr>
+                            <th data-property="Consulta">@Resources.Language.Query</th>
+                            <th data-property="Compañia">@Resources.Language.LabelCompany</th>
+                            <th data-property="NroSin">@Resources.Language.LabelNro Sin</th>
+                            <th data-property="Plate">@Resources.Language.LabelPlate</th>
+                            <th data-property="Chassis">@Resources.Language.LabelChassis</th>
+                            <th data-property="SinisterDate">@Resources.Language.LabelSinisterDate</th>
+                            <th data-property="Insured">@Resources.Language.LabelInsured</th>
+                            <th data-property="LabelProtection">@Resources.Language.LabelProtection</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@{ Html.RenderAction("ModalDetailCexperPolicy", "Cexper", new { area = "ReportsFasecolda" });}

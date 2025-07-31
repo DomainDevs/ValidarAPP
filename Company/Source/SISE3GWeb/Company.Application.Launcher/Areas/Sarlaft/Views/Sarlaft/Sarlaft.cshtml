@@ -1,0 +1,491 @@
+﻿@{
+    Layout = null;
+}
+
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div class="column-40" id="titleMain">
+        @Resources.Language.CustomerKnowledge
+    </div>
+    <div class="column-30 no-padding" id="typeSearch">
+        <select class="uif-select" id="selectSearchPersonType" data-val="true" data-native="false" data-val-required="@Resources.Language.ErrorCreateSarlaft"
+                data-id="Value" data-name="Text" name="PersonTypeId"></select>
+    </div>
+    <div class="column-30 even" id="documentSearch">
+        <input type="text" id="inputSearch" name="Search" class="uif-input-search" placeholder="@Resources.Language.LabelHeaderDocumentNumber" maxlength="50">
+    </div>
+
+</script>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0289"))
+        {
+            <button class="btn btn-default" id="btnExentoSarlaft" style="display: none">
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExempt
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0288"))
+        {
+            <button class="btn btn-default cancel" id="btnExitSarlaft">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0287"))
+        {
+            <button class="btn btn-default" id="btnNewSarlaft">
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonNew
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0037"))
+        {
+            <button class="btn btn-default cancel" id="btnEditSarlaft">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonEdit
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0285"))
+        {
+            <button class="btn btn-default" id="btnConsultSarlaft">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.ButtonConsult
+            </button>
+        }
+
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0286"))
+        {
+            <button class="btn btn-primary" id="btnSaveSarlaft">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.ButtonSave
+            </button>
+        }
+
+    </div>
+</script>
+
+<div class="uif-modal" id="modalLinks">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Sarlaft/Views/Sarlaft/Links.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalRepresentlegal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Sarlaft/Views/Sarlaft/LegalRepresentative.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalPartner">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Sarlaft/Views/Sarlaft/Partners.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalInternationalOperations">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Sarlaft/Views/Sarlaft/InternationalOperations.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalPeps">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Sarlaft/Views/Sarlaft/Peps.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalExempt">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Sarlaft/Views/Sarlaft/Exempt.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalFinalBeneficiary">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Sarlaft/Views/Sarlaft/FinalBeneficiary.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalListSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Sarlaft/Views/Sarlaft/TableResult.cshtml")
+    </div>
+</div>
+
+<form id="formSarlaft" autocomplete="off" class="form form-space-adjusted">
+    <div class="main-container">
+        <div class="uif-col-9" id="SearchMain" style="display:none">
+            <div class="row uif-col-12">
+                <h5><strong>@Resources.Language.LabelFormHistory</strong></h5>
+            </div>
+            <div class="uif-col-12">
+                <table id="tblPayment" class="uif-table" data-title="" data-filter="false" data-paginate="false" data-selectiontype="single">
+                    <thead>
+                        <tr>
+                            <th data-property="Id" data-visible="true"><b>@Resources.Language.RegistrationYear</b></th>
+                            <th data-property="BranchId" data-visible="true"><b>@Resources.Language.Branch</b></th>
+                            <th data-property="ClaimCd" data-visible="true"><b>@Resources.Language.SignDate</b></th>
+                            <th data-property="ClaimCd" data-visible="true"><b>@Resources.Language.FormNumber</b></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="uif-col-9" fit-col-main id="FormMain" style="display:none">
+            <div class="row">
+                <div class="uif-col-6">
+                    <h5><strong>@Resources.Language.LabelOppositorInformation</strong></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-2">
+                    @Html.Label(@Resources.Language.RegistrationYear)
+                    <input type="text" id="inputSignYear" name="Year" disabled="disabled">
+                    <input type="hidden" id="IndividualId" name="IndividualId">
+                    <input type="hidden" id="SarlaftId" name="Id">
+                </div>
+
+                <div class="uif-col-2">
+                    <label>@Resources.Language.SignatureBranch</label>
+                    <select class="uif-select" name="SignatureBranch" id="selectSignatureBranch"
+                            data-id="Id" data-name="DescriptionLong" data-val="true" data-val-required="true" data-filter="true" data-native="false" disabled></select>
+                    @Html.ValidationMessage("SignatureBranch", Resources.Language.FieldRequired)
+                </div>
+
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.DiligenceDate</label>
+                    <input type="text" class="uif-datepicker" id="inputDiligenceDate" data-min-date="01/01/1910" data-max-date="DateTime.Now" name="DiligenceDate" required="required" />
+                    @Html.ValidationMessage("DiligenceDate", Resources.Language.FieldRequired)
+                </div>
+
+                <div class="uif-col-3">
+                    <label>@Resources.Language.LabelTypeDocument</label>
+                    <select class="uif-select form-control" id="selectTypeDocument" name="TypeDocument"
+                            data-id="Id" data-name="DescriptionLong"
+                            data-val="true"
+                            data-val-required="Campo requerido"
+                            data-filter="false" data-native="false" required="required"></select>
+                    @Html.ValidationMessage("TypeDocument", Resources.Language.FieldRequired)
+                </div>
+
+                @*<div class="uif-col-3">
+                    <label>@Resources.Language.LabelNumDocument</label>
+                    <input type="text" id="inputNumDocument" name="NumDocument" disabled="disabled" />
+
+                    <label>@Resources.Language.</label>
+                    <input type="text" id="inputNumDocument" name="NumDocument" disabled="disabled" />
+                </div>*@
+
+
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.LanguagePerson.LabelDocumentNumber</label>
+                    <table>
+                        <tr>
+                            <td style="width: 80%">
+                                <input type="text" id="inputNumDocument" required maxlength="9" disabled="disabled"/>
+                            </td>
+                            <td>
+                            
+                            </td>
+                            <td style="width: 20%">
+                                <input type="text" id="inputCompanyDigit" disabled />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="uif-col-3">
+                    <label>@Resources.Language.LabelName</label>
+                    <input type="text" id="inputName" name="Name" disabled="disabled" />
+                </div>
+
+                <div class="uif-col-2">
+                    <label>@Resources.Language.FormNumber</label>
+                    <input type="text" id="inputFormNumber" name="FormNumber" disabled="disabled">
+                </div>
+
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.Approvedby</label>
+                    <input type="text" id="inputApprovedby" name="Approvedby" required="required" maxlength="60">
+                    @Html.ValidationMessage("Approvedby", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-2">
+                    <label class="field-required">@Resources.Language.VerificationDate</label>
+                    <input type="text" class="uif-datepicker" id="inputVerificationDate" name="VerificationDate" required="required" disabled="disabled" />
+                    @Html.ValidationMessage("VerificationDate", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-2">
+                    <label class="field-required">@Resources.Language.LabelUser</label>
+                    <input type="text" id="inputUserName" name="UserName" disabled="disabled" />
+                    <input type="hidden" id="inputUserId" name="UserId" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-2">
+                    <label class="field-required">@Resources.Language.VerifyingOfficial</label>
+                    <input type="text" id="inputVerifyingOfficial" name="VerifyingOfficial" required="required" maxlength="60" />
+                    @Html.ValidationMessage("VerifyingOfficial", Resources.Language.FieldRequired)
+                </div>
+
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelConstitutionDate</label>
+                    <input type="text" class="uif-datepicker" id="inputConstitutionDate" data-min-date="01/01/1910" data-max-date="DateTime.Now" name="ConstitutionDate" required="required" />
+                    @Html.ValidationMessage("ConstitutionDate", Resources.Language.FieldRequired)
+                </div>
+
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.InterviewDate</label>
+                    <input type="text" class="uif-datepicker" id="inputInterviewDate" data-min-date="01/01/1910" data-max-date="DateTime.Now" name="InterviewDate" required="required" />
+                    @Html.ValidationMessage("InterviewDate", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.InterviewManager</label>
+                    <input class="uif-input-search" type="text" id="inputInterviewManager" name="InterviewManager" required="required" maxlength="60" />
+                    @Html.ValidationMessage("InterviewManager", Resources.Language.FieldRequired)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.OppositorType</label>
+                    <select class="uif-multiselect form-control" id="selectOppositorType" data-native="false" data-id="Id" data-name="Description"
+                            data-val-required="Campo requerido" required="required" name="OppositorType" multiple="multiple"></select>
+                    @Html.ValidationMessage("OppositorType", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3 NaturalFields">
+                    <label class="field-required">@Resources.LanguagePerson.PersonType</label>
+                    <select class="uif-select" id="selectPersonType" name="PersonType" data-id="Value" data-name="Text"
+                            data-val-required="Campo requerido" required="required"></select>
+                    @Html.ValidationMessage("PersonType", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3 NaturalFields">
+                    <label class="field-required">@Resources.LanguagePerson.LabelNationality</label>
+                    <select class="uif-select" id="selectNationality" name="Nationality" data-id="Id" data-name="Description"
+                            data-val-required="Campo requerido" required="required"></select>
+                    @Html.ValidationMessage("Nationality", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3 NaturalFields">
+                    <label class="field-required">@Resources.LanguagePerson.LabelNationality 2</label>
+                    <select class="uif-select" id="selectNationalityOther" name="NationalityOther" data-id="Id" data-name="Description"
+                            data-val-required="Campo requerido" required="required"></select>
+                    @Html.ValidationMessage("NationalityOther", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3" id="LegalFields">
+                    <label class="field-required">@Resources.Language.SocietyType</label>
+                    <select class="uif-select" id="selectSocietyType" name="SocietyType" data-id="Id" data-name="Description"
+                            data-val-required="Campo requerido" required="required"></select>
+                    @Html.ValidationMessage("SocietyType", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.LanguagePerson.Exemption</label>
+                    <select class="uif-select" id="selectExemptionType" name="ExemptionType" data-id="Id" data-name="Description"
+                            data-val-required="Campo requerido"></select>
+                    @*  @Html.ValidationMessage("ExemptionType", Resources.Language.FieldRequired)  *@
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-3" hidden>
+                    <label>@Resources.Language.LabelTypeCompany</label>
+                    <select class="uif-select form-control" id="selectSCompanyType" data-native="false" data-id="Id" data-name="Description"></select>
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.LanguagePerson.Country</label>
+                    <select class="uif-select" id="selectSCountry" data-id="Id" data-name="Description" name="Pais" required="required" data-val-required="@Resources.Language.RequiredField"></select>
+                    @Html.ValidationMessage("Pais", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.LanguagePerson.LabelDepartment</label>
+                    <select class="uif-select" id="selectSState" data-id="Id" data-name="Description" name="StateId" required="required" data-val-required="@Resources.Language.RequiredField"></select>
+                    @Html.ValidationMessage("StateId", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.LanguagePerson.City</label>
+                    <select class="uif-select" id="selectSCity" data-id="Id" data-name="Description" name="CityId" required="required" data-val-required="@Resources.Language.RequiredField"></select>
+                    @Html.ValidationMessage("CityId", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.Address</label>
+                    <input type="text" value="" id="MainAddressNatural" name="MainAddress" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" data-val="true" required="required" data-val-required="@Resources.Language.RequiredField" maxlength="100" />
+                    @Html.ValidationMessage("MainAddress", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.Phone</label>
+                    <input class="uif-input" type="text" id="inputPhone" name="Phone" data-minlenght="4" data-maxlenght="13" data-val="true" maxlength="13"
+                           required="required" data-val-required="@Resources.Language.RequiredField" onkeypress="return OnlyNumbers(event,this)" />
+                    @Html.ValidationMessage("Phone", Resources.Language.FieldRequired)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.AdressEmail</label>
+                    <input class="uif-input" id="AdressEmail" name="AdressEmail" type="text" style="text-transform: lowercase" required="required" data-val-required="@Resources.Language.RequiredField" maxlength="100">
+                    @Html.ValidationMessage("AdressEmail", Resources.Language.FieldRequired)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <h5><strong>@Resources.Language.FinancialInformation</strong></h5>
+                </div>
+
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="updateCIIU">
+                        <label for="updateCIIU">¿Actualizar Código CIIU?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelIncome</label>
+                    <input type="text" class="rightAlign" id="inputIncome" name="Income" required="required" onKeyPress="if(this.value.length == 16) return false;" />
+                    @Html.ValidationMessage("Income", @Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelTotalAssets</label>
+                    <input type="text" class="rightAlign" id="inputTotalAssets" name="TotalAssets" required="required" onKeyPress="if(this.value.length == 16) return false;" />
+                    @Html.ValidationMessage("TotalAssets", @Resources.Language.FieldRequired)
+                </div>
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.CIIUCodeMainActivity</label>
+                    <input class="uif-input-search" type="text" id="selectCIIUCodeMainActivity" name="MainActivity" required="required"/>
+                    @Html.ValidationMessage("MainActivity", @Resources.Language.FieldRequired)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelExpensesSarlaft</label>
+                    <input type="text" class="rightAlign" id="inputExpenses" name="Expenses" required="required" onKeyPress="if(this.value.length == 16) return false;" />
+                    @Html.ValidationMessage("Expenses", @Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelTotalLiabilities</label>
+                    <input type="text" class="rightAlign" id="inputTotalLiabilities" name="TotalLiabilities" required="required" onKeyPress="if(this.value.length == 16) return false;" />
+                    @Html.ValidationMessage("TotalLiabilities", @Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.Heritage</label>
+                    <input type="text" class="rightAlign" id="inputHeritage" name="TotalLiabilities" required="required" onKeyPress="if(this.value.length == 16) return false;" disabled />
+                </div>
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <input type="checkbox" id="rdInternationalOperations">
+                        <label for="rdInternationalOperations">@Resources.Language.InternationalOperations</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <input type="checkbox" id="ckeckExtraIncome">
+                        <label for="ckeckExtraIncome">Otros Ingresos</label>
+                    </div>
+                </div>
+                <div class="uif-col-3">
+                    <label>Valor Otros Ingresos</label>
+                    <input type="text" id="inputOtherIncome" name="inputOtherIncome" disabled="disabled">
+                    @Html.ValidationMessage("inputOtherIncome", Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.SecondaryActivity</label>
+                    <input class="uif-input-search" type="text" id="selectSecondaryActivity" name="SecondActivity"/>
+                    @Html.ValidationMessage("SecondActivity", Resources.Language.FieldRequired)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <h5><strong>@Resources.Language.InterviewInformation</strong></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.InterviewPlace</label>
+                    <input type="text" id="inputInterviewPlace" name="InterviewPlace" required="required" maxlength="120" />
+                    @Html.ValidationMessage("InterviewPlace", @Resources.Language.FieldRequired)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.Result</label>
+                    <select class="uif-select form-control"
+                            id="selectResult"
+                            name="Result"
+                            data-id="Id"
+                            data-name="DescriptionLong"
+                            data-val="true"
+                            data-filter="true"
+                            data-val-required="Campo requerido"
+                            data-native="false"></select>
+                    @Html.ValidationMessage("Result", @Resources.Language.FieldRequired)
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelObservations</label>
+                    <textarea id="inputDescription" rows="5" name="description" maxlenght="199" onchange="if(this.value.length >= 200) return false" onKeyPress="if(this.value.length >= 200) return false" onkeydown="if(this.value.length >= 200) return false" onkeyup="if(this.value.length >= 200) return false"></textarea>
+                    @Html.ValidationMessage("description", Resources.Language.FieldRequired)
+                </div>
+            </div>
+        </div>
+
+        <div class="uif-col-12" fit-col-main id="FormQuery" style="display:none">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label><strong>@Resources.Language.ClientName</strong></label>
+                    <label id=labelnamesarlaft></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <table id="tblSarlaft" class="uif-table" data-exporttocsv="false" data-exportname="Conocimiento del Cliente" data-filter="false" data-selectiontype="single">
+                        <thead>
+                            <tr>
+                                <th data-property="Id" data-visible="false">Id</th>
+                                <th data-property="Year">@Resources.Language.RegistrationYear</th>
+                                <th data-property="BranchName">Sucursal</th>
+                                <th data-property="FillingDate">Fecha Diligenciamiento</th>
+                                <th data-property="FormNum">Número Formulario</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="uif-col-3" fit-col-main id="SarlaftMenu" style="display:none">
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="uif-col-12 fit-col-secondary">
+                        <div class="uif-right-bar" id="panelButtonsRight">
+                            <ul>
+                                <li id="liLinks"><a href="#" id="btnLinks">@Resources.Language.Links</a></li>
+                                <li id="liRepresentlegal"><a href="#" id="btnRepresentlegal">@Resources.Language.Representlegal</a></li>
+                                <li id="liTitlePartner"><a href="#" id="btnTitlePartner">@Resources.Language.TitlePartner</a></li>
+                                <li><a href="#" id="btnInternationalOperations">@Resources.Language.InternationalOperations</a></li>
+                                <li id="liTitlePEPS"><a href="#" id="btnPEPS">@Resources.Language.Peps</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

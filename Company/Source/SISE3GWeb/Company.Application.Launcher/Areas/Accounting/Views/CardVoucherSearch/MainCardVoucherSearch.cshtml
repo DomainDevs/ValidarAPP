@@ -1,0 +1,110 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.SearchCards;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.BallotsAdministration</li>
+        <li>@Global.SearchLabel @Global.Card</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-primary" id="RejectCardVoucherSearch">
+            <i class="fa fa-clone"></i>  @Global.Reject
+        </button>
+        <button class="btn btn-primary" id="RegularizeCardVoucherSearch">
+            <i class="fa fa-check-circle-o"></i>  @Global.Regularize
+        </button>
+    </footer>
+}
+
+@section Modals
+{
+    <div class="uif-modal" id="VoucherSearchModal">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Html.Partial("CardVoucherSearchModal")
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-modal" id="ModalRejectVoucher">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Html.Partial("VoucherRejectionModal")
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="RejectVoucherSuccessDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.RejectCard</label></h4>
+                </div>
+
+                <div class="form">
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <input type="text" id="TechnicalTransaction" disabled="disabled" style="border: none" />
+                        </div>
+                    </div>
+
+                    <div class="uif-row">
+                        <div  id="accountingMessageDiv" class="uif-col-12">
+                            <label>@Global.AccountingIntegration:</label>
+                            <input type="text" id="accountingMessage" disabled="disabled" style="border: none" />
+                        </div>
+                    </div>
+
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <label id="rejectTextMessage"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" id="PrintDetail">
+                        <i class="fa fa-print"></i> @Global.PrintDetail
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        <i class="fa fa-check"></i> @Global.Accept
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("CardVoucherSearchPartial")
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/common-validations.js")"></script>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagRegularizationCards" value="@ViewBag.RegularizationCards" />
+<input type="hidden" id="ViewBagLoadVoucherRegularizationLink" value="@Url.Content(Global.LoadVoucherRegularizationLink)" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCardVoucherSearch")
+}

@@ -1,0 +1,38 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.AnalysisConceptModel
+
+@{
+    ViewBag.Title = "AnalysisConceptModal";
+    Layout = null;
+}
+
+<form id="addAnalysisConcept" onsubmit=" return false ">
+    <div class="uif-modalbody">
+        @Html.HiddenFor(m => m.AnalysisConceptId)
+        <div class="form">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    @Html.Label(Global.Description, htmlAttributes: new {@class = "control-label"})
+                    @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej.: Nuevo", onblur = "this.value = this.value.toUpperCase();" } })
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
+                <div class="uif-col-6">
+                    @Html.LabelFor(m => m.AnalysisTreatmentId, htmlAttributes: new {@class = "control-label"})
+                    @Html.DropDownListFor(m => m.AnalysisTreatmentId, Enumerable.Empty<SelectListItem>(), new {@class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetAnalysisTreatments"), data_id = "AnalysisTreatmentId", data_name = "Description", data_selectedid = @Model.AnalysisTreatmentId})
+                    @Html.ValidationMessageFor(m => m.AnalysisTreatmentId)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="cancelButton" data-dismiss="modal" data-role="button">
+            <i class="fa fa-times"></i> @Global.Cancel
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0761"))
+        {
+            <button type="submit" class="btn btn-primary" id="saveButton" onclick=" return false " data-role="button">
+                <i class="fa fa-floppy-o"></i> @Global.Save
+            </button>
+        }
+    </div>
+</form>

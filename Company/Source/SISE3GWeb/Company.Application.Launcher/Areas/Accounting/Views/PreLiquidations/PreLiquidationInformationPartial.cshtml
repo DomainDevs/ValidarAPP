@@ -1,0 +1,208 @@
+﻿@using System.Web.Mvc.Html
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+<form id="PreLiquidationForm" action="">
+    <div class="uif-row">
+        <div class="uif-col-7">
+            <label class="control-label">@Global.Branch</label>
+            <br />
+            @Html.DropDownList("BranchGenerationDrop", Enumerable.Empty<SelectListItem>(), new
+             {
+              @class = "uif-select form-control",
+              data_source = @Url.Content("~/BillSearch/LoadBranch"),
+              data_id = "Id",
+              data_name = "Description",
+              data_selectedid = @ViewBag.BranchDefault,
+              data_native = "true",
+              data_val = "true",
+              data_val_required = @Global.RequiredField
+            })
+            @Html.ValidationMessage("BranchGenerationDrop")
+        </div>
+        <div class="uif-col-5">
+            <label class="control-label">@Global.SalePoint</label>
+            <br />
+            @Html.DropDownList("SalesPointDrop", Enumerable.Empty<SelectListItem>(), new
+            {
+             @class = "uif-select form-control",
+             data_id = "Id",
+             data_name = "Description",
+             data_native = "true",
+             data_val = "true",
+             data_val_required = @Global.RequiredField
+            })
+            @Html.ValidationMessage("SalesPointDrop")
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Company</label>
+            <br />
+            @Html.DropDownList("CompanyGenerationDrop", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/PreLiquidations/GetAccountingCompany"),
+           data_id = "IndividualId",
+           data_name = "Name",
+           data_native = "true",
+           data_val = "true",
+           data_selectedid = @ViewBag.AccountingCompanyDefault,
+           data_val_required = @Global.RequiredField
+       })
+            @Html.ValidationMessage("CompanyGenerationDrop")
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Global.GenerationDate</label>
+            <br />
+            <input type="text" id="GenerationDate" name="GenerationDate" disabled="disabled" style="text-align: right" />
+        </div>
+        <div class="uif-col-5">
+            <label class="control-label">@Global.PayerType</label>
+            <br />
+            @Html.DropDownList("PayerTypeDrop", Enumerable.Empty<SelectListItem>(), new
+                                          {
+                                              @class = "uif-select form-control",
+                                              data_source = @Url.Content("~/Accounting/Common/LoadPersonType"),
+                                              data_id = "Id",
+                                              data_name = "Description",
+                                              data_native = "true",
+                                              data_val = "true",
+                                              data_val_required = @Global.RequiredField
+                                          })
+            @Html.ValidationMessage("PayerTypeDrop")
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.DocumentNumber:
+            </label>
+            <br />
+            <div id="BeneficiaryDocumentNumberData">
+                <input type="text" id="BeneficiaryDocumentNumber" name="BeneficiaryDocumentNumber" disabled />
+            </div>
+            @*Campos Ocultos*@
+
+            <input class="uif-autocomplete" type="text" 
+                   data-source="@Url.Action("GetSuppliersByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber"
+                   on onkeypress="return JustNumbers(event, this);" 
+                   maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' 
+                   id="SearchSuppliersByDocumentNumber"
+                   name="SearchSuppliersByDocumentNumber" 
+                   hidden="hidden"
+                   data-val="true" 
+                   data-val-required='@Global.RequiredField'/>
+            <span class="text-danger" data-valmsg-for="SearchSuppliersByDocumentNumber" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchInsuredByDocumentNumber"
+                   name="SearchInsuredByDocumentNumber" hidden="hidden"
+                   data-val="true" data-val-required='@Global.RequiredField' onblur="updateInput(this.id)"/>
+            <span class="text-danger" data-valmsg-for="SearchInsuredByDocumentNumber" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetCoinsuranceByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchCoinsuranceByDocumentNumber"
+                   name="SearchCoinsuranceByDocumentNumber" hidden="hidden"
+                   data-val="true" data-val-required='@Global.RequiredField'/>
+            <span class="text-danger" data-valmsg-for="SearchCoinsuranceByDocumentNumber" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetPersonByDocumentNumber", "Billing")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchPersonByDocumentNumber"
+                   name="SearchPersonByDocumentNumber" hidden="hidden"
+                   data-val="true" data-val-required='@Global.RequiredField'/>
+            <span class="text-danger" data-valmsg-for="SearchPersonByDocumentNumber" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetAgentByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchAgentByDocumentNumber"
+                   name="SearchAgentByDocumentNumber" hidden="hidden"
+                   data-val="true" data-val-required='@Global.RequiredField'/>
+            <span class="text-danger" data-valmsg-for="SearchAgentByDocumentNumber" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetEmployeeByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchEmployeeByDocumentNumber"
+                   name="SearchEmployeeByDocumentNumber" hidden="hidden"
+                   data-val="true" data-val-required='@Global.RequiredField'/>
+            <span class="text-danger" data-valmsg-for="SearchEmployeeByDocumentNumber" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetReinsurerByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchReinsurerByDocumentNumber"
+                   name="SearchReinsurerByDocumentNumber" hidden="hidden"
+                   data-val="true" data-val-required='@Global.RequiredField'/>
+            <span class="text-danger" data-valmsg-for="SearchReinsurerByDocumentNumber" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-8">
+            <label class="control-label">
+
+                @Global.PayerName:
+            </label>
+
+            <br />
+            <div id="BeneficiaryNameData">
+                <input type="text" id="BeneficiaryName" name="SearchPayerNamePaymentOrder" disabled />
+            </div>
+
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetSuppliersByName", "Common")"
+                   data-displaykey="Name" placeholder='@Global.EnterName' id="SearchSuppliersByName" maxlength="60"
+                   name="SearchSuppliersByName" hidden="hidden"
+                   data-val="true" data-val-required='@Global.RequiredField'/>
+            <span class="text-danger" data-valmsg-for="SearchSuppliersByName" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetInsuredByInsuredName", "Common")"
+                   data-displaykey="Name" placeholder='@Global.EnterName' id="SearchInsuredByName" maxlength="100"
+                   name="SearchInsuredByName" hidden="hidden" data-val="true" data-val-required='@Global.RequiredField' onblur="updateInput(this.id)"/>
+            <span class="text-danger" data-valmsg-for="SearchInsuredByName" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetCoinsurerByName", "Common")"
+                   data-displaykey="Name" placeholder='@Global.EnterName' id="SearchCoinsuranceByName" maxlength="60"
+                   name="SearchCoinsuranceByName" hidden="hidden" 
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="SearchCoinsuranceByName" data-valmsg-replace="true">
+            </span>
+
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetPersonByName", "Billing")"
+                   data-displaykey="Name" placeholder='@Global.EnterName' id="SearchPersonByName" maxlength="60"
+                   name="SearchPersonByName" hidden="hidden" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="SearchPersonByName" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetAgentByName", "Common")"
+                   data-displaykey="Name" placeholder='@Global.EnterName' id="SearchAgentByName" maxlength="60"
+                   name="SearchAgentByName" hidden="hidden" 
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="SearchAgentByName" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetEmployeeByName", "Common")"
+                   data-displaykey="Name" placeholder='@Global.EnterName' id="SearchEmployeeByName" maxlength="60"
+                   name="SearchEmployeeByName" hidden="hidden" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="SearchEmployeeByName" data-valmsg-replace="true">
+            </span>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetReinsurerByName", "Common")"
+                   data-displaykey="Name" placeholder='@Global.EnterName' id="SearchReinsurerByName" maxlength="60"
+                   name="SearchReinsurerByName" hidden="hidden" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="SearchReinsurerByName" data-valmsg-replace="true">
+            </span>
+
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label class="control-label">@Global.Description</label>
+            <br />
+            <input type="text" id="Description" name="Description" maxlength="100" onblur=" this.value=this.value.toUpperCase();" />
+            <input type="hidden" id="ReceiptAmount" name="ReceiptAmount"/>
+        </div>
+    </div>
+
+
+</form>

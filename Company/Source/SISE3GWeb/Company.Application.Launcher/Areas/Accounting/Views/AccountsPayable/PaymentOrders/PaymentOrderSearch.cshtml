@@ -1,0 +1,311 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.SearchLabel;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------*@
+@*																		 CODIGO HTML																		*@
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.SearchReceipts</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="PrintPaymentOrder" class="btn btn-default" role="button">
+            <i class="fa fa-print"></i>@Global.Print
+        </button>
+        <button id="AutorizePaymentOrder" class="btn btn-primary" role="button" type="submit">
+            <i class="fa fa-thumbs-o-up"></i>@Global.Authorize
+        </button>
+        <button id="ModifyPaymentOrder" class="btn btn-primary" role="button" type="submit">
+            <i class="fa fa-edit"></i>@Global.Modify
+        </button>
+        <button id="CancelPaymentOrder" class="btn btn-primary" role="button">
+            <i class="fa fa-remove"></i>@Global.Annul
+        </button>
+        <button id="ExportToExcel" class="btn btn-primary" role="button">
+            <i class="fa fa-file-excel-o"></i>@Global.ExportToExcel
+        </button>
+
+    </footer>
+}
+
+<div id="accSearchPaymentOrders">
+    <form id="PaymentOrdersForm">
+        <div class="uif-row filterRow">
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.Branch:
+                </label>
+                <br />
+                <select class="uif-select form-control required" id="BranchPaymentOrderSelect" name="BranchPaymentOrderSelect"
+                        data-source='@Url.Content("~/Accounting/Common/GetBranchs")' data-id="Id" data-name="Description" data-selectedid="@ViewBag.BranchDefault" data-val="true"
+                        data-val-required='@Global.RequiredField' data-native="true"></select>
+                <span class="text-danger" data-valmsg-for="BranchPaymentOrderSelect" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.User:
+                </label>
+                <br />
+                <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetUsers", "BillSearch")"
+                       data-displaykey="value" data-id="id"
+                       placeholder='@Global.EnterUser' id="UserPaymentOrders" name="UserPaymentOrders">
+                <input type="hidden" id="_UserIdPaymentOrders" name="_UserIdPaymentOrders" />
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.PaymentMethod:
+                </label>
+                <br />
+                <select class="uif-select form-control" id="SearchPaymentMeansSelect" name="SearchPaymentMeansSelect"
+                        data-source='@Url.Content("~/Accounting/PaymentOrders/GetEnabledPaymentMethodTypesSelect")' data-id="Id" data-name="Description"
+                        data-native="true"></select>
+            </div>
+        </div>
+
+        <div class="uif-row filterRow">
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.PaymentOrder:
+                </label>
+                <input type="text" id="SearchPaymentOrderNumber" name="SearchPaymentOrderNumber" onkeypress=" return JustNumbers(event, this); " maxlength="9" />
+                <input type="hidden" id="SearchBeneficiaryIndividualId" name="SearchBeneficiaryIndividualId" />
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.StartDate:
+                </label>
+                <input type="text" id="SearchPaymentOrderStartDate" name="SearchPaymentOrderStartDate" class="uif-datepicker" />
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.EndDate:
+                </label>
+                <input type="text" id="SearchPaymentOrderEndDate" name="SearchPaymentOrderEndDate" class="uif-datepicker" />
+            </div>
+        </div>
+    </form>
+
+    <div class="uif-row filterRow">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.PayerType:
+            </label>
+            <select class="uif-select form-control" id="SearchPayerTypeSelect" name="SearchPayerTypeSelect"
+                    data-source='@Url.Content("~/Accounting/Common/LoadPersonType")' data-id="Id"
+                    data-name="Description" data-native="true"></select>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Global.DocumentNumber:</label>
+            <input type="text" id="SearchPayerDocumentNumber" name="SearchPayerDocumentNumber" disabled />
+
+            @*Campos Ocultos*@
+
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetSuppliersByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="10"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchSuppliersByDocumentNumber" name="SearchSuppliersByDocumentNumber" hidden="hidden" />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="10"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchInsuredByDocumentNumber" name="SearchInsuredByDocumentNumber" hidden="hidden" />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetCoinsuranceByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="10"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchCoinsuranceByDocumentNumber" name="SearchCoinsuranceByDocumentNumber" hidden="hidden" />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetPersonByDocumentNumber", "Billing")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="10"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchPersonByDocumentNumber" name="SearchPersonByDocumentNumber" hidden="hidden" />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetAgentByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="10"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchAgentByDocumentNumber" name="SearchAgentByDocumentNumber" hidden="hidden" />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetEmployeeByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="10"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchEmployeeByDocumentNumber" name="SearchEmployeeByDocumentNumber" hidden="hidden" />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetReinsurerByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="10"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchReinsurerByDocumentNumber" name="SearchReinsurerByDocumentNumber" hidden="hidden" />
+        </div>
+        <div class="uif-col-6">
+            <label class="control-label">@Global.PayerName:</label>
+            <input type="text" id="SearchPayerNamePaymentOrder" name="SearchPayerNamePaymentOrder" disabled />
+
+            @*Campos Ocultos*@
+
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetSuppliersByName", "Common")" data-displaykey="Name"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchSuppliersByName" name="SearchSuppliersByName" hidden="hidden">
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetInsuredByInsuredName", "Common")" data-displaykey="Name"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchInsuredByName" name="SearchInsuredByName" hidden="hidden">
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetCoinsurerByName", "Common")" data-displaykey="Name"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchCoinsuranceByName" name="SearchCoinsuranceByName" hidden="hidden">
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetPersonByName", "Billing")" data-displaykey="Name"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchPersonByName" name="SearchPersonByName" hidden="hidden">
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetAgentByName", "Common")" data-displaykey="Name"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchAgentByName" name="SearchAgentByName" hidden="hidden">
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetEmployeeByName", "Common")" data-displaykey="Name"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchEmployeeByName" name="SearchEmployeeByName" hidden="hidden">
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetReinsurerByName", "Common")" data-displaykey="Name"
+                   placeholder='@Global.EnterDocumentNumber' id="SearchReinsurerByName" name="SearchReinsurerByName" hidden="hidden">
+        </div>
+    </div>
+
+    <div class="uif-row filterRow">
+        <div class="uif-col-3">
+            <label class="control-label">@Global.Status</label>
+            <select class="uif-select form-control" id="PaymentOrderStatus" name="PaymentOrderStatus"
+                    data-source='@Url.Content("~/Accounting/PaymentOrders/GetPaymentOrderStatus")' data-id="Id" data-name="Description" data-native="true"></select>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Global.Accounting</label>
+            <select class="uif-select form-control" id="SearchAccountingSelect" name="Accounting"
+                    data-source='@Url.Content("~/Accounting/PaymentOrders/IsBoolean")' data-id="Id" data-name="Description" data-native="true"></select>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Global.Delivered</label>
+            <select class="uif-select form-control" id="SearchDeliveredSelect" name="Delivered"
+                    data-source='@Url.Content("~/Accounting/PaymentOrders/IsBoolean")' data-id="Id" data-name="Description" data-native="true"></select>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Global.Reconcile</label>
+            <select class="uif-select form-control" id="SearchReconcileSelect" name="Reconcile"
+                    data-source='@Url.Content("~/Accounting/PaymentOrders/IsBoolean")' data-id="Id" data-name="Description" data-native="true"></select>
+        </div>
+    </div>
+
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+
+
+    <!-- BOTONES-->
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer">
+                <button id="CleanPaymentOrder" class="btn btn-default" role="button">
+                    <i class="fa fa-paint-brush"></i>@Global.Clean
+                </button>
+                <button id="SearchPaymentOrderProcess" class="btn btn-primary" role="button" type="submit">
+                    <i class="fa fa-search"></i>@Global.Search
+                </button>
+                <button id="ShowMoreParam" class="btn btn-primary" role="button" type="submit">
+                    <i class="fa fa-filter"></i>Filtro
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" data-title="@Global.Search"
+                   data-source="" id="SearchPaymentOrdersTable" data-selectiontype="single" data-filter="true" data-paginate="true" data-exporttocsv="false" data-exportname="cultura">
+                <thead>
+                    <tr>
+                        <th data-property="PaymentOrderCode">@Global.PaymentOrderNumber</th>
+                        <th data-property="SectorName">@Global.Sector</th>
+                        <th data-property="PaymentMethodName">@Global.PaymentMethod</th>
+                        <th data-property="ExchangeRate" data-visible="false">@Global.Exchange</th>
+                        <th data-property="IncomeAmount" data-visible="false">@Global.LocalAmount</th>
+                        <th data-property="Amount">@Global.Amount</th>
+                        <th data-property="UserName">@Global.User</th>
+                        <th data-property="BranchName">@Global.Branch</th>
+                        <!--SMT-1638 Inicio-->
+                        <th data-property="EstimatedPaymentDate" data-visible="true">@Global.PaymentRequest_EstimatedDate</th>
+                        <!--SMT-1638 Fin-->
+                        <th data-property="AdmissionDate">@Global.AccountingDate</th>
+                        <th data-property="PayerName">@Global.PayerName</th>
+                        <th data-property="CheckNumber">@Global.CheckNumber</th>
+                        <th data-property="BankAccountNumber">@Global.BankAccountNumber</th>
+                        <th data-property="CancellationDate">@Global.CancellationDate</th>
+                        <th data-property="TempImputationCode" data-visible="false">TempImputationCode</th>
+                        <th data-property="PaymentMethodCode" data-visible="false">ExchangeRate</th>
+                        <th data-property="UserId" data-visible="false">UserId</th>
+                        <th data-property="BranchCode" data-visible="false">ExchangeRate</th>
+                        <th data-property="IndividualId" data-visible="false">Holder</th>
+                        <th data-property="BeneficiaryDocumentNumber" data-visible="false">ExchangeRate</th>
+                        <th data-property="BeneficiaryName" data-visible="false">BeneficiaryName</th>
+                        <th data-property="BranchPayCode" data-visible="false">ExchangeRate</th>
+                        <th data-property="BranchPayName" data-visible="false">Holder</th>
+                        <th data-property="CompanyCode" data-visible="false">TempImputationCode</th>
+                        <th data-property="CompanyName" data-visible="false">ExchangeRate</th>
+                        <th data-property="CurrencyCode" data-visible="false">Holder</th>
+                        <th data-property="CurrencyName">@Global.Currency</th>
+                        <th data-property="AccountBankCode" data-visible="false">ExchangeRate</th>
+                        <th data-property="PaymentSourceCode" data-visible="false">Holder</th>
+                        <th data-property="PaymentSourceName" data-visible="false">ExchangeRate</th>
+                        <th data-property="PersonTypeCode" data-visible="false">Holder</th>
+                        <th data-property="PersonTypeName" data-visible="false">ExchangeRate</th>
+                        <th data-property="PayTo" data-visible="false">PayTo</th>
+                        <th data-property="StatusDescription">@Global.Status</th>
+                        <th data-property="Status" data-visible="false">@Global.Status</th>
+
+                        <th data-property="BankAccountNumberPerson">@Global.ReceivingBankAccountNumber</th>
+                        <th data-property="BankNamePerson">@Global.ReceivingBank</th>
+
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="div-dialogo-cancellation-payment_order"></div>
+</div>
+
+<div id="dlgCancelPaymentOrders" title="@Global.PaymentOrdersCancellation" style="display: none">
+    <h3>@Global.CancelPaymentOrder</h3>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagParameterMulticompanyPayment" value="@ViewBag.ParameterMulticompany" />
+<input type="hidden" id="ViewBagAccountingCompanyDefaultPayment" value="@ViewBag.AccountingCompanyDefault" />
+<input type="hidden" id="ViewBagBranchUserDefaultPayment" value="@ViewBag.BranchUserDefault" />
+<input type="hidden" id="ViewBagSalePointBranchUserDefaultPayment" value="@ViewBag.SalePointBranchUserDefault" />
+<input type="hidden" id="ViewBagBranchDisablePayment" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagParamPaymentMethodTransferPayment" value="@ViewBag.ParamPaymentMethodTransfer" />
+<input type="hidden" id="ViewBagSupplierCodePayment" value="@ViewBag.SupplierCode" />
+<input type="hidden" id="ViewBagInsuredCodePayment" value="@ViewBag.InsuredCode" />
+<input type="hidden" id="ViewBagCoinsurerCodePayment" value="@ViewBag.CoinsurerCode" />
+<input type="hidden" id="ViewBagThirdPartyCodePayment" value="@ViewBag.ThirdPartyCode" />
+<input type="hidden" id="ViewBagProducerCodePayment" value="@ViewBag.ProducerCode" />
+<input type="hidden" id="ViewBagEmployeeCodePayment" value="@ViewBag.EmployeeCode" />
+<input type="hidden" id="ViewBagReinsurerCodePayment" value="@ViewBag.ReinsurerCode" />
+<input type="hidden" id="ViewBagTradeConsultantPayment" value="@ViewBag.TradeConsultant" />
+<input type="hidden" id="ViewBagAgentCodePayment" value="@ViewBag.AgentCode" />
+<input type="hidden" id="ViewBagLoadPaymentOrdersApplicationLink" value="@Url.Content(Global.LoadPaymentOrdersApplicationLink)" />
+<input type="hidden" id="ViewBagParamConceptSourceId" value="@ViewBag.ParamConceptSourceId" />
+
+<style>
+    .panel-table .panel-heading, .panel-table.panel-heading-table {
+        display: none;
+    }
+
+    /* Ensure that the demo table scrolls */
+    /*th,*/
+    td {
+        white-space: nowrap;
+    }
+    /*div.dataTables_wrapper {
+        width: 1000px;
+        margin: 0 auto;
+    }*/
+
+</style>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/PaymentOrderSearch")
+}

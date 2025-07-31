@@ -1,0 +1,215 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.Endorsement.Models.ChangeTermViewModel
+
+@*<div class="row main-title">
+            <div class="column-60">
+                @Resources.Language.LabelChangeTermPolicy
+            </div>
+            <div class="column-40">
+                <div class="important">
+                    <div class="date">
+                        <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate">@Model.IssueDate</span>
+                        @Resources.Language.LabelNumberTemporal<span id="labelTemporalId"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        <div>@Resources.Language.LabelChangeTermPolicy</div>
+    </div>
+    <div class="column-30">
+        <div class="important">
+            <div class="date">
+                <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate"></span>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="btnCancel">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-default" id="btnPrintTemporalTerm">
+            <i class="fa fa-print" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.PrintTemporal
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0730"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.ButonSaveChangeTerm</button>
+        }
+    </div>
+</script>
+
+@*}*@
+
+<div class="uif-alert" id="alert"></div>
+<form id="formChangeTerm" class="without-peripheral">
+    <div class="row">
+        <div class="uif-col-12">
+            <h5 id="globalTitle"></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-summary field-summary-alignment">
+                <div class="items">
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableRisk</div>
+                            <div id="labelCurrentRisk">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableSum</div>
+                            <div id="labelCurrentSum">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTablePremium</div>
+                            <div id="labelCurrentPremium">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableExpenses</div>
+                            <div id="labelCurrentExpenses">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableTaxes</div>
+                            <div id="labelCurrentTaxes">0</div>
+                        </div>
+                    </div>
+                    <div class="item primary">
+                        <div>
+                            <div>@Resources.Language.LabelTableTotalPremium</div>
+                            <div id="labelCurrentTotalPremium">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelFilingNumber</label>
+            @Html.TextBoxFor(model => model.TicketNumber, new { id = "inputFilingNumber", type = "text", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TicketNumber)
+
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelFilingDate</label>
+            @Html.TextBoxFor(model => model.TicketDate, "{0:dd/MM/yyyy}", new { id = "inputTicketDate", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.TicketDate)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <h5><strong>@Resources.Language.LabelDataChangeTermEndorsement</strong></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelChangeTermDateTransfer</label>
+            @Html.TextBoxFor(model => model.CurrentFrom, new { id = "inputDateTransfer", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.CurrentFrom)
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelCurrentTo</label>
+            @Html.TextBoxFor(model => model.CurrentTo, new { id = "inputCurrentTo", @class = "uif-datepicker", disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.CurrentFrom)
+        </div>
+        <div class="uif-col-1">
+            <label>@Resources.Language.LabelDays</label>
+            @Html.TextBoxFor(model => model.Days, new { id = "inputChangeTermDays", disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.Days)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelText</label>
+            @Html.TextAreaFor(model => model.Text, new { id = "inputText", rows = "5", style = "text-transform:uppercase" })
+            @Html.ValidationMessageFor(model => model.Text)
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelObservations</label>
+            @Html.TextAreaFor(model => model.Observations, new { id = "inputObservations", rows = "5", style = "text-transform:uppercase" })
+            @Html.ValidationMessageFor(model => model.Observations)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.RecordObservations</label>
+            <textarea id="inputRecord" name="inputRecord" rows="5" required></textarea>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-12">
+            <div class="pull-right">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0729"))
+                {
+                    <button type="button" class="btn btn-primary btn-calculate" id="btnCalculate">
+                        <div>
+                            <i class="fa fa-calculator"></i>
+                            <div>
+                                @Resources.Language.LabelButtonCalculate
+                            </div>
+                        </div>
+                    </button>
+                }
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-summary field-summary-alignment">
+                <div class="title">@Resources.Language.LabelSummaryChangeTerm</div>
+                <div class="items">
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableRisk</div>
+                            <div id="labelRisk">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableSum</div>
+                            <div id="labelSum">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTablePremium</div>
+                            <div id="labelPremium">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableExpenses</div>
+                            <div id="labelExpenses">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableTaxes</div>
+                            <div id="labelTaxes">0</div>
+                        </div>
+                    </div>
+                    <div class="item primary">
+                        <div>
+                            <div>@Resources.Language.LabelTableTotalPremium</div>
+                            <div id="labelTotalPremium">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RecoveryPaymentPlanView">
+  <collections>
+    <collection name="Recovery" type="Sistran.Core.Application.Claims.Entities.Recovery, 
+                Core.Claims.Entities"></collection>
+    <collection name="PaymentPlan" type="Sistran.Core.Application.Claims.Entities.PaymentPlan, 
+                Core.Claims.Entities"></collection>
+    <collection name="PaymentSchedule" type="Sistran.Core.Application.Claims.Entities.PaymentSchedule, 
+                Core.Claims.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Recovery" destination="PaymentPlan" name="RecoveryPaymentPlan" type="Left">
+      <property left="PaymentPlanCode" type="Equal" right="PaymentPlanCode"></property>
+    </relation>
+    <relation source="PaymentPlan" destination="PaymentSchedule" name="PaymentPlanPaymentSchedule" type="Left">
+      <property left="PaymentPlanCode" type="Equal" right="PaymentPlanCode"></property>
+    </relation>
+  </relations>
+</view>

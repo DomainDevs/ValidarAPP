@@ -1,0 +1,39 @@
+<map version="2.0" type="class" name="Phone" namespace="Sistran.Core.Application.UniquePerson" file-version="1.0" description="PHONE_ENTITY">
+<properties>
+<property name="IndividualId" type="Integer" key="true" description="INDIVIDUAL_ID_PROPERTY" />
+<property name="DataId" type="Integer" key="true" autonumber="id" description="DATA_ID_PROPERTY" />
+<property name="PhoneTypeCode" type="Integer" description="PHONE_TYPE_CODE_PROPERTY" />
+<property name="PhoneNumber" type="Long" description="PHONE_NUMBER_PROPERTY" />
+<property name="Extension" type="Integer" nullable="true" description="EXTENSION_PROPERTY" />
+<property name="CountryCode" type="Integer" nullable="true" description="COUNTRY_CODE_PROPERTY" />
+<property name="CityCode" type="Integer" nullable="true" description="CITY_CODE_PROPERTY" />
+<property name="ScheduleAvailability" type="String" size="20" nullable="true" description="SCHEDULE_AVAILABILITY_PROPERTY" />
+<property name="IsMain" type="Boolean" nullable="true" description="IS_MAIN_PROPERTY" />
+</properties>
+<tables>
+<table name="PHONE" schema="UP" alias="PHONE" update="true">
+<columns>
+<column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" key="true" />
+<column name="DATA_ID" type="Int16" property="DataId" key="true" />
+<column name="PHONE_TYPE_CD" type="Byte" property="PhoneTypeCode" allowNull="false" />
+<column name="PHONE_NUMBER" type="String" property="PhoneNumber" allowNull="false" size="8" />
+<column name="EXTENSION" type="Int32" property="Extension" />
+<column name="COUNTRY_CODE" type="Int16" property="CountryCode" />
+<column name="CITY_CODE" type="Int16" property="CityCode" />
+<column name="SCHEDULE_AVAILABILITY" type="String" property="ScheduleAvailability" size="20" />
+<column name="IS_MAIN" type="Boolean" property="IsMain" />
+</columns>
+</table>
+</tables>
+ <autonumbers>
+    <autonumber name="id" schema="UP" table="INDIVIDUAL" column="AT_DATA_ID" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="INDIVIDUAL_ID" />
+          <Variable name="IndividualId" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>
+</map>

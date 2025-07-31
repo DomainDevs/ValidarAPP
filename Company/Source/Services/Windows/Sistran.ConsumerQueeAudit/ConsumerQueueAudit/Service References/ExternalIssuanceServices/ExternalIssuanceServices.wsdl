@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ExternalIssuanceServices" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="ExternalIssuanceServices.xsd" namespace="http://tempuri.org/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IExternalIssuanceServices_PolicyIssuanceVehicle_InputMessage">
+    <wsdl:part name="parameters" element="tns:PolicyIssuanceVehicle" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_PolicyIssuanceVehicle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PolicyIssuanceVehicleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_PolicyRenewal_InputMessage">
+    <wsdl:part name="parameters" element="tns:PolicyRenewal" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_PolicyRenewal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PolicyRenewalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_PolicyRenewalByAlliance_InputMessage">
+    <wsdl:part name="parameters" element="tns:PolicyRenewalByAlliance" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_PolicyRenewalByAlliance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PolicyRenewalByAllianceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_FirmRenewalPolicy_InputMessage">
+    <wsdl:part name="parameters" element="tns:FirmRenewalPolicy" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_FirmRenewalPolicy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FirmRenewalPolicyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_AuthorizationPolicies_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationPolicies" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_AuthorizationPolicies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationPoliciesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_CreateEndorsementFromJson_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEndorsementFromJson" />
+  </wsdl:message>
+  <wsdl:message name="IExternalIssuanceServices_CreateEndorsementFromJson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEndorsementFromJsonResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IExternalIssuanceServices">
+    <wsdl:operation name="PolicyIssuanceVehicle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IExternalIssuanceServices/PolicyIssuanceVehicle" message="tns:IExternalIssuanceServices_PolicyIssuanceVehicle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IExternalIssuanceServices/PolicyIssuanceVehicleResponse" message="tns:IExternalIssuanceServices_PolicyIssuanceVehicle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PolicyRenewal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IExternalIssuanceServices/PolicyRenewal" message="tns:IExternalIssuanceServices_PolicyRenewal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IExternalIssuanceServices/PolicyRenewalResponse" message="tns:IExternalIssuanceServices_PolicyRenewal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PolicyRenewalByAlliance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IExternalIssuanceServices/PolicyRenewalByAlliance" message="tns:IExternalIssuanceServices_PolicyRenewalByAlliance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IExternalIssuanceServices/PolicyRenewalByAllianceResponse" message="tns:IExternalIssuanceServices_PolicyRenewalByAlliance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FirmRenewalPolicy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IExternalIssuanceServices/FirmRenewalPolicy" message="tns:IExternalIssuanceServices_FirmRenewalPolicy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IExternalIssuanceServices/FirmRenewalPolicyResponse" message="tns:IExternalIssuanceServices_FirmRenewalPolicy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizationPolicies">
+      <wsdl:input wsaw:Action="http://tempuri.org/IExternalIssuanceServices/AuthorizationPolicies" message="tns:IExternalIssuanceServices_AuthorizationPolicies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IExternalIssuanceServices/AuthorizationPoliciesResponse" message="tns:IExternalIssuanceServices_AuthorizationPolicies_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateEndorsementFromJson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IExternalIssuanceServices/CreateEndorsementFromJson" message="tns:IExternalIssuanceServices_CreateEndorsementFromJson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IExternalIssuanceServices/CreateEndorsementFromJsonResponse" message="tns:IExternalIssuanceServices_CreateEndorsementFromJson_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IExternalIssuanceServices" type="tns:IExternalIssuanceServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PolicyIssuanceVehicle">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/PolicyIssuanceVehicle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PolicyRenewal">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/PolicyRenewal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PolicyRenewalByAlliance">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/PolicyRenewalByAlliance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FirmRenewalPolicy">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/FirmRenewalPolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizationPolicies">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/AuthorizationPolicies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEndorsementFromJson">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/CreateEndorsementFromJson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IExternalIssuanceServices1" type="tns:IExternalIssuanceServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PolicyIssuanceVehicle">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/PolicyIssuanceVehicle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PolicyRenewal">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/PolicyRenewal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PolicyRenewalByAlliance">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/PolicyRenewalByAlliance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FirmRenewalPolicy">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/FirmRenewalPolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizationPolicies">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/AuthorizationPolicies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEndorsementFromJson">
+      <soap:operation soapAction="http://tempuri.org/IExternalIssuanceServices/CreateEndorsementFromJson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ExternalIssuanceServices">
+    <wsdl:port name="BasicHttpBinding_IExternalIssuanceServices" binding="tns:BasicHttpBinding_IExternalIssuanceServices">
+      <soap:address location="http://localhost/External/ExternalIssuanceServices" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IExternalIssuanceServices1" binding="tns:BasicHttpBinding_IExternalIssuanceServices1">
+      <soap:address location="http://localhost/ExternalIssuanceServices" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

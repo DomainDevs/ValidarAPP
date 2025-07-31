@@ -1,0 +1,42 @@
+﻿<div>
+    <h5>
+        <strong>@Resources.Language.TypeContactInformation</strong>
+    </h5>
+    <div class="row">
+        <div class="uif-col-4">
+            <label class="field-required">@Resources.Language.FullName</label>
+            <input type="text" id="inputContactInformationName" name="contactInformationName" data-val="true" maxlength="50" data-val-required="@Resources.Language.RequiredField" required />
+            <span class="text-danger" data-valmsg-for="contactInformationName" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            <label class="field-required">@Resources.Language.Phone</label>
+            <input type="text" id="inputContactInformationPhone" name="contactInformationPhone" data-val="true" maxlength="50" data-val-required="@Resources.Language.RequiredField" required />
+            <span class="text-danger" data-valmsg-for="contactInformationPhone" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.Mail</label>
+            <input type="text" id="inputContactInformationMail" name="contactInformationMail" maxlength="50" placeholder="@Resources.Language.EmailPlaceholder" />
+        </div>
+    </div>
+</div>
+<div>
+    <h5>
+        <strong>@Resources.Language.SearchByInsured</strong>
+    </h5>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.DocumentNumber</label>
+            <input type="text" id="insuredDocumentNumber" name="insuredDocumentNumber" class="uif-autocomplete" maxlength="50" data-val="true"
+                   data-source="@Url.Content("~/Claim/GetInsuredsByDescriptionInsuredSearchTypeCustomerType")" data-displaykey="DocumentNumber"
+                   data-id="documentNumber" placeholder="@Resources.Language.PlaceHolderDocumentNumber" />
+            <span class="text-danger" data-valmsg-for="insuredDocumentNumber" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.FullName</label>
+            <input type="text" id="insuredFullName" name="insuredFullName" class="uif-autocomplete" data-val="true" maxlength="80"
+                   data-source="@Url.Content("~/Claim/GetInsuredsByDescriptionInsuredSearchTypeCustomerType")" data-displaykey="FullName"
+                   data-id="FirstLastName" placeholder="@Resources.Language.PlaceHolderNameSurname" />
+            <span class="text-danger" data-valmsg-for="insuredFullName" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+</div>

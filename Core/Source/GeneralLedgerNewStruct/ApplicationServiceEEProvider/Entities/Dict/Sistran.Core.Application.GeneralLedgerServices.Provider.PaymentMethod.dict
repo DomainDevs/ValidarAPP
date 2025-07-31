@@ -1,0 +1,22 @@
+<map version="2.0" type="class" name="PaymentMethod" namespace="Sistran.Core.Application.GeneralLedgerServices.EEProvider" file-version="1.0" description="PAYMENT_METHOD_ENTITY">
+  <properties>
+    <property name="PaymentMethodCode" type="Integer" key="true" description="PAYMENT_METHOD_CODE_PROPERTY" />
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="SmallDescription" type="String" size="15" description="SMALL_DESCRIPTION_PROPERTY" />
+    <property name="TinyDescription" type="String" size="3" description="TINY_DESCRIPTION_PROPERTY" />
+    <property name="IsIncome" type="Boolean" description="IS_INCOME_PROPERTY" />
+    <property name="PaymentMethodTypeCode" type="Integer" description="PAYMENT_METHOD_TYPE_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_METHOD" schema="COMM" alias="PAYMENT_METHOD" update="true">
+      <columns>
+        <column name="PAYMENT_METHOD_CD" type="Byte" property="PaymentMethodCode" key="true" identity = "true"/>
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="SMALL_DESCRIPTION" type="String" property="SmallDescription" allowNull="false" size="15" />
+        <column name="TINY_DESCRIPTION" type="String" property="TinyDescription" allowNull="false" size="3" />
+        <column name="IS_INCOME" type="Boolean" property="IsIncome" allowNull="false" />
+        <column name="PAYMENT_METHOD_TYPE_CD" type="Byte" property="PaymentMethodTypeCode" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

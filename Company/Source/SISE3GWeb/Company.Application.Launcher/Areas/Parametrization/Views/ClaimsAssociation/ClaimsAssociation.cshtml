@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-90">
+        @Resources.Language.PaymentConceptCoverageAssociation
+    </div>
+    <div class="column-10 even">
+
+    </div>
+</script>
+
+<form id="formAssociationConceptsofPaymentCoverage" autocomplete="off" class="form form-space-adjusted">
+    <br />
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.Prefix</label>
+            <select class="uif-select form-control" id="selectPrefix"
+                    data-id="Id" data-name="Description" name="PrefixId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelLineBusiness</label>
+            <select class="uif-select form-control" id="selectLineBusiness"
+                    data-id="Id" data-name="Description" name="LineBusinessId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.SinisterConcept</label>
+            <select class="uif-select form-control" id="selectConcept"
+                    data-id="Id" data-name="Description" name="SubLineBusinessId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelCoverage</label>
+            <select class="uif-select form-control" id="selectCoverage"
+                    data-id="Id" data-name="Description" name="CauseId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="uif-col-6">
+            <table id="tblConcepts" class="uif-table" data-title="Conceptos de pago Disponibles"
+                   data-edit="false" data-delete="false" data-add="false" data-paginate="true" data-filter="true">
+                <thead>
+                    <tr>
+                        <th data-property="Id">@Resources.Language.Code</th>
+                        <th data-property="Description">@Resources.Language.PaymentConcept</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="uif-col-6">
+            <table id="tblConceptsAssigned" class="uif-table" data-title="Conceptos de pago Asignados"
+                   data-edit="false" data-delete="true" data-add="false" data-paginate="false" data-selectiontype="none" data-filter="true">
+                <thead>
+                    <tr>
+                        <th data-property="Id">@Resources.Language.Code</th>
+                        <th data-property="Description">@Resources.Language.PaymentConcept</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>

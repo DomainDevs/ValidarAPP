@@ -1,0 +1,91 @@
+﻿<script id="tmpForAssign" type="text/template">
+    <div>
+        <label>
+        {{Currency.Description}}, {{PaymentSchedule.Description}}
+</label>
+    </div>
+    <div>
+        <label>
+            {{PaymentMethod.Description}}
+        </label>
+    </div>
+    <div>
+        <label class="font-highlight">
+            {{IsDefaultDescription}}
+        </label>
+    </div>
+</script>
+<script id="tmpForPaymentPlan" type="text/template">
+    <div>
+        <label>
+            {{Currency.Description}}, {{PaymentSchedule.Description}}
+        </label>
+    </div>
+    <div>
+        <label>
+            {{PaymentMethod.Description}}
+        </label>
+    </div>
+   
+</script>
+<form id="formPaymenPlan" class="form">
+    <div class="uif-row" id="mainModalCurrency">
+        <div class="uif-col-12">            
+            <div class="uif-row">
+                <div class="uif-col-5">
+                    <div class="uif-listview" id="listviewPaymentPlan">
+                    </div>
+                </div>
+                <div class="uif-col-2">
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalPaymentPlanAssignAll">
+                                <span class="" aria-hidden="true">>></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalPaymentPlanDeallocateAll">
+                                <span class="" aria-hidden="true"><<</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalPaymentPlanAssign">
+                                <span class="" aria-hidden="true">></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12 centerAlign">
+                            <button type="button" class="btn btn-default centerAlign middleWidth" id="btnModalPaymentPlanDeallocate">
+                                <span class="" aria-hidden="true"><</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-col-5">
+                    <div class="uif-listview" id="listviewPaymentPlanAssing">
+                    </div>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-5">
+                </div>
+                <div class="uif-col-2">
+                </div>
+                <div class="uif-col-5">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0585"))
+                    {
+                        <button type="button" class="btn btn-default secondary-Colombia" id="btnModalPaymentPlanDefault">
+                            <span class="" aria-hidden="true">@Resources.Language.LabelDefault</span>
+                        </button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

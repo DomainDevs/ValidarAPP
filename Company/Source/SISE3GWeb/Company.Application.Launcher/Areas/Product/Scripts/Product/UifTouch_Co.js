@@ -1,0 +1,1 @@
+﻿$.fn.Edit = function () { }

@@ -1,0 +1,240 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = null;
+}
+
+<script id="retention-display-template" type="text/template">
+    <div>
+        @Global.Currency: <strong>{{CurrencyId}} - {{Currency}}</strong> <br>
+        @Global.Amount: {{Amount}} | @Global.AmountExchange: {{ExchangeRate}}|
+        @Global.Retention: {{DocumentNumber}} <br>
+        @Global.RetentionConcept: <strong>{{RetentionConceptId}} - {{RetentionConcept}}</strong>
+</div>
+    <div class="text-right vertical-center">
+        <div class="number">@Global.TotalLocalCurrency: {{LocalAmount}}</div>
+    </div>
+</script>
+
+<form id="addRetentionForm" onsubmit="return false" class="form">
+    <div class="main-content">
+        <div class="uif-row">
+            <!--left col-->
+            <div class="uif-col-6">
+                <div class="uif-row">
+                    <div class="col-xs-6">
+                        <label>@Global.Branch</label>
+                        @Html.DropDownList("selectRetentionBranch", Enumerable.Empty<SelectListItem>(), new
+                   {
+                       @class = "uif-select form-control",
+                       data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                       data_id = "Id",
+                       data_name = "Description",
+                       data_native = "true",
+                       data_val = "true",
+                       data_val_required = @Global.RequiredField
+                   })
+                        <span class="text-danger" data-valmsg-for="selectRetentionBranch" data-valmsg-replace="true" />
+                    </div> 
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Prefix</label>
+                        @Html.DropDownList("selectRetentionPrefix", Enumerable.Empty<SelectListItem>(), new
+                   {
+                       @class = "uif-select form-control",
+                       data_source = @Url.Content("~/Accounting/Common/GetPrefixes"),
+                       data_id = "Id",
+                       data_name = "Description",
+                       data_native = "true",
+                       data_val = "true",
+                       data_val_required = @Global.RequiredField
+                   })
+                        <span class="text-danger" data-valmsg-for="selectRetentionPrefix" data-valmsg-replace="true" />
+                    </div> 
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Policy</label>       
+                        @Html.TextBox("RetentionPolicy", "", new
+                   {
+                       @onkeypress = "return JustNumbers(event,this)",
+                       data_val = "true",
+                       maxlength = "12",
+                       data_val_required = @Global.RequiredField
+                   })
+                        <span class="text-danger" data-valmsg-for="RetentionPolicy" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Endorsement</label>           
+                        @Html.TextBox("RetentionEndorsement", "", new
+                        {
+                         @onkeypress = "return JustNumbers(event,this)",
+                         data_val = "true",
+                         maxlength = "4",
+                         data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="RetentionEndorsement" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenRetentionEndorsement" />
+                    </div>
+                </div>
+
+                    <div class="uif-row">
+                        <div class="uif-col-xs-6">
+                            <label>@Global.Currency</label>
+                            @Html.DropDownList("selectRetentionCurrency", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                            <span class="text-danger" data-valmsg-for="selectRetentionCurrency" data-valmsg-replace="true" />
+                        </div>
+                        <div class="uif-col-xs-6">
+                            <label>@Global.Amount</label>
+                            @Html.TextBox("RetentionAmount", "", new
+                       {
+                           @onkeypress = "return OnlyDecimalNumber(event,this)",
+                           style = "text-align: right",
+                           data_val = "true",
+                           maxlength = "26",
+                           data_val_required = @Global.RequiredField
+                       })
+                            <span class="text-danger" data-valmsg-for="RetentionAmount" data-valmsg-replace="true" />
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-xs-6">
+                            <label>@Global.AmountExchange</label>
+                            <input type="text" id="RetentionExchangeRate" style="text-align: right" />
+                        </div>
+                        <div class="uif-col-xs-6">
+                            <label>@Global.TotalLocalCurrency</label>
+                            <input type="text" id="RetentionLocalAmount" disabled="disabled" style="text-align: right" />
+                        </div>
+                    </div>
+                    <div class="uif-row">                  
+                        <div class="uif-col-xs-6">
+                            <label>@Global.BillNumber</label>
+
+                             @Html.TextBox("RetentionBillNumber", "", new
+                                {
+                                 @onkeypress = "return JustNumbers(event,this)",
+                                 data_val = "true",
+                                 maxlength = "12",
+                                 data_val_required = @Global.RequiredField
+                                })
+
+                            <span class="text-danger" data-valmsg-for="RetentionBillNumber" data-valmsg-replace="true" />
+
+                            <input type="hidden" id="HiddenRetentionBillNumber" />
+                        </div>
+                        <div class="col-xs-6">
+                            <label>@Global.Recovery_ReceiptDate</label>
+                            <input type="text" 
+                                   data-mask="99/99/9999"
+                                   id="RetentionBillDate"
+                                   name="RetentionBillDate"
+                                   value="@ViewBag.FakeDate" 
+                                   data-val="true" 
+                                   data-val-required='@Global.RequiredField' />
+                            <span class="text-danger" data-valmsg-for="RetentionBillDate" data-valmsg-replace="true" />
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-xs-6">
+                            <label>@Global.AuthorizationNumber</label>
+                           @Html.TextBox("RetentionAutorizationNumber", "", new
+                           {
+                               @onkeypress = "return JustNumbers(event,this)",
+                               style = "text-align: right",
+                               data_val = "true",
+                               maxlength = "49",
+                               data_val_required = @Global.RequiredField
+                           })
+                            <span class="text-danger" data-valmsg-for="RetentionAutorizationNumber" data-valmsg-replace="true" />
+
+                            <input type="hidden" id="HiddenRetentionAutorizationNumber" />
+                        </div>
+                        <div class="uif-col-xs-6">
+                            <label>@Global.VoucherNumber</label>
+                            @Html.TextBox("RetentionVoucherNumber", "", new
+                            {
+                                @onkeypress = "return JustNumbers(event,this)",
+                                style = "text-align: right",
+                                data_val = "true",
+                                maxlength = "17",
+                                data_val_required = @Global.RequiredField
+                            })
+                            <span class="text-danger" data-valmsg-for="RetentionVoucherNumber" data-valmsg-replace="true" />
+                                                                                 
+                            <input type="hidden" id="HiddenRetentionVoucherNumber" />
+                        </div>
+                    </div>     
+                    <div class="uif-row">
+                        <div class="col-xs-6">
+                            <label>@Global.IssueDate</label>
+                            <input type="text" 
+                                   value="@ViewBag.DateAccounting" 
+                                   data-mask="99/99/9999" 
+                                   id="RetentionIssueDate"
+                                   name="RetentionIssueDate"
+                                   data-val="true" 
+                                   data-val-required='@Global.RequiredField' />
+                            <span class="text-danger" data-valmsg-for="RetentionIssueDate" data-valmsg-replace="true" />
+                        </div>
+                        <div class="col-xs-6">
+                            <label>@Global.ExpirationDate</label>
+                            <input type="text"
+                                   value="@ViewBag.FakeDate" 
+                                   data-mask="99/99/9999" 
+                                   id="RetentionExpirationDate"
+                                   name="RetentionExpirationDate"
+                                   data-val="true" 
+                                   data-val-required='@Global.RequiredField' />
+                            <span class="text-danger" data-valmsg-for="RetentionExpirationDate" data-valmsg-replace="true" />
+                        </div>
+                    </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.RetentionConcept</label>
+                        @Html.DropDownList("SelectRetentionConcept", Enumerable.Empty<SelectListItem>(), new
+                            {
+                                @class = "uif-select form-control",
+                                data_source = @Url.Content("~/Accounting/Retention/GetRetentionConcept"),
+                                data_id = "Id",
+                                data_name = "Description",
+                                data_native = "true"
+                            })
+                        <span class="text-danger" data-valmsg-for="SelectRetentionConcept" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <div class="uif-alert" id="alertForm"></div>
+                        </div>
+                    </div>
+                </div>
+            <!--End left col-->
+            <!--right col-->
+            <div class="uif-col-6">
+                <div class="uif-listview" id="retentionListView">
+                    <div class="footer">
+                        <div class="uif-col-xs-6">
+                            @Global.Total
+                        </div>
+                        <div class="uif-col-xs-6 text-right">
+                            <b id="TotalRetention">$ 0.00</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End right col-->
+        </div>
+    </div>
+</form>
+
+

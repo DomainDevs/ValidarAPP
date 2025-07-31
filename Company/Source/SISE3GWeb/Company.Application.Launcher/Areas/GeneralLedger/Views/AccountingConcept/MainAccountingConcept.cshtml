@@ -1,0 +1,112 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    //ViewBag.Title = "MainAccountingConcept";
+    ViewBag.Title = @Global.AccountingConcept;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameter</li>
+        <li>@Global.AccountingConcept</li>
+        <li class="active">@Global.AccountingConcept</li>
+    </ol>
+}
+
+@section Modals
+{
+
+    <!--Form para grabar concepto contable-->
+    <form id="MainAccountingConceptAddForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="MainAccountingConceptModalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/GeneralLedger/Views/AccountingConcept/AccountingConceptModal.cshtml")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="SaveAddAccountingConcept" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <!--Form para editar concepto contable-->
+    <form id="MainAccountingConceptEditForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="MainAccountingConceptModalEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/GeneralLedger/Views/AccountingConcept/AccountingConceptModal.cshtml")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="SaveEditAccountingConcept" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteAccountingConcept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="deleteKeyModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+<br />
+
+<div class="uif-row">
+    <div class="uif-alert" id="mainAlert"></div>
+</div>
+
+<form id="formAccountingConceptKey" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="accountingConceptTable" data-exporttocsv="false" data-add="true" data-edit="true"
+                   data-delete="true" data-selectiontype="single" data-filter="true"
+                   data-source="@Url.Action("GetAccountingConcepts", "AccountingConcept")"
+                   data-paginate="true" data-title="@Global.AccountingConcept">
+                <thead>
+                    <tr>
+                        <th data-property="Id">Id</th>
+                        <th data-property="AccountingAccount.Number">@Global.AccountingAccount</th>
+                        <th data-property="Description">@Global.Description</th>
+                        <th data-property="AgentEnabled" data-type="boolean">@Global.Agent</th>
+                        <th data-property="CoInsurancedEnabled" data-type="boolean">@Global.Coinsurances</th>
+                        <th data-property="ReinsuranceEnabled" data-type="boolean">@Global.Reinsurance</th>
+                        <th data-property="InsuredEnabled" data-type="boolean">@Global.Insured</th>
+                        <th data-property="ItemEnabled" data-type="boolean">@Global.EnabledItem</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+@*<input type="hidden" id="ViewBagControlSpanAccountingConcept" value="false" />*@
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/MainAccountingConcept")
+}

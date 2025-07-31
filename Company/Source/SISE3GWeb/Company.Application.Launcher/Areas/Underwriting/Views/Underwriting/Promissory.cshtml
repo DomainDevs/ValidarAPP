@@ -1,0 +1,113 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.PolicyModelsView
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column-40">
+        Información pagaré
+    </div>
+    <div class="column-30 no-padding">
+        Emisión pagaré temporal
+    </div>
+</script>
+
+<form id="formPromissory" class="form modal-Colombia">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>Tasa financiación</label>
+            @*<input type="text" id="inputFinancingRate" class="rightAlign" />*@
+            @Html.TextBoxFor(model => model.FinancingRate, new { id = "inputFinancingRate", @class = "rightAlign", maxLength = 2, disabled="disabled" })
+            @Html.ValidationMessageFor(model => model.FinancingRate)
+        </div>
+        <div class="uif-col-3">
+            <label>Estado pagaré</label>
+            @*<input type="text" id="inputStatePay" class="rightAlign" />*@
+            @Html.TextBoxFor(model => model.StatePay, new { id = "inputStatePay", @class = "rightAlign", maxLength = 20 , disabled="disabled"})
+            @Html.ValidationMessageFor(model => model.StatePay)
+        </div>
+        <div class="uif-col-3">
+            <label>Vigencia desde</label>
+            @*<input class="uif-datepicker" id="dateTofrom" />*@
+            @Html.TextBoxFor(model => model.ValidSince, "{0:dd/MM/yyyy}", new { id = "dateTofrom", @class = "uif-datepicker" , disabled="disabled"})
+            @Html.ValidationMessageFor(model => model.ValidSince)
+        </div>
+        <div class="uif-col-3">
+            <label>Vigencia hasta</label>
+            @Html.TextBoxFor(model => model.ValidityUntil, "{0:dd/MM/yyyy}", new { id = "dateToUntil", @class = "uif-datepicker", disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.ValidityUntil)
+            @*<input class="uif-datepicker" id="dateToUntil" />*@
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>Codigo asegurado</label>
+            @*<input type="text" id="inputInsuredCode" disabled="disabled" class="rightAlign" />*@
+            @Html.TextBoxFor(model => model.InsuredCode, new { id = "inputInsuredCode", @class = "rightAlign", disabled="disabled" })
+            @Html.ValidationMessageFor(model => model.InsuredCode)
+        </div>
+        <div class="uif-col-6">
+            <label>Nombre asegurado</label>
+            @*<input type="text" id="inputInsuredName" disabled="disabled" class="rightAlign" />*@
+            @Html.TextBoxFor(model => model.InsuredName, new { id = "inputInsuredName", @class = "rightAlign", disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.InsuredName)
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-col-3">
+                <label>Nro. Cuotas</label>
+                @*<input type="text" id="inputQuota" disabled="disabled" class="rightAlign" />*@
+                @Html.TextBoxFor(model => model.Quota, new { id = "inputQuota", @class = "rightAlign", maxLength = 2 })
+                @Html.ValidationMessageFor(model => model.Quota)
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-col-6">
+                    <label style="margin-top:20px;">Valor Total (Prima+Iva) $</label>
+                </div>
+                <div class="uif-col-6">
+                    @Html.TextBoxFor(model => model.TotalValue, new { id = "inputTotalValue", @class = "rightAlign", maxLength = 20, disabled = "disabled", style = "margin-top:20px;" })
+                    @Html.ValidationMessageFor(model => model.TotalValue)
+                    @*<input type="text" id="inputTotalValue" disabled="disabled" style="margin-top:20px;" />*@
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-12">
+            <div class="uif-col-3">
+                <label>Porcentaje a financiar %</label>
+                @*<input type="text" id="inputPercentage" disabled="disabled" class="rightAlign" />*@
+                @Html.TextBoxFor(model => model.Percentage, new { id = "inputPercentage", @class = "rightAlign", maxLength = 2 })
+                @Html.ValidationMessageFor(model => model.Percentage)
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-col-6">
+                    <label style="margin-top:20px;">Valor a financiar $</label>
+                </div>
+                <div class="uif-col-6">
+                    @Html.TextBoxFor(model => model.ValueFinance, new { id = "inputValueFinance", @class = "rightAlign", maxLength = 2, disabled = "disabled", style = "margin-top:20px;" })
+                    @Html.ValidationMessageFor(model => model.ValueFinance)
+                    @*<input type="text" id="inputValueFinance" disabled="disabled" style="margin-top:20px;" />*@
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-12">
+            <div class="uif-col-3">
+                <label>Valor a financiar</label>
+                @*<input type="text" id="inputInputValueFinanceTwo" disabled="disabled" class="rightAlign" />*@
+                @Html.TextBoxFor(model => model.ValueFinanceTwo, new { id = "inputInputValueFinanceTwo", @class = "rightAlign", maxLength = 20 })
+                @Html.ValidationMessageFor(model => model.ValueFinanceTwo)
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-col-6">
+                    <label style="margin-top:20px;"> Valor minimo a financiar $</label>
+                </div>
+                <div class="uif-col-6">
+                    @*<input type="text" id="inputMinimumValue" disabled="disabled" style="margin-top:20px;" />*@
+                    @Html.TextBoxFor(model => model.MinimumValue, new { id = "inputMinimumValue", @class = "rightAlign", maxLength = 20, disabled = "disabled" , style= "margin-top:20px;" })
+                    @Html.ValidationMessageFor(model => model.MinimumValue)
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

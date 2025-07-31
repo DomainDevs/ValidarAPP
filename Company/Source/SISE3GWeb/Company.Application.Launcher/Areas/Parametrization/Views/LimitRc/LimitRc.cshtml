@@ -1,0 +1,157 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.LimitRcViewModel
+@{
+    Layout = null;
+}
+<script id="LimitRcTemplate" type="text/template">
+	{{#ifCond StatusTypeService "==" 2}}
+	<div> Código Límite:<strong class="success"> ({{LimitRcCd}})</strong></div>
+	{{else ifCond StatusTypeService "==" 3}}
+	<div> Código Límite:<strong class="warning"> ({{LimitRcCd}})</strong></div>
+	{{else ifCond StatusTypeService "==" 4}}
+	<div> Código Límite:<strong class="danger"> ({{LimitRcCd}})</strong></div>
+	{{else}}
+	<div> Código Límite:<strong> ({{LimitRcCd}})</strong></div>
+	{{/ifCond }}
+
+	{{#if ValidationLimit}}
+	<div>
+		<br>
+		Límite Uno: <strong>{{Limit1}}</strong>
+	</div>
+	<div>
+		<br>
+		Límite Dos: <strong>{{Limit2}}</strong>
+	</div>
+	<div>
+		<br>
+		Límite Tres: <strong>{{Limit3}}</strong>
+	</div>
+	<div class="hide">
+		<br>
+		Límite Unico: <strong>{{LimitUnique}}</strong>
+	</div>
+	<div>
+		<br>
+		Descripción: <strong>{{Description}}</strong>
+	</div>
+	{{/if}}
+	{{#if ValidationUnique}}
+	<div class="hide">
+		<br>
+		Límite Uno: <strong>{{Limit1}}</strong>
+	</div>
+	<div class="hide">
+		<br>
+		Límite Dos: <strong>{{Limit2}}</strong>
+	</div>
+	<div class="hide">
+		<br>
+		Límite Tres: <strong>{{Limit3}}</strong>
+	</div>
+	<div>
+		<br>
+		Límite Unico: <strong>{{LimitUnique}}</strong>
+	</div>
+	<div>
+		<br>
+		Descripción: <strong>{{Description}}</strong>
+	</div>
+	{{/if}}
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.LabelLimitRC
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputLimitRcSearch", @placeholder = @Resources.Language.LabelPlaceHolderSearchLimitRc })
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsLimitRc" class="footerLimitRc">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+<form id="formLimitRc" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LimitCode</label>
+                    @Html.TextBoxFor(model => model.LimitRcCd, new { id = "inputLimitCode", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.LimitRcCd)
+                </div>
+                <div class="uif-col-6"></div>
+                <div class="uif-col-6"></div>
+            </div>
+            <div class="row">
+                <div class="uif-col-7">
+                    <label>@Resources.Language.Limit1</label>
+                    @Html.TextBoxFor(model => model.Limit1, new { id = "inputLimit1", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Limit1)
+                </div>
+                <div class="uif-col-7">
+                    <label>@Resources.Language.Limit2</label>
+                    @Html.TextBoxFor(model => model.Limit2, new { id = "inputLimit2", @class = "rightAlign"})
+                    @Html.ValidationMessageFor(model => model.Limit2)
+                </div>
+                <div class="uif-col-7">
+                    <label>@Resources.Language.Limit3</label>
+                    @Html.TextBoxFor(model => model.Limit3, new { id = "inputLimit3", disabled = "disabled", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Limit3)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LimitUnique</label>
+                    @Html.TextBoxFor(model => model.LimitUnique, new { id = "inputLimitUnique", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.LimitUnique)
+                </div>
+                <div class="uif-col-6"></div>
+                <div class="uif-col-6"></div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LimitDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", placeholder = @Resources.Language.LabelPlaceHolderLimitDescription, @class = "rightAlign", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listViewLimitRc" class="uif-listview"></div>
+        </div>
+
+    </div>
+
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsLimitRc">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewLimitRc">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAcceptLimitRc">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

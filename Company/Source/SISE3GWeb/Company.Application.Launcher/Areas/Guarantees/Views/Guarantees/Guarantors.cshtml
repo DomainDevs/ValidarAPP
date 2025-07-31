@@ -1,0 +1,94 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Guarantees.Models.GuarantorsViewModel
+
+<div class="uif-alert" id="alertGuarantors"></div>
+
+<div class="row uif-row-pc">
+    <div class="uif-col col-md-7">
+        <span id="IndividualName-Guarantors">@Model.Name </span>
+        <span id="NumberDocument-Guarantors" hidden="hidden">@Model.NumberDocument</span>
+    </div>
+</div>
+
+<form id="formGuarantor" name="formGuarantor" class="modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row uif-row-pc">
+                <div class="uif-col-12">
+                    <label class="radio-inline">
+                        <input type="radio" name="personType" value="naturalPerson" id="naturalPerson" checked="checked">@Resources.Language.NaturalPerson
+                    </label>
+                </div>
+                <div class="uif-col-12">
+                    <label class="radio-inline">
+                        <input type="radio" name="personType" value="legalPerson" id="legalPerson">@Resources.Language.LegalPerson
+                    </label>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="uif-col col-md-6">
+                    <label class="field-required">@Resources.Language.LabelName</label>
+                    @Html.TextBoxFor(model => model.Name, new { id = "Guarantor-Name", @class = "changeToUpper" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+
+                <div class="uif-col col-md-6">
+                    <label class="field-required">@Resources.Language.LabelBusinessNameOrDocumentNumber</label>
+                    @Html.TextBoxFor(model => model.DocumentNumber, new { id = "Guarantors-DocumentNumber", @class = "uif-input"})
+                    @Html.ValidationMessageFor(model => model.DocumentNumber)
+                </div>
+            </div>
+
+            <div class="row uif-row-pc">
+                <div class="uif-col col-md-6">
+                    <label class="field-required">@Resources.Language.Address</label>
+                    @Html.TextBoxFor(model => model.Address, new { id = "Guarantors-Address", @class = "changeToUpper", @maxlength = "30" })
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+                <div class="uif-col col-md-6">
+                    <label class="field-required">@Resources.Language.LabelCity</label>
+                    <input class="uif-autocomplete" name="City" type="text" data-source="@Url.Content("~/Guarantees/Guarantees/GetCities")" data-displaykey="Description" data-minlenght="2" data-maxlenght="5" id="Guarantor-City">
+                    @Html.ValidationMessageFor(model => model.City)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col col-md-6">
+                    <label class="field-required">@Resources.Language.Phone</label>
+                    @Html.TextBoxFor(model => model.Phone, new { id = "Guarantors-Phone", @class = "uif-input", @maxlength = "15" })
+                    @Html.ValidationMessageFor(model => model.Phone)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-listview" id="tableGuarantors">
+            </div>
+        </div>
+
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div id="buttonGuarantor" class="pull-right">
+                <button type="button" class="btn btn-default" id="btnNewGuarantor">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAcceptGuarantor">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.AddForm
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+

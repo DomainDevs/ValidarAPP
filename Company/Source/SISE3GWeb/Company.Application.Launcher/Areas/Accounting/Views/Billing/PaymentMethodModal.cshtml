@@ -1,0 +1,244 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "PaymentMethodModal";
+}
+
+<form id="addForm" class="form">
+<div class="uif-panel">
+    <!-- Cash -->
+    <div id="divCash">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label>@Global.Currency</label>
+                <select class="uif-select form-control" id="selectCashCurrency" name="selectCashCurrency"
+                        data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id"
+                        data-name="Description"></select>
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.Amount</label>
+                <br />
+                <input type="text" id="CashAmount" style="text-align: right" onkeypress="return OnlyDecimalNumber(event,this)" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.Exchange</label>
+                <br />
+                <input type="text" id="CashExchangeRate" disabled="disabled" style="text-align: right" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Global.LocalAmount</label>
+                <br />
+                <input type="text" id="CashLocalAmount" disabled="disabled" style="text-align: right" />
+            </div>
+        </div>
+    </div>
+    <!-- End Cash -->
+    <!-- Check -->
+    <div id="divCheck">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label>@Global.Currency</label>
+                <select class="uif-select form-control" id="selectCheckCurrency" name="selectCheckCurrency"
+                        data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id"
+                        data-name="Description"></select>
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.Amount</label>
+                <br />
+                <input type="text" id="CheckAmount" style="text-align: right" onkeypress="return OnlyDecimalNumber(event,this)" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.ExchangeRate</label>
+                <br />
+                <input type="text" id="CheckExchangeRate" disabled="disabled" style="text-align: right" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Global.LocalAmount</label>
+                <br />
+                <input type="text" id="CheckLocalAmount" disabled="disabled" style="text-align: right" />
+            </div>
+            <div class="uif-col-6">
+                <label>@Global.IssuingBank</label>
+                <br />
+                <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value" placeholder='@Global.EnterIssuingBank' id="inputCheckIssuingBank">
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.AccountNumber</label>
+                <br />
+                <input type="text" id="CheckAccountNumber" style="text-align: right" maxlength="15" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Global.DocumentNumber</label>
+                <br />
+                <input type="text" id="CheckDocumentNumber" style="text-align: right" maxlength="15" />
+            </div>
+            <div class="uif-col-6">
+                <label>@Global.PayHolderName</label>
+                <br />
+                <input type="text" id="CheckHolderName" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.Date</label>
+                <br />
+                <input type="text" value="@ViewBag.AccountingDate" class="uif-datepicker" data-mask="99/99/9999" id="CheckDate" />
+            </div>
+        </div>
+    </div>
+    <!-- End Check -->
+    <!-- Credit Card -->
+    <div id="divCreditCard">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label>@Global.Currency</label>
+                <select class="uif-select form-control" id="selectCreditCardCurrency" name="selectCreditCardCurrency"
+                        data-source='@Url.Content("~/Accounting/Common/GetCurrencies")' data-id="Id"
+                        data-name="Description"></select>
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.Amount</label>
+                <br />
+                <input type="text" id="CreditCardAmount" style="text-align: right" onkeypress="return OnlyDecimalNumber(event,this)" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.Exchange</label>
+                <br />
+                <input type="text" id="CreditCardExchangeRate" disabled="disabled" style="text-align: right" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Global.LocalAmount</label>
+                <br />
+                <input type="text" id="CreditCardLocalAmount" disabled="disabled" style="text-align: right" />
+            </div>
+            <div class="uif-col-9">
+                <label>@Global.Conduit</label>
+                <br />
+                <select class="uif-select form-control" id="selectCreditCardType" name="selectCreditCardType"
+                        data-source='@Url.Content("~/Accounting/Common/GetCreditCardTypes")' data-id="Id"
+                        data-name="Description"></select>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label>@Global.IssuingBank</label>
+                <br />
+                <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value" placeholder='@Global.EnterIssuingBank' id="inputCreditCardIssuingBank">
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.CreditCardNumber</label>
+                <br />
+                <input type="text" id="CreditCardNumber" style="text-align: right" maxlength="16" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.AuthorizationNumber</label>
+                <br />
+                <input type="text" id="CreditCardAuthorizationNumber" style="text-align: right" maxlength="12" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label>@Global.VoucherNumber</label>
+                <br />
+                <input type="text" id="CreditCardVoucherNumber" name="CreditCardVoucherNumber" style="text-align: right" maxlength="12" />
+            </div>
+            <div class="uif-col-9">
+                <label>@Global.PayCreditCardName</label>
+                <br />
+                <input type="text" id="CreditCardHolderName" name="CreditCardHolderName" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-9">
+                <label>@Global.ExpirationMonthYear</label>
+                <br />
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <select class="uif-select form-control" id="selectCreditCardValidThruMonth" name="selectCreditCardValidThruMonth"
+                                data-source='@Url.Content("~/Accounting/Common/GetValidMonths")' data-id="Id" data-name="Description"></select>
+                    </div>
+                    <div class="uif-col-6">
+                        <input type="text" id="CreditCardValidThruYear" name="CreditCardValidThruYear" data-pattern="0000" class="uif-mask" />
+                    </div>
+                </div>
+            </div>
+            <div class="uif-col-3">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.TaxBase</label>
+                        <br />
+                        <input type="text" id="CreditCardTaxBase" style="text-align: right" onkeypress="return OnlyDecimalNumber(event,this)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End CreditCard -->
+
+    <div class="uif-row">
+        <div class="pull-right">
+            <div class="uif-col-12">
+                <button type="button" id="btnAddPayment" class="btn btn-primary" role="button">
+                    <span class="glyphicon glyphicon-plus"></span> @Global.Add
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+    
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="tablePayments" data-exporttocsv="false" data-add="false" data-edit="false"
+                   data-delete="true" data-selectiontype="none" data-filter="true"
+                   data-source="" data-paginate="true" data-title="@Global.SummaryPaymentType">
+                <thead>
+                    <tr>
+                        <th data-property="PaymentTypeId" data-visible="false">ItemId</th>
+                        <th data-property="PaymentTypeDescription">@Global.PaymentType</th>
+                        <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+                        <th data-property="Currency">@Global.Currency</th>
+                        <th data-property="Amount">@Global.Amount</th>
+                        <th data-property="Exchange">@Global.Exchange</th>
+                        <th data-property="LocalAmount">@Global.LocalAmount</th>
+                        <th data-property="DocumentNumber" data-visible="false">DocumentNumber</th>
+                        <th data-property="VoucherNumber" data-visible="false">VoucherNumber</th>
+                        <th data-property="CardNumber" data-visible="false">CardNumber</th>
+                        <th data-property="CardType" data-visible="false">CardType</th>
+                        <th data-property="CardTypeName" data-visible="false">CardTypeName</th>
+                        <th data-property="AuthorizationNumber" data-visible="false">AuthorizationNumber</th>
+                        <th data-property="CardsName" data-visible="false">CardsName</th>
+                        <th data-property="ValidThruMonth" data-visible="false">ValidThruMonth</th>
+                        <th data-property="ValidThruYear" data-visible="false">ValidThruYear</th>
+                        <th data-property="IssuingBankId" data-visible="false">IssuingBankId</th>
+                        <th data-property="IssuinBankName" data-visible="false">IssuinBankName</th>
+                        <th data-property="IssuingBankAccountNumber" data-visible="false">IssuingBankAccountNumber</th>
+                        <th data-property="IssuerName" data-visible="false">IssuerName</th>
+                        <th data-property="RecievingBankId" data-visible="false">RecievingBankId</th>
+                        <th data-property="RecievingBankName" data-visible="false">RecievingBankName</th>
+                        <th data-property="RecievingBankAccountNumber" data-visible="false">RecievingBankAccountNumber</th>
+                        <th data-property="SerialVoucher" data-visible="false">SerialVoucher</th>
+                        <th data-property="SerialNumber" data-visible="false">SerialNumber</th>
+                        <th data-property="Date" data-visible="false">Date</th>
+                        <th data-property="TaxBase" data-visible="false">TaxBase</th>
+                        <th data-property="Information" data-visible="false">Information</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</form>
+

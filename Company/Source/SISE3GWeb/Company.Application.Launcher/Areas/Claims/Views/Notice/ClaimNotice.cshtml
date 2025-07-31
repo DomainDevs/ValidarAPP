@@ -1,0 +1,177 @@
+﻿<h5>
+    <strong>@Resources.Language.ClaimNotice</strong>
+</h5>
+<form id="frmClaimNotice" autocomplete="off" class="form">
+    <div id="panelSearch">
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="field-required"> @Resources.Language.NoticeDate</label>
+                <input type="text" id="_noticeDate" name="_noticeDate" class="uif-datepicker" data-max-date="@DateTime.Now.ToString("dd/MM/yyyy")"
+                       data-val="true" data-val-required="@Resources.Language.RequiredField" required />
+                <span class="text-danger" data-valmsg-for="_noticeDate" data-valmsg-replace="true"></span>
+            </div>            
+            <div class="uif-col-3">
+                <label>@Resources.Language.InternalConsecutive</label>
+                <input type="text" id="inputInternalConsecutive" name="internalConsecutive" data-val="true" maxlength="20"/>
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.NoticeNumber</label>
+                <input type="text" id="Number" name="Number" onkeypress="return event.charCode >= 48 && event.charCode <= 58" style="font-weight: bold;" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.ObjectedNotice</label>
+                <input type="text" name="ObjectedDescription" id="ObjectedDescription" maxlength="50" style="text-align: right;" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.OcurrenceDate</label>
+                <input type="text" id="Date" name="Date" class="uif-datepicker" data-max-date="@DateTime.Now.ToString("dd/MM/yyyy")"
+                       data-val="true" data-val-required="@Resources.Language.RequiredField" required />
+                <span class="text-danger" data-valmsg-for="Date" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-3">
+                <label> @Resources.Language.TimeIncident</label>
+                <input type="text" class="uif-Timepicker" id="InputTimeIncident" autocomplete="off" />
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LocationOfClaim</label>
+                <input type="text" id="Location" name="location" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                       data-id="Id" data-filter="true" data-native="false" required maxlength="50">
+                <span class="text-danger" data-valmsg-for="location" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+    <div id="panelLocation">
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.Country</label>
+                <select class="uif-select form-control" id="Country" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                        data-id="Id" data-name="Description" name="country" data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="country" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.Department</label>
+                <select class="uif-select form-control" id="State" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                        data-id="Id" data-name="Description" name="state" data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="state" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.Municipality</label>
+                <select class="uif-select form-control" id="City" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                        data-id="Id" data-name="Description" name="description" data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="description" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.IssueDescription</label>
+            <textarea id="Description" type="text" name="Description" style="resize: none; width: 100%;" rows="3" maxlength="300"
+                      data-val="true" data-val-required="@Resources.Language.RequiredField" required></textarea>
+            <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.OthersAffectedData</label>
+            <textarea id="OthersAffected" type="text" name="othersAffectedData" style="resize: none; width: 100%; height:30px"
+                      rows="1" maxlength="200"></textarea>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.ClaimNoticeClaimClaimedAmount</label>
+            <input type="text" id="ClaimedAmount" name="ClaimedAmount" maxlength="26" data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,20)" data-val="true" onkeypress="return event.charCode >= 48 && event.charCode <= 58" style="text-align: right;" />
+            <span class="text-danger" data-valmsg-for="ClaimedAmount" data-valmsg-replace="true"></span>
+        </div>
+
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.DriverManData</label>
+            <input type="text" id="inputdriverInformation" name="driverManData" maxlength="70" />
+            <span class="text-danger" data-valmsg-for="driverManData" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LocationNoticeReason</label>
+            <div class="row">
+                <div class="uif-col-2">
+                    <input id="RadioNotice" type="radio" name="MotivoAviso" value="1" checked="checked" />
+                    <label for="RadioNotice">@Resources.Language.RadioNotice</label>
+                </div>
+                <div class="uif-col-2">
+                    <input id="RadioNotice1" type="radio" name="MotivoAviso" value="2" />
+                    <label for="RadioNotice1">@Resources.Language.RadioNotice1</label>
+                </div>
+                <div class="uif-col-2">
+                    <input id="RadioNotice2" type="radio" name="MotivoAviso" value="3" />
+                    <label for="RadioNotice2">@Resources.Language.RadioNotice2</label>
+                </div>
+                <div class="uif-col-6">
+                    <input type="text" id="ClaimNoticeReasonOthers" style="resize: none; width: 100%; display: none;" maxlength=250 />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelCoverage">
+        @Html.Partial("CoveragesPartial")
+    </div>
+
+</form>
+
+<form id="addCoverageForm">
+    <div class="uif-modal" id="modalAddCoverage">
+        <div class="uif-modalbody">
+            @Html.Partial("CoveragesDialog")
+        </div>
+        <div class="uif-modalbuttons">
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0311"))
+            {
+                <button type="button" class="btn btn-primary" id="btnAddCoverage">@Resources.Language.Accept</button>
+            }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0312"))
+            {
+                <button type="button" class="btn btn-default" id="" data-dismiss="modal">@Resources.Language.Cancel</button>
+            }
+        </div>
+
+    </div>
+</form>
+
+<form id="noticeBranchForm" class="form">
+    <div class="uif-modal" id="modalNoticeBranch" data-size="sm">
+        <div class="uif-modalbody">
+            <div class="form">
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label class="field-required">@Resources.Language.LabelBranchClaim</label>
+                        <select class="uif-select form-control" id="selectNoticeBranchSearch" data-val="true" data-id="Id"
+                                data-name="Description" data-val-required="@Resources.Language.RequiredField"
+                                name="ClaimBranchSearch" data-native="false" data-filter="true"></select>
+                        <span class="text-danger" data-valmsg-for="ClaimBranchSearch" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="btnClaimNoticeNo" data-dismiss="modal">@Resources.Language.Cancel</button>
+            <button type="button" class="btn btn-primary" id="btnClaimNoticeYes" onclick="return false">@Resources.Language.Accept</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-modal" id="modalClaimNoticeMap">
+    <div class="uif-modalbody">
+        @Html.Partial("../Notice/ClaimNoticeMap")
+    </div>
+
+    <div class="uif-modalbuttons">
+        <button id="btnCancelNoticeMap" class="btn btn-default" data-dismiss="modal"> @Resources.Language.Cancel</button>
+        <button id="btnsaveNoticeMap" class="btn btn-primary"> @Resources.Language.Schedule </button>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<map version="2.0" type="class" name="Script" namespace="Sistran.Core.Application.RulesScriptsServices.EEProvider" file-version="1.0" description="SCRIPT_ENTITY">
+  <properties>
+    <property name="ScriptId" type="Integer" key="true" autonumber="33" description="SCRIPT_ID_PROPERTY" />
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="LevelId" type="Integer" description="LEVEL_ID_PROPERTY" />
+    <property name="PackageId" type="Integer" description="PACKAGE_ID_PROPERTY" />
+    <property name="NodeId" type="Integer" nullable="true" description="NODE_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="SCRIPT" schema="SCR" alias="SCRIPT" update="true">
+      <columns>
+        <column name="SCRIPT_ID" type="Int32" property="ScriptId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="LEVEL_ID" type="Int16" property="LevelId" allowNull="false" />
+        <column name="PACKAGE_ID" type="Int32" property="PackageId" allowNull="false" />
+        <column name="NODE_ID" type="Int32" property="NodeId" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="33" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Decimal" value="33" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

@@ -1,0 +1,90 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Events.Models.DelegationResultModelView
+
+<script src="~/Areas/Events/Scripts/Events/EventsSummary.js"></script>
+
+<script id="display-template-EventsSummary" type="text/template">
+    <div class="EventItem" id="{{ResultId}}">
+        <input type="hidden" id="ModuleId" value="{{ModuleId}}" />
+        <input type="hidden" id="SubModuleId" value="{{SubModuleId}}" />
+        <input type="hidden" id="GroupEventId" value="{{GroupEventId}}" />
+        <input type="hidden" id="EventId" value="{{EventId}}" />
+        <input type="hidden" id="DelegationId" value="{{DelegationId}}" />
+        <input type="hidden" id="IdAuthorizer" value="{{IdAuthorizer}}" />
+        <input type="hidden" id="IdNotifier" value="{{IdNotifier}}" />
+        <input type="hidden" id="ReasonRequest" value="{{ReasonRequest}}" />
+        <input type="hidden" id="IdTemp" value="{{IdTemp}}" />
+        <div><label>({{Count}}) {{DescriptionErrorMessage}} </label></div>
+        <br />
+        <div><label>{{EventDate}} </label></div>
+    </div>
+</script>
+
+<div class="uif-modal" id="modalEventsSummary">
+    <div class="uif-modalbody">
+        <div class="form modal-Colombia">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form", id = "formEvensSummary", @Area = "Events" }))
+        {
+            <div class="row">
+                <div class="uif-col-6" id="searchUserSumamry">
+                    
+                        <input type="hidden" id="idJson" value="@ViewBag.idJson" />
+                        <input type="hidden" id="idTemp" value="@ViewBag.IdTemp" />
+                        <div id="panelEventsSummaryDetails">
+                            @Html.HiddenFor(model => model.ResultId)
+                            @Html.HiddenFor(model => model.GroupEventId)
+                            @Html.HiddenFor(model => model.EventId)
+                            @Html.HiddenFor(model => model.DelegationId)
+                            <div class="form-group">
+                                @Html.LabelFor(model => Model.IdAuthorizer, new { @class = "field-required" })
+                                @Html.DropDownListFor(model => Model.IdAuthorizer, new List<SelectListItem>(), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.IdAuthorizer)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => Model.IdNotifier, new { @class = "field-required" })
+                                @Html.DropDownListFor(model => Model.IdNotifier, new List<SelectListItem>(), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.IdNotifier)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => Model.ReasonRequest, new { @class = "field-required" })
+                                @Html.TextAreaFor(model => Model.ReasonRequest, 5, 5, new { style = "height:100%", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.ReasonRequest)
+                            </div>
+                        </div>
+                
+                </div>
+                <div class="uif-col-6">
+                    <div class="uif-listview" id="lvwEventsSummary"> </div>
+                </div>
+            </div>
+            <div class="row lineDividing">
+                <div class="uif-col-6">
+                    <div class="pull-right width-save">
+                        <button type="button" class="btn btn-default" id="btnCancelEvent">@Resources.Language.Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="btnSaveEvent">@Resources.Language.Accept</button>
+                    </div>
+                </div>
+                <div class="uif-col-6">
+                    <div class="uif-summary">
+                        <div class="items">    
+                            <div class="item">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-primary" id="btnSaveEvents">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<input type="hidden" id="hdnIdModule" value="@ViewBag.IdModule" />
+<input type="hidden" id="hdnIdSubModule" value="@ViewBag.IdSubModule" />
+<input type="hidden" id="hdnIdTemp" value="@ViewBag.IdTemp" />
+<input type="hidden" id="hdnType" value="@ViewBag.Type" />
+<input type="hidden" id="hdnidJson" value="@ViewBag.idJson" />
+

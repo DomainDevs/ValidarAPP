@@ -1,0 +1,157 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Printing.Models.LegalRepresentativeSingViewModel
+
+<script id="LegalRepresentativeSingTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+        <div>Representante Legal: <strong class="success">{{LegalRepresentative}}</strong></div>
+    {{else ifCond Status "==" 3}}
+        <div>Representante Legal: <strong class="warning">{{LegalRepresentative}}</strong></div>
+    {{else}}
+        <div>Representante Legal: <strong>{{LegalRepresentative}}</strong></div>
+    {{/ifCond}}
+    <div>Compañía: {{CiaDescription}} ({{BranchTypeCode}})</div>
+    <div>Tipo de Sucursal: {{BranchTypeDescription}} ({{CiaCode}})</div>
+	<div>Válida Desde: {{CurrentFrom}}</div>
+    <div>Representante Legal: {{LegalRepresentative}}</div>
+</script>
+
+@section Title{
+	<div class="row main-title">
+		<div class="column-70">
+			@Resources.Language.LabelLegalRepresentativeSing
+		</div>
+		<div class="column-30 even">
+			<input type="text" name="Id" id="inputSearchLegalRepresentativeSing" class="uif-input-search" placeholder="@Resources.Language.LabelSearchLegalRepresentativeSing" />
+			<button class="btn btn-default" id="btnSearchAdvLegalRepresentativeSing"><i class="fa fa-angle-down"></i></button>
+		</div>
+	</div>
+	<input type="hidden" id="Signature_width" name="Signature_width" value="@System.Configuration.ConfigurationManager.AppSettings["signature_width"]" />
+	<input type="hidden" id="Signature_height" name="Signature_height" value="@System.Configuration.ConfigurationManager.AppSettings["signature_height"]" />
+	<input type="hidden" id="Signature_size" name="Signature_size" value="@System.Configuration.ConfigurationManager.AppSettings["signature_size"]" />
+	<input type="hidden" id="ImageWidthAndHeight" name="ImageWidthAndHeight" 
+		   value="@string.Format(
+				 Resources.Language.ImageWidthAndHeight,
+				 System.Configuration.ConfigurationManager.AppSettings["signature_width"],
+				 System.Configuration.ConfigurationManager.AppSettings["signature_height"])" />
+	<input type="hidden" id="ImageSize" name="ImageSize" 
+		   value="@string.Format(
+				 Resources.Language.ImageSize,
+				 (Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["signature_size"])/1024))" />
+<input type="hidden" id="ImageFormt" name="ImageFormt"
+	   value="@string.Format(
+				 Resources.Language.ImageFormt,
+				 System.Configuration.ConfigurationManager.AppSettings["allowed_extensions_img"])" />
+}
+
+@section Toolbar
+{
+	<footer>
+		<div class="pull-right">
+			<button class="btn btn-default cancel" id="btnExit">
+				<i class="fa fa-times-circle" aria-hidden="true"></i>
+				<span class="" aria-hidden="true"></span>
+				@Resources.Language.ButtonExit
+			</button>
+			<button class="btn btn-default" id="btnExport">
+				<i class="fa fa-download" aria-hidden="true"></i>
+				<span class="" aria-hidden="true"></span>
+				@Resources.Language.ExportXLS
+			</button>
+
+			<button class="btn btn-primary" id="btnSaveLegalRepresentativeSing">
+				<i class="fa fa-floppy-o" aria-hidden="true"></i>
+				<span class="" aria-hidden="true"></span>
+				@Resources.Language.ButtonSave
+			</button>
+
+		</div>
+
+	</footer>
+}
+
+<div id="uif-spinner-loading" hidden="hidden">
+	<div class="spinner spinner-three-bounce">
+		<div class="bounce1"></div>
+		<div class="bounce2"></div>
+		<div class="bounce3"></div>
+	</div>
+</div>
+
+<form id="formLegalRepresentativeSing" autocomplete="off" class="form without-space">
+	<div class="row">
+		<div class="uif-col-6">
+			<br />
+			<div class="row">
+				<div class="uif-col-6">
+					<label class="field-required">@Resources.Language.LabelCompanyType</label>
+					<select class="uif-select form-control"
+							name="CiaCode"
+							id="selectCiaCode"
+							data-id="Id"
+							data-name="Description"
+							data-val="true"
+                            data-filter="true" data-native="false"
+							data-val-required="@Resources.Language.ErrorRequiredCompanyType"></select>
+					@Html.ValidationMessageFor(model => model.CiaCode)
+				</div>
+				<div class="uif-col-6">
+					<label class="field-required">@Resources.Language.LabelBranchType</label>
+					<select class="uif-select form-control"
+							name="BranchTypeCode"
+							id="selectBranchTypeCode"
+							data-id="Id"
+							data-name="Description"
+							data-val="true"
+                            data-filter="true" data-native="false"
+							data-val-required="@Resources.Language.ErrorRequiredBranchType"></select>
+					@Html.ValidationMessageFor(model => model.BranchTypeCode)
+				</div>
+			</div>
+			<div class="row">
+				<div class="uif-col-9">
+					<label class="field-required">@Resources.Language.LabelLegalRepresentative</label>
+					@Html.TextBoxFor(model => model.LegalRepresentative, new { id = "inputLegalRepresentative", maxlength = "200" })
+					@Html.ValidationMessageFor(model => model.LegalRepresentative)
+				</div>
+				<div class="uif-col-3">
+					<label class="field-required">@Resources.Language.LabelDateCurrentFrom</label>
+					@Html.TextBoxFor(model => model.CurrentFrom, new { id = "inputCurrentFrom", @class = "uif-datepicker", @data_min_date = "01/01/1910" })
+					@Html.ValidationMessageFor(model => model.CurrentFrom)
+				</div>
+			</div>
+			<div class="row">
+				<div class="uif-col-6">
+					<label class="field-required">@Resources.Language.LabelImage</label>
+					<input type="hidden" name="PathSignatureImg" id="inputPathSignatureImg" />
+					<input type='file' name="SignatureImg" id="imgInp" class="uif-inputfile" data-input="true" accept="@System.Configuration.ConfigurationManager.AppSettings["allowed_extensions_img"]" />
+					@Html.ValidationMessageFor(model => model.SignatureImg)
+					<img id="imgSignatureImg" />
+				</div>
+			</div>
+		</div>
+		<div class="uif-col-6  fit-col-secondary" id="panelLegalRepresentativeSing">
+			<div id="listLegalRepresentativeSing" class="uif-listview"></div>
+		</div>
+	</div>
+	<div class="row lineDividing">
+		<div class="uif-col-6 center-col-right" id="btnsLegalRepresentativeSing">
+			<div class="pull-right width-save">
+				<button type="button" class="btn btn-default" id="btnNewLegalRepresentativeSing">@Resources.Language.New</button>
+				<button type="button" class="btn btn-primary" id="btnLegalRepresentativeSingAccept">@Resources.Language.Add </button>
+			</div>
+		</div>
+		<div class="uif-col-6">
+			<div class="uif-summary">
+				<div class="items">
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+@section Scripts
+{
+	@Scripts.Render("~/bundle/js/LegalRepresentativeSing")
+}
+
+
+

@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+<script id="display-template-GroupConditions" type="text/template">
+    <div class="template-GroupConditions">
+        <input type="hidden" value="{{Id}}" />
+        <div>{{Description}}</div>
+        <br />
+        <div>@Resources.Language.LabelAssignedEntities : {{RelatedEntities}}</div>
+    </div>
+</script>
+<script id="display-add-template-GroupConditions" type="text/template">
+    <div class="uif-col-12">
+        <input type="text" name="RelatedEntities" id="relatedEntities" hidden />
+        @*<input type="text" name="EventEntities" id="eventEntities" hidden />*@
+        <input type="text" name="RelatedEntitiesId" id="relatedEntitiesId" hidden />
+        <div class="row">
+            <div class="uif-col-12">
+                <label class="field-required">ID Condición</label>
+                <input class="text" type="text" id="inputCondition" name="Id" data-val="true">
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <label class="field-required">Nombre del grupo de condiciones</label>
+                <input class="text" type="text" id="inputGroupConditions" name="Description" data-val="true">
+                <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+</script>
+<div class="row">
+    <div class="uif-col-9 fit-col-secondary">
+        <div class="uif-listview" id="listViewGroupConditions"></div>
+    </div>
+    <div class="uif-col-3 fit-col-secondary">
+        <div class="uif-right-bar">
+            <ul>
+                <li>
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0650"))
+                    {
+                        <a href="#" id="assignEntity">@Resources.Language.LabelAssignEntity</a>
+                    }
+
+                    <p id="selectedAssingEntity"></p>
+                </li>
+                <li>
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0652"))
+                    {
+                        <a href="#" id="assingDependence">@Resources.Language.LabelAssignDependence</a>
+                    }
+                        
+                        <p id="selectedAssingDependence"></p>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="uif-modal" id="assignEntityModal">
+    <div class="uif-modalbody">
+        @Html.Partial("../EventsSarlaftModal/AssignEntityModal")
+    </div>
+</div>
+<div class="uif-modal" id="assingDependenceModal">
+    <div class="uif-modalbody">
+        @Html.Partial("../EventsSarlaftModal/AssingDependenceModal")
+    </div>
+</div>

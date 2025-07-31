@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E50945BB-1CAA-4996-86E3-FA8674F436CD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.AccountingClosingServices.EEProvider</RootNamespace>
+    <AssemblyName>Core.AccountingClosingServices.EEProvider</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\Bin\lib\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AccountingClosing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Services\Core\AccountingClosing\ApplicationService\Core.AccountingClosing.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AccountingClosingServices.Resources">
+      <HintPath>..\..\..\Bin\Services\Core\AccountingClosing\Resources\Core.AccountingClosingServices.Resources.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices">
+      <HintPath>..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions">
+      <HintPath>..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.GeneralLedgerServices">
+      <HintPath>..\..\..\Bin\Services\Core\GeneralLedger\ApplicationService\Core.GeneralLedgerServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ReportingServices">
+      <HintPath>..\..\..\Bin\Services\Core\Reporting\Reporting\Core.ReportingServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.TempCommonServices">
+      <HintPath>..\..\..\Bin\Services\Core\TempCommon\TempCommon\Core.TempCommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePersonServices.V1">
+      <HintPath>..\..\..\Bin\Services\Core\UniquePerson\UniquePersonService\Core.UniquePersonServices.V1.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniqueUserServices">
+      <HintPath>..\..\..\Bin\Services\Core\UniqueUser\UniqueUserServices\Core.UniqueUserServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Utilities">
+      <HintPath>..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Co.Application.Data">
+      <HintPath>..\..\..\Bin\lib\Sistran.Co.Application.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.BAF">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.BAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF.Engine">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.SAF">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.SAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.ServiceModel">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Views, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountingClosingApplicationServiceProvider.cs" />
+    <Compile Include="Assemblers\DTOAssembler.cs" />
+    <Compile Include="Assemblers\EntityAssembler.cs" />
+    <Compile Include="Assemblers\ModelAssembler.cs" />
+    <Compile Include="Assemblers\ModelDTOAssembler.cs" />
+    <Compile Include="DelegateService.cs" />
+    <Compile Include="Enums\AccountingAccountApplications.cs" />
+    <Compile Include="Enums\AccountingClosing.cs" />
+    <Compile Include="Enums\AccountingNatures.cs" />
+    <Compile Include="Enums\EnumType.cs" />
+    <Compile Include="Enums\PostDateTypes.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingAccount.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingAccountType.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingCompany.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingConcepts\AccountingConcept.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingConcepts\BranchAccountingConcept.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingConcepts\ConceptSource.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingConcepts\MovementType.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingConcepts\UserBranchAccountingConcept.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingMovementType.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingRules\AccountingAccountMask.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingRules\AccountingRule.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingRules\AccountingRulePackage.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingRules\Condition.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingRules\Parameter.cs" />
+    <Compile Include="Models\GeneralLedger\AccountingRules\Result.cs" />
+    <Compile Include="Models\GeneralLedger\AccountReclassification\AccountReclassification.cs" />
+    <Compile Include="Models\GeneralLedger\AccountReclassification\AccountReclassificationResult.cs" />
+    <Compile Include="Models\GeneralLedger\Analysis.cs" />
+    <Compile Include="Models\GeneralLedger\AnalysisCode.cs" />
+    <Compile Include="Models\GeneralLedger\AnalysisConcept.cs" />
+    <Compile Include="Models\GeneralLedger\AnalysisTreatment.cs" />
+    <Compile Include="Models\GeneralLedger\CostCenter.cs" />
+    <Compile Include="Models\GeneralLedger\CostCenterType.cs" />
+    <Compile Include="Models\GeneralLedger\EntryDestination.cs" />
+    <Compile Include="Models\GeneralLedger\EntryType.cs" />
+    <Compile Include="Models\GeneralLedger\EntryTypeItem.cs" />
+    <Compile Include="Models\GeneralLedger\LedgerEntry.cs" />
+    <Compile Include="Models\GeneralLedger\LedgerEntryItem.cs" />
+    <Compile Include="Models\GeneralLedger\PostDated.cs" />
+    <Compile Include="Models\GeneralLedger\Receipt.cs" />
+    <Compile Include="Models\GeneralLedger\ReconciliationMovementType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkerFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Business\" />
+    <Folder Include="DAOs\" />
+    <Folder Include="Entities\Dict\" />
+    <Folder Include="IntegrationProviders\" />
+    <Folder Include="Models\AccountingConcepts\" />
+    <Folder Include="Models\AccountingRules\" />
+    <Folder Include="Models\AccountReclassification\" />
+    <Folder Include="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccountingClosing.Resources\AccountingClosing.Resources.csproj">
+      <Project>{9EC9C381-B331-478E-BA56-43837C1D5FEE}</Project>
+      <Name>AccountingClosing.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Condition="'$(BuildingInsideVisualStudio)' == 'true'" Include="..\packages\Sistran.Core.Analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\AccountingClosing\ApplicationServiceEEProvider\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\ProjectDeployBranch.msbuild" />
+</Project>

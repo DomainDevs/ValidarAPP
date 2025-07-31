@@ -1,0 +1,117 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D4386AE0-61A7-4357-B3F9-652EBC295CD0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Integration.UndewritingIntegrationServices</RootNamespace>
+    <AssemblyName>Core.UndewritingIntegrationServices</AssemblyName>
+    <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <XsdCodeGenEnabled>True</XsdCodeGenEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core.UtilitiesServices">
+      <HintPath>..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTOs\BaseCurrencyDTO.cs" />
+    <Compile Include="DTOs\BasePaymentPlan.cs" />
+    <Compile Include="DTOs\Base\ComboBaseDTO.cs" />
+    <Compile Include="DTOs\Base\PersonBaseDTO.cs" />
+    <Compile Include="DTOs\Base\PolicyBaseDTO.cs" />
+    <Compile Include="DTOs\CoInsuranceAssignedDTO.cs" />
+    <Compile Include="DTOs\CoInsuranceDTO.cs" />
+    <Compile Include="DTOs\ComponentLbSb.cs" />
+    <Compile Include="DTOs\ComponentTypeDTO.cs" />
+    <Compile Include="DTOs\CoverageDTO.cs" />
+    <Compile Include="DTOs\DeductibleDTO.cs" />
+    <Compile Include="DTOs\EndorsementBaseDTO.cs" />
+    <Compile Include="DTOs\FilterBaseDTO.cs" />
+    <Compile Include="DTOs\FinancialPlanDTO.cs" />
+    <Compile Include="DTOs\HolderDTO.cs" />
+    <Compile Include="DTOs\InsuredDTO.cs" />
+    <Compile Include="DTOs\InsuredObjectDTO.cs" />
+    <Compile Include="DTOs\IssuanceAgencyDTO.cs" />
+    <Compile Include="DTOs\PayerBaseDTO.cs" />
+    <Compile Include="DTOs\PayerPaymentComponentDTO.cs" />
+    <Compile Include="DTOs\PayerPaymentComponentLBSBDTO.cs" />
+    <Compile Include="DTOs\PayerPaymentDTO.cs" />
+    <Compile Include="DTOs\PaymentDistributionCompDTO.cs" />
+    <Compile Include="DTOs\PaymentDistributionDTO.cs" />
+    <Compile Include="DTOs\PaymentsScheduleDTO.cs" />
+    <Compile Include="DTOs\Payment\PaymenQuotaDTO.cs" />
+    <Compile Include="DTOs\Person\PersonDataDTO.cs" />
+    <Compile Include="DTOs\Person\PersonRequestDTO.cs" />
+    <Compile Include="DTOs\PolicyDTO.cs" />
+    <Compile Include="DTOs\PolicyFilterDTO.cs" />
+    <Compile Include="DTOs\PremiumSearchPolicyDTO.cs" />
+    <Compile Include="DTOs\QuotaAll.cs" />
+    <Compile Include="DTOs\QuotaComponentDTO.cs" />
+    <Compile Include="DTOs\QuotaComponentLbSbDTO.cs" />
+    <Compile Include="DTOs\RiskCommercialClassDTO.cs" />
+    <Compile Include="DTOs\RiskDTO.cs" />
+    <Compile Include="DTOs\SearchPolicyPaymentDTO.cs" />
+    <Compile Include="DTOs\SummaryDTO.cs" />
+    <Compile Include="Enums\PaymentState.cs" />
+    <Compile Include="IUndewritingIntegrationServices.cs" />
+    <Compile Include="Models\PayerPayment.cs" />
+    <Compile Include="Models\PayerPaymentComp.cs" />
+    <Compile Include="Models\PayerPaymentCompLbsb.cs" />
+    <Compile Include="Models\PremiumSearchPolicy.cs" />
+    <Compile Include="Models\SearchPolicyPayment.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\Integration\UndewritingIntegrationServices\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\ProjectDeployBranch.msbuild" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{3D9AD99F-2412-4246-B90B-4EAA41C64699}">
+        <WcfProjectProperties>
+          <AutoStart>True</AutoStart>
+        </WcfProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,33 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.AlliedSalePointsModelsView
+@using Sistran.Core.Framework.UIF.Web.Helpers;
+<form id="formAlliedSalePints" class="form modal-Colombia">
+	<div class="uif-row">
+		<div class="uif-col-6">
+			<label class="field-required">@Resources.Language.LabelAllySalePointsIntermediary</label>
+			@Html.TextBoxFor(model => model.IndividualId, new { id = "inputIntermediary", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderAllySalePointsIntermediary })
+			@Html.ValidationMessageFor(model => model.SalePointDescription)
+		</div>
+		<div class="uif-col-6">
+			<label class="field-required">@Resources.Language.LabelAllySalePointsAlly</label>
+			<select class="uif-select form-control" id="selectAllieds" data-id="AllianceId" data-name="Description"></select>
+			@Html.HiddenFor(model => model.AllianceId, new { id = "inputAllianceId" })
+		</div>
+	</div>
+		<div class="row">
+				<table class="uif-table" style="width:800px" data-selectiontype="none" id="tblResultListAlliedSalePoints" data-paginate="true" data-pagesize="10">
+					<thead>
+						<tr>
+							<th data-property="AllianceId" data-visible="false"></th>
+							<th data-property="BranchAllianceId" data-visible="false"></th>
+							<th data-property="SalePointAllianceId" data-visible="false"></th>
+							<th data-property="IndividualId" data-visible="false"></th>
+							<th data-property="AgentAgencyId" data-visible="false"></th>
+							<th data-property="IsAssign" data-type="boolean" style="align-content:center">@Resources.Language.LabelTableAllySalePointsAssigned</th>
+							<th data-property="SalePointDescription">@Resources.Language.LabelTableAllySalePointsSalePoint</th>
+							<th data-property="BranchDescription">@Resources.Language.LabelTableAllySalePointsBranch</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>				
+</form>

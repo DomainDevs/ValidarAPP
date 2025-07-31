@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+<form id="frmNoticeLocation" class="form form-space-adjusted" autocomplete="off">
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="accContactInformation">
+                <h5>
+                    <strong>@Resources.Language.ContactInformation</strong>
+                </h5>
+                @Html.Partial("../Notice/ContactInformationPartial")
+                <div>
+                    <h5>
+                        <strong>@Resources.Language.TypeInjuredSuretyData</strong>
+                    </h5>
+                    <div class="row">
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.PropertyAddress</label>
+                            <input class="uif-input-search" data-displaykey="FullAddress" type="text" placeholder="@Resources.Language.PlaceHolderAddress" maxlength="50"
+                                   id="inputRiskLocation" name="inputRiskLocation" data-val="true" data-val-required="@Resources.Language.FieldRequired" required>
+                            <span class="text-danger" data-valmsg-for="inputRiskLocation" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-2">
+                            <label class="field-required">@Resources.Language.Country</label>
+                            <select class="uif-select form-control" id="CountryLocation" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="country" data-filter="true" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="country" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.Department</label>
+                            <select class="uif-select form-control" id="StateLocation" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="department" data-filter="true" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="department" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.Municipality</label>
+                            <select class="uif-select form-control" id="CityLocation" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="city" data-filter="true" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="city" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="accPolicy">
+                @Html.Partial("../Notice/PolicyInformationPartial")
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="accClaimNotice">
+                @Html.Partial("../Notice/ClaimNotice")
+            </div>
+        </div>
+    </div>
+</form>
+
+@* // -- // Modales // -- // *@
+
+<div class="uif-modal" id="modalSearchbyInsured">
+    <div class="uif-modalbody">
+        @Html.Partial("../NoticeLocation/SearchPoliciesLocationDialog")
+    </div>
+</div>

@@ -1,0 +1,260 @@
+﻿@{
+    Layout=null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.CoverageModelsView
+
+<script id="title-template" type="text/template">
+</script>
+
+<script id="footer-template" type="text/template">
+    <div id="buttonsCoverage">
+        <button type="button" class="btn btn-default" id="btnCloseCoverage">
+            <span aria-hidden="true"></span>
+            @Resources.Language.Close
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0253"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSaveCoverage">
+                <span aria-hidden="true"></span>
+                @Resources.Language.ButtonSave
+            </button>
+        }
+
+    </div>
+</script>
+
+<script id="coverageTemplate" type="text/template">
+    <div><strong>{{Description}}</strong></div>
+    <div>@Resources.Language.LabelAmount: {{LimitAmount}}</div>
+    <div>@Resources.Language.LabelSumInsured: <span class="warning"><b>{{SubLimitAmount}}</b></span></div>
+    <div>@Resources.Language.LabelPremium: <span class="warning"><b>{{PremiumAmount}}</b></span></div>
+    <div>@Resources.Language.LabelRate: {{DisplayRate}}</div>
+    <div>@Resources.Language.LabelStatus: {{CoverStatusName}}</div>
+    <div>@Resources.Language.TypeCoverage: <span class="alert alert-warning"> <b>{{TypeCoverage}}</b></span></div>
+    <div>@Resources.Language.LabelDeductible: {{Deductible.Description}}</div>
+</script>
+
+<div class="uif-alert" id="alert"></div>
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalTexts">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Texts.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.TextsModelsView())
+    </div>
+    <div id="buttonsTexts" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnTextClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0243"))
+        {
+            <button type="button" class="btn btn-primary" id="btnTextSave">@Resources.Language.ButtonSave</button>
+        }
+
+    </div>
+</div>
+
+<div id="modalClauses" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Clauses.cshtml")
+    </div>
+    <div id="buttonsClauses" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnClausesClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0246"))
+        {
+            <button type="button" class="btn btn-primary" id="btnClausesSave">@Resources.Language.ButtonSave</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal" id="modalDeductibles">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Deductible.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.DeductibleModelsView())
+    </div>
+    <div id="buttonsDeductible" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnDeductibleClose">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0249"))
+        {
+            <button type="button" class="btn btn-primary" id="btnDeductibleSave">@Resources.Language.ButtonSave</button>
+        }
+    </div>
+</div>
+
+<form id="mainCoverage" class="form without-space">
+    <div id="panelCoverage">
+        @Html.HiddenFor(model => model.CoverageId, new { id = "hiddenCoverageId" })
+        <div class="row">
+            <div class="uif-col-6">
+                <div class="row">
+                    <div class="uif-col-12">
+                        <h4 id="globalTitle"></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label class="field-required">@Resources.Language.LabelNameCoverage</label>
+                        <select class="uif-select form-control" data-native="false" id="selectCoverage"
+                                name="CoverageId" data-val="true" data-val-required="@Resources.Language.ErrorDocumentCoverage"></select>
+                        @Html.ValidationMessageFor(model => model.CoverageId)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelFrom</label>
+                        @Html.TextBoxFor(model => model.CurrentFrom, new { id = "inputFromCoverage", @class = "uif-datepicker" })
+                        @Html.ValidationMessageFor(model => model.CurrentFrom)
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelTo</label>
+                        @Html.TextBoxFor(model => model.CurrentTo, new { id = "inputToCoverage", @class = "uif-datepicker" })
+                        @Html.ValidationMessageFor(model => model.CurrentTo)
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelDays</label>
+                        @Html.TextBoxFor(model => model.EffectiveDays, new { id = "inputDaysCoverage", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelSumAssured</label>
+                        @Html.TextBoxFor(model => model.DeclaredAmount, new { id = "inputDeclaredAmount", maxLength = 20, @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.DeclaredAmount)
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelAmount</label>
+                        @Html.TextBoxFor(model => model.LimitAmount, new { id = "inputLimitAmount", maxLength = 20, @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.LimitAmount)
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelSubLimitAmount</label>
+                        @Html.TextBoxFor(model => model.SubLimitAmount, new { id = "inputSubLimitAmount", maxLength = 20, @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.SubLimitAmount)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelLimitClaimant</label>
+                        @Html.TextBoxFor(model => model.LimitClaimantAmount, new { id = "inputLimitClaimantAmount", maxLength = 20, @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.LimitClaimantAmount)
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelMaxLiabilitySurety</label>
+                        @Html.TextBoxFor(model => model.MaxLiabilityAmount, new { id = "inputMaxLiabilityAmount", maxLength = 20, @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.MaxLiabilityAmount)
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelCalculeType</label>
+                        <select class="uif-select form-control" id="selectCalculeType" data-source="@Url.Content("~/Underwriting/RiskLiability/GetCalculeTypes")" data-id="Value" data-name="Text"
+                        name="CalculationTypeId" data-val="true" data-val-required="@Resources.Language.ErrorDocumentCalculeType" data-selectedid="@Model.CalculationTypeId"></select>
+                        @Html.ValidationMessageFor(model => model.CalculationTypeId)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelRateType</label>
+                        <select class="uif-select form-control" id="selectRateType" data-id="Value" data-name="Text"
+                                name="RateType" data-val="true" data-val-required="@Resources.Language.ErrorDocumentType" data-selectedid="@Model.RateType"></select>
+                        @Html.ValidationMessageFor(model => model.RateType)
+                    </div>
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.LabelRate</label>
+                        @Html.TextBoxFor(model => model.Rate, new { id = "inputRate", maxLength = 20, @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.Rate)
+                    </div>
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.LabelPremium</label>
+                        @Html.TextBoxFor(model => model.PremiumAmount, new { id = "inputPremiumAmount", maxLength = 20, @class = "rightAlign", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.PremiumAmount)
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">
+                            @Resources.Language.LabeLimitEvent
+                        </label>
+                        @Html.TextBoxFor(model => model.LimitEvent, new { id = "inputLimitOccurrenceAmount", maxLength = 20, @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.LimitEvent)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label>@Resources.Language.LabelDeductible</label>
+                        <select class="uif-select form-control" id="selectDeductible" disabled="disabled" data-native="false" data-source="" data-id="Id" data-name="Description" name="DeductibleId"></select>
+                        @Html.ValidationMessageFor(model => model.DeductibleId)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12 width-clauses">
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0241"))
+                        {
+                            <button type="button" class="btn btn-default secondary-Colombia" id="btnTextCoverage">@Resources.Language.LabelText</button>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0244"))
+                        {
+                            <button type="button" class="btn btn-default secondary-Colombia" id="btnClausesCoverage">@Resources.Language.LabelClauses</button>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0247"))
+                        {
+                            <button type="button" class="btn btn-default secondary-Colombia" id="btnDeductibleCoverage">@Resources.Language.LabelDeductibles</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="uif-col-6 fit-col-secondary">
+                <div id="listCoveragesEdit" class="uif-listview"></div>
+            </div>
+        </div>
+        <div class="row lineDividing">
+            <div class="uif-col-6 center-col-right">
+                <div class="pull-right width-save">
+                    <button type="button" class="btn btn-primary" id="btnCalculateCoverage" style="width:90px">
+                        <span class="fa fa-calculator"></span>
+                        @Resources.Language.ButtonCalculate
+                    </button>
+
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0250"))
+                    {
+                        <button type="button" class="btn btn-default" id="btnCancelCoverage">@Resources.Language.NewForm</button>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0251"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnAcceptCoverage">@Resources.Language.AddForm</button>
+                    }
+
+
+                </div>
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-summary">
+                    <div class="items">
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelInsuredValue</div>
+                                <div id="inputAmountInsured">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelPremium</div>
+                                <div id="inputTotalPremium">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form id="modalFormTextSearch">
+    <div class="uif-modal" id="modalTextSearch">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Underwriting/Views/Underwriting/TextsResults.cshtml")
+        </div>
+    </div>
+</form>

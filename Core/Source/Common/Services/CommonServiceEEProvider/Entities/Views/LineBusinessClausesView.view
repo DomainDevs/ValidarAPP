@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="LineBusinessView">
+  <collections>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, 
+                 Core.Common.Entities"></collection>
+    <collection name="ClauseLevel" type="Sistran.Core.Application.Quotation.Entities.ClauseLevel, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="Clause" type="Sistran.Core.Application.Quotation.Entities.Clause, 
+                 Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="LineBusiness" destination="ClauseLevel" name="LineBusinessClauseLevel" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="ConditionLevelId"></property>
+    </relation>
+    <relation source="ClauseLevel" destination="Clause" name="ClauseClauseLevel" type="Inner">
+      <property left="ClauseId" type="Equal" right="ClauseId"></property>
+    </relation>
+  </relations>
+</view>

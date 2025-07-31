@@ -1,0 +1,34 @@
+<map version="2.0" type="class" name="GetDistributionErrors" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="GET_DISTRIBUTION_ERRORS_ENTITY">
+  <properties>
+    <property name="EndorsementCode" type="Integer" description="ENDORSEMENT_CODE_PROPERTY" />
+    <property name="ModuleCode" type="Integer" nullable="true" description="MODULE_CODE_PROPERTY" />
+    <property name="TempReinsuranceProcessCode" type="Integer" nullable="true" description="TEMP_REINSURANCE_PROCESS_CODE_PROPERTY" />
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="BranchDescription" type="String" size="50" nullable="true" description="BRANCH_DESCRIPTION_PROPERTY" />
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="PrefixDescription" type="String" size="15" description="PREFIX_DESCRIPTION_PROPERTY" />
+    <property name="PolicyNumber" type="Decimal" precision="12" scale="5" description="POLICY_NUMBER_PROPERTY" />
+    <property name="EndorsementNumber" type="Decimal" precision="12" scale="5" description="ENDORSEMENT_NUMBER_PROPERTY" />
+    <property name="RiskNumber" type="Integer" description="RISK_NUMBER_PROPERTY" />
+    <property name="CoverageNumber" type="Integer" description="COVERAGE_NUMBER_PROPERTY" />
+    <property name="ErrorDescription" type="String" size="200" description="ERROR_DESCRIPTION_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="GET_DISTRIBUTION_ERRORS" schema="REINS" alias="GET_DISTRIBUTION_ERRORS" update="true">
+      <columns>
+        <column name="ENDORSEMENT_CD" type="Int32" property="EndorsementCode" allowNull="false" />
+        <column name="MODULE_CD" type="Int32" property="ModuleCode" />
+        <column name="TEMP_REINSURANCE_PROCESS_CD" type="Int32" property="TempReinsuranceProcessCode" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" allowNull="false" />
+        <column name="BRANCH_DESCRIPTION" type="String" property="BranchDescription" size="50" />
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" allowNull="false" />
+        <column name="PREFIX_DESCRIPTION" type="String" property="PrefixDescription" allowNull="false" size="15" />
+        <column name="POLICY_NUMBER" type="Decimal" property="PolicyNumber" allowNull="false" size="19" precision="12" />
+        <column name="ENDORSEMENT_NUMBER" type="Decimal" property="EndorsementNumber" allowNull="false" size="19" precision="12" />
+        <column name="RISK_NUMBER" type="Int32" property="RiskNumber" allowNull="false" />
+        <column name="COVERAGE_NUMBER" type="Int32" property="CoverageNumber" allowNull="false" />
+        <column name="ERROR_DESCRIPTION" type="String" property="ErrorDescription" allowNull="false" size="200" />
+      </columns>
+    </table>
+  </tables>
+</map>

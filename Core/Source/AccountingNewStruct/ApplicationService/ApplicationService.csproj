@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9B455325-D55A-4239-991F-95737D8A5565}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.AccountingServices</RootNamespace>
+    <AssemblyName>Core.AccountingServices</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core.UndewritingIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\Integration\UndewritingIntegrationServices\Core.UndewritingIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTOs\AccountingConceptDTO.cs" />
+    <Compile Include="DTOs\AccountingListParametersDTO.cs" />
+    <Compile Include="DTOs\AccountingParametersDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\CheckBookControlDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\CheckPaymentOrderDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\ClaimDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\PaymentOrderDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\PaymentRequestDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\PaymentRequestNumberDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\PaymentRequestTypeDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\TransferPaymentOrderDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\VoucherConceptDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\VoucherConceptTaxDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\VoucherDTO.cs" />
+    <Compile Include="DTOs\AccountsPayables\VoucherTypeDTO.cs" />
+    <Compile Include="DTOs\ActionTypeDTO.cs" />
+    <Compile Include="DTOs\AgencyDTO.cs" />
+    <Compile Include="DTOs\AgentDTO.cs" />
+    <Compile Include="DTOs\Amortizations\AmortizationDTO.cs" />
+    <Compile Include="DTOs\AmountDTO.cs" />
+    <Compile Include="DTOs\AnalysisCodeDTO.cs" />
+    <Compile Include="DTOs\AnalysisConceptDTO.cs" />
+    <Compile Include="DTOs\Application\PremiumRequestDTO.cs" />
+    <Compile Include="DTOs\AutomaticDebits\AutomaticDebitDTO.cs" />
+    <Compile Include="DTOs\AutomaticDebits\AutomaticDebitStatusDTO.cs" />
+    <Compile Include="DTOs\AutomaticDebits\BankNetworkDTO.cs" />
+    <Compile Include="DTOs\AutomaticDebits\BankNetworkStatusDTO.cs" />
+    <Compile Include="DTOs\AutomaticDebits\CouponDTO.cs" />
+    <Compile Include="DTOs\AutomaticDebits\FieldDTO.cs" />
+    <Compile Include="DTOs\AutomaticDebits\FormatDTO.cs" />
+    <Compile Include="DTOs\AutomaticDebits\PaymentMethodAccountTypeDTO.cs" />
+    <Compile Include="DTOs\AutomaticDebits\PaymentMethodBankNetworkDTO.cs" />
+    <Compile Include="DTOs\BankAccounts\BankAccountCompanyDTO.cs" />
+    <Compile Include="DTOs\BankAccounts\BankAccountPersonDTO.cs" />
+    <Compile Include="DTOs\BankAccounts\BankAccountTypeDTO.cs" />
+    <Compile Include="DTOs\BankDTO.cs" />
+    <Compile Include="DTOs\BaseBankBranchDTO.cs" />
+    <Compile Include="DTOs\BeneficiaryDTO.cs" />
+    <Compile Include="DTOs\BillingGroupDTO.cs" />
+    <Compile Include="DTOs\BillReportDTO.cs" />
+    <Compile Include="DTOs\CancellationPolicies\CancellationLimitDTO.cs" />
+    <Compile Include="DTOs\CancellationPolicies\CancellationPolicyTypeDTO.cs" />
+    <Compile Include="DTOs\CancellationPolicies\ExclusionDTO.cs" />
+    <Compile Include="DTOs\CollectApplicationDTO.cs" />
+    <Compile Include="DTOs\CollectControlDTO.cs" />
+    <Compile Include="DTOs\CollectControlPaymentDTO.cs" />
+    <Compile Include="DTOs\CollectConceptDTO.cs" />
+    <Compile Include="DTOs\CollectDTO.cs" />
+    <Compile Include="DTOs\CollectGeneralLedgerDTO.cs" />
+    <Compile Include="DTOs\CompanyDTO.cs" />
+    <Compile Include="DTOs\ConceptSourceDTO.cs" />
+    <Compile Include="DTOs\DebitCreditDTO.cs" />
+    <Compile Include="DTOs\DocumentTypeDTO.cs" />
+    <Compile Include="DTOs\EconomicActivityDTO.cs" />
+    <Compile Include="DTOs\EndorsementDTO.cs" />
+    <Compile Include="DTOs\ExchangeRateDTO.cs" />
+    <Compile Include="DTOs\Filter\PremiumFilterDTO.cs" />
+    <Compile Include="DTOs\Filter\ReversionFilterDTO.cs" />
+    <Compile Include="DTOs\GeneralLedger\GenericJournalEntryDTO.cs" />
+    <Compile Include="DTOs\GeneralLedger\GenericJournalEntryItemDTO.cs" />
+    <Compile Include="DTOs\HolderDTO.cs" />
+    <Compile Include="DTOs\IdentificationDocumentDTO.cs" />
+    <Compile Include="DTOs\Imputations\AccountingConceptDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationAccountingAnalysisDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationAccountingCostCenterDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationAccountingDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationAccountingTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationJournalEntryDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationLedgerDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationPremiumCommisionDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationPremiumDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationPremiumItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\ApplicationTypeDTO.cs" />
+    <Compile Include="DTOs\Imputations\BrokerCheckingAccountItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\CoInsuranceCheckingAccountItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\DepositPremiumTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\LogMassiveDataPolicyDTO.cs" />
+    <Compile Include="DTOs\Imputations\ParamApplicationPremiumComponent.cs" />
+    <Compile Include="DTOs\Imputations\ReinsuranceCheckingAccountItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\TempApplicationDTO.cs" />
+    <Compile Include="DTOs\Imputations\TempApplicationPremiumCommissDTO.cs" />
+    <Compile Include="DTOs\Imputations\UpdTempApplicationPremiumComponentDTO.cs" />
+    <Compile Include="DTOs\Imputations\TempApplicationPremiumComponentDTO.cs" />
+    <Compile Include="DTOs\Imputations\TempApplicationPremiumDTO.cs" />
+    <Compile Include="DTOs\IndividualDTO.cs" />
+    <Compile Include="DTOs\IssuanceAgencyDTO.cs" />
+    <Compile Include="DTOs\IssuanceAgentDTO.cs" />
+    <Compile Include="DTOs\IssuanceAgentTypeDTO.cs" />
+    <Compile Include="DTOs\IssuanceCommissionDTO.cs" />
+    <Compile Include="DTOs\JournalEntryReversionParametersDTO.cs" />
+    <Compile Include="DTOs\LineBusinessDTO.cs" />
+    <Compile Include="DTOs\MessageDTO.cs" />
+    <Compile Include="DTOs\MessageSuccessDTO.cs" />
+    <Compile Include="DTOs\MovementTypeDTO.cs" />
+    <Compile Include="DTOs\OriginalGeneralLedgerDTO.cs" />
+    <Compile Include="DTOs\PayerComponentDTO.cs" />
+    <Compile Include="DTOs\PayerDTO.cs" />
+    <Compile Include="DTOs\CreditNotes\CreditNoteDTO.cs" />
+    <Compile Include="DTOs\CreditNotes\CreditNoteItemDTO.cs" />
+    <Compile Include="DTOs\PaymentBallotAccountingDTO.cs" />
+    <Compile Include="DTOs\PaymentBallotAccountingParametersDTO.cs" />
+    <Compile Include="DTOs\PaymentBallotDTO.cs" />
+    <Compile Include="DTOs\PaymentBallotParametersDTO.cs" />
+    <Compile Include="DTOs\PaymentBallotResponsesDTO.cs" />
+    <Compile Include="DTOs\PaymentPlanDTO.cs" />
+    <Compile Include="DTOs\PaymentSummaryDTO.cs" />
+    <Compile Include="DTOs\Payments\CheckingRejectionResponseDTO.cs" />
+    <Compile Include="DTOs\Payments\ConsignmentCheckDTO.cs" />
+    <Compile Include="DTOs\PaymentTicketBallotDTO.cs" />
+    <Compile Include="DTOs\PaymentTypeDTO.cs" />
+    <Compile Include="DTOs\PersonDTO.cs" />
+    <Compile Include="DTOs\PersonIndividualTypeDTO.cs" />
+    <Compile Include="DTOs\PersonTypeDTO.cs" />
+    <Compile Include="DTOs\PolicyDTO.cs" />
+    <Compile Include="DTOs\PolicyTypeDTO.cs" />
+    <Compile Include="DTOs\PrefixDTO.cs" />
+    <Compile Include="DTOs\ProductDTO.cs" />
+    <Compile Include="DTOs\QuotaDTO.cs" />
+    <Compile Include="DTOs\RejectedPaymentDTO.cs" />
+    <Compile Include="DTOs\SalePointDTO.cs" />
+    <Compile Include="DTOs\BillDTO.cs" />
+    <Compile Include="DTOs\SaveBillParametersDTO.cs" />
+    <Compile Include="DTOs\Search\AccountingAccountDTO.cs" />
+    <Compile Include="DTOs\Search\AccountingParameterDTO.cs" />
+    <Compile Include="DTOs\Search\AgentCoinsuranceCheckingAccountDTO.cs" />
+    <Compile Include="DTOs\Search\AgentCommissionBalanceDTO.cs" />
+    <Compile Include="DTOs\Search\AgentCommissionBalanceItemDTO.cs" />
+    <Compile Include="DTOs\Search\AgentCommissionClosureDTO.cs" />
+    <Compile Include="DTOs\Search\ApplicationParameterDTO.cs" />
+    <Compile Include="DTOs\Search\AppPaymentPolicyDTO.cs" />
+    <Compile Include="DTOs\Search\AutomaticDebitsDTO.cs" />
+    <Compile Include="DTOs\Search\AutomaticDebitSummaryDTO.cs" />
+    <Compile Include="DTOs\Search\BalanceInquieriesDTO.cs" />
+    <Compile Include="DTOs\Search\BallotNotDepositedDTO.cs" />
+    <Compile Include="DTOs\Search\BeneficiaryBankAccountsDTO.cs" />
+    <Compile Include="DTOs\Search\BranchDTO.cs" />
+    <Compile Include="DTOs\Search\BrokerAgentDTO.cs" />
+    <Compile Include="DTOs\Search\BrokerBalanceDTO.cs" />
+    <Compile Include="DTOs\Search\BrokerCheckingAccountItemDTO.cs" />
+    <Compile Include="DTOs\Search\CancelCheckDTO.cs" />
+    <Compile Include="DTOs\Search\CancellationNoticeDTO.cs" />
+    <Compile Include="DTOs\Search\CardToDepositInternalBallotDTO.cs" />
+    <Compile Include="DTOs\Search\CardVoucherDTO.cs" />
+    <Compile Include="DTOs\Search\CheckBallotAccountingParameterDTO.cs" />
+    <Compile Include="DTOs\Search\CheckBookControlDTO.cs" />
+    <Compile Include="DTOs\Search\CheckInformationDTO.cs" />
+    <Compile Include="DTOs\Search\CheckInformationGridDTO.cs" />
+    <Compile Include="DTOs\Search\CheckToDepositInternalBallotDTO.cs" />
+    <Compile Include="DTOs\Search\CoinsuranceBalanceDTO.cs" />
+    <Compile Include="DTOs\Search\CoinsuranceCheckingAccountItemDTO.cs" />
+    <Compile Include="DTOs\Search\CollectItemPolicyDTO.cs" />
+    <Compile Include="DTOs\Search\CollectItemWithoutPaymentTicketDTO.cs" />
+    <Compile Include="DTOs\Search\CollectMassiveProcessDTO.cs" />
+    <Compile Include="DTOs\Search\ConceptCurrentAccountDTO.cs" />
+    <Compile Include="DTOs\Search\CostCenterDTO.cs" />
+    <Compile Include="DTOs\Search\CouponStatusDTO.cs" />
+    <Compile Include="DTOs\Search\CreditableCardHeaderDTO.cs" />
+    <Compile Include="DTOs\Search\CreditCardPaymentBallotDTO.cs" />
+    <Compile Include="DTOs\Search\CurrencyDiferenceDTO.cs" />
+    <Compile Include="DTOs\Search\CurrencyDifferenceDTO.cs" />
+    <Compile Include="DTOs\Search\CurrencyDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentOrderDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentOrdersCommissionDTO.cs" />
+    <Compile Include="DTOs\Search\DepositCheckInformationDTO.cs" />
+    <Compile Include="DTOs\Search\DepositPremiumTransactionDTO.cs" />
+    <Compile Include="DTOs\Search\DetailBallotNotDepositedDTO.cs" />
+    <Compile Include="DTOs\Search\DetailCardDTO.cs" />
+    <Compile Include="DTOs\Search\DetailCheckDTO.cs" />
+    <Compile Include="DTOs\Search\DetailPayDTO.cs" />
+    <Compile Include="DTOs\Search\DetailPaymentBallotSearchDTO.cs" />
+    <Compile Include="DTOs\Search\DetailValuesDTO.cs" />
+    <Compile Include="DTOs\Search\DiscountedCommissionDTO.cs" />
+    <Compile Include="DTOs\Search\EndorsementPaymentDTO.cs" />
+    <Compile Include="DTOs\Search\ExcessPaymentDTO.cs" />
+    <Compile Include="DTOs\Search\ExchangePaymentChekDTO.cs" />
+    <Compile Include="DTOs\Search\ForeignCurrencyExchangeRate.cs" />
+    <Compile Include="DTOs\Search\GeneralLedgerDTO.cs" />
+    <Compile Include="DTOs\Search\ImputationParameterDTO.cs" />
+    <Compile Include="DTOs\Search\IncomeChangeConceptDTO.cs" />
+    <Compile Include="DTOs\Search\InformationPaymentDTO.cs" />
+    <Compile Include="DTOs\Search\InternalBallotCardReportDTO.cs" />
+    <Compile Include="DTOs\Search\InternalBallotCashReportDTO.cs" />
+    <Compile Include="DTOs\Search\InternalBallotReportDTO.cs" />
+    <Compile Include="DTOs\Search\LegalPaymentDTO.cs" />
+    <Compile Include="DTOs\Search\MassiveDataGenerateDTO.cs" />
+    <Compile Include="DTOs\Search\MassiveProcessDTO.cs" />
+    <Compile Include="DTOs\Search\OtherPaymentsRequestReportHeaderDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentBallotDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentBallotSearchDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentConceptDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentMethodTypeDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentRequestAccountingParameterDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentRequestClaimDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentRequestVariousDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentServiceFileDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentTicketDTO.cs" />
+    <Compile Include="DTOs\Search\PaymentTicketItemDTO.cs" />
+    <Compile Include="DTOs\Search\PendingCommissionDTO.cs" />
+    <Compile Include="DTOs\Search\PercentagePayQuotaDTO.cs" />
+    <Compile Include="DTOs\Search\PolicyQuotaDTO.cs" />
+    <Compile Include="DTOs\Search\PrefixComponentCollectionDTO.cs" />
+    <Compile Include="DTOs\Search\PreliquidationsDTO.cs" />
+    <Compile Include="DTOs\Search\PremiumReceivableItemDTO.cs" />
+    <Compile Include="DTOs\Search\PremiumReceivableSearchPolicyDTO.cs" />
+    <Compile Include="DTOs\Search\PrintCheckDTO.cs" />
+    <Compile Include="DTOs\Search\RegularizedPaymentDTO.cs" />
+    <Compile Include="DTOs\Search\ReinsuranceCheckingAccountItemDTO.cs" />
+    <Compile Include="DTOs\Search\RejectedCardVoucherInfoDTO.cs" />
+    <Compile Include="DTOs\Search\RejectedPaymentDTO.cs" />
+    <Compile Include="DTOs\Search\ReportCollectDTO.cs" />
+    <Compile Include="DTOs\Search\ReportPaymentDTO.cs" />
+    <Compile Include="DTOs\Search\SearchAgentsItemsDTO.cs" />
+    <Compile Include="DTOs\Search\SearchCollectDTO.cs" />
+    <Compile Include="DTOs\Search\SearchInternalBallotCardDTO.cs" />
+    <Compile Include="DTOs\Search\SearchInternalBallotDTO.cs" />
+    <Compile Include="DTOs\Search\SearchParameterBrokersCheckingAccountDTO.cs" />
+    <Compile Include="DTOs\Search\SearchParameterCheckPaymentOrderDTO.cs" />
+    <Compile Include="DTOs\Search\SearchParameterClaimsPaymentRequestDTO.cs" />
+    <Compile Include="DTOs\Search\SearchParameterCoinsuranceCheckingAccountDTO.cs" />
+    <Compile Include="DTOs\Search\SearchParameterPaymentOrdersDTO.cs" />
+    <Compile Include="DTOs\Search\SearchParameterReinsuranceCheckingAccountDTO.cs" />
+    <Compile Include="DTOs\Search\SearchParameterTemporaryDTO.cs" />
+    <!--<Compile Include="DTOs\Search\SearchPolicyPremiumReceivableDTO.cs" />-->
+    <Compile Include="DTOs\Search\SearchTransactionDTO.cs" />
+    <Compile Include="DTOs\Search\StatusPaymentDTO.cs" />
+    <Compile Include="DTOs\Search\SumaryPayMethodDTO.cs" />
+    <Compile Include="DTOs\Search\TaxInformationDTO.cs" />
+    <Compile Include="DTOs\Search\TempDailyAccountingDTO.cs" />
+    <Compile Include="DTOs\Search\TempJournalEntryDTO.cs" />
+    <Compile Include="DTOs\Search\TemporaryItemSearchDTO.cs" />
+    <Compile Include="DTOs\Search\TempPaymentOrderDTO.cs" />
+    <Compile Include="DTOs\Search\TempPaymentRequestClaimDTO.cs" />
+    <Compile Include="DTOs\Search\TempUsedDepositPremiumDTO.cs" />
+    <Compile Include="DTOs\Search\TicketDTO.cs" />
+    <Compile Include="DTOs\Search\UnpaidInstallmentDTO.cs" />
+    <Compile Include="DTOs\Search\ValidateParameterBrokerCoinsuranceReinsuranceDTO.cs" />
+    <Compile Include="DTOs\Search\ValueTypeDTO.cs" />
+    <Compile Include="DTOs\SubLineBusinessDTO.cs" />
+    <Compile Include="DTOs\TaxConditionDTO.cs" />
+    <Compile Include="DTOs\TaxCategoryDTO.cs" />
+    <Compile Include="DTOs\TaxDTO.cs" />
+    <Compile Include="DTOs\TemporalPremiumDTO.cs" />
+    <Compile Include="DTOs\TransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\BookAccountDTO.cs" />
+    <Compile Include="DTOs\Imputations\BrokersCheckingAccountTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\BrokersCheckingAccountTransactionItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\CheckingAccountConceptDTO.cs" />
+    <Compile Include="DTOs\Imputations\CheckingAccountTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\ClaimsPaymentRequestTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\ClaimsPaymentRequestTransactionItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\CoInsuranceCheckingAccountTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\CoInsuranceCheckingAccountTransactionItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\CollectPayerDTO.cs" />
+    <Compile Include="DTOs\Imputations\ConceptDTO.cs" />
+    <Compile Include="DTOs\Imputations\DailyAccountingAnalysisCodeDTO.cs" />
+    <Compile Include="DTOs\Imputations\DailyAccountingCostCenterDTO.cs" />
+    <Compile Include="DTOs\Imputations\DailyAccountingTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\DailyAccountingTransactionItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\InsuredLoanTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\InsuredLoanTransactionItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\JournalEntryDTO.cs" />
+    <Compile Include="DTOs\Imputations\PaymentRequestTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\PaymentRequestTransactionItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\PreLiquidationDTO.cs" />
+    <Compile Include="DTOs\Imputations\PremiumReceivableTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\PremiumReceivableTransactionItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\ReInsuranceCheckingAccountTransactionDTO.cs" />
+    <Compile Include="DTOs\Imputations\ReInsuranceCheckingAccountTransactionItemDTO.cs" />
+    <Compile Include="DTOs\Imputations\TransactionTypeDTO.cs" />
+    <Compile Include="DTOs\PaymentReinsuranceDTO.cs" />
+    <Compile Include="DTOs\Payments\CashDTO.cs" />
+    <Compile Include="DTOs\Payments\CheckDTO.cs" />
+    <Compile Include="DTOs\Payments\CreditCardDTO.cs" />
+    <Compile Include="DTOs\Payments\CreditCardTypeDTO.cs" />
+    <Compile Include="DTOs\Payments\CreditCardValidThruDTO.cs" />
+    <Compile Include="DTOs\Payments\DepositVoucherDTO.cs" />
+    <Compile Include="DTOs\Payments\PaymentDTO.cs" />
+    <Compile Include="DTOs\Payments\PaymentMethodDTO.cs" />
+    <Compile Include="DTOs\Payments\PaymentTaxDTO.cs" />
+    <Compile Include="DTOs\Payments\RetentionReceiptDTO.cs" />
+    <Compile Include="DTOs\Payments\TransferDTO.cs" />
+    <Compile Include="DTOs\PaymentTicketDTO.cs" />
+    <Compile Include="DTOs\RangeDTO.cs" />
+    <Compile Include="DTOs\RangeItemDTO.cs" />
+    <Compile Include="DTOs\RejectionDTO.cs" />
+    <Compile Include="DTOs\Retentions\RetentionBaseDTO.cs" />
+    <Compile Include="DTOs\Retentions\RetentionConceptDTO.cs" />
+    <Compile Include="DTOs\Retentions\RetentionConceptPercentageDTO.cs" />
+    <Compile Include="Enums\AccountingNature.cs" />
+    <Compile Include="Enums\ActionTypes.cs" />
+    <Compile Include="Enums\AmortizationStatus.cs" />
+    <Compile Include="Enums\ApplicationTypes.cs" />
+    <Compile Include="Enums\CoInsuranceTypes.cs" />
+    <Compile Include="Enums\CollectControlStatus.cs" />
+    <Compile Include="Enums\CollectStatus.cs" />
+    <Compile Include="Enums\CollectTypes.cs" />
+    <Compile Include="Enums\ComponentTypes.cs" />
+    <Compile Include="Enums\CouponStatusTypes.cs" />
+    <Compile Include="Enums\CoveredRiskType.cs" />
+    <Compile Include="Enums\CreditNoteStatus.cs" />
+    <Compile Include="Enums\ExclusionTypes.cs" />
+    <Compile Include="Enums\ImputationItemTypes.cs" />
+    <Compile Include="Enums\JournalEntryStatus.cs" />
+    <Compile Include="Enums\MovementTypes.cs" />
+    <Compile Include="Enums\PaymentMethods.cs" />
+    <Compile Include="Enums\PaymentOrderStatus.cs" />
+    <Compile Include="Enums\PaymentRequestTypes.cs" />
+    <Compile Include="Enums\PaymentSources.cs" />
+    <Compile Include="Enums\PaymentStatus.cs" />
+    <Compile Include="Enums\PaymentTicketStatus.cs" />
+    <Compile Include="Enums\PaymentType.cs" />
+    <Compile Include="Enums\PaymentTypes.cs" />
+    <Compile Include="Enums\ProcessType.cs" />
+    <Compile Include="IAccountingAccountService.cs" />
+    <Compile Include="IAccountingAccountsPayableService.cs" />
+    <Compile Include="IAccountingAmortizationService.cs" />
+    <Compile Include="IAccountingApplicationService.cs" />
+    <Compile Include="IAccountingCollectControlService.cs" />
+    <Compile Include="IAccountingCollectService.cs" />
+    <Compile Include="IAccountingCreditNoteService.cs" />
+    <Compile Include="IAccountingParameterService.cs" />
+    <Compile Include="IAccountingPaymentBallotService.cs" />
+    <Compile Include="IAccountingPaymentService.cs" />
+    <Compile Include="IAccountingPaymentTicketService.cs" />
+    <Compile Include="IAccountingRetentionService.cs" />
+    <Compile Include="IAccountingComponentDistributionService.cs" />
+    <Compile Include="IAccountingReversionService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Condition="'$(BuildingInsideVisualStudio)' == 'true'" Include="..\packages\Sistran.Core.Analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\Accounting\ApplicationService\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\ProjectDeployBranch.msbuild" />
+</Project>

@@ -1,0 +1,94 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.PledgeViewModel
+
+<form id="AddPledge" name="AddPledge">
+    @Html.AntiForgeryToken()
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelCountry</label>
+            <input class="uif-input-search"
+                data-val="true" id="inputCountry-Pledge" name="inputCountry-Pledge" placeholder="@Resources.Language.NameCountry" type="text">
+            @Html.ValidationMessageFor(model => model.Country)
+        </div>
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelState</label>
+            <input class="uif-input-search"
+                data-val="true" id="inputState-Pledge" name="inputState-Pledge" placeholder="@Resources.Language.NameDepartment" type="text">
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelCity</label>
+            <input class="uif-input-search"
+                data-val="true" id="inputCity-Pledge" name="inputCity-Pledge" placeholder="@Resources.Language.NameCity" type="text">
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-3">
+            <label  class="field-required">@Resources.Language.LabelPlate </label>
+            @Html.TextBoxFor(model => model.Plate, new { id = "Pledge-Plate", @class = "changeToUpper" })
+            @Html.ValidationMessageFor(model => model.Plate)
+        </div>
+
+        <div class="uif-col col-md-3">
+            <label>@Resources.Language.LabelEngine </label>
+            @Html.TextBoxFor(model => model.Engine, new { id = "Pledge-Engine", @class = "changeToUpper" })
+            @Html.ValidationMessageFor(model => model.Engine)
+        </div>
+
+        <div class="uif-col col-md-3">
+            <label>@Resources.Language.LabelChassis </label>
+            @Html.TextBoxFor(model => model.Chassis, new { id = "Pledge-Chassis", @class = "changeToUpper" })
+            @Html.ValidationMessageFor(model => model.Chassis)
+        </div>
+
+        <div class="uif-col col-md-3">
+            <label>@Resources.Language.LabelValuationDate </label>
+            @Html.TextBoxFor(model => model.ValuationDate, "{0:dd/MM/yyyy}", new { id = "Pledge-ValuationDate", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.ValuationDate)
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-3">
+            <label>@Resources.Language.LabelCompanyInsured </label>
+            <input class="uif-autocomplete" name="Company" type="text" data-source="@Url.Action("GetCoInsuranceCompanies", "Guarantee")" 
+                data-displaykey="Description" data-minlenght="2"  data-maxlenght="5" id="Pledge-Company">
+            @Html.ValidationMessageFor(model => model.Company)
+        </div>
+
+        <div class="uif-col col-md-2">
+            <label>@Resources.Language.LabelNroPolicy</label>
+            @Html.TextBoxFor(model => model.NumberPolicy, new { id = "Pledge-NumberPolicy" })
+            @Html.ValidationMessageFor(model => model.NumberPolicy)
+        </div>
+
+        <div class="uif-col col-md-3">
+            <label>@Resources.Language.LabelInsuredValue</label>
+            @Html.TextBoxFor(model => model.InsuredValue, new { id = "Pledge-InsuredValue", @class = "numberWithCommas rightAlign" })
+            @Html.ValidationMessageFor(model => model.InsuredValue)
+        </div>
+
+        <div class="uif-col col-md-2">
+            <label>@Resources.Language.LabelValuationValue</label>
+            @Html.TextBoxFor(model => model.ValuationValue, new { id = "Pledge-ValuationValue", @class = "numberWithCommas rightAlign" })
+            @Html.ValidationMessageFor(model => model.ValuationValue)
+        </div>
+
+        <div class="uif-col col-md-2">
+            <label>@Resources.Language.LabelCoin </label>
+            <select class="uif-select form-control" id="Pledge-Currency" data-val="true" data-source="@Url.Content("~/Person/Guarantee/GetCurrencies")" data-val-required="@Resources.Language.ErrorDocumentControlCurrency" data-id="Id" data-name="Description" name="Currency">
+            </select>
+            @Html.ValidationMessageFor(model => model.Currency)
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelObservations</label>
+            @Html.TextAreaFor(model => model.Observations, new { id = "Pledge-Observations", cols = "12", rows = "2", style = "resize: none", @class = "changeToUpper" })
+            @Html.ValidationMessageFor(model => model.Observations)
+        </div>
+    </div>
+</form>

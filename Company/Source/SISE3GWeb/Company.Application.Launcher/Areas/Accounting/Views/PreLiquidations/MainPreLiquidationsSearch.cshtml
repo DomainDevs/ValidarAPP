@@ -1,0 +1,170 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.SearchLabel;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.Preliquidation</li>
+        <li class="active">@Global.SearchLabel</li>
+    </ol>
+}
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-default" id="editPreliquidation">
+            <i class="fa fa-edit"></i> @Global.Edit
+        </button>
+        <button class="btn btn-primary" id="cancelPreliquidation">
+            <i class="glyphicon glyphicon-remove"></i>  @Global.Annul
+        </button>
+        <button class="btn btn-primary" id="printPreliquidation">
+            <i class="fa fa-print"></i>  @Global.Print
+        </button>
+        <button class="btn btn-primary" id="applyPreliquidation">
+            <i class="fa fa-check"></i>  @Global.Apply
+        </button>
+    </footer>
+}
+
+<hr />
+<div class="uif-alert" id="alert"></div>
+<form id="PreliquidationsSearchForm">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Branch</label>
+            <select class="uif-select form-control" id="Branch" name="Branch"
+                    data-source='@Url.Content("~/Accounting/Common/GetBranchs")'
+                    data-id="Id" data-name="Description"
+                    data-selectedid="@ViewBag.BranchDefault"
+                    data-native="true"
+                    data-val="true"
+                    data-val-required="@Global.RequiredField"></select>
+            <span class="text-danger" data-valmsg-for="Branch" data-valmsg-replace="true" data-native="true"  />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.SalePoint</label>
+            <select class="uif-select form-control"
+                    id="SalePoint"
+                    name="SalePoint"
+                    data-id="Id"
+                    data-name="Description" 
+                    data-native="true"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.Company</label>
+            <select class="uif-select form-control"
+                    id="Company"
+                    name="Company"
+                    data-source='@Url.Content("~/Accounting/Common/GetAccountingCompanies")'
+                    data-id="Id"
+                    data-name="Description"
+                    data-native="true">
+            </select>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.StartDate</label>
+            <input type="text" id="StartDate" name="StartDate" class="uif-datepicker" data-mask="99/99/9999" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.EndDate</label>
+            <input type="text" id="EndDate" name="EndDate" class="uif-datepicker" data-mask="99/99/9999" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.PreLiquidationNumber</label>
+            <input type="text" id="PreliquidationNumber" name="PreliquidationNumber" onkeypress=" return JustNumbers(event, this); " maxlength="10" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.PayerType</label>
+            <select class="uif-select form-control" id="PayerType"
+                    name="PayerType" data-source='@Url.Content("~/Accounting/Common/LoadPersonType")'
+                    data-id="Id"
+                    data-name="Description"
+                    data-native="true">
+            </select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.DocNumberPayer</label>
+            <input class="uif-autocomplete" type="text" id="DocumentNumber" name="DocumentNumber" data-source="@Url.Action("GetBeneficiary", "PreLiquidations")" data-displaykey="DocumentNumber" placeholder="@Global.DocumentNumber" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.PayerName</label>
+            <input class="uif-autocomplete" type="text" id="Name" name="Name" data-source="@Url.Action("GetBeneficiary", "PreLiquidations")" data-displaykey="Name" placeholder="@Global.FullName" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.User</label>
+            <input class="uif-autocomplete" type="text" id="User" name="User" data-source="@Url.Action("GetUserByUserName", "PreLiquidations")" data-displaykey="nick" placeholder="@Global.User" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer">
+                <button id="clear" class="btn btn-default" role="button">
+                    <i class="fa fa-paint-brush"></i>  @Global.Clean
+                </button>
+                <button type="submit" id="search" class="btn btn-primary" role="button" onclick="return false">
+                    <i class="fa fa-search"></i>  @Global.Search
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+<div class="uif-row"></div>
+<table class="uif-table" data-title="@Global.SearchLabel" data-source="null" id="PreliquidationsSearchTable" data-add="false" data-edit="false" data-delete="false" data-selectiontype="single" data-paginate="true">
+    <thead>
+        <tr>
+            <th data-property="PreliquidationId">@Global.PreliquidationNum</th>
+            <th data-property="Status" data-visible="false">Status</th>
+            <th data-property="StatusDescription">@Global.Status</th>
+            <th data-property="BranchId" data-visible="false">BranchId</th>
+            <th data-property="BranchDescription">@Global.Branch</th>
+            <th data-property="UsertId" data-visible="false">UsertId</th>
+            <th data-property="UserName">@Global.User</th>
+            <th data-property="SalesPointId" data-visible="false">SalesPointId</th>
+            <th data-property="SalesPointDescription">@Global.SalePoint</th>
+            <th data-property="RegisterDate">@Global.RegisterDate</th>
+            <th data-property="AccountingCompanyId" data-visible="false">AccountingCompanyId</th>
+            <th data-property="AccountingCompanyDescription">@Global.Company</th>
+            <th data-property="PersonTypeId" data-visible="false">PersonTypeId</th>
+            <th data-property="PersonTypeDescription" data-visible="false">PersonTypeDescription</th>
+            <th data-property="BeneficiaryIndividualId" data-visible="false">BeneficiaryIndividualId</th>
+            <th data-property="BeneficiaryDocumentNumber" data-visible="false">BeneficiaryDocumentNumber</th>
+            <th data-property="BeneficiaryName">@Global.Depositor</th>
+            <th data-property="Description" data-visible="false">@Global.Description</th>
+            <th data-property="TempImputationId" data-visible="false">TempImputationId</th>
+            <th data-property="SourceId" data-visible="false">SourceId</th>
+            <th data-property="ImputationTypeId" data-visible="false">ImputationTypeId</th>
+            <th data-property="ImputationTypeDescription" data-visible="false">ImputationTypeDescription</th>
+            <th data-property="IsRealSource" data-visible="false">IsRealSource</th>
+            <th data-property="TotalAmount" data-visible="true">@Global.TotalControl</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<div class="uif-row">
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable"/>
+<input type="hidden" id="ViewBagParameterMulticompany" value="@ViewBag.ParameterMulticompany"/>
+<input type="hidden" id="ViewBagAccountingCompanyDefault" value="@ViewBag.AccountingCompanyDefault"/>
+<input type="hidden" id="ViewBagBranchIdFromPreliquidation" value="@ViewBag.BranchId" />
+<input type="hidden" id="ViewBagPreliquidationIdFromPreliquidation" value="@ViewBag.PreliquidationId"/>
+<input type="hidden" id="ViewBagSalePointBranchUserDefault" value="@ViewBag.SalePointBranchUserDefault"/>
+<input type="hidden" id="ViewBagLoadBillingLink" value="@Url.Content(Global.LoadBillingLink)" />
+<input type="hidden" id="ViewBagLoadPreliquidationsLink" value="@Url.Content(Global.LoadPreliquidationsLink)" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainPreLiquidationsSearch")
+}

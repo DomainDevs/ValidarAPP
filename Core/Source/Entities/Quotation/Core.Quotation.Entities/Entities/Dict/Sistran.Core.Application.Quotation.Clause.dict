@@ -1,0 +1,35 @@
+
+<map version="2.0" type="class" name="Clause" namespace="Sistran.Core.Application.Quotation" file-version="1.0" description="CLAUSE_ENTITY">
+  <properties>
+    <property name="ClauseId" type="Integer" key="true" autonumber="id" description="CLAUSE_ID_PROPERTY" />
+    <property name="ClauseName" type="String" size="10" description="CLAUSE_NAME_PROPERTY" />
+    <property name="ClauseTitle" type="String" size="60" nullable="true" description="CLAUSE_TITLE_PROPERTY" />
+    <property name="CurrentFrom" type="DateTime" description="CURRENT_FROM_PROPERTY" />
+    <property name="CurrentTo" type="DateTime" nullable="true" description="CURRENT_TO_PROPERTY" />
+    <property name="ConditionLevelCode" type="Integer" description="CONDITION_LEVEL_CODE_PROPERTY" />
+    <property name="ClauseText" type="String" size="2147483647" description="CLAUSE_TEXT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CLAUSE" schema="QUO" alias="CLAUSE" update="true">
+      <columns>
+        <column name="CLAUSE_ID" type="Int32" property="ClauseId" key="true" />
+        <column name="CLAUSE_NAME" type="String" property="ClauseName" allowNull="false" size="10" />
+        <column name="CLAUSE_TITLE" type="String" property="ClauseTitle" size="60" />
+        <column name="CURRENT_FROM" type="DateTime" property="CurrentFrom" allowNull="false" />
+        <column name="CURRENT_TO" type="DateTime" property="CurrentTo" />
+        <column name="CONDITION_LEVEL_CD" type="Byte" property="ConditionLevelCode" allowNull="false" />
+        <column name="CLAUSE_TEXT" type="String" property="ClauseText" allowNull="false" size="2147483647" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Int32" value="85" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

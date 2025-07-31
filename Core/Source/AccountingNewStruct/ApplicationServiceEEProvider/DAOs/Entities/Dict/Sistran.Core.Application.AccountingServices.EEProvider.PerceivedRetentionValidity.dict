@@ -1,0 +1,22 @@
+<map version="2.0" type="class" name="PerceivedRetentionValidity" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="PERCEIVED_RETENTION_VALIDITY_ENTITY">
+  <properties>
+    <property name="PerceivedRetentionValidityId" type="Integer" key="true" description="PERCEIVED_RETENTION_VALIDITY_ID_PROPERTY" nullable = "false" autonumber="Identity" />
+    <property name="PerceivedRetentionCode" type="Integer" description="PERCEIVED_RETENTION_CODE_PROPERTY" />
+    <property name="RetentionPercentage" type="Decimal" precision="5" scale="2" description="RETENTION_PERCENTAGE_PROPERTY" />
+    <property name="ValidityFrom" type="DateTime" description="VALIDITY_FROM_PROPERTY" />
+    <property name="ValidityTo" type="DateTime" description="VALIDITY_TO_PROPERTY" />
+    <property name="PerceivedRetentionCode2" type="String" size="6" description="PERCEIVED_RETENTION_CODE2_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PERCEIVED_RETENTION_VALIDITY" schema="ACC" alias="PERCEIVED_RETENTION_VALIDITY" update="true">
+      <columns>
+        <column name="PERCEIVED_RETENTION_VALIDITY_ID" type="Int32" property="PerceivedRetentionValidityId" key="true" identity ="true" />
+        <column name="PERCEIVED_RETENTION_CD" type="Int32" property="PerceivedRetentionCode" allowNull="false" />
+        <column name="RETENTION_PERCENTAGE" type="Decimal" property="RetentionPercentage" allowNull="false" size="19" precision="5" scale="2" />
+        <column name="VALIDITY_FROM" type="DateTime" property="ValidityFrom" allowNull="false" />
+        <column name="VALIDITY_TO" type="DateTime" property="ValidityTo" allowNull="false" />
+        <column name="PERCEIVED_RETENTION_CODE" type="String" property="PerceivedRetentionCode2" allowNull="false" size="6" />
+      </columns>
+    </table>
+  </tables>
+</map>

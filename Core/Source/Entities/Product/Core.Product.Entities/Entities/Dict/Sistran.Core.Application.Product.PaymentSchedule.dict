@@ -1,0 +1,48 @@
+<map version="2.0" type="class" name="PaymentSchedule" namespace="Sistran.Core.Application.Product" file-version="1.0" description="PAYMENT_SCHEDULE_ENTITY">
+  <properties>
+    <property name="PaymentScheduleId" type="Integer" key="true" description="PAYMENT_SCHEDULE_ID_PROPERTY" autonumber="id"/>
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="SmallDescription" type="String" size="15" description="SMALL_DESCRIPTION_PROPERTY" />
+    <property name="IsGreaterDate" type="Boolean" description="IS_GREATER_DATE_PROPERTY" />
+    <property name="IsIssueDate" type="Boolean" description="IS_ISSUE_DATE_PROPERTY" />
+    <property name="FirstPayQuantity" type="Integer" description="FIRST_PAY_QUANTITY_PROPERTY" />
+    <property name="PaymentQuantity" type="Integer" description="PAYMENT_QUANTITY_PROPERTY" />
+    <property name="GapUnitCode" type="Integer" nullable="true" description="GAP_UNIT_CODE_PROPERTY" />
+    <property name="GapQuantity" type="Integer" nullable="true" description="GAP_QUANTITY_PROPERTY" />
+    <property name="LastPayQuantity" type="Integer" nullable="true" description="LAST_PAY_QUANTITY_PROPERTY" />
+    <property name="DisabledDate" type="DateTime" nullable="true" description="DISABLED_DATE_PROPERTY" />
+    <property name="PremiumFinancing" type="Boolean" description="PREMIUM_FINANCING_PROPERTY" />
+    <property name="AutoDistribution" type="Boolean" description="AUTO_DISTRIBUTION_PROPERTY" />
+    <property name="Financing" type="Boolean" description="FINANCING_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_SCHEDULE" schema="PROD" alias="PAYMENT_SCHEDULE" update="true">
+      <columns>
+        <column name="PAYMENT_SCHEDULE_ID" type="Int32" property="PaymentScheduleId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="SMALL_DESCRIPTION" type="String" property="SmallDescription" allowNull="false" size="15" />
+        <column name="IS_GREATER_DATE" type="Boolean" property="IsGreaterDate" allowNull="false" />
+        <column name="IS_ISSUE_DATE" type="Boolean" property="IsIssueDate" allowNull="false" />
+        <column name="FIRST_PAY_QTY" type="Byte" property="FirstPayQuantity" allowNull="false" />
+        <column name="PAYMENT_QTY" type="Int16" property="PaymentQuantity" allowNull="false" />
+        <column name="GAP_UNIT_CD" type="Byte" property="GapUnitCode" />
+        <column name="GAP_QTY" type="Byte" property="GapQuantity" />
+        <column name="LAST_PAY_QTY" type="Byte" property="LastPayQuantity" />
+        <column name="DISABLED_DATE" type="DateTime" property="DisabledDate" />
+        <column name="PREMIUM_FINANCING" type="Boolean" property="PremiumFinancing" allowNull="false" />
+        <column name="AUTO_DISTRIBUTION" type="Boolean" property="AutoDistribution" allowNull="false" />
+        <column name="FINANCING" type="Byte" property="Financing" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="74" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

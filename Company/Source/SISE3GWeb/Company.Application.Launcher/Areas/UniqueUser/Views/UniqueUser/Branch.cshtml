@@ -1,0 +1,90 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.BranchModelsView
+@using Sistran.Core.Framework.UIF.Web.Helpers;
+
+<script id="branchTemplate" type="text/template">
+
+    {{#ifCond StatusTypeService "==" 2}}
+    <div><strong class="success">{{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div><strong class="warning">{{Description}}</strong></div>
+    {{else}}
+    <div><strong>{{Description}}</strong></div>
+    {{/ifCond }}
+    <div><p class="warning">{{SalePoints.Description}}</p></div>
+</script>
+
+<form id="formBranch" class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelBranch</label>
+                    <select class="uif-select form-control" id="selectBranch" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlBranch"
+                            data-id="Id" data-name="Description" name="BranchId"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.BranchId)
+                </div>
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="chkBranch" name="chkBranch" />
+                        <label for="chkBranch">@Resources.Language.DefaultBranch</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelSalesPoint</label>
+                    <select class="uif-select form-control" id="selectSalesPoint" data-val="true"
+                            data-id="Id" data-name="Description" name="SalesPointId"
+                            data-filter="true" data-native="false"></select>
+                </div>
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="chkSalesPoint" name="chkSalesPoint" />
+                        <label for="chkSalesPoint">@Resources.Language.DefaultSalesPoint</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0686"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnAddPdv">
+                            @Resources.Language.AssingAllPdv
+                        </button>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0687"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnRemovePdv">
+                            @Resources.Language.RemoveAllPdv
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6" id="panelBranch">
+            <div id="listBranch" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6" id="btnsBranch">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewBranch">
+                    @Resources.Language.New
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0688"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnBranchAccept">
+                        @Resources.Language.Add
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

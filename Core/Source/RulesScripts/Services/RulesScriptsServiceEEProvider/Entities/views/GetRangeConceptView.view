@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="GetRangeConceptView">
+  <collections>
+    <collection name="Concept" type=" Sistran.Core.Application.Script.Entities.Concept, 
+              Core.Script.Entities"></collection>
+
+    <collection name="RangeConcept" type="Sistran.Core.Application.Script.Entities.RangeConcept, 
+              Core.Script.Entities"></collection>
+
+    <collection name="RangeEntity" type="Sistran.Core.Application.Script.Entities.RangeEntity, 
+              Core.Script.Entities"></collection>
+
+    <collection name="RangeEntityValue" type="Sistran.Core.Application.Script.Entities.RangeEntityValue, 
+              Core.Script.Entities"></collection>
+
+  </collections>
+  <relations>
+    <relation source="Concept" destination="RangeConcept" name="Concept_RangeConcept" type="Left">
+      <property left="ConceptId" type="Equal" right="ConceptId"></property>
+      <property left="EntityId" type="Equal" right="EntityId"></property>
+    </relation>
+
+    <relation source="RangeConcept" destination="RangeEntity" name="RangeConcept_RangeEntity" type="Left">
+      <property left="RangeEntityCode" type="Equal" right="RangeEntityCode"></property>
+    </relation>
+
+    <relation source="RangeEntity" destination="RangeEntityValue" name="RangeEntity_RangeEntityValue" type="Left">
+      <property left="RangeEntityCode" type="Equal" right="RangeEntityCode"></property>
+    </relation>
+  </relations>
+</view>
+
+

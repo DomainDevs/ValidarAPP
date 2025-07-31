@@ -1,0 +1,207 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="uif-panel" data-title="@Global.RejectInformation"> 
+    <form id="formRejectInformation" class="form">
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.IssuingBank:
+                </label>
+                <br />
+                <input type="text" id="RejectedIssuingBankName" name="RejectedIssuingBankName" disabled="disabled" />
+                <input type="hidden" id="RejectedIssuingBankCode" name="RejectedIssuingBankCode" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.IssuingAccountNumber:
+                </label>
+                <br />
+                <input type="text" id="RejectedIssuingAccountBank" name="RejectedIssuingAccountBank" disabled="disabled" />
+                <input type="hidden" id="RejectedPaymentCode" name="RejectedPaymentCode" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.CheckNumber:
+                </label>
+                <br />
+                <input type="text" id="RejectedCheckNumber" name="RejectedCheckNumber" disabled="disabled" />
+                <input type="hidden" id="RejectedPaymentMethodTypeCode" name="RejectedPaymentMethodTypeCode" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.CheckDate:
+                </label>
+                <br />
+                <input type="text" id="CheckDate" name="CheckDate" maxlength="40" disabled="disabled" />
+            </div>
+        </div>
+
+
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Issuer:
+                </label>
+                <br />
+                <input type="text" id="IssuerRejection" name="IssuerRejection" maxlength="40" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Currency:
+                </label>
+                <br />
+                <input type="text" id="CurrencyRejection" name="CurrencyRejection" maxlength="40" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Amount:
+                </label>
+                <br />
+                <input type="text" id="AmountRejection" name="AmountRejection" maxlength="40" disabled="disabled" style="text-align:right" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.IncomeTransactionNumber:
+                </label>
+                <br />
+                <input type="text" id="TransactionNumberRejection" name="TransactionNumberRejection" maxlength="40" disabled="disabled" />
+            </div>
+            <div class="uif-col-3" hidden ="hidden">
+                <label class="control-label">
+                    @Global.IncomeReceiptNum:
+                </label>
+                <br />
+                <input type="text" id="ReceipNumber" name="ReceipNumber" maxlength="40" disabled="disabled" />
+            </div>
+        </div>
+
+
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.DepositDate:
+                </label>
+                <br />
+                <input type="text" id="DepositDateRejection" name="DepositDateRejection" maxlength="40" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.DepositBallotNumber:
+                </label>
+                <br />
+                <input type="text" id="RejectionDepositBallotNumber" name="RejectionDepositBallotNumber" maxlength="40" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.ReceivingBank:
+                </label>
+                <br />
+                <input type="text" id="ReceiverBank" name="ReceiverBank" maxlength="40" disabled="disabled" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.ReceivingBankAccount:
+                </label>
+                <br />
+                <input type="text" id="ReceivingAccount" name="ReceivingAccount" maxlength="40" disabled="disabled" />
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.DepositTransaction:
+                </label>
+                <br />
+                <input type="text" id="DepositTransaction" name="DepositTransaction" maxlength="40" disabled="disabled" />
+            </div>
+            <div class="uif-col-9">
+                <label class="control-label">
+                    @Global.Depositor:
+                </label>
+                <br />
+                <input type="text" id="Depositor" name="Depositor" maxlength="100" disabled="disabled" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="uif-panel" data-title="">
+    <form id="formRejectInfo" class="form">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <table class="uif-table" data-title="@Global.AssociatedPoliciesEndorsements"
+                       data-source="" id="tblPolicies" data-selectiontype="multiple" data-filter="true" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="BranchDescription">@Global.Branch</th>
+                            <th data-property="PrefixDescription">@Global.Prefix</th>
+                            <th data-property="PolicyId">@Global.Policy</th>
+                            <th data-property="Endorsement">@Global.Endorsement</th>
+                            <th data-property="QuoteNum">@Global.QuotaNumber</th>
+                            <th data-property="Amount">@Global.Amount</th>
+                            <th data-property="CollectItemCode" data-visible="false">BillItemCode</th>
+                            <th data-property="Status" data-visible="false">Status</th>
+                            <th data-property="CollectCode" data-visible="false">BillCode</th>
+                            <th data-property="TechnicalTransaction" data-visible="false">TransactionNumber</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="uif-panel" data-title="@Global.RejectInformation">
+    <form id="InformationRejectedCheck" class="form">
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.RejectionDate:
+                </label>
+                <br />
+                <input type="text" id="RejectionDate" name="RejectionDate" class="uif-datepicker required"
+                       maxlength="10" data-mask="99/99/9999" disabled="disabled" data-val="true"
+                       data-val-required='@Global.RequiredField' />
+                <span class="text-danger" data-valmsg-for="RejectionDate" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-9">
+                <label class="control-label">
+                    @Global.RejectionReason:
+                </label>
+                <br />
+                <select class="uif-select form-control required" id="RejectionMotive" name="RejectionMotive" data-native="true"
+                        data-source='@Url.Content("~/Accounting/Common/GetRejectionsSelect")' data-id="Id" data-name="Description" data-val="true"
+                        data-val-required='@Global.RequiredField'></select>
+                <span class="text-danger" data-valmsg-for="RejectionMotive" data-valmsg-replace="true" />
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.RejectedComission:
+                </label>
+                <br />
+                <input type="text" id="RejectedCommission" name="RejectedCommission" style="text-align:right" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.RejectedComissionTax:
+                </label>
+                <br />
+                <input type="text" id="RejectedCommissionTax" name="RejectedCommissionTax" style="text-align:right" />
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label">
+                    @Global.Observations:
+                </label>
+                <br />
+                <input type="text" id="Observations" name="Observations" onblur="this.value = this.value.toUpperCase();" />
+            </div>
+        </div>
+    </form>
+</div>
+
+

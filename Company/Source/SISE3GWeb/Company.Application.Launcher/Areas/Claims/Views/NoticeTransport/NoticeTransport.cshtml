@@ -1,0 +1,66 @@
+﻿@{
+    Layout = null;
+}
+<form id="frmNoticeTransport" class="form form-space-adjusted" autocomplete="off">
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="accContactInformation">
+                <h5>
+                    <strong>@Resources.Language.ContactInformation</strong>
+                </h5>
+                @Html.Partial("../Notice/ContactInformationPartial")
+                <div>
+                    <h5>
+                        <strong>@Resources.Language.RiskTransportData</strong>
+                    </h5>
+                    <div class="row">
+                        <div class="uif-col-6">
+                            <label>@Resources.Language.LabelCargoType</label>
+                            <input type="text" id="inputCargoType" name="CargoType" data-val="true" maxlength="50" />
+                        </div>
+                        <div class="uif-col-6">
+                            <label>@Resources.Language.LabelPackagingType</label>
+                            <input type="text" id="inputPackagingType" name="PackagingType" data-val="true" maxlength="50" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.Origin</label>
+                            <input type="text" id="inputOriginTransport" name="OriginTransport" data-val="true" maxlength="50" />
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.Destiny</label>
+                            <input type="text" id="inputDestinyTransport" name="DestinyTransport" data-val="true" maxlength="50" />
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.LabelTransportType</label>
+                            <input type="text" id="inputTransportType" name="TransportType" data-val="true" maxlength="50" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="accPolicy">
+                @Html.Partial("../Notice/PolicyInformationPartial")
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="accClaimNotice">
+                @Html.Partial("../Notice/ClaimNotice")
+            </div>
+        </div>
+    </div>
+</form>
+
+@* // -- // Modales // -- // *@
+
+<div class="uif-modal" id="modalSearchbyInsured">
+    <div class="uif-modalbody">
+        @Html.Partial("../NoticeTransport/SearchPoliciesTransportDialog")
+    </div>
+</div>

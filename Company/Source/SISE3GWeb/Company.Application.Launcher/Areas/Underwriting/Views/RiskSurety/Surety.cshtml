@@ -1,0 +1,504 @@
+﻿@{
+    Layout = null;
+}
+@model  Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.RiskSuretyModelsView
+<script id="title-template" type="text/template">
+    <div class="column-80">
+        @Resources.Language.DataRisk
+    </div>
+    <div class="column-20 even">
+        <i class="fa fa-file-o" aria-hidden="true"></i>
+        <div id="globalTitle"></div>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsSurety">
+        <button type="button" class="btn btn-default" id="btnClose">
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonClose
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0202"))
+        {
+            <button type="button" class="btn btn-default" id="btnDeleteRisk">
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.RiskDelete
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0203"))
+        {
+            <button type="button" class="btn btn-default" id="btnAddRiskSurety">
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.RiskNew
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0204"))
+        {
+            <button type="button" class="btn btn-primary" id="btnRiskAccept">
+                <span aria-hidden="true"></span>
+                @Resources.Language.RiskSave
+            </button>
+        }
+        </div>
+</script>
+
+<script id="coverageTemplate" type="text/template">
+    <div><strong>{{Description}}</strong></div>
+    <div>@Resources.Language.LabelSumInsured: <span class="warning"><b>{{SubLimitAmount}}</b></span></div>
+    <div>@Resources.Language.LabelPremium: <span class="warning"><b>{{PremiumAmount}}</b></span></div>
+    <div>@Resources.Language.LabelRate: {{Rate}}</div>
+    <div>@Resources.Language.LabelStatus: {{CoverStatusName}}</div>
+    <div>@Resources.Language.RangeDate: {{CurrentFrom}} -  {{CurrentTo}} </div>
+    {{#ifCond Deductible.Id ">" 0}}
+    <div>@Resources.Language.LabelDeductible: {{Deductible.Description}}</div>
+    {{/ifCond}}
+</script>
+
+<div class="uif-alert" id="alert"></div>
+
+<div class="uif-modal" id="modalTexts">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Texts.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.TextsModelsView())
+    </div>
+    <div id="buttonsTexts" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnTextClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnTextSave">@Resources.Language.ButtonSave</button>
+    </div>
+    <div id="buttonsContractObjects" class="uif-modalbuttons width-save" style="display: none">
+        <button type="button" class="btn btn-default" id="btnContractObjectClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnContractObjectSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div id="modalClauses" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Clauses.cshtml")
+    </div>
+    <div id="buttonsClauses" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnClausesClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnClausesSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div id="modalOperationQuotaCumulus" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("ModalOperationQuotaCumulus")
+    </div>
+</div>
+
+<div id="modalBeneficiaries" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Beneficiaries.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.BeneficiaryModelsView())
+    </div>
+    <div id="buttonsBeneficiaries" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnBeneficiaryClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnBeneficiarySave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div id="modalCrossGuarantees" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/RiskSurety/CrossGuarantees.cshtml")
+    </div>
+    <div id="buttonsCrossGuarantees" class="uif-modalbuttons">
+        <button type="button" class="btn btn-danger" id="btnCrossGuaranteesClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0193"))
+        {
+            <button type="button" class="btn btn-primary" id="btnCrossGuaranteesNew">@Resources.Language.ButtonAdd</button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0194"))
+        {
+            <button type="button" class="btn btn-primary" id="btnCrossGuaranteesSave">@Resources.Language.ButtonSave</button>
+        }
+        </div>
+</div>
+
+<form id="FormExecuteScript">
+    <div class="uif-modal" id="ModalExecuteScript">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/RulesScripts/Views/Scripts/ExecuteScript.cshtml")
+        </div>
+        <div class="uif-modalbuttons width-save">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+            <button type="button" class="btn btn-primary" onclick="return false" id="btnRecordScrip">@Resources.Language.ButtonSave</button>
+        </div>
+    </div>
+</form>
+
+<div class="uif-modal" id="modalIndividualDetail">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/IndividualDetail.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalIndividualSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/IndividualResults.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalTextSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/TextsResults.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalPersonOnline">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/PersonOnline.cshtml")
+    </div>
+</div>
+
+<form id="mainRiskSurety" class="form without-space">
+    <div id="modalSurety">
+        @Html.HiddenFor(model => model.ContractorId, new { id = "hiddenContractorId" })
+        <div class="row">
+            <div class="uif-col-6">
+                <div class="row  box-title">
+                    <div class="uif-col-2">
+                        <label>@Resources.Language.LabelRiskData</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select class="uif-select form-control" data-native="false" id="selectRiskSurety" data-id="Id" data-name="Description" name="RiskId"></select>
+                        @Html.ValidationMessageFor(model => model.RiskId)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+
+                        <h4><strong> @Resources.Language.LabelDataRiskSurety</strong></h4>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label class="field-required">@Resources.Language.LabelSecure</label>
+                        <div class="input-with-buttons">
+                            @Html.TextBoxFor(model => model.ContractorName, new { id = "inputSecure", @class = "uif-input-search", @maxLength = 120, placeholder = @Resources.Language.PlaceHolderDocumentName })
+                            @Html.ValidationMessageFor(model => model.ContractorName)
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0236"))
+                            {
+                                <button type="button" class="btn btn-default secondary-Colombia" id="btnDetailSecureRiskSecure">
+                                    @Resources.Language.ButtonDetail
+                                </button>
+                            }
+                                <button type="button" class="btn btn-default secondary-Colombia" id="btnSecureConvertProspect">
+                                    @Resources.Language.ButtonConvertProspect
+                                </button>
+                            </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label class="field-required">@Resources.Language.LabelInsured</label>
+                        <div class="input-with-buttons">
+                            @Html.TextBoxFor(model => model.InsuredName, new { id = "inputInsured", @class = "uif-input-search", @maxLength = 120, placeholder = @Resources.Language.PlaceHolderDocumentName })
+                            @Html.ValidationMessageFor(model => model.InsuredName)
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0237"))
+                            {
+                                <button type="button" class="btn btn-default secondary-Colombia" id="btnDetailInsuredRiskSurety">
+                                    @Resources.Language.ButtonDetail
+                                </button>
+                            }
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0238"))
+                            {
+                                <button type="button" class="btn btn-default secondary-Colombia" id="btnConvertProspect">
+                                    @Resources.Language.ButtonConvertProspect
+                                </button>
+                            }
+                            </div>
+                    </div>
+                </div>
+                @*Datos Razon Social Asegurado*@
+                @*<div class="row" id="reasonSocialWrapper">*@
+                @*<div class="uif-row">
+                        <div class="uif-col-12">
+                            <h4>
+                                <label><strong>@Resources.Language.LabelreasonSocial</strong> </label>
+                            </h4>
+                        </div>
+                    </div>*@
+                <div class="row" id="reasonSocialWrapper" style="display: none">
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <div class="uif-col-8">
+                                <label>@Resources.Language.LabelreasonSocial</label>
+                                <select class="uif-select" id="inputName" data-id="NameNum" data-name="TradeName" name="Name"></select>
+                            </div>
+                            <div class="uif-col-4">
+                                <label>@Resources.Language.LabelPhoneReasonSocial</label>
+                                <input class="uif-input" type="text" id="inputPhone" name="Phone" disabled="disabled">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <div class="uif-col-12">
+                                <label>@Resources.Language.LabelAdressReasonSocial</label>
+                                <input class="uif-input" type="text" id="inputAdress" name="Name" disabled="disabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*</div>*@
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelContractType</label>
+                        <select class="uif-select form-control" id="selectContractType" data-native="false" data-id="Id" data-name="Description" name="ContractType" data-val="true" data-val-required="@Resources.Language.ErrorContractType"></select>
+                        @Html.ValidationMessageFor(model => model.ContractType)
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelClassofContract</label>
+                        @*<select class="uif-select form-control" id="selectClassofContract" data-native="false" data-source="@Url.Action("GetSuretyContractCategories", "RiskSurety")" data-id="Id" data-name="Description" name="Class" data-val="true" data-val-required="@Resources.Language.ErrorClass"></select>*@
+                        <select class="uif-select form-control" id="selectClassofContract" data-native="false" data-id="Id" data-name="Description" name="Class" data-val="true" data-val-required="@Resources.Language.ErrorClass"></select>
+                        @Html.ValidationMessageFor(model => model.Class)
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.LabelGroupCoverage</label>
+                        <select class="uif-select form-control" data-native="false" id="selectRiskSuretyGroupCoverage" data-source="" data-id="Id" data-name="Description" name="GroupCoverage" data-val="true" data-val-required="@Resources.Language.ErrorGroupCoverage"></select>
+                        @Html.ValidationMessageFor(model => model.GroupCoverage)
+                    </div>
+                    <div class="uif-col-4">
+                        <label></label>
+                        <div class="checkbox">
+                            <input type="checkbox" id="chkFacultativeSurety" name="chkSurety" />
+                            <label for="chkFacultativeSurety">@Resources.Language.LabelFacultative</label>
+                        </div>
+                    </div>
+                    <div class="uif-col-4">
+                        <label></label>
+                        <div class="checkbox">
+                            <input type="checkbox" id="chkRetentionSurety" name="chkSurety" />
+                            <label for="chkRetentionSurety">@Resources.Language.LabelRetencion</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelContractNumber</label>
+                        @Html.TextBoxFor(model => model.ContractNumber, new { id = "inputContractNumber", maxLength = 20 })
+                        @Html.ValidationMessageFor(model => model.ContractNumber)
+                    </div>
+
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelContractValue</label>
+                        @Html.TextBoxFor(model => model.ContractValue, new { id = "inputContractValue", maxLength = 20 })
+                        @Html.ValidationMessageFor(model => model.ContractValue)
+                    </div>
+                </div>
+
+                <div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <h4><strong>Zona de riesgo</strong></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <label class="field-required">@Resources.LanguagePerson.Country</label>
+                            <select class="uif-select" id="selectSuretyCountry" data-id="Id" data-name="Description" name="País" required></select>
+                            @Html.ValidationMessageFor(model => model.CountryId)
+                        </div>
+                        <div class="uif-col-12">
+                            <br></br>
+                            <input type="checkbox" id="NacionalLevel" name="chkNacionalLevel" />
+                            <label for="NacionalLevel">@Resources.LanguagePerson.NacionalLevel</label>
+                        </div>
+                    </div>
+                    @*Nuevo*@
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <label>@Resources.LanguagePerson.LabelDepartment</label>
+                            <select class="uif-select" id="selectSuretyState" data-id="Id" data-name="Description" name="StateId" required></select>
+                            @Html.ValidationMessageFor(model => model.StateId)
+                        </div>
+                        <div class="uif-col-12">
+                            <label>@Resources.LanguagePerson.City</label>
+                            <select class="uif-select" id="selectSuretyCity" data-id="Id" data-name="Description" name="CityId" required></select>
+                            @Html.ValidationMessageFor(model => model.CityId)
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+
+                @*Datos Razon Social Asegurado*@
+                <div class="row" id="reasonSocialWrapper" style="display: none">
+                    <div class="row">
+                        <div class="uif-col-12">
+                            @*<div class="uif-col-12 col-md-offset-1" style="border:0.5px solid #DCDCDC">*@
+                            @* <div class="row">*@
+                            <div class="uif-col-12">
+                                <h4>
+                                    <label><strong>@Resources.Language.LabelreasonSocial</strong> </label>
+                                </h4>
+                            </div>
+                            @* </div>*@
+                            <div class="row">
+                                <div class="uif-col-8">
+                                    <label>@Resources.Language.LabelNombreReasonSocial</label>
+                                    <select class="uif-select" id="inputName" data-id="NameNum" data-name="TradeName" name="Name"></select>
+                                </div>
+                                <div class="uif-col-4">
+                                    <label>@Resources.Language.LabelPhoneReasonSocial</label>
+                                    <input class="uif-input" type="text" id="inputPhone" name="Phone" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="uif-col-12">
+                                    <label>@Resources.Language.LabelAdressReasonSocial</label>
+                                    <input class="uif-input" type="text" id="inputAdress" name="Name" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="row">
+                        <div class="uif-col-12">
+                            @*<div class="uif-col-12 col-md-offset-1" style="border:0.5px solid #DCDCDC">*@
+                            <div class="row">
+                                <div class="uif-col-12">
+                                    <h4>
+                                        <label><strong>@Resources.Language.LabelDateCoveragePostContractual</strong> </label>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="uif-col-6">
+                                    <input type="radio" id="chkTerminalUnitContract" name="chkTerminalUnitContract" />
+                                    <label>@Resources.Language.LabelTerminalUnitContract</label>
+                                </div>
+                                <div class="uif-col-6">
+                                    <input type="radio" id="chkFinalDeliveryDate" name="chkTerminalUnitContract" />
+                                    <label>@Resources.Language.LabelFinalDeliveryDate</label>
+                                </div>
+                                <div class="uif-col-5">
+                                    <input type="text" class="uif-datepicker form-control" id="datepicker" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                            </div>
+                            @*</div>*@
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.LabelOperationalCapacity</label>
+                        @Html.TextBoxFor(model => model.OperatingQuota, new { id = "inputOperationalCapacity", disabled = "disabled", @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.OperatingQuota)
+                    </div>
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.LabelAccumulation</label>
+                        @Html.TextBoxFor(model => model.Aggregate, new { id = "inputAccumulation", disabled = "disabled", @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.Aggregate)
+                    </div>
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.LabelAvailable</label>
+                        @Html.TextBoxFor(model => model.Available, new { id = "inputAvailable", disabled = "disabled", @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.Available)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="uif-col-5">
+                        <label id="LabelAvaliableOperationQuota">@Resources.Language.LabelAvaliableOperationQuota </label>
+                        @Html.TextBoxFor(model => model.AvailableOperatingQuota, new { id = "inputAvaliableOperationQuota", disabled = "disabled", @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.AvailableOperatingQuota)
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="uif-col-4 fit-col-secondary">
+                <div id="listCoverages" class="uif-listview"></div>
+            </div>
+            <div class="uif-col-2 fit-col-secondary">
+                <div class="uif-right-bar" id="panelButtonsRightRisk">
+                    <div class="right-bar-title">
+                        <a href="#" id="btnScript">
+                            <i class="fa fa-gear"></i>
+                            <b class="primary">@Resources.Language.LabelScript</b>
+                        </a>
+                    </div>
+                    <ul>
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0013"))
+                        {
+                            <li>
+                                <a href="#" id="btnBeneficiary">@Resources.Language.LabelBeneficiary</a>
+                                <p id="selectedBeneficiaries"></p>
+                            </li>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0014"))
+                        {
+                            <li>
+                                <a href="#" id="btnCounterGuarantees">@Resources.Language.LabelCounterGuarantees</a>
+                                <p id="selecteCounterGuarantees"></p>
+                            </li>
+                        }
+                        @*Se elimina por comptabilidad con r1 que guarda solo texto de riesgo obligatorio
+                                <li>
+                                <a href="#" id="btnContractObject">@Resources.Language.LabelObjectofContract</a>
+                                <p id="selectedContractObject"></p>
+                            </li>*@
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0015"))
+                        {
+                            <li>
+                                <a href="#" id="btnTexts">@Resources.Language.LabelContractObject</a>
+                                <p id="selectedTexts"></p>
+                            </li>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0016"))
+                        {
+                            <li>
+                                <a href="#" id="btnClauses">@Resources.Language.LabelClauses</a>
+                                <p id="selectedClauses"></p>
+                            </li>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0017"))
+                        {
+                            <li>
+                                <a href="#" id="btnStrengthenedInformation">@Resources.Language.LabelStrengthenedInformation</a>
+                                <p id="selectedStrengthenedInformation"></p>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row lineDividing">
+            <div class="uif-col-6">
+            </div>
+            <div class="uif-col-4">
+                <div class="uif-summary">
+                    <div class="items">
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelInsuredValue</div>
+                                <div id="inputTotalSumInsuredRisk">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelPremium</div>
+                                <div id="inputPremiumRisk">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

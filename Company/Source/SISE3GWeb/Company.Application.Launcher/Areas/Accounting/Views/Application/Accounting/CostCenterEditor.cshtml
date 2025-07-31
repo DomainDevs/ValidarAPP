@@ -1,0 +1,14 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label>@Global.CostCenter</label>
+        @Html.TextBox("CostCenter", "", new { id = "CostCenter", @class = "uif-autocomplete", data_source = @Url.Content("~/Common/GetCostCenter"), data_displaykey = "Value", placeholder = @Global.EnterNameCostCenter, required = "" })
+        @Html.ValidationMessage("CostCenter", @Global.ValidationRequired)
+    </div>
+    <div class="uif-col-6">
+        <label>@Global.Percentage</label>
+        @Html.TextBox("Percentage", "", new { id = "Percentage", required = "", onkeypress = " return OnlyDecimalNumber(event, this); ", maxlength = "10" })
+        @Html.ValidationMessage("Percentage", @Global.ValidationRequired)
+    </div>
+</div>

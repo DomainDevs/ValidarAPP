@@ -1,0 +1,68 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Application.ReinsuranceServices.DTOs.LineDTO
+
+@{
+    Layout = null;
+    int selectedItem = 0;
+
+
+    if (Model.CumulusType != null){
+
+        selectedItem = int.Parse(Model.CumulusType.CumulusTypeId.ToString());
+    }
+}
+
+<form id="formLine" onsubmit="return false" class="form">
+
+    <div class="uif-modalbody">
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <b class="field-required">@Global.CumulusType:</b>
+                <br />
+                @Html.DropDownList("CumulusTypeId", Enumerable.Empty<SelectListItem>(),
+                new
+                {
+                    @class = "uif-select",
+                    data_source = @Url.Content("~/Reinsurance/Parameter/GetCumulusType"),
+                    data_id = "CumulusTypeId",
+                    data_name = "Description",
+                    data_val_required = @Global.RequiredField,
+                    data_val = "true",
+                    data_selectedid = @selectedItem
+                })
+
+                @Html.ValidationMessage("CumulusTypeId")
+
+                @Html.HiddenFor(model => model.LineId, new { id = "LineId" })
+            </div>
+
+            <div class="uif-col-8">
+                <b class="field-required">@Global.Description:</b>
+                <br />
+                @Html.TextBoxFor(model => model.Description, new
+                {
+                    @maxlength = "100",
+                    data_val_required = @Global.RequiredField,
+                    data_val = "true",
+                    @onchange = "convertToUpperCase(this);",
+                })
+                @Html.ValidationMessage("Description")
+            </div>
+        </div>
+
+        <div id="msgValidateCumulusType" class="uif-alert">
+        </div>
+
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0357") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0361"))
+        {
+            <button type="submit" class="btn btn-primary" id="btnSaveLine"
+                    onclick="return acceptDialogModalLine()">
+                @Global.Save
+            </button>
+         }
+    </div>
+</form>
+

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GenerateWSQuotePrinter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="tempId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="printBinary" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateWSQuotePrinterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateWSQuotePrinterResult" type="tns:PrinterClass" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PrinterClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrinterBinary" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XMLFTP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PrinterClass" nillable="true" type="tns:PrinterClass" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GenerateWSQuotePrinterSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateWSQuotePrinter" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSQuotePrinterSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateWSQuotePrinterResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSQuotePrinterHttpGetIn">
+    <wsdl:part name="tempId" type="s:string" />
+    <wsdl:part name="emailUser" type="s:string" />
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="printBinary" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSQuotePrinterHttpGetOut">
+    <wsdl:part name="Body" element="tns:PrinterClass" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSQuotePrinterHttpPostIn">
+    <wsdl:part name="tempId" type="s:string" />
+    <wsdl:part name="emailUser" type="s:string" />
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="printBinary" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSQuotePrinterHttpPostOut">
+    <wsdl:part name="Body" element="tns:PrinterClass" />
+  </wsdl:message>
+  <wsdl:portType name="WSQuotePrinterSoap">
+    <wsdl:operation name="GenerateWSQuotePrinter">
+      <wsdl:input message="tns:GenerateWSQuotePrinterSoapIn" />
+      <wsdl:output message="tns:GenerateWSQuotePrinterSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSQuotePrinterHttpGet">
+    <wsdl:operation name="GenerateWSQuotePrinter">
+      <wsdl:input message="tns:GenerateWSQuotePrinterHttpGetIn" />
+      <wsdl:output message="tns:GenerateWSQuotePrinterHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSQuotePrinterHttpPost">
+    <wsdl:operation name="GenerateWSQuotePrinter">
+      <wsdl:input message="tns:GenerateWSQuotePrinterHttpPostIn" />
+      <wsdl:output message="tns:GenerateWSQuotePrinterHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSQuotePrinterSoap" type="tns:WSQuotePrinterSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GenerateWSQuotePrinter">
+      <soap:operation soapAction="http://tempuri.org/GenerateWSQuotePrinter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSQuotePrinterSoap12" type="tns:WSQuotePrinterSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GenerateWSQuotePrinter">
+      <soap12:operation soapAction="http://tempuri.org/GenerateWSQuotePrinter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSQuotePrinterHttpGet" type="tns:WSQuotePrinterHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GenerateWSQuotePrinter">
+      <http:operation location="/GenerateWSQuotePrinter" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSQuotePrinterHttpPost" type="tns:WSQuotePrinterHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GenerateWSQuotePrinter">
+      <http:operation location="/GenerateWSQuotePrinter" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSQuotePrinter">
+    <wsdl:port name="WSQuotePrinterSoap" binding="tns:WSQuotePrinterSoap">
+      <soap:address location="http://coboarqaxa01/cpt/WebServices/Printer/WSQuotePrinter.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSQuotePrinterSoap12" binding="tns:WSQuotePrinterSoap12">
+      <soap12:address location="http://coboarqaxa01/cpt/WebServices/Printer/WSQuotePrinter.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSQuotePrinterHttpGet" binding="tns:WSQuotePrinterHttpGet">
+      <http:address location="http://coboarqaxa01/cpt/WebServices/Printer/WSQuotePrinter.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSQuotePrinterHttpPost" binding="tns:WSQuotePrinterHttpPost">
+      <http:address location="http://coboarqaxa01/cpt/WebServices/Printer/WSQuotePrinter.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,55 @@
+﻿@model  Sistran.Core.Framework.UIF.Web.Areas.RulesScripts.Models.ScriptViewModel
+@{
+    Layout = null;
+}
+
+<form class="form" id="formScript">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <input type="hidden" id="ScriptId" />
+            @Html.LabelFor(x => x.Name, new { @class = "field-required" })
+            @Html.TextBoxFor(x => x.Name, new { id = "nameScript", maxlength = 50 })
+            @Html.ValidationMessageFor(x => x.Name)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(x => x.Package, new { @class = "field-required" })
+            @Html.DropDownListFor(x => x.Package, new List<SelectListItem>() { },
+                 new Dictionary<string, object>()
+                 {
+                {"Class","uif-select form-control" },
+                {"id","selectPackageScript"},
+                {"data-native", "false" },
+                {"data-id","PackageId"},
+                {"data-name","Description" }
+                 })
+            @Html.ValidationMessageFor(x => x.Package)
+        </div>
+        <div class="uif-col-3">
+            @Html.LabelFor(x => x.Level, new { @class = "field-required" })
+            @Html.DropDownListFor(x => x.Level, new List<SelectListItem>() { },
+                 new Dictionary<string, object>()
+                 {
+                {"Class","uif-select form-control" },
+                {"id","selectLevelScript"},
+                {"data-native", "false" },
+                {"data-id","LevelId"},
+                {"data-name","Description" }
+                 })
+            @Html.ValidationMessageFor(x => x.Level)
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div style="text-align: right;">
+                <button type="button" class="btn btn-primary" id="addPreguntaRama1">
+                    <span class="glyphicon glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div id="QuestionPanel"></div>
+        </div>
+    </div>
+</form>

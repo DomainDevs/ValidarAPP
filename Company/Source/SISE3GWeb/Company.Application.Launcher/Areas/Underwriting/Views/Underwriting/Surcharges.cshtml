@@ -1,0 +1,75 @@
+﻿@model  Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.SurchargesViewModel
+
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.LabelSurcharge
+    </div>
+    <div class="column-30 even">
+    </div>
+</script>
+
+<script id="SurchargesTemplate" type="text/template">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div>Descripción:<strong class="success">{{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div>Descripción:<strong class="warning"> {{Description}} ({{Id}})</strong></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div>Descripción:<strong class="danger"> {{Description}} ({{Id}})</strong></div>
+    {{else}}
+    <div>Descripción: <strong>{{Description}} ({{Id}})</strong></div>
+    {{/ifCond }}
+
+    <div>
+        <br>
+        Tipo de Cálculo: <strong>{{RateDescription}}</strong>
+    </div>
+    <div>
+        <br>
+        Tasa: <strong>{{Rate}}</strong>
+    </div>
+</script>
+
+<form id="formSurcharge" class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.LabelSurcharge parametrizados</label>
+                    <select class="uif-select form-control" id="selectDesSurcharge" data-val="true" data-val-required="@Resources.Language.ErrorIsRrequired"
+                            data-id="Id" data-name="Description" name="Description" data-native="false"></select>
+                    @*@Html.ValidationMessageFor(model => model.PrefixId)*@
+                </div>
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelRateType</label>
+                    <input type="text" id="inputRateType" disabled="disabled" class="rightAlign" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelRate</label>
+                    <input type="text" id="inputRate" disabled="disabled" class="rightAlign" />
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listSurcharges" class="uif-listview"></div>
+            <br />
+            <div class="uif-col-14">
+                <span>@Resources.Language.LabelTotal @Resources.Language.LabelSurcharge: <b id="surchagesTotal"></b></span>
+            </div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewSurcharge">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAcceptSurcharge">@Resources.Language.Add </button>
+            </div>
+        </div>
+    </div>
+</form>
+

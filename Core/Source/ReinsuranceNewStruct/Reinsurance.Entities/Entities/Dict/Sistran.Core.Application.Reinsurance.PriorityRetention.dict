@@ -1,0 +1,22 @@
+<map version="2.0" type="class" name="PriorityRetention" namespace="Sistran.Core.Application.Reinsurance" file-version="1.0" description="PRIORITY_RETENTION_ENTITY">
+  <properties>
+    <property name="PriorityRetentionId" type="Integer" key="true" description="PRIORITY_RETENTION_ID_PROPERTY" nullable="false" autonumber="Identity"/>
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="ValidityFrom" type="DateTime" description="VALIDITY_FROM_PROPERTY" />
+    <property name="ValidityTo" type="DateTime" description="VALIDITY_TO_PROPERTY" />
+    <property name="PriorityRetentionAmount" type="Decimal" precision="18" scale="2" description="PRIORITY_RETENTION_AMOUNT_PROPERTY" />
+    <property name="Enabled" type="Boolean" description="ENABLED_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PRIORITY_RETENTION" schema="REINS" alias="PRIORITY_RETENTION" update="true">
+      <columns>
+        <column name="PRIORITY_RETENTION_ID" type="Int32" key="true" property="PriorityRetentionId" allowNull="false" identity ="true"/>
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" allowNull="false" />
+        <column name="VALIDITY_FROM" type="DateTime" property="ValidityFrom" allowNull="false" />
+        <column name="VALIDITY_TO" type="DateTime" property="ValidityTo" allowNull="false" />
+        <column name="PRIORITY_RETENTION_AMT" type="Decimal" property="PriorityRetentionAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="ENABLED" type="Boolean" property="Enabled" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

@@ -1,0 +1,284 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @Global.ReinsureClaims;
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.ReinsuranceManual</li>
+        <li>@Global.ReinsureClaims</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0434"))
+        {
+            <button id="btnReinsureClaim" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-repeat"></span> @Global.ReinsureClaim
+            </button>
+        }
+        @*BOTON DE AJUSTE/MODIFICACION*@
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0426"))
+        {
+            <button id="btnLoadReinsClaims" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-upload"></span> @Global.Adjustment
+            </button>
+        }
+        @*BOTON DE GRABAR REASEGURO*@
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0431"))
+        {
+            <button id="btnRecordReinsure" class="btn btn-primary">
+                <span class="glyphicon glyphicon-floppy-saved"></span> @Global.RecordReinsurance
+            </button>
+        }
+    </footer>
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <ul class="uif-tab" id="tabsReinsClaims">
+            <li class="active"><a id="tabGeneralClm" href="#tabGeneral">@Global.SearchLabel</a></li>
+            <li class="disabled">
+                <a id="tabModifyClaimReinsure" href="#tabModificacion">@Global.TitleModificationReinsurance</a>
+            </li>
+        </ul>
+
+        <div class="uif-tab-content">
+            <div id="tabGeneral" class="active">
+                <form id="formSearchClaimsReinsure" class="form">
+                    <div class="uif-row">
+                        <div class="uif-col-2">
+                            <label class="field-required">@Global.Branch</label>
+                            <select class="uif-select form-control"
+                                    id="selectBranch" name="selectBranch"
+                                    data-source='@Url.Content("~/Reinsurance/Process/GetBranch")'
+                                    data-id="Id"
+                                    data-name="Description"
+                                    data-native="true"
+                                    data-val="true"
+                                    data-val-required="@Resources.Language.RequiredField"></select>
+                            <span class="text-danger" data-valmsg-for="selectBranch" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-2">
+                            <label class="field-required">@Global.Prefix</label>
+                            <select class="uif-select form-control"
+                                    id="selectPrefix" name="selectPrefix"
+                                    data-source='@Url.Content("~/Reinsurance/Process/GetPrefix")'
+                                    data-id="Id"
+                                    data-name="Description"
+                                    data-native="true"
+                                    data-val="true"
+                                    data-val-required="@Resources.Language.RequiredField"></select>
+                            <span class="text-danger" data-valmsg-for="selectPrefix" data-valmsg-replace="true"></span>
+
+                        </div>
+                        <div class="uif-col-2">
+                            <label class="field-required">@Global.PolicyNumber</label>
+                            <input type="text"
+                                   id="policyNumber"
+                                   name="policyNumber"
+                                   maxlength="15"
+                                   onkeypress="return JustNumbers(event);"
+                                   data-val="true"
+                                   data-val-required="@Resources.Language.RequiredField" />
+                            <span class="text-danger" data-valmsg-for="policyNumber" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-2">
+                            <label>@Global.Claim</label>
+                            <input type="text" id="claimNumber"
+                                   name="claimNumber"
+                                   maxlength="15"
+                                   onkeypress="return JustNumbers(event);" />
+                        </div>
+                        <div class="uif-col-2">
+                        </div>
+                        <div class="uif-col-2">
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0425"))
+                            {
+                                <button type="button" class="btn btn-primary btn-block" id="searchClaimsReinsure">
+                                    <span class="glyphicon glyphicon-search"></span> @Global.Search
+                                </button>
+                            }
+                        </div>
+                    </div>
+
+                    <table class="uif-table" id="tableClaims" data-selectiontype="single"
+                           data-add="false" data-paginate="false" data-filter="false"
+                           data-title="<b>@Global.Claims</b>">
+                        <thead>
+                            <tr>
+                                <th data-visible="false" data-property="Modifications[0].Coverages[0].Estimations[0].Type.Id">Id</th>
+                                <th data-visible="false" data-property="Modifications[0].Coverages[0].Id">Id</th>
+                                <th data-visible="false" data-property="Branch.Id">Id</th>
+                                <th data-visible="false" data-property="Prefix.Id">Id</th>
+                                <th data-visible="false" data-property="Endorsement.PolicyNumber">Id</th>
+                                <th data-visible="false" data-property="Id">Id</th>
+                                <th data-visible="false" data-property="Modifications[0].Id">Id</th>
+                                <th data-property="Number">@Global.Claim</th>
+                                <th data-property="Modifications[0].Coverages[0].SubClaim">@Global.SubClaim</th>
+                                <th data-property="OccurrenceDate" data-type="date">@Global.ClaimDate</th>
+                                <th data-property="Modifications[0].RegistrationDate" data-type="date">@Global.RegistrationDate</th>
+                                <th data-property="Modifications[0].Coverages[0].Estimations[0].Type.Description">@Global.EstimationType</th>
+                                <th data-property="Modifications[0].Coverages[0].Estimations[0].PaymentAmount" data-type="currency">@Global.EstimationAmount</th>
+                                <th data-property="Modifications[0].Coverages[0].Estimations[0].Version">@Global.LabelVersion</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                    <table class="uif-table" id="tableReinsuranceClaims" data-selectiontype="none"
+                           data-paginate="true" data-filter="false"
+                           data-title="<b>@Global.Reinsurance</b>">
+                        <thead>
+                            <tr>
+                                <th data-property="ReinsuranceNumber">@Global.ReinsuranceNumber</th>
+                                <th data-property="LayerNumber">@Global.LayerNumber</th>
+                                <th data-property="LineDescription">@Global.Line</th>
+                                <th data-property="CumulusKey">@Global.CumulusKey</th>
+                                <th data-property="Contract">@Global.Contract</th>
+                                <th data-property="LevelNumber">@Global.LevelNumber</th>
+                                <th data-property="MovementSource">@Global.MovementSource</th>
+                                <th data-property="TradeName">@Global.ReinsuranceCompany</th>
+                                <th data-property="Amount" data-type="currency">@Global.Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </form>
+            </div>
+
+            <div id="tabModificacion">
+                <div class="uif-col-12">
+                    <table class="uif-table" id="tableModificationReinsuranceClaim"
+                           data-selectiontype="none" data-edit="true" data-paginate="false"
+                           data-filter="false" data-title="<b>@Global.ModificationReinsurance</b>">
+                        <thead>
+                            <tr>
+                                <th data-property="LayerNumber">@Global.LayerNumber</th>
+                                <th data-property="LineId">@Global.LineId</th>
+                                <th data-property="CumulusKey">@Global.CumulusKey</th>
+                                <th data-property="Contract">@Global.Contract</th>
+                                <th data-property="LevelNumber">@Global.LevelNumber</th>
+                                <th data-property="MovementSource">@Global.MovementSource</th>
+                                <th data-property="Amount" data-type="currency">@Global.Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section modals{
+
+    <form id="formReinsClaim" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalModificationReinsuranceLines">
+            <div class="uif-modalbody">
+                @Html.Partial("../Reinsurance/Process/ModificationReinsuranceClaimLineDialog")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0435"))
+                {
+                    <button type="submit" class="btn btn-primary" id="btnReinsClaim">@Global.Save</button>
+                }
+            </div>
+        </div>
+    </form>
+
+    <div class="modal fade" id="modalRecalculateReinsClaim" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.Reinsurance</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.ConfirmMessageRecalculateReinsClaim
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnModalRecalculateReinsClaim">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalLoadReinsClaim" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.ReinsureClaim</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.ConfirmMessageLoadReinsClaim
+                </div>
+                <div class="modal-footer">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0427"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnModalLoadReinsClaim">@Global.Yes</button>
+                    }
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalConfirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.ReinsureClaim</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.ConfirmMessageProcess
+                    <br />
+                </div>
+                <div class="modal-footer">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0429"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnConfirmYes">@Global.Yes</button>
+                    }
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalRecordConfirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.RecordReinsurance</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.ConfirmMessageSaveReinsurance
+                    <br />
+                </div>
+                <div class="modal-footer">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0432"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnConfirmRecordYes">@Global.Yes</button>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0433"))
+                    {
+                        <button type="button" class="btn btn-default" id="btnConfirmRecordNo" data-dismiss="modal">@Global.No</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    @Scripts.Render("~/reinsurance/bundles/ReinsureClaims")
+}

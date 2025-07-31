@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PrefixComponentCollection">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PrefixComponentCollectionCode">
+          <Column table-alias="PrefixComponentCollection" name="PrefixComponentCollectionCode" />
+        </SelectValue>
+        <SelectValue alias="ComponentCollectionCode">
+          <Column table-alias="PrefixComponentCollection" name="ComponentCollectionCode" />
+        </SelectValue>
+        <SelectValue alias="LineBusinessCode">
+          <Column table-alias="PrefixComponentCollection" name="LineBusinessCode" />
+        </SelectValue>
+        <SelectValue alias="SubLineBusinessCode">
+          <Column table-alias="PrefixComponentCollection" name="SubLineBusinessCode" />
+        </SelectValue>
+        <SelectValue alias="PremiumReceivableTransCode">
+          <Column table-alias="ComponentCollection" name="PremiumReceivableTransCode" />
+        </SelectValue>
+        <SelectValue alias="ComponentId">
+          <Column table-alias="ComponentCollection" name="ComponentId" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PrefixComponentCollection, Core.Accounting.Entities" alias="PrefixComponentCollection" />
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.ComponentCollection, Core.Accounting.Entities" alias="ComponentCollection" />
+
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="PrefixComponentCollection" name="ComponentCollectionCode" />
+              <Column table-alias="ComponentCollection" name="ComponentCollectionCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

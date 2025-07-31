@@ -1,0 +1,165 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.PaymentPlanViewModel
+@{
+    Layout = null;
+}
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column-70">
+        @Resources.Language.LabelPaymentPlans
+    </div>   
+    <div class="column-30 even">
+        @Html.TextBox("PaymenPlanSearch", null, new { @class = "uif-input-search", id = "inputPaymenPlanSearch", placeholder = Resources.Language.FindPaymentPlan })
+       
+    </div>
+</script>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>       
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnCreatePaymentPlan">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+<script type="text/template" id="templatePaymentPlan">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div><strong class="success">{{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div><strong class="warning">{{Description}} ({{Id}})</strong></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div><strong class="danger">{{Description}} ({{Id}})</strong></div>
+    {{else}}
+    <div><strong>{{Description}} ({{Id}})</strong></div>
+    {{/ifCond}}
+    <div>{{SmallDescription}}</div>
+    <div>@Resources.Language.NumberQuota: {{Quantity}}</div>
+</script>
+
+<form class="form without-space" id="formPaymentPlan">
+    <input type="hidden" name="Id" id="Id"/>
+    <div>
+        <div class="row">
+            <div class="uif-col-6">
+                <br />
+                <div class="row">
+                    <div class="uif-col-12">
+                        @Html.LabelFor(model => model.Description, new { @class = "field-required" })
+                        @Html.TextBoxFor(model => model.Description)
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-6">
+                        @Html.LabelFor(model => model.SmallDescription, new { @class = "field-required" })
+                        @Html.TextBoxFor(model => model.SmallDescription)
+                        @Html.ValidationMessageFor(model => model.SmallDescription)
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.DateFirstQuota</label>
+                        <select class="uif-select" name="QuotaType" id="QuotaType" data-val-required="true"
+                                data-val="true" data-filter="true" data-native="false"></select>
+                        @Html.ValidationMessage("QuotaType", Resources.Language.FieldRequired)
+                        @Html.HiddenFor(model => model.IsGreaterDate)
+                        @Html.HiddenFor(model => model.IsIssueDate)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-6">
+                        @Html.LabelFor(model => model.FirstPayQuantity)
+                        @Html.TextBoxFor(model => model.FirstPayQuantity)
+                        @Html.ValidationMessageFor(model => model.FirstPayQuantity)
+                    </div>
+                    <div class="uif-col-6">
+                        @Html.LabelFor(model => model.LastPayQuantity)
+                        @Html.TextBoxFor(model => model.LastPayQuantity)
+                        @Html.ValidationMessageFor(model => model.LastPayQuantity)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.UnitTime</label>
+                        <select class="uif-select" id="GapUnit" name="GapUnit" data-val-required="true" data-val="true"
+                                data-filter="true" data-native="false"></select>   
+                        @Html.ValidationMessageFor(model => model.GapUnit, Resources.Language.FieldRequired)
+                    </div>
+                    <div class="uif-col-6">
+                        @Html.LabelFor(model => model.Quantity, new { @class = "field-required" })
+                        @Html.TextBoxFor(model => model.Quantity, new { })
+                        @Html.ValidationMessageFor(model => model.Quantity)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="without-label">
+                        <input type="checkbox" id="Financing" />
+                        <label for="Financing">Financiacion</label>
+                        @Html.HiddenFor(model => model.Financing)
+                    </div>
+          
+                </div>
+                <div class="row">
+                   
+                    <div class="uif-col-6">
+                        <button type="button" class="btn btn-default secondary-Colombia" id="btnShowQuotas">@Resources.Language.DistributionQuotasPlan</button>
+                    </div>
+                </div>
+                <br />
+                <input type="hidden" name="Quotas" id="Quotas" />
+                @*<select style="visibility:hidden" id="ComponentType" name="ComponentType"
+                        data-filter="true" data-native="false"></select>*@
+
+                @*<select name="nombre" style="visibility:hidden">
+                    contenido
+                </select>*@
+
+
+
+            </div>
+            <div class="uif-col-6 fit-col-secondary">
+                <div id="listPaymentPlan" class="uif-listview"></div>
+            </div>
+        </div>
+        <div class="row lineDividing">
+            <div class="uif-col-6 center-col-right">
+                <div class="pull-right width-save">
+                    <button type="button" class="btn btn-default" id="btnNewPaymentPlan">
+                        @Resources.Language.NewForm
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnAddPaymentPlan">
+                        @Resources.Language.AddForm
+                    </button>
+                </div>
+            </div>
+            <div class="uif-col-6" id="summaryAgent">
+                <div class="uif-summary">
+                    <div class="items">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@*Modales*@
+<div class="uif-modal" id="modalDistributionQuota">
+    <div class="uif-modalbody">
+        @Html.Partial("DistributionQuota")
+    </div>
+    <div id="buttonsClauses" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnDistributionQuotaClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnDistributionQuotaAccept">@Resources.Language.ButtonSave</button>
+    </div>
+</div>

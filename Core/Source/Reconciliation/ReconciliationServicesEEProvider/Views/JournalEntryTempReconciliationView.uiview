@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="JournalEntryTempReconciliationView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="ReconciliationCode">
+          <Column table-alias="TempReconciliation" name="ReconciliationCode" />
+        </SelectValue>
+        <SelectValue alias="BankStatementCode">
+          <Column table-alias="JournalEntryItem" name="JournalEntryItemId" />
+        </SelectValue>
+        <SelectValue alias="BankReconciliationCode">
+          <Column table-alias="JournalEntryItem" name="BankReconciliationId" />
+        </SelectValue>
+        <SelectValue alias="ShortDescription">
+          <Column table-alias="BankReconciliation" name="ShortDescription" />
+        </SelectValue>
+        <SelectValue alias="VoucherNumber">
+          <Column table-alias="JournalEntry" name="TransactionNumber" />
+        </SelectValue>
+        <SelectValue alias="MovementDate">
+          <Column table-alias="JournalEntry" name="Date" />
+        </SelectValue>
+        <SelectValue alias="LocalAmount">
+          <Column table-alias="JournalEntryItem" name="AmountLocalValue" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="JournalEntryItem" name="Description" />
+        </SelectValue>
+        <SelectValue alias="SourceBranchCode">
+          <Column table-alias="JournalEntry" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <Join>
+                <ClassNameTable name="Sistran.Core.Application.GeneralLedgerServices.Provider.Entities.JournalEntryItem, Core.GeneralLedgerServices.Provider" alias="JournalEntryItem" />
+                <ClassNameTable name="Sistran.Core.Application.GeneralLedgerServices.Provider.Entities.JournalEntry, Core.GeneralLedgerServices.Provider" alias="JournalEntry" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="JournalEntry" name="JournalEntryId" />
+                    <Column table-alias="JournalEntryItem" name="JournalEntryId" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.ReconciliationServices.EEProvider.Entities.TempReconciliation, Core.ReconciliationServices.EEProvider" alias="TempReconciliation" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="TempReconciliation" name="JournalEntryCode" />
+                  <Column table-alias="JournalEntryItem" name="JournalEntryId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedgerServices.Provider.Entities.BankReconciliation, Core.GeneralLedgerServices.Provider" alias="BankReconciliation" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="BankReconciliation" name="BankReconciliationId" />
+                <Column table-alias="JournalEntryItem" name="BankReconciliationId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Branch" name="BranchCode" />
+              <Column table-alias="JournalEntry" name="BranchCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

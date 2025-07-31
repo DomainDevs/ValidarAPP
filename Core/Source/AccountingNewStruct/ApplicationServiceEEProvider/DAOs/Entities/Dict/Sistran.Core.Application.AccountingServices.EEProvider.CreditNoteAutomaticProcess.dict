@@ -1,0 +1,46 @@
+<map version="2.0" type="class" name="CreditNoteAutomaticProcessView" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="GET_CREDIT_NOTE_AUTOMATIC_PROCESS_ENTITY">
+  <properties>
+    <property name="InsuredIndividualId" type="Integer" nullable="true" description="INSURED_INDIVIDUAL_ID_PROPERTY" />
+    <property name="PolicyId" type="Integer" key="true" description="POLICY_ID_PROPERTY" />
+    <property name="PolicyDocumentNumber" type="Decimal" precision="12" scale="5" description="POLICY_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="EndorsementId" type="Integer" description="ENDORSEMENT_ID_PROPERTY" />
+    <property name="EndorsementDocumentNumber" type="Integer" description="ENDORSEMENT_DOCUMENT_NUMBER_PROPERTY" />
+    <property name="Quota" type="Integer" description="QUOTA_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" description="AMOUNT_PROPERTY" />
+    <property name="PaymentAmount" type="Decimal" precision="38" scale="2" nullable="true" description="PAYMENT_AMOUNT_PROPERTY" />
+    <property name="EndoTypeCode" type="Integer" description="ENDO_TYPE_CODE_PROPERTY" />
+    <property name="EndorsementTypeDescription" type="String" size="50" description="ENDORSEMENT_TYPE_DESCRIPTION_PROPERTY" />
+    <property name="PaymentExpirationDate" type="DateTime" description="PAYMENT_EXPIRATION_DATE_PROPERTY" />
+    <property name="BusinessTypeCode" type="Integer" description="BUSINESS_TYPE_CODE_PROPERTY" />
+    <property name="BussinessTypeDescription" type="String" size="30" nullable="true" description="BUSSINESS_TYPE_DESCRIPTION_PROPERTY" />
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="PrefixCode" type="Integer" description="PREFIX_CODE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+    <property name="ExchangeRate" type="Decimal" precision="10" scale="6" description="EXCHANGE_RATE_PROPERTY" />
+    <property name="PayerIndividualId" type="Integer" description="PAYER_INDIVIDUAL_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="GET_CREDIT_NOTE_AUTOMATIC_PROCESS" schema="ACC" alias="GET_CREDIT_NOTE_AUTOMATIC_PROCESS" update="true">
+      <columns>
+        <column name="INSURED_INDIVIDUAL_ID" type="Int32" property="InsuredIndividualId" />
+        <column name="POLICY_ID" type="Int32" property="PolicyId" key="true" />
+        <column name="POLICY_DOCUMENT_NUMBER" type="Decimal" property="PolicyDocumentNumber" allowNull="false" size="19" precision="12" />
+        <column name="ENDORSEMENT_ID" type="Int32" property="EndorsementId" allowNull="false" />
+        <column name="ENDORSEMENT_DOCUMENT_NUMBER" type="Int32" property="EndorsementDocumentNumber" allowNull="false" />
+        <column name="QUOTA" type="Byte" property="Quota" allowNull="false" />
+        <column name="AMOUNT" type="Decimal" property="Amount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="PAYMENT_AMOUNT" type="Decimal" property="PaymentAmount" size="19" precision="38" scale="2" />
+        <column name="ENDO_TYPE_CD" type="Int16" property="EndoTypeCode" allowNull="false" />
+        <column name="ENDORSEMENT_TYPE_DESCRIPTION" type="String" property="EndorsementTypeDescription" allowNull="false" size="50" />
+        <column name="PAYMENT_EXPIRATION_DATE" type="DateTime" property="PaymentExpirationDate" allowNull="false" />
+        <column name="BUSINESS_TYPE_CD" type="Byte" property="BusinessTypeCode" allowNull="false" />
+        <column name="BUSSINESS_TYPE_DESCRIPTION" type="String" property="BussinessTypeDescription" size="30" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" allowNull="false" />
+        <column name="PREFIX_CD" type="Int16" property="PrefixCode" allowNull="false" />
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" allowNull="false" />
+        <column name="EXCHANGE_RATE" type="Decimal" property="ExchangeRate" allowNull="false" size="19" precision="10" scale="6" />
+        <column name="PAYER_INDIVIDUAL_ID" type="Int32" property="PayerIndividualId" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

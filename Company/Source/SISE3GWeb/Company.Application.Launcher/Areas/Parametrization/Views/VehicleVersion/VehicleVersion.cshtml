@@ -1,0 +1,200 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.VehicleVersionViewModel
+@{
+    Layout = null;
+}
+
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div class="column column-70">
+        @Resources.Language.VehicleVersion
+    </div>
+    <div class="column column-30">
+        @Html.TextBox("inputVehicleVersion", null, new { @class = "uif-input-search", id = "inputVehicleVersion", @placeholder = @Resources.Language.SearchVersion })
+        <button class="btn background-dark" id="btnAdvSearch"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+<form class="form without-space" id="formVehicleVersion">
+    <div class="uif-row fit-col-main">
+        <div class="uif-col-3">
+
+            <label class="field-required">@Resources.Language.Make</label>
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="VehicleMakeServiceQueryModel" name="VehicleMakeServiceQueryModel"
+                    data-source='@Url.Content("~/Parametrization/VehicleVersion/GetMakes")'
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentControlMake"></select>
+            <span class="text-danger" data-valmsg-for="VehicleMakeServiceQueryModel" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.Model</label>
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="VehicleModelServiceQueryModel" name="VehicleModelServiceQueryModel"
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentControlModel"></select>
+            <span class="text-danger" data-valmsg-for="VehicleModelServiceQueryModel" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.CodeVersion</label>
+            @Html.TextBoxFor(model => model.Id, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.NameVersion</label>
+            @Html.TextBoxFor(model => model.Description, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.EngineQuantity</label>
+            @Html.TextBoxFor(model => model.EngineQuantity, htmlAttributes: new { @class = "form-control rightAlign" })
+            @Html.ValidationMessageFor(model => model.EngineQuantity)
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.HorsePower</label>
+            @Html.TextBoxFor(model => model.HorsePower, htmlAttributes: new { @class = "form-control rightAlign" })
+            @Html.ValidationMessageFor(model => model.HorsePower)
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.Weight</label>
+            @Html.TextBoxFor(model => model.Weight, htmlAttributes: new { @class = "form-control rightAlign" })
+            @Html.ValidationMessageFor(model => model.Weight)
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.TonsQuantity</label>
+            @Html.TextBoxFor(model => model.TonsQuantity, htmlAttributes: new { @class = "form-control rightAlign" })
+            @Html.ValidationMessageFor(model => model.TonsQuantity)
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.PassengerQuantity</label>
+            @Html.TextBoxFor(model => model.PassengerQuantity, htmlAttributes: new { @class = "form-control rightAlign" })
+            @Html.ValidationMessageFor(model => model.PassengerQuantity)
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.FuelType</label>
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="VehicleFuelServiceQueryModel" name="VehicleFuelServiceQueryModel"
+                    data-source='@Url.Content("~/Parametrization/VehicleVersion/GetFuelType")'
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentControlFuelType"></select>
+            @Html.ValidationMessageFor(model => model.VehicleFuelServiceQueryModel)
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.Body</label>
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="VehicleBodyServiceQueryModel" name="VehicleBodyServiceQueryModel"
+                    data-source='@Url.Content("~/Parametrization/VehicleVersion/GetBody")'
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.Language.ErrorSelectBody"></select>
+            <span class="text-danger" data-valmsg-for="VehicleBodyServiceQueryModel" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.VehicleType</label>
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="VehicleTypeServiceQueryModel" name="VehicleTypeServiceQueryModel"
+                    data-source='@Url.Content("~/Parametrization/VehicleVersion/GetTypeVehicle")'
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentControlVehicleType"></select>
+            <span class="text-danger" data-valmsg-for="VehicleTypeServiceQueryModel" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.TransmissionType</label>
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="VehicleTransmissionTypeServiceQueryModel" name="VehicleTransmissionTypeServiceQueryModel"
+                    data-source='@Url.Content("~/Parametrization/VehicleVersion/GetTransmissionType")'
+                    data-id="Id" data-name="Description"
+                    data-val="true"></select>
+            <span class="text-danger" data-valmsg-for="VehicleTransmissionTypeServiceQueryModel" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.TopSpeed</label>
+            @Html.TextBoxFor(model => model.MaxSpeedQuantity, htmlAttributes: new { @class = "form-control rightAlign" })
+            @Html.ValidationMessageFor(model => model.MaxSpeedQuantity)
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.DoorQuantity</label>
+            @Html.TextBoxFor(model => model.DoorQuantity, htmlAttributes: new { @class = "form-control rightAlign" })
+            @Html.ValidationMessageFor(model => model.DoorQuantity)
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.Price</label>
+            @Html.TextBoxFor(model => model.Price, htmlAttributes: new { @class = "form-control rightAlign" })
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.Currency</label>
+            <select data-filter="true" data-native="false" class="uif-select form-control" id="Currency" name="Currency"
+                    data-source='@Url.Content("~/Parametrization/VehicleVersion/GetCurrency")'
+                    data-id="Id" data-name="Description"
+                    data-val="true"
+                    data-val-required="@Resources.Language.ErrorSelectCurrency"></select>
+            <span class="text-danger" data-valmsg-for="Currency" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-2">
+            <label>@string.Empty</label>
+            <div class="row-space-adjusted">
+                <input type="checkbox" id="IsImported" name="IsImported" />
+                @Html.LabelFor(model => model.IsImported, htmlAttributes: new { @class = "control-label" })
+            </div>
+        </div>
+        <div class="uif-col-2">
+            <label>@string.Empty</label>
+            <div class="row-space-adjusted">
+                <input type="checkbox" id="LastModel" name="LastModel" />
+                @Html.LabelFor(model => model.LastModel, htmlAttributes: new { @class = "control-label" })
+            </div>
+        </div>   
+    </div>
+</form>
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" id="ExitVehicleVersion">
+            <i class="fa fa-times"></i> @Resources.Language.ButtonExit
+        </button>
+        <button type="button" class="btn btn-default" id="DeleteVehicleVersion">
+            <i class="fa fa-trash"></i> @Resources.Language.Delete
+        </button>
+        <button type="button" class="btn btn-default" id="AddNewVehicleVersion">
+            <i class="fa fa-plus"></i> @Resources.Language.New
+        </button>
+        <button type="button" class="btn btn-default" id="ExcelVehicleVersion">
+            <i class="fa fa-cloud-download"></i> @Resources.Language.ButtonExport
+        </button>
+        <button type="button" class="btn btn-primary" id="SaveVehicleVersion">
+            <i class="fa fa-floppy-o"></i> @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+@*Modales*@
+<div class="uif-modal" id="VehicleVersionConfirmationModal">
+    <div class="uif-modalbody">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                @Resources.Language.ConfirmSaveModal
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Cancel</button>
+        <button type="submit" class="btn btn-primary" id="VehicleVersionConfirmationAccept">@Resources.Language.Yes</button>
+    </div>
+</div>
+<div class="uif-modal" id="VehicleVersionConfirmationDeleteModal">
+    <div class="uif-modalbody">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                @Resources.Language.ConfirmDelete
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Cancel</button>
+        <button type="submit" class="btn btn-primary" id="VehicleVersionAcceptDelete">@Resources.Language.Yes</button>
+    </div>
+</div>

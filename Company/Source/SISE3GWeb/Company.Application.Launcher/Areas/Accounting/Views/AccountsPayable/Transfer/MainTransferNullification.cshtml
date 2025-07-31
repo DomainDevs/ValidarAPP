@@ -1,0 +1,161 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.Annulment;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------*@
+@*																		 CODIGO HTML																		*@
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.TransfBankAnnulment</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="CancelCancellation">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="Annular" class="btn btn-primary" role="button">
+            <i class="fa fa-check"></i>  @Global.Accept
+        </button>
+    </footer>
+}
+
+<form id="TransferCancellationForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.IssuingAccountNumber</label>
+            @Html.TextBox("issuingAcountNumberCancellation", "", new
+            {
+                id = "issuingAcountNumberCancellation",
+                maxlength = "13",
+                onkeypress = " return JustNumbers(event, this); ",
+                @class = "uif-autocomplete",
+                data_source = @Url.Content("~/Accounting/Common/SearchAccountBank"),
+                data_displaykey = "AccountNumber",
+                placeholder = @Global.EnterNumberAccount,
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="issuingAcountNumberCancellation" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.IssuingBankAccountName</label>
+            <br />
+            @Html.TextBox("issuingBankAccountNameCancellation", "", new
+            {
+                id = "issuingBankAccountNameCancellation",
+                maxlength = "100",
+                @class = "uif-autocomplete",
+                data_source = @Url.Content("~/Accounting/Common/SearchAccountBank"),
+                data_displaykey = "LongDescription",
+                placeholder = @Global.EnterAccounName,
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="issuingBankAccountNameCancellation" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Currency</label>
+            <br />
+            @Html.TextBox("CurrencyCancellation", "", new
+                    {
+                        id = "CurrencyCancellation",
+                        disabled = "disabled",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+            <span class="text-danger" data-valmsg-for="CurrencyCancellation" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+<div class="uif-row">
+    <div class="uif-col-3">
+        <label>@Global.CancellationDate</label>
+        <br />
+        @Html.TextBox("CancellationDate", "", new
+                {
+                    id = "CancellationDate",
+                    disabled = "disabled",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+        <span class="text-danger" data-valmsg-for="CancellationDate" data-valmsg-replace="true" />
+    </div>
+    <div class="uif-col-6">
+        <label>@Global.FileRejection</label>
+        <form id="FileCancellationPath" method="post" enctype="multipart/form-data" target="iframeUpload">
+            <input type="file" id="inputControlSingle" class="uif-inputfile"
+                   data-input="true">
+        </form>
+    </div>
+    <div class="uif-col-3">
+        <label>@Global.TotalSelected</label>
+        <br />
+        @Html.TextBox("TotalAmountTransferCancellation", "", new
+                {
+                    id = "TotalAmountTransferCancellation",
+                    disabled = "disabled"
+                })
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- BOTONES -->
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="form-footer">
+            <button id="CleanCancellation" class="btn btn-default" role="button">
+                <i class="fa fa-paint-brush"></i>   @Global.Clean
+            </button>
+            <button id="UpLoadFile" class="btn btn-primary" role="button">
+                <i class="fa fa-upload"></i>   @Global.UploadFile
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--TABLA-->
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="TransferCancellation" data-exporttocsv="false" data-add="false" data-edit="false"
+               data-delete="false" data-filter="true" data-selectiontype="multiple"
+               data-source="" data-paginate="true" data-title="@Global.AccountBankConsult">
+            <thead>
+                <tr>
+                    <th data-property="PaymentOrderCode">@Global.PaymentOrderNumber</th>
+                    <th data-property="BeneficiaryName">@Global.Beneficiary</th>
+                    <th data-property="CancellationDate">@Global.CancellationDate</th>
+                    <th data-property="BankName">@Global.BankName</th>
+                    <th data-property="BankAccountNumber">@Global.BankAccountNumber</th>
+                    <th data-property="Amount">@Global.Amount</th>
+                    <th data-property="Status" data-visible="false">Status</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainTransferNullification")
+}

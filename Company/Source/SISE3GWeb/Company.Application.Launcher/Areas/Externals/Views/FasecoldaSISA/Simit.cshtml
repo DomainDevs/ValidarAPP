@@ -1,0 +1,85 @@
+﻿@*@model Sistran.Core.Framework.UIF.Web.Areas.Externals.Models.QuerySISAViewModel*@
+
+@section Title
+{
+    <div id="" class="row main-title">
+        <div id="tittle" class="column-70">
+            @Resources.Language.TitleSIMITQuery
+        </div>
+    </div>
+}
+
+<form id="formFasecolda" autocomplete="off" class="form form-space-adjusted">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="row row-space-adjusted"></div>
+            <div class="row row-space-adjusted">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDocumentNumber</label>
+                    @Html.TextBox("lblDocNumberSimit", null, new { id = "inputDocNumberSimit", placeholder = @Resources.Language.LabelDocumentNumber })
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelTypeDocument</label>
+                    <select class="uif-select form-control" id="selectDocTypeSimit" data-id="Id" data-name="Description"
+                            name="InfringementGroupCode" data-val="false" data-val-required="@Resources.Language.ErrorDocument"
+                            data-filter="true" data-native="false"></select>
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelCodValid</label>
+                    @Html.TextBox("txtName2", null, new { id = "inputVerificationCodeSimit", placeholder = @Resources.Language.LabelCodValid })
+                </div>
+                <div class="uif-col-6">
+                    <div class="form-group" style="text-align:center"></div>
+                    <div class="form-group" style="text-align:center">
+                        <img style="height:30px; width:110px; padding-right:5px;" src="@Url.Content("~/Account/Captcha")" alt="Image" id="captchaImageSIMIT" />
+                        <input type="button" class="btn btn-primary" id="btnReloadCaptchaSIMIT">
+                    </div>
+                </div>
+                <div class="uif-col-6">
+                    <div class="form-group" style="text-align:center"></div>
+                    <button type="button" class="btn btn-primary" id="btnSearchSIMIT" disabled>
+                        @Resources.Language.search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="resultDiv" class="uif-row" style="display:none">
+        <div class="uif-col-12">
+            <div class="active">
+                <table class="uif-table" data-title="" data-selectiontype="none" id="tableSIMITResults" data-filter="false" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="InfringementCode">@Resources.Language.LabelNumeral</th>
+                            <th data-property="PenaltyDate" data-type="date">@Resources.Language.LabelDate</th>
+                            <th data-property="Name">@Resources.Language.LabelName</th>
+                            <th data-property="Number">@Resources.Language.LabelCode</th>
+                            <th data-property="Value">@Resources.Language.Value</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button type="button" class="btn btn-default" id="btnExitSISA">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExit
+                </span>
+            </button>
+        </div>
+    </footer>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/FasecoldaSIMIT")
+}

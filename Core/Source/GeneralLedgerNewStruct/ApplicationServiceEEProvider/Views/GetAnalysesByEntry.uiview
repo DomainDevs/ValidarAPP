@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="GetAnalysesByEntry">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="AnalysisEntryItemId">
+          <Column table-alias="AnalysisEntryItem" name="AnalysisEntryItemId" />
+        </SelectValue>
+        <SelectValue alias="AnalysisId">
+          <Column table-alias="AnalysisEntryItem" name="AnalysisId" />
+        </SelectValue>
+        <SelectValue alias="AnalysisDescription">
+          <Column table-alias="Analysis" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AnalysisConceptId">
+          <Column table-alias="AnalysisEntryItem" name="AnalysisConceptId" />
+        </SelectValue>
+        <SelectValue alias="AnalysisConceptDescription">
+          <Column table-alias="AnalysisConcept" name="Description" />
+        </SelectValue>
+        <SelectValue alias="EntryItemId">
+          <Column table-alias="AnalysisEntryItem" name="EntryItemId" />
+        </SelectValue>
+        <SelectValue alias="ConceptKey">
+          <Column table-alias="AnalysisEntryItem" name="ConceptKey" />
+        </SelectValue>
+        <SelectValue alias="EntryAnalysisDescription">
+          <Column table-alias="AnalysisEntryItem" name="Description" />
+        </SelectValue>
+        <SelectValue alias="IsJournalEntry">
+          <Column table-alias="AnalysisEntryItem" name="IsJournalEntry" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AnalysisEntryItem, Core.GeneralLedger.Entities" alias="AnalysisEntryItem" />
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.Analysis, Core.GeneralLedger.Entities" alias="Analysis" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Analysis" name="AnalysisId" />
+                <Column table-alias="AnalysisEntryItem" name="AnalysisId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AnalysisConcept, Core.GeneralLedger.Entities" alias="AnalysisConcept" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="AnalysisConcept" name="AnalysisConceptId" />
+              <Column table-alias="AnalysisEntryItem" name="AnalysisConceptId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

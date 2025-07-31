@@ -1,0 +1,66 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.AuthorizationPolicies.Models.GroupPoliciesModelView
+@{
+    Layout = null;
+}
+@* Temaplte de busqueda en listView search *@
+<script id="searchTemplate" type="text/template">
+    <div><b>{{Description}}</b></div>
+    <div>@Resources.Language.LabelModule <b>{{Module.Description}}</b> - @Resources.Language.LabelSubmodule <b>{{SubModule.Description}}</b></></div>
+</script>
+
+@* Formulario de busqueda avanzada *@
+<form class="form" id="searchGroupPolicies">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.LabelSearchGroupPolicies</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.LabelGroupPoliciesDescription</label>
+            @Html.TextBoxFor(model => model.Description, new { @Id = "DescriptionGroupPoliciesSearchAdvanzed" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelGroupPoliciesModule</label>
+            <select class="uif-select" name="IdModule" id="IdModuleSearchAdvanzed" data-id="Id" data-name="Description" data-val="true" data-native="false" data-val-required="@Resources.Language.OptionSelect"></select>
+            @Html.ValidationMessageFor(model => model.IdModule)
+        </div>
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelGroupPoliciesSubmodulo</label>
+            <select class="uif-select" name="IdSubModule" id="IdSubModuleSearchAdvanzed" data-id="Id" data-name="Description" data-native="false" data-val="true" data-val-required="@Resources.Language.OptionSelect"></select>
+        </div>
+    </div>
+    <div class="row">        
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelGroupPoliciesBouquet</label>
+            <select class="uif-select" name="IdPrefix" id="IdPrefixSearchAdvanzed" data-id="Id" data-name="Description" data-val="true" data-native="false" data-val-required="@Resources.Language.OptionSelect"></select>
+            @Html.ValidationMessageFor(model => model.IdPrefix)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="without-label">
+                <button class="btn btn-primary-Co width-container" id="btnAdvancedSearchListView" type="button"> @Resources.Language.search</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listviewSearch">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchScriptGroupPolicies" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoadGroupPolicies" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>

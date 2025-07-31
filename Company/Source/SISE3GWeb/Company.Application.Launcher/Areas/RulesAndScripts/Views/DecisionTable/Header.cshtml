@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+
+@*TITULO*@
+<script id="title-template" type="text/template">
+    <div class="column">
+        <div id="Title">@Resources.Language.DecisionTables</div>
+    </div>
+</script>
+@**@
+
+@*FOOTER*@
+<script id="footer-template" type="text/template">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default btn-sm" id="btnBack">
+                    <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                    <span class="" aria-hidden="true">@Resources.Language.ButtonGoBack</span>
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnSaveHead">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</script>
+@**@
+
+@*TEMPLATES*@
+<script id="template-Condition-Action" type="text/template">
+    <div>
+        {{DescriptionFacade}}
+    </div>
+</script>
+@**@
+
+
+<form class="form" id="formRuleBase">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label class="field-required">Nombre de la Tabla</label>
+            <input type="text" id="txtDescriptionRuleBase" name="txtDescriptionRuleBase" required />
+            <span class="field-validation-valid" data-valmsg-for="txtDescriptionRuleBase" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-xs-6">
+            <label class="field-required">@Resources.Language.LabelPackages</label>
+            <select id="ddlPackage"
+                    data-val="true"
+                    data-id="PackageId"
+                    data-name="Description">
+            </select>
+        </div>
+        <div class="uif-col-xs-6">
+            <label class="field-required">@Resources.Language.LabelLevels</label>
+            <select id="ddlLevel"
+                    data-val="true"
+                    data-id="LevelId"
+                    data-name="Description">
+            </select>
+        </div>
+    </div>
+</form>
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <div id="LsvCondition" class="uif-listview">
+        </div>
+    </div>
+
+    <div class="uif-col-6">
+        <div id="LsvAction" class="uif-listview">
+        </div>
+    </div>
+</div>
+
+@* Modales *@
+@{ Html.RenderAction("ModalConceptHeader", "DecisionTable", new { area = "RulesAndScripts" });}
+@**@

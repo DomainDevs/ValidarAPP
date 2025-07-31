@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="uif-modal" id="modalConditionRule">
+    <div class="uif-modalbody">
+        <form class="form" id="formModalConditionRule">
+            <input type="hidden" id="hdnIndexConditionRule" />
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelIf</label>
+                    <select class="uif-select form-control"
+                            id="ddlConceptCondition"
+                            data-filter="true"
+                            data-native="false"
+                            data-id="ConceptIdFacadeId"
+                            data-name="DescriptionFacade" required></select>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelIs</label>
+                    <select class="uif-select form-control"
+                            id="ddlConditionIs"
+                            data-id="Operator"
+                            data-name="Description"
+                            data-native="false" required></select>
+                </div>
+            </div>
+            <div class="uif-row" id="panelConditionComparatorType">
+                <div class="uif-col-12">
+                    <label></label>
+                    <select class="uif-select form-control"
+                            id="ddlConditionComparatorType"
+                            data-id="Id"
+                            data-name="Description"
+                            data-native="false"required></select>
+                </div>
+            </div>
+            <div class="uif-row" id="panelConditionExpression">
+                <div class="uif-col-12" id="panelExpressionText">
+                    <input type="text" class="form-control" id="txtExpressionText" required />
+                </div>
+                <div class="uif-col-12" id="panelExpressionNumber">
+                    <input type="text" class="form-control" id="txtExpressionNumber"  required />
+                </div>
+                <div class="uif-col-12" id="panelExpressionDecimal">
+                    <input class="form-control" id="txtExpressionDecimal" step="0.00001" required />
+                </div>
+                <div class="uif-col-12" id="panelExpressionDate">
+                    <input type="text" class="uif-datepicker" id="txtExpressionDate" required />
+                </div>
+                <div class="uif-col-12" id="panelExpressionList">
+                    <select class="uif-select form-control" data-native="false" id="dllExpressionList" required></select>
+                </div>
+                <div class="uif-col-12" id="panelExpressionSearch">
+                    <input class="uif-input-search" type="text" id="txtExpressionSearch"/>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0617"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSaveConditionRule" disabled>@Resources.Language.ButtonSave</button>
+        }
+
+    </div>
+</div>

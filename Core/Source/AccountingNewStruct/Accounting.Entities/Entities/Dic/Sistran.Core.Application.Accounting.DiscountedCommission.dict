@@ -1,0 +1,34 @@
+<map version="2.0" type="class" name="DiscountedCommission" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="DISCOUNTED_COMMISSION_ENTITY">
+  <properties>
+    <property name="DiscountedCommissionCode" type="Integer" description="DISCOUNTED_COMMISSION_CODE_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="AgentTypeCode" type="Integer" nullable="true" description="AGENT_TYPE_CODE_PROPERTY" />
+    <property name="AgentIndividualId" type="Integer" nullable="true" description="AGENT_INDIVIDUAL_ID_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+    <property name="ExchangeRate" type="Decimal" precision="18" scale="6" nullable="true" description="EXCHANGE_RATE_PROPERTY" />
+    <property name="BaseIncomeAmount" type="Decimal" precision="18" scale="2" nullable="true" description="BASE_INCOME_AMOUNT_PROPERTY" />
+    <property name="BaseAmount" type="Decimal" precision="18" scale="2" nullable="true" description="BASE_AMOUNT_PROPERTY" />
+    <property name="CommissionPercentage" type="Decimal" precision="18" scale="2" nullable="true" description="COMMISSION_PERCENTAGE_PROPERTY" />
+    <property name="CommissionType" type="Integer" nullable="true" description="COMMISSION_TYPE_PROPERTY" />
+    <property name="CommissionDiscountIncomeAmount" type="Decimal" precision="18" scale="2" nullable="true" description="COMMISSION_DISCOUNT_INCOME_AMOUNT_PROPERTY" />
+    <property name="CommissionDiscountAmount" type="Decimal" precision="18" scale="2" nullable="true" description="COMMISSION_DISCOUNT_AMOUNT_PROPERTY" />
+    <property name="PremiumReceivableTransCode" type="Integer" nullable="true" description="PREMIUM_RECEIVABLE_TRANS_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="DISCOUNTED_COMMISSION" schema="ACC" alias="DISCOUNTED_COMMISSION" update="true">
+      <columns>
+        <column name="DISCOUNTED_COMMISSION_CD" type="Int32" property="DiscountedCommissionCode" allowNull="false" identity ="true" />
+        <column name="AGENT_TYPE_CD" type="Int32" property="AgentTypeCode" />
+        <column name="AGENT_INDIVIDUAL_ID" type="Int32" property="AgentIndividualId" />
+        <column name="CURRENCY_CD" type="Int32" property="CurrencyCode" />
+        <column name="EXCHANGE_RATE" type="Decimal" property="ExchangeRate" size="19" precision="18" scale="6" />
+        <column name="BASE_INCOME_AMOUNT" type="Decimal" property="BaseIncomeAmount" size="19" precision="18" scale="2" />
+        <column name="BASE_AMOUNT" type="Decimal" property="BaseAmount" size="19" precision="18" scale="2" />
+        <column name="COMMISSION_PERCENTAGE" type="Decimal" property="CommissionPercentage" size="19" precision="18" scale="2" />
+        <column name="COMMISSION_TYPE" type="Int32" property="CommissionType" />
+        <column name="COMMISSION_DISCOUNT_INCOME_AMOUNT" type="Decimal" property="CommissionDiscountIncomeAmount" size="19" precision="18" scale="2" />
+        <column name="COMMISSION_DISCOUNT_AMOUNT" type="Decimal" property="CommissionDiscountAmount" size="19" precision="18" scale="2" />
+        <column name="PREMIUM_RECEIVABLE_TRANS_CD" type="Int32" property="PremiumReceivableTransCode" />
+      </columns>
+    </table>
+  </tables>
+</map>

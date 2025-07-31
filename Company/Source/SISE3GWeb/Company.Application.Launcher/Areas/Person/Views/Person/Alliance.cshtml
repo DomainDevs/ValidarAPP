@@ -1,0 +1,62 @@
+﻿
+<script id="AllianceTemplate" type="text/template">
+    <div>{{AgencyDescription}}</div>
+    {{#ifCond Status "==" 2}}
+        <div><strong class="success">{{AllianceDescription}}</strong></div>
+    {{else ifCond Status "==" 3}}
+        <div><strong class="warning">{{AllianceDescription}}</strong></div>
+    {{else}}
+        <div><strong>{{AllianceDescription}}</strong></div>
+    {{/ifCond}}
+    <div>{{ImpressionDescription}}</div>
+</script>
+<form id="formAlliance" class="form modal-Colombia">
+    <div class="uif-alert" id="alert"></div>
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row row-space-adjusted">
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.Agency</label>
+                    <select class="uif-select form-control" id="selectAcency" data-id="Id" data-name="FullName"
+                            name="Id" data-val="true" data-val-required="@Resources.LanguagePerson.ErrorDocument"></select>
+                    @*@Html.ValidationMessageFor(model => model.AgencyAgencyId)*@
+                </div>
+            </div>
+            <div class="row row-space-adjusted">
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.LabelAllied</label>
+                    <select class="uif-select form-control" id="selectAlliance" data-id="AlliedCode" data-name="Description"
+                            name="AllianceId" data-val="true" data-val-required="@Resources.LanguagePerson.ErrorDocument"></select>
+                    @*@Html.ValidationMessageFor(model => model.AllianceId)*@
+                </div>
+                <div class="uif-col-6">
+                    <input type="checkbox" id="chkIsSpecialImpression" name="IsSpecialImpression" />
+                    <label for="chkIsSpecialImpression">@Resources.LanguagePerson.LabelSpecialImpression</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listAlliance" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnNewAlliance">
+                    <span class="" aria-hidden="true"></span>
+                        @Resources.LanguagePerson.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAddAlliance">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.LanguagePerson.AddForm
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

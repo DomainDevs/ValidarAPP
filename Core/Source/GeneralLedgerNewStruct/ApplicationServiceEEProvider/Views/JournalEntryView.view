@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="JournalEntryView">
+  <collections>
+    <collection name="JournalEntry" type="Sistran.Core.Application.GeneralLedger.Entities.JournalEntry, 
+                Core.GeneralLedger.Entities"></collection>
+    <collection name="JournalEntryItem" type="Sistran.Core.Application.GeneralLedger.Entities.JournalEntryItem, 
+                Core.GeneralLedger.Entities"></collection>
+    <collection name="AccountingAccount" type="Sistran.Core.Application.GeneralLedger.Entities.AccountingAccount, 
+                Core.GeneralLedger.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="JournalEntry" destination="JournalEntryItem" name="JournalEntryJournalEntryItem" type="Inner">
+      <property left="JournalEntryId" type="Equal" right="JournalEntryId"></property>
+    </relation>
+    <relation source="JournalEntryItem" destination="AccountingAccount" name="JournalEntryItemAccountingAccount" type="Inner">
+      <property left="AccountingAccountId" type="Equal" right="AccountingAccountId"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,93 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="display-template-PoliciesAuthorization" type="text/template">
+    {{#if Required}}
+    <div style="background: red; width: 5px; height: 100%; display: block; float: left; margin-right: 10px;"></div>
+    {{/if}}
+    <div>
+        <div><label><b>{{DescriptionGroup}}-{{DescriptionPolicie}} </b></label></div>
+        <div><label>{{AccountName}}</label></div>
+        <div><label>{{DateRequest}}</label></div>
+        <div><label>Cantidad : {{Count}}</label></div>
+        <div><label>Referencia : {{Key}}</label></div>
+    </div>
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-50">
+        <div id="Title">Autorización de Politicas</div>
+    </div>
+    <div class="column-20 no-padding">
+        <select class="uif-select" id="ddlStatusPolicies" data-val="true" data-id="Id" data-name="Description" data-native="false"></select>
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "txtSearchAuthorization"})
+        <button class="btn btn-default" id="btnSearchAdvPoliciesAut"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="footerAuthorizationPending">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0703"))
+        {
+            <button class="btn btn-default cancel" id="btnPrinting">
+                <i class="fa fa-print" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.LabelPrinter
+            </button>
+        }
+        <button class="btn btn-default cancel" id="btnExport">
+            <i class="fa fa-print" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0701"))
+        {
+            <button class="btn btn-default cancel" id="btnRechazar">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonRejecting
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0704"))
+        {
+            <button class="btn btn-default cancel" id="btnReasignar">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonReassigning
+            </button>
+        }
+
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0699"))
+        {
+            <button type="button" class="btn btn-primary" id="btnAceptar">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonAccept
+            </button>
+        }
+
+    </div>
+    <div id="footerAuthorizationReasign">
+        <button class="btn btn-default cancel" id="btnHistory">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            Historial
+        </button>
+    </div>
+</script>
+
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <div class="uif-listview" id="lsvPoliciesAuthorization"></div>
+    </div>
+    <div class="uif-col-6">
+        <input type="hidden" id="hdnAutorizatioIndex" />
+        @{ Html.RenderAction("AuthorizationPending", "Authorize", new { area = "AuthorizationPolicies" });}
+        @{ Html.RenderAction("AuthorizationAuthorized", "Authorize", new { area = "AuthorizationPolicies" });}
+        @{ Html.RenderAction("AuthorizationRejected", "Authorize", new { area = "AuthorizationPolicies" });}
+        @{ Html.RenderAction("AuthorizationReasign", "Authorize", new { area = "AuthorizationPolicies" });}
+    </div>
+</div>

@@ -1,0 +1,230 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "DatafonoModal";
+}
+
+<script id="datafono-display-template" type="text/template">
+    <div>
+        <strong>{{CardTypeName}}</strong> | @Global.CreditCardNumber: {{CardNumber}} | @Global.Amount: {{Amount}} <br>
+        {{CardsName}}
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number">@Global.TotalLocalCurrency: {{LocalAmount}}</div>
+    </div>
+</script>
+
+<form id="addDatafonoForm" onsubmit="return false" class="form">
+    <div class="main-content">
+        <div class="uif-row">
+            <!--left col-->
+            <div class="uif-col-6">
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Currency</label>
+                        @Html.DropDownList("selectDatafonoCurrency", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="selectDatafonoCardCurrency" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.AmountExchange</label>
+                        <br />
+                        @Html.TextBox("DatafonoExchangeRate", "", new
+                          {
+                              @onkeypress = "return OnlyDecimalNumber(event,this)",
+                              style = "text-align: right;",
+                              required = "",
+                              disabled = "disable",
+                              maxlength ="26"
+                          })
+                        <span class="text-danger" data-valmsg-for="DatafonoExchangeRate" data-valmsg-replace="true" />                        
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Amount</label>
+                        <br />
+                        @Html.TextBox("DatafonoAmount", "", new
+                   {
+                       @onkeypress = "return OnlyDecimalNumber(event,this)",
+                       style = "text-align: right",
+                       data_val = "true",
+                       maxlength = "26",
+                       data_val_required = @Global.RequiredField
+                   })
+                        <span class="text-danger" data-valmsg-for="DatafonoAmount" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.TotalLocalCurrency</label>
+                        <br />
+                        <input type="text" id="DatafonoLocalAmount" disabled="disabled" style="text-align: right" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.Conduit</label>
+                        <br />
+                        @Html.DropDownList("selectDatafonoCreditCardType", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetCreditCardTypes"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="selectDatafonoCreditCardType" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.IssuingBank</label>
+                        <br />
+                        <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value" placeholder='@Global.EnterIssuingBank'
+                               id="inputDatafonoIssuingBank" name="inputDatafonoIssuingBank" data-val="true" data-val-required='@Global.RequiredField'>
+                        <span class="text-danger" data-valmsg-for="inputDatafonoIssuingBank" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.CreditCardNumber</label>
+                        <br />
+                        @Html.TextBox("DatafonoCreditCardNumber", "", new
+                        {
+                            @class = "uif-mask",
+                            data_pattern = "0000000000000000",
+                            maxlength = "16",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="DatafonoCreditCardNumber" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenDatafonoCreditCardNumber" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.AuthorizationNumber</label>
+                        <br />
+                        @Html.TextBox("DatafonoAuthorizationNumber", "", new
+                        {
+                            @class = "uif-mask",
+                            data_pattern = "0000000000",
+                            maxlength = "10",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="DatafonoAuthorizationNumber" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.VoucherNumber</label>
+                        <br />
+                        @Html.TextBox("DatafonoVoucherNumber", "", new
+                        {
+                            @class = "uif-mask",
+                            data_pattern = "000000000000000",
+                            maxlength = "15",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="DatafonoVoucherNumber" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenDatafonoVoucherNumber" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.TaxBase</label>
+                        <br />
+                        @Html.TextBox("DatafonoTaxBase", "", new
+                        {
+                            @onkeypress = "return OnlyDecimalNumber(event,this)",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="DatafonoTaxBase" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.PayCreditCardName</label>
+                        <br />
+                        @Html.TextBox("DatafonoHolderName", "", new
+                        {
+                            maxlength = "40",
+                            style = "text-align: left",
+                            @onblur = "this.value = this.value.toUpperCase();",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="DatafonoHolderName" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.ExpirationMonthYear</label>
+                        <br />
+                        <div class="uif-row">
+                            <div class="uif-col-xs-6">
+                                @Html.DropDownList("selectDatafonoCreditCardValidThruMonth", Enumerable.Empty<SelectListItem>(), new
+                                {
+                                    @class = "uif-select form-control",
+                                    data_source = @Url.Content("~/Accounting/Common/GetValidMonths"),
+                                    data_id = "Id",
+                                    data_name = "Description",
+                                    data_native = "true",
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                <span class="text-danger" data-valmsg-for="selectDatafonoCreditCardValidThruMonth" data-valmsg-replace="true" />
+                            </div>
+                            <div class="uif-col-xs-6">
+                                @Html.TextBox("DatafonoCreditCardValidThruYear", "", new
+                                {
+                                    @class = "uif-mask",
+                                    data_pattern = "0000",
+                                    maxlength = "4",
+                                    style = "text-align: left",
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                <span class="text-danger" data-valmsg-for="DatafonoCreditCardValidThruYear" data-valmsg-replace="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertForm"></div>
+                    </div>
+                </div>
+            </div>
+            <!--End left col-->
+            <!--right col-->
+            <div class="uif-col-6">
+                <div class="uif-listview" id="datafonoListView">
+                    <div class="footer">
+                        <div class="uif-col-xs-6">
+                            @Global.Total
+                        </div>
+                        <div class="uif-col-xs-6 text-right">
+                            <b id="TotalDatafono">$ 0.00</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End right col-->
+
+        </div>
+    </div>
+</form>
+

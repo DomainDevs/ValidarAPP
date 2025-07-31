@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="GetLineCumulusType">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="LineId">
+          <Column table-alias="Line" name="LineId" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="Line" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CumulusTypeId">
+          <Column table-alias="CumulusType" name="CumulusTypeId" />
+        </SelectValue>
+        <SelectValue alias="CumulusTypeDescription">
+          <Column table-alias="CumulusType" name="Description" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.Line,
+                          Core.Reinsurance.Entities" alias="Line" />
+          <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.CumulusType,
+                          Core.Reinsurance.Entities" alias="CumulusType" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="CumulusType" name="CumulusTypeId" />
+              <Column table-alias="Line" name="CumulusTypeId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

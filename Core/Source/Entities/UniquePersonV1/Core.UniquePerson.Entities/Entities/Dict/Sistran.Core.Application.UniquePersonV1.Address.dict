@@ -1,0 +1,48 @@
+<map version="2.0" type="class" name="Address" namespace="Sistran.Core.Application.UniquePersonV1" file-version="1.0" description="ADDRESS_ENTITY">
+<properties>
+<property name="IndividualId" type="Integer" key="true" description="INDIVIDUAL_ID_PROPERTY" />
+<property name="DataId" type="Integer" key="true" description="DATA_ID_PROPERTY" autonumber="id" />
+<property name="AddressTypeCode" type="Integer" description="ADDRESS_TYPE_CODE_PROPERTY" />
+<property name="IsMailingAddress" type="Boolean" description="IS_MAILING_ADDRESS_PROPERTY" />
+<property name="StreetTypeCode" type="Integer" description="STREET_TYPE_CODE_PROPERTY" />
+<property name="Street" type="String" size="180" description="STREET_PROPERTY" />
+<property name="CityCode" type="Integer" nullable="true" description="CITY_CODE_PROPERTY" />
+<property name="HouseNumber" type="Integer" nullable="true" description="HOUSE_NUMBER_PROPERTY" />
+<property name="Floor" type="String" size="3" nullable="true" description="FLOOR_PROPERTY" />
+<property name="Apartment" type="String" size="5" nullable="true" description="APARTMENT_PROPERTY" />
+<property name="ZipCode" type="String" size="10" nullable="true" description="ZIP_CODE_PROPERTY" />
+<property name="Urbanization" type="String" size="60" nullable="true" description="URBANIZATION_PROPERTY" />
+<property name="StateCode" type="Integer" nullable="true" description="STATE_CODE_PROPERTY" />
+<property name="CountryCode" type="Integer" nullable="true" description="COUNTRY_CODE_PROPERTY" />
+</properties>
+<tables>
+<table name="ADDRESS" schema="UP" alias="ADDRESS" update="true">
+<columns>
+<column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" key="true" />
+<column name="DATA_ID" type="Int16" property="DataId" key="true" />
+<column name="ADDRESS_TYPE_CD" type="Byte" property="AddressTypeCode" allowNull="false" />
+<column name="IS_MAILING_ADDRESS" type="Boolean" property="IsMailingAddress" allowNull="false" />
+<column name="STREET_TYPE_CD" type="Byte" property="StreetTypeCode" allowNull="false" />
+<column name="STREET" type="String" property="Street" allowNull="false" size="180" />
+<column name="CITY_CD" type="Int16" property="CityCode" />
+<column name="HOUSE_NUMBER" type="Int32" property="HouseNumber" />
+<column name="FLOOR" type="String" property="Floor" size="3" />
+<column name="APARTMENT" type="String" property="Apartment" size="5" />
+<column name="ZIP_CODE" type="String" property="ZipCode" size="10" />
+<column name="URBANIZATION" type="String" property="Urbanization" size="60" />
+<column name="STATE_CD" type="Int16" property="StateCode" />
+<column name="COUNTRY_CD" type="Int16" property="CountryCode" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="UP" table="INDIVIDUAL" column="AT_DATA_ID" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="INDIVIDUAL_ID"/>
+          <Variable name="IndividualId"/>
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

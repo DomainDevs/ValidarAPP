@@ -1,0 +1,127 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.SurchargeViewModel
+@{
+    Layout = null;
+}
+
+<script id="SurchargeTemplate" type="text/template">
+
+	{{#ifCond StatusTypeService "==" 2}}
+	<div>Descripción:<strong class="success">{{Description}}</strong></div>
+	{{else ifCond StatusTypeService "==" 3}}
+	<div>Descripción:<strong class="warning"> {{Description}} ({{Id}})</strong></div>
+	{{else ifCond StatusTypeService "==" 4}}
+	<div>Descripción:<strong class="danger"> {{Description}} ({{Id}})</strong></div>
+	{{else}}
+	<div>Descripción: <strong>{{Description}} ({{Id}})</strong></div>
+	{{/ifCond }}
+
+	<div>
+		<br>
+
+		Tipo de Cálculo: <strong>{{RateDescription}}</strong>
+
+	</div>
+	<div>
+		<br>
+
+		Tasa: <strong>{{Rate}}</strong>
+
+	</div>
+</script>
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column">
+        @Resources.Language.LabelTitleSurcharge
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+
+        <button class="btn btn-primary" id="btnSaveSurcharge" @*style="display: none"*@>
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+
+    </div>
+
+</script>
+
+
+<form id="formSurcharge" autocomplete="off" class="form without-space">
+    <input type="hidden" name="Id" id="Id" />
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", placeholder = @Resources.Language.LabelDescription })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelAbbreviation</label>
+                    @Html.TextBoxFor(model => model.TinyDescription, new { id = "inputDescriptionShort", placeholder = @Resources.Language.LabelAbbreviation })
+                    @Html.ValidationMessageFor(model => model.TinyDescription)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelType</label>
+                    <select class="uif-select form-control" id="selectType" data-id="Value" data-name="Text" name="Type"
+                            data-val="true" data-val-required="@Resources.Language.ErrorIsRrequired"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Type)
+                </div>
+                <div class="uif-col-4" id="porcentaje">
+                    <label class="field-required">@Resources.Language.LabelRate</label>
+                    @Html.TextBoxFor(model => model.Rate, new { id = "inputRate", maxLength = 20, @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Rate)
+                </div>
+                <div class="uif-col-4" id="milaje">
+                    <label class="field-required">@Resources.Language.LabelRate</label>
+                    @Html.TextBoxFor(model => model.RateM, new { id = "inputRateM", maxLength = 20,  @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.RateM)
+                </div>
+                <div class="uif-col-4" id="importe">
+                    <label class="field-required">@Resources.Language.LabelRate</label>
+                    @Html.TextBoxFor(model => model.RateI, new { id = "inputRateI", maxLength = 20, @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.RateI)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary" id="panelSurcharge">
+            <div id="listViewSearchAdvanced" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsSurcharge">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewSurcharge">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnSurchargeAccept">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+

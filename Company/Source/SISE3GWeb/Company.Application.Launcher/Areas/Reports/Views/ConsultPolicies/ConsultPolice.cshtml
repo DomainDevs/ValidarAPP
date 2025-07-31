@@ -1,0 +1,61 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Reports.Models.ConsultPoliciesViewModel
+
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-90">
+        <div id="Title">Consulta Politicas</div>
+    </div>
+    <div class="column-10"></div>
+</script>
+<script id="footer-template" type="text/template">
+    <button class="btn btn-default cancel" id="btnExit">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+        <span class="" aria-hidden="true"></span>
+        @Resources.Language.ButtonExit
+    </button>
+    <button class="btn btn-default" id="btnExport">
+        <i class="fa fa-download" aria-hidden="true"></i>
+        <span class="" aria-hidden="true"></span>
+        @Resources.Language.ExportXLS
+    </button>
+</script>
+<form id="formConsultPolice" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-12">
+            <br />
+            <div class="row">
+                <div class="uif-col-3">
+                    <label>@Resources.Language.LabelDateStart</label>
+                    @Html.TextBoxFor(model => model.labelInitialDateOfSelection, "{0:dd/MM/yyyy}", new { id = "inputFromDate", @class = "uif-datepicker" })
+                    @Html.ValidationMessageFor(model => model.labelInitialDateOfSelection)
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.DateUntil</label>
+                    @Html.TextBoxFor(model => model.labelFinalyDateOfSelection, "{0:dd/MM/yyyy}", new { id = "inputFromDate", @class = "uif-datepicker" })
+                    @Html.ValidationMessageFor(model => model.labelFinalyDateOfSelection)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.StatePolicies</label>
+                    <select class="uif-select form-control" id="selectStatePolicies" data-native="false" data-id="Id" data-name="SmallDescription"></select>
+                </div>
+                <</div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelBranch</label>
+                    <select class="uif-select form-control" id="selectBranch" data-id="Id" data-native="false" data-name="SmallDescription"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelPrefix</label>
+                    <select class="uif-select form-control" id="selectBranch" data-id="Id" data-native="false" data-name="SmallDescription"></select>
+                </div>
+                <div class="uif-col-12 center-col-right">
+                    <button type="button" class="btn btn-primary" id="btnSaveTechnicalBranch">@Resources.Language.ButtonSearch</button>
+                </div>
+            </div>
+            </div>
+    </div>
+</form>

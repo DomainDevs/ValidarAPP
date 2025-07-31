@@ -1,0 +1,143 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = null;
+}
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <b id="pnlFacultativeContract"></b>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <b>@Global.Intermediary</b>
+            <input class="uif-autocomplete"
+                   type="text"
+                   id="inputSearchBroker"
+                   data-source="@Url.Action("GetReinsuranceCompanyByName", "Parameter")"
+                   data-displaykey="Name"
+                   placeholder="@Global.EnterSearchCriteriaHere">
+        </div>
+        <div class="uif-col-6">
+            <b class="field-required">@Global.ReinsuranceCompany</b>
+            <input class="uif-autocomplete"
+                   type="text"
+                   id="inputSearchCompany"
+                   data-source="@Url.Action("GetReinsuranceCompanyByName", "Parameter")"
+                   data-displaykey="Name" placeholder='@Global.EnterSearchCriteriaHere'
+                   name="inputSearchCompany"
+                   data-val="true"
+                   data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="inputSearchCompany" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <b class="field-required">@Global.ParticipationPercentage: </b>
+            <input class="form-control" data-val="true" data-val-required="@Global.RequiredField" style="text-align:right"
+                   id="ParticipationPercentage" name="ParticipationPercentage" type="text" maxlength="5" onkeypress="return OnlyDecimalNumber(event, this)" data-val-range-min="0"
+                   data-val-range-max="100"
+                   data-val-range="@Global.ErrorPercentageHigher" />
+            <span class="text-danger" data-valmsg-for="ParticipationPercentage" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-6">
+            <b class="field-required">@Global.ParticipationAmount: </b>
+            <input class="form-control" data-val="true" id="lblParticipationAmount" style="text-align:right"
+                   name="lblParticipationAmount" type="text" disabled="disabled" readonly />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <b class="field-required">@Global.PremiumPercentage: </b>
+            <input class="form-control" data-val="true" data-val-required="@Global.RequiredField" style="text-align:right"
+                   id="PremiumPercentage" name="PremiumPercentage" type="text" maxlength="5" onkeypress="return OnlyDecimalNumber(event, this)"
+                   data-val-range-min="0"
+                   data-val-range-max="100"
+                   data-val-range="@Global.ErrorPercentageHigher" />
+            <span class="text-danger" data-valmsg-for="PremiumPercentage" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-6">
+            <b class="field-required">@Global.PremiumAmount: </b><br />
+            <input class="form-control" data-val="true" id="lblPremiumAmount" name="lblPremiumAmount" style="text-align:right"
+                   type="text" disabled="disabled" readonly />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <b class="field-required">@Global.CommissionPercentage: </b>
+            <input class="form-control" data-val="true" data-val-required="@Global.RequiredField" style="text-align:right"
+                   id="CommissionPercentage" name="CommissionPercentage" type="text" maxlength="5" onkeypress="return OnlyDecimalNumber(event, this)" data-val-range-min="0"
+                   data-val-range-max="100"
+                   data-val-range="@Global.ErrorPercentageHigher" />
+            <span class="text-danger" data-valmsg-for="CommissionPercentage" data-valmsg-replace="true"></span>
+
+        </div>
+        <div class="uif-col-6">
+            <b class="field-required">@Global.Commission: </b>
+            <input class="form-control" data-val="true" disabled="disabled" style="text-align:right"
+                   id="CommissionValue" type="text" onkeypress="return OnlyDecimalNumber(event, this)" readonly />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <b class="field-required">@Global.DepositPersentage: </b>
+            <input class="form-control" data-val="true" data-val-required="@Global.RequiredField"
+                   style="text-align:right"
+                   id="DepositPercentage" name="DepositPercentage"
+                   type="text" maxlength="5"
+                   onkeypress="return OnlyDecimalNumber(event, this)"
+                   data-val-range-min="0"
+                   data-val-range-max="100"
+                   data-val-range="@Global.ErrorPercentageHigher" />
+            <span class="text-danger" data-valmsg-for="DepositPercentage" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-6">
+            <b class="field-required">@Global.Reserve:</b>
+            <input class="form-control" data-val="true" disabled="disabled" style="text-align:right"
+                   id="Reservation" type="text" onkeypress="return OnlyDecimalNumber(event, this)" readonly" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <b class="field-required">@Global.InterestOnReservePercentage: </b>
+            <input class="form-control" data-val="true" data-val-required="@Global.RequiredField" style="text-align:right"
+                   id="InterestReservePersentage" name="InterestReservePersentage" type="text" maxlength="5" onkeypress="return OnlyDecimalNumber(event, this)" data-val-range-min="0"
+                   data-val-range-max="100"
+                   data-val-range="@Global.ErrorPercentageHigher" />
+            <span class="text-danger" data-valmsg-for="InterestReservePersentage" data-valmsg-replace="true"></span>
+
+        </div>
+        <div class="uif-col-6">
+            <b class="field-required">@Global.InterestOnReserve: </b>
+            <input class="form-control" id="InterestReserve" type="text" disabled="disabled" style="text-align:right"
+                   onkeypress="return JustNumbers(event, this)" readonly/>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <b class="field-required">@Global.DepositReleaseDate: </b>
+            <input type="text" value="@ViewBag.CurrentDate" class="uif-datepicker" data-mask="99/99/9999" id="DateDepositRelease"
+                   name="DateDepositRelease" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="DateFirstPage" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <b class="field-required">@Global.NetPremiumPay: </b>
+            <input class="form-control" disabled="disabled" style="text-align:right"
+                   id="NetPremiumPay" type="text" onkeypress="return OnlyDecimalNumber(event, this)" readonly/>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertFacultativetDialog"></div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="BrokerReinsuranceId" value="" />
+<input type="hidden" id="ReinsuranceCompanyId" value="" />
+<input type="hidden" id="TempFacultativeCompanyId" value="" />
+<input type="hidden" id="TempFacultativeId" value="" />
+
+
+

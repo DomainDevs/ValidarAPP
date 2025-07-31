@@ -1,0 +1,63 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "CancelAppliationReceipt";
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.Billing</li>
+        <li class="active">@Global.Delete @Global.Temporal</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" onclick="return false" id="DeleteTempApplicationItem" class="btn btn-danger" role="button">
+            <i class="fa fa-save"></i>  @Global.Delete
+        </button>
+    </footer>
+}
+
+@section Modals{
+
+    <div class="uif-modal" id="SaveDailyCloseSuccessDialog">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Html.Partial("../Billing/DailyCashClosingDialog")
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="submit" class="btn btn-primary" id="AcceptDialog"
+                    onclick="return AcceptDialog(event, 'SaveDailyCloseSuccessDialog')">
+                @Global.Accept
+            </button>
+        </div>
+    </div>
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="TemApplicationsTable" data-exporttocsv="false" data-edit="false" data-delete="false"
+               data-filter="false" data-paginate="true" data-selectiontype="single"
+               data-title="@Global.SearchTemporary">
+            <thead>
+                <tr>
+                    <th data-property="SourceId" data-visible="false">SOURCEID</th>
+                    <th data-property="TempAppId">TEMPORAL DE APLICACION</th>
+                    <th data-property="UserName" style="text-align:left">USUARIO</th>
+                    <th data-property="RegisterDate">FECHA REGISTRO</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/CancelAppliationReceipt")
+}

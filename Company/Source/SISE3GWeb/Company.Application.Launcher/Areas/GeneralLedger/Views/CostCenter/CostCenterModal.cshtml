@@ -1,0 +1,50 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.CostCenterModel
+
+@{
+    ViewBag.Title = "CostCenterModal";
+    Layout = null;
+}
+
+
+<form id="addCostCenter" onsubmit="return false" >
+    <div class="uif-modalbody">
+        @Html.HiddenFor(m => m.Id)
+        <div class="form">
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    @Html.Label(Global.Description, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej.: Nuevo", onblur = "this.value = this.value.toUpperCase();" } })
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
+                <div class="uif-col-4">
+                    @Html.Label(Global.CostCenterType, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.CostCenterTypeId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetCostCenterTypes"), data_id = "CostCenterTypeId", data_name = "Description", data_selectedid = @Model.CostCenterTypeId })
+                    @Html.ValidationMessageFor(m => m.CostCenterTypeId)
+                </div>
+                <div class="uif-col-3">
+                    @Html.Label(Global.Prorated, htmlAttributes: new { @class = "control-label" })
+                    <div class="checkbox">
+                        <input type="checkbox" id="IsProrated" checked="@Model.IsProrated">
+                        <label for="IsProrated"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+
+        <button type="button" class="btn btn-default" id="cancelButton" data-dismiss="modal" data-role="button">
+            <i class="fa fa-times"></i> @Global.Cancel
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0756"))
+        {
+            <button type="submit" class="btn btn-primary" id="saveButton" onclick="return false" data-role="button">
+                <i class="fa fa-floppy-o"></i> @Global.Save
+            </button>
+        }
+
+    </div>
+</form>
+
+

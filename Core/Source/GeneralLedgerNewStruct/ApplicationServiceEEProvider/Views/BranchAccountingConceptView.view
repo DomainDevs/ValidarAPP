@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="BranchAccountingConceptView">
+  <collections>
+    <collection name="AccountingConcept" type="Sistran.Core.Application.GeneralLedger.Entities.AccountingConcept, 
+                Core.GeneralLedger.Entities"></collection>
+    <collection name="BranchAccountingConcept" type="Sistran.Core.Application.GeneralLedger.Entities.BranchAccountingConcept, 
+                Core.GeneralLedger.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="BranchAccountingConcept" destination="AccountingConcept" name="BranchAccountingConceptAccountingConcept" type="Inner">
+      <property left="AccountingConceptCode" type="Equal" right="AccountingConceptCode"></property>
+    </relation>
+  </relations>
+</view>

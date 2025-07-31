@@ -1,0 +1,40 @@
+<map version="2.0" type="class" name="BankStatement" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="BANK_STATEMENT_ENTITY">
+  <properties>
+    <property name="BankStatementId" type="Integer" key="true" description="BANK_STATEMENT_ID_PROPERTY" nullable ="false" autonumber="Identity" />
+    <property name="BankAccountCode" type="Integer" nullable="true" description="BANK_ACCOUNT_CODE_PROPERTY" />
+    <property name="BankReconciliationCode" type="Integer" nullable="true" description="BANK_RECONCILIATION_CODE_PROPERTY" />
+    <property name="VoucherNumber" type="String" size="15" nullable="true" description="VOUCHER_NUMBER_PROPERTY" />
+    <property name="MovementDate" type="DateTime" nullable="true" description="MOVEMENT_DATE_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" nullable="true" description="AMOUNT_PROPERTY" />
+    <property name="Description" type="String" size="200" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="ReconciliationCode" type="Integer" nullable="true" description="RECONCILIATION_CODE_PROPERTY" />
+    <property name="ReconciliationDate" type="DateTime" nullable="true" description="RECONCILIATION_DATE_PROPERTY" />
+    <property name="CutDate" type="DateTime" nullable="true" description="CUT_DATE_PROPERTY" />
+    <property name="SourceBranchCode" type="Integer" nullable="true" description="SOURCE_BRANCH_CODE_PROPERTY" />
+    <property name="CityCode" type="Integer" nullable="true" description="CITY_CODE_PROPERTY" />
+    <property name="ThirdDescription" type="String" size="200" nullable="true" description="THIRD_DESCRIPTION_PROPERTY" />
+    <property name="ProcessDate" type="DateTime" nullable="true" description="PROCESS_DATE_PROPERTY" />
+    <property name="ProcessCode" type="Integer" nullable="true" description="PROCESS_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="BANK_STATEMENT" schema="ACC" alias="BANK_STATEMENT" update="true">
+      <columns>
+        <column name="BANK_STATEMENT_ID" type="Int32" property="BankStatementId" key="true" identity ="true" />
+        <column name="BANK_ACCOUNT_CD" type="Int32" property="BankAccountCode" />
+        <column name="BANK_RECONCILIATION_CD" type="Int32" property="BankReconciliationCode" />
+        <column name="VOUCHER_NUMBER" type="String" property="VoucherNumber" size="15" />
+        <column name="MOVEMENT_DATE" type="DateTime" property="MovementDate" />
+        <column name="AMOUNT" type="Decimal" property="Amount" size="19" precision="18" scale="2" />
+        <column name="DESCRIPTION" type="String" property="Description" size="200" />
+        <column name="RECONCILIATION_CD" type="Int32" property="ReconciliationCode" />
+        <column name="RECONCILIATION_DATE" type="DateTime" property="ReconciliationDate" />
+        <column name="CUT_DATE" type="DateTime" property="CutDate" />
+        <column name="SOURCE_BRANCH_CD" type="Byte" property="SourceBranchCode" />
+        <column name="CITY_CD" type="Int32" property="CityCode" />
+        <column name="THIRD_DESCRIPTION" type="String" property="ThirdDescription" size="200" />
+        <column name="PROCESS_DATE" type="DateTime" property="ProcessDate" />
+        <column name="PROCESS_CD" type="Int32" property="ProcessCode" />
+      </columns>
+    </table>
+  </tables>
+</map>

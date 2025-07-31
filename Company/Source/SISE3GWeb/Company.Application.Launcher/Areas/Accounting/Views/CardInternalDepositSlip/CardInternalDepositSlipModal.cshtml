@@ -1,0 +1,168 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<form id="formIBOne" class="form" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label" for="BallotNumberCardInternalDeposit">@Global.InternalBallotNumber:</label>
+            <input type="text" id="BallotNumberCardInternalDeposit" disabled="disabled" placeholder="" style="text-align: left" />
+            <input type="hidden" id="PaymentMethodTypeCode" name=" " />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="CreditCardTypeNameCardInternalDeposit">@Global.Conduit:</label>
+            <input type="text" id="CreditCardTypeNameCardInternalDeposit" disabled="disabled" placeholder="" style="text-align: left" />
+            <input type="hidden" id="CreditCardTypeCode" name="CreditCardTypeCode" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="BranchNameCardInternalDeposit">@Global.Branch:</label>
+            <input type="text" id="BranchNameCardInternalDeposit" disabled="disabled" placeholder="" style="text-align: left" />
+            <input type="hidden" id="BranchCode" name="BranchCode" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label" for="ToDateCardInternalDeposit">@Global.DateIncomeTo:</label>
+            <input type="text" id="ToDateCardInternalDeposit" name="ToDateCardInternalDeposit" class="uif-datepicker" data-mask="99/99/9999" 
+                   maxlength="10" style="text-align: left" data-val="true" data-val-required="@Global.RequiredField" />
+            <input type="hidden" id="BillingDate" name="BillingDate" style="text-align: left" />
+            <span class="text-danger" data-valmsg-for="ToDateCardInternalDeposit" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="ReceivingBankNameCardInternalDeposit">@Global.ReceivingBank:</label>
+            <input type="text" id="ReceivingBankNameCardInternalDeposit" disabled="disabled" placeholder="" style="text-align: left" />
+            <input type="hidden" id="ReceivingBankCode" name="ReceivingBankCode" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="ReceivingAccountNumberCardInternalDeposit">@Global.AccountNumber:</label>
+            <input type="text" id="ReceivingAccountNumberCardInternalDeposit" disabled="disabled" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label" for="AccountCurrencyNameCardInternalDeposit">@Global.Currency:</label>
+            <input type="text" id="AccountCurrencyNameCardInternalDeposit" disabled="disabled" />
+            <input type="hidden" id="AccountCurrencyCode" name="AccountCurrencyCode" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="CardAmountCardInternalDeposit">@Global.Amount:</label>
+            <input type="text" id="CardAmountCardInternalDeposit" style="text-align: right" disabled="disabled" />
+            <input type="hidden" id="RegisterDate" name="RegisterDate" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="CommissionAmountCardInternalDeposit">@Global.CommissionValue:</label>
+            <input type="text" id="CommissionAmountCardInternalDeposit" maxlength="16" style="text-align: right" disabled="disabled" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label" for="VoucherNumberCardInternalDeposit">
+                @Global.VoucherNumber:
+            </label>
+            <br />
+            <input type="text" id="VoucherNumberCardInternalDeposit" onkeypress="return JustNumbers(event, this);" maxlength="12" />
+        </div>
+        <div class="uif-col-8">
+            <label class="control-label" for="VoucherNumberCardInternalDeposit">
+                @Global.IssuingBank:
+            </label>
+            <br />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "CheckInternalDepositSlip")" data-displaykey="bankDescription" placeholder="" id="IssuingBankCardInternalDeposit" maxlength="60">
+            <input type="hidden" id="IssuingBank" name="IssuingBank" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="pull-right">
+                <div class="form-footer">
+                    <button id="CleanCardCardInternalDeposit" class="btn btn-default" role="button">
+                        <i class="fa fa-paint-brush"></i> @Global.Clean
+                    </button>
+                    <button id="SearchCardCardInternalDeposit" class="btn btn-primary" role="button">
+                        <i class="fa fa-search"></i> @Global.Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertCardInternalDeposit"></div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="CardsDialogCardInternalDeposit" data-exporttocsv="false"
+                   data-add="true" data-edit="false" data-delete="false" data-selectiontype="multiple" data-filter="false"
+                   data-paginate="true" data-title=" ">
+                <thead>
+                    <tr>
+                        <th data-property="PaymentCode" data-visible="false">'PaymentCode'</th>
+                        <th data-property="PaymentMethodTypeCode" data-visible="false">'PaymentMethodTypeCode'</th>
+                        <th data-property="CurrencyCode" data-visible="false">'CurrencyCode'</th>
+                        <th data-property="BankName" data-visible="false">@Global.IssuingBank</th>
+                        <th data-property="VoucherNumber">@Global.VoucherNumber</th>
+                        <th data-property="CardNumber">@Global.CreditCardNumber</th>
+                        <th data-property="CardDate">@Global.InternalBallotDepositCardGridCardDate</th>
+                        <th data-property="TechnicalTransaction">@Global.TransactionNumber</th>
+                        <th data-property="ReceiptNumber" data-visible="false">@Global.BillNum</th>
+                        <th data-property="CurrencyName">@Global.Currency</th>
+                        <th data-property="Amount">@Global.Amount</th>
+                        <th data-property="TaxAmount">@Global.TotalTaxes</th>
+                        <th data-property="CommissionAmount">@Global.CommissionValue</th>
+                        <th data-property="Holder" data-visible="false">@Global.HolderCardName</th>
+                        <th data-property="BranchCode" data-visible="false">'BranchCode'</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="ACardsDialogCardInternalDeposit" data-exporttocsv="false"
+                   data-add="false" data-edit="false" data-delete="true" data-selectiontype="multiple" data-filter="false"
+                   data-paginate="true" data-title="@Global.InternalBallotDepositCardSelectedCards">
+                <thead>
+                    <tr>
+                        <th data-property="PaymentCode" data-visible="false">'PaymentCode'</th>
+                        <th data-property="PaymentMethodTypeCode" data-visible="false">'PaymentMethodTypeCode'</th>
+                        <th data-property="CurrencyCode" data-visible="false">'CurrencyCode'</th>
+                        <th data-property="BankName" data-visible="false">@Global.IssuingBank</th>
+                        <th data-property="VoucherNumber">@Global.VoucherNumber</th>
+                        <th data-property="CardNumber">@Global.CreditCardNumber</th>
+                        <th data-property="CardDate">@Global.InternalBallotDepositCardGridCardDate</th>
+                        <th data-property="TechnicalTransaction">@Global.TransactionNumber</th>
+                        <th data-property="ReceiptNumber" data-visible="false">@Global.BillNum</th>
+                        <th data-property="CurrencyName">@Global.Currency</th>
+                        <th data-property="Amount">@Global.Amount</th>
+                        <th data-property="TaxAmount">@Global.TotalTaxes</th>
+                        <th data-property="CommissionAmount">@Global.CommissionValue</th>
+                        <th data-property="Holder" data-visible="false">@Global.HolderCardName</th>
+                        <th data-property="BranchCode" data-visible="false">'BranchCode'</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="pull-right">
+            <div class="uif-col-12">
+                <button id="CancelTicketCardInternalDeposit" class="btn btn-default" data-dismiss="modal" role="button">
+                    <i class="fa fa-remove"></i> @Global.Close
+                </button>
+                <button id="SaveTicketCardInternalDeposit" class="btn btn-primary" role="button">
+                    <i class="fa fa-save"></i> @Global.Accept
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+

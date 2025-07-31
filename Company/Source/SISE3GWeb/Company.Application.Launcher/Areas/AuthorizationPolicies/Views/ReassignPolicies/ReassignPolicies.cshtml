@@ -1,0 +1,182 @@
+﻿
+@{
+    Layout = null;
+}
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="col-lg-12">
+        @Resources.Language.LabelReassignPolicies
+    </div>
+</script>
+
+<form id="formReportPolicies" class="form without-space">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelPolicyReportDateStar</label>
+                    <input type="datetime" class="uif-datepicker" name="dateInitPolicies" id="dateInitPolicies" value="@DateTime.Now.ToString("dd/MM/yyy")" data-max-date="@DateTime.Now.ToString("dd/MM/yyy")" required />
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelPolicyReportDateEnd</label>
+                    <input type="datetime" class="uif-datepicker" name="dateEndPolicies" id="dateEndPolicies" value="@DateTime.Now.ToString("dd/MM/yyy")" data-max-date="@DateTime.Now.ToString("dd/MM/yyy")" required />
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelGroupPolicies</label>
+                    <select class="uif-select" name="SelectGroupPolicies" id="SelectGroupPolicies" data-id="Id" data-name="Description" data-filter="true" data-native="false" data-val-required="@Resources.Language.OptionSelect" required></select>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Policies</label>
+                    <select class="uif-select" name="SelectPolicies" id="SelectPolicies" data-id="IdPolicies" data-name="Description" data-filter="true" data-native="false" data-val-required="@Resources.Language.OptionSelect" required></select>
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.IssuingUser</label>
+                    <select class="uif-select" name="SelectIssuingUser" id="SelectIssuingUser" data-id="UserId" data-filter="true" data-native="false" data-name="AccountName" data-val-required="@Resources.Language.OptionSelect" required></select>
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.AuthorizingUser</label>
+                    <select class="uif-select" id="SelectAuthorizingUser" data-id="UserId" data-name="AccountName" data-filter="true" data-native="false" name="SelectAuthorizingUser" data-val-required="@Resources.Language.OptionSelect" required></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-4">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0709"))
+                    {
+                        <button type="button" id="SearchReassignPolicies" class="btn btn-default"> @Resources.Language.ButtonSearch</button>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="uif-col-12 ">
+        <table data-paginate="true" class="uif-table" id="TablePendingRequests" data-filter="true" data-selectiontype="single">
+            <thead>
+                <tr>
+                    <th data-property="DescriptionGroup">Grupo de politicas</th>
+                    <th data-property="DescriptionPolicie">Politica</th>
+                    <th data-property="Reference">Temporal</th>
+                    <th data-property="DateRequest">Fecha de solicitud</th>
+                    <th data-property="DescriptionRequest">Motivo de solicitud</th>
+                    <th data-property="Count">Cantidad</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+@*Modales*@
+<div class="uif-modal" id="modalRequestDetails">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div id="divTableDetailsRequests" class="uif-col-12 ">
+                <table data-paginate="true" data-hiddencolumns="[0]" class="uif-table" id="tableDetailsRequests" data-filter="true" data-selectiontype="single">
+                    <thead>
+                        <tr>
+                            <th data-property="AuthorizationRequestId"></th>
+                            <th data-property="Count">Cantidad</th>
+                            <th data-property="DescriptionRequest">Descripcion</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div id="divTableAnswersReassign" class="uif-col-12 ">
+                <table data-paginate="true" class="uif-table" id="tableReassignAnswers" data-filter="true" data-selectiontype="single">
+                    <thead>
+                        <tr>
+                            <th data-property="UserAnswer.AccountName">Autorizador</th>
+                            <th data-property="HierarchyAnswer.Description">Jerarquia</th>
+                            <th data-property="StatusDescription">Estado</th>
+                            <th data-property="DateAnswer">Fecha de respuesta</th>
+                            <th data-property="DescriptionAnswer">Descripcion</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div id="divTableReassign" class="uif-col-12 ">
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelHierarchy</label>
+                        <select class="uif-select" name="SelectHierarchy" id="SelectHierarchy" data-id="Id" data-name="Description" data-val-required="@Resources.Language.OptionSelect" required></select>
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.AuthorizingUser</label>
+                        <select class="uif-select" name="SelectUserAuth" id="SelectUserAuth" data-id="UserId" data-name="AccountName" data-val-required="@Resources.Language.OptionSelect" required></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label class="field-required">@Resources.Language.LabelReallocationReason</label>
+                        <input class='upperCase-co' type="text" id="inputReallocationReason" maxlength="250" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button class="btn btn-defauld cancel" data-dismiss="modal">
+            @Resources.Language.ButtonClose
+        </button>
+        <button class="btn btn-primary" id="btnback">
+            @Resources.Language.ButtonPreview
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0706"))
+        {
+            <button class="btn btn-primary" id="btnSearchDetailsAnswerReassign">
+                @Resources.Language.LabelDetails
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0707"))
+        {
+            <button class="btn btn-primary" id="btnSearchReassign">
+                @Resources.Language.LabelDetails
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0708"))
+        {
+            <button class="btn btn-primary" id="btnAssign">
+                @Resources.Language.LabelAssign
+            </button>
+        }
+    </div>
+</div>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitPolicyReassign">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0705"))
+        {
+            <button class="btn btn-primary cancel" id="btnSearchDetailsReassign">
+                <i class="" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.LabelDetails
+            </button>
+        }
+
+    </div>
+</script>
+

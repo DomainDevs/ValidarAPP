@@ -1,0 +1,30 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.AdditionalDataModelsView
+<form id="formAdditionalData" class="form">
+    <div class="row">
+        <div class="uif-col-8">
+            <label>@Resources.Language.LabelInsuredSecondary</label>
+            @Html.TextBoxFor(model => model.InsuredName, new { id = "inputAdditionalDataInsured", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelFuelType</label>
+            <select class="uif-select form-control" id="selectFuelType" data-native="false" data-val="true"
+                data-id="Id" data-name="Description" name="FuelType">
+            </select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelBodyType</label>
+            <select class="uif-select form-control" id="selectBodyType"
+                data-id="Id" data-native="false" data-name="Description" name="BodyType"
+                data-val="true" data-val-required="@Resources.Language.ErrorSelectBody">
+            </select>
+            @Html.ValidationMessageFor(model => model.BodyType)
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelVehicleNewPrice</label>
+            @Html.TextBoxFor(model => model.NewPrice, new { id = "inputAdditionalDataPrice", @class = "rightAlign" })
+            @Html.ValidationMessageFor(model => model.NewPrice)
+        </div>
+    </div>
+</form>

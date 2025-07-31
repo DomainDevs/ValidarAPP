@@ -1,0 +1,97 @@
+<div class="container">
+	<div class="section cols primary">
+		<div>
+		  <p>Sucursal:<span class = "info">{{endorsementDetail.[0].BRANCH}}</span> Ramo: <span class="info">{{endorsementDetail.[0].PREFIX}}</span></p>
+		  <p>Póliza:<span class = "info">{{endorsementDetail.[0].DOCUMENT_NUM}}</span> / <span class="info">{{endorsementDetail.[0].ENDORSEMENT_TYPE}}</span></p>
+		  <p>Sufijo: <span class="info">{{endorsementDetail.[0].SUFFIX}}</span> Endoso:<span class="info">{{endorsementDetail.[0].ENDORSEMENT_NUM}}</span></p>
+		  <p>Tomador: <span class="info">{{endorsementDetail.[0].ID_HOLDER}} / {{endorsementDetail.[0].HOLDER_NAME}}</span></p>
+		</div>
+		<div>
+		  <p>Fecha de Emisión: <span class="info">{{formatDate endorsementDetail.[0].ISSUE_DATE}}</span></p>
+		  <p>Inicio Vigencia: <span class="info">{{formatDate  endorsementDetail.[0].CURRENT_FROM}}</span> Fin Vigencia: <span class="info">{{formatDate endorsementDetail.[0].CURRENT_TO}}</span></p>
+		  <p>Asegurado: <span class="info">{{endorsementDetail.[0].HOLDER_NAME}}</span></p>
+		  <p>Moneda: <span class="info">{{endorsementDetail.[0].CURRENCY}}</span> - TRM <span class="info">{{formatNumber endorsementDetail.[0].EXCHANGE_RATE minimumFractionDigits="2" maximumFractionDigits="3"}}</span></p>
+		</div>
+	</div>
+<br/>
+<sise-tabs>
+  <sise-tab title="Coberturas">
+        <table class="table">
+            <tr>
+              <th style="text-align: center">Riesgo</th>
+              <th style="text-align: center">Cobertura</th>
+              <th style="text-align: center">Suma Asegurada</th>
+              <th style="text-align: center">Suma Asegurada Total</th>
+              <th style="text-align: center">Tipo Cálculo</th>
+              <th style="text-align: center">Tipo Tasa</th>
+              <th style="text-align: center">Tasa</th>
+              <th style="text-align: center">Prima</th>
+            </tr>
+            {{#each coverages}}
+            <tr>
+                <td style="text-align: left">{{RISK_NUM}}</td>
+                <td style="text-align: left">{{COVERAGE}}</td>
+                <td style="text-align: right">{{formatNumber ENDORSEMENT_LIMIT_AMT minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+                <td style="text-align: right">{{formatNumber LIMIT_AMT minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+                <td style="text-align: left">{{CALCULATE_TYPE}}</td>
+                <td style="text-align: left">{{RATE_TYPE}}</td>
+                <td style="text-align: right">{{RATE}}</td>
+                <td style="text-align: right">{{formatNumber PREMIUM_AMT minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          </tr>
+          {{/each}}
+        </table>
+    </sise-tab>
+	<sise-tab title="Deducibles por Causal">
+	  <table class="table">
+			<tr>
+			  <th style="text-align: center">Causa del siniestro</th>
+			  <th style="text-align: center">Importe</th>
+			</tr>
+			{{#each deductiblesByCause}}
+			<tr>
+				<td style="text-align: left">{{DESCRIPTION_CAUSE}}</td>
+				<td style="text-align: left">{{formatNumber DEDUCTIBLE_AMOUNT minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+		  </tr>
+		  {{/each}}
+		</table>
+	</sise-tab>
+	<sise-tab title="Recargos y descuentos">
+		<table class="table">
+			<tr>
+			  <th style="text-align: center">Riesgo</th>
+			  <th style="text-align: center">Ramo</th>
+			  <th style="text-align: center">Prima moneda Emisión</th>
+			</tr>
+			{{#each paymentsByRisk}}
+			<tr>
+				<td style="text-align: left">{{RISK_ID}}</td>
+				<td style="text-align: left">{{PREFIX}}</td>
+				<td style="text-align: left">{{formatNumber PAYMENTS minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+		  </tr>
+		  {{/each}}
+		</table>
+		<table class="table">
+			<tr>
+			  <th style="text-align: center">Riesgo</th>
+			  <th style="text-align: center">Recargo</th>
+			  <th style="text-align: center">Ramo</th>
+			  <th style="text-align: center">Cobertura</th>
+			  <th style="text-align: center">Pje</th>
+			  <th style="text-align: center">Tipo Pje</th>
+			  <th style="text-align: center">Prima moneda Emisión</th>
+			</tr>
+			{{#each paymentsByRiskCoverage}}
+			<tr>
+				<td style="text-align: left">{{RISK_ID}}</td>
+				<td style="text-align: left">{{COMPONENT_DESCRIPTION}}</td>
+				<td style="text-align: left">{{PREFIX}}</td>
+				<td style="text-align: left">{{COVERAGE}}</td>
+				<td style="text-align: left">{{RATE}}</td>
+				<td style="text-align: left">{{RATE_DESCRIPTION}}</td>
+				<td style="text-align: left">{{formatNumber PAYMENT minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+		  </tr>
+		  {{/each}}
+		</table>
+	</sise-tab>
+</sise-tabs>
+</div>

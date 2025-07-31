@@ -1,0 +1,23 @@
+<map version="2.0" type="class" name="AgentCoinsuranceCheckingAccount" 
+     namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="AGENT_COINSURANCE_CHECKING_ACCOUNT_ENTITY">
+	<properties>
+		<property name="AgentCoinsuranceCheckingAccountCode" type="Integer" key="true" description="AGENT_COINSURANCE_CHECKING_ACCOUNT_CODE_PROPERTY" nullable = "false" autonumber="Identity"/>
+		<property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+		<property name="AgentTypeCode" type="Integer" nullable="true" description="AGENT_TYPE_CODE_PROPERTY" />
+		<property name="AgentId" type="Integer" nullable="true" description="AGENT_ID_PROPERTY" />
+		<property name="CommissionAmount" type="Decimal" precision="18" scale="2" nullable="true" description="COMMISSION_AMOUNT_PROPERTY" />
+		<property name="IncomeCommissionAmount" type="Decimal" precision="18" scale="2" nullable="true" description="INCOME_COMMISSION_AMOUNT_PROPERTY" />
+	</properties>
+	<tables>
+		<table name="AGENT_COINSURANCE_CHECKING_ACCOUNT" schema="ACC" alias="AGENT_COINSURANCE_CHECKING_ACCOUNT" update="true">
+			<columns>
+				<column name="AGENT_COINSURANCE_CHECKING_ACCOUNT_CD" type="Int32" property="AgentCoinsuranceCheckingAccountCode" key="true" identity ="true"/>
+				<column name="CURRENCY_CD" type="Int32" property="CurrencyCode" />
+				<column name="AGENT_TYPE_CD" type="Int32" property="AgentTypeCode" />
+				<column name="AGENT_ID" type="Int32" property="AgentId" />
+				<column name="COMMISSION_AMOUNT" type="Decimal" property="CommissionAmount" size="19" precision="18" scale="2" />
+				<column name="INCOME_COMMISSION_AMOUNT" type="Decimal" property="IncomeCommissionAmount" size="19" precision="18" scale="2" />
+			</columns>
+		</table>
+	</tables>
+</map>

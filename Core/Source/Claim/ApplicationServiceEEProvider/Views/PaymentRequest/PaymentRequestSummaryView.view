@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PaymentConceptBranchView">
+  <collections>
+    <collection name="PaymentRequest" type="Sistran.Core.Application.Claims.Entities.PaymentRequest, 
+                Core.Claims.Entities"></collection>
+    <collection name="PaymentRequestClaim" type="Sistran.Core.Application.Claims.Entities.PaymentRequestClaim, 
+                Core.Claims.Entities"></collection>
+    <collection name="Claim" type="Sistran.Core.Application.Claims.Entities.Claim, 
+                Core.Claims.Entities"></collection>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, 
+                Core.Common.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                Core.Common.Entities"></collection>
+    <collection name="PaymentVoucher" type="Sistran.Core.Application.Claims.Entities.PaymentVoucher, 
+                Core.Claims.Entities"></collection>
+    <collection name="PaymentVoucherConcept" type="Sistran.Core.Application.Claims.Entities.PaymentVoucherConcept, 
+                Core.Claims.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Claim" destination="Branch" name="ClaimBranch" type="Inner">
+      <property left="ClaimBranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="Claim" destination="Prefix" name="ClaimPrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="PaymentRequest" destination="PaymentVoucher" name="PaymentRequestVoucher" type="Inner">
+      <property left="PaymentRequestCode" type="Equal" right="PaymentRequestCode"></property>
+    </relation>
+    <relation source="PaymentVoucherConcept" destination="PaymentVoucher" name="VoucherConceptVoucher" type="Inner">
+      <property left="PaymentVoucherCode" type="Equal" right="PaymentVoucherCode"></property>
+    </relation>
+    <relation source="PaymentRequest" destination="PaymentRequestClaim" name="PaymentRequestPaymentRequestClaim" type="Inner">
+      <property left="PaymentRequestCode" type="Equal" right="PaymentRequestCode"></property>
+    </relation>
+    <relation source="PaymentVoucherConcept" destination="PaymentRequestClaim" name="VoucherConceptPaymentRequestClaim" type="Inner">
+      <property left="PaymentVoucherConceptCode" type="Equal" right="PaymentVoucherConceptCode"></property>
+    </relation>
+    <relation source="PaymentRequestClaim" destination="Claim" name="PaymentRequestClaimClaim" type="Inner">
+      <property left="ClaimCode" type="Equal" right="ClaimCode"></property>
+    </relation>
+  </relations>
+</view>

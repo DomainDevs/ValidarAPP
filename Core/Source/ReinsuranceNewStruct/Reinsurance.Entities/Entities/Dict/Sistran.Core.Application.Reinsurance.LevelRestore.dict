@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="LevelRestore" namespace="Sistran.Core.Application.Reinsurance" file-version="1.0" description="LEVEL_RESTORE_ENTITY">
+  <properties>
+    <property name="LevelRestoreId" type="Integer" key="true" description="LEVEL_RESTORE_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="ContractLevelCode" type="Integer" description="CONTRACT_LEVEL_CODE_PROPERTY" />
+    <property name="ReestablishmentNumber" type="Integer" description="REESTABLISHMENT_NUMBER_PROPERTY" />
+    <property name="ReestablishmentPercentage" type="Decimal" precision="12" scale="2" nullable="true" description="REESTABLISHMENT_PERCENTAGE_PROPERTY" />
+    <property name="PointNoticePercentage" type="Decimal" precision="12" scale="2" nullable="true" description="POINT_NOTICE_PERCENTAGE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="LEVEL_RESTORE" schema="REINS" alias="LEVEL_RESTORE" update="true">
+      <columns>
+        <column name="LEVEL_RESTORE_ID" type="Int32" property="LevelRestoreId" key="true" identity ="true"/>
+        <column name="CONTRACT_LEVEL_CD" type="Int32" property="ContractLevelCode" allowNull="false" />
+        <column name="REESTABLISHMENT_NUMBER" type="Int32" property="ReestablishmentNumber" allowNull="false" />
+        <column name="REESTABLISHMENT_PERCENTAGE" type="Decimal" property="ReestablishmentPercentage" size="19" precision="12" scale="2" />
+        <column name="POINT_NOTICE_PERCENTAGE" type="Decimal" property="PointNoticePercentage" size="19" precision="12" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

@@ -1,0 +1,291 @@
+﻿@using System.Runtime.Versioning
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = Global.Condition;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.CentralAccounting</li>
+        <li>@Global.Parameter</li>
+        <li>@Global.Dynamic</li>
+        <li>@Global.Condition</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal" id="deleteRecordConfirmationModal">
+        <div class="uif-modalbody">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.DeleteConfirmationMessage</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="cancelDelete" data-dismiss="modal">@Global.No</button>
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0779"))
+            {
+                <button type="submit" class="btn btn-primary" id="confirmDelete">@Global.Yes</button>
+            }
+
+        </div>
+    </div>
+    <div class="form">
+        <div class="uif-modal" id="accountingRuleModal">
+            <div class="uif-modalbody">
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <input type="hidden" id="AccountingRuleId" name="AccountingRuleId" />
+                        <label class="control-label">@Global.AccountingRule</label>
+                        <input class="form-control" placeholder='@Global.ExampleAccountingRule' data-val="true" data-val-required="@Global.RequiredField"
+                               id="AccountingRuleDescription" name="AccountingRuleDescription" type="text" value="" onblur=" this.value=this.value.toUpperCase(); " />
+                        <span class="text-danger" data-valmsg-for="AccountingRuleDescription" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="control-label">@Global.Observations</label>
+                        <input class="form-control" placeholder='@Global.Observations' data-val="true" id="AccountingRuleObservations" name="AccountingRuleObservations" type="text" value="" onblur=" this.value=this.value.toUpperCase(); " />
+                    </div>
+                </div>
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0776"))
+                {
+                    <button type="submit" class="btn btn-primary" id="updateAccountingRule">@Global.Accept</button>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="form">
+        <div class="uif-modal" id="conditionModal">
+            <div class="uif-modalbody">
+                <div class="uif-row">
+                    <input type="hidden" id="conditionId" name="conditionId" />
+                    <input type="hidden" id="RightResultId" name="RightResultId" />
+                    <input type="hidden" id="ConditionResultId" name="ConditionResultId" />
+                    <div class="uif-col-4">
+                        <label>@Global.ParameterLabel</label>
+                        <select class="uif-select form-control required" id="conditionParameter" data-source="null" data-id="Id" data-name="ParameterDescription" name="operation" data-val-required='@Global.RequiredField'></select>
+                        <span class="text-danger" data-valmsg-for="operation" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label>@Global.Operation</label>
+                        <select class="uif-select form-control required" id="operation" data-source="@Url.Content("~/GeneralLedger/EntryParameter/GetOperators")" data-id="Id" data-name="Description" name="operation" data-val-required='@Global.RequiredField'></select>
+                        <span class="text-danger" data-valmsg-for="operation" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label>@Global.Value</label>
+                        <input type="text" id="conditionValue" name="conditionValue" onkeypress="return OnlyDecimalNumber(event,this)"/>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertFormCondition"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0777"))
+                {
+                    <button type="submit" class="btn btn-primary" id="addCondition">@Global.Accept</button>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="form">
+        <div class="uif-modal" id="resultModal">
+            <div class="uif-modalbody">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="resultModalAlert"></div>
+                    </div>
+                </div>
+                <hr />
+                <div class="uif-row">
+                    <form id="resultForm" onsubmit="return false">
+                        <input type="hidden" id="ResultId" name="ResultId" />
+                        <div class="uif-col-3">
+                            <label>@Global.Nature</label>
+                            <select class="uif-select form-control required" id="accountingNature" data-source="@Url.Content("~/GeneralLedger/Base/GetNatures")" data-id="AccountingNatureId" data-name="Description" name="accountingNature" data-val="true" data-val-required='@Global.RequiredField'></select>
+                            <span class="text-danger" data-valmsg-for="accountingNature" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Global.AccountingAccount</label>
+                            <input type="text" id="accountingAccount" name="accountingAccount" data-val="true" data-val-required='@Global.RequiredField' />
+                            <span class="text-danger" data-valmsg-for="accountingAccount" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Global.ParameterLabel</label>
+                            <select class="uif-select form-control required" id="resultParameter" name="resultParameter" data-source="null" data-id="Id" data-name="ParameterDescription" data-val="true" data-val-required='@Global.RequiredField'></select>
+                            <span class="text-danger" data-valmsg-for="resultParameter" data-valmsg-replace="true"></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <span class="glyphicon glyphicon-check" id="setUpAccount"><input type="checkbox" id="setUpAccountCheck"></span>Configurar Cuenta
+                    </div>
+                </div>
+                <hr />
+                <div id="accountingAccountMaskRegion">
+                    <div class="uif-alert" id="maskAlert"></div>
+                    <div id="accountingAccountMaskEditor">
+                        <form id="accountingAccountMaskForm" onsubmit="return false">
+                            <div class="uif-panel" data-title="">
+                                @Html.Partial("~/Areas/GeneralLedger/Views/EntryParameter/AccountingAccountMaskEditor.cshtml")
+                            </div>
+                        </form>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <div class="uif-listview" id="accountingAccountMaskList">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-modalbuttons" id="resultButtons">
+                <button type="button" class="btn btn-default" id="cancelResult" data-dismiss="modal">@Global.Cancel</button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0778"))
+                {
+                    <button type="submit" class="btn btn-primary" id="addResult">@Global.Accept</button>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="form">
+        <div class="uif-modal" id="previewModal">
+            <div class="uif-modalbody">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <table class="uif-table" id="AccountingRuleListDetails" data-exporttocsv="false" data-edit="false" data-delete="false" data-filter="false" data-paginate="true" data-title="@Global.AccountingRuleList" data-selectiontype="none">
+                            <thead>
+                                <tr>
+                                    <th data-property="AccountingRuleDescription">@Global.Rule</th>
+                                    <th data-property="ConditionDescription">@Global.Condition</th>
+                                    <th data-property="RightResultDescription">@Global.TrueResult</th>
+                                    <th data-property="LeftResultDescription">@Global.FalseResult</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">@Global.Accept</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <label class="control-label">@Global.Module</label>
+        <select class="uif-select form-control required"
+                data-source="@Url.Content("~/GeneralLedger/Base/GetModuleDates")"
+                id="Module" name="Module"
+                data-id="Id" data-name="Description" data-val="true"
+                data-val-required='@Global.RequiredField' data-native="true"></select>
+    </div>
+</div>
+<br />
+<div class="uif-row">
+    <div class="uif-col-12">
+        <ul class="uif-tab" id="conditionsTab">
+            <li class="active"><a href="#accountingRulesRegion" id="accountingRulesTab">@Global.AccountingRules</a></li>
+            <li><a href="#rulesRegion" id="rulesTab">@Global.Conditions</a></li>
+        </ul>
+        <div class="uif-tab-content">
+            <div class="active" id="accountingRulesRegion">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="accountingRulesAlert"></div>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <table class="uif-table" id="accountingRules" data-exporttocsv="false" data-add="true" data-edit="true" data-delete="true" data-filter="true" data-paginate="true" data-sort="false" data-selectiontype="single" data-title="@Global.AccountingRules">
+                            <thead>
+                                <tr>
+                                    <th data-property="ModuleId" data-visible="false">ModuleId</th>
+                                    <th data-property="AccountingRuleId" data-visible="false">AccountingRuleId</th>
+                                    <th data-property="AccountingRuleDescription">@Global.AccountingRule</th>
+                                    <th data-property="AccountingRuleObservations">@Global.Observations</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="rulesRegion">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="accountingRuleInformationMessage"></div>
+                        <div class="uif-alert" id="selectedAccountingRuleAlert"></div>
+                        <div class="uif-alert" id="rulesAlert"></div>
+                        <div id="conditionsRegion">
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <table class="uif-table" id="conditions" data-exporttocsv="false" data-add="true" data-edit="true" data-delete="true" data-filter="false" data-paginate="true" data-sort="false" data-selectiontype="none" data-title="@Global.Conditions">
+                                        <thead>
+                                            <tr>
+                                                <th data-property="If"></th>
+                                                <th data-property="ConditionId" data-visible="false"></th>
+                                                <th data-property="ParameterId" data-visible="false"></th>
+                                                <th data-property="ParameterDescription"></th>
+                                                <th data-property="Operator"></th>
+                                                <th data-property="Value"></th>
+                                                <th data-property="RightResultId" data-visible="false"></th>
+                                                <th data-property="ResultId" data-visible="false"></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <table class="uif-table" id="results" data-exporttocsv="false" data-add="true" data-edit="true" data-delete="true" data-filter="false" data-paginate="false" data-selectiontype="none" data-title="@Global.Result">
+                                        <thead>
+                                            <tr>
+                                                <th data-property="ResultId" data-visible="false"></th>
+                                                <th data-property="AccountingNatureId" data-visible="false"></th>
+                                                <th data-property="AccountingNatureDescription">@Global.Nature</th>
+                                                <th data-property="AccountingAccountId" data-visible="false"></th>
+                                                <th data-property="AccountingAccountNumber">@Global.AccountingAccount</th>
+                                                <th data-property="ParameterId" data-visible="false"></th>
+                                                <th data-property="ParameterDescription">@Global.ParameterLabel</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="accountingAccountMaskListTemplate" type="text/template">
+    @*<div><label>Id: </label> {{AccountingAccountMaskId}}</div>*@
+    <div><label><b>@Global.ParameterLabel: </b></label> {{ParameterDescription}}</div>
+    <div><label><b>@Global.Position: </b></label> {{Position}}</div>
+    <div><label><b>@Global.Mask: </b></label> {{Mask}}</div>
+</script>
+<input type="hidden" id="ViewBagAccountLength" value="@ViewBag.AccountLength" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/Condition")
+}

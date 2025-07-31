@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="EventsView">
+  <collections>
+    <collection name="CoEventCompany"        type="Sistran.Core.Application.Events.Entities.CoEventCompany, 
+                 Core.Events.Entities"></collection>
+    <collection name="CoEventConditionGroup" type="Sistran.Core.Application.Events.Entities.CoEventConditionGroup, 
+                Core.Events.Entities"></collection>    
+    <collection name="CoEventGroup"          type="Sistran.Core.Application.Events.Entities.CoEventGroup, 
+                 Core.Events.Entities"></collection>
+    <collection name="CoEventGroupPrefix"    type="Sistran.Core.Application.Events.Entities.CoEventGroupPrefix, 
+                 Core.Events.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="CoEventCompany" destination="CoEventConditionGroup" name="CoEventCompanyCoEventConditionGroup" type="Inner">
+      <property left="ConditionId" type="Equal" right="ConditionId"></property>
+    </relation>
+    <relation source="CoEventCompany" destination="CoEventGroup" name="CoEventCompanyCoEventGroup" type="Inner">
+      <property left="GroupEventId" type="Equal" right="GroupEventId"></property>
+    </relation>
+    <relation source="CoEventCompany" destination="CoEventGroupPrefix" name="CoEventCompanyCoEventGroupPrefix" type="Inner">
+      <property left="GroupEventId" type="Equal" right="GroupEventId"></property>
+      <property left="EventId" type="Equal" right="EventId"></property>
+    </relation>
+  </relations>
+</view>

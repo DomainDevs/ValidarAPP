@@ -1,0 +1,161 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.FinalBalance;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.AccountingReports</li>
+        <li>@Global.AccountingLable</li>
+        <li class="active">@Global.FinalBalance</li>
+    </ol>
+}
+
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="FBReportCancel" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Clean
+            </button>
+            <button id="FBReportGenerate" class="btn btn-primary" role="button">
+                <i class="glyphicon glyphicon-play"></i>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+@section modals{
+    <div class="modal fade" id="modalMassiveTotRecordsFb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.TrialBalance</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="FBReportModal">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="FBReportForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.MonthFrom
+            </label>
+            @Html.DropDownList("FBReportMonthFrom", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Accounting/Common/GetYearMonths"),
+           data_id = "Id",
+           data_name = "Description",
+           data_val = "true",
+           data_native = "true",
+           data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="FBReportMonthFrom" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.MonthTo
+            </label>
+            @Html.DropDownList("FBReportMonthTo", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Accounting/Common/GetYearMonths"),
+           data_id = "Id",
+           data_name = "Description",
+           data_val = "true",
+           data_native = "true",
+           data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="FBReportMonthTo" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Global.Year</label>
+            <input class="form-control" placeholder='@Global.ExampleYear' data-val="true" data-val-required="@Global.RequiredField"
+                   id="FBReportYear" name="FBReportYear" type="text" onkeypress="return JustNumbers(event, this);" maxlength="4" min="1900" />
+            <span class="text-danger" data-valmsg-for="FBReportYear" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("FBReportBranch", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+           data_id = "Id",
+           data_name = "Description",
+           data_selectedid = @ViewBag.BranchDefault,
+           data_val = "true"
+       })
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkAllFb"></span><input type="checkbox" id="checkAll"> @Global.All
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkAssetsFb"></span><input type="checkbox" id="checkAssetsFb"> @Global.Assets
+        </div>
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkLiabilitiesFb"></span><input type="checkbox" id="checkLiabilitiesFb"> @Global.Liabilities
+        </div>
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkPatrimonyFb"></span><input type="checkbox" id="checkPatrimonyFb"> @Global.Patrimony
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkIncomeFb"></span><input type="checkbox" id="checkIncomeFb"> @Global.Income
+        </div>
+        <div class="uif-col-3">
+            <span class="glyphicon glyphicon-check" id="checkExpensesFb"></span><input type="checkbox" id="checkExpensesFb"> @Global.Expenses
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertFb"></div>
+        </div>
+    </div>
+   
+</form>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagAssetsFb" value="@ViewBag.Assets" />
+<input type="hidden" id="ViewBagLiabilitiesFb" value="@ViewBag.Liabilities" />
+<input type="hidden" id="ViewBagPatrimonyFb" value="@ViewBag.Patrimony" />
+<input type="hidden" id="ViewBagIncomeFb" value="@ViewBag.Income" />
+<input type="hidden" id="ViewBagExpensesFb" value="@ViewBag.Expenses" />
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/FinalBalance")
+}

@@ -1,0 +1,46 @@
+<map version="2.0" type="class" name="Insured" namespace="Sistran.Core.Application.UniquePerson" file-version="1.0" description="INSURED_ENTITY">
+  <properties>
+    <property name="IndividualId" type="Integer" key="true" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="InsuredCode" type="Integer" description="INSURED_CODE_PROPERTY" autonumber="Identity" key="true" />
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="InsProfileCode" type="Integer" description="INS_PROFILE_CODE_PROPERTY" />
+    <property name="InsSegmentCode" type="Integer" description="INS_SEGMENT_CODE_PROPERTY" />
+    <property name="EnteredDate" type="DateTime" description="ENTERED_DATE_PROPERTY" />
+    <property name="DeclinedDate" type="DateTime" nullable="true" description="DECLINED_DATE_PROPERTY" />
+    <property name="InsDeclinedTypeCode" type="Integer" nullable="true" description="INS_DECLINED_TYPE_CODE_PROPERTY" />
+    <property name="MainInsuredIndId" type="Integer" nullable="true" description="MAIN_INSURED_IND_ID_PROPERTY" />
+    <property name="OperativeEndorsement" type="Decimal" precision="19" scale="4" nullable="true" description="OPERATIVE_ENDORSEMENT_PROPERTY" />
+    <property name="CheckPayableTo" type="String" size="80" nullable="true" description="CHECK_PAYABLE_TO_PROPERTY" />
+    <property name="Annotations" type="String" size="80" nullable="true" description="ANNOTATIONS_PROPERTY" />
+    <property name="ReferredBy" type="String" size="30" nullable="true" description="REFERRED_BY_PROPERTY" />
+    <property name="IsCommercialClient" type="Integer" nullable="true" description="IS_COMMERCIAL_CLIENT_PROPERTY" />
+    <property name="IsSms" type="Integer" nullable="true" description="IS_SMS_PROPERTY" />
+    <property name="IsMailAddress" type="Integer" nullable="true" description="IS_MAIL_ADDRESS_PROPERTY" />
+    <property name="ModifyDate" type="DateTime" nullable="true" description="MODIFY_DATE_PROPERTY" />
+    <property name="IsMassive" type="Boolean" description="IS_MASSIVE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="INSURED" schema="UP" alias="INSURED" update="true">
+      <columns>
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" key="true" />
+        <column name="INSURED_CD" type="Int32" property="InsuredCode" allowNull="false" key="true"  identity="true" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" allowNull="false" />
+        <column name="INS_PROFILE_CD" type="Byte" property="InsProfileCode" allowNull="false" />
+        <column name="INS_SEGMENT_CD" type="Byte" property="InsSegmentCode" allowNull="false" />
+        <column name="ENTERED_DATE" type="DateTime" property="EnteredDate" allowNull="false" />
+        <column name="DECLINED_DATE" type="DateTime" property="DeclinedDate" />
+        <column name="INS_DECLINED_TYPE_CD" type="Byte" property="InsDeclinedTypeCode" />
+        <column name="MAIN_INSURED_IND_ID" type="Int32" property="MainInsuredIndId" />
+        <column name="OPERATIVE_ENDORSEMENT" type="Decimal" property="OperativeEndorsement" size="19" precision="19" scale="4" />
+        <column name="CHECK_PAYABLE_TO" type="String" property="CheckPayableTo" size="80" />
+        <column name="ANNOTATIONS" type="String" property="Annotations" size="80" />
+        <column name="REFERRED_BY" type="String" property="ReferredBy" size="30" />
+        <column name="IS_COMMERCIAL_CLIENT" type="Int32" property="IsCommercialClient" />
+        <column name="IS_SMS" type="Int32" property="IsSms" />
+        <column name="IS_MAIL_ADDRESS" type="Int32" property="IsMailAddress" />
+        <column name="MODIFY_DATE" type="DateTime" property="ModifyDate" />
+        <column name="IS_MASSIVE" type="Boolean" property="IsMassive" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

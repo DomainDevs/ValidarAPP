@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskFidelityView">
+  <collections>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskFidelity" type="Sistran.Core.Application.Issuance.Entities.RiskFidelity, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Risk" type="Sistran.Core.Application.Issuance.Entities.Risk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskBeneficiary" type="Sistran.Core.Application.Issuance.Entities.RiskBeneficiary, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskClause" type="Sistran.Core.Application.Issuance.Entities.RiskClause, 
+                Core.Issuance.Entities"></collection>
+    
+  </collections>
+  <relations>
+    <relation source="EndorsementRisk" destination="RiskFidelity" name="EndorsementFidelity" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="Risk" destination="EndorsementRisk" name="EndorsementRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskBeneficiary" destination="EndorsementRisk" name="EndorsementRiskBeneficiary" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="RiskClause" name="EndorsementRiskClause" type="left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+
+  </relations>
+</view>

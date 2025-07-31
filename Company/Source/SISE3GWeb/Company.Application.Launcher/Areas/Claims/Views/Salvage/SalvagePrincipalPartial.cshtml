@@ -1,0 +1,157 @@
+﻿﻿@model Sistran.Core.Application.ClaimServices.DTOs.Salvage.SalvageDTO
+
+<div id="accSalvageSearchClaim">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <h5>
+                <strong>@Resources.Language.RecoverySearchClaim</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-2">
+            <label >@Resources.Language.Branch</label>
+            <select class="uif-select form-control" id="selectBranch" data-id="Id" data-name="Description" name="BranchId"
+                    data-val="true" data-native="false" data-filter="true"></select>
+            <span class="text-danger" data-valmsg-for="BranchId" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.Prefix</label>
+            <select class="uif-select form-control" id="selectPrefix" data-id="Id" data-name="Description" name="PrefixId"
+                    data-val="true" data-native="false" data-filter="true"></select>
+            <span class="text-danger" data-valmsg-for="PrefixId" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelNumberPolicy</label>
+            <input type="text" class="uif-input rightAlign" id="inputPolicyDocumentNumber" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                   data-name="Description" name="PolicyDocumentNumber" required onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+            <span class="text-danger" data-valmsg-for="PolicyDocumentNumber" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.ClaimNumber</label>
+            <input type="text" class="uif-input rightAlign" id="inputClaimNumber" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                   data-name="Description" name="ClaimNumber" required onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+            <span class="text-danger" data-valmsg-for="ClaimNumber" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-2">
+            <div class="without-label">
+                <button id="btnSalvageSearch" tabindex="0" class="btn btn-default secondary-Colombia" type="button"> <i class="fa fa-search" aria-hidden="true"></i> @Resources.Language.LabelSearch </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="accPolicyInformation">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <h5>
+                <strong>@Resources.Language.PolicyInformation</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.Branch</label>
+            <input type="text" name="_branch" value="" id="_branch" class="uif-input" disabled = "disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.Prefix</label>
+            <input type="text" name="_prefix" value="" id="_prefix" class="uif-input" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelNumberPolicy</label>
+            <input type="text" name="_policy" value="" id="_policy" class="uif-input rightAlign" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.PolicyEndorsementNumber</label>
+            <input type="text" name="_endorsement" value="" id="_endorsement" class="uif-input rightAlign" disabled="disabled" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelInsured</label>
+            <input type="text" name="_nameInsured" value="" id="_nameInsured" class="uif-input" disabled="disabled" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="without-label">
+                <button id="btnGetPolicyInfo" tabindex="0" class="btn btn-default secondary-Colombia" type="button"> <i class="fa fa-search" aria-hidden="true"></i> @Resources.Language.PolicyConsult </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div id="accSubClaimInformation">
+            <h5>
+                <strong>@Resources.Language.SubClaims</strong>
+            </h5>
+            <table class="uif-table" id="tblSubClaims" data-title="<b>@Resources.Language.SubClaims</b>" data-add="false" data-edit="false" data-delete="false" data-filter="false" data-paginate="10" data-selectiontype="single">
+                <thead>
+                    <tr>
+                        <th data-property="ClaimId" data-visible="false"><b>ClaimId</b></th>
+                        <th data-property="SubClaim"><b>@Resources.Language.SubClaim</b></th>
+                        <th data-property="RiskNumber"><b>@Resources.Language.RiskNumber</b></th>
+                        <th data-property="RiskDescription"><b>@Resources.Language.Risk</b></th>
+                        <th data-property="CoverageDescription"><b>@Resources.Language.Coverage</b></th>
+                        <th data-property="Insured"><b>@Resources.Language.InsuredOrThird</b></th>
+                        <th data-property="Currency"><b>@Resources.Language.Currency</b></th>
+                        <th data-property="RiskDescription@*Salvage*@"><b>@Resources.Language.Salvage</b></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div id="accSalvageInformation">
+            <h5>
+                <strong>@Resources.Language.SalvageSettings</strong>
+            </h5>
+            <table class="uif-table" id="tblSalvages" data-title="<b>@Resources.Language.Salvages</b>" data-source="null" data-add="true" data-edit="true" data-delete="true" data-filter="false" data-paginate="false">
+                <thead>
+                    <tr>
+                        <th data-property="Id"><b>@Resources.Language.SalvageShortNumber</b></th>
+                        <th data-property="CreationDate"><b>@Resources.Language.NoticeDate</b></th>
+                        <th data-property="Description"><b>@Resources.Language.SalvageDescription</b></th>
+                        <th data-property="Location"><b>@Resources.Language.Localitation</b></th>
+                        <th data-property="UnitsQuantity"><b>@Resources.Language.UnitsQuantityAbbreviation</b></th>
+                        <th data-property="EstimatedSale" data-type="currency"><b>@Resources.Language.EstimatedOfSale</b></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div id="accSaleInformation">
+            <h5>
+                <strong>@Resources.Language.Sales</strong>
+            </h5>
+            <table class="uif-table" id="tblSales" data-title="<b>@Resources.Language.Sales</b>" data-selectiontype="none" data-add="true" data-edit="true" data-delete="false" data-filter="false" data-paginate="false">
+                <thead>
+                    <tr>
+                        <th data-property="Id"><b>@Resources.Language.SaleShortNumber</b></th>
+                        <th data-property="Date"><b>@Resources.Language.SaleDate</b></th>
+                        <th data-property="Description"><b>@Resources.Language.SaleDescription</b></th>
+                        <th data-property="BuyerFullName"><b>@Resources.Language.Buyer</b></th>
+                        <th data-property="QuantitySold"><b>@Resources.Language.UnitsQuantityAbbreviation</b></th>
+                        <th data-property="TotalAmount" data-type="currency"><b>@Resources.Language.SaleAmount</b></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.Endorsement.Models.ChangePolicyHolderViewModel
+
+<form id="formSavePolicyHolder" class="form modal-Colombia">
+    @Html.HiddenFor(model => model.IsPrincipal, new { id = "hiddenIsPrincipal" })
+    <div class="row">
+        <div class="uif-col-6" id="AddPolicyHolder">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelPolicyHolderName</label>
+                    @Html.TextBoxFor(model => model.ChangePolicyHolderName, new { id = "inputChangePolicyHolderName", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderKeyName })
+                    @Html.ValidationMessageFor(model => model.ChangePolicyHolderName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelPolicyHolderAddress</label>
+                    @Html.TextBoxFor(model => model.ChangePolicyHolderAddress, new { id = "inputChangePolicyHolderAddress", @class = "rightAlign", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ChangePolicyHolderAddress)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6" id="addPolicyHolderPhone">
+                    <label>@Resources.Language.LabelPolicyHolderPhone</label>
+                    @Html.TextBoxFor(model => model.ChangePolicyHolderPhone, new { id = "inputChangePolicyHolderPhone", @class = "rightAlign", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ChangePolicyHolderPhone)
+                </div>
+                <div class="uif-col-6" id="addPolicyHolderEmail">
+                    <label>@Resources.Language.LabelPolicyHolderEmail</label>
+                    @Html.TextBoxFor(model => model.ChangePolicyHolderEmail, new { id = "inputChangePolicyHolderEmail", @class = "rightAlign", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ChangePolicyHolderEmail)
+                </div>
+            </div>
+
+            <div class="row" id="checkboxIsPrincipal">
+                <div class="uif-col-3">
+                    <input type="checkbox" name="agentIsPrincipal" value=" " id="policyHolderIsPrincipal" />
+                    <label for="agentIsPrincipal">@Resources.Language.LabelPrincipalCheckBox</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6" id="listPolicyHolder">
+            <div id="listSaveChangePolicyHolder" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6" id="btnsAgent">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnChangePolicyHolderCancel">
+                    @Resources.Language.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btnChangePolicyHolderAccept">
+                    @Resources.Language.AddForm
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

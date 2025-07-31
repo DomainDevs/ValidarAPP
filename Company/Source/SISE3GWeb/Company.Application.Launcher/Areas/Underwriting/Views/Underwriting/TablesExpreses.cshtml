@@ -1,0 +1,90 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.TablesExpresesModelsView
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.TablesExpresesTitle
+    </div>
+    <div class="column-30 even">
+    </div>
+</script>
+<script id="TablesExpresesTemplate" type="text/template">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div><strong class="success"><strong>({{Id}}) {{Description}}</strong> </strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div><strong class="warning"><strong>({{Id}}) {{Description}}</strong> </strong></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div><strong class="danger"><strong>({{Id}}) {{Description}}</strong> </strong></div>
+    {{else}}
+    <div><strong>({{Id}}) {{Description}}</strong></div>
+    {{/ifCond}}
+    <div><p> {{TaxeType}} {{Taxe}}</p></div>
+    <div><p>{{RuleDescription}}</p></div>
+</script>
+<form id="formTablesExpreses" class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.TableExpresesParameterizedExpenses</label>
+                    <select class="uif-select form-control" id="dllParameterizedExpenses"
+                            data-id="Id" data-name="Description" name="parameterizedExpenses"
+                            data-val="true" data-val-required="Se revento"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(m => m.parameterizedExpenses)
+                </div>
+                <div class="uif-col-12">
+                    <label>@Resources.Language.TablesExpresesExecutionType</label>
+                    @Html.TextBoxFor(x => x.ExecuteType, new { id = "inputExecuteType", disabled = "disabled" })
+                </div>
+            </div>
+            <div class="row" id="containerTaxes">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.TablesExpresesTaxesType</label>
+                    @Html.TextBoxFor(x => x.TaxesType, new { id = "inputTaxesType", disabled = "disabled" })
+                </div>
+                <div class="uif-col-12">
+                    <label>@Resources.Language.TablesExpresesTaxes</label>
+                    @Html.TextBoxFor(m => m.Taxes, new { id = "inputTaxes" })
+                </div>
+            </div>
+            <div class="row" id="containerRules">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelRulesPackage</label>
+                    @Html.TextBoxFor(x => x.RuleDescription, new { id = "inputRuleDescription" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="without-label">
+                        <input type="checkbox" id="inputMandatory" name="inputMandatory" />
+                        <label for="inputMandatory">@Resources.Language.TablesExpresesRequired</label>
+                    </div>
+                </div>
+                <div class="uif-col-12">
+                    <div class="without-label">
+                        <input type="checkbox" id="inpuInitiallyIncluded" name="inpuInitiallyIncluded" />
+                        <label for="inpuInitiallyIncluded">@Resources.Language.TablesExpresesInitiallyIncluded</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listViewTablesExpreses" class="uif-listview"></div>
+            <br />
+            <div class="uif-col-14">
+                @Html.TextBoxFor(m => m.TotalTablesExpreses, new { id = "inputTotalTablesExpreses", placeholder = "Total Gastos de Suscripción", disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewTablesExpreses">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAcceptTablesExpreses">@Resources.Language.Add </button>
+            </div>
+        </div>
+    </div>
+</form>
+

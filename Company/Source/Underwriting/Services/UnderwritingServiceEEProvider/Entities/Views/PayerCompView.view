@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="PayerCompView">
+  <collections>
+    <collection name="PayerComp" type="Sistran.Core.Application.Issuance.Entities.PayerComp, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, 
+                 Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+  <relation source="PayerComp" destination="Policy" name="PayerCompPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="PayerComp" destination="Coverage" name="PayerCompCoverage" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="PayerComp" destination="LineBusiness" name="EndorsemenGroupEndorsement" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+  
+  </relations>
+</view>

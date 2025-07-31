@@ -1,0 +1,207 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.EntryConsultationModel
+
+@{
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.AccountingEntry</a></li>
+        <li class="active">@Global.ConsultationReversion</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-default" role="button" id="RevertLedgerEntry" onclick="return false">
+            <i class="fa fa-undo"></i>
+            @Global.Revert
+        </button>
+        <button class="btn btn-primary" role="button" id="PrintLedgerEntry" onclick="return false">
+            <i class="fa fa-print"></i>
+            @Global.PrintReport
+        </button>
+    </footer>
+}
+
+@section Modals
+{
+    <div class="uif-modal" id="revertLedgerEntryModal">
+        <div class="uif-modalbody">
+            <div class="form">
+                <label>@Global.ReverseEntry</label>
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                <button type="button" class="btn btn-primary" id="LedgerEntryModalYes">@Global.Yes</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-modal" id="ledgerEntrySearchModal">
+        <div class="uif-modalbody">
+            @Html.Partial("LedgerEntrySearchModal")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="CancelEntryDetails" data-dismiss="modal">@Global.Cancel</button>
+            <button type="submit" class="btn btn-primary" id="LedgerEntryDetails" onclick="return false">@Global.Details</button>
+        </div>
+    </div>
+}
+
+<div class="uif-alert" id="mainAlert"></div>
+<form id="searchForm">
+    <div class="uif-panel">
+        <div class="uif-row">
+            <div class="uif-col-4">
+                @Html.LabelFor(model => model.TransactionNumber)
+                @Html.TextBoxFor(model => model.TransactionNumber, new { id = "transactionNumber" })
+                @Html.ValidationMessageFor(model => model.TransactionNumber)
+            </div>
+            <div class="uif-col-4">
+                @Html.LabelFor(model => model.EntryYear)
+                @Html.TextBoxFor(model => model.EntryYear, new { id = "ledgerEntryYear", maxlength = "4" })
+                @Html.ValidationMessageFor(model => model.EntryYear)
+            </div>
+            <div class="uif-col-4">
+                @Html.LabelFor(model => model.EntryMonth)
+                @Html.DropDownListFor(model => model.EntryMonth, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetMonths"), data_id = "Id", data_name = "Description", id = "ddlLedgerEntryMonth" })
+                @Html.ValidationMessageFor(model => model.EntryMonth)
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label>@Global.Branch</label>
+                <select class="uif-select form-control" id="ddlBranch"
+                        data-source="@Url.Content("~/GeneralLedger/Base/GetBranches")"
+                        data-id="Id" data-name="Description" name="BranchId"
+                        data-selectedid=@ViewBag.BranchDefault></select>
+
+            </div>
+            <div class="uif-col-4">
+                <label>@Global.Destination</label>
+                <select class="uif-select form-control" id="ddlDestination" 
+                        data-source="@Url.Content("~/GeneralLedger/Base/GetDestinations")" 
+                        data-id="DestinationId" data-name="Description" name="DestinationId"></select>
+            </div>
+            <div class="uif-col-4">
+                <label>@Global.VoucherType</label>
+                <select class="uif-select form-control" id="ddlAccountingMovementType" data-source="@Url.Content("~/GeneralLedger/Base/GetAccountingMovementTypes")" data-id="AccountingMovementTypeId" data-name="Description" name="AccountingMovementTypeId"></select>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="form-footer">
+                    <button class="btn btn-default" role="button" id="ClearLedgerEntrySearch" onclick="return false">
+                        <i class="fa fa-trash-o"></i>
+                        @Global.Clean
+                    </button>
+                    <button class="btn btn-primary" role="button" id="SearchLedgerEntry" onclick="return false">
+                        <i class="fa fa-search"></i>
+                        @Global.Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" data-title="@Global.AccountingAccount" data-source="null" id="tblEntries" data-add="false" data-edit="false" data-delete="false" data-filter="true" data-paginate="true">
+            <thead>
+                <tr>
+                    <th data-property="EntryId" data-visible="false">EntryId</th>
+                    <th data-property="AccountingAccountId" data-visible="false">AccoutingAccountId</th>
+                    <th data-property="AccountingAccountNumber">@Global.LedgerAccountNumber</th>
+                    <th data-property="AccountingAccountName">@Global.AccountingAccountName</th>
+                    <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+                    <th data-property="CurrencyDescription">@Global.Currency</th>
+                    <th data-property="AccountingNature" data-visible="false">AccountingNature</th>
+                    <th data-property="AccountingNatureDescription" data-visible="false">@Global.Nature</th>
+                    <th data-property="DebitsAmountValue" data-visible="false">@Global.Debits</th>
+                    <th data-property="DebitsAmountLocalValue">@Global.Debits</th>
+                    <th data-property="CreditsAmountValue" data-visible="false">@Global.Credits</th>
+                    <th data-property="CreditsAmountLocalValue">@Global.Credits</th>
+                    <th data-property="Date" data-visible="false">@Global.OperationDate</th>
+                    <th data-property="EntryNumber" data-visible="false">@Global.JournalEntryNumber</th>
+                    <th data-property="EntryDescription">@Global.MovementDescription</th>
+                    <th data-property="BranchId" data-visible="false">BranchId</th>
+                    <th data-property="BranchDescription" data-visible="false">@Global.Branch</th>
+                    <th data-property="UserId" data-visible="false">UserId</th>
+                    <th data-property="UserName" data-visible="false">@Global.User</th>
+                    <th data-property="Status" data-visible="false">Status</th>
+                    <th data-property="StatusDescription">@Global.Status</th>
+                    <th data-property="DailyEntryHeaderId" data-visible="false">LedgerEntryId</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<br />
+<ul class="uif-tab">
+    <li class="active"><a href="#tabSingle">@Global.CostCenter</a></li>
+    <li><a href="#tabSelected">@Global.Analysis</a></li>
+    <li><a href="#tabDepended">@Global.Postdated</a></li>
+</ul>
+<div class="uif-tab-content">
+    <div class="active" id="tabSingle">
+        <table id="tblCostCenter" data-title="@Global.CostCenter" class="uif-table" data-edit="false" data-delete="false" data-filter="false" data-add="false" data-paginate="false">
+            <thead>
+                <tr>
+                    <th data-property="CostCenterId">@Global.Id</th>
+                    <th data-property="Description">@Global.Description</th>
+                    <th data-property="PercentageAmount">@Global.Percentage</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="tabSelected">
+        <table id="tblAnalysis" class="uif-table" data-title="@Global.Analysis" data-source="null" data-edit="false" data-delete="false" data-filter="false" data-paginate="false" data-add="false">
+            <thead>
+                <tr>
+                    <th data-property="EntryAnalysisId" data-visible="false">EntryAnalysisId</th>
+                    <th data-property="AnalysisId" data-visible="false">AnalysisId</th>
+                    <th data-property="AnalysisDescription">@Global.Code</th>
+                    <th data-property="AnalysisConceptId" data-visible="false">AnalysConceptId</th>
+                    <th data-property="AnalysisConceptDescription">@Global.Concept</th>
+                    <th data-property="ConceptKey">@Global.Key</th>
+                    <th data-property="EntryAnalysisDescription">@Global.Description</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="tabDepended">
+        <table id="tblPostdated" class="uif-table" data-title="@Global.Postdated" data-source="null" data-edit="false" data-delete="false" data-filter="false" data-paginate="false" data-add="false">
+            <thead>
+                <tr>
+                    <th data-property="PostDateTypeId" data-visible="false">PostDateTypeId</th>
+                    <th data-property="PostDateTypeDescription">@Global.Type</th>
+                    <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+                    <th data-property="CurrencyDescription">@Global.Currency</th>
+                    <th data-property="ExchangeRate">@Global.Exchange</th>
+                    <th data-property="IssueAmount">@Global.IssueAmount</th>
+                    <th data-property="LocalAmount">@Global.LocalAmount</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagReverted" value="@ViewBag.Reverted" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/MainLedgerEntrySearch")
+}
+
+

@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+}
+
+@*TITULO*@
+<script id="title-template" type="text/template">
+    <div class="column-50">
+        <div id="Title">@Resources.Language.DecisionTables</div>
+    </div>
+    <div class="column-20 no-padding">
+        <select class="uif-select" id="ddlPackage" data-native="false" data-val="true"  data-id="PackageId" data-name="Description"></select>
+    </div>
+    <div class="column-30 even">
+        <input class="uif-input-search" type="text" placeholder="@Resources.Language.SearchForDecisionTable" id="SearchDecisionTable" />
+        <button class="btn btn-default" id="btnSearchAdvDecisionTable"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+@**@
+
+@*FOOTER*@
+<script id="footer-template" type="text/template">
+    <button type="button" class="btn btn-default btn-sm" id="btnExit">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+        <span aria-hidden="true">@Resources.Language.ButtonExit</span>
+    </button>
+    <button type="button" class="btn btn-default btn-sm" id="btnExportDecisionTables">
+        <i class="fa fa-download" aria-hidden="true"></i>
+        <span aria-hidden="true">@Resources.Language.ListTables</span>
+    </button>
+    <button type="button" class="btn btn-default btn-sm" id="btnExportDecisionTable">
+        <i class="fa fa-download" aria-hidden="true"></i>
+        <span aria-hidden="true">@Resources.Language.DownloadTable</span>
+    </button>
+    <button type="button" class="btn btn-default btn-sm" id="LoadFromFile">
+        <i class="fa fa-upload" aria-hidden="true"></i>
+        <span aria-hidden="true">@Resources.Language.UploadTable</span>
+    </button>
+    <button type="button" class="btn btn-primary btn-sm" id="btnNewTable">
+        <i class="fa fa-file-o" aria-hidden="true"></i>
+        <span aria-hidden="true">@Resources.Language.New</span>
+    </button>
+</script>
+@**@
+
+@*TEMPLATES*@
+<script id="template-DecisionTable" type="text/template">
+    <div>
+        <div>
+            Id <strong>{{RuleBaseId}}</strong>
+        </div>
+        <div>
+            <strong>@Resources.Language.Description: </strong> {{Description}}
+        </div>
+        <div>
+            <strong>@Resources.Language.LabelModule: </strong> {{Package.Description}}
+        </div>
+        <div>
+            <strong>@Resources.Language.LabelLevels: </strong>{{Level.Description}}
+        </div>
+
+        <div>
+            <strong>@Resources.Language.labelPublished: </strong>
+            {{#if IsPublished}}
+            @Resources.Language.LabelIf
+            {{else}}
+            @Resources.Language.LabelNot
+            {{/if}}
+        </div>
+        <div>
+            <strong>@Resources.Language.DateLastModified: </strong> {{CurrentFrom}}
+        </div>
+        <div>
+            <strong>@Resources.Language.LabelVersion: </strong>{{Version}}
+        </div>
+    </div>
+</script>
+@**@
+
+
+<form class="form">
+    <div class="uif-row">
+        <div class="uif-col-8">
+            <div class="uif-row">
+                <div class="uif-col-xs-12">
+                    <div id="lsvDecisionTable" class="uif-listview">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-4">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="uif-right-bar">
+                        <ul>
+                            <li>
+                                <a id="btnModifyConcepts">@Resources.Language.ModifyConcepts</a>
+                            </li>
+                            <li>
+                                <a id="btnModifyData">@Resources.Language.ModifyData</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

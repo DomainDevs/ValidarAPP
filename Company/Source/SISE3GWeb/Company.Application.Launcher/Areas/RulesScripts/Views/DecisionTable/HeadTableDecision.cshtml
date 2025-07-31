@@ -1,0 +1,178 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.RulesScripts.Models.DecisionTableViewModel
+
+@{
+    //ViewBag.Title = "Guiones";
+}
+
+<form class="form">
+    <div class="uif-panel">
+        <!-- filter  -->
+        <div class="uif-row" id="filtrarGuiones">
+            <div class="uif-col-12">
+
+                <div class="uif-row">
+                    <div class="uif-col-xs-12">
+                        <label for="">
+                            Nombre de la Tabla
+                        </label>
+                        @Html.TextBoxFor(model => model.RuleBase.Description)
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Resources.Language.LabelPackages</label>
+                        <select class="uif-select form-control"
+                                id="selectPackage"
+                                data-selectedid="@Model.RuleBase.PackageId"
+                                data-filter="true"
+                                data-source="@Url.Content("~/RulesScripts/RuleSet/GetPackages")"
+                                data-id="PackageId"
+                                data-name="Description"></select>
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Resources.Language.LabelLevels</label>
+                        <select class="uif-select form-control" id="selectLevel"
+                                data-selectedid="@Model.RuleBase.LevelId"
+                                data-source=""
+                                data-id="LevelId"
+                                data-name="Description"
+                                data-native="false"></select>
+                    </div>
+                </div>
+
+                <div class="uif-row" id="BotonesAccionesCondiciones">
+                    <div class="uif-col-xs-6">
+                        <button type="button" class="btn btn-primary" id="btnCondicion">
+                            <div>
+                                <i class="fa fa-plus"></i>
+                                <div></div>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <button type="button" class="btn btn-primary" id="btnAccion">
+                            <div>
+                                <i class="fa fa-plus"></i>
+                                <div></div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="uif-row" id="accionesCondiciones">
+                    <div class="uif-col-xs-6">
+                        <div id="ListCondition" class="uif-listview">
+                            <div class="header">
+                                <div class="uif-col-xs-8">
+                                    <h4>@Resources.Language.LabelConditions</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uif-col-xs-6">
+                        <div id="ListAction" class="uif-listview">
+                            <div class="header">
+                                <div class="uif-col-xs-8">
+                                    <h4>@Resources.Language.Actions</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- /filter  -->
+
+        <div class="uif-row">
+            <div class="uif-col-12" id="addGuion" hidden>
+                @Html.Action("GuionAdd", "Scripts", new { area = "RulesScripts" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(m => m.RuleBase.PackageId)
+        @Html.HiddenFor(m => m.RuleBase.RuleBaseId)
+</form>
+
+
+
+<!-- start footer -->
+@section Toolbar
+{
+    <footer>
+        <div class="app-header">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div id="buttonsUnderwriting" class="pull-right">
+                        <button type="button" class="btn btn-default btn-sm" id="btnExit">
+                            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.ButtonClose</span>
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm" id="btnRecord">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+}
+<!-- end footer -->
+
+@section Modals
+{
+    <!-- Modal add condicion -->
+    <form id="formModalAddCondition" class="form">
+        <div class="uif-modal" id="ModalHeadCondition">
+            <div class="uif-modalbody">
+                @Html.Partial("HeadModalCondition")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="submit" class="btn btn-primary" id="btnSaveAddCondition" onclick="return false">@Resources.Language.ButtonSave</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Modal Add accion -->
+    <form id="formModalAddAction" class="form">
+        <div class="uif-modal" id="ModalHeadAction">
+            <div class="uif-modalbody">
+                @Html.Partial("HeadModalAction")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="submit" class="btn btn-primary" id="btnSaveAddAction" onclick="return false">@Resources.Language.ButtonSave</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+            </div>
+        </div>
+    </form>
+}
+
+<!-- start template -->
+<script id="template-RuleSetList" type="text/template">
+
+    <div>
+        {{Description}}
+    </div>
+    <div class="text-right vertical-center">
+    </div>
+
+</script>
+<!-- end template -->
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/SearchCombo/Obj.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/SearchCombo/SearchCombo.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/DecisionTable/HeadTableDecision.js")"></script>
+
+}
+
+
+
+

@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+<script id="display-template-group" type="text/template">
+    <div><b>{{GroupEventDescription}}</b></div>
+    <div><b>@Resources.Language.LabelModule </b>{{NameModule}} -<b> @Resources.Language.LabelSubmodule </b>{{NameSubmodule}}</></div>
+</script>
+
+<form id="formEventsGroup" autocomplete="off" class="form">
+    <div class="row">
+        <div class="uif-col-5">
+            <input type="text" name="Index" id="indexId" hidden />
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">ID Grupo de Eventos</label>
+                    <input class="text" type="text" name="Id" data-val="true" data-id="Id" id="inputGroupEvent" data-val-required="@Resources.Language.ErrorEmptyRequiredFields" onkeypress="return event.charCode >= 48 && event.charCode <= 58" required>
+                    <span class="text-danger" data-valmsg-for="Id" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">Nombre Grupo de Evento</label>
+                    <input class="text" type="text" name="GroupEventDescription" data-val="true" data-id="Id" id="inputNameGroupEvent" data-val-required="@Resources.Language.ErrorEmptyRequiredFields" required>
+                    <span class="text-danger" data-valmsg-for="GroupEventDescription" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">Modulo</label>
+                    <select class="uif-select form-control" id="selectModule" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                            data-id="Id" data-name="Description" name="ModuleId" data-native="false" data-filter="true" required></select>
+                    <span class="text-danger" data-valmsg-for="ModuleId" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">SubModulo</label>
+                    <select class="uif-select form-control" id="selectSubModule" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                            data-id="Id" data-name="Description" name="SubmoduleId" data-native="false" data-filter="true" required></select>
+                    <span class="text-danger" data-valmsg-for="SubmoduleId" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>Procedimiento Autorización</label>
+                    <input class="form-control" type="text" name="ProcedureAuthorized" data-val="true" data-id="Id" id="inputAuthorizationProcedure">
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>Procedimiento de Rechazo</label>
+                    <input class="form-control" type="text" name="ProcedureReject" data-val="true" data-id="Id" id="inputRejectionProcedure">
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>Reporte de Autorización</label>
+                    <input class="form-control" type="text" name="AuthorizationReport" data-val="true" data-id="Id" id="inputAuthorizationReport">
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-1 without-label">
+            <input type="checkbox" id="chkEnabled" name="chkEnabledInd" />
+            <label for="chkEnabled">Habilitado</label>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-listview" id="listViewGroup"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewGroupEvent" value="Cancelar">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAddGroupEvent" value="Guardar" >@Resources.Language.AddForm</button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-col-12">
+                <div class="uif-summary">
+                    <div class="items">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

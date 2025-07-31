@@ -1,0 +1,127 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="main-content">
+
+    <div class="uif-row background-grey grow">
+        <div class="uif-col-xs-12">
+            <form id="BillSearchForm" onsubmit="return false">
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label class="field-required">@Global.Branch</label>
+                        <select class="uif-select form-control" id="BranchBillSearch" data-id="Id" data-name="Description"
+                                data-val-required='@Global.RequiredField'
+                                data-source="@Url.Content("~/BillSearch/LoadBranch")"
+                                data-native="true" data-selectedid="@ViewBag.BranchDefault"
+                                data-val="true" name="BranchBillSearch"></select>
+                        <span class="text-danger" data-valmsg-for="BranchBillSearch" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">@Global.User</label>
+                        <br />
+                        <input type="text" maxlength="40" class="uif-autocomplete" id="UserSearch" name="UserSearch"
+                               data-source="@Url.Action("GetUsers", "BillSearch")" data-displaykey="value" placeholder="" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">@Global.IncomeConcept</label>
+                        @Html.DropDownList("IncomeConceptBillSearch", Enumerable.Empty<SelectListItem>(), new
+                                       {
+                                           @class = "uif-select form-control",
+                                           data_source = @Url.Content("~/Accounting/Common/GetIncomeConcepts"),
+                                           data_id = "Id",
+                                           data_name = "Description",
+                                           data_native = "true"
+                                       })
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-2">
+                        <label class="control-label">@Global.StartDate</label>
+                        <br />
+                        <input type="text" id="StartDateBillSearch" name="StartDateBillSearch"
+                               data-mask="99/99/9999" class="uif-datepicker" maxlength="10" />
+                    </div>
+                    <div class="uif-col-2">
+                        <label class="control-label">@Global.DateTo</label>
+                        <br />
+                        <input type="text" id="EndDateBillSearch" name="EndDateBillSearch"
+                               data-mask="99/99/9999" class="uif-datepicker" maxlength="10" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">@Global.TransactionNumber</label>
+                        <br />
+                        <input type="text" id="BillSearchNumber" name="BillSearchNumber"
+                               onkeypress=" return JustNumbers(event, this); " maxlength="10" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">@Global.Status</label>
+                        <select class="uif-select form-control" id="ReceiptStatus" data-id="Id" data-name="Description"
+                                data-source="@Url.Content("~/BillSearch/GetReceiptStatus")"
+                                data-native="true" data-val="true" name="ReceiptStatus">
+                        </select>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertBillSearch"></div>
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="form-footer">
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0510"))
+                            {
+                                <button id="CleanSearch" class="btn btn-default" role="button">
+                                    <i class="fa fa-paint-brush"></i>  @Global.Clean
+                                </button>
+                            }
+
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0509"))
+                            {
+                                <button type="submit" id="BillSearch" class="btn btn-primary" role="button" onclick="return false">
+                                    <i class="fa fa-search"></i>  @Global.Search
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <table class="uif-table" id="SearchBillsIncomeTable" data-exporttocsv="false" 
+                           data-edit="true" data-delete="false"
+                           data-filter="false"
+                           data-paginate="true"
+                           data-title="@Global.SearchLabel"
+                           data-serverside="false">
+                        <thead>
+                            <tr>
+                                <th data-visible="false" data-property="BillCode">@Global.BillNum</th>
+                                <th data-property="TechnicalTransaction">@Global.TransactionNumber</th>
+                                <th data-visible="false" data-property="BillStatus">BillStatus</th>
+                                <th data-property="StatusDescription">@Global.Status</th>
+                                <th data-property="PaymentsTotal">@Global.BillTotal</th>
+                                <th data-property="AccountName">@Global.User</th>
+                                <th data-visible="false" data-property="BranchCode">BranchCode</th>
+                                <th data-property="BranchDescription">@Global.Branch</th>
+                                <th data-property="RegisterDate">@Global.RegisterDate</th>
+                                <th data-property="AccountingDate">@Global.AccountingDate</th>
+                                <th data-visible="false" data-property="PayerId">PayerId</th>
+                                <th data-property="Payer">@Global.Depositor</th>
+                                <th data-visible="false" data-property="BillControlCode">BillControlCode</th>
+                                <th data-visible="false" data-property="DocumentNumber">DocumentNumber</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+

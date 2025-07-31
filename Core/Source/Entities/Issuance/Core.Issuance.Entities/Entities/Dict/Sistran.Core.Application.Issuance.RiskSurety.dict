@@ -1,0 +1,32 @@
+<map version="2.0" type="class" name="RiskSurety" namespace="Sistran.Core.Application.Issuance" file-version="1.0" description="RISK_SURETY_ENTITY">
+  <properties>
+    <property name="RiskId" type="Integer" key="true" description="RISK_ID_PROPERTY" />
+    <property name="IndividualId" type="Integer" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="SuretyContractTypeCode" type="Integer" description="SURETY_CONTRACT_TYPE_CODE_PROPERTY" />
+    <property name="SuretyContractCategoriesCode" type="Integer" nullable="true" description="SURETY_CONTRACT_CATEGORIES_CODE_PROPERTY" />
+    <property name="BidNumber" type="String" size="20" nullable="true" description="BID_NUMBER_PROPERTY" />
+    <property name="ProyectName" type="String" size="100" nullable="true" description="PROYECT_NAME_PROPERTY" />
+    <property name="FundedBy" type="String" size="100" nullable="true" description="FUNDED_BY_PROPERTY" />
+    <property name="ContractAddress" type="String" size="180" nullable="true" description="CONTRACT_ADDRESS_PROPERTY" />
+    <property name="ContractAmount" type="Decimal" precision="18" scale="2" description="CONTRACT_AMOUNT_PROPERTY" />
+    <property name="PileAmount" type="Decimal" precision="18" scale="5" nullable="true" description="PILE_AMOUNT_PROPERTY" />
+    <property name="IsFacultative" type="Boolean" nullable="true" description="IS_FACULTATIVE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="RISK_SURETY" schema="ISS" alias="RISK_SURETY" update="true">
+      <columns>
+        <column name="RISK_ID" type="Int32" property="RiskId" key="true" />
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" allowNull="false" />
+        <column name="SURETY_CONTRACT_TYPE_CD" type="Int32" property="SuretyContractTypeCode" allowNull="false" />
+        <column name="SURETY_CONTRACT_CATEGORIES_CD" type="Int32" property="SuretyContractCategoriesCode" />
+        <column name="BID_NUMBER" type="String" property="BidNumber" size="20" />
+        <column name="PROYECT_NAME" type="String" property="ProyectName" size="100" />
+        <column name="FUNDED_BY" type="String" property="FundedBy" size="100" />
+        <column name="CONTRACT_ADDRESS" type="String" property="ContractAddress" size="180" />
+        <column name="CONTRACT_AMT" type="Decimal" property="ContractAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="PILE_AMT" type="Decimal" property="PileAmount" size="19" precision="18" />
+        <column name="IS_FACULTATIVE" type="Boolean" property="IsFacultative" allowNull="true" />
+      </columns>
+    </table>
+  </tables>
+</map>

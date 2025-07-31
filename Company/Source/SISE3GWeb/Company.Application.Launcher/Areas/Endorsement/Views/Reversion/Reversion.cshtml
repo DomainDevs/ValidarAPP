@@ -1,0 +1,147 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Endorsement.Models.ReversionViewModel
+
+<script id="title-template" type="text/template">
+
+    <div class="column-70">
+        @Resources.Language.LabelEndorsmentRev
+    </div>
+    <div class="column-30">
+        <div class="important">
+            <div class="date">
+                <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate"></span>
+            </div>
+        </div>
+    </div>
+
+</script>
+
+<script id="footer-template" type="text/template">
+
+    <div class="pull-right">
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" id="btnCancel">@Resources.Language.ButtonClose</button>
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0742"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnSaveReversion">@Resources.Language.ButonSaveReversion</button>
+                    }
+                    </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<div class="uif-alert" id="alert"></div>
+<form id="formReversion" class="without-peripheral">
+
+    @Html.HiddenFor(model => model.EndorsementTo, new { id = "hiddenEndorsementTo" })
+    <div class="row">
+        <div class="uif-col-12">
+            <h5 id="globalTitle"></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-summary field-summary-alignment">
+                <div class="title">
+                    @Resources.Language.EndorsementSummaryReverse
+                </div>
+                <div class="items">
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableRisk</div>
+                            <div id="labelCurrentRisk">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableSum</div>
+                            <div id="labelCurrentSum">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTablePremium</div>
+                            <div id="labelCurrentPremium">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTableExpenses</div>
+                            <div id="labelCurrentExpenses">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelSurcharge</div>
+                            <div id="labelCurrentSurcharges">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelDiscount</div>
+                            <div id="labelCurrentDiscounts">0</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTablesTaxes</div>
+                            <div id="labelCurrentTaxes">0</div>
+                        </div>
+                    </div>
+                    <div class="item primary">
+                        <div>
+                            <div>@Resources.Language.LabelTableTotalPremium</div>
+                            <div id="labelCurrentTotalPremium">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <h5><strong>@Resources.Language.LabelDataReversionEndorsement</strong></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelReversionReason</label>
+            <select class="uif-select form-control" id="selectEndorsementReason" data-id="Id" data-name="Description"
+                    name="EndorsementReasonId" data-native="false" data-val="true" data-val-required="@Resources.Language.ErrorSelectReversionReason"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelFilingNumber</label>
+            @Html.TextBoxFor(model => model.TicketNumber, new { id = "Nroregistration", maxLength = 15 })
+            @Html.ValidationMessageFor(model => model.TicketNumber)
+        </div>
+        <div class="uif-col-2">
+            <label class="field-required">@Resources.Language.LabelFilingDate</label>
+            @Html.TextBoxFor(model => model.TicketDate, new { id = "inputDateRegister", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.TicketDate)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelText</label>
+            @Html.TextAreaFor(model => model.Text, new { id = "Text", rows = "5", style = "text-transform:uppercase" })
+            @Html.ValidationMessageFor(model => model.Text)
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelObservations</label>
+            @Html.TextAreaFor(model => model.Observations, new { id = "Observations", rows = "5", style = "text-transform:uppercase" })
+            @Html.ValidationMessageFor(model => model.Observations)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.RecordObservations</label>
+            <textarea cols="12" id="Record" name="Record" rows="5" required></textarea>
+        </div>
+    </div>
+
+</form>
+

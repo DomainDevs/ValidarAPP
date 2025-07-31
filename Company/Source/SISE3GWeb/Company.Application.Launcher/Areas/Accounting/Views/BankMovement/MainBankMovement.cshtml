@@ -1,0 +1,122 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.BankMovements;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.BankConciliation</li>
+        <li>@Global.Parameters</li>
+        <li>@Global.BankMovements</li>
+    </ol>
+}
+
+@section Modals
+{
+    <form id="MainBankMovementAddForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="MainBankMovementModalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/BankMovement/BankMovementModal.cshtml")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0561"))
+                {
+                    <button type="submit" class="btn btn-primary" id="MainBankMovementSaveAdd" onclick="return false">@Global.Save</button>
+                }
+            </div>
+        </div>
+    </form>
+
+    <form id="MainBankMovementEditForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="MainBankMovementModalEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/BankMovement/BankMovementModal.cshtml")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0562"))
+                {
+                    <button type="submit" class="btn btn-primary" id="MainBankMovementSaveEdit" onclick="return false">@Global.Save</button>
+                }
+            </div>
+        </div>
+    </form>
+
+    <div class="uif-modal" id="modalBankMovement"></div>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteBankMovement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                    <br />
+                    <p id="selectedMessageDelete"></p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0564"))
+                    {
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                        </button>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0563"))
+                    {
+                        <button type="button" class="btn btn-primary" id="MainBankMovementDeleteModal">
+                            <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<br />
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="MainBankMovementAlert"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableBankMovement" data-exporttocsv="false" data-add="true" data-edit="true"
+               data-delete="true" data-selectiontype="none" data-filter="true"
+               data-source="@Url.Action("GetBankMovements", "BankMovement")"
+               data-paginate="true" data-title="@Global.BankMovements">
+            <thead>
+                <tr>
+                    <th data-property="Id" style="text-align:left">Id</th>
+                    <th data-property="Description" style="text-align:left">@Global.Description</th>
+                    <th data-property="ShortDescription" style="text-align:left">@Global.SmallDescription</th>
+                    <th data-property="AccountingNatureId" data-visible="false">AccountingNatureId</th>
+                    <th data-property="AccountingNatureCompany" style="text-align:left">@Global.AccountingNatureCompany</th>
+                    @*<th data-property="IsDebitCompany" data-type="boolean">@Global.HasTax</th>
+                    <th data-property="IsDebitBank" data-type="boolean">@Global.HasTax</th>*@
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<input type="hidden" id="ViewBagControlSpanNetwork" value="true" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainBankMovement")
+}

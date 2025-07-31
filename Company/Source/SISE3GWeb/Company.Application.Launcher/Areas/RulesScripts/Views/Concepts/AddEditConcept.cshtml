@@ -1,0 +1,210 @@
+﻿@model  Sistran.Core.Framework.UIF.Web.Areas.RulesScripts.Models.ConceptViewModel
+
+@Html.Hidden("hdnConceptIndex")
+@Html.HiddenFor(model => model.ConceptId)
+@Html.HiddenFor(model => model.IsStatic)
+@Html.HiddenFor(model => model.ConceptControlCode)
+<div class="row row-space-adjusted">
+    <div class="uif-col-4">
+        @Html.LabelFor(model => model.Description, new { @class = "field-required" })
+        @Html.TextBoxFor(model => model.Description, new { maxlength = 50 })
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+    <div class="uif-col-4">
+        @Html.Label(@Resources.Language.LabelModule, new { @class = "field-required" })
+        @Html.DropDownListFor(model => model.Module, new List<SelectListItem>() { }, "",
+                           new Dictionary<string, object>()
+                           {
+            {"id","ddlModule" },
+            {"class","uif-select" },
+            {"data-selectedid","1" },
+            {"data-id", "PackageId" },
+            {"data-native", "false" },
+            {"data-name", "Description" },
+            { "required", "required" },
+                         })
+        @Html.HiddenFor(m => m.Module)
+        @Html.ValidationMessageFor(model => model.Module)
+    </div>
+    <div class="uif-col-4">
+        @Html.Label(@Resources.Language.LabelLevels, new { @class = "field-required" })
+        @Html.DropDownListFor(model => model.Level, new List<SelectListItem>() { }, "",
+                           new Dictionary<string, object>()
+                           {
+             { "id","ddlLevel"},
+            {"class","uif-select" },
+            {"data-id", "LevelId" },
+            {"data-name", "Description" },
+             {"data-native", "false" },
+            { "required", "required" },
+                         })
+        @Html.HiddenFor(m => m.Level)
+        @Html.ValidationMessageFor(model => model.Level)
+    </div>
+</div>
+<div class="row">
+
+    <div class="uif-col-4">
+        @Html.Label(@Resources.Language.LabelEntity)
+        @Html.DropDownList("ddlEntity", new List<SelectListItem>() { }, "", new { disabled = "disabled" })
+    </div>
+    <div class="uif-col-4">
+        @Html.LabelFor(model => model.ConceptTypeCode, new { @class = "field-required" })
+        @Html.DropDownListFor(model => model.ConceptTypeCode, new List<SelectListItem>() { }, "",
+                                  new Dictionary<string, object>()
+                                  {
+ {"class","uif-select" },
+ {"data-id", "ConceptTypeId" },
+ {"data-name", "Description" },
+  {"data-native", "false" },
+ {"required", "required" },
+                                })
+        @Html.HiddenFor(m => m.ConceptTypeCode)
+        @Html.ValidationMessageFor(model => model.ConceptTypeCode)
+
+    </div>
+    <div id="ConceptTypeList" class="uif-col-4">
+        @Html.Label(Resources.Language.AvailableLists)
+        <div class="input-with-buttons">
+            @Html.DropDownList("ddlLists", new List<SelectListItem>(), new Dictionary<string, object>()
+                {
+                    {"class","uif-select" },
+                    {"data-id", "ListEntityCode" },
+                    {"data-name", "Description" },
+                     {"data-native", "false" },
+                    {"required", "required" },
+                })
+            <button type="button" class="btn btn-default" id="btnAddList">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    <div id="ConceptTypeRange" class="uif-col-4">
+        @Html.Label(Resources.Language.AvailableRanges)
+        <div class="input-with-buttons">
+
+            @Html.DropDownList("ddlRanges", new List<SelectListItem>(), new Dictionary<string, object>()
+                {
+                    {"class","uif-select" },
+                    {"data-id", "RangeEntityCode" },
+                    {"data-name", "Description" },
+                     {"data-native", "false" },
+                    {"required", "required" },
+                })
+            <button type="button" class="btn btn-default" id="btnAddRange">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    <div id="ConceptTypeReference" class="uif-col-4">
+        @Html.Label(Resources.Language.AvailableLists)
+        <div class="input-with-buttons">
+
+            @Html.DropDownList("ddlReferences", new List<SelectListItem>(), new Dictionary<string, object>()
+                {
+                    {"class","uif-select" },
+                    {"data-id", "EntityId" },
+                    {"data-name", "Description" },
+                    {"required", "required" },
+                    {"data-native", "false" },
+                    {"data-filter", "true" }
+                })
+        </div>
+    </div>
+</div>
+<div class="row" id="ConceptTypeBasic">
+    <div class="uif-col-4">
+        @Html.Label(Resources.Language.BasicTypes)
+        @Html.DropDownList("BasicTypeCode", new List<SelectListItem>() { }, "",
+                      new Dictionary<string, object>()
+                      {
+                         {"id","ConceptControlCodeBasic" },
+                         {"class","uif-select" },
+                         {"data-id", "BasicTypeId" },
+                         {"data-name", "Description" },
+                          {"data-native", "false" },
+                         {"required", "required" },
+                    })
+    </div>
+    <div class="uif-col-8" id="RangeNumeric">
+        <div class="uif-col-6">
+            @Html.Label(Resources.Language.Min)
+            <div id="divTxtMin">
+                @Html.TextBox("TxtMin")
+            </div>
+        </div>
+        <div class="uif-col-6">
+            @Html.Label(Resources.Language.Max)
+            <div id="divTxtMax">
+                @Html.TextBox("TxtMax")
+            </div>
+        </div>
+    </div>
+    <div class="uif-col-8" id="LengthStr">
+        <div class="uif-col-6">
+            @Html.Label(Resources.Language.Length)
+            @Html.TextBox("TxtLength")
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-2">
+        <div class="without-label">
+            @Html.CheckBoxFor(model => model.IsVisible)
+            @Html.LabelFor(model => model.IsVisible)
+        </div>
+    </div>
+    <div class="uif-col-2">
+        <div class="without-label">
+            @Html.CheckBoxFor(model => model.IsNull)
+            @Html.LabelFor(model => model.IsNull)
+        </div>
+    </div>
+    <div class="uif-col-2">
+        <div class="without-label">
+            @Html.CheckBoxFor(model => model.IsPersistible)
+            @Html.LabelFor(model => model.IsPersistible)
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-12">
+        <div class="without-label">
+            <button type="button" class="btn btn-default" id="btnQuestion">
+                <i class="fa fa-plus" aria-hidden="true"></i><span>@Resources.Language.TagScripts</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+@* Modal de tipo guoines *@
+<div style="margin-top:55px;" class="uif-modal" id="modalGuiones">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-12">
+                @Html.HiddenFor(model => model.IdQuestion)
+                @Html.Hidden("QuestionDescriptionTmp")
+                @Html.LabelFor(model => model.QuestionDescription)
+                @Html.TextBoxFor(model => model.QuestionDescription, new { maxlength = 50 })
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCloseQuestion">@Resources.Language.ButtonCancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSaveQuestion">@Resources.Language.ButtonAccept</button>
+    </div>
+</div>
+
+
+<script id="listEntityValueTemplate" type="text/template">
+    <div><strong>{{ListValue}}</strong></div>
+</script>
+
+<script id="RangeEntityValueTemplate" type="text/template">
+    <div><strong>@Resources.Language.From {{FromValue}}  @Resources.Language.To {{ToValue}}</strong></div>
+</script>
+
+<script id="ReferenceEntityValueTemplate" type="text/template">
+    <div><strong>{{Descripción}}</strong></div>
+</script>
+

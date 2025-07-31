@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PaymentTicketItemPaymentView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CollectCode">
+          <Column table-alias="Payment" name="CollectCode" />
+        </SelectValue>
+        <SelectValue alias="PaymentTicketItemCode">
+          <Column table-alias="PaymentTicketItem" name="PaymentTicketItemCode" />
+        </SelectValue>
+        <SelectValue alias="PaymentMethodTypeCode">
+          <Column table-alias="Payment" name="PaymentMethodTypeCode" />
+        </SelectValue>
+        <SelectValue alias="PaymentTicketCode">
+          <Column table-alias="PaymentTicketItem" name="PaymentTicketCode" />
+        </SelectValue>
+        <SelectValue alias="Status">
+          <Column table-alias="Payment" name="Status" />
+        </SelectValue>
+        <SelectValue alias="PaymentCode">
+          <Column table-alias="Payment" name="PaymentCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Payment, Core.Accounting.Entities" alias="Payment" />
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentTicketItem, Core.Accounting.Entities" alias="PaymentTicketItem" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="PaymentTicketItem" name="PaymentCode" />
+              <Column table-alias="Payment" name="PaymentCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

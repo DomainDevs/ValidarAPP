@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="uif-modal" id="modalRuleSet">
+    <div class="uif-modalbody">
+        <form class="form" id="formModalRuleSet">
+            <input type="hidden" id="hdnIndexRuleSet" name="hdnIndexRuleSet" />
+            <input type="hidden" id="hdnNew" name="hdnNew" />
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.LabelNameRuleSet</label>
+                    <input type="text" id="txtDescriptionRuleSet" name="Description" required="required" maxlength="100" />
+                    <span class="field-validation-valid" data-valmsg-for="txtDescriptionRuleSet" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPackages</label>
+                    <input type="text" id="txtPackage" name="Package" disabled="disabled" />
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelLevels</label>
+                    <select class="uif-select important" id="ddlLevel" name="Level" data-val="true" data-native="false" data-id="LevelId" data-name="Description" required="required"></select>
+                    <span class="field-validation-valid" data-valmsg-for="ddlLevel" data-valmsg-replace="true"></span>
+                </div>
+
+
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <label>@Resources.Language.DateCreate</label>
+                    <input type="text" id="currentFrom" name="currentFrom" data-name="CurrentFrom" maxlength="10" data-val-length-max="10" />
+                </div>
+
+                <div class="uif-col-3">
+                    <label>@Resources.Language.ModificationDate</label>
+                    <input type="text" id="currentTo" name="currentTo" data-name="currentTo" />
+                </div>
+				<div class="uif-col-6" style="padding-top:2%">
+					<input type="checkbox" id="chkActivo" name="Activo" />
+					<label id="txtActivo" for="chkActivo">Activo</label>
+					<input type="hidden" name="ActiveType" id="txtActiveType" />
+				</div>
+			</div>
+        </form>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0615"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSaveRuleSet">@Resources.Language.ButtonSave</button>
+        }
+    </div>
+</div>

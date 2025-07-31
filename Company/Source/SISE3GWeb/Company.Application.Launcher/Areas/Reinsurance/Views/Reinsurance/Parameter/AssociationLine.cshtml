@@ -1,0 +1,115 @@
+﻿@using System.Collections.Specialized
+@using System.Web.Mvc.Html
+@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Application.ReinsuranceServices.DTOs.AssociationLineDTO
+
+@{
+    ViewBag.Title = @Global.AssociationOfLines;
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameter</li>
+        <li>@Global.AssociationOfLines</li>
+    </ol>
+}
+<form id="formAssociationLine" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-2">
+            @*Ejercicio*@
+            <b>
+                @Global.ContractYear
+            </b>
+            <select class="uif-select form-control"
+                    id="selectContractYear"
+                    data-source='@Url.Content("~/Reinsurance/Parameter/GetContractYear")'
+                    data-id="Id"
+                    data-name="Name"
+                    data-val="true"
+                    data-selectedid="@ViewBag.YearNow"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="selectContractYear" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            <b>
+                @Global.AssociationType
+            </b>
+            <select class="uif-select form-control"
+                    id="LineAssociationType"
+                    name="AssociationTypeId"
+                    data-source="@Url.Content("~/Reinsurance/Parameter/GetLineAssociationTypes")"
+                    data-id="LineAssociationTypeId"
+                    data-name="Description"
+                    data-val="true"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="LineAssociationType" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-6">
+        </div>
+    </div>
+</form>
+
+<div class="uif-alert" id="alertAsoLine"></div>
+<div class="uif-row">
+    <div class="uif-col-12" id="divAssociationPrefix">
+        <table class="uif-table" id="tblAssociationPrefix"
+               data-add="true" data-delete="true" data-filter="true" data-edit="true" data-paginate="true"
+               data-selectiontype="none">
+            <thead>
+                <tr id="trAssociationPrefix">
+                    <th data-visible="false" data-property="AssociationLineId">AssociationLineId</th>
+                    <th data-property="LineDescription">@Global.Line</th>
+                    <th data-property="DateFrom">@Global.DateFrom</th>
+                    <th data-property="DateTo">@Global.DateTo</th>
+                    <th data-property="ValueFrom" data-visible="false">Value</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    @Html.Partial("../Reinsurance/Parameter/AssociationLinePartial")
+</div>
+
+
+
+@section Modals{
+
+    <div class="uif-modal" id="modalParams"></div>
+
+    <div class="uif-modal" id="modalDeleteAssociationLine">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Global.DeleteConfirmationMessage
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0394"))
+            {
+                <button type="submit" class="btn btn-primary" id="btnDeleteModal">@Global.Yes</button>
+            }
+        </div>
+    </div>
+}
+
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagByLineBusiness" value="@ViewBag.ByLineBusiness" />
+<input type="hidden" id="ViewBagByLineBusinessSubLineBusiness" value="@ViewBag.ByLineBusinessSubLineBusiness" />
+<input type="hidden" id="ViewBagByOperationTypePrefix" value="@ViewBag.ByOperationTypePrefix" />
+<input type="hidden" id="ViewBagByInsured" value="@ViewBag.ByInsured" />
+<input type="hidden" id="ViewBagByPrefix" value="@ViewBag.ByPrefix" />
+<input type="hidden" id="ViewBagByPolicy" value="@ViewBag.ByPolicy" />
+<input type="hidden" id="ViewBagByFacultativeIssue" value="@ViewBag.ByFacultativeIssue" />
+<input type="hidden" id="ViewBagByInsuredPrefix" value="@ViewBag.ByInsuredPrefix" />
+<input type="hidden" id="ViewBagByLineBusinessSubLineBusinessRisk" value="@ViewBag.ByLineBusinessSubLineBusinessRisk" />
+<input type="hidden" id="ViewBagByPrefixRisk" value="@ViewBag.ByPrefixRisk" />
+<input type="hidden" id="ViewBagByPolicyLineBusinessSubLineBusiness" value="@ViewBag.ByPolicyLineBusinessSubLineBusiness" />
+<input type="hidden" id="ViewBagByLineBusinessSubLineBusinessCoverage" value="@ViewBag.ByLineBusinessSubLineBusinessCoverage" />
+<input type="hidden" id="ViewByPrefixProduct" value="@ViewBag.ByPrefixProduct" />
+<input type="hidden" id="ViewBagYearNow" value="@ViewBag.YearNow" />
+
+@section scripts{
+    @Scripts.Render("~/reinsurance/bundles/AssociationLine")
+}

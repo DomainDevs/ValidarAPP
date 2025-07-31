@@ -1,0 +1,141 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.Range;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameters</li>
+        <li>@Global.PortfolioReport</li>
+        <li class="active">@Global.Range</li>
+    </ol>
+}
+
+@section Modals
+{
+
+    <!-- RangeHeaderDetails -->
+    <form id="rangeParametrizationAddFieldForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="rangeParametrizationModalAddField">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/Range/RangeFormatModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="rangeParametrizationSaveAddField" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="rangeParametrizationEditFieldForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="rangeParametrizationModalEditField">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/Range/RangeFormatModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="rangeParametrizationSaveEditField" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="rangeParametrizationAddRangeDetailForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="rangeParametrizationModalAddRangeDetail">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/Range/RangeDebitModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveAddRangeDetail" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="rangeParametrizationModalDeleteRange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="rangeParametrizationDeleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="rangeParametrizationDeleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="rangeParametrizationDeleteFieldModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="rangeParametrizationRangeForm" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertRangeHeader"></div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="tableRange" data-exporttocsv="false" data-add="true" data-edit="true"
+                   data-delete="true" data-selectiontype="single" data-filter="true"
+                   data-source="@Url.Action("GetRanges", "Parameters")"
+                   data-paginate="true" data-title=@Global.Ranges>
+                <thead>
+                    <tr>
+                        <th data-property="Id" data-visible="false">Id</th>
+                        <th data-property="Description">@Global.Description</th>
+                        <th data-property="Default" data-type="boolean">@Global.Default</th>
+
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="rangeParametrizationAlert"></div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="tableRangeDetail" data-exporttocsv="false" data-add="true" data-edit="false"
+                   data-delete="true" data-selectiontype="none"
+                   data-source="" data-paginate="true" data-title=@Global.RangeDetail>
+                <thead>
+                    <tr>
+                        <th data-property="Id" data-visible="false">Id</th>
+                        <th data-property="ColumnNumber">@Global.Order</th>
+                        <th data-property="DayFrom">@Global.DaysFrom</th>
+                        <th data-property="DayTo">@Global.DaysTo</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+</form>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagLimitedRange" value="@ViewBag.LimitedRange" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/RangeParametrizationDetail")
+}

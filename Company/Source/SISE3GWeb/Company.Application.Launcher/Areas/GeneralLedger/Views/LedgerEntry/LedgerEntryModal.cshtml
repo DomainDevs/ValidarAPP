@@ -1,0 +1,134 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.AccountingEntryModel
+
+@{
+    ViewBag.Title = "EntryModal";
+}
+
+<div class="form">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="entryModalAlert"></div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            @Html.HiddenFor(model => model.AccountingAccountId)
+            @Html.LabelFor(model => model.AccountingConceptId)
+            <input class="uif-autocomplete" type="text"
+                   data-source="@Url.Action("GetInformationAccountant", "Base")"
+                   data-displaykey="Id" id="conceptId"
+                   onkeypress = "return JustNumbers(event, this);"
+                   data-minlenght="1" />
+            @*@Html.TextBoxFor(model => model.AccountingConceptId, new
+            {
+                @class = "uif-autocomplete",
+                data_source = @Url.Action("GetEntryInformationAccountant", "Base"),
+                data_displaykey = "Id",
+                id = "conceptId",
+                onkeypress = "return JustNumbers(event, this);",
+                data_val = "true",
+                data_minlenght = "1"
+            })*@
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.AccountingConcept</label><br />
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetEntryInformationAccountantByDescrition", "Base")" data-displaykey="Description" id="conceptDescription" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.LedgerAccountNumber</label>
+            @Html.TextBoxFor(model => model.AccountingAccountNumber, new { @class = "uif-autocomplete", data_source = @Url.Action("GetEntryAccountingAccountsByNumberDescription", "Base"), data_displaykey = "Number", id = "accountingAccountNumber" })
+            @Html.ValidationMessageFor(model => model.AccountingAccountNumber)
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.AccountingAccountName</label>
+            <input type="text" placeholder="" id="accountingAccountDescription" disabled="disabled">
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            @Html.LabelFor(obj => obj.AccountingNatureId)
+            @Html.DropDownListFor(obj => obj.AccountingNatureId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetNatures"), data_id = "AccountingNatureId", data_name = "Description", data_selectedid = "@Model.AccountingNature" })
+            @Html.ValidationMessageFor(model => model.AccountingNatureId)
+        </div>
+
+        <div class="uif-col-3">
+            <label>@Global.Currency</label>
+            @Html.DropDownListFor(obj => obj.CurrencyId, Enumerable.Empty<SelectListItem>(),
+               new
+               {
+                   @class = "uif-select",
+                   data_source = @Url.Content("~/GeneralLedger/Base/GetCurrencies"),
+                   data_id = "Id",
+                   data_name = "Description",
+                   id = "ddlCurrencies",
+                   data_selectedid = "@Model.CurrencyId"
+               })
+            @Html.ValidationMessageFor(obj => obj.CurrencyId)
+
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Exchange</label>
+            @Html.TextBoxFor(model => model.ExchangeRate,
+               new
+               {
+                   id = "exchange",
+                   disabled = "disabled",
+                   style = "text-align: right"
+               })
+            @Html.ValidationMessageFor(model => model.ExchangeRate)
+
+        </div>
+
+        <div class="uif-col-3">
+            @Html.LabelFor(model => model.Amount)
+            @Html.TextBoxFor(model => model.Amount, new { onkeypress = "return OnlyDecimalNumber(event, this);", style = "text-align: right" })
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="entryPersonAlert"></div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            @Html.HiddenFor(model => model.IndividualId)
+            @Html.LabelFor(model => model.DocumentNumber)
+            @Html.TextBoxFor(model => model.DocumentNumber,
+                          new { @class = "uif-autocomplete", data_source = @Url.Action("GetPersonsByDocumentNumber", "Base"),
+                              data_displaykey = "DocumentNumber", id = "entryPayerDocumentNumber", name="entryPayerDocumentNumber",
+                              placeholder = "Documento" })
+            @Html.ValidationMessageFor(model => model.DocumentNumber)
+        </div>
+        <div class="uif-col-9">
+            <label>@Global.PersonCompany</label>
+            <input type="text" placeholder="" id="entryPayerName" disabled="disabled">
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            @Html.LabelFor(model => model.Description)
+            @Html.TextBoxFor(model => model.Description, new { @onblur = "this.value = this.value.toUpperCase();" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.BankConciliation</label>
+            <select class="uif-select form-control" id="BankReconciliationId" data-source="@Url.Content("~/GeneralLedger/Base/GetBankMovements")" data-id="Id" data-name="Description" name="BankReconciliationId"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.VoucherNumber</label>
+            <input type="text" id="ReceiptNumber" name="ReceiptNumber" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.DateVoucher</label>
+            <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="receiptDate" name="ReceiptDate" />
+        </div>
+    </div>
+
+</div>

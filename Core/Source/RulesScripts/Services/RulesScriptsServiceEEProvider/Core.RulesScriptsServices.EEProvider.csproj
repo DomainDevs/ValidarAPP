@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{832F2278-D6F0-4671-8B1E-1191A8A3EA73}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.RulesScriptsServices.EEProvider</RootNamespace>
+    <AssemblyName>Core.RulesScriptsServices.EEProvider</AssemblyName>
+    <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\..\Bin\lib\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AuthorizationPolicies.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\AuthorizationPolicies\Core.AuthorizationPolicies.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Common.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Common\Core.Common.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices">
+      <HintPath>..\..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices.EEProvider">
+      <HintPath>..\..\..\..\Bin\Services\Core\Common\CommonServiceEEProvider\Core.CommonServices.EEProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions">
+      <HintPath>..\..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ModelServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Application\Core\ModelServices\Core.ModelServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Parameters.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Parameters\Core.Parameters.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Script.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Script\Core.Script.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Utilities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServicesEEProvider">
+      <HintPath>..\..\..\..\Bin\Services\Core\Utilities\UtilitiesServiceEEProvider\Core.UtilitiesServicesEEProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\..\..\..\Bin\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\Bin\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Co.Application.Data, Version=1.6.0.0, Culture=neutral, PublicKeyToken=eb247e58141b51b5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\lib\Sistran.Co.Application.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.BAF, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.BAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.BAF.Application, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.BAF.Application.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF.Engine, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.IUIViewService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.IUIViewService.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Queries, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Rules.Integration">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Rules.Integration.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.SAF, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.SAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.ServiceModel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Transactions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Transactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Views, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assemblers\AutoMapperAssembler.cs" />
+    <Compile Include="Assemblers\EntityAssembler.cs" />
+    <Compile Include="Assemblers\ModelAssembler.cs" />
+    <Compile Include="Assemblers\_NewAssembler.cs" />
+    <Compile Include="ConceptsServiceEEProvider.cs" />
+    <Compile Include="DAOs\ConceptTypeDAO.cs" />
+    <Compile Include="DAOs\FileDAO.cs" />
+    <Compile Include="DAOs\RuleConditionComparatorDAO.cs" />
+    <Compile Include="DAOs\QuestionDAO.cs" />
+    <Compile Include="DAOs\EdgeAnswerDAO.cs" />
+    <Compile Include="DAOs\NodeDAO.cs" />
+    <Compile Include="DAOs\NodeQuestionDAO.cs" />
+    <Compile Include="DAOs\EdgeDAO.cs" />
+    <Compile Include="DAOs\RuleSetDAO.cs" />
+    <Compile Include="DAOs\RulsetProcessDAO.cs" />
+    <Compile Include="DAOs\_NewDao.cs" />
+    <Compile Include="DelegateService.cs" />
+    <Compile Include="DTOs\DecisionTableLoader.cs" />
+    <Compile Include="Entities\Edge.cs" />
+    <Compile Include="Entities\EdgeAnswer.cs" />
+    <Compile Include="Entities\Node.cs" />
+    <Compile Include="Entities\NodeQuestion.cs" />
+    <Compile Include="Entities\Question.cs" />
+    <Compile Include="DAOs\ScriptDAO.cs" />
+    <Compile Include="DAOs\RuleDAO.cs" />
+    <Compile Include="DAOs\RuleActionConceptDAO.cs" />
+    <Compile Include="DAOs\RuleConditionConceptDAO.cs" />
+    <Compile Include="DAOs\DecisionTableDAO.cs" />
+    <Compile Include="DAOs\DynamicConceptValueDAO.cs" />
+    <Compile Include="DAOs\PositionEntityDAO.cs" />
+    <Compile Include="DAOs\RuleActionDAO.cs" />
+    <Compile Include="DAOs\RuleConditionDAO.cs" />
+    <Compile Include="DTOs\ConceptValueDTO.cs" />
+    <Compile Include="DTOs\ConceptValueDTODictionary.cs" />
+    <Compile Include="DTOs\DecisionTableDTO.cs" />
+    <Compile Include="DTOs\IDynamicConceptContainer.cs" />
+    <Compile Include="Entities\BasicConcept.cs" />
+    <Compile Include="Entities\BasicType.cs" />
+    <Compile Include="Entities\ConceptControl.cs" />
+    <Compile Include="Entities\ConceptType.cs" />
+    <Compile Include="Entities\ConceptTypeControl.cs" />
+    <Compile Include="Entities\DynamicConceptRelation.cs" />
+    <Compile Include="Entities\DynamicConceptValue.cs" />
+    <Compile Include="Entities\ListConcept.cs" />
+    <Compile Include="Entities\ListEntity.cs" />
+    <Compile Include="Entities\PositionEntity.cs" />
+    <Compile Include="Entities\ReferenceConcept.cs" />
+    <Compile Include="Entities\Rule.cs" />
+    <Compile Include="Entities\RuleAction.cs" />
+    <Compile Include="Entities\RuleCondition.cs" />
+    <Compile Include="Entities\RuleConditionComparator.cs" />
+    <Compile Include="Entities\RuleProcess.cs" />
+    <Compile Include="Entities\RuleProcessGroup.cs" />
+    <Compile Include="Entities\RuleProcessRuleset.cs" />
+    <Compile Include="Entities\RuleSet.cs" />
+    <Compile Include="Entities\Script.cs" />
+    <Compile Include="Entities\views\GetConceptView.cs" />
+    <Compile Include="Entities\views\RuleConditionConcept.cs" />
+    <Compile Include="Entities\views\GetBasicConceptView.cs" />
+    <Compile Include="Entities\views\RuleActionConcept.cs" />
+    <Compile Include="Entities\views\GetListConceptView.cs" />
+    <Compile Include="Entities\views\GetRangeConceptView.cs" />
+    <Compile Include="Entities\views\GetReferenceConceptView.cs" />
+    <Compile Include="Entities\views\RuleProcessRulsetView.cs" />
+    <Compile Include="Helper\ActionDefinitionBuilder.cs" />
+    <Compile Include="Helper\ConditionDefinitionBuilder.cs" />
+    <Compile Include="Helper\MapHelper.cs" />
+    <Compile Include="Helper\RuleDefinitionBuilder.cs" />
+    <Compile Include="Helper\RuleHelper.cs" />
+    <Compile Include="Helper\RuleSetDefinitionBuilder.cs" />
+    <Compile Include="Helper\UIViewManager.cs" />
+    <Compile Include="Helper\_NewHelper.cs" />
+    <Compile Include="Resources\Errors.es.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.es.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Errors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RulesCompositeComparer.cs" />
+    <Compile Include="ScriptsServiceEEProvider.cs" />
+    <Compile Include="DAOs\ActionDAO.cs" />
+    <Compile Include="DAOs\BasicConceptCheckDAO.cs" />
+    <Compile Include="DAOs\BasicConceptDAO.cs" />
+    <Compile Include="DAOs\ConceptDAO.cs" />
+    <Compile Include="DAOs\ConditionDAO.cs" />
+    <Compile Include="DAOs\RuleBaseDAO.cs" />
+    <Compile Include="DAOs\LavelDAO.cs" />
+    <Compile Include="DAOs\ListConceptDAO.cs" />
+    <Compile Include="DAOs\ListEntityDAO.cs" />
+    <Compile Include="DAOs\ListEntityValueDAO.cs" />
+    <Compile Include="DAOs\PackageDAO.cs" />
+    <Compile Include="DAOs\RangeConceptDAO.cs" />
+    <Compile Include="DAOs\RangeEntityDAO.cs" />
+    <Compile Include="DAOs\RangeEntityValueDAO.cs" />
+    <Compile Include="DAOs\ReferenceConceptDAO.cs" />
+    <Compile Include="DAOs\RuleFunctionDAO.cs" />
+    <Compile Include="DTOs\ActionDTO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DTOs\ActionTypeCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DTOs\AssignActionDTO.cs" />
+    <Compile Include="DTOs\AssignActionDTOBase.cs" />
+    <Compile Include="DTOs\ArithmeticOperatorCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entities\BasicConceptCheck.cs" />
+    <Compile Include="DTOs\CodeConceptExpression.cs" />
+    <Compile Include="DTOs\CodeDynamicConceptExpression.cs" />
+    <Compile Include="DTOs\CodeListValueExpression.cs" />
+    <Compile Include="DTOs\ComparisionOperatorCollection.cs" />
+    <Compile Include="DTOs\ConditionDTO.cs" />
+    <Compile Include="DTOs\InvokeActionDTO.cs" />
+    <Compile Include="DTOs\InvokeFunctionCollection.cs" />
+    <Compile Include="Entities\Level.cs" />
+    <Compile Include="DTOs\Operator.cs" />
+    <Compile Include="DTOs\OperatorCollection.cs" />
+    <Compile Include="Entities\Package.cs" />
+    <Compile Include="DTOs\Pair.cs" />
+    <Compile Include="Entities\RangeEntity.cs" />
+    <Compile Include="Entities\RangeEntityValue.cs" />
+    <Compile Include="DTOs\RuleBaseDef.cs" />
+    <Compile Include="DTOs\RuleDef.cs" />
+    <Compile Include="DTOs\RuleDefCollection.cs" />
+    <Compile Include="DTOs\RuleDTO.cs" />
+    <Compile Include="Entities\RuleActionConcept.cs" />
+    <Compile Include="Entities\RuleBase.cs" />
+    <Compile Include="Entities\RuleConditionConcept.cs" />
+    <Compile Include="Entities\RuleFunction.cs" />
+    <Compile Include="DTOs\TemporaryAssignActionDTO.cs" />
+    <Compile Include="DTOs\ValueTypeCollection.cs" />
+    <Compile Include="Entities\views\GetRulesSetByProductView.cs" />
+    <Compile Include="Entities\views\GetRulesSetView.cs" />
+    <Compile Include="Entities\views\ListValuesView.cs" />
+    <Compile Include="Entities\views\RangeValuesView.cs" />
+    <Compile Include="Helper\ExpressionHelper.cs" />
+    <Compile Include="Helper\ExpressionParser.cs" />
+    <Compile Include="Helper\RuleBaseXmlReader.cs" />
+    <Compile Include="Entities\RuleEditorData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helper\RuleSetDefinitionReader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RulesServiceEEProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleProcess.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleProcessGroup.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleProcessRuleset.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.Edge.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.EdgeAnswer.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.Node.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.NodeQuestion.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.Question.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.ReferenceConcept.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.BasicConcept.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.BasicConceptCheck.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.BasicType.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.Concept.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.ConceptType.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.ConceptTypeControl.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.DynamicConceptRelation.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.DynamicConceptValue.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.Level.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.ListConcept.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.ListEntity.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.ListEntityValue.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.Package.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RangeConcept.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RangeEntity.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RangeEntityValue.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.Rule.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleAction.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleActionConcept.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleBase.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleCondition.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleConditionComparator.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleConditionConcept.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleFunction.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.ConceptControl.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.RuleSet.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.PositionEntity.dict" />
+    <None Include="Entities\dict\Sistran.Core.Application.RulesScriptsServices.EEProvider.Script.dict" />
+    <None Include="Entities\views\GetConceptView.view" />
+    <None Include="Entities\views\RuleConditionConcept.view" />
+    <None Include="Entities\views\GetBasicConceptView.view" />
+    <None Include="Entities\views\RuleActionConcept.view" />
+    <None Include="Entities\views\GetListConceptView.view" />
+    <None Include="Entities\views\GetRangeConceptView.view" />
+    <None Include="Entities\views\GetReferenceConceptView.view" />
+    <None Include="Entities\views\GetRulesSetByProductView.view">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Entities\views\GetRulesSetView.View">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Entities\views\ListValuesView.view" />
+    <None Include="Entities\views\RangeValuesView.view" />
+    <None Include="Entities\views\RuleProcessRulsetView.view" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RulesScriptsService\Core.RulesScriptsServices.csproj">
+      <Project>{2ff08afb-3757-4c7c-8b8b-6bea2c12a6cc}</Project>
+      <Name>Core.RulesScriptsServices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Errors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Errors.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{3D9AD99F-2412-4246-B90B-4EAA41C64699}">
+        <WcfProjectProperties>
+          <AutoStart>True</AutoStart>
+        </WcfProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\RulesScripts\RulesScriptsServiceEEProvider\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

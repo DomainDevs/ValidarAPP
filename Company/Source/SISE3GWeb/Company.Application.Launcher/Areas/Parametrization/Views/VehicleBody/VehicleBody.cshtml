@@ -1,0 +1,114 @@
+﻿@model  Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.VehicleBodyViewModel
+<script id="VehicleBodyTemplate" type="text/template">
+	<label>@Resources.Language.LabelVehicleBody : {{ShortDescription}} ({{BodyCode}})</label>
+	{{#ifCond State "==" 2}}
+	<div><strong class="success">{{ShortDescription}}</strong></div>
+	{{else ifCond State "==" 3}}
+	<div><strong class="warning">{{ShortDescription}}</strong></div>
+	{{else ifCond State "==" 4}}
+	<div><strong class="danger">{{ShortDescription}}</strong></div>
+	{{/ifCond }}
+</script>
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.LabelVehicleBody
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputSearchVehicleBody", @placeholder = @Resources.Language.EnterTextVehicleBody })
+            <button class="btn btn-default" id="btnSearchAdvVehicleBody">
+                <i class="fa fa-angle-down"></i>
+            </button>
+        </div>
+    </div>
+}
+@section Toolbar{
+<footer>
+    <div class="pull-right">
+
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+
+        <button class="btn btn-primary" id="btnSaveVehicleBody"
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</footer>   
+}
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formVehicleBody" autocomplete="off" class="form without-space">
+    <div class="row">
+        <input type="hidden" id="inputId" />
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+				<input type="hidden" id="inputCode" name="inputBodyCode" />
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelBodyVehicleShortDescription</label>
+                    @Html.TextBoxFor(model => model.ShortDescription, new {id = "inputShortDescription", placeholder = @Resources.Language.LabelBodyVehicleShortDescription, maxlength = "15" })
+                    @Html.ValidationMessageFor(model => model.ShortDescription)
+                </div>
+            </div>
+            <div class="row pull-left">
+				<br />
+				<div class="uif-col-2">
+					<button type="button" class="btn btn-default" id="btnAsociateBody">
+						@Resources.Language.LabelAsociateUse
+					</button>
+				</div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary" id="panelVehicleBody">
+            <div id="listVehicleBody" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsVehicleBody">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewVehicleBody">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAcceptVehicleBody">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="uif-modal" id="modalUses">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/VehicleBody/VehicleUse.cshtml")
+    </div>
+    <div class="uif-modalbuttons" id="btnBottomVehicleUse">
+        <button type="button" class="btn btn-default" id="btnCancelVehicleUse" data-dismiss="modal">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-default" id="btnExportVehicleUse">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            @Resources.Language.ExportXLS
+        </button>
+        <button type="button" class="btn btn-primary  btn-main " id="btnAcceptVehicleUse">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/VehicleBody")
+}

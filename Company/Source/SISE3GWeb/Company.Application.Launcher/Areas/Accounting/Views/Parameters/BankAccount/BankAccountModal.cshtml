@@ -1,0 +1,58 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Framework.UIF.Web.Areas.Accounting.Models.BankAccountModel
+<form id="editAccountBank" onsubmit="return false" class="form">
+    <div class="uif-modalbody">
+        @Html.HiddenFor(m => m.BankAccountId)
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Label(@Global.Description, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(m => m.Description,
+                    new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "form-control",
+                            @onblur = "this.value = this.value.toUpperCase();",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        }
+                    })
+                <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true" />
+            </div>
+            <div class="col-md-4">
+                <span class="required-color">*</span>
+                <label class="control-label" for="status">
+                    @Global.Status
+                </label>
+                <select class="uif-select form-control" id="statusBankAccount" name="statusBankAccount"
+                        data-source='@Url.Content("~/Accounting/Parameters/GetStatus")' data-native="true"
+                        data-id="Enabled" data-name="EnabledDescription" data-val="true"
+                        data-val-required="@Global.RequiredField"></select>
+                <span class="text-danger" data-valmsg-for="statusBankAccount" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label" for="date">
+                    @Global.Date
+                </label>
+                <input type="text" value="" class="uif-datepicker form-control" data-mask="99/99/9999" id="dateBankAccount" disabled="disabled"
+                       name="date" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="uif-alert" id="alertModelBankAccount"></div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="cancelButton" data-dismiss="modal" data-role="button">
+            <i class="fa fa-remove"></i> @Global.Cancel
+        </button>
+        <button type="submit" class="btn btn-primary" id="saveButtonBankAccount" onclick="return false" data-role="button">
+            <i class="fa fa-save"></i> @Global.Save
+        </button>
+    </div>
+</form>
+

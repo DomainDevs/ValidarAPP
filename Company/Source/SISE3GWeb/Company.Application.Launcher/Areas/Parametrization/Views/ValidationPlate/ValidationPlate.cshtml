@@ -1,0 +1,148 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.ValidationPlateViewModel
+
+@{
+    Layout = null;
+}
+
+<script id="ValidationPlateTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+    <div> @Resources.Language.LabelLicencesePlate:<strong class="success"> ({{Plate}})</strong></div>
+    {{else ifCond Status "==" 3}}
+    <div> @Resources.Language.LabelLicencesePlate:<strong class="warning"> ({{Plate}})</strong></div>
+    {{else ifCond Status "==" 4}}
+    <div> @Resources.Language.LabelLicencesePlate:<strong class="danger"> ({{Plate}})</strong></div>
+    {{else}}
+    <div> @Resources.Language.LabelLicencesePlate:<strong> ({{Plate}})</strong></div>
+    {{/ifCond }}
+    <div>@Resources.Language.LabelEngine: <strong>{{Motor}}</strong></div>
+    <div>@Resources.Language.LabelChassis: <strong>{{Chassis}}</strong></div>
+    <div>@Resources.Language.Enabled: <strong>{{IsEnabled}}</strong></div>
+</script>
+
+<script id="title-template" type="text/template">
+    <div id="title" class="column-70">
+        @Resources.Language.ValidationPlate
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("ValidationPlateSearch", null, new { @class = "uif-input-search", id = "inputValidationPlateSearch", placeholder = Resources.Language.SearchPlate })
+    </div>
+</script>
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitValidationPlate">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+
+        <button class="btn btn-default" id="btnExportValidateVehicle">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSaveValidateVehicle">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+@*Formulario Principal*@
+<form id="formValidationPlate" class="form without-space">
+    <input type="hidden" name="Id" id="Id" />
+    <div class="row">
+        <div class="uif-col-6 fit-col-main">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPlate:</label>
+                    @Html.TextBoxFor(model => model.Plate, new { id = "PlateText" })
+                    @Html.ValidationMessageFor(model => model.Plate)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelEngine</label>
+                    @Html.TextBoxFor(model => model.Motor, new { id = "MotorText" })
+                    @Html.ValidationMessageFor(model => model.Motor)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelChassis</label>
+                    @Html.TextBoxFor(model => model.Chassis, new { id = "ChassisText" })
+                    @Html.ValidationMessageFor(model => model.Chassis)
+                </div>
+                @*<div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelLevels</label>
+                        <select class="uif-select" name="Level" id="Level" data-id="Id" data-name="Description" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                        @Html.ValidationMessageFor(model => model.Level, Resources.Language.Required)
+                    </div>*@
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelFasecolda</label>
+                    @Html.TextBoxFor(model => model.CodFasecolda, new { id = "CodFasecoldaText" })
+                    @Html.ValidationMessageFor(model => model.CodFasecolda)
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelMake</label>
+                    <select class="uif-select form-control" id="CodMake"
+                            data-id="Id" data-name="Description" name="CodMake"
+                            data-val="true"
+                            data-val-required="@Resources.Language.ErrorDocumentControlMake" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.CodMake)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelModel</label>
+                    <select class="uif-select form-control" name="CodModel" id="CodModel" data-id="Id" data-name="Description" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.CodModel, Resources.Language.Required)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelVersion</label>
+                    <select class="uif-select" name="CodVersion" id="CodVersion" data-id="Id" data-name="Description" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.CodVersion, Resources.Language.Required)
+                </div>
+
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelCause</label>
+                    <select class="uif-select" id="CodCause" name="CodCause" data-id="Id" data-name="Description" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.CodCause, Resources.Language.Required)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <input type="checkbox" id="IsEnabled" name="IsEnabled" />
+                    @Html.LabelFor(model => model.IsEnabled, htmlAttributes: new { @class = "control-label" })
+                </div>
+            </div>
+
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listViewValidationV" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnValidationPlateNew">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAcceptVP">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.AddForm
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6" id="summaryAgent">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>

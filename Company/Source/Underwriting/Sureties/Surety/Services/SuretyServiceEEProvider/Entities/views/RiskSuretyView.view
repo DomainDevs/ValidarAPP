@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskSuretyView">
+  <collections>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskSurety" type="Sistran.Core.Application.Issuance.Entities.RiskSurety, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Risk" type="Sistran.Core.Application.Issuance.Entities.Risk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="CoRisk" type="Sistran.Core.Application.Issuance.Entities.CoRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskPayer" type="Sistran.Core.Application.Issuance.Entities.RiskPayer, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskBeneficiary" type="Sistran.Core.Application.Issuance.Entities.RiskBeneficiary, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskSuretyGuarantee" type="Sistran.Core.Application.Issuance.Entities.RiskSuretyGuarantee, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskSuretyContract" type="Sistran.Core.Application.Issuance.Entities.RiskSuretyContract, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="CoRiskSurety" type="Sistran.Core.Application.Issuance.Entities.CoRiskSurety, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskClause" type="Sistran.Core.Application.Issuance.Entities.RiskClause,
+                Core.Issuance.Entities"></collection>
+    <collection name="InsuredGuarantee" type="Sistran.Core.Application.UniquePersonV1.Entities.InsuredGuarantee,
+                Core.UniquePersonV1.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="EndorsementRisk" destination="RiskSurety" name="EndorsementRiskSurety" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="Risk" destination="EndorsementRisk" name="EndorsementRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="CoRisk" destination="EndorsementRisk" name="EndorsementCoRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskPayer" destination="EndorsementRisk" name="EndorsementRiskPayer" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskBeneficiary" destination="EndorsementRisk" name="EndorsementRiskBeneficiary" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskSuretyGuarantee" destination="EndorsementRisk" name="EndorsementRiskSuretyGuarantee" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskSuretyContract" destination="EndorsementRisk" name="EndorsementRiskSuretyContract" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="Policy" destination="EndorsementRisk" name="EndorsementPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="CoRiskSurety" destination="CoRisk" name="CoRiskSuretyCoRisk" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskClause" destination="EndorsementRisk" name="RiskClauseEndorsementRisk" type="Left">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="InsuredGuarantee" destination="RiskSuretyGuarantee" name="InsuredGuaranteeRiskSuretyGuarantee" type="Left">
+      <property left="GuaranteeId" type="Equal" right="GuaranteeId"></property>
+    </relation>
+  </relations>
+</view>

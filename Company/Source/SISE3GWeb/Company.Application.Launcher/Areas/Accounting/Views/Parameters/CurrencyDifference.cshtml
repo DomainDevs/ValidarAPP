@@ -1,0 +1,109 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = Global.CurrencyDifference;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameters</li>
+        <li>@Global.Billing</li>
+        <li>@Global.CurrencyDifference</li>
+    </ol>
+}
+
+@section Modals{
+
+  @*MODAL BORRADO DE REGISTRO*@
+  <div class="modal fade" id="DeleteDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.CurrencyDifference</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.DeletedMultipleRecords
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.No
+                    </button>
+                    <button type="button" class="btn btn-primary" id="DeleteAccountDialog">
+                        <span class="glyphicon glyphicon-ok"> @Global.Yes</span>
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+}
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <b>@Global.AccountType</b>
+        @Html.DropDownList("CurrencyDifferenceCurrency", Enumerable.Empty<SelectListItem>(), new
+                     {
+                         @class = "uif-select form-control",
+                         data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                         data_id = "Id",
+                         data_name = "Description",
+                         required = ""
+                     })
+        @Html.ValidationMessage("CurrencyDifferenceCurrency")
+    </div>
+    <div class="uif-col-4">
+        <b>@Global.MaxCurrencyDifference</b>
+        <input type="text" id="maxDifference" name="maxDifference" maxlength="5"
+               onkeypress="return OnlyDecimalNumber(event,this)" style="text-align: right" />
+    </div>
+    <div class="uif-col-4">
+        <b>@Global.PercentageCurrencyDifference</b>
+        <input type="text" id="currencyDifferencePercentage" name="currencyDifferencePercentage" maxlength="5"
+               onkeypress="return OnlyDecimalNumber(event,this)" style="text-align: right" />
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertCurrencyDifference"></div>
+    </div>
+</div>
+<div class="uif-row">
+
+    <div class="pull-right">
+        <div class="uif-col-6">
+            <button id="CancelCurrencyDifference" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-remove"></span>@Global.Cancel
+            </button>
+        </div>
+        <div class="uif-col-6">
+            <button id="SaveCurrencyDifference" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-ok"></span>  @Global.Accept
+            </button>
+        </div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" data-source="null"
+               data-title=" " id="CurrencyDifference"
+               data-edit="true" data-delete="false" data-filter="false" data-paginate="true" 
+               data-selectiontype="none" @*data-pagesize="true"*@ data-add="true">
+            <thead>
+                <tr>
+                    <th data-property="CurrencyCode" data-visible="false"></th>
+                    <th data-property="Description" >@Global.Description</th>
+                    <th data-property="MaximumDifference">@Global.MaxDifference</th>
+                    <th data-property="PercentageDifference">@Global.PercentageDifference</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/CurrencyDifference")
+}

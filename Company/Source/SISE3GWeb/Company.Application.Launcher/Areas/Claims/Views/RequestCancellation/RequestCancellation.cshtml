@@ -1,0 +1,286 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.RequestCancellation
+    </div>
+    <div class="column-20" id="divLabelInformationCancellation" style="display:none;">
+        @Resources.Language.LabelRequest:&nbsp;<span id="inputInformationCancelation"> </span>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div id="buttonsRescue" class="footerUnderwriting">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0346"))
+        {
+
+            <button class="btn btn-primary" id="SaveRequestCancellation">
+                <span class="fa fa-floppy-o" aria-hidden="true">&nbsp;@Resources.Language.ButtonSave</span>
+            </button>
+        }
+    </div>
+</script>
+<form id="formRescue" class="form form-space-adjusted" autocomplete="off">
+    <div id="modalSearch">
+        <div class="row">
+            <div class="uif-col-12 fit-col-main">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <h5><strong>@Resources.Language.search</strong></h5>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelBranch</label>
+                        <select class="uif-select form-control" id="selectBranch" data-val="true" data-source=''
+                                data-val-required="@Resources.Language.RequiredField" data-id="Id" data-name="Description"
+                                data-native="false" data-filter="true" name="BranchId" data-selectedid=""></select>
+                        <span class="text-danger" data-valmsg-for="BranchId" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelPrefix</label>
+                        <select class="uif-select form-control" id="selectPrefix" data-val="true" data-source=''
+                                data-val-required="@Resources.Language.RequiredField" data-id="Id" data-name="Description"
+                                data-native="false" data-filter="true" name="PrefixId" data-selectedid=""></select>
+                        <span class="text-danger" data-valmsg-for="PrefixId" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.PaymentRequestNumber</label>
+                        <input type="text" name="PaymentRequestNumber" data-val-required="@Resources.Language.RequiredField" data-val="true" id="inputRequestNumber" class="uif-input rightAlign" required />
+                        <span class="text-danger" data-valmsg-for="PaymentRequestNumber" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <div class="without-label">
+                            <button type="button" class="btn btn-default secondary-Colombia" id="btnSearchRequest">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                @Resources.Language.search
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div id="paymentRequestInformation">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <h5><strong>@Resources.Language.LabelBasicInformation</strong></h5>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <label>@Resources.Language.OriginOfPayment</label>
+                    <select class="uif-select form-control" id="selectPaymentSource" data-val="true" data-source=''
+                            data-id="Id" data-name="Description" data-native="false" name="paymentSourceId"></select>
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.MovementType</label>
+                    <select class="uif-select form-control" id="selectMovementType" data-val="true" data-source=''
+                            data-id="Id" data-name="Description" data-native="false" name="movementTypeId"></select>
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.PaymentBranch</label>
+                    <select class="uif-select form-control" id="selectPaymentBranch" data-val="true" data-source=''
+                            data-id="Id" data-name="Description" data-native="false" name="paymentBranchId" data-selectedid=""></select>
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.EstimatedPaymentDate</label>
+                    <input type="text" name="EstimatedDate" value="" id="inputEstimatedDate" class="uif-input" disabled="disabled" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <label>@Resources.Language.RegistrationDate</label>
+                    <input type="text" name="RegistrationDate" value="" id="inputRegistrationDate" class="uif-input" disabled="disabled" />
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.AccountingDate</label>
+                    <input type="text" name="AccountingDate" value="" id="inputAccountingDate" class="uif-input" disabled="disabled" />
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.PaymentCurrency</label>
+                    <select class="uif-select form-control" id="selectPaymentCurrency" data-val="true" data-source=''
+                            data-val-required=" " data-id="Id" data-name="Description"
+                            data-native="false" name="PaymentCurrencyId" data-selectedid=""></select>
+                </div>
+                <div class="uif-col-3">
+                    <label>@Resources.Language.LabelMethodPayment</label>
+                    <select class="uif-select form-control" id="selectPaymentMethod" data-val="true" data-source=''
+                            data-val-required="" data-id="Id" data-name="Description"
+                            data-native="false" name="methodPayment" data-selectedid=""></select>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <label>@Resources.Language.PayTo</label>
+                    <select class="uif-select form-control" id="selectPayTo" data-val="true" data-source=''
+                            data-native="false" data-id="Id" data-name="Description" name="payToId" data-selectedid=""></select>
+                </div>
+                <div id="divInsured">
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.DocumentNumber</label>
+                        <input type="text" name="DocumentNumberInsured" value="" id="DocumentNumberInsured" class="uif-input" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.FullName</label>
+                        <input type="text" name="FullNameInsured" value="" id="FullNameInsured" class="uif-input" disabled="disabled" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelDescription</label>
+                    <textarea id="inputDescription" type="text" name="Description" style="resize: none; width: 100%;" rows="3" maxlength="300" disabled="disabled"
+                              data-val="true"></textarea>
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+
+                    <div class="uif-col-12">
+                        <table class="uif-table" id="tblPaymentRequestClaims" data-add="false" data-edit="false" data-delete="false" data-filter="false" data-selectiontype="nose">
+                            <thead>
+                                <tr>
+                                    <th data-property="SubClaim">@Resources.Language.SubClaim</th>
+                                    <th data-property="RiskDescription">@Resources.Language.LabeltitleRisk</th>
+                                    <th data-property="CoverageDescription">@Resources.Language.LabelTitleCoverage</th>
+                                    <th data-property="Insured">@Resources.Language.InsuredName / @Resources.Language.Third</th>
+                                    <th data-property="Currency">@Resources.Language.LabelCoin</th>
+                                    <th data-property="EstimationType">@Resources.Language.EstimationType</th>
+                                    <th data-property="TotalConcept" data-type="currency">@Resources.Language.TotalConcept</th>
+                                    <th data-property="TotalTax" data-type="currency">@Resources.Language.TotalTax</th>
+                                    <th data-property="TotalRetention" data-type="currency">@Resources.Language.TotalRetention</th>
+                                    <th data-property="Total" data-type="currency">@Resources.Language.Total</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-7"><br /></div>
+        <div class="uif-col-2"><br /></div>
+        <div class="uif-col-3">
+            <label id="lblTotalFinish" class="field-required">@Resources.Language.TotalFinish</label>
+            <input type="text" name="DateAssignment" data-val="true" id="inputTotalFinish" class="rightAlign uif-input" required disabled="disabled" />
+        </div>
+    </div>
+</div>
+
+<div id="ChargeRequestInformation">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <h5><strong>@Resources.Language.LabelBasicInformation</strong></h5>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.OriginOfPayment</label>
+                    <select class="uif-select form-control" id="selectRecoveryPaymentSource" data-val="true" data-source=''
+                            data-id="Id" data-name="Description" data-native="false" name="paymentSourceId"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.MovementType</label>
+                    <select class="uif-select form-control" id="selectRecoveryMovementType" data-val="true" data-source=''
+                            data-id="Id" data-name="Description" data-native="false" name="movementTypeId"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.RecoveryBranch</label>
+                    <select class="uif-select form-control" id="selectRecoveryBranch" data-val="true" data-source=''
+                            data-id="Id" data-name="Description" data-native="false" name="paymentBranchId" data-selectedid=""></select>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.RegistrationDate</label>
+                    <input type="text" name="RegistrationDate" value="" id="inputRecoveryRegistrationDate" class="uif-input" disabled="disabled" />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.AccountingDate</label>
+                    <input type="text" name="AccountingDate" value="" id="inputRecoveryAccountingDate" class="uif-input" disabled="disabled" />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.CollectTo</label>
+                    <select class="uif-select form-control" id="selectCollectTo" data-val="true" data-source=''
+                            data-native="false" data-id="Id" data-name="Description" name="payToId" data-selectedid=""></select>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div id="divInsured">
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.DocumentNumber</label>
+                        <input type="text" name="DocumentNumberBeneficiary" value="" id="DocumentNumberBeneficiary" class="uif-input" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-8">
+                        <label>@Resources.Language.FullName</label>
+                        <input type="text" name="FullNameBeneficiary" value="" id="FullNameBeneficiary" class="uif-input" disabled="disabled" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+
+                    <div class="uif-col-12">
+                        <table class="uif-table" id="tblChargeRequestClaims" data-add="false" data-edit="false" data-delete="false" data-filter="false" data-selectiontype="nose">
+                            <thead>
+                                <tr>
+
+                                    <th data-property="SubClaim">@Resources.Language.SubClaim</th>
+                                    <th data-property="RiskDescription">@Resources.Language.LabeltitleRisk</th>
+                                    <th data-property="CoverageDescription">@Resources.Language.LabelTitleCoverage</th>
+                                    <th data-property="Insured">@Resources.Language.InsuredName / @Resources.Language.Third</th>
+                                    <th data-property="Currency">@Resources.Language.LabelCoin</th>
+                                    <th data-property="EstimationType">@Resources.Language.EstimationType</th>
+                                    <th data-property="TotalConcept" data-type="currency">@Resources.Language.TotalConcept</th>
+                                    <th data-property="TotalTax" data-type="currency">@Resources.Language.TotalTax</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*MODAL PARA CONCEPTOS DE PAGO VARIOS VAUCHERS*@
+<div class="uif-modal" id="modalMultipleBillingInformationDialog">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Claims/Views/PaymentRequest/MultipleBillingInformationDialog.cshtml")
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnMultiplePaymentConceptClose" data-dismiss="modal">@Resources.Language.Cancel</button>
+        <button type="button" class="btn btn-primary" id="btnMultiplePaymentConcept">@Resources.Language.Accept</button>
+    </div>
+</div>
+
+@*MODAL PARA CONCEPTOS DE PAGO*@
+<div class="uif-modal" id="modalSingleBillingInformationDialog">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Claims/Views/PaymentRequest/ModelSingleBillingInformationDialog.cshtml")
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnPaymentConceptClose" data-dismiss="modal">@Resources.Language.Cancel</button>
+        <button type="button" class="btn btn-primary" id="btnPaymentConcept">@Resources.Language.Accept</button>
+    </div>
+</div>
+
+
+

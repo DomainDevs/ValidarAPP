@@ -1,0 +1,24 @@
+<map version="2.0" type="class" name="PaymentAllocation" namespace="Sistran.Core.Application.Reinsurance" file-version="1.0" description="PAYMENT_ALLOCATION_ENTITY">
+  <properties>
+    <property name="PaymentAllocationId" type="Integer" key="true" description="PAYMENT_ALLOCATION_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="PaymentCumulusId" type="Integer" description="PAYMENT_CUMULUS_ID_PROPERTY" />
+    <property name="MovementSourceId" type="Integer" description="MOVEMENT_SOURCE_ID_PROPERTY" />
+    <property name="CurrencyId" type="Integer" description="CURRENCY_ID_PROPERTY" />
+    <property name="IsFacultative" type="Boolean" description="IS_FACULTATIVE_PROPERTY" />
+    <property name="ContractCompanyId" type="Integer" description="CONTRACT_COMPANY_ID_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" description="AMOUNT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_ALLOCATION" schema="REINS" alias="PAYMENT_ALLOCATION" update="true">
+      <columns>
+        <column name="PAYMENT_ALLOCATION_ID" type="Int32" property="PaymentAllocationId" key="true" identity ="true"/>
+        <column name="PAYMENT_CUMULUS_ID" type="Int32" property="PaymentCumulusId" allowNull="false" />
+        <column name="MOVEMENT_SOURCE_ID" type="Int32" property="MovementSourceId" allowNull="false" />
+        <column name="CURRENCY_ID" type="Int32" property="CurrencyId" allowNull="false" />
+        <column name="IS_FACULTATIVE" type="Boolean" property="IsFacultative" allowNull="false" />
+        <column name="CONTRACT_COMPANY_ID" type="Int32" property="ContractCompanyId" allowNull="false" />
+        <column name="AMOUNT" type="Decimal" property="Amount" allowNull="false" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

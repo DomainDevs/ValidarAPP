@@ -1,0 +1,22 @@
+<map version="2.0" type="class" name="TransferPaymentOrder" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="TRANSFER_PAYMENT_ORDER_ENTITY">
+  <properties>
+    <property name="TransferPaymentOrderCode" type="Integer" key="true" description="TRANSFER_PAYMENT_ORDER_CODE_PROPERTY" nullable = "false" autonumber="Identity" />
+    <property name="AccountBankCode" type="Integer" nullable="true" description="ACCOUNT_BANK_CODE_PROPERTY" />
+    <property name="DeliveryDate" type="DateTime" nullable="true" description="DELIVERY_DATE_PROPERTY" />
+    <property name="Status" type="Integer" nullable="true" description="STATUS_PROPERTY" />
+    <property name="CancellationDate" type="DateTime" nullable="true" description="CANCELLATION_DATE_PROPERTY" />
+    <property name="User" type="Integer" nullable="true" description="USER_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="TRANSFER_PAYMENT_ORDER" schema="ACC" alias="TRANSFER_PAYMENT_ORDER" update="true">
+      <columns>
+        <column name="TRANSFER_PAYMENT_ORDER_CD" type="Int32" property="TransferPaymentOrderCode" key="true" identity ="true" />
+        <column name="ACCOUNT_BANK_CD" type="Int32" property="AccountBankCode" />
+        <column name="DELIVERY_DATE" type="DateTime" property="DeliveryDate" />
+        <column name="STATUS" type="Int32" property="Status" />
+        <column name="CANCELLATION_DATE" type="DateTime" property="CancellationDate" />
+        <column name="USER" type="Int32" property="User" />
+      </columns>
+    </table>
+  </tables>
+</map>

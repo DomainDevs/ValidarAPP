@@ -1,0 +1,81 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.PolicyModelsView
+@{
+    Layout = null;
+}
+<!--Búsqueda Avanzada-->
+@*<script id="title-template" type="text/template">
+        <div class="column-40">
+            @Resources.Language.DataPolicy
+        </div>
+        <div class="column-30 no-padding">
+            <div class="date important">
+                <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate"></span>
+            </div>
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputSecured", @placeholder = @Resources.Language.SearchTemporal })
+            <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </script>*@
+
+<!--Pop UP Búsqueda-->
+@*<div class="uif-modal" id="modalIndividualDetail">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/IndividualDetail.cshtml")
+    </div>
+</div>*@
+@*<div class="uif-modal" id="modalDefaultSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Guarantees/Views/Guarantees/DefaultResults.cshtml")
+    </div>
+</div>*@
+<div class="uif-modal" id="modalIndividualSearch_">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Guarantees/Views/Guarantees/IndividualResults.cshtml")
+    </div>
+</div>
+
+<!--Formulario de búsqueda-->
+<form id="frmSearchInsrd">
+    <div class="row">
+        <div class="uif-col-9 fit-col-main">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelHolder</label>
+                    @Html.TextBoxFor(model => model.HolderName, new { id = "inputHolder_", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+                    @Html.ValidationMessageFor(model => model.HolderName)
+                    @*<button class="btn btn-default search" id="btnSearch">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                        <span class="" aria-hidden="true"></span>
+                        @Resources.Language.ButtonSearch
+                    </button>*@
+                </div>
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <button type="button" class="btn btn-default search" id="btnSearch_">
+                            @Resources.Language.ButtonSearch
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--Footer actionlink-->
+<script id="footer-template" type="text/template">
+    <div id="buttonsUnderwriting" class="footerUnderwriting">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default cancel" id="btnNew">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.New
+        </button>
+    </div>
+</script>
+

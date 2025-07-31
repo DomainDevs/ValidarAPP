@@ -1,0 +1,67 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.CityViewModel
+
+
+<script id="templateSearchAdvancedCity" type="text/template">
+    <div>
+        <strong>Pais: </strong> {{Country.Description}}
+    </div>
+    <div>
+        <strong>Departamento: </strong> {{State.Description}}
+    </div>
+    <div>
+        <strong>Ciudad: </strong> {{Description}}
+    </div>
+</script>
+
+<form class="form" id="frmAdvCity">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.TitleCountries</label>
+            <select class="uif-select form-control" id="ddlCountriesSearch" data-id="Id" data-name="DescriptionLong" name="Country"
+                    data-val="true" data-filter="true" data-native="false" data-val-required="@Resources.Language.ErrorfieldCountries"></select>
+         
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label class="field-required">@Resources.Language.TitleState</label>
+            <select class="uif-select form-control" id="ddlStatesSearch" data-id="Id" data-name="DescriptionLong" name="State"
+                    data-val="true" data-filter="true" data-native="false" data-val-required="@Resources.Language.ErrorfieldState"></select>
+         
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.Description</label>
+            @Html.TextBoxFor(model => model.Description, htmlAttributes: new { @class = "form-control", @Id = "DescriptionSearch", @maxlength = "50" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <button class="btn btn-primary-Co width-container" id="btnSearchAdvCityAccept" type="button"> @Resources.Language.search</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="lvSearchAdvancedCity">
+            </div>
+        </div>
+    </div>  
+   
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchAdvCity" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnOkSearchAdvCity" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+

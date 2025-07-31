@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        Mantenimiento Listas de Riesgo
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputDocumentSearch", @placeholder = "Buscar Listas" })
+        <button class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+<div class="uif-modal" id="modalAddPerson">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/ListRiskPerson/Views/ListRiskPerson/AddPerson.cshtml")
+    </div>
+</div>
+
+
+<div class="uif-col-12" id="SearchMain">
+
+    <div class="row uif-col-12 ">
+        <strong>@Resources.Language.Result</strong>
+    </div>
+
+    <div class="uif-col-12">
+        <table id="tblRiskList" class="uif-table" data-exporttocsv="true" data-filter="true" data-exportname="ListasDeRiesgo" data-paginate="true" data-add="true" data-selectiontype="none" data-edit="true">
+            <thead>
+                <tr>
+                    <th data-property="DocumentType.Description" data-visible="false"><b>@Resources.Language.LabelTypeDocument</b></th>
+                    <th data-property="IdCardNo" data-visible="false"><b>@Resources.Language.DocumentNumber</b></th>
+                    <th data-property="Name" data-visible="true"><b>@Resources.Language.Name</b></th>
+                    <th data-property="LastName" data-visible="true"><b>@Resources.Language.LabelLastName</b></th>
+                    <th data-property="AliasName" data-visible="true"><b>Apodo/Sobrenombre</b></th>
+                    <th data-property="Age" data-visible="true"><b>@Resources.Language.Age</b></th>
+                    <th data-property="ListRisk.RiskListTypeDescription" data-visible="false"><b>@Resources.Language.RiskListType</b></th>
+                    <th data-property="ListRisk.Description" data-visible="true"><b>@Resources.Language.RiskList</b></th>
+                    <th data-property="AssignmentDate" data-visible="true"><b>Fecha de asignación</b></th>
+                    <th data-property="IssueDate" data-visible="true"><b>Fecha ultima</b></th>
+                    <th data-property="Excluded" data-visible="false"><b>@Resources.Language.Excluded</b></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

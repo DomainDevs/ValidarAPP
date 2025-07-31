@@ -1,0 +1,76 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.EntryTypeAccountingModel
+
+@{
+    ViewBag.Title = "AccountingModal";
+    Layout = null;
+}
+
+<form id="addEntryTypeAccount" onsubmit="return false">
+    <div class="uif-modalbody">
+        <div class="form">
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    @Html.HiddenFor(model => model.EntryTypeAccountingId)
+                    @Html.HiddenFor(model => model.EntryTypeCd)
+                    @Html.LabelFor(model => model.Description)
+                    @Html.TextBoxFor(model => model.Description, new { @onblur = "this.value = this.value.toUpperCase();" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-6">
+                    @Html.HiddenFor(model => model.AccountingAccountId)
+                    @Html.HiddenFor(model => model.AccountingAccountNumber)
+                    @Html.LabelFor(model => model.AccountingAccountDescription)
+                    @Html.TextBoxFor(model => model.AccountingAccountDescription, new { @class = "uif-autocomplete", data_displaykey = "AccountingAccountNumberName", data_source = @Url.Action("GetAccounts", "EntryType"), placeholder = "" })
+                    @Html.ValidationMessageFor(model => model.AccountingAccountDescription)
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    @Html.LabelFor(model => model.AccountingNatureId)
+                    @Html.DropDownListFor(model => model.AccountingNatureId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetNatures"), data_id = "AccountingNatureId", data_name = "Description", data_selectedid = @Model.AccountingNatureId })
+                    @Html.ValidationMessageFor(model => model.AccountingNatureId)
+                </div>
+                <div class="uif-col-6">
+                    @Html.LabelFor(model => model.CurrencyId)
+                    @Html.DropDownListFor(model => model.CurrencyId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetCurrencies"), data_id = "Id", data_name = "Description", data_selectedid = @Model.CurrencyId })
+                    @Html.ValidationMessageFor(model => model.CurrencyId)
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    @Html.LabelFor(model => model.AccountingMovementTypeId)
+                    @Html.DropDownListFor(model => model.AccountingMovementTypeId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetAccountingMovementTypes"), data_id = "AccountingMovementTypeId", data_name = "Description", data_selectedid = @Model.AccountingMovementTypeId })
+                    @Html.ValidationMessageFor(model => model.AccountingMovementTypeId)
+                </div>
+                <div class="uif-col-6">
+                    @Html.LabelFor(model => model.CostCenterId)
+                    @Html.DropDownListFor(model => model.CostCenterId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetCostCenters"), data_id = "CostCenterId", data_name = "Description", data_selectedid = @Model.CostCenterId })
+                    @Html.ValidationMessageFor(model => model.CostCenterId)
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    @Html.LabelFor(model => model.AnalysisId)
+                    @Html.DropDownListFor(model => model.AnalysisId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetAnalyses"), data_id = "AnalysisCodeId", data_name = "Description", data_selectedid = @Model.AnalysisId })
+                    @Html.ValidationMessageFor(model => model.AnalysisId)
+                </div>
+                <div class="uif-col-6">
+                    @Html.LabelFor(model => model.PaymentConceptCd)
+                    @Html.DropDownListFor(model => model.PaymentConceptCd, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetPaymentConcepts"), data_id = "Id", data_name = "Description", data_selectedid = @Model.PaymentConceptCd })
+                    @Html.ValidationMessageFor(model => model.PaymentConceptCd)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="cancelButtonAEntryType" data-dismiss="modal" data-role="button">
+            <i class="glyphicon glyphicon-remove"></i> @Global.Cancel
+        </button>
+        <button type="submit" class="btn btn-primary" id="saveButtonAEntryType" onclick="return false" data-role="button">
+            <i class="glyphicon glyphicon-save"></i> @Global.Save
+        </button>
+    </div>
+</form>
+
+

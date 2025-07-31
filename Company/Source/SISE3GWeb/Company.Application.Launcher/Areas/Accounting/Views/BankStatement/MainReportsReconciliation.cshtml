@@ -1,0 +1,76 @@
+﻿@*ESTA PANTALLAS ES DE BUSINESS NO EXISTE PARA ENTERPRISE*@
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ReconciliatonReports;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.BankConciliation</a></li>
+
+        <li class="active">@Global.ReconciliatonReports</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="btnCancelReports" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="btnPrintReports" class="btn btn-primary" role="button">
+            <i class="fa fa-print"></i>  @Global.Print
+        </button>
+    </footer>
+}
+
+<form id="formPendingBanks" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.ConciliationReportsOptions</label>
+            <select class="uif-select form-control" id="selectOptionsReports" name="selectOptionsReports" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/Accounting/BankStatement/GetConciliationReportsOptions")' data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="selectOptionsReports" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Bank</label>
+            <select class="uif-select form-control" id="selectBankReports" name="selectBankReports" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/Accounting/BankStatement/GetBanks")' data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="selectBankReports" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.AccountType</label>
+            <select class="uif-select form-control" id="selectAccountTypeReports" name="selectAccountTypeReports" data-val="true" data-val-required="@Global.RequiredField"
+                    data-source='@Url.Content("~/Accounting/BankStatement/GetAccountTypes")' data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="selectAccountTypeReports" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.AccountNumber</label>
+            <select class="uif-select form-control" id="selectAccountNumberReports" name="selectAccountNumberReports" data-val="true" data-val-required="@Global.RequiredField"
+                    data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="selectAccountNumberReports" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.DateTo</label>
+            <input type="text" value="@ViewBag.CurrentDate" class="uif-datepicker" data-mask="99/99/9999" id="DateToReports" name="DateToReports"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="DateToReports" data-valmsg-replace="true" />
+        </div>
+    </div>    
+     <!--ALERT-->
+     <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertReports"></div>
+        </div>
+     </div>
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainReportsReconciliation")
+}

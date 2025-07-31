@@ -1,0 +1,131 @@
+﻿@*AVISOS DE CANCELACION ES SOLO PARA BE*@
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.BusinessLetter;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+<style>
+    .modal-content {
+        width: 500px;
+    }
+</style>
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.CancellationNotice</a></li>
+        <li class="active">@Global.BusinessLetter</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="CleanLetter">
+            <i class="fa fa-paint-brush"></i> @Global.Clean
+        </button>
+        <button type="submit" class="btn btn-primary" id="AcceptLetter" onclick="return false" data-role="button">
+            <i class="fa fa-print"></i> @Global.Accept
+        </button>
+    </footer>
+}
+
+<form id="report" onsubmit="return false">
+    <div class="uif-panel" data-title='@Global.Dates'>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label" for="requestDate">@Global.RequestDate</label>
+                @Html.TextBox("requestDate", "", new
+                {
+                    @class = "uif-datepicker",
+                    style = "text-align: left",
+                    data_mask = "99/99/9999",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+                <span class="text-danger" data-valmsg-for="requestDate" data-valmsg-replace="true" />
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-panel" data-title='@Global.Insured'>
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label" for="letter">@Global.BusinessLetter :</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="letter" onkeypress="return JustNumbers(event, this);">
+                    <span class="input-group-addon cursor-hand" id="btnSearch">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label" for="documentNumber">@Global.DocNumInsured :</label>
+                @Html.TextBox("documentNumber", "", new
+                {
+                    id = "documentNumber",
+                    maxlength = "20",
+                    @class = "uif-autocomplete",
+                    data_source = @Url.Content("~/Accounting/Common/GetInsuredByDocumentNumber"),
+                    data_displaykey = "DocumentNumber",
+                    placeholder = @Global.EnterInsurdeDocument,
+                    onkeypress = " return JustNumbers(event, this)",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+                <span class="text-danger" data-valmsg-for="documentNumber" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label" for="insuredName">@Global.InsuredName :</label>
+                @Html.TextBox("insuredName", "", new
+                {
+                    id = "insuredName",
+                    @class = "uif-autocomplete",
+                    data_source = @Url.Content("~/Accounting/Common/GetInsuredByInsuredName"),
+                    data_displaykey = "Name",
+                    placeholder = @Global.EnterInsurdeName,
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+                <span class="text-danger" data-valmsg-for="insuredName" data-valmsg-replace="true" />
+            </div>
+            
+        </div>
+        
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <br />
+                <div class="uif-alert" id="alertSearch" style="height:30px">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="uif-alert" id="alertForm">
+    </div>
+
+    <div class="uif-panel" data-title='@Global.Policy'>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="control-label" for="policy">@Global.Policy :</label>
+                <select class="uif-select form-control" id="policy" data-id="Id" data-name="Description"
+                        data-val-required='@Global.RequiredField' data-source="null" data-val="true"
+                        name="policy" data-native="true"></select>
+                <span class="text-danger" data-valmsg-for="policy" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label" for="official">@Global.CollectionOfficer</label>
+                <input type="text" class="form-control" id="official" />
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label" for="manager">@Global.CollectionManager</label>
+                <input type="text" class="form-control" id="manager" />
+            </div>
+        </div>
+    </div>
+</form>
+

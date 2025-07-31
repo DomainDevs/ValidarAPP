@@ -1,0 +1,202 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.Accounting.Models.CheckBookControlModel
+
+@{
+    Layout = null;
+}
+
+<script id="check-display-template" type="text/template">
+    <div>
+        <strong>@Global.PaymentConcept:</strong>{{PaymentConceptIdDescription}} <br /> <strong>@Global.VoucherNumber:</strong> {{VoucherNumber}} <br />
+        <strong>@Global.CostCenter:</strong> {{CostCenterIdDescription}} <br /> <strong>@Global.Amount:</strong> $ {{Amount}} | <strong>@Global.Taxes:</strong> $ {{Taxes}}  <br />
+        <strong>@Global.Retention:</strong> $ {{Retentions}}
+
+</div>
+</script>
+
+<div class="uif-row flex">
+    <!--left col-->
+    <div class="col-xs-12 col-md-6 col-left">
+        <form id="PaymentConceptFormulario" class="form">
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.VoucherType</label>
+                    @Html.DropDownList("VoucherType", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_source = @Url.Content("~/Accounting/Common/GetVoucherTypes"),
+                        data_id = "Id",
+                        data_name = "Description",
+                        data_val = "true",
+                        data_native = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="VoucherType" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label for="">@Global.VoucherNumber</label>
+                    @Html.TextBox("VoucherNumber", "", new
+                    {
+                        @onkeypress = "return JustNumbers(event,this)",
+                        style = "text-align: right",
+                        maxlength = "15",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="VoucherNumber" data-valmsg-replace="true" />
+                </div>
+                <div class="uif-col-6">
+                    <label for="">@Global.DateVoucher</label>
+                    @Html.TextBox("CheckDate", "", new
+                   {
+                       @class = "uif-datepicker",
+                       data_mask = "99/99/9999",
+                       data_val = "true",
+                       data_val_required = @Global.RequiredField
+                   })
+                    <span class="text-danger" data-valmsg-for="CheckDate" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label for="">@Global.VoucherCurrency</label>
+                    @Html.DropDownList("VoucherCurrency", Enumerable.Empty<SelectListItem>(), new
+                     {
+                         @class = "uif-select form-control",
+                         data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                         data_id = "Id",
+                         data_name = "Description",
+                         data_val = "true",
+                         data_native = "true",
+                         data_val_required = @Global.RequiredField
+                     })
+                    <span class="text-danger" data-valmsg-for="VoucherCurrency" data-valmsg-replace="true" />
+
+                </div>
+                <div class="uif-col-6">
+                    <label for="">@Global.ExchangeRate</label>
+                    @Html.TextBox("ExchangeRate", "", new
+                    {
+                        @onkeypress = "return OnlyDecimalNumber(event,this)",
+                        style = "text-align: right",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="ExchangeRate" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.CodeConcept</label>
+                    @Html.TextBox("PaymentConceptId", "", new
+                       {
+                           id = "PaymentConceptId",
+                           @class = "uif-autocomplete",
+                           data_source = @Url.Content("~/Accounting/Accounting/GetPaymentConceptById"),
+                           data_displaykey = "Id",
+                           placeholder = @Global.EnterConceptCode,
+                           onkeypress = "return JustNumbers(event, this);",
+                           data_val = "true",
+                           data_val_required = @Global.RequiredField,
+                           data_minlenght = "1"
+                       })
+                    <span class="text-danger" data-valmsg-for="PaymentConceptId" data-valmsg-replace="true" />
+
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.PaymentConcepts</label>
+                    @Html.TextBox("PaymentConceptDescription", "", new
+                       {
+                           id = "PaymentConceptDescription",
+                           @class = "uif-autocomplete",
+                           data_source = @Url.Content("~/Accounting/Accounting/GetPaymentConceptByDescription"),
+                           data_displaykey = "Description",
+                           placeholder = @Global.EnterConceptName,
+                           data_val = "true",
+                           data_val_required = @Global.RequiredField,
+                           @onblur = "this.value = this.value.toUpperCase();"
+                       })
+                    <span class="text-danger" data-valmsg-for="PaymentConceptDescription" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label for="costCenter">@Global.CostCenter</label>
+                    @Html.DropDownList("costCenter", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_id = "CostCenterId",
+                        data_name = "Description",
+                        data_val = "true",
+                        data_native = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="costCenter" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <label for="">@Global.ConceptAmount</label>
+                    @Html.TextBox("ConceptAmount", "", new
+                    {
+                        @onkeypress = "return OnlyDecimalNumber(event,this)",
+                        style = "text-align: right",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                    <span class="text-danger" data-valmsg-for="ConceptAmount" data-valmsg-replace="true" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="uif-alert" id="alertForm"></div>
+                </div>
+            </div>
+        </form>
+    </div><!--End left col-->
+    <!--right col-->
+    <div class="col-xs-12 col-md-6 col-right">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div id="PaymentConcetpsListView" class="uif-listview">
+                    <div class="footer">
+                        <div class="uif-summary col-xs-12">
+                            <div class="items">
+                                <div class="item">
+                                    <div>
+                                        <div><strong>@Global.TotalAmount</strong></div>
+                                        <div><b id="TotalPaymentAmount">$0.00</b></div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div><strong>@Global.TotalTaxes</strong></div>
+                                        <div><b id="TotalPaymentTaxes">$0.00</b></div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div>
+                                        <div><strong>@Global.TotalRetention</strong></div>
+                                        <div><b id="TotalPaymentRetention">$0.00</b></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End right col-->
+</div>
+
+
+
+

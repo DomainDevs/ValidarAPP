@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskTransportView ">
+  <collections>
+    <collection name="RiskTransport" type="Sistran.Core.Application.Issuance.Entities.RiskTransport, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskTransportMean" type="Sistran.Core.Application.Issuance.Entities.RiskTransportMean, 
+                Core.Issuance.Entities"></collection>
+    <collection name="TransportMean" type="Sistran.Core.Application.Common.Entities.TransportMean, 
+                Core.Common.Entities"></collection>
+    <collection name="TransportCargoType" type="Sistran.Core.Application.Common.Entities.TransportCargoType, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="RiskTransport" destination="RiskTransportMean" name="RiskTransportRiskTransportMean" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskTransportMean" destination="TransportMean" name="RiskTransportMeanTransportMean" type="Inner">
+      <property left="TransportMeanCode" type="Equal" right="TransportMeanCode"></property>
+    </relation>
+    <relation source="RiskTransport" destination="TransportCargoType" name="RiskTransportTransportCargoType" type="Inner">
+      <property left="TransportCargoTypeCode" type="Equal" right="TransportCargoTypeCode"></property>
+    </relation>
+  </relations>
+</view>

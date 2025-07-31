@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="GetConceptView">
+  <collections>
+    <collection name="Concept" type=" Sistran.Core.Application.Script.Entities.Concept, 
+              Core.Script.Entities"></collection>
+
+    <collection name="ConceptDependency" type="Sistran.Core.Application.Script.Entities.ConceptDependencies, 
+              Core.Script.Entities"></collection>
+
+    <collection name="Concept2" type=" Sistran.Core.Application.Script.Entities.Concept, 
+              Core.Script.Entities"></collection>
+
+  </collections>
+  <relations>
+    <relation source="Concept" destination="ConceptDependency" name="Concept_ConceptDependency" type="Left">
+      <property left="ConceptId" type="Equal" right="ConceptId"></property>
+      <property left="EntityId" type="Equal" right="EntityId"></property>
+    </relation>
+
+    <relation source="ConceptDependency" destination="Concept2" name="ConceptDependency_Concept2" type="Left">
+      <property left="DependsConceptId" type="Equal" right="ConceptId"></property>
+      <property left="DependsEntityId" type="Equal" right="EntityId"></property>
+    </relation>
+  </relations>
+</view>
+
+

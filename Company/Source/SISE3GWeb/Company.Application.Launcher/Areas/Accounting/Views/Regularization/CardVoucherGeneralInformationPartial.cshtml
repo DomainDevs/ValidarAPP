@@ -1,0 +1,62 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div id="_cardVoucherGeneralInformation">
+    
+    <form id="frmCardVoucherGeneralInformation" action="">
+        <div class="uif-row">
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Date
+                </label>
+                <br/>
+                <input type="text" id="_billingDate" disabled="disabled"/>
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.Branch
+                </label>
+                <br/>
+                <select class="uif-select form-control required" id="SelectBranchCardRegularization" name="SelectBranchCardRegularization"
+                        data-source='@Url.Content("~/Accounting/Common/GetBranchs")' data-id="Id"
+                        data-name="Description" data-val="true"
+                        data-val-required='@Global.RequiredField' data-native="true">
+                </select>
+                <span class="text-danger" data-valmsg-for="SelectBranchCardRegularization" data-valmsg-replace="true" />
+
+                <select class="uif-select form-control required" id="SelectBranchCheckRegularization" 
+                        name="SelectBranchCheckRegularization"
+                        data-source='@Url.Content("~/Accounting/Common/GetBranchs")' data-id="Id"
+                        data-name="Description" data-val="true"
+                        data-val-required='@Global.RequiredField' data-native="true"></select>
+                <span class="text-danger" data-valmsg-for="SelectBranchCheckRegularization" data-valmsg-replace="true" />
+
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.DocumentNumber
+                </label>
+                <br/>
+                <input type="text" id="DocumentNumber" name="DocumentNumber" maxlength="18" class="uif-autocomplete required"
+                       data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                       data-displaykey="DocumentNumber" placeholder='@Global.EnterDocumentNumber' data-val="true"
+                       data-val-required='@Global.RequiredField'/>
+                <span class="text-danger" data-valmsg-for="DocumentNumber" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-3">
+                <label class="control-label">
+                    @Global.FullName
+                </label>
+                <br/>
+                <input type="text" id="FirstLastName" name="FirstLastName" maxlength="80" style="text-align: left" class="uif-autocomplete required"
+                       data-source="@Url.Action("GetInsuredByInsuredName", "Common")"
+                       data-displaykey="Name" 
+                       placeholder='@Global.EnterSurnamesAndNames' 
+                       data-val="true"
+                       data-val-required='@Global.RequiredField'/>
+                <span class="text-danger" data-valmsg-for="FirstLastName" data-valmsg-replace="true" />
+            </div>
+        </div>
+
+
+    </form>
+</div>

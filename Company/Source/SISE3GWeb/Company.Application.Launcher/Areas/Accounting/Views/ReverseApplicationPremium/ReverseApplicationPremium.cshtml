@@ -1,0 +1,50 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = "ReverseApplicationPremium";
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-primary" id="ReverseApplicationPremium">
+            <i class="fa fa-repeat"></i> @Global.Reverse
+        </button>
+    </footer>
+}
+    <form id="formReverseApplicationPremium">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alerReversionApplicationPremium"></div>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <table class="uif-table" id="ApplicationPremium" data-exporttocsv="false"
+                       data-edit="false" data-delete="false"
+                       data-filter="false"
+                       data-paginate="true"
+                       data-title="Primas Aplicadas"
+                       data-serverside="false">
+                    <thead>
+                        <tr>
+                            <th data-visible="false" data-property="Id">@Global.Id</th>
+                            <th data-property="EndorsementId">@Global.EndorsementNumber</th>
+                            <th data-property="Name">@Global.NamePayer</th>
+                            <th data-property="PaymentNumber">@Global.NumberPayment</th>
+                            <th data-property="NameCurrency">@Global.Currency</th>
+                            <th data-property="MainAmount">@Global.EstimationAmount</th>
+                            <th data-property="MainLocalAmount">@Global.MainLocalAmount</th>
+                            <th data-property="QuotaStatusId">@Global.QuotaStatus</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+    </form>
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/ReverseApplicationPremium")
+}
+

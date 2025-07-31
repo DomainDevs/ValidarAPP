@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="TempReinsuranceLine" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="TEMP_REINSURANCE_LINE_ENTITY">
+  <properties>
+    <property name="TempReinsuranceLineId" type="Integer" key="true" description="TEMP_REINSURANCE_LINE_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="TempReinsLayerIssuanceCode" type="Integer" description="TEMP_REINS_LAYER_ISSUANCE_CODE_PROPERTY" />
+    <property name="LineCode" type="Integer" nullable="true" description="LINE_CODE_PROPERTY" />
+    <property name="OldLineCode" type="Integer" nullable="true" description="OLD_LINE_CODE_PROPERTY" />
+    <property name="CumulusKey" type="String" size="100" nullable="true" description="CUMULUS_KEY_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="TEMP_REINSURANCE_LINE" schema="REINS" alias="TEMP_REINSURANCE_LINE" update="true">
+      <columns>
+        <column name="TEMP_REINSURANCE_LINE_ID" type="Int32" property="TempReinsuranceLineId" key="true" identity ="true"/>
+        <column name="TEMP_REINS_LAYER_ISSUANCE_CD" type="Int32" property="TempReinsLayerIssuanceCode" allowNull="false" />
+        <column name="LINE_CD" type="Int32" property="LineCode" />
+        <column name="OLD_LINE_CD" type="Int32" property="OldLineCode" />
+        <column name="CUMULUS_KEY" type="String" property="CumulusKey" size="100" />
+      </columns>
+    </table>
+  </tables>
+</map>

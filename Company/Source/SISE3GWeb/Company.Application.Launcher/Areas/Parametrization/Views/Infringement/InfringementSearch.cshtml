@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelInfringementDescription</label>
+            @Html.TextBox("InfringementDescription", null, new { id = "inputInfringementDescriptionSrch", maxlength = "50", placeholder = @Resources.Language.LabelInfringementDescription })
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelInfringementCodeSearch</label>
+            @Html.TextBox("InfringementCode", null, new { id = "inputInfringementCodeSrch", maxlength = "50", placeholder = @Resources.Language.LabelInfringementCode })
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelInfringementGroup</label>
+            <select class="uif-select form-control" id="selectInfringementGroupSrch" data-id="InfringementGroupCode" data-name="InfringementGroupDescription"
+                    name="InfringementGroupCode" data-val="true" data-val-required="@Resources.Language.ErrorDocument"
+                    data-filter="true" data-native="false"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <button class="btn btn-primary-Co width-container" id="btnSearch" type="button">@Resources.Language.search</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="lvSearchAdvInfringement">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchAdv" data-dismiss="modal" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnOkSearchAdv" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>

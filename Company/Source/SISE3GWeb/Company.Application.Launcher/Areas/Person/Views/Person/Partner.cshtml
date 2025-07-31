@@ -1,0 +1,67 @@
+﻿<script id="partnerTemplate" type="text/template">
+<div>{{TradeName}}</div>
+<div>{{Description}} {{IdentificationDocumentNumber}}</div>
+{{#if Active}}
+<div class="warning">@Resources.LanguagePerson.Active</div>
+{{else}}
+<div class="warning">@Resources.LanguagePerson.Inactive</div>
+{{/if}}
+</script>
+<form class="modal-Colombia" id="fronPartner">
+    <div class="uif-alert" id="alert"></div>
+    <div class="row">
+        <input type="hidden" id="inputPartnerId" name="inputPartner" />
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelTypeDocument</label>
+                    <select id="selectDocumentPartner" class="uif-select form-control" data-id="Id" data-name="SmallDescription"></select>
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelDocumentNumber</label>
+                    <input type="text" id="InputDocumentNumberPartner" maxlength="14" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-9">
+                    <label class="field-required">@Resources.LanguagePerson.LabelName</label>
+                    <input type="text" id="InputNamePartner" class="upperCase-co" maxlength="120" />
+                </div>
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <div class="checkbox">
+                            <div class="checkbox">
+                                <input type="checkbox" id="_active" checked />
+                                <label for="_active">@Resources.LanguagePerson.LabelActivoCheckBox</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listPartner" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnnewPartner">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.LanguagePerson.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btncreatePartner">
+                    <span class="" aria-hidden="true"></span>
+                    @Resources.LanguagePerson.AddForm
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

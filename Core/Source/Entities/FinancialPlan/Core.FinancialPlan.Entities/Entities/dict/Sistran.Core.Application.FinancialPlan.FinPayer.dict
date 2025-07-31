@@ -1,0 +1,40 @@
+<map version="2.0" type="class" name="FinPayer" namespace="Core.FinancialPlan" file-version="1.0" description="FIN_PAYER_ENTITY">
+  <properties>
+    <property name="FinPayerId" type="Integer" autonumber="Identity"  key="true" description="FIN_PAYER_ID_PROPERTY" />
+    <property name="EndorsementId" type="Integer" description="ENDORSEMENT_ID_PROPERTY" />
+    <property name="PayerId" type="Integer" description="PAYER_ID_PROPERTY" />
+    <property name="SequentialId" type="Integer" description="SEQUENTIAL_ID_PROPERTY" />
+    <property name="SurchargePercentage" type="Decimal" precision="7" scale="4" description="SURCHARGE_PERCENTAGE_PROPERTY" />
+    <property name="PaymentScheduleId" type="Integer" description="PAYMENT_SCHEDULE_ID_PROPERTY" />
+    <property name="PaymentMethodCode" type="Integer" description="PAYMENT_METHOD_CODE_PROPERTY" />
+    <property name="MailAddressId" type="Integer" nullable="true" description="MAIL_ADDRESS_ID_PROPERTY" />
+    <property name="PaymentId" type="Integer" nullable="true" description="PAYMENT_ID_PROPERTY" />
+    <property name="AccountingDate" type="DateTime" nullable="true" description="ACCOUNTING_DATE_PROPERTY" />
+    <property name="FinancialDate" type="DateTime" nullable="true" description="FINANCIAL_DATE_PROPERTY" />
+    <property name="ReasonChange" type="String" size="128" nullable="true" description="REASON_CHANGE_PROPERTY" />
+    <property name="IsByPaymentFinancial" type="Boolean" nullable="true" description="IS_BY_PAYMENT_FINANCIAL_PROPERTY" />
+    <property name="IsCurrent" type="Boolean" nullable="true" description="IS_CURRENT_PROPERTY" />
+    <property name="UserId" type="Integer" description="USER_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="FIN_PAYER" schema="FPLAN" alias="FIN_PAYER" update="true">
+      <columns>
+        <column name="FIN_PAYER_ID" type="Int32" property="FinPayerId" key="true" identity="true"/>
+        <column name="ENDORSEMENT_ID" type="Int32" property="EndorsementId" allowNull="false" />
+        <column name="PAYER_ID" type="Int32" property="PayerId" allowNull="false" />
+        <column name="SEQUENTIAL_ID" type="Int32" property="SequentialId" allowNull="false" />
+        <column name="SURCHARGE_PCT" type="Decimal" property="SurchargePercentage" allowNull="false" size="19" precision="7" scale="4" />
+        <column name="PAYMENT_SCHEDULE_ID" type="Int32" property="PaymentScheduleId" allowNull="false" />
+        <column name="PAYMENT_METHOD_CD" type="Byte" property="PaymentMethodCode" allowNull="false" />
+        <column name="MAIL_ADDRESS_ID" type="Int16" property="MailAddressId" />
+        <column name="PAYMENT_ID" type="Int16" property="PaymentId" />
+        <column name="ACCOUNTING_DATE" type="DateTime" property="AccountingDate" />
+        <column name="FINANCIAL_DATE" type="DateTime" property="FinancialDate" />
+        <column name="REASON_CHANGE" type="String" property="ReasonChange" size="128" />
+        <column name="IS_BY_PAYMENT_FINANCIAL" type="Boolean" property="IsByPaymentFinancial" />
+        <column name="IS_CURRENT" type="Boolean" property="IsCurrent" />
+        <column name="USER_ID" type="Int32" property="UserId" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

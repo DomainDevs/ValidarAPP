@@ -1,0 +1,225 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.ClauseViewModel
+
+@{
+    Layout = null;
+}
+
+<script id="templateClause" type="text/templateClause">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div>@Resources.Language.Name:<strong class="success">{{Name}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div>@Resources.Language.Name:<strong class="warning">{{Name}}({{Id}})</strong></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div>@Resources.Language.Name:<strong class="danger">{{Name}}({{Id}})</strong></div>
+    {{else}}
+    <div><div>@Resources.Language.Name: <strong>{{Name}}({{Id}})</strong></div></div>
+    {{/ifCond }}
+    <div>Titulo: <strong>{{Title}}</strong></div>
+    <div>@Resources.Language.LabelLevels: <strong>{{LevelDescription}}</strong></div>
+
+</script>
+
+
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column-40">
+        Clausulas
+    </div>
+    <div class="column-30">
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("ClauseSearch", null, new { @class = "uif-input-search", id = "inputClauseSearch", placeholder = Resources.Language.search })
+    </div>
+</script>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitClause">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSaveClause">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+
+@*Formulario Principal*@
+<form id="formClause" class="form without-space">
+    <input type="hidden" name="Id" id="Id" />
+    <div class="row">
+        <div class="uif-col-6 fit-col-main">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">Nombre de la cláusula</label>
+                    @Html.TextBoxFor(model => model.Name, new { id = "inputNameLoad", maxlength = "10" })
+                    @*<input type="text" name="Name" id="Name" />*@
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">Titulo de la cláusula</label>
+                    @Html.TextBoxFor(model => model.Title, new { id = "inputTitleLoad", maxlength = "60" })
+                    @*<input type="text" name="Title" id="Title" />*@
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelLevels</label>
+                    <select class="uif-select" name="Level" id="Level" data-id="Id" data-name="Description" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Level, Resources.Language.Required)
+
+
+                </div>
+                <div class="uif-col-6" id="divBranch">
+                    <label class="field-required">Ramo Comercial</label>
+                    <select class="uif-select" name="CommercialBranch" id="CommercialBranch"
+                            data-id="PrefixCode" data-name="PrefixDescription" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessage("CommercialBranch", Resources.Language.Required)
+                </div>
+
+
+                <div class="uif-col-6" id="divCoveredRisk">
+                    <label class="field-required">Tipo de riesgo cubierto</label>
+                    <select class="uif-select" name="CoveredRisk" id="CoveredRisk" data-id="Id" data-name="Description" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.CoveredRisk, Resources.Language.Required)
+                </div>
+
+                <div class="uif-col-6" id="divLineBusiness">
+                    <label class="field-required">@Resources.Language.LabelLineBusiness</label>
+                    <select class="uif-select" name="LineBusiness" id="LineBusiness" data-id="Id" data-name="Description" data-val="true" data-val-required="true" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.LineBusiness, Resources.Language.Required)
+                </div>
+
+
+                <div class="uif-col-6" id="divCoverage">
+                    <label class="field-required">Cobertura</label>
+                    <input class="uif-input-search" id="Coverage" name="Coverage" placeholder="Cobertura" data-id="Id" data-name="Description" type="text" data-val="true" data-val-required="true">
+                    @Html.ValidationMessageFor(model => model.Coverage, Resources.Language.Required)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6" id="divObj">
+                    <label class="">Objeto del seguro</label>
+                    <input type="text" name="ObjectInsurance" id="ObjectInsurance" disabled="disabled" />
+                </div>
+
+                <div class="uif-col-6" id="divProtection">
+                    <label class="">Amparo</label>
+                    <input type="text" name="Protection" id="Protection" disabled="disabled" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">Fecha de Inicio</label>
+                    @*<input type="text" class="uif-datepicker" name="InputStartDate" id="InputStartDate" data-val-required="true" />*@
+                    @Html.TextBoxFor(model => model.InputStartDate, new { @id= "InputStartDate", @class= "uif-datepicker" })
+                    @Html.ValidationMessageFor(model => model.InputStartDate, "es Requerido")
+                </div>
+
+                <div class="uif-col-4">
+                    <label class="">@Resources.Language.LabelDueDate</label>
+                    <input type="text" class="uif-datepicker" name="DueDate" id="DueDate" />
+                    @*@Html.ValidationMessageFor(model => model.DueDate, Resources.Language.Required)*@
+                </div>
+
+                <div class="uif-col-4 checkbox">
+                    <br>
+                    <input type="checkbox" id="required" name="Required" />
+                    <label for="required">Obligatorio</label>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="">Texto precatalogado</label>
+                    <input class="uif-input-search"
+                           data-val="true" id="inputPrecatalogedText" name="inputPrecatalogedText" data-id="Id" placeholder="@Resources.Language.PlaceHolderKeyName" type="text">
+                </div>
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <button type="button" class="btn btn-default secondary-Colombia" id="btnMore" data-id="Id">
+                            Agregar Texto
+                        </button>
+                        <button type="button" class="btn btn-default secondary-Colombia" id="btnDetail" data-id="Id">
+                            @Resources.Language.ButtonDetail
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">Texto de la cláusula</label>
+                    @*@Html.TextAreaFor(model => model.Body, new { id = "Body", cols = "12", rows = "22", @class = "textarea" })*@
+                    @Html.TextAreaFor(model => model.ClauseText, new { id = "ClauseText", cols = "8", rows = "5", @class = "textarea" })
+                    @Html.ValidationMessageFor(model => model.ClauseText, "es requerido")
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listClause" class="uif-listview"></div>
+        </div>
+    </div>    
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnClauseNew">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btnClauseAccept">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.AddForm
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6" id="summaryAgent">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+@*Modales*@
+<div class="uif-modal" id="modalClauseDetail">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/Clauses/DetailClause.cshtml")
+    </div>
+    <div id="buttonsClauses" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalClausesClose">@Resources.Language.ButtonClose</button>
+    </div>
+</div>
+<div class="uif-modal" id="modalListSearchText">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/Clauses/ListPrecatalogedText.cshtml")
+    </div>
+</div>
+
+
+<div class="uif-modal" id="modalListSearchCoverage">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/Clauses/ListCoverage.cshtml")
+    </div>
+</div>
+
+
+<div class="uif-modal" id="modalListSearchClause">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/Clauses/ListClause.cshtml")
+    </div>
+</div>

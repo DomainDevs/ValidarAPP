@@ -1,0 +1,183 @@
+﻿@{
+    Layout = null;
+}
+@Html.Partial("~/Areas/Person/Views/Person/Persons.cshtml")
+<form autocomplete="off" class="form form-space-adjusted">
+    <div id="modalPeople">
+        <div div class="row">
+            <div class="uif-col-9" fit-col-main id="columnMain">
+                <div div class="row">
+                    <div class="uif-col-12" id="personsRol">
+                        @Html.Partial("~/Areas/Person/Views/Person/PersonsRol.cshtml")
+                    </div>
+                </div>
+                <div div class="row">
+                    <div class="uif-col-12">
+                        <div class="uif-row ">
+                            <div class="uif-col-3">
+                                <label class="field-required">@Resources.LanguagePerson.LabelTypeDocument</label>
+                                <select class="uif-select form-control" id="selectCompanyDocumentType" data-id="Id" data-name="SmallDescription"></select>
+                            </div>
+                            <div class="uif-col-4">
+                                <label class="field-required">@Resources.LanguagePerson.LabelDocumentNumber</label>
+                                <table>
+                                    <tr>
+                                        <td style="width: 80%">
+                                            <input type="text" id="inputCompanyDocumentNumber" required maxlength="14" />
+                                        </td>
+                                        <td>
+                                            -
+                                        </td>
+                                        <td style="width: 20%">
+                                            <input type="text" id="inputCompanyDigit" disabled />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="uif-col-3">
+                                <label class="field-required">@Resources.LanguagePerson.codePerson</label>
+                                <input style="color: red" type="text" id="lblCompanyCode" class="rightAlign" disabled />
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-6">
+                                <label class="field-required">@Resources.LanguagePerson.TradeName</label>
+                                <input type="text" id="inputCompanyTradeName" class="upperCase-co" required maxlength="120" />
+                            </div>
+                            <div class="uif-col-6">
+                                <label class="field-required">@Resources.LanguagePerson.LabelTypePartnership</label>
+                                <select class="uif-select form-control" id="selectTypePartnership" data-id="Id" data-name="Description"></select>
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-3">
+                                <label class="field-required">@Resources.LanguagePerson.CompanyType</label>
+                                <select class="uif-select form-control" id="selectCompanyTypePartnership" data-id="Id" data-name="Description"></select>
+                            </div>
+                            <div class="uif-col-3">
+                                <label>@Resources.LanguagePerson.LabelCountryOrigin</label>
+                                <input class="uif-input-search"
+                                       data-val="true" id="inputCompanyCountryOrigin" name="inputCompanyCountryOrigin" placeholder="@Resources.LanguagePerson.NameCountry" type="text">
+                            </div>
+                            <div class="uif-col-6">
+                                <label>@Resources.LanguagePerson.LabelCheckNameOf</label>
+                                <input type="text" id="inputcheckpayable" class="upperCase-co" maxlength="90" />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-12">
+                                <h5><strong>@Resources.LanguagePerson.LabelAddressesAndPhone</strong></h5>
+                            </div>
+                        </div>
+
+                        <div class="uif-row">
+                            <div class="uif-col-3">
+                                <label class="field-required">@Resources.LanguagePerson.LabelTypeAddress</label>
+                                <select class="uif-select form-control" id="selectCompanyAddressType" data-id="Id" data-name="Description"></select>
+                            </div>
+                            <div class="uif-col-6">
+                                <label class="field-required">@Resources.LanguagePerson.LabelFullAddress</label>
+                                <input class='upperCase-co' type="text" id="inputCompanyAddress" required maxlength="180" />
+                                <input type="hidden" id="hidennCompanyAddressId" />
+                            </div>
+                            <div class="uif-col-3">
+                                <div class="without-label">
+                                    <input type="checkbox" id="chkCompanyPrincipal" checked />
+                                    <label for="chkCompanyPrincipal">@Resources.LanguagePerson.PrincipalAddress</label>
+                                    <button class="btn btn-default" onclick="return false" id="btnLegAddresses"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-3">
+                                <label class="field-required">@Resources.LanguagePerson.LabelCountry</label>
+                                <input class="uif-input-search"
+                                       data-val="true" id="inputCompanyCountry" name="inputCompanyCountry" placeholder="@Resources.LanguagePerson.NameCountry" type="text">
+                            </div>
+                            <div class="uif-col-3">
+                                <label>@Resources.LanguagePerson.LabelCodDaneCity</label>
+                                <input type="number" value="" id="inputCompanyDaneCode" name="DaneCodePn" data-displaykey="DANECode" data-minlenght="2" data-maxlenght="5" maxlength="5" placeholder="@Resources.LanguagePerson.EnterCodeDANE" />
+                            </div>
+                            <div class="uif-col-3">
+                                <label class="field-required">@Resources.LanguagePerson.LabelState</label>
+                                <input class="uif-input-search"
+                                       data-val="true" id="inputCompanyState" name="inputCompanyState" placeholder="@Resources.LanguagePerson.NameDepartment" type="text">
+                            </div>
+                            <div class="uif-col-3">
+                                <label class="field-required">@Resources.LanguagePerson.LabelCity</label>
+                                <input class="uif-input-search"
+                                       data-val="true" id="inputCompanyCity" name="inputCompanyCity" placeholder="@Resources.LanguagePerson.NameCity" type="text">
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-3">
+                                <label class="field-required">@Resources.LanguagePerson.LabelPhoneType</label>
+                                <select class="uif-select form-control" id="selectCompanyPhoneType" data-id="Id" data-name="Description"></select>
+                            </div>
+                            <div class="uif-col-3">
+                                <label class="field-required">@Resources.LanguagePerson.LabelPhone</label>
+                                <div class="input-with-buttons">
+                                    <input type="text" id="inputCompanyPhone" maxlength="20" />
+                                    <button class="btn btn-default" onclick="return false" id="btnPhoneCompany"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div class="uif-col-2">
+                                <label class="field-required">@Resources.LanguagePerson.LabelEmailType</label>
+                                <select class="uif-select form-control" id="selectCompanyEmailType" data-id="Id" data-name="Description"></select>
+                            </div>
+                            <div class="uif-col-4">
+                                <label class="field-required">@Resources.LanguagePerson.Email</label>
+                                <div class="input-with-buttons">
+                                    <input type="text" id="inputCompanyEmail" maxlength="60" style="text-transform: lowercase" />
+                                    <input type="hidden" id="hidennCompanyEmailId" />
+                                    <button class="btn btn-default" onclick="return false" id="btnCompanyEmail"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="uif-row">
+                            <div class="uif-col-6">
+                                <label class="field-required">@Resources.LanguagePerson.EconomicActivity</label>
+                                <input class="uif-input-search upperCase-co" type="text" id="inputCompanyEconomyActivity">
+                            </div>
+                            <div class="uif-col-6">
+                                <label class="field-required">@Resources.LanguagePerson.ElectronicBillingEmailLabel</label>
+                                <input class="uif-input" id="inputEmailElectronicBilling" type="text" style="text-transform: lowercase">
+                            </div>
+
+                        </div>
+
+                       
+                        @*<div class="uif-row">
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.LanguagePerson.ElectronicBillingEmailLabel</label>
+                <input class="uif-input" id="inputEmailElectronicBilling" type="text" style="text-transform: lowercase">
+            </div>
+        </div>*@
+                    </div>
+                </div>
+            </div>
+            <div class="uif-col-3" fit-col-main id="personsMenu">
+                @Html.Partial("~/Areas/Person/Views/Person/PersonsMenu.cshtml")
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<div class="uif-modal" id="modalPerson2G">
+    <div class="uif-modalbody">
+        <table class="uif-table" data-selectiontype="single" id="tblPerson2G" data-paginate="true">
+            <thead>
+                <tr>
+                    <th data-property="PersonId">@Resources.Language.PersonId</th>
+                    <th data-property="Role">@Resources.Language.Role</th>
+                    <th data-property="FullName">@Resources.Language.LabelDescription</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

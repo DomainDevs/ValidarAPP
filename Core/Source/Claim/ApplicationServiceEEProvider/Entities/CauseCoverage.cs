@@ -1,0 +1,179 @@
+﻿using Sistran.Core.Framework;
+using Sistran.Core.Framework.DAF;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sistran.Core.Application.ClaimServices.EEProvider.Entities
+{
+    /// <summary>
+    /// Definición de entidad CauseCoverage.
+    /// </summary>
+    [
+    PersistentClass("Sistran.Core.Application.ClaimServices.EEProvider.CauseCoverage.dict"),
+    Serializable(),
+    DescriptionKey("CAUSE_COVERAGE_ENTITY"),
+    TableMap(TableName = "CAUSE_COVERAGE", Schema = "CLM"),
+    ]
+    public partial class CauseCoverage :
+        BusinessObject2
+    {
+        #region static
+        /// <summary>
+        /// Propiedades públicas de la entidad.
+        /// </summary>
+        public static class Properties
+        {
+            public static readonly string CauseId = "CauseId";
+            public static readonly string CoverageId = "CoverageId";
+            public static readonly string LackPeriod = "LackPeriod";
+        }
+
+        /// <summary>
+        /// Crea una clave primaria para una clase concreta.
+        /// </summary>
+        /// <param name="concreteClass">Clase concreta.</param>
+        /// <param name="causeId">Propiedad clave CauseId.</param>
+        /// <param name="coverageId">Propiedad clave CoverageId.</param>
+        /// <returns>Clave primaria.</returns>
+        protected static PrimaryKey InternalCreatePrimaryKey<T>(int causeId, int coverageId)
+        {
+            Dictionary<string, object> keys = new Dictionary<string, object>();
+            keys.Add(Properties.CauseId, causeId);
+            keys.Add(Properties.CoverageId, coverageId);
+
+            return new PrimaryKey<T>(keys);
+        }
+
+
+        protected static PrimaryKey InternalCreatePrimaryKey<T>()
+        {
+            Dictionary<string, object> keys = new Dictionary<string, object>();
+            keys.Add(Properties.CauseId, null);
+            keys.Add(Properties.CoverageId, null);
+
+            return new PrimaryKey<T>(keys);
+        }
+
+        /// <summary>
+        /// Crea una clave primaria para esta clase.
+        /// </summary>
+        /// <param name="causeId">Propiedad clave CauseId.</param>
+        /// <param name="coverageId">Propiedad clave CoverageId.</param>
+        public static PrimaryKey CreatePrimaryKey(int causeId, int coverageId)
+        {
+            return InternalCreatePrimaryKey<CauseCoverage>(causeId, coverageId);
+        }
+
+        public static PrimaryKey CreatePrimaryKey()
+        {
+            return InternalCreatePrimaryKey<CauseCoverage>();
+        }
+        #endregion
+
+        //*** Object Attributes ********************************
+
+        /// <summary>
+        /// Atributo para la propiedad LackPeriod.
+        /// </summary>
+        private int? _lackPeriod = null;
+        //*** Object Constructors ********************************
+
+        /// <summary>
+        /// Constructor de instancia de la clase en base a las propiedades claves.
+        /// </summary>
+        /// <param name="causeId">CauseId key property.</param>
+        /// <param name="coverageId">CoverageId key property.</param>
+        public CauseCoverage(int causeId, int coverageId) :
+            this(CauseCoverage.CreatePrimaryKey(causeId, coverageId), null)
+        {
+        }
+
+        public CauseCoverage() :
+            this(CauseCoverage.CreatePrimaryKey(), null)
+        {
+        }
+
+        /// <summary>
+        /// Constructor de instancia de la clase en base a una clave primaria y a valores iniciales.
+        /// </summary>
+        /// <param name="key">
+        /// Identificador de la instancia de la entidad.
+        /// </param>
+        /// <param name="initialValues">
+        /// Valores para establecer el estado de la instancia.
+        /// </param>
+        public CauseCoverage(PrimaryKey key, IDictionary initialValues) :
+            base(key, initialValues)
+        {
+        }
+
+        /*** Object Properties ********************************/
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad CauseId.
+        /// </summary>
+        /// <value>Propiedad CauseId.</value>
+        [
+        DescriptionKey("CAUSE_ID_PROPERTY"),
+        PersistentProperty(IsKey = true),
+        ColumnMap(ColumnName = "CAUSE_ID", DbType = System.Data.DbType.String),
+        ]
+        public int CauseId
+        {
+            get
+            {
+                return (int)this._primaryKey[Properties.CauseId];
+            }
+            set
+            {
+                this._primaryKey[Properties.CauseId] = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad CoverageId.
+        /// </summary>
+        /// <value>Propiedad CoverageId.</value>
+        [
+        DescriptionKey("COVERAGE_ID_PROPERTY"),
+        PersistentProperty(IsKey = true),
+        ColumnMap(ColumnName = "COVERAGE_ID", DbType = System.Data.DbType.String),
+        ]
+        public int CoverageId
+        {
+            get
+            {
+                return (int)this._primaryKey[Properties.CoverageId];
+            }
+            set
+            {
+                this._primaryKey[Properties.CoverageId] = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad LackPeriod.
+        /// </summary>
+        /// <value>Propiedad LackPeriod.</value>
+        [
+        DescriptionKey("LACK_PERIOD_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "LACK_PERIOD", DbType = System.Data.DbType.String),
+        ]
+        public int? LackPeriod
+        {
+            get
+            {
+                return this._lackPeriod;
+            }
+            set
+            {
+                this._lackPeriod = value;
+            }
+        }
+
+    }
+}

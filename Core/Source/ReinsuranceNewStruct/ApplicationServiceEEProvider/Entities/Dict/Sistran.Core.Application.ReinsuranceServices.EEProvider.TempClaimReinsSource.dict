@@ -1,0 +1,18 @@
+<map version="2.0" type="class" name="TempClaimReinsSource" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="TEMP_CLAIM_REINS_SOURCE_ENTITY">
+  <properties>
+    <property name="TempClaimReinsSourceId" type="Integer" key="true" description="TEMP_CLAIM_REINS_SOURCE_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="TempClaimAllocationCode" type="Integer" description="TEMP_CLAIM_ALLOCATION_CODE_PROPERTY" />
+    <property name="MovementSourceCode" type="Integer" description="MOVEMENT_SOURCE_CODE_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" description="AMOUNT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="TEMP_CLAIM_REINS_SOURCE" schema="REINS" alias="TEMP_CLAIM_REINS_SOURCE" update="true">
+      <columns>
+        <column name="TEMP_CLAIM_REINS_SOURCE_ID" type="Int32" property="TempClaimReinsSourceId" key="true" identity ="true"/>
+        <column name="TEMP_CLAIM_ALLOCATION_CD" type="Int32" property="TempClaimAllocationCode" allowNull="false" />
+        <column name="MOVEMENT_SOURCE_CD" type="Int32" property="MovementSourceCode" allowNull="false" />
+        <column name="AMOUNT" type="Decimal" property="Amount" allowNull="false" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

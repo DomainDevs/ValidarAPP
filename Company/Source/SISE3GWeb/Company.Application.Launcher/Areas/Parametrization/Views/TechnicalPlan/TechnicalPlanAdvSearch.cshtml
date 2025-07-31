@@ -1,0 +1,59 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.TechnicalPlanSearchViewModel
+@{
+	Layout = null;
+}
+
+<script id="ListTechnicalPlanTemplate" type="text/template">
+	<div>
+		@Resources.Language.LabelTechnicalPlanCoveredRiskType: <strong>{{CoveredRiskTypeDescription}}   ({{CoveredRiskTypeId}})</strong>
+	</div>
+	<div>
+		@Resources.Language.LabelTechnicalPlan: <strong>{{TechnicalPlanDescription}}</strong><strong> ({{TechnicalPlanId}})</strong>
+	</div>
+</script>
+
+<form class="form" id="FormSearchTechnicalPlan">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+	<div class="row">
+		<div class="uif-col-6">
+			<label>@Resources.Language.LabelTechnicalPlanCoveredRiskType</label>
+			<select class="uif-select form-control" id="SearchCoveredRiskType" data-id="Id" data-name="ShortDescription" name="SearchCoveredRiskType"
+                    data-filter="true" data-native="false"></select>
+		</div>
+		<div class="uif-col-6">
+			@Html.LabelFor(m => m.ShortDescription)
+			@Html.TextBoxFor(model => model.ShortDescription, new
+			{
+				@id = "SearchShortDescription", @placeholder = @Resources.Language.LabelTechnicalPlanShortDescription})
+			@Html.ValidationMessageFor(model => model.ShortDescription)
+
+			@*<label>@Resources.Language.LabelTechnicalPlanShortDescription</label>
+				<input type="text" id="SearchShortDescription" name="SearchShortDescription" value="" data-val="true" data-val-length-max="50" data-val-length="@Resources.Language.ErrorMaximumLength50" placeholder="@Resources.Language.LabelTechnicalPlanShortDescription" />
+				@Html.ValidationMessage("SearchShortDescription")*@
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+            <button type="button" name="BtnAdvancedSearchTechnicalPlan" id="BtnAdvancedSearchTechnicalPlan" class="btn btn-primary-Co width-container">@Resources.Language.search</button>			
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+			<div class="uif-listview" id="LvSearchAdvTechnicalPlan">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+			<div class="pull-right width-save">
+				<button class="btn btn-default" id="BtnCancelTechnicalPlanSearchAdv" type="button">@Resources.Language.Close</button>
+				<button class="btn btn-primary" id="BtnOkTechnicalPlanSearchAdv" type="button">@Resources.Language.Accept</button>
+			</div>
+		</div>
+	</div>
+</form>
+

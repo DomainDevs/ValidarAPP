@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ClaimNoticeView">
+  <collections>
+    <collection name="ClaimNotice" type="Sistran.Core.Application.Claims.Entities.ClaimNotice, 
+                Core.Claims.Entities"></collection>
+    <collection name="ClaimNoticeDocumentation" type="Sistran.Core.Application.Claims.Entities.ClaimNoticeDocumentation, 
+                Core.Claims.Entities"></collection>
+    <collection name="ClaimNoticeCoverage" type="Sistran.Core.Application.Claims.Entities.ClaimNoticeCoverage, 
+                Core.Claims.Entities"></collection>
+    <collection name="ClaimNoticeContactInformation" type="Sistran.Core.Application.Claims.Entities.ClaimNoticeContactInformation, 
+                Core.Claims.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="ClaimNotice" destination="ClaimNoticeDocumentation" name="ClaimNoticeClaimNoticeDocumentation" type="Left">
+      <property left="ClaimNoticeCode" type="Equal" right="ClaimNoticeCode"></property>
+    </relation>
+    <relation source="ClaimNotice" destination="ClaimNoticeCoverage" name="ClaimNoticeClaimNoticeCoverage" type="Left">
+      <property left="ClaimNoticeCode" type="Equal" right="ClaimNoticeCode"></property>
+    </relation>
+    <relation source="ClaimNotice" destination="ClaimNoticeContactInformation" name="ClaimNoticeClaimNoticeContactInformation" type="Left">
+      <property left="ClaimNoticeCode" type="Equal" right="ClaimNoticeCode"></property>
+    </relation>
+  </relations>
+</view>

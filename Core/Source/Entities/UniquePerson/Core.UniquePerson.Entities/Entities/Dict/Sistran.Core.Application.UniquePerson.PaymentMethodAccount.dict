@@ -1,0 +1,26 @@
+<map version="2.0" type="class" name="PaymentMethodAccount" namespace="Sistran.Core.Application.UniquePerson" file-version="1.0" description="PAYMENT_METHOD_ACCOUNT_ENTITY">
+  <properties>
+    <property name="IndividualId" type="Integer" key="true" description="INDIVIDUAL_ID_PROPERTY" />
+    <property name="PaymentId" type="Integer" key="true" description="PAYMENT_ID_PROPERTY" />
+    <property name="PaymentAccountTypeCode" type="Integer" description="PAYMENT_ACCOUNT_TYPE_CODE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+    <property name="AccountNumber" type="Decimal" precision="20" scale="5" description="ACCOUNT_NUMBER_PROPERTY" />
+    <property name="ElectronicAccount" type="Decimal" precision="30" scale="5" nullable="true" description="ELECTRONIC_ACCOUNT_PROPERTY" />
+    <property name="BankCode" type="Integer" nullable="true" description="BANK_CODE_PROPERTY" />
+    <property name="BankBranchNumber" type="Integer" nullable="true" description="BANK_BRANCH_NUMBER_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_METHOD_ACCOUNT" schema="UP" alias="PAYMENT_METHOD_ACCOUNT" update="true">
+      <columns>
+        <column name="INDIVIDUAL_ID" type="Int32" property="IndividualId" key="true" />
+        <column name="PAYMENT_ID" type="Int16" property="PaymentId" key="true"/>
+        <column name="PAYMENT_ACCOUNT_TYPE_CD" type="Byte" property="PaymentAccountTypeCode" allowNull="false" />
+        <column name="CURRENCY_CD" type="Byte" property="CurrencyCode" allowNull="false" />
+        <column name="ACCOUNT_NUMBER" type="Decimal" property="AccountNumber" allowNull="false" size="19" precision="20" />
+        <column name="ELECTRONIC_ACCOUNT" type="Decimal" property="ElectronicAccount" size="19" precision="30" />
+        <column name="BANK_CD" type="Int32" property="BankCode" />
+        <column name="BANK_BRANCH_NUMBER" type="Int16" property="BankBranchNumber" />
+      </columns>
+    </table>
+  </tables>
+</map>

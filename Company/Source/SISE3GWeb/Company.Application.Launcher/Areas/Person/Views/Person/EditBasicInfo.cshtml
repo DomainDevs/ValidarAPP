@@ -1,0 +1,139 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column" id="titleMain">
+        Editar Información Básica
+    </div>
+</script>
+
+<div id="modalEditBasicInfo">
+    <div div class="row">
+        <div class="uif-col-4">
+            <label class="field-required">Nombre/Razón Social/Documento</label>
+            <input class="uif-input-search" data-val="true" id="inputIdNumber" name="inputIdNumber" placeholder="Ingrese un valor para iniciar la búsqueda" type="text">
+        </div>
+    </div>
+</div>
+<br />
+<div id="companySection">
+    <div div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.LanguagePerson.TradeName</label>
+            <input data-val="true" id="inputSocialReason" name="inputSocialReason" type="text">
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.OriginCountry</label>
+            <input data-val="true" id="inputOriginCountry" name="inputOriginCountry" type="text" disabled>
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.LanguagePerson.BusinessType</label>
+            <select class="uif-select form-control" id="selectCompanyType" data-id="Id" data-name="Description"></select>
+        </div>
+    </div>
+    <div div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.AssociationType</label>
+            <select class="uif-select form-control" id="selectAsociationType" data-id="Id" data-name="Description"></select>
+        </div>
+        <div class="uif-col-12">
+            <label>@Resources.LanguagePerson.EconomicActivityCode</label>
+            <input data-val="true" id="inputEconomicActivityCompany" name="inputEconomicActivityCompany" type="text" disabled>
+        </div>
+    </div>
+    <div div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.BusinessIdentificationType</label>
+            <select class="uif-select form-control" id="selectIdTypeCompany" data-id="Id" data-name="SmallDescription"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.LabelDocumentNumber</label>
+            <table>
+                <tr>
+                    <td style="width: 80%">
+                        <input type="text" id="inputIdNumberCompany" required maxlength="14" disabled />
+                    </td>
+                    <td>
+                        -
+                    </td>
+                    <td style="width: 20%">
+                        <input type="text" id="inputIdNumberDigit" disabled />
+                    </td>
+                </tr>
+            </table>
+            @*<div class="uif-col-2">
+                    <label class="field-required">Cód. Actividad Económica</label>
+                    <input class="uif-input" data-val="true" id="inputIdNumber" name="inputIdNumber" placeholder="Número de documento" type="text">
+                </div>*@
+        </div>
+    </div>
+</div>
+<div id="personSection" hidden>
+    <div div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.LabelFirstName</label>
+            <input data-val="true" id="inputLastName1" name="inputLastName1" type="text">
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.Secondsurname</label>
+            <input data-val="true" id="inputLastName2" name="inputLastName2" type="text">
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.LabelNameNatural</label>
+            <input data-val="true" id="inputName" name="inputName" type="text">
+        </div>
+    </div>
+    <div div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.LabelGender</label>
+            <select class="uif-select form-control" id="selectGender" data-val="true" data-id="Id" data-name="Description" name="PersonTypeId" disabled></select>
+            @*<input data-val="true" id="inputGender" name="inputGender" type="text" disabled>*@
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.LabelBirthDate</label>
+            <input data-val="true" id="inputBirthDate" name="inputBirthDate" type="text" disabled>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.LabelMaritalStatus</label>
+            <select class="uif-select form-control" id="selectCivilStatus" data-id="Id" data-name="Description" disabled></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.LabelTypeDocument</label>
+            <select class="uif-select form-control" id="selectIdTypePerson" data-id="Id" data-name="SmallDescription" disabled></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.LabelNumberDocument</label>
+            <input data-val="true" id="inputIdNumberPerson" name="inputIdNumberPerson" type="text" disabled>
+        </div>
+    </div>
+    <div div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.LanguagePerson.LabelNationality</label>
+            <input data-val="true" id="inputNationality" name="inputTributaryIdPerson" type="text" disabled>
+        </div>
+        <div class="uif-col-12">
+            <label>@Resources.LanguagePerson.EconomicActivity</label>
+            <input data-val="true" id="inputEconomicActivity" name="inputEconomicActivity" type="text" disabled />
+        </div>
+    </div>
+</div>
+
+<script id="footer-template" type="text/template">
+    <div id="btnBottomMain">
+        <button type="button" class="btn btn-default" id="btnCancelView">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            @Resources.LanguagePerson.ButtonExit
+        </button>
+        <button type="button" class="btn btn-primary" id="btnUpdatePerson">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            @Resources.LanguagePerson.LabelRecord
+        </button>
+    </div>
+</script>
+
+<div class="uif-modal" id="modalIndividualSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/IndividualResults.cshtml")
+    </div>
+</div>

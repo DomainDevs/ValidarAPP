@@ -1,0 +1,22 @@
+<map version="2.0" type="class" name="CollectControlPayment" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="COLLECT_CONTROL_PAYMENT_ENTITY">
+  <properties>
+    <property name="CollectControlPaymentId" type="Integer" key="true" description="COLLECT_CONTROL_PAYMENT_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="CollectControlCode" type="Integer" nullable="true" description="COLLECT_CONTROL_CODE_PROPERTY" />
+    <property name="PaymentMethodCode" type="Integer" nullable="true" description="PAYMENT_METHOD_CODE_PROPERTY" />
+    <property name="PaymentTotalAdmitted" type="Decimal" precision="18" scale="2" nullable="true" description="PAYMENT_TOTAL_ADMITTED_PROPERTY" />
+    <property name="PaymentTotalReceived" type="Decimal" precision="18" scale="2" nullable="true" description="PAYMENT_TOTAL_RECEIVED_PROPERTY" />
+    <property name="PaymentTotalDifference" type="Decimal" precision="18" scale="2" nullable="true" description="PAYMENT_TOTAL_DIFFERENCE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="COLLECT_CONTROL_PAYMENT" schema="ACC" alias="COLLECT_CONTROL_PAYMENT" update="true">
+      <columns>
+        <column name="COLLECT_CONTROL_PAYMENT_ID" type="Int32" property="CollectControlPaymentId" key="true" identity ="true"/>
+        <column name="COLLECT_CONTROL_CD" type="Int32" property="CollectControlCode" />
+        <column name="PAYMENT_METHOD_CD" type="Int32" property="PaymentMethodCode" />
+        <column name="PAYMENT_TOTAL_ADMITTED" type="Decimal" property="PaymentTotalAdmitted" size="19" precision="18" scale="2" />
+        <column name="PAYMENT_TOTAL_RECEIVED" type="Decimal" property="PaymentTotalReceived" size="19" precision="18" scale="2" />
+        <column name="PAYMENT_TOTAL_DIFFERENCE" type="Decimal" property="PaymentTotalDifference" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+<script id="BusinessTemplate" type="text/template">    
+    <div>@Resources.Language.LabelScoreValid: <strong>{{score}}</strong></div>
+    <div>@Resources.Language.LabelDateOfQuery: <strong>{{dateRequest}}</strong></div>   
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-40">
+        @Resources.Language.TitleScoreCredit
+    </div>
+    <div class="column-30">
+        <select class="uif-select form-control" data-native="false" style="color:white!important; background-color:#365380!important" id="ddlDocumentType" data-id="Id" data-name="Description" name="PrefixTypeCode"
+                data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"></select>
+        @*@Html.HiddenFor(model => model.PrefixTypeCode)
+            @Html.ValidationMessageFor(model => model.PrefixTypeCode)*@
+    </div>
+
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputProcess", @placeholder = @Resources.Language.LabelPlaceHolderDocumenNum })
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsPrefix" class="footerModule">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+    </div>
+</script>
+
+<form id="formBusinessBranch" class="form without-space" autocomplete="off">
+    @*@Html.AntiForgeryToken()*@
+    <div class="row">
+        <div class="uif-col-10">
+            <table data-paginate="true" data-selectiontype="none" class="uif-table" id="tableScoreCredit" data-title="" data-filter="false">
+                <thead>
+                    <tr>
+                        @*<th data-property="Id">@Resources.Language.Property</th>*@
+                        <th data-property="score">Puntaje (Score)</th>
+                        <th data-property="response">Respuesta</th>
+                        <th data-property="dateRequest" data-type="date">Fecha Consulta</th>
+                        <th data-property="isDefaultValue">Es valor por defecto?</th>
+                        <th data-property="userName">Nombre de Usuario</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="uif-col-2 fit-col-secondary">
+            <div id="listViewScoreCreditValid" class="uif-listview"></div>
+        </div>
+    </div>
+
+    <div class="row lineDividing">
+        <div class="uif-col-10 center-col-right" id="btnsModule">
+
+        </div>
+        <div class="uif-col-2">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+    <iframe id="txtArea1" style="display:none"></iframe>
+</form>

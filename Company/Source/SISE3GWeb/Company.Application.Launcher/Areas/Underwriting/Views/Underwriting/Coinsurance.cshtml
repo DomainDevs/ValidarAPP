@@ -1,0 +1,168 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.CoInsuranceModelsView
+@using Sistran.Core.Framework.UIF.Web.Helpers;
+
+<script id="CoInsuranceAssignedTemplate" type="text/template">
+    <div><b>{{Description}}</b></div>
+    <div>@Resources.Language.Participation: <span class="warning">{{Participation}}%</span></div>
+</script>
+<script id="CoInsuranceAcceptedTemplate" type="text/template">
+    <div><b>{{Description}}</b></div>
+    <div>@Resources.Language.Participation: <span class="warning">{{Participation}}%</span></div>
+</script>
+<form id="formCoInsurance" class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelBusinessType</label>
+                    <select class="uif-select form-control" id="selectCoInsBusinessType" data-native="false" data-val="true" data-id="Value" data-name="Text" name="BusinessType"></select>
+                    @Html.ValidationMessageFor(model => model.BusinessType)
+                </div>
+            </div>
+            <div class="row panelAssigned">
+                <div class="uif-col-12">
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <h4>@Resources.Language.LabelInsuranceAssigned</h4>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-6">
+                            @Html.HiddenFor(model => model.TemporalId, new { id = "hiddenCoinsuranceId" })
+                            <label class="field-required">@Resources.Language.LabelOwnParticipationRate</label>
+                            @Html.TextBoxFor(model => model.AssignedParticipationPercentageOwn, new { id = "inputCoInsAssignedParticipationTotal", maxlength = "5", disabled = "disabled", @class = "rightAlign" })
+                            @Html.ValidationMessageFor(model => model.AssignedParticipationPercentageOwn)
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <label class="field-required">@Resources.Language.LabelCoInsurance</label>
+                            <input type="text" value="" id="inputCoInsAssignedInsured" name="AssignedCoinsurerName" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" placeholder="@Resources.Language.PlaceHolderCoInsurance" />
+                            @Html.ValidationMessageFor(model => model.AssignedCoinsurerName)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-6">
+                            <label class="field-required">@Resources.Language.LabelTableParticipationCoa</label>
+                            @Html.TextBoxFor(model => model.AssignedParticipationPercentage, new { id = "inputCoInsAssignedParticipation", maxlength = "5", @class = "rightAlign" })
+                            @Html.ValidationMessageFor(model => model.AssignedParticipationPercentage)
+                        </div>
+                        <div class="uif-col-6">
+                            <label class="field-required">@Resources.Language.LabelExpenses</label>
+                            @Html.TextBoxFor(model => model.AssignedExpensesPercentage, new { id = "inputCoInsAssignedExpenses", maxlength = "5", @class = "rightAlign" })
+                            @Html.ValidationMessageFor(model => model.AssignedExpensesPercentage)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="uif-col-6 panelAssigned">
+            <div id="listCoInsuranceAssigned" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row" id="panelAccepted">
+        <div class="uif-col-12">
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelOwnParticipationRate</label>
+                    @Html.TextBoxFor(model => model.AcceptedParticipationPercentageOwn, new { id = "inputCoInsAcceptedParticipationTotal", maxlength = "5", @class = "rightAlign field-required" })
+                    @Html.ValidationMessageFor(model => model.AcceptedParticipationPercentageOwn)
+                </div>
+                <div class="uif-col-9">
+                    <label class="field-required">@Resources.Language.LabelLeadingInsurer</label>
+                    <input type="text" value="" id="inputCoInsAcceptedLeadingInsurer" name="AcceptedCoinsurerName" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" placeholder="@Resources.Language.PlaceHolderInsurance" data-val="true" required   data-val-required="@Resources.Language.ErrorDocumentCoinsured"  />
+                    @Html.ValidationMessageFor(model => model.AcceptedCoinsurerName)
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelTableParticipation</label>
+                    @Html.TextBoxFor(model => model.AcceptedParticipationPercentage, new { id = "inputCoInsAcceptedParticipation", maxlength = "5", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.AcceptedParticipationPercentage)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelExpenses</label>
+                    @Html.TextBoxFor(model => model.AcceptedExpensesPercentage, new { id = "inputCoInsAcceptedExpenses", maxlength = "5", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.AcceptedExpensesPercentage)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelLeadingPolicy</label>
+                    @Html.TextBoxFor(model => model.AcceptedPolicyNumber, new { id = "inputCoInsAcceptedLeadingPolicy", maxlength = "20", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.AcceptedPolicyNumber)
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelEndorsement</label>
+                    @Html.TextBoxFor(model => model.AcceptedEndorsementNumber, new { id = "inputCoInsAcceptedEndorsement", maxlength = "20", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.AcceptedEndorsementNumber)
+                </div>
+            </div>
+            @*<div class="uif-row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelAgent</label>
+                    @Html.TextBoxFor(model => model.AcceptedAgentName, new { id = "inputAccepAgentsAgency", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderKeyName })
+                    @Html.ValidationMessageFor(model => model.AcceptedAgentName)*@
+                    @*<input class="uif-autocomplete" id="inputCoInsAcceptedAgent" type="text" data-source="@Url.Action("GetCoInsuranceCompaniesByDescription", "../Underwriting/Underwriting")"
+                        data-id="Id" data-displaykey="Description" data-minLenght="3" maxlength="100" name="AcceptedCoinsurerNames" data-val="true" , placeholder="@Resources.Language.PlaceHolderInsurance" />*@
+                @*</div>
+                <div class="uif-col-2">
+                    <label>@Resources.Language.LabelParticipation</label>
+                    @Html.TextBoxFor(model => model.AssignedAgentPercentage, new { id = "inputCoInsAcceptedAgentParticipation", maxlength = "8", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.AssignedAgentPercentage)
+                </div>
+                <div class="uif-col-3">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" id="btnCoInsAcceptedAgentNew">
+                            <span aria-hidden="true"></span>
+                            @Resources.Language.New
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btnCoInsAcceptedAgent">
+                            <span aria-hidden="true"></span>
+                            @Resources.Language.AddForm
+                        </button>
+                    </div>
+                </div>*@
+            @*</div>*@
+            @*<div class="uif-row">
+                <div class="uif-col-11 fit-col-secondary">
+                    <div id="listCoInsuranceAcceptedAgents" class="uif-listview">
+                    </div>
+                    <h6>@Resources.Language.AlertMaxTableSearch</h6>
+                </div>
+            </div>*@
+            @*<div class="uif-row">
+                <div class="uif-col-3">
+                    Total Participación Intermediarios
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelParticipation</label>
+                    <label id="inputCoInsAcceptedAgenTotalPercentage">@Resources.Language.LabelParticipation</label>*@
+                    @*@Html.TextBox("Id", null, new { id = "inputCoInsAcceptedAgenTotalPercentage", maxlength = "20", @class = "rightAlign" })*@
+                @*</div>
+            </div>*@
+        </div>
+    </div>
+
+    <div class="row lineDividing panelAssigned">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnCoInsAssignedNew">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btnCoInsAssignedAccept">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.AddForm
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div>
+                <div class="uif-summary">
+                    <div class="items">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

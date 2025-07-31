@@ -1,0 +1,317 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@*@model Sistran.Core.Application.ReinsuranceServices.DTOs.LevelDTO*@
+@{
+    ViewBag.Title = @Global.Contracts;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameter</li>
+        <li>@Global.Contract</li>
+    </ol>
+}
+
+
+<div id="tabs">
+
+    <ul class="uif-tab" id="tabmenu">
+        <li class="active"><a href="#tabContract">@Global.Contracts</a></li>
+        <li><a href="#tabContractLevel">@Global.ContractLevel</a></li>
+        <li><a href="#tabContractLevelCompany" id="IdContractLevelCompany">@Global.ContractLevelCompany</a></li>
+    </ul>
+
+    <div class="uif-tab-content">
+        <div class="active" id="tabContract">
+            <div class="uif-row">
+                <form id="formContractSearch" onsubmit="return false">
+                    <div class="uif-col-3">
+                        @Global.ContractYear
+                        <select class="uif-select form-control" id="selectContractYear"
+                                data-source="@Url.Content("~/Reinsurance/Parameter/GetContractYear")"
+                                data-id="Id"
+                                data-name="Name"
+                                data-native="true"
+                                data-val="true"
+                                name="selectContractYear"
+                                data-selectedid="@ViewBag.ContractYearNow"
+                                data-val-required='@Global.RequiredField'></select>
+                        <span class="text-danger" data-valmsg-for="selectContractYear" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-3">
+                        @Global.ContractType
+                        <select class="uif-select form-control" id="selectContractType" name="selectContractType"
+                                data-source="@Url.Content("~/Reinsurance/Parameter/GetContractTypeEnabled")"
+                                data-id="ContractTypeId" data-name="Description" data-val="true"
+                                data-val-required='@Global.RequiredField'></select>
+                        <span class="text-danger" data-valmsg-for="selectContractType" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-2">
+                        <br />
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0369"))
+                        {
+                            <button class="btn btn-primary btn-block" id="btnSearchContract">
+                                <span class="glyphicon glyphicon-search"></span> @Global.Search
+                            </button>
+                        }
+                    </div>
+                    <div class="uif-col-4">
+                    </div>
+                </form>
+            </div>
+            <hr />
+            <div class="uif-alert" id="alertMainContract"></div>
+
+            <div class="active" id="tabSingle">
+                <table class="uif-table" id="tableContract" data-filter="true" data-add="true"
+                       data-edit="true" data-delete="true">
+                    <thead>
+                        <tr>
+                            <th data-property="ContractId" data-visible="false">@Global.Id</th>
+                            <th data-property="SmallDescription">@Global.SmallDescription</th>
+                            <th data-property="Description">@Global.Description</th>
+                            <th data-property="Currency.Description">@Global.Currency</th>
+                            <th data-property="ContractType.ContractFunctionality.ContractFunctionalityId" data-visible="false"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab ContractLevel -->
+        <div class="tab-pane" id="tabContractLevel">
+            <b id="panelContractLevel"></b>
+            <hr />
+            <div class="uif-alert" id="alertMainContractLevel"></div>
+            <div class="uif-row">
+                <div class="uif-col-10">
+                    <table class="uif-table" id="tableContractLevel" data-add="true" data-edit="true" data-delete="true">
+                        <thead>
+                            <tr>
+                                <th data-property="ContractLevelId" data-visible="false">@Global.Id</th>
+                                <th data-property="Number">@Global.LevelNumber</th>
+                                <th data-property="AssignmentPercentage">@Global.AssignmentPercentage</th>
+                                <th data-property="LinesNumber" data-type="currency">@Global.LinesNumber</th>
+                                <th data-property="ContractLimit" data-type="currency">@Global.ContractLimit</th>
+                                <th data-property="RetentionLimit" data-type="currency">@Global.RetentionLimit</th>
+                                <th data-property="EventLimit" data-type="currency">@Global.EventLimit</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center"></tbody>
+                    </table>
+
+                </div>
+                <div class="uif-col-2" id="rightBarLinks">
+                    <div class="uif-right-bar">
+                        <ul>
+                            <li>
+                                <a href="#" onclick="LevelPaymentModal();">@Global.Payment</a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="LevelRestoreModal();">@Global.Reestablishments</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab ContractLevelCompany -->
+        <div class="tab-pane" id="tabContractLevelCompany">
+            <b id="panelContractLevelCompany"></b>
+            <hr />
+            <div class="uif-alert" id="alertMainLevelCompany"></div>
+            <div>
+                <table class="uif-table" id="tableContractLevelCompany" data-add="true" data-edit="true" data-delete="true"
+                       data-selectiontype="none">
+                    <thead>
+                        <tr>
+                            <th data-property="LevelCompanyId" data-visible="false">@Global.Id</th>
+                            <th data-property="Agent.IndividualId" data-visible="false">@Global.BrokerReinsuranceCompanyId</th>
+                            <th data-property="Agent.FullName">@Global.Intermediary</th>
+                            <th data-property="Company.IndividualId" data-visible="false">@Global.ReinsuranceCompanyId</th>
+                            <th data-property="Company.FullName">@Global.ReinsuranceCompany</th>
+                            <th data-property="GivenPercentage">@Global.ParticipationPercentage</th>
+                            <th data-property="ComissionPercentage">@Global.CommissionPercentage</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="uif-row">
+    <footer>
+        <div class="uif-col-12">
+            <button type="button" class="btn btn-primary" id="btnCopyContract" style="float:right;">
+                @Resources.Language.ButtonCopy
+            </button>
+        </div>
+    </footer>
+</div>
+
+@section Modals{
+
+
+    <div class="uif-modal" id="modalContract">
+        <div class="uif-modalbody">
+        </div>
+    </div>
+
+    <div class="uif-modal" id="modalContractLevel">
+        <div class="uif-modalbody">
+        </div>
+    </div>
+
+    <div class="uif-modal" id="modalContractLevelCompany">
+        <div class="uif-modalbody">
+
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalDeleteContract" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.Contracts</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.DeleteConfirmationMessage
+                </div>
+                <div class="modal-footer">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0372"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnDelete">@Global.Yes</button>
+                    }
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="modalContractLevelDelete" tabindex="-2" role="dialog" aria-labelledby="contractModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.ContractLevel</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.DeleteConfirmationMessage
+                </div>
+                <div class="modal-footer">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0378"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnContractLevelDelete">@Global.Yes</button>
+                    }
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="modalContractLevelCompanyDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.ContractLevelCompany</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.DeleteConfirmationMessage
+                </div>
+                <div class="modal-footer">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0384"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnContractLevelCompanyDelete">@Global.Yes</button>
+                    }
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--Modal para grabar Pagos nivel-->
+    <div class="uif-modal" id="paymentModalAdd">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Reinsurance/Views/Reinsurance/Parameter/ContractLevelPaymentModal.cshtml")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+        </div>
+
+    </div>
+    <!--Modal para grabar Restablecimiento nivel-->
+    <div class="uif-modal" id="restoreModalAdd">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Reinsurance/Views/Reinsurance/Parameter/ContractLevelRestoreModal.cshtml")
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+        </div>
+    </div>
+
+    <div class="uif-modal" id="modalCopyContract" data-size="md">
+        <div class="uif-modalbody">
+            <form id="formCopyContract" onsubmit="return false" class="form">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <b class="field-required">@Global.SmallDescription</b>
+                        <input type="text"
+                               id="copyContractSmallDescription"
+                               name="copyContractSmallDescription"
+                               data-val="true"
+                               data-val-required='@Global.RequiredField'
+                               maxlength="10"
+                               onchange="convertToUpperCase(this);" />
+                        <span class="text-danger" data-valmsg-for="copyContractSmallDescription" data-valmsg-replace="true" />
+                    </div>
+
+                    <div class="uif-col-12">
+                        <b class="field-required">@Global.ContractYear</b>
+                        <select class="uif-select form-control"
+                                id="selectCopyContractYear"
+                                name="selectCopyContractYear"
+                                data-source="@Url.Content("~/Reinsurance/Parameter/GetContractYear")"
+                                data-id="Id"
+                                data-name="Name"
+                                data-native="true"
+                                data-val="true"
+                                data-selectedid="@ViewBag.ContractYearNow"
+                                data-val-required='@Global.RequiredField'></select>
+                        <span class="text-danger" data-valmsg-for="selectCopyContractYear" data-valmsg-replace="true" />
+                    </div>
+
+                    <div class="uif-col-12">
+                        <b class="field-required">@Global.Description</b>
+                        <input type="text"
+                               id="copyContractDescription"
+                               name="copyContractDescription"
+                               data-val="true"
+                               data-val-required='@Global.RequiredField'
+                               onchange="convertToUpperCase(this);" />
+                        <span class="text-danger" data-valmsg-for="copyContractDescription" data-valmsg-replace="true" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-primary" id="btnCopyContractSave">@Global.Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+        </div>
+    </div>
+
+}
+
+
+@section scripts{
+    @Scripts.Render("~/reinsurance/bundles/MainContract")
+}

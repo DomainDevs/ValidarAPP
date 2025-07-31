@@ -1,0 +1,63 @@
+﻿<form id="formEstimations" class="form">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.StateCode</label>
+                    <select class="uif-select form-control" id="selectStateCode" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                            data-id="Id" data-name="Description" name="StateCodeId"
+                            data-filter="true" data-native="false" required></select>
+                    <span class="text-danger" data-valmsg-for="StateCodeId" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelReason</label>
+                    <select class="uif-select form-control" id="selectReason" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                            data-id="Id" data-name="Description" name="ReasonId"
+                            data-filter="true" data-native="false" required></select>
+                    <span class="text-danger" data-valmsg-for="ReasonId" data-valmsg-replace="true"></span>
+                </div>
+                 <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.AmountType</label>
+                    <select class="uif-select form-control" id="selectAmountType" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                            data-id="Id" data-name="Description" name="selectAmountType" data-filter="true" data-native="false" required></select>
+                    <span class="text-danger" data-valmsg-for="selectAmountType" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.ClaimCurrency</label>
+                    <select class="uif-select form-control" id="selectClaimCurrency" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                            data-id="Id" data-name="Description" name="ClaimCurrencyid"
+                            data-filter="true" data-native="false" required></select>
+                    <span class="text-danger" data-valmsg-for="ClaimCurrencyid" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelSalaryNumber</label>
+                    <input type="text" class="disabled rightAlign" id="inputSalaryNumeric" required />
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required" id="LabelEstimation">@Resources.Language.Estimation</label>
+                    <input type="text" class="disabled rightAlign" id="inputEstimation" name="inputEstimation" data-val="true" maxlength="21" 
+                           data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,16)" required />
+                    <span class="text-danger" data-valmsg-for="inputEstimation" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelDeductible</label>
+                    <input type="text" class="disabled rightAlign" id="inputDeductible" name="inputDeductible" data-val="true" maxlength="21"
+                           data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,16)" required />
+                    <span class="text-danger" data-valmsg-for="inputDeductible" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="uif-modalbuttons width-save">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0302"))
+                {
+                    <button type="button" class="btn btn-default" id="btnCancelModalEstimation">@Resources.Language.Close</button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0301"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnSaveEstimationClaim">@Resources.Language.Save</button>
+                }
+            </div>
+        </div>
+    </div>
+</form>

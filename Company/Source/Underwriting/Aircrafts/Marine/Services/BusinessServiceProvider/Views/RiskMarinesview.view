@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskMarinesview">
+  <collections>   
+
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="EndorsementOperation" type="Sistran.Core.Application.Issuance.Entities.EndorsementOperation, 
+                Core.Issuance.Entities"></collection> 
+    <collection name="EndoRiskCoverage" type="Sistran.Core.Application.Issuance.Entities.EndorsementRiskCoverage, 
+                Core.Issuance.Entities"></collection> 
+    <collection name="RiskCoverage" type="Sistran.Core.Application.Issuance.Entities.RiskCoverage, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskAircraft" type="Sistran.Core.Application.Issuance.Entities.RiskAircraft, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskAircraftUse" type="Sistran.Core.Application.Common.Entities.AircraftUse, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="EndorsementOperation" destination="EndorsementRisk" name="EndorsementRiskOperation" type="Inner">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>  
+   <relation source="EndorsementRisk" destination="EndoRiskCoverage" name="EndorsementRiskCoverage" type="Inner">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>  
+   <relation source="EndoRiskCoverage" destination="RiskCoverage" name="EndorsementRisksCoverages" type="Inner">
+      <property left="RiskCoverId" type="Equal" right="RiskCoverId"></property>
+    </relation>
+    <relation source="RiskAircraft" destination="EndorsementRisk" name="EndorsementRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskAircraft" destination="RiskAircraftUse" name="EndorsementRiskAircraftUse" type="Left">
+      <property left="AircraftUseCode" type="Equal" right="AircraftUseCode"></property>
+    </relation>
+  </relations>
+</view>

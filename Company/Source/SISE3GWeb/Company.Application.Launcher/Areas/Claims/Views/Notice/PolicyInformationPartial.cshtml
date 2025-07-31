@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+<h5>
+    <strong>@Resources.Language.PolicyInformation</strong>
+</h5>
+<div class="row">
+    <div class="uif-col-3">
+        <label>@Resources.Language.Branch</label>
+        <select class="uif-select form-control" id="ddlBranch" data-val="true"
+                data-id="Id" data-name="Description" name="branch" data-filter="true" data-native="false"></select>
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.Language.Prefix</label>
+        <select class="uif-select form-control" id="ddlPrefix" data-val="true"
+                data-id="Id" data-name="Description" name="prefix" data-filter="true" data-native="false"></select>
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.Language.LabelNumberPolicy</label>
+        <input type="text" name="_policy" value="" id="_policy" class="uif-input" disabled="disabled" />
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.Language.PolicyEndorsementNumber</label>
+        <input type="text" name="_endorsement" value="" id="_endorsement" class="uif-input" disabled="disabled" />
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-3">
+        <label>@Resources.Language.ClaimPeriod</label>
+        <input type="text" name="_startDate" value="" id="_startDate" class="uif-input" disabled="disabled" />
+    </div>
+    <div class="uif-col-3">
+        <label>@Resources.Language.LastBilledPeriod</label>
+        <input type="text" name="_startInvoiced" value="" id="_startInvoiced" class="uif-input" disabled="disabled" />
+    </div>
+    <div class="uif-col-3">
+        <label class="field">@Resources.Language.Currency</label>
+        <input type="text" class="disabled" id="InputCurrency" disabled="disabled" />
+    </div>
+    <div class="uif-col-3">
+        <div class="without-label">
+            <button id="btnGetPolicyInfo" class="btn btn-default secondary-Colombia" type="button"><i class="fa fa-search" aria-hidden="true"></i> @Resources.Language.PolicyConsult</button>
+        </div>
+    </div>
+</div>
+<div class="uif-modal" id="modalPolicyConsult">
+    <div class="uif-modalbody">
+        @Html.Partial("../Claim/ModalPolicyConsult")
+    </div>
+</div>

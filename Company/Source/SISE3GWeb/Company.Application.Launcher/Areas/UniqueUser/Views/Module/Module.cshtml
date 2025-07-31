@@ -1,0 +1,99 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.ModuleModelsView
+@{
+    Layout = null;
+}
+
+<script id="ModuleTemplate" type="text/template">
+
+	{{#ifCond StatusTypeService "==" 2}}
+	<div> Módulo: <strong class="success"> {{Description}}</strong></div>
+	{{else ifCond StatusTypeService "==" 3}}
+	<div> Módulo: <strong class="warning">{{Description}} ({{Id}})</strong></div>
+	{{else ifCond StatusTypeService "==" 4}}
+	<div> Módulo: <strong class="danger">{{Description}} ({{Id}})</strong></div>
+	{{else}}
+	<div> Módulo: <strong>{{Description}} ({{Id}})</strong></div>
+	{{/ifCond }}
+	<div>  <strong>{{EnabledDescription}}</strong> </div>
+</script>
+
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.Modules
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputSearch", @placeholder = @Resources.Language.SearchModule })
+        @*<button class="btn btn-default" id="btnSearchAdvModule" hidden="hidden"><i class="fa fa-angle-down" ></i></button>*@        
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsModule" class="footerModule">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0665"))
+        {
+            <button class="btn btn-default" id="btnSendExcel">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ExportXLS
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0664"))
+        {
+            <button class="btn btn-primary" id="btnSaveModule">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+            </button>
+        }
+    </div>
+</script>
+
+<form id="formModule" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ExpirationDate, new { id = "hiddenExpirationDate" })
+    @Html.HiddenFor(model => model.VirtualFolder, new { id = "hiddenVirtualFolder" })
+    @Html.HiddenFor(model => model.Id, new { id = "hiddenId" })
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.DescriptionModule</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "Description", placeholder = @Resources.Language.PlaceHolderKeyName, maxlength = 30 })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="chkDisabled" name="Disabled" />
+                        <label for="chkDisabled">@Resources.Language.Disabled</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary" id="panelModule">
+            <div id="listModule" class="uif-listview"></div>
+        </div>
+    </div>
+
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewModule">@Resources.Language.New</button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0663"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnModuleAccept">@Resources.Language.Add </button>
+                }
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

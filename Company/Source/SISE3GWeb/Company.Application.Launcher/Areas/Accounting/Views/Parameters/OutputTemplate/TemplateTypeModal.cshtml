@@ -1,0 +1,149 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.Format
+
+@{
+    int selectedFormatTypeItem = 0;
+}
+
+<div class="uif-panel">
+    <div class="uif-row" id="modalFormatHeader">
+        <div class="uif-col-4">
+            <label>@Global.FormatType</label>
+            @Html.DropDownList("selectFormatType", Enumerable.Empty<SelectListItem>(), new
+                    {
+                        @class = "uif-select form-control",
+                        data_id = "Id",
+                        data_name = "Description",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField,
+                        data_native = "true"
+                    })
+            <span class="text-danger" data-valmsg-for="selectFormatType" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.Separator</label>
+            <br />
+            <input type="text" id="Separator" maxlength="1" />
+        </div>
+        <div class="uif-col-4" id="divFormatUse">
+            <label>@Global.FormatUse</label>
+            @Html.DropDownList("selectFileUsing", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/Networks/GetUseDebitFiles"),
+           data_id = "Id",
+           data_name = "Description",
+           data_val = "true",
+           data_val_required = @Global.RequiredField,
+           data_native = "true"
+       })
+            <span class="text-danger" data-valmsg-for="selectFileUsing" data-valmsg-replace="true" />
+        </div>
+
+    </div>
+    <div id="fieldModal">
+        <div class="uif-row">
+            <div class="col-md-12">
+                @Html.HiddenFor(model => model.Id)
+                <label class="control-label" for="Description">
+                    @Global.Description
+                </label>
+                <input class="form-control" placeholder='@Global.ExampleConcept' data-val="true" data-val-required="@Global.RequiredField"
+                       id="DescriptionTemplate" name="DescriptionTemplate" type="text" value="" onblur="this.value = this.value.toUpperCase();" />
+                <span class="text-danger" data-valmsg-for="DescriptionTemplate" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label>Orden</label>
+                <br />
+                <input type="text" data-pattern="000" class="uif-mask" id="Order" name="Order"
+                       data-val="true" data-val-required='@Global.RequiredField'>
+                <span class="text-danger" data-valmsg-for="Order" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Global.InitialPosition</label>
+                <br />
+                <input type="text" data-pattern="000" class="uif-mask" id="Start" name="Start"
+                       data-val="true" data-val-required='@Global.RequiredField'>
+                <span class="text-danger" data-valmsg-for="Start" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Global.Length</label>
+                <br />
+                <input type="text" data-pattern="000" class="uif-mask" id="Length" name="Length"
+                       data-val="true">
+                @*<span class="text-danger" data-valmsg-for="Length" data-valmsg-replace="true" />*@
+            </div>
+        </div>
+
+
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label>@Global.ColumnNumber</label>
+                <br />
+                <input type="text" id="ColumnNumber" name="ColumnNumber" onkeypress=" return JustNumbers(event, this); "
+                       onblur="this.value = this.value.toUpperCase();" maxlength="2" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Global.RowNumber</label>
+                <br />
+                <input type="text" id="RowNumber" name="RowNumber" onkeypress=" return JustNumbers(event, this); "
+                       onblur="this.value = this.value.toUpperCase();" maxlength="6" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Global.Value</label>
+                <br />
+                <input type="text" id="Value" data-val="true" maxlength="200">
+            </div>
+        </div>
+        <div class="uif-row" id="divFieldAutomaticDebit">
+            <div class="uif-col-6">
+                <label>@Global.Field</label>
+                <br />
+                <input type="text" id="FieldName" data-val="true" onblur="this.value = this.value.toUpperCase();" >
+            </div>
+
+            <div class="uif-col-6">
+                <label>@Global.Format</label>
+                <select class="uif-select form-control" id="selectFieldFormat" name="selectFieldFormat"
+                        data-source='@Url.Content("~/Networks/GetFieldFormats")' 
+                        data-id="Id" data-name="Description" data-native="true"
+                        data-selectedid="@selectedFormatTypeItem" data-val="true" data-val-required='@Global.RequiredField'></select>
+                <span class="text-danger" data-valmsg-for="selectFieldFormat" data-valmsg-replace="true" />
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label>@Global.Filled</label>
+                <br />
+                <input type="text" id="Filled" maxlength="1" data-val="true">
+            </div>
+            <div class="uif-col-6">
+                <label>@Global.Alignment</label>
+                <select class="uif-select form-control" id="Align" name="Align" data-native="true"
+                        data-source='@Url.Content("~/Networks/GetFieldAlignment")' data-id="Id"
+                        data-name="Description" data-selectedid="Align" data-val="true"></select>
+            </div>
+        </div>
+        @*<div class="uif-row">
+            <div class="uif-col-4">
+                <br />
+                <label id="lblIsDefault">@Global.IsRequired</label>
+                <span class="glyphicon glyphicon-unchecked" id="checkDefault"></span>
+                <input type="checkbox" id="Defaultcheck">
+            </div>
+
+        </div>*@
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertFormTemplateTypeModal"></div>
+        </div>
+    </div>
+</div>
+
+

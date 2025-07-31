@@ -1,0 +1,30 @@
+<map version="2.0" type="class" name="FinPayerPayment" namespace="Core.FinancialPlan" file-version="1.0" description="FIN_PAYER_PAYMENT_ENTITY">
+  <properties>
+    <property name="PayerPaymentId" type="Integer" key="true"  autonumber="Identity" description="PAYER_PAYMENT_ID_PROPERTY" />
+    <property name="PaymentNum" type="Integer" description="PAYMENT_NUM_PROPERTY" />
+    <property name="PayExpDate" type="DateTime" description="PAY_EXP_DATE_PROPERTY" />
+    <property name="PaymentPercentage" type="Decimal" precision="16" scale="6" nullable="true" description="PAYMENT_PERCENTAGE_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" description="AMOUNT_PROPERTY" />
+    <property name="LocalAmount" type="Decimal" precision="18" scale="2" nullable="true" description="LOCAL_AMOUNT_PROPERTY" />
+    <property name="MainAmount" type="Decimal" precision="18" scale="2" nullable="true" description="MAIN_AMOUNT_PROPERTY" />
+    <property name="MainLocalAmount" type="Decimal" precision="18" scale="2" nullable="true" description="MAIN_LOCAL_AMOUNT_PROPERTY" />
+    <property name="PaymentState" type="Integer" nullable="true" description="PAYMENT_STATE_PROPERTY" />
+    <property name="FinPayerId" type="Integer" description="FIN_PAYER_ID_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="FIN_PAYER_PAYMENT" schema="FPLAN" alias="FIN_PAYER_PAYMENT" update="true">
+      <columns>
+        <column name="PAYER_PAYMENT_ID" type="Int32" property="PayerPaymentId" key="true"  identity="true" />
+        <column name="PAYMENT_NUM" type="Byte" property="PaymentNum" allowNull="false" />
+        <column name="PAY_EXP_DATE" type="DateTime" property="PayExpDate" allowNull="false" />
+        <column name="PAYMENT_PCT" type="Decimal" property="PaymentPercentage" size="19" precision="16" scale="6" />
+        <column name="AMOUNT" type="Decimal" property="Amount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="LOCAL_AMOUNT" type="Decimal" property="LocalAmount" size="19" precision="18" scale="2" />
+        <column name="MAIN_AMOUNT" type="Decimal" property="MainAmount" size="19" precision="18" scale="2" />
+        <column name="MAIN_LOCAL_AMOUNT" type="Decimal" property="MainLocalAmount" size="19" precision="18" scale="2" />
+        <column name="PAYMENT_STATE" type="Int32" property="PaymentState" />      
+        <column name="FIN_PAYER_ID" type="Int32" property="FinPayerId" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

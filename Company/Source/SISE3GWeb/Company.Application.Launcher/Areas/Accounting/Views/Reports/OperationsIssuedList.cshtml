@@ -1,0 +1,147 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @Global.OperationsIssued;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Reports</a></li>
+        <li class="active">@Global.OperationsIssued</li>
+    </ol>
+}
+
+<form id="ReportFormOperationsIssued" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("BranchOperationsIssued", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetListBranchesbyUserName"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_selectedid = @ViewBag.BranchDefault,
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="BranchOperationsIssued" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.DateFrom</label>
+            <input type="text" id="StartDateOperationsIssued" name="StartDateOperationsIssued" class="uif-datepicker" data-mask="99/99/9999" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.DateTo</label>
+            <input type="text" id="EndDateOperationsIssued" name="EndDateOperationsIssued" class="uif-datepicker" data-mask="99/99/9999" />
+        </div>
+
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Status
+            </label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="all" value="1" checked>
+                    @Global.All
+                </label>
+                <label>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" name="options" id="pending" value="2">
+                    @Global.Pending
+                </label>
+                <label>
+                    &nbsp;&nbsp;&nbsp;<input type="radio" name="options" id="applied" value="3">
+                    @Global.Applied
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+
+    @section Toolbar
+    {
+        <footer>
+            <button id="CancelOperationIssued" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-remove"></span>  @Global.Clean
+            </button>
+            <button id="MassiveReportOperationIssued" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        </footer>
+    }
+
+
+    @section modals{
+
+        @*VENTANAS MODALES DE CONFIRMACION*@
+        <!-- Modal Confirma proceso de masivos reaseguros -->
+        <div class="modal fade" id="modalMassiveTotRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><b>@Global.OperationsIssued</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <b id="pnlModalTotRecords"></b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnModalOperationsIssued">@Global.Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalMassiveNo">@Global.No</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- Modal Confirmacion del Proceso Masivo de cada reporte -->
+        <div class="modal fade" id="modalMassiveReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><b>@Global.OperationsIssued</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        @Global.ConfirmMessageProcess
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnModalMassiveProcessReport">@Global.Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</form>
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/OperationsIssuedList")
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>

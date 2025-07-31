@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PremiumRecievableImputationView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PremiumReceivableTransId">
+          <Column table-alias="PremiumReceivableTrans" name="PremiumReceivableTransId" />
+        </SelectValue>
+        <SelectValue alias="ImputationCode">
+          <Column table-alias="PremiumReceivableTrans" name="ImputationCode" />
+        </SelectValue>
+        <SelectValue alias="PolicyId">
+          <Column table-alias="PremiumReceivableTrans" name="PolicyId" />
+        </SelectValue>
+        <SelectValue alias="PolicyDocumentNumber">
+          <Column table-alias="PolicyPremiumReceivable" name="PolicyDocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="EndorsementId">
+          <Column table-alias="PremiumReceivableTrans" name="EndorsementId" />
+        </SelectValue>
+        <SelectValue alias="EndorsementDocumentNumber">
+          <Column table-alias="PolicyPremiumReceivable" name="EndorsementDocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="PaymentNum">
+          <Column table-alias="PremiumReceivableTrans" name="PaymentNum" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="PolicyPremiumReceivable" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="PolicyPremiumReceivable" name="BranchDescription" />
+        </SelectValue>
+        <SelectValue alias="PrefixCode">
+          <Column table-alias="PolicyPremiumReceivable" name="PrefixCode" />
+        </SelectValue>
+        <SelectValue alias="PrefixDescription">
+          <Column table-alias="PolicyPremiumReceivable" name="PrefixDescription" />
+        </SelectValue>
+        <SelectValue alias="SourceCode">
+          <Column table-alias="Imputation" name="SourceCode" />
+        </SelectValue>
+        <SelectValue alias="ImputationTypeCode">
+          <Column table-alias="Imputation" name="ImputationTypeCode" />
+        </SelectValue>
+        <SelectValue alias="TechnicalTransaction">
+          <Column table-alias="Imputation" name="TechnicalTransaction" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PremiumReceivableTrans, Core.Accounting.Entities" alias="PremiumReceivableTrans" />
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Imputation, Core.Accounting.Entities" alias="Imputation" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Imputation" name="ImputationCode" />
+                <Column table-alias="PremiumReceivableTrans" name="ImputationCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PolicyPremiumReceivable, Core.Accounting.Entities" alias="PolicyPremiumReceivable" />
+          <criteria>
+            <BinaryPredicate type="And">
+              <BinaryPredicate type="And">
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="PolicyPremiumReceivable" name="PolicyId" />
+                  <Column table-alias="PremiumReceivableTrans" name="PolicyId" />
+                </BinaryCriterion>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="PolicyPremiumReceivable" name="EndorsementId" />
+                  <Column table-alias="PremiumReceivableTrans" name="EndorsementId" />
+                </BinaryCriterion>
+              </BinaryPredicate>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="PolicyPremiumReceivable" name="PaymentNum" />
+                <Column table-alias="PremiumReceivableTrans" name="PaymentNum" />
+              </BinaryCriterion>
+            </BinaryPredicate>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

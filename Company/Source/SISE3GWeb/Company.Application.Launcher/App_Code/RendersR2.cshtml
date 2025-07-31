@@ -1,0 +1,84 @@
+﻿@helper RenderModulesR2(IEnumerable<Sistran.Core.Framework.UIF2.Services.Security.Module> modules,string LevelOpetarion)
+{
+if (modules != null)
+{
+	foreach (var module in modules)
+	{
+            <li data-name="@module.Title" class="@(module.Path ==LevelOpetarion+Request.Url.PathAndQuery?"active":"")">
+                @if (module.SubModules != null)
+                {
+                    if (module.SubModules.Any())
+                    {
+                        <a href="#" class="has-submenu">
+                            @if (module.Image != string.Empty)
+                            {
+                                <i class="@module.Image"></i>
+                            }
+                            @module.Title <i class="zmdi zmdi-plus drop-icon"></i>
+                        </a>
+
+
+                        <ul class="@(hasChildOpen(LevelOpetarion+Request.Url.PathAndQuery, module.SubModules) ? "open" : "")">
+
+                            @RenderModulesR2(module.SubModules, LevelOpetarion)
+                        </ul>
+                    }
+                    else
+                    {
+                        <a href="@module.Path">
+                            @if (module.Image != string.Empty)
+                            {
+                                <i class="@module.Image"></i>
+                            }
+                   
+                            @module.Title
+                        </a>
+                    }
+                }
+                else
+                    {
+                        <a href="@module.Path">
+                            @if (module.Image != string.Empty)
+                            {
+                                <i class="@module.Image"></i>
+                            }
+                   
+                            @module.Title
+                        </a>
+                    }
+            </li>
+        }
+    }
+}
+
+@functions
+{
+	public static bool hasChildOpen(string path, IEnumerable<Sistran.Core.Framework.UIF2.Services.Security.Module> modules)
+	{
+		bool result = false;
+
+		foreach (var module in modules)
+		{
+			if (module.SubModules != null)
+			{
+				if (module.SubModules.Any())
+				{
+					result = result || module.SubModules.Exists(s => s.Path==path);
+				}
+				else
+				{
+					result = result || module.Path == path;
+
+
+				}
+			}
+			else
+			{
+				result = result || module.Path == path;
+			}
+		}
+
+		return result;
+	}
+
+}

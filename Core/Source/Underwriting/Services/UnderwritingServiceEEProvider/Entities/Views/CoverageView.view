@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CoverageView">
+  <collections>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, 
+                Core.Quotation.Entities"></collection>
+    <collection name="CoCoverage" type="Sistran.Core.Application.Quotation.Entities.CoCoverage, 
+                Core.Quotation.Entities"></collection>
+    <collection name="GroupCoverage" type="Sistran.Core.Application.Product.Entities.GroupCoverage, 
+                Core.Product.Entities"></collection>
+    <collection name="CoCoverageValue" type="Sistran.Core.Application.Quotation.Entities.CoCoverageValue, 
+                Core.Quotation.Entities"></collection>
+    <collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, 
+                Core.Quotation.Entities"></collection>
+    <collection name="GroupInsuredObject" type="Sistran.Core.Application.Product.Entities.GroupInsuredObject,
+                Core.Product.Entities"></collection>
+    <collection name="CoverDetailType" type="Sistran.Core.Application.Quotation.Entities.CoverDetailType, 
+                Core.Quotation.Entities"></collection>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, 
+                Core.Common.Entities"></collection>
+    <collection name="SubLineBusiness" type="Sistran.Core.Application.Common.Entities.SubLineBusiness, 
+                Core.Common.Entities"></collection>
+   <collection name="AllyCoverage" type="Sistran.Core.Application.Quotation.Entities.AllyCoverage,
+               Core.Quotation.Entities">
+   </collection>
+  </collections>
+  <relations>
+    <relation source="Coverage" destination="GroupCoverage" name="CoverageGroupCoverage" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="Coverage" destination="CoCoverage" name="CoverageCoCoverage" type="Left">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="Coverage" destination="CoCoverageValue" name="CoverageCoCoverageValue" type="Left">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="Coverage" destination="InsuredObject" name="CoverageInsuredObject" type="Inner">
+      <property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+    </relation>
+    <relation source="GroupCoverage" destination="GroupInsuredObject" name="ProductGroupInsuredObject" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+      <property left="CoverGroupId" type="Equal" right="CoverageGroupCode"></property>
+    </relation>
+    <relation source="Coverage" destination="CoverDetailType" name="CoverageCoverDetailType" type="Left">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+    <relation source="Coverage" destination="LineBusiness" name="CoverageLineBusiness" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="Coverage" destination="SubLineBusiness" name="CoverageSubLineBusiness" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+      <property left="SubLineBusinessCode" type="Equal" right="SubLineBusinessCode"></property>
+    </relation>
+   <relation source="Coverage" destination="AllyCoverage" name="AllyCoverageCoverage" type="left">
+      <property left="CoverageId" type="Equal" right="AllyCoverageId"></property>
+    </relation>
+  </relations>
+</view>

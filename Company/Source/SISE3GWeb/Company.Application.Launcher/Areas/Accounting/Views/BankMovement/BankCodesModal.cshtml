@@ -1,0 +1,47 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label>@Global.Bank</label>
+        <br />
+        @Html.TextBox("BankDescription", "", new {
+            data_val = "true",
+            maxlength = "35",
+            data_val_required = @Global.RequiredField,
+            @onblur = "this.value = this.value.toUpperCase();"
+        })
+        <span class="text-danger" data-valmsg-for="BankDescription" data-valmsg-replace="true" />
+    </div>
+    <div class="uif-col-6">
+        <label>@Global.BankMovement</label>
+        <select class="uif-select form-control" id="selectSiseMovement" name="selectSiseMovement" data-native="true"
+                data-source='@Url.Content("~/Accounting/BankMovement/GetSiseMovements")' data-id="Id" data-name="Description"
+                data-val="true" data-val-required='@Global.RequiredField'></select>
+        <span class="text-danger" data-valmsg-for="selectSiseMovement" data-valmsg-replace="true" />
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label>@Global.BankCode</label>
+        <br />
+        @Html.TextBox("BankCodeEquivalente", "", new {
+            data_val = "true",
+            maxlength = "35",
+            data_val_required = @Global.RequiredField,
+            @onblur = "this.value = this.value.toUpperCase();"
+        })
+        <span class="text-danger" data-valmsg-for="BankCodeEquivalente" data-valmsg-replace="true" />
+    </div>
+    <div class="uif-col-6">
+        <br />
+        <span class="glyphicon glyphicon-check" id="checkHasVoucher"></span><input type="checkbox" id="HasVoucherCheck"> @Global.VoucherNumber
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertForm"></div>
+    </div>
+</div>
+
+
+

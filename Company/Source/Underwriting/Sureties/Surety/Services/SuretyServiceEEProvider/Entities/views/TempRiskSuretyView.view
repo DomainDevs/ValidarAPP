@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TempRiskSuretyView">
+  <collections>
+    <collection name="TempRisk" type="Sistran.Core.Application.Issuance.Entities.TempRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="CoTempRisk" type="Sistran.Core.Application.Issuance.Entities.CoTempRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="TempRiskSurety" type="Sistran.Core.Application.Issuance.Entities.TempRiskSurety, 
+                Core.Issuance.Entities"></collection>
+    <collection name="TempRiskSuretyGuarantee" type="Sistran.Core.Application.Issuance.Entities.TempRiskSuretyGuarantee, 
+                Core.Issuance.Entities"></collection>
+    <collection name="TempRiskBeneficiary" type="Sistran.Core.Application.Issuance.Entities.TempRiskBeneficiary, 
+                Core.Issuance.Entities"></collection>
+    <collection name="TempRiskClause" type="Sistran.Core.Application.Issuance.Entities.TempRiskClause, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="TempRisk" destination="CoTempRisk" name="TempRiskCoTempRisk" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskSurety" name="TempRiskTempRiskSurety" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskSuretyGuarantee" name="TempRiskTempRiskSuretyGuarantee" type="Left">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskBeneficiary" name="TempRiskTempRiskBeneficiary" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="TempRisk" destination="TempRiskClause" name="TempRiskTempRiskClause" type="Left">
+      <property left="TempId" type="Equal" right="TempId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+  </relations>
+</view>

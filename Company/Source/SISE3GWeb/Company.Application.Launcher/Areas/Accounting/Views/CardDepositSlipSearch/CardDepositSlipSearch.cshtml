@@ -1,0 +1,126 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "CardDepositSlipSearch";
+    
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <h4>
+            <b>@Global.SearchCriteria</b>
+        </h4>
+    </div>
+</div>
+
+<form id="DepositSlipSearch" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label" for="BankCardDepositSlipsSearch">@Global.ReceivingBank
+            </label>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "CheckInternalDepositSlip")" data-displaykey="bankDescription" placeholder="" id="BankCardDepositSlipsSearch" maxlength="40" data-val-required='@Global.RequiredField' />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="StartDateCardDepositSlipsSearch">
+                @Global.DateFrom
+            </label>
+            <input type="text" id="StartDateCardDepositSlipsSearch" class="uif-datepicker" data-mask="99/99/9999" placeholder="" maxlength="10" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="EndDateCardDepositSlipsSearch">
+                @Global.DateTo
+            </label>
+            <input type="text" id="EndDateCardDepositSlipsSearch" class="uif-datepicker" data-mask="99/99/9999" placeholder="" maxlength="10" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label" for="InternalBallotNumberCardDepositSlipsSearch">
+                @Global.InternalBallotNumber
+            </label>
+                <input type="text" id="InternalBallotNumberCardDepositSlipsSearch" onkeypress="return JustNumbers(event, this);" placeholder="" style="text-align: right" maxlength="10" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="CreditCardTypeCardDepositSlipsSearch">
+                @Global.Conduit
+            </label>
+                @Html.DropDownList("CreditCardTypeCardDepositSlipsSearch", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetCreditCardTypes"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_native = "true"
+             })
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="BranchCardDepositSlipsSearch">
+                @Global.Branch
+            </label>
+                @Html.DropDownList("BranchCardDepositSlipsSearch", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetListBranchesbyUserName"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_selectedid = @ViewBag.BranchDefault,
+                 data_native = "true"
+             })
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0544"))
+                {
+                    <button id="CleanCardDepositSlipsSearch" class="btn btn-default" role="button">
+                        <i class="fa fa-paint-brush"></i> @Global.Clean
+                    </button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0545"))
+                {
+                    <button id="SearchCardDepositSlipsSearch" class="btn btn-primary" role="button">
+                        <i class="fa fa-search"></i> @Global.Search
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertCardVoucher"></div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="SearchCardsCardDepositSlipsSearch" data-exporttocsv="false"
+                   data-add="false" data-edit="true" data-delete="false" data-selectiontype="single" data-filter="false"
+                   data-paginate="true" data-title="@Global.BallotCardInternalDeposit">
+                <thead>
+                    <tr>
+                        <th data-property="BranchDescription">@Global.Branch</th>
+                        <th data-property="PaymentTicketCode">@Global.InternalBallotNumber </th>
+                        <th data-property="BankDescription">@Global.ReceivingBank</th>
+                        <th data-property="AccountNumber">@Global.ReceivingBankAccountNumber</th>
+                        <th data-property="CurrencyDescription">@Global.Currency</th>
+                        <th data-property="CreditCardDescription">@Global.Conduit</th>
+                        <th data-property="PaymentMethodTypeCode" data-visible="false">PaymentMethodTypeCode</th>
+                        <th data-property="PaymentMethodTypeDescription">@Global.CardType</th>
+                        <th data-property="Amount">@Global.Amount</th>
+                        <th data-property="Status" data-visible="false">'IdEstado'</th>
+                        <th data-property="StatusDescription">@Global.Status</th>
+                        <th data-property="RegisterDate">@Global.Date</th>
+                        <th data-property="PaymentBallotNumber">@Global.DepositBallotNumber</th>
+                        <th data-property="DepositDate">@Global.DepositDate</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+

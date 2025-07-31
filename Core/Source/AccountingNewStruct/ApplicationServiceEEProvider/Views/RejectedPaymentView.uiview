@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="RejectedPaymentView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PaymentCode">
+          <Column table-alias="Payment" name="PaymentCode" />
+        </SelectValue>
+        <SelectValue alias="RejectionDate">
+          <Column table-alias="RejectedPayment" name="RejectionDate" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="Rejection" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Comission">
+          <Column table-alias="RejectedPayment" name="Comission" />
+        </SelectValue>
+        <SelectValue alias="TaxComission">
+          <Column table-alias="RejectedPayment" name="TaxComission" />
+        </SelectValue>
+        <SelectValue alias="RejectedPaymentCode">
+          <Column table-alias="RejectedPayment" name="RejectedPaymentCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <Join>
+                <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Payment,  Core.Accounting.Entities" alias="Payment" />
+                <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Collect,  Core.Accounting.Entities" alias="Collect" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Collect" name="CollectId" />
+                    <Column table-alias="Payment" name="CollectCode" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentTicketItem,  Core.Accounting.Entities" alias="PaymentTicketItem" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="PaymentTicketItem" name="PaymentCode" />
+                  <Column table-alias="Payment" name="PaymentCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.RejectedPayment,  Core.Accounting.Entities" alias="RejectedPayment" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="RejectedPayment" name="PaymentCode" />
+                <Column table-alias="Payment" name="PaymentCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Rejection,  Core.Accounting.Entities" alias="Rejection" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Rejection" name="RejectionCode" />
+              <Column table-alias="RejectedPayment" name="RejectionCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

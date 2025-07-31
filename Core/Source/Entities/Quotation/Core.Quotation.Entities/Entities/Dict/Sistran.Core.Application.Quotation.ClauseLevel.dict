@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="ClauseLevel" namespace="Sistran.Core.Application.Quotation" file-version="1.0" description="CLAUSE_LEVEL_ENTITY">
+  <properties>
+    <property name="ClauseLevelId" type="Integer" key="true" description="CLAUSE_LEVEL_ID_PROPERTY" autonumber="id"  />
+    <property name="ClauseId" type="Integer" description="CLAUSE_ID_PROPERTY" />
+    <property name="ConditionLevelId" type="Integer" nullable="true" description="CONDITION_LEVEL_ID_PROPERTY" />
+    <property name="IsMandatory" type="Boolean" description="IS_MANDATORY_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CLAUSE_LEVEL" schema="QUO" alias="CLAUSE_LEVEL" update="true">
+      <columns>
+        <column name="CLAUSE_LEVEL_ID" type="Int32" property="ClauseLevelId" key="true" />
+        <column name="CLAUSE_ID" type="Int32" property="ClauseId" allowNull="false" />
+        <column name="CONDITION_LEVEL_ID" type="Int32" property="ConditionLevelId" />
+        <column name="IS_MANDATORY" type="Boolean" property="IsMandatory" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="106" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

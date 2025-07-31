@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CoverageParametrizationView">
+  <collections>
+    <collection name="Clause" type="Sistran.Core.Application.Quotation.Entities.Clause, 
+                Core.Quotation.Entities"></collection>
+    <collection name="ClauseLevel" type="Sistran.Core.Application.Quotation.Entities.ClauseLevel, 
+                Core.Quotation.Entities"></collection>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, 
+                Core.Quotation.Entities"></collection>
+    <collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, 
+                Core.Quotation.Entities"></collection>
+    <collection name="Peril" type="Sistran.Core.Application.Quotation.Entities.Peril, 
+                Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Clause" destination="ClauseLevel" name="ClauseClauseLevel" type="Inner">
+      <property left="ClauseId" type="Equal" right="ClauseId"></property>
+    </relation>
+    <relation source="Coverage" destination="ClauseLevel" name="CoverageClauseLevel" type="Inner">
+      <property left="CoverageId" type="Equal" right="ConditionLevelId"></property>
+    </relation>
+    <relation source="Coverage" destination="InsuredObject" name="CoverageInsuredObject" type="Inner">
+      <property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+    </relation>
+    <relation source="Coverage" destination="Peril" name="CoveragePeril" type="Inner">
+      <property left="PerilCode" type="Equal" right="PerilCode"></property>
+    </relation>
+
+  </relations>
+</view>

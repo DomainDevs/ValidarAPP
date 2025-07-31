@@ -1,0 +1,145 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.AuthorizationPolicies.Models.GroupPoliciesModelView
+@{
+        Layout = null;
+    }
+@section title
+{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.LabelTabEventGroup
+        </div>
+        <div class="column-30 even">
+
+        </div>
+    </div>
+}
+@section Toolbar
+{
+
+}
+<script id="display-template-GroupPolicies" type="text/template">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div><b> <strong class="success">{{Description}}</strong></b></div>
+    <div>@Resources.Language.LabelModule <b>{{Module.Description}}</b> - @Resources.Language.LabelSubmodule <b>{{SubModule.Description}}</b></></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div><b> <strong class="warning">{{Description}} ({{IdGroupPolicies}})</strong></b></div>
+    <div>@Resources.Language.LabelModule <b>{{Module.Description}}</b> - @Resources.Language.LabelSubmodule <b>{{SubModule.Description}}</b></></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div><b> <strong class="danger">{{Description}} ({{IdGroupPolicies}})</strong></b></div>
+    <div>@Resources.Language.LabelModule <b>{{Module.Description}}</b> - @Resources.Language.LabelSubmodule <b>{{SubModule.Description}}</b></></div>
+    {{else}}
+    <div><b>{{Description}} ({{IdGroupPolicies}})</b></div>
+    <div>@Resources.Language.LabelModule <b>{{Module.Description}}</b> - @Resources.Language.LabelSubmodule <b>{{SubModule.Description}}</b></></div>
+    {{/ifCond }}
+</script>
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column-40">
+        @Resources.Language.LabelGroupPolicies
+    </div>
+    <div class="column-30">
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("GroundsRejectionSearch", null, new { @class = "uif-input-search", id = "inputGroundsGroupPolicies", placeholder = Resources.Language.SearchGroupPolicies })
+        <button class="btn btn-default" id="btnSearchAdvScript"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitGroupPolicies">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0638"))
+        {
+            <button class="btn btn-primary" id="btnSaveGroupPolicies">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.ButtonSave
+            </button>
+        }
+    </div>
+</script>
+<form id="GroupPoliciesForm">
+    <div class="row">
+        <div class="uif-col-6 fit-col-main">
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelGroupPoliciesCode</label>
+                    @Html.TextBoxFor(model => model.IdGroupPolicies, new { @Id = "IdGroupPolicies", @disabled = true, @class = "text-center" })
+                </div>
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelGroupPoliciesDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { @Id = "DescriptionGroupPolicies" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelGroupPoliciesModule</label>
+                    <select class="uif-select" name="IdModule" id="IdModule" data-id="Id" data-name="Description" data-val="true" data-native="false" data-val-required="@Resources.Language.OptionSelect"></select>
+                    @Html.ValidationMessageFor(model => model.IdModule)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelGroupPoliciesSubmodulo</label>
+                    <select class="uif-select" name="IdSubModule" id="IdSubModule" data-id="Id" data-name="Description" data-val="true" data-native="false" data-val-required="@Resources.Language.OptionSelect"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelGroupPoliciesPackage</label>
+                    <select class="uif-select" name="Package" id="IdPackage" data-id="PackageId" data-name="Description" data-val="true" data-native="false" data-val-required="@Resources.Language.OptionSelect"></select>
+                    @Html.ValidationMessageFor(model => model.Package)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelGroupPoliciesBouquet</label>
+                    <select class="uif-select" name="IdPrefix" id="IdPrefix" data-id="Id" data-name="Description" data-val="true" data-native="false" data-val-required="@Resources.Language.OptionSelect"></select>
+                    @Html.ValidationMessageFor(model => model.IdPrefix)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelGroupPoliciesTypeRisk</label>
+                    <select class="uif-select" name="IdRisk" id="IdRisk" data-id="Id" data-name="Description" data-val="true" data-native="false" data-val-required="@Resources.Language.OptionSelect"></select>
+                    @Html.ValidationMessageFor(model => model.IdRisk)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="lsvGroupPolicies" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnGroupPoliciesNew">
+                    <span aria-hidden="true"></span>
+                    @Resources.Language.NewForm
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0637"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnGroupPoliciesAccept">
+                        <span aria-hidden="true"></span>
+                        @Resources.Language.AddForm
+                    </button>
+                }
+
+            </div>
+        </div>
+        <div class="uif-col-6" id="summaryAgent">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{   
+    @*@Scripts.Render("~/bundle/js/GroupPolicies")*@
+}

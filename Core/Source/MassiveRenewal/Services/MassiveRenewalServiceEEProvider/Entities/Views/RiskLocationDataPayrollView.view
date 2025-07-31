@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskLocationDataPayrollView">
+  <collections>
+    <collection name="RiskLocation" type="Sistran.Core.Application.Issuance.Entities.RiskLocation, 
+                Core.Issuance.Entities"></collection>
+    <collection name="State" type="Sistran.Core.Application.Common.Entities.State, 
+                Core.Common.Entities"></collection>
+    <collection name="City" type="Sistran.Core.Application.Common.Entities.City, 
+                Core.Common.Entities"></collection>
+    <collection name="RiskCommercialClass" type="Sistran.Core.Application.Parameters.Entities.RiskCommercialClass, 
+                Core.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="RiskLocation" destination="State" name="RiskLocationState" type="Inner">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+      <property left="StateCode" type="Equal" right="StateCode"></property>
+    </relation>
+    <relation source="RiskLocation" destination="City" name="RiskLocationCity" type="Inner">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+      <property left="StateCode" type="Equal" right="StateCode"></property>
+      <property left="CityCode" type="Equal" right="CityCode"></property>
+    </relation>
+    <relation source="RiskLocation" destination="RiskCommercialClass" name="RiskLocationRiskCommercialClass" type="Inner">
+      <property left="CommRiskClassCode" type="Equal" right="RiskCommercialClassCode"></property>
+    </relation>
+  </relations>
+</view>

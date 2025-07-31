@@ -1,0 +1,119 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ComparativeBalanceSheet;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.AccountingReports</li>
+        <li>@Global.AccountingLable</li>
+        <li class="active">@Global.ComparativeBalanceSheet</li>
+    </ol>
+}
+
+@section modals{
+    <div class="modal fade" id="modalMassiveTotRecordsCbs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.ComparativeBalanceSheet</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="CBSReportModal">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="CBSReportForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.Year</label>
+            <input class="form-control" placeholder='@Global.ExampleYear' data-val="true" data-val-required="@Global.RequiredField"
+                   id="CBSReportYear" name="CBSReportYear" type="text" onkeypress="return JustNumbers(event, this);" maxlength="4" min="1900" />
+            <span class="text-danger" data-valmsg-for="CBSReportYear" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="uif-col-3">
+            <label class="control-label">@Global.MonthFrom</label>
+            <select class="uif-select form-control required" id="CBSReportMonthFrom" name="CBSReportMonthFrom"
+                    data-source='@Url.Content("~/Accounting/Common/GetYearMonths")'
+                    data-val="true" data-val-required="@Global.RequiredField"
+                    data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="CBSReportMonthFrom" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-6">
+            <label class="control-label" for="CBSReportAccountingNumber">
+                @Global.AccountNumber
+            </label>
+            <input class="uif-autocomplete" type="text"
+                   data-source="@Url.Action("GetAccountintAccountByNumber", "Parameters")"
+                   data-displaykey="AccountingNumber" placeholder='@Global.EnterNumberAccount' id="CBSReportAccountingNumber"
+                   value=""
+                   name="CBSReportAccountingNumber" onkeypress="return JustNumbers(event, this);" />
+        </div>
+      
+
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="Month" value="M" checked>
+                    @Global.Monthly
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="Detail" value="D" checked>
+                    @Global.Annual
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertCbs"></div>
+        </div>
+    </div>
+
+</form>
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="CBSReportCancel" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Clean
+            </button>
+            <button id="CBSReportGenerate" class="btn btn-primary" role="button">
+                <i class="glyphicon glyphicon-play"></i>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/ComparativeBalanceSheet")
+}

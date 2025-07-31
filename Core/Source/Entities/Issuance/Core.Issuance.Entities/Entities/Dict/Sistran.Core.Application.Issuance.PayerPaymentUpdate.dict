@@ -1,0 +1,38 @@
+<map version="2.0" type="class" name="PayerPaymentUpdate" namespace="Sistran.Core.Application.Issuance" file-version="1.0" description="PAYER_PAYMENT_UPDATE_ENTITY">
+  <properties>
+    <property name="EndorsementId" type="Integer" key="true" description="ENDORSEMENT_ID_PROPERTY" />
+    <property name="PolicyId" type="Integer" key="true" description="POLICY_ID_PROPERTY" />
+    <property name="PayerId" type="Integer" key="true" description="PAYER_ID_PROPERTY" />
+    <property name="PaymentNum" type="Integer" key="true" description="PAYMENT_NUM_PROPERTY" />
+    <property name="SequentialId" type="Integer"  key="true" description="SEQUENTIAL_ID_PROPERTY" />
+    <property name="PaymentScheduleId" type="Integer" description="PAYMENT_SCHEDULE_ID_PROPERTY" />
+    <property name="PaymentMethodCode" type="Integer" description="PAYMENT_METHOD_CODE_PROPERTY" />
+    <property name="MailAddressId" type="Integer" nullable="true" description="MAIL_ADDRESS_ID_PROPERTY" />
+    <property name="PaymentId" type="Integer" nullable="true" description="PAYMENT_ID_PROPERTY" />
+    <property name="PayExpDate" type="DateTime" description="PAY_EXP_DATE_PROPERTY" />
+    <property name="PaymentPercentage" type="Decimal" precision="16" scale="6" nullable="true" description="PAYMENT_PERCENTAGE_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" description="AMOUNT_PROPERTY" />
+    <property name="AgtPayExpDate" type="DateTime" nullable="true" description="AGT_PAY_EXP_DATE_PROPERTY" />
+    <property name="IsByPaymentUpdate" type="Boolean" description="IS_BY_PAYMENT_UPDATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYER_PAYMENT_UPDATE" schema="ISS" alias="PAYER_PAYMENT_UPDATE" update="true">
+      <columns>
+        <column name="ENDORSEMENT_ID" type="Int32" property="EndorsementId" key="true" readonly="false" />
+        <column name="POLICY_ID" type="Int32" property="PolicyId" key="true" />
+        <column name="PAYER_ID" type="Int32" property="PayerId" key="true" />
+        <column name="PAYMENT_NUM" type="Byte" property="PaymentNum" key="true" />
+        <column name="SEQUENTIAL_ID" type="Int32" property="SequentialId" key="true" />
+        <column name="PAYMENT_SCHEDULE_ID" type="Int32" property="PaymentScheduleId" allowNull="false" />
+        <column name="PAYMENT_METHOD_CD" type="Byte" property="PaymentMethodCode" allowNull="false" />
+        <column name="MAIL_ADDRESS_ID" type="Int16" property="MailAddressId" />
+        <column name="PAYMENT_ID" type="Int16" property="PaymentId" />
+        <column name="PAY_EXP_DATE" type="DateTime" property="PayExpDate" allowNull="false" />
+        <column name="PAYMENT_PCT" type="Decimal" property="PaymentPercentage" size="19" precision="16" scale="6" />
+        <column name="AMOUNT" type="Decimal" property="Amount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="AGT_PAY_EXP_DATE" type="DateTime" property="AgtPayExpDate" />
+        <column name="IS_BY_PAYMENT_UPDATE" type="Boolean" property="IsByPaymentUpdate" />
+      </columns>
+    </table>
+  </tables>
+</map>

@@ -1,0 +1,135 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Printing.Models.PrinterModelsView
+@section Title
+{
+<div class="row main-title">
+    <div class="column-50">
+        IMPRESIÓN COLECTIVAS
+    </div>
+    <div class="column-50">
+        <div>
+            <div>
+                <label>Numero de proceso impresión</label>
+                @*@Html.TextBoxFor(model => model.PolicyNumber, new { id = "inputPolicyNumber", @class = "uif-input-search", @backgroundColor = "white" })*@
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div>
+            <button type="button" class="btn btn-default" id="btnClose"><i class="fa fa-times-circle" aria-hidden="true"></i>@Resources.Language.ButtonExit</button>
+            <button type="button" class="btn btn-primary" id="btnPrint">
+                <i class="fa fa-print" aria-hidden="true"></i>@Resources.Language.LabelPrinter
+            </button>
+        </div>
+    </footer>
+}
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formPrinting" class="form without-peripheral">
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelBranch</label>
+            <select class="uif-select form-control" id="selectBranch" data-val="true" data-native="false" data-source='@Url.Content("~/Printer/GetBranches")'
+                    data-val-required="@Resources.Language.ErrorDocumentControlBranch" data-id="Id" data-name="Description" name="BranchId" data-selectedId="@Model.BranchId"></select>
+            @Html.ValidationMessageFor(model => model.BranchId)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelPrefixCommercial</label>
+            <select class="uif-select form-control" id="selectPrefixCommercial" data-val="true" data-native="false" data-source='@Url.Content("~/Printer/GetPrefixes")'
+                    data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial" data-id="Id" data-name="Description" name="PrefixId" data-selectedId="@Model.PrefixId"></select>
+            @Html.ValidationMessageFor(model => model.PrefixId)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelNumberPolicy</label>
+            @Html.TextBoxFor(model => model.PolicyNumber, new { id = "inputPolicyNumber", @class = "uif-input-search" })
+            @Html.ValidationMessageFor(model => model.PolicyNumber)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelEndorsement</label>
+            <select class="uif-select form-control" id="selectEndorsement" data-id="Id" data-native="false" data-name="Description"
+                    name="EndorsementId" data-val="true" data-val-required="@Resources.Language.ErrorDocumentEndorsement" data-selectedId="@Model.EndorsementId"></select>
+            @Html.ValidationMessageFor(model => model.EndorsementId)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelTemporal</label>
+            @Html.TextBoxFor(model => model.TemporalId, new { id = "inputTemporal", @class = "uif-input-search" })
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelLoad</label>
+            @Html.TextBoxFor(model => model.IdLoad, new { id = "inputLoad", @class = "uif-input-search" })
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelStateLoad</label>
+            @Html.TextBoxFor(model => model.IdLoad, new { id = "inputLoad" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <div class="uif-col-12">
+                <input type="radio" id="radioRisks" name="radiosPrint" value="1" />
+                <label for="radioNumPolicy">Riesgos</label>
+                <input type="radio" id="radioPlate" name="radiosPrint" value="2" />
+                <label for="radioPay">Placas</label>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="RiskArea" style="display:none">
+        <div class="uif-col-3">
+            <label>Cantidad de Riesgos</label>
+            <input type="text" id="inputRisk" data-val-maxlength-max="60" />
+        </div>
+        <div class="uif-col-3">
+            <label>Riesgo Desde</label>
+            <input type="text" id="inputRiskSinse" data-val-maxlength-max="60" />
+        </div>
+        <div class="uif-col-3">
+            <label>Riesgo Hasta</label>
+            <input type="text" id="inputRiskUntil" data-val-maxlength-max="60" />
+        </div>
+    </div>
+    <div class="row" id="RiskPlate" style="display:none">
+        <div class="uif-col-3">
+            <label>Placa</label>
+            <input type="text" id="inputPlate" data-val-maxlength-max="60" />
+        </div>
+        <div class="uif-col-3">
+            <label>Placas a Imprimir</label>
+            <input type="text" id="inputPlatesPrint" data-val-maxlength-max="60" />
+        </div>
+    </div>
+    <div class="row" style="display:none" id="divDownload">
+        @*<div class="uif-col-12">*@
+        <div class="uif-col-3">
+            <div class="without-label">
+                <label>@Resources.Language.ProcessPrinting</label>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <div class="without-label">
+                <a href="" id="hrfPathPdf" class="btn btn-primary" download="" target="_blank">
+                    <i class="fa fa-download"></i>
+                    <span id="hrfPathName" style="padding-left:5px"></span>
+                </a>
+            </div>
+        </div>
+        @*</div>*@
+    </div>
+</form>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/MassivePrinter");
+}

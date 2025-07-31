@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sistran.Company.Application.Sureties.SuretyServices.Models
+{
+    [DataContract]
+    public class CompanyRiskSuretyPost
+    {
+        [DataMember]
+        public int TempId { get; set; }
+        [DataMember]
+        public DateTime? IssueDate { get; set; }
+        [DataMember]
+        public DateTime? ContractDate { get; set; }
+        [DataMember]
+        public int UserId { get; set; }
+        [DataMember]
+        public bool ChkContractDate { get; set; }
+        [DataMember]
+        public bool ChkContractFinalyDate { get; set; }
+    }
+}

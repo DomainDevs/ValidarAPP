@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="CompanyAircraftsRiskCoveragesView">
+  <collections>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="RiskCoverage" type="Sistran.Core.Application.Issuance.Entities.RiskCoverage, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  <relations>
+	<relation source="RiskCoverage" destination="Coverage" name="RiskCoverage" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+  </relations>
+</view>

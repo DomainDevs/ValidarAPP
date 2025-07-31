@@ -1,0 +1,119 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Massive.Models.MassiveViewModel
+@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        Cargue Listas de Riesgos
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputProcess", @placeholder = "Buscar cargue" })
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsFaseColda" class="footerFaseColda">
+        <button type="button" class="btn btn-default" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>@Resources.Language.ButtonExit
+        </button>
+        <button type="button" class="btn btn-default" id="btnErrors">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>@Resources.Language.Error
+        </button>
+        <button type="button" class="btn btn-default" id="btnNew">
+            <i class="fa fa-file-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>@Resources.Language.ButtonNew
+        </button>
+        <button type="button" class="btn btn-primary" id="btnLoad">@Resources.Language.Load</button>
+        <button type="button" class="btn btn-default" id="btnProcess">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>@Resources.Language.ButtonGenerateProcess
+        </button>
+    </div>
+</script>
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formFileListRisk" autocomplete="off" class="form">
+    <div class="row">
+        <div class="uif-col-12 ">
+            <div class="uif-row">
+                <div class="uif-col-9">
+                    <label class="field-required">@Resources.Language.LabelListRisk</label>
+                    <select class="uif-select" data-id="Id" data-name="Description" id="selectListRisk" name="ListRisk" required> </select>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-9">
+                    <label class="field-required">Archivo Listas de Riesgo</label>
+                    <input class="text" type="text" id="inputListRiskFile" name="inputListRiskFile" data-val="true" data-id="Id" data-val-required="@Resources.Language.ErrorEmptyRequiredFields" required disabled>
+                    <span class="text-danger" data-valmsg-for="inputListRiskFile" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelExcelFile</label>
+                    @Html.TextBoxFor(model => model.FileName,
+                                new Dictionary<string, Object>
+                                    {
+                                    {"input,","false"},
+                                    { "id","inputFileRisk"},
+                                    { "class", "inputfile"},
+                                    { "type","file"},
+                                    {"data-text",Resources.Language.ChooseFile}
+                                })
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="progress" style="height: 35px">
+                        <div id="progress-bar-code" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">0% complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="" style="float: right">
+                        <button type="button" class="btn btn-default " id="btnRequestProcess">
+                            Cargar lista ONU
+                        </button>
+                        <button type="button" class="btn btn-default " id="btnAddFiles">
+                            @Resources.Language.ButtonLoad
+                        </button>
+                    </div>
+                </div>
+            </div>
+     
+            @*<div id="wizard" class="uif-wizard">
+                <div class="uif-step" id="step1" data-title="@Resources.Language.LabelChargue"></div>
+                <div class="uif-step" id="step2" data-title=@Resources.Language.LabelValid></div>
+                <div class="uif-step" id="step3" data-title=@Resources.Language.LabelChangePaymentPlan></div>
+            </div>*@
+
+            <div class="uif-row" id="stepsListRisk">
+                <div class="uif-col-3">
+                    <label>Total Registros</label>
+                    <input class="text" type="text" name="totalRecords" data-val="true" data-id="Id" id="inputTotalRecords" data-val-required="@Resources.Language.ErrorEmptyRequiredFields" required disabled>
+                </div>
+                <div class="uif-col-3">
+                    <label id="lblProcess">Procesados</label>
+                    <input class="text" type="text" name="processed" data-val="true" data-id="Id" id="inputProcessed" data-val-required="@Resources.Language.ErrorEmptyRequiredFields" required disabled>
+                </div>
+                <div class="uif-col-3">
+                    <label>Pendientes</label>
+                    <input class="text" type="text" name="pending" data-val="true" data-id="Id" id="inputPending" data-val-required="@Resources.Language.ErrorEmptyRequiredFields" required disabled>
+                </div>
+                <div class="uif-col-3">
+                    <label>Con Errores</label>
+                    <input class="text" type="text" name="errors" data-val="true" data-id="Id" id="inputErrors" data-val-required="@Resources.Language.ErrorEmptyRequiredFields" required disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

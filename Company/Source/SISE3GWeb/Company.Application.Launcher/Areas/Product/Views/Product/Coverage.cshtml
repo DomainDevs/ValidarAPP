@@ -1,0 +1,174 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Product.Models.CoverageModelsView
+<script id="coverageTemplate" type="text/template">
+    {{#ifCond StatusTypeService "==" 4}}
+    <div><strong class="danger">{{Description}} - ({{Id}})</></strong></div>
+    {{else}}
+    <div><strong><small>{{Description}} - ({{Id}})</small></strong></div>
+    {{/ifCond }}
+
+    <div><strong><small>{{LineBusinessDescription}} - {{SubLineBusinessDescription}}</small></strong></div>
+    <div><strong><small>{{InsuredObjectDescription}}</small></strong></div>
+    <div class="redAlertLabel"><strong><small>{{HaveAllyCoverage}}</small></strong></div>
+</script>
+<form id="formCoverage" class="form form-space-adjusted">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row row-space-adjusted">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelRiskType</label>
+                    <select class="uif-select form-control" id="selectModalAssignCoverageRiskType" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlRiskType"
+                            name="RiskTypeId" disabled data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.RiskTypeId)
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelGroupCoverage</label>
+                    <select class="uif-select form-control" id="selectModalAssignCoverageGroupCoverage" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlGroupCoverage"
+                            name="GroupCoverageId" disabled data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.CoverageGroupId)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelInsuranceObject</label>
+                    <select class="uif-select form-control" id="selectModalAssignCoverageInsuredObject" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlInsuranceObject"
+                            data-id="Id" data-name="Description" name="InsuranceObjectId" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.InsuredObjectId)
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelCoverage</label>
+                    <select class="uif-select form-control" id="selectModalAssignCoverageCoverage" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlCoverage"
+                            data-id="Id" data-name="Description" name="Id" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Id)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="uif-col-6">
+                        <div class="row">
+                            <div class="without-label">
+                                <input type="checkbox" id="chkModalAssignCoverageInitialIncludeCoverage" name="InitialIncludeCoverage" />
+                                <label for="chkModalAssignCoverageInitialIncludeCoverage">@Resources.Language.LabelInitialInclude</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="without-label">
+                                <input type="checkbox" id="chkModalAssignCoverageMandatoryCoverage" name="MandatoryCoverage" />
+                                <label for="chkModalAssignCoverageMandatoryCoverage">@Resources.Language.Obligatory</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="without-label">
+                                <input type="checkbox" id="chkModalAssignCoverageIsSubLimit" name="IsSubLimit" />
+                                <label for="chkModalAssignCoverageIsSubLimit">@Resources.Language.SubLimitRequired</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uif-col-6">
+                        <div class="row">
+                            <div class="without-label">
+                                <label>@Resources.Language.LabelMinimumPremium</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="without-label">
+                                <input type="checkbox" id="chkModalAssignIsPremiumMin" name="IsPremiumMin" />
+                                <label for="chkModalAssignIsPremiumMin">@Resources.Language.ProductMinimumPremiumIncliud</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="without-label">
+                                <input type="checkbox" id="chkModalAssignNoCalculate" name="NoCalculate" />
+                                <label for="chkModalAssignNoCalculate">@Resources.Language.ProductNoCalc</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelPrincipalCoverage</label>
+                    <select class="uif-select form-control" id="selectModalAssignCoveragePrincipalCoverage" data-val="true"
+                            data-id="Id" data-name="Description" name="PrincipalCoverageId" data-filter="true" data-native="false"></select>
+                </div>
+                <div>
+                    <div class="uif-col-6"> 
+                        <label>@Resources.Language.LabelPercentageSublimit</label>
+                        @Html.TextBoxFor(model => model.SubLimitAmount, new { id = "inputModalAssignCoverageSublimitCoverage" })
+                        @Html.ValidationMessageFor(model => model.SubLimitAmount)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="pull-left" id="panelButtonsRight">
+                    <button type="button" class="btn btn-default secondary-Colombia hidden" id="btnModalAssignCoverageAllyCoverage">
+                        <span class="" aria-hidden="true">@Resources.Language.LabelCoverageAllied</span>
+                    </button>
+                </div>
+                @*<div class="pull-left" id="panelButtonsRight">
+                    <button type="button" class="btn btn-default secondary-Colombia" id="btnModalDeductiblesByCoverage" disabled>
+                        <span class="" aria-hidden="true">@Resources.Language.LabelDeductiblesByCoverage</span>
+                    </button>
+                </div>*@
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <br />
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div class="uif-listview" id="listModalAssignCoverage"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnCancelAssignModalAssignCoverage">
+                    <span class="" aria-hidden="true">@Resources.Language.ButtonCancel</span>
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0592"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnAssignModalAssignCoverage">
+                        <span class="" aria-hidden="true">@Resources.Language.ButtonAssign</span>
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@* Modal planes tecnicos*@
+<script id="display-template-TecnicalPlan" type="text/template">
+    <div><b>{{Description}}</b></div>
+</script>
+
+<div class="uif-modal" id="modalTecnicalPlan">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="uif-listview" id="lsvTecnicalPlan"></div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="acceptModalTecnicalPlan">@Resources.Language.Accept</button>
+    </div>
+</div>
+<div class="uif-modal" id="modalDeductiblesByCoverage">
+    <div class="uif-modalbody" style="height:460px; overflow: auto;">
+        @Html.Partial("~/Areas/Product/Views/Product/DeductiblesByCoverages.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomStaffLabour">
+        <button type="button" class="btn btn-default" id="btnCancelDeductiblesByCoverage" data-dismiss="modal">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-primary btn-main " id="btnAcceptDeductiblesByCoverage" data-dismiss="modal">@Resources.Language.ButtonSave</button>
+    </div>
+</div>

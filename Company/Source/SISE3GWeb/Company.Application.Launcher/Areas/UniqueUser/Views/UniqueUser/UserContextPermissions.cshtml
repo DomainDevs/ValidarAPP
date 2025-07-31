@@ -1,0 +1,37 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.UserContextPermissionsModelsView
+@using Sistran.Core.Framework.UIF.Web.Helpers;
+
+<form id="formUserAccessPermissions" class="form modal-Colombia">
+    <div class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">×</span></button>
+        <span>@Resources.Language.ContextPermissionHelp</span>
+    </div>
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.PERMISION</label>
+            <select class="uif-select form-control" id="selectPermissionsAccess" data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentControlModule"
+                    data-id="Id" data-name="Description" name="PermissionsId"
+                    data-filter="true" data-native="false"></select>
+            @Html.ValidationMessageFor(model => model.PermissionsId)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12" id="divUserAccessPermissions">
+            <table data-paginate="false" data-selectiontype="multiple" data-filter="true" class="uif-table" id="tableContextPermissions" data-add="false">
+                <thead>
+                    <tr>
+                        <th data-property="Id"  data-visible="false"></th>
+                        
+                        <th data-property="Assigned"  data-visible="false"></th>
+                        <th data-property="Code"  data-visible="false"></th>
+                        <th data-property="Description">@Resources.Language.Description</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>

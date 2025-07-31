@@ -1,0 +1,70 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Collective.Models.CollectiveModelView
+
+<form id="formFile" class="form">
+    <div class="row" style="display:none">
+        <div class="uif-col-2">
+
+            <label>@Resources.Language.LabelTemporyIssuance</label>
+            @Html.TextBoxFor(model => model.TempId, new { id = "inputTemporal", maxlength = "60" })
+        </div>
+        <div class="uif-col-10">
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelDescription</label>
+            @Html.TextBoxFor(model => model.LoadName, new { id = "inputNameLoad", maxlength = "60" })
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelTypeStructure</label>
+            <div id="combo">
+                <select class="uif-select form-control" id="selectTypeLoad" data-id="Id" data-native="false" data-name="Description" name="LoadTypeId"></select>
+            </div>
+            @Html.ValidationMessageFor(model => model.LoadTypeId)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12" id="divFile">
+            <label>@Resources.Language.LabelExcelFile</label>
+            @Html.TextBoxFor(model => model.FileName,
+                    new Dictionary<string, Object>
+                    {
+                        {"input,","false"},
+                        { "id","inputExcelFile"},
+                        { "class", "uif-inputfile"},
+                        { "type","file"},
+                        {"data-text",Resources.Language.ChooseFile},
+                        {"accept",".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"}
+                    })
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12 withOutMargin">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <span class="sr-only">0% complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row" hidden="hidden">
+        <div class="uif-col-12">
+            <table class="uif-table" id="tableUpload" data-source="null" data-filter="false" data-selectiontype="none" data-paginate="false" hidden="hidden">
+                <thead>
+                    <tr>
+                        <th data-property="Name">Name</th>
+                        <th data-property="Length">Length</th>
+                        <th data-property="Type">Type</th>
+                        <th data-property="FolderName">FolderName</th>
+                        <th data-property="ExcelName">ExcelName</th>
+                        <th data-property="WorkSheetName">WorkSheetName</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+</form>

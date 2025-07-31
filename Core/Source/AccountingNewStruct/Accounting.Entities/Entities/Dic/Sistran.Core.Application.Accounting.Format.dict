@@ -1,0 +1,22 @@
+<map version="2.0" type="class" name="Format" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="FORMAT_ENTITY">
+  <properties>
+    <property name="FormatCode" type="Integer" key="true" description="FORMAT_CODE_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="FormatModuleCode" type="Integer" nullable="true" description="FORMAT_MODULE_CODE_PROPERTY" />
+    <property name="Description" type="String" size="200" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="FileType" type="Integer" nullable="true" description="FILE_TYPE_PROPERTY" />
+    <property name="DateFrom" type="DateTime" nullable="true" description="DATE_FROM_PROPERTY" />
+    <property name="DateTo" type="DateTime" nullable="true" description="DATE_TO_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="FORMAT" schema="ACC" alias="FORMAT" update="true">
+      <columns>
+        <column name="FORMAT_CD" type="Int32" property="FormatCode" key="true" identity ="true"/>
+        <column name="FORMAT_MODULE_CD" type="Int32" property="FormatModuleCode" />
+        <column name="DESCRIPTION" type="String" property="Description" size="200" />
+        <column name="FILE_TYPE" type="Int32" property="FileType" />
+        <column name="DATE_FROM" type="DateTime" property="DateFrom" />
+        <column name="DATE_TO" type="DateTime" property="DateTo" />
+      </columns>
+    </table>
+  </tables>
+</map>

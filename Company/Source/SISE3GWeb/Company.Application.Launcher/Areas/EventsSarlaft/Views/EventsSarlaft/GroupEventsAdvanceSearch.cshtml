@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+
+<script id="templateAdvanceEvents" type="text/template">
+    <div>
+        <div>
+            <strong>ID grupo de evento:</strong> {{Id}} | <strong>Nombre Grupo Evento: </strong> {{GroupEventDescription}}
+        </div>
+        <div>
+            <strong>Modulo:</strong> {{NameModule}} | <strong>SubModule:</strong> {{NameSubmodule}}
+        </div>
+        <div>
+            <strong>Procedimiento Autorización:</strong> {{ProcedureAuthorized}}
+        </div>
+        <div>
+            <strong>Procedimiento de Rechazo:</strong> {{ProcedureReject}}
+        </div>
+        <div>
+            <strong>Reporte de Autorización:</strong> {{AuthorizationReport}}
+        </div>
+    </div>
+</script>
+<form class="form" id="formAdvanceEvents">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>Búsqueda Avanzada de Grupo de Eventos</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>ID Grupo de Eventos</label>
+            <input class="text" type="text" name="Id" data-val="true" data-id="Id" id="inputGroupEvent" onkeypress="return event.charCode >= 48 && event.charCode <= 58">
+        </div>
+        <div class="uif-col-4">
+            <label>Nombre Grupo de Evento</label>
+            <input class="text" type="text" name="GroupEventDescription" data-val="true" data-id="Id" id="inputNameGroupEventAdv">
+        </div>
+        <div class="uif-col-4">
+            <label>Procedimiento Autorización</label>
+            <input class="form-control" type="text" name="ProcedureAuthorized" data-val="true" data-id="Id" id="inputAuthorizationProcedureAdv">
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>Modulo</label>
+            <select class="uif-select form-control" id="selectModuleAdv" data-val="true"
+                    data-id="Id" data-name="Description" name="ModuleId" data-native="false" data-filter="true"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>SubModulo</label>
+            <select class="uif-select form-control" id="selectSubModuleAdv" data-val="true"
+                    data-id="Id" data-name="Description" name="SubmoduleId" data-native="false" data-filter="true"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>Procedimiento de Rechazo</label>
+            <input class="form-control" type="text" name="ProcedureReject" data-val="true" data-id="Id" id="inputRejectionProcedureAdv">
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>Habilitado</label>
+            <select class="uif-select form-control" id="selectStatus" data-val="true"
+                    data-id="Id" data-name="Description" name="Status" data-native="false" data-filter="true"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>Reporte de Autorización</label>
+            <input class="form-control" type="text" name="AuthorizationReport" data-val="true" data-id="Id" id="inputRejectionProcedureAdv">
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="uif-col-12">
+        <button type="button" name="name" id="btnAdvancedSearchEvents" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-12">
+        <div class="uif-listview" id="listViewAdvanceEvents"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-12">
+        <div class="pull-right width-save">
+            <button class="btn btn-default" id="btnCancelAdvanceEvents" data-dismiss="modal" type="button">@Resources.Language.Close</button>
+            <button class="btn btn-primary" id="btnAcceptdAdvanceEvents" type="button">@Resources.Language.Accept</button>
+        </div>
+    </div>
+</div>
+
+

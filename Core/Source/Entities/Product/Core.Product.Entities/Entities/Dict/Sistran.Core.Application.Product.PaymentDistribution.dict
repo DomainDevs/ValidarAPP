@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="PaymentDistribution" namespace="Sistran.Core.Application.Product" file-version="1.0" description="PAYMENT_DISTRIBUTION_ENTITY">
+  <properties>
+    <property name="PaymentScheduleId" type="Integer" key="true" description="PAYMENT_SCHEDULE_ID_PROPERTY" />
+    <property name="PaymentNumber" type="Integer" key="true" description="PAYMENT_NUMBER_PROPERTY" />
+    <property name="GapUnitCode" type="Integer" nullable="true" description="GAP_UNIT_CODE_PROPERTY" />
+    <property name="GapQuantity" type="Integer" nullable="true" description="GAP_QUANTITY_PROPERTY" />
+    <property name="PaymentPercentage" type="Decimal" precision="16" scale="6" nullable="true" description="PAYMENT_PERCENTAGE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_DISTRIBUTION" schema="PROD" alias="PAYMENT_DISTRIBUTION" update="true">
+      <columns>
+        <column name="PAYMENT_SCHEDULE_ID" type="Int32" property="PaymentScheduleId" key="true" />
+        <column name="PAYMENT_NUMBER" type="Int16" property="PaymentNumber" key="true" />
+        <column name="GAP_UNIT_CD" type="Byte" property="GapUnitCode" />
+        <column name="GAP_QTY" type="Int16" property="GapQuantity" />
+        <column name="PAYMENT_PCT" type="Decimal" property="PaymentPercentage" size="19" precision="16" scale="6" />
+      </columns>
+    </table>
+  </tables>
+</map>

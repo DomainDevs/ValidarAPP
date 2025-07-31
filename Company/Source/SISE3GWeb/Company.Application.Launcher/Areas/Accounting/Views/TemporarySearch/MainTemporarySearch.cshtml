@@ -1,0 +1,140 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.SearchTemporary;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.TemporaryMenu</li>
+        <li class="active">@Global.SearchLabel</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="submit" id="DeleteTemporaryButton" class="btn btn-default">
+            <i class="fa fa-remove"></i> @Global.Delete
+        </button>        
+    </footer>
+}
+
+<form id="TemporarySearchForm" action="">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Branch</label>
+
+            <select class="uif-select form-control" id="TemporaryBranchDrop"
+                    data-id="Id" data-name="Description"
+                    data-source="@Url.Content("~/Accounting/BillSearch/LoadBranch")"
+                    data-native="true"
+                    name="TemporaryBranchDrop"></select>
+            <span class="text-danger" data-valmsg-for="TemporaryBranchDrop" data-valmsg-replace="true">
+            </span>
+        </div>
+
+        <div class="uif-col-4">
+            <label class="control-label">@Global.SearchReceiptApplicationType</label>
+            <select class="uif-select form-control" id="ApplicationTypeDrop"
+                    data-id="Id" data-name="Description"
+                    data-val-required='@Global.RequiredField'
+                    data-source="@Url.Content("~/Accounting/TemporarySearch/LoadApplicationType")"
+                    data-native="true"
+                    data-val="true" name="ApplicationTypeDrop"></select>
+            <span class="text-danger" data-valmsg-for="ApplicationTypeDrop"
+                  data-valmsg-replace="true">
+            </span>
+        </div>
+
+        <div class="uif-col-4">
+            <label class="control-label">@Global.User</label>
+            <br />
+            <input type="text" maxlength="40" class="uif-autocomplete" id="TemporaryUser" name="TemporaryUser"
+                   data-source="@Url.Action("GetUsers", "BillSearch")" data-displaykey="value" placeholder="" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.StartDate</label>
+            <br />
+            <input type="text" id="StartDateTempSearch" name="StartDateTempSearch"
+                   data-mask="99/99/9999" class="uif-datepicker" maxlength="10" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.DateTo</label>
+            <br />
+            <input type="text" id="EndDateTempSearch" name="EndDateTempSearch"
+                   data-mask="99/99/9999" class="uif-datepicker" maxlength="10" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.SearchReceiptTemporaryNumber</label>
+            <br />
+            <input type="text" id="TemporaryNumber" name="TemporaryNumber"
+                   onkeypress=" return JustNumbers(event, this); " maxlength="10" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertTempSearch"></div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer">
+                <button id="CleanTemporaryButton" class="btn btn-default" role="button">
+                    <i class="fa fa-paint-brush"></i>  @Global.Clean
+                </button>
+                <button type="submit" id="SearchTemporaryButton" class="btn btn-primary"
+                        role="button" onclick="return false">
+                    <i class="fa fa-search"></i>  @Global.Search
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="SearchTemporalsTable" data-exporttocsv="false" data-edit="true"
+               data-filter="false" data-paginate="true" data-title="@Global.TemporaryMenu" data-delete="false" data-selectiontype="multiple">
+            <thead>
+                <tr>
+                    <th data-visible="false" data-property="BranchCode">BranchCode</th>
+                    <th data-property="TemporaryNumber">@Global.Temporary</th>
+                    <th data-property="BranchName">@Global.Branch</th>
+                    <th data-property="UserName">@Global.User</th>
+                    <th data-visible="false" data-property="ImputationTypeCode">ImputationTypeCode</th>
+                    <th data-property="ImputationTypeName">@Global.SearchReceiptApplicationType</th>
+                    <th data-property="RegisterDate">@Global.Date</th>
+                    <th data-visible="false" data-property="SourceCode">SourceCode</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagAplicationBill" value="@ViewBag.AplicationBill" />
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagAplicationJournalEntry" value="@ViewBag.AplicationJournalEntry" />
+<input type="hidden" id="ViewBagAplicationPreLiquidation" value="@ViewBag.AplicationPreLiquidation" />
+<input type="hidden" id="ViewBagAplicationPaymentOrder" value="@ViewBag.AplicationPaymentOrder"/>
+<input type="hidden" id="ViewBagTempPreliquidationBranchId" value="@ViewBag.TempPreliquidationBranchId" />
+<input type="hidden" id="ViewBagTempImputationId" value="@ViewBag.TempImputationId"/>
+
+@*REDIRECCION*@
+<input type="hidden" id="ViewBagLoadPreliquidationsLink" value="@Url.Content(Global.LoadPreliquidationsLink)"/>
+<input type="hidden" id="ViewBagLoadApplicationReceiptLink" value="@Url.Content(Global.LoadApplicationReceiptLink)"/>
+<input type="hidden" id="ViewBagLoadJournalEntryLink" value="@Url.Content(Global.LoadJournalEntryLink)"/>
+<input type="hidden" id="ViewBagLoadPaymentOrdersApplicationLink" value="@Url.Content(Global.LoadPaymentOrdersApplicationLink)" />
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainTemporarySearch")
+}

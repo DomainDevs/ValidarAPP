@@ -1,0 +1,42 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<form id="IncomeChangeForm" onsubmit="return false " class="form">
+    <div class="uif-panel">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label">@Global.BillNum</label>
+                <br />
+                <input type="text" id="ReceiptNumberDialog" name="ReceiptNumberDialog" maxlength="10" disabled="disabled" />
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label">@Global.Date</label>
+                <br />
+                <input type="text" id="ReceiptDateDialog" name="ReceiptDateDialog" maxlength="10" disabled="disabled" />
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label">@Global.Concept</label>
+                <br />
+                <input type="text" id="BillingConceptDialog" name="BillingConceptDialog" style="text-align: left" disabled="disabled" />
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label">@Global.IncomeChangeConceptNewConcept</label>
+                <br />
+                @Html.DropDownList("IncomeConceptComboDialog", Enumerable.Empty<SelectListItem>(), new
+                                                                                              {
+                                                                                                  @class = "uif-select form-control",
+                                                                                                  data_source = @Url.Content("~/Accounting/Common/GetIncomeConcepts"),
+                                                                                                  data_id = "Id",
+                                                                                                  data_name = "Description",
+                                                                                                  data_native = "true",
+                                                                                                  data_val = "true",
+                                                                                                  data_val_required = @Global.RequiredField
+
+                                                                                              })
+                <span class="text-danger" data-valmsg-for="IncomeConceptComboDialog" data-valmsg-replace="true" />
+            </div>
+        </div>
+
+    </div>
+</form>

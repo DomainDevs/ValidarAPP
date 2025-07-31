@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="GetEndorsementsPayments">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PolicyId">
+          <Column table-alias="PolicyPremiumReceivableView" name="PolicyId" />
+        </SelectValue>
+        <SelectValue alias="EndorsementId">
+          <Column table-alias="PolicyPremiumReceivableView" name="EndorsementId" />
+        </SelectValue>
+        <SelectValue alias="PaymentNum">
+          <Column table-alias="PolicyPremiumReceivableView" name="PaymentNum" />
+        </SelectValue>
+        <SelectValue alias="PolicyDocumentNumber">
+          <Column table-alias="PolicyPremiumReceivableView" name="PolicyDocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="EndorsementDocumentNumber">
+          <Column table-alias="PolicyPremiumReceivableView" name="EndorsementDocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="PolicyPremiumReceivableView" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="PrefixCode">
+          <Column table-alias="PolicyPremiumReceivableView" name="PrefixCode" />
+        </SelectValue>
+        <SelectValue alias="ImputationCode">
+          <Column table-alias="PremiumReceivableTrans" name="ImputationCode" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="PremiumReceivableTrans" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="PolicyPremiumReceivableView" name="BranchDescription" />
+        </SelectValue>
+        <SelectValue alias="PrefixDescription">
+          <Column table-alias="PolicyPremiumReceivableView" name="PrefixDescription" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PolicyPremiumReceivable, Core.Accounting.Entities" alias="PolicyPremiumReceivableView" />
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PremiumReceivableTrans, Core.Accounting.Entities" alias="PremiumReceivableTrans" />
+          <criteria>
+            <BinaryPredicate type="And">
+              <BinaryPredicate type="And">
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="PremiumReceivableTrans" name="EndorsementId" />
+                  <Column table-alias="PolicyPremiumReceivableView" name="EndorsementId" />
+                </BinaryCriterion>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="PremiumReceivableTrans" name="PolicyId" />
+                  <Column table-alias="PolicyPremiumReceivableView" name="PolicyId" />
+                </BinaryCriterion>
+              </BinaryPredicate>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="PremiumReceivableTrans" name="PaymentNum" />
+                <Column table-alias="PolicyPremiumReceivableView" name="PaymentNum" />
+              </BinaryCriterion>
+            </BinaryPredicate>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

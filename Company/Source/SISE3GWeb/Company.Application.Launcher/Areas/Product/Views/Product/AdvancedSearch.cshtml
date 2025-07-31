@@ -1,0 +1,69 @@
+﻿
+<script id="advancedSearchTemplate" type="text/template">
+	<div>
+		@Resources.Language.TitleProducts:<strong> {{Id}}</strong>
+	</div>
+	<div>
+		@Resources.Language.LabelDescriptionProduct: {{Description}} |
+	</div>
+	<div>
+		@Resources.Language.LabelPrefix: {{Prefix.Description}} | @Resources.Language.LabelCurrentDate: {{CurrentFrom}}
+	</div>
+	{{#if IsPolitical}}
+	<div>@Resources.Language.LabelPoliticalProduct: @Resources.Language.LabelIf</div>
+	{{else}}
+	<div>@Resources.Language.LabelPoliticalProduct: @Resources.Language.LabelNot </div>
+	{{/if}}
+</script>
+<div class="uif-alert" id="alertAdvanced"></div>
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelPrefixCommercial</label>
+            <select class="uif-select form-control" id="selectPrefixCommercialAdvanced" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"
+                    data-id="Id" data-name="Description" name="PrefixId"  data-filter="true" data-native="false">
+            </select>
+            
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelDescriptionProduct</label>
+                   
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelCurrentDate</label>
+            <input type="text" name="name" value="" id="inputFromIssueDate" class="uif-datepicker" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelDisabledDate</label>
+            <input type="text" name="name" value="" id="inputToIssueDate" class="uif-datepicker" />
+        </div>
+        <div class="uif-col-4">
+            <div class="without-label">
+                <button type="button" name="name" id="btnAdvancedSearch" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listViewSearchAdvanced">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchAdv" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoadProduct" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+

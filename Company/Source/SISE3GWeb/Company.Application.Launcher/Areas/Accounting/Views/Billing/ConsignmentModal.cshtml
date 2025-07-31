@@ -1,0 +1,164 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "ConsignmentModal";
+}
+
+<script id="consignment-display-template" type="text/template">
+
+    <div>
+        <strong>{{RecievingBankName}}</strong> | @Global.AccountNumber: {{RecievingBankAccountNumber}} |
+        @Global.BallotNumber: {{DocumentNumber}}
+        @Global.Amount: {{Amount}}|
+       <div class="text-left">{{IssuerName}}</div>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number">@Global.TotalLocalCurrency: {{LocalAmount}}</div>
+    </div>
+
+
+</script>
+
+
+
+<form id="addConsignmentForm" onsubmit="return false" class="form">
+    @*<div class="main-content"></div>*@
+        <div class="uif-row">
+            <!--left col-->
+            <div class="uif-col-6">
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label>@Global.Currency</label>
+                        <select
+                                class="uif-select form-control"
+                                id="selectConsignmentCurrency"
+                                data-id="Id"
+                                data-name="Description"
+                                data-val-required="@Global.RequiredField">
+                        </select>
+                        <span class="text-danger" data-valmsg-for="selectConsignmentCurrency" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-6">
+                        <label>@Global.AmountExchange</label>
+                        <br />
+                        @Html.TextBox("ConsignmentExchangeRate", "", new
+                         {
+                             @onkeypress = "return OnlyDecimalNumber(event,this)",
+                             style = "text-align: right;",
+                             required = "",
+                             disabled = "disable",
+                             maxlength ="14"
+                         })
+                        <span class="text-danger" data-valmsg-for="ConsignmentExchangeRate" data-valmsg-replace="true" />                        
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label>@Global.Amount</label>
+                        <br />
+                        @Html.TextBox("ConsignmentAmount", "", new
+                   {
+                       @onkeypress = "return OnlyDecimalNumber(event,this)",
+                       style = "text-align: right",
+                       data_val = "true",
+                       maxlength = "25",
+                       data_val_required = @Global.RequiredField
+                   })
+                        <span class="text-danger" data-valmsg-for="ConsignmentAmount" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-6">
+                        <label>@Global.TotalLocalCurrency</label>
+                        <br />
+                        <input type="text" id="ConsignmentLocalAmount" disabled="disabled" style="text-align: right" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.ReceivingBank</label>
+                        <br />
+                        <select class="uif-select form-control"
+                                id="selectConsignmentReceivingBank"
+                                data-id="Id"
+                                data-name="Description"
+                                data-val-required="@Global.RequiredField"></select>
+                        <span class="text-danger" data-valmsg-for="selectConsignmentReceivingBank" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenReceivingBankName" />
+                        <input type="hidden" id="HiddenReceivingBankId" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.AccountNumber</label>
+                        <br />
+                        <select class="uif-select form-control"
+                                id="selectConsignmentAccountNumber"
+                                data-id="Id"
+                                data-name="Description"
+                                data-val-required="@Global.RequiredField"></select>
+                        <span class="text-danger" data-valmsg-for="selectConsignmentAccountNumber" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenAccountNumber" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label>@Global.BallotNumber</label>
+                        <br />
+                        @Html.TextBox("ConsignmentBallotNumber", "", new
+                        {
+                            @class = "uif-mask",
+                            data_pattern = "0000000000",
+                            style = "text-align: right",
+                            maxlength = "10",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="ConsignmentBallotNumber" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenBallotNumber" />
+                    </div>
+                    <div class="uif-col-6">
+                        <label>@Global.Date</label>
+                        <br />
+                        <input type="text" value="@ViewBag.DateAccounting" class="uif-datepicker" data-mask="99/99/9999" id="ConsignmentDate"
+                               name="ConsignmentDate" data-val="true" data-val-required='@Global.RequiredField' />
+                        <span class="text-danger" data-valmsg-for="ConsignmentDate" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label>@Global.DepositorName</label>
+                        <br />
+                        @Html.TextBox("ConsignmentDepositorName", "", new
+                        {
+                            style = "text-align: left",
+                            maxlength = "40",
+                            @onblur = "this.value = this.value.toUpperCase();",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="ConsignmentDepositorName" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertForm"></div>
+                    </div>
+                </div>
+            </div>
+            <!--End left col-->
+            <!--right col-->
+            <div class="uif-col-6">
+                <div class="uif-listview" id="consignmentsListView">
+                    <div class="footer">
+                        <div class="uif-col-xs-6">
+                            @Global.Total
+                        </div>
+                        <div class="uif-col-xs-6 text-right">
+                            <b id="TotalConsignment">$ 0.00</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End right col-->
+        </div>
+    
+</form>

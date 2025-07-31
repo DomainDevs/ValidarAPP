@@ -1,0 +1,91 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "CashModal";
+}
+
+
+<script id="cash-display-template" type="text/template">
+    <div>
+        @Global.Currency: <strong>{{CurrencyId}} - {{Currency}}</strong> <br>
+        @Global.Amount: {{Amount}} | @Global.AmountExchange: {{ExchangeRate}}
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number">@Global.TotalLocalCurrency: {{LocalAmount}}</div>
+    </div>
+</script>
+
+<form id="addCashForm" onsubmit="return false" class="form">
+    <div class="main-content">
+        <div class="uif-row">
+            <!--left col-->
+            <div class="uif-col-6">
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Currency</label>
+                        <select class="uif-select form-control"
+                                id="selectCashCurrency"
+                                data-id="Id"
+                                data-name="Description"
+                                data-val-required="@Global.RequiredField"></select>
+
+                        <span class="text-danger" data-valmsg-for="selectCashCurrency" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.AmountExchange</label>
+                        @Html.TextBox("CashExchangeRate", "", new
+        {
+            @onkeypress = "return OnlyDecimalNumber(event,this)",
+            style = "text-align: right;",
+            required = "",
+            disabled = "disable",
+            maxlength = "26"
+        })
+                        <span class="text-danger" data-valmsg-for="CashExchangeRate" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Amount</label>
+                        <br />
+                        @Html.TextBox("CashAmount", "", new
+                        {
+                            @onkeypress = "return OnlyDecimalNumber(event,this)",
+                            style = "text-align: right",
+                            data_val = "true",
+                            maxlength = "26",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="CashAmount" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.TotalLocalCurrency</label>
+                        <br />
+                        <input type="text" id="CashLocalAmount" disabled="disabled" style="text-align: right" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertForm"></div>
+                    </div>
+                </div>
+            </div>
+            <!--End left col-->
+            <!--right col-->
+            <div class="uif-col-6">
+                <div class="uif-listview" id="cashsListView">
+                    <div class="footer">
+                        <div class="uif-col-xs-6">
+                            @Global.Total
+                        </div>
+                        <div class="uif-col-xs-6 text-right">
+                            <b id="TotalCash">$ 0.00</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End right col-->
+        </div>
+    </div>
+</form>
+

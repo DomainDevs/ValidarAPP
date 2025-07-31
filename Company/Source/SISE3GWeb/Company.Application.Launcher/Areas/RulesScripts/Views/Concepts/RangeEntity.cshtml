@@ -1,0 +1,109 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.RulesScripts.Models.RangeEntityViewModel
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.RangeEntity
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("RangeEntityCode", null, new { @class = "uif-input-search", id = "inputSearchRangeEntity", @placeholder = @Resources.Language.SearchRangeEntity })
+        <button class="btn btn-default" id="btnSearchAdvRange"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div>
+        <button type="button" class="btn btn-default" id="btnExitRangeEntity">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonExit</span>
+        </button>
+        <button type="button" class="btn btn-primary" id="btnSaveRangeEntity">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+        </button>
+    </div>
+</script>
+<script id="rangeEntityTemplate" type="text/template">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div><strong class="success">{{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div><strong class="warning">{{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div><strong class="danger">{{Description}}</strong></div>
+    {{else}}
+    <div><strong>{{Description}}</strong></div>
+    {{/ifCond}}
+</script>
+<script id="rangeEntityValueTemplate" type="text/template">
+    {{#ifCond StatusTypeService "==" 2}}
+    <div class="row">
+        <div class="uif-col-4 pull-left"><strong class="success">{{FromValue}}</strong></div>
+        <div class="uif-col-4"><strong>|</strong></div>
+        <div class="uif-col-4 pull-right"><strong class="success">{{ToValue}}</strong></div>
+    </div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div class="row">
+        <div class="uif-col-4 pull-left"><strong class="warning">{{FromValue}}</strong></div>
+        <div class="uif-col-4"><strong>|</strong></div>
+        <div class="uif-col-4 pull-right"><strong class="warning">{{ToValue}}</strong></div>
+    </div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div class="row">
+        <div class="uif-col-4 pull-left"><strong class="danger">{{FromValue}}</strong></div>
+        <div class="uif-col-4"><strong>|</strong></div>
+        <div class="uif-col-4 pull-right"><strong class="danger">{{ToValue}}</strong></div>
+    </div>
+    {{else}}
+    <div class="row">
+        <div class="uif-col-4 pull-left"><strong>{{FromValue}}</strong></div>
+        <div class="uif-col-4"><strong>|</strong></div>
+        <div class="uif-col-4 pull-right"><strong>{{ToValue}}</strong></div>
+    </div>
+    {{/ifCond}}
+</script>
+
+<form class="form without-space" id="formRangeEntity">
+    <input type="hidden" id="Status" name="StatusTypeService" value="" />
+    <input type="hidden" id="Index" name="Index" value="" />
+    <input type="hidden" id="RangeEntityCode" name="RangeEntityCode" value="" />
+    <input type="hidden" id="RangeValueAt" name="RangeValueAt" value="" />
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { placeholder = @Resources.Language.LabelDescription, maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="uif-listview" id="lsvRangeEntityValue"></div>
+                </div>
+            </div>            
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div class="uif-listview" id="lsvRangeEntity"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnCancelRangeEntity">
+                    @Resources.Language.NewForm
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAddRangeEntity">
+                    @Resources.Language.AddForm
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

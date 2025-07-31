@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="section cols primary">
+    <div>
+      <p>Sucursal:<span class = "info">{{endorsementDetail.[0].BRANCH}}</span> Ramo: <span class="info">{{endorsementDetail.[0].PREFIX}}</span></p>
+      <p>Póliza:<span class = "info">{{endorsementDetail.[0].DOCUMENT_NUM}}</span> / <span class="info">{{endorsementDetail.[0].ENDORSEMENT_TYPE}}</span></p>
+      <p>Sufijo: <span class="info">{{endorsementDetail.[0].SUFFIX}}</span> Endoso:<span class="info">{{endorsementDetail.[0].ENDORSEMENT_NUM}}</span></p>
+      <p>Tomador: <span class="info">{{endorsementDetail.[0].ID_HOLDER}} / {{endorsementDetail.[0].HOLDER_NAME}}</span></p>
+    </div>
+    <div>
+      <p>Fecha de Emisión: <span class="info">{{formatDate endorsementDetail.[0].ISSUE_DATE}}</span></p>
+      <p>Inicio Vigencia: <span class="info">{{formatDate  endorsementDetail.[0].CURRENT_FROM}}</span> Fin Vigencia: <span class="info">{{formatDate endorsementDetail.[0].CURRENT_TO}}</span></p>
+      <p>Asegurado: <span class="info">{{endorsementDetail.[0].HOLDER_NAME}}</span></p>
+      <p>Moneda: <span class="info">{{endorsementDetail.[0].CURRENCY}}</span> - TRM <span class="info">{{formatNumber endorsementDetail.[0].EXCHANGE_RATE minimumFractionDigits="2" maximumFractionDigits="3"}}</span></p>
+      <p>Suma Asegura: <span class="info">{{formatNumber endorsementDetail.[0].LIMIT_AMT}}</span> Prima: <span class="info">{{formatNumber endorsementDetail.[0].PREMIUM_AMT}}</span></p>
+    </div>
+    <div></div>
+  </div> 
+  <div class="section rows primary">
+    <h3>Siniestros</h3>
+    <table class="table">
+      <tr>
+        <th style="text-align: center">Siniestro</th>
+        <th style="text-align: center">Asegurado</th>
+        <th style="text-align: center">Ocurrencia</th>
+        <th style="text-align: center">Cobertura</th>
+        <th style="text-align: center">Moneda</th>
+        <th style="text-align: center">Reserva</th>
+        <th style="text-align: center">Reserva Gastos</th>
+      </tr>
+      {{#each claims}}
+        <tr class="client__row" data-claimid={{CLAIM_CD}} style="cursor:pointer;">
+          <td>{{NUMBER}}</td>
+          <td style="text-align: left">{{INSURED_NAME}}</td>
+          <td style="text-align: center">{{formatDate OCCURRENCE_DATE}}</td>
+          <td style="text-align: center">{{COVERAGE}}</td>
+          <td style="text-align: left">{{CURRENCY}}</td>
+          <td style="text-align: right">{{formatNumber RESERVE}}</td>
+          <td style="text-align: right">{{formatNumber RESERVE_EXPENSES}}</td>          
+        <tr>
+      {{/each}}
+    </table>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="GetContractLine">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="ContractLineId">
+          <Column table-alias="ContractLine" name="ContractLineId" />
+        </SelectValue>
+        <SelectValue alias="LineId">
+          <Column table-alias="ContractLine" name="LineId" />
+        </SelectValue>
+        <SelectValue alias="LineDescription">
+          <Column table-alias="Line" name="Description" />
+        </SelectValue>
+        <SelectValue alias="ContractId">
+          <Column table-alias="ContractLine" name="ContractId" />
+        </SelectValue>
+        <SelectValue alias="ContractDescription">
+          <Column table-alias="Contract" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Priority">
+          <Column table-alias="ContractLine" name="Priority" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.ContractLine,
+                            Core.Reinsurance.Entities" alias="ContractLine" />
+            <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.Contract,
+                            Core.Reinsurance.Entities" alias="Contract" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Contract" name="ContractId" />
+                <Column table-alias="ContractLine" name="ContractId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.Line, 
+                          Core.Reinsurance.Entities" alias="Line" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Line" name="LineId" />
+              <Column table-alias="ContractLine" name="LineId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

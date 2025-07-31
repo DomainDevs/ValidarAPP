@@ -1,0 +1,48 @@
+﻿@using System.Web.Mvc.Html
+@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.Reinsurance.Models.ReinsuranceLayerModel
+@{
+    Layout = null;
+}
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <b>@Global.PercentageInsuredAmount:</b>
+            <input class="form-control" id="layerSumPercentage" name="layerSumPercentage" type="text" style="text-align:right"
+                   data-val="true" data-val-required="@Global.RequiredField" maxlength="5" onkeypress="return OnlyDecimalNumber(event, this)" />
+            <span class="text-danger" data-valmsg-for="layerSumPercentage" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="uif-col-4">
+            <b>@Global.PremiumPercentage:</b>
+            <input class="form-control" id="layerPremiumPercentage" name="layerPremiumPercentage" type="text" style="text-align:right"
+                   data-val="true" data-val-required="@Global.RequiredField" maxlength="5" onkeypress="return OnlyDecimalNumber(event, this)" />
+            <span class="text-danger" data-valmsg-for="layerPremiumPercentage" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            <b>@Global.LayerNumber:</b>
+            <input class="form-control" id="ReinsLayerNumber" type="text" style="text-align:right" readonly="readonly" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <b></b>
+            <input type="hidden" id="ReinsuranceSourceId" value="" />
+            <input type="hidden" id="ReinsuranceLayerId" value="" />
+        </div>
+        <div class="uif-col-4">
+            <input type="hidden" id="tempReinsuranceProcessId" name="tempReinsuranceProcessId" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertModificationDialog"></div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="ReinsSourceId" value="" />
+<input type="hidden" id="ReinsLayerId" value="" />
+
+
+

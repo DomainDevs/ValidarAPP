@@ -1,0 +1,113 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.DetailViewModel
+@{
+    Layout = null;
+}
+<script id="DetailTemplate" type="text/template">
+    <div>@Resources.Language.LabelDetailType: {{TypeDescription}}</div>
+    <div>
+        {{#ifCond Status "==" 2}}
+        <div>@Resources.Language.LabelDescription: <strong class="success">{{Description}}</strong></div>
+        {{else ifCond Status "==" 3}}
+        <div>@Resources.Language.LabelDescription: <strong class="warning">{{Description}} ({{Id}})</strong></div>
+        {{else ifCond Status "==" 4}}
+        <div>@Resources.Language.LabelDescription: <strong class="danger">{{Description}} ({{Id}})</strong></div>
+        {{else}}
+        <div>@Resources.Language.LabelDescription: <strong>{{Description}} ({{Id}})</strong></div>
+        {{/ifCond }}
+    </div>
+    <div>@Resources.Language.SubLimitAmount: {{SublimitAmt}}</div>
+    <div>@Resources.Language.Enabled: {{EnabledDescription}}</div>
+    <div>@Resources.Language.LabelRateType: {{RateTypeDescription}}</div>
+    <div>@Resources.Language.LabelRate: <strong>{{Rate}}</strong></div>
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.PrechargeDetail
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+<form id="formDetail" autocomplete="off" class="form without-space">
+    <div class="row">
+        <input type="hidden" id="inputId" value="0" />
+        <input type="hidden" id="inputIdByType" value="0" />
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDetailType</label>
+                    <select class="uif-select form-control" id="selectDetailType"
+                            data-id="Id" data-name="Description" name="DetailTypeId"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlDetailType"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.DetailTypeId)
+
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.Description</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", maxlength = 50 })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.SubLimitAmount</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputSubLimitAmount", maxlength = 15, @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.SublimitAmt)
+                </div>
+                <div class="without-label">
+                    <div class="uif-col-6">
+                        <input type="checkbox" id="chkEnabled" name="Enabled" />
+                        <label for="chkEnabled">@Resources.Language.Enabled</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.RateType</label>
+                    <select class="uif-select form-control" id="selectRateType"
+                            data-id="Value" data-name="Text" name="Type"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.RateTypeId)
+                </div>
+
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelRate</label>
+                    @Html.TextBoxFor(model => model.Rate, new { id = "inputRate", maxLength = 20, @class = "rightAlign input-money" })
+                    @Html.ValidationMessageFor(model => model.Rate)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary" id="panelDetail">
+            <div id="listDetail" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right-Proteccion" id="buttonsView">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNew">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAccept">@Resources.Language.Add</button>
+
+            </div>
+        </div>
+    </div>
+</form>

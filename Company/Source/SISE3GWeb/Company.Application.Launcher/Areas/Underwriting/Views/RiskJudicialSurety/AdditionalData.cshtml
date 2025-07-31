@@ -1,0 +1,57 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.AdditionalDataJudicialSuretyModelsView
+<form id="formAdditionalData" class="form">
+    <div class="row">
+        <div class="uif-col-10">
+            <h5 id="LabelPrinter"><strong> @Resources.Language.LabelAttorneyInformation</strong></h5>
+            <div>
+                @*<label>@Resources.Language.LabelAttorney</label>*@
+                @Html.TextBoxFor(model => model.AttorneyName)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelTypeDocument</label>
+            <select class="uif-select form-control" id="selectDescriptionId" data-val="true"
+                    data-id="Id" data-name="Description" name="DocumentType"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelNumberDocument</label>
+            @Html.TextBoxFor(model => model.NumberId)
+            @Html.ValidationMessageFor(model => model.NumberId)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelProfessionalCard</label>
+            @Html.TextBoxFor(model => model.CardProfessional)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-10">
+            <h5 id="LabelPrinter"><strong> @Resources.Language.LabelPrinterHeaderDetail</strong></h5>
+            <label>@Resources.Language.InsuredNameToPrint</label>
+            @Html.TextBoxFor(model => model.InsuredToPrint, new { id = "inputInsured", @class = "uif-input" })
+        </div>
+    </div>
+        <div class="row" id="reasonSocialWrapper" style="display: none">
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.LabelreasonSocial</label>
+                        <select class="uif-select" id="inputName" data-id="NameNum" data-name="TradeName" name="Name"></select>
+                    </div>
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.LabelPhoneReasonSocial</label>
+                        <input class="uif-input" type="text" id="inputPhone" name="Phone" disabled="disabled">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="uif-col-12">
+                        <label>@Resources.Language.LabelAdressReasonSocial</label>
+                        <input class="uif-input" type="text" id="inputAdress" name="Name" disabled="disabled">
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>

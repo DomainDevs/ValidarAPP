@@ -1,0 +1,435 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.InternalDepositSlip;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.AccountingAdministrative</li>
+        <li class="active">@Global.CheckAdministration</li>
+        <li class="active">@Global.InternalBallot</li>
+    </ol>
+}
+
+@section Modals
+{
+    <form id="BallotForm" onsubmit="return false">
+        <div class="uif-modal" id="ModalSaveIBallot">
+            <div class="uif-modalbody">
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        @Global.ReceivingBank:
+                    </div>
+                    <div class="uif-col-6">
+                        @Global.BallotNumber:
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label id="receivingBankName"></label>
+                        <input type="hidden" id="paymentTicketCode" style="border: none" />
+                        <input type="hidden" id="paymentMethodTypeCode" style="border: none" />
+                    </div>
+                    <div class="uif-col-6">
+                        <label id="paymentTicketItemId"></label>
+                    </div>
+                </div>
+                <br />
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        @Global.AccountNumber:
+                    </div>
+                    <div class="col-md-6">
+                        @Global.Date:
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label id="accountBank"></label>
+                        <input type="hidden" id="branchCodeReport" style="border: none" />
+                        <input type="hidden" id="branchNameReport" style="border: none" />
+                    </div>
+                    <div class="uif-col-6">
+                        <label id="dateBallot"></label>
+                    </div>
+                </div>
+                <br />
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        @Global.Currency:
+                    </div>
+                    <div class="uif-col-6">
+                        @Global.User:
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label id="accountCurrency"></label>
+                    </div>
+                    <div class="uif-col-6">
+                        <label id="userBallot"></label>
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-9">
+                        &nbsp;&nbsp;&nbsp; @Global.Cash:
+                    </div>
+                    <div class="uif-col-3">
+                        <label id="cashBallot"></label>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-9">
+                        &nbsp;&nbsp;&nbsp; @Global.TotalChecks:
+                    </div>
+                    <div class="uif-col-3">
+                        <label id="totalChecks"></label>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-9">
+                        &nbsp;&nbsp;&nbsp; @Global.Total:
+                    </div>
+                    <div class="uif-col-3">
+                        <label id="totalBallot"></label>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-9">
+
+                    </div>
+                    <div class="uif-col-3">
+                        <button type="submit" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+                        <button type="submit" class="btn btn-primary" id="printBallot"
+                                onclick="return PrintInternalBallot(event, 'ModalSaveIBallot')">
+                            @Global.BallotPrint
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+    <!-- Modal -->
+    <div id="ModalSaveIBallotOld" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">@Global.InternalSlipSuccessfulSaved</h3>
+            </div>
+            <div class="modal-body">
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        @Global.ReceivingBank:
+                    </div>
+                    <div class="uif-col-6">
+                        @Global.BallotNumber:
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label id="receivingBankName"></label>
+                        <input type="hidden" id="paymentTicketCode" style="border: none" />
+                        <input type="hidden" id="paymentMethodTypeCode" style="border: none" />
+                    </div>
+                    <div class="uif-col-6">
+                        <label id="paymentTicketItemId"></label>
+                    </div>
+                </div>
+                <br />
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        @Global.AccountNumber:
+                    </div>
+                    <div class="col-md-6">
+                        @Global.Date:
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label id="accountBank"></label>
+                        <input type="hidden" id="branchCodeReport" style="border: none" />
+                        <input type="hidden" id="branchNameReport" style="border: none" />
+                    </div>
+                    <div class="uif-col-6">
+                        <label id="dateBallot"></label>
+                    </div>
+                </div>
+                <br />
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        @Global.Currency:
+                    </div>
+                    <div class="uif-col-6">
+                        @Global.User:
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label id="accountCurrency"></label>
+                    </div>
+                    <div class="uif-col-6">
+                        <label id="userBallot"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">@Global.Close</button>
+                <button class="btn btn-primary" id="printBallot" onclick="return PrintInternalBallot(event, 'ModalSaveIBallot')">@Global.BallotPrint</button>
+            </div>
+        </div>
+
+
+    </div>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-default" id="CancelTicket">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button class="btn btn-primary" id="SaveTicket">
+            <i class="fa fa-save"></i> @Global.Accept
+        </button>
+    </footer>
+}
+
+<!-- /.Modal de Eliminación -->
+<div class="modal fade" id="modalDeleteBallot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times-circle">
+                    </i>
+                </button>
+                <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+            </div>
+            <div class="modal-body" id="deleteMessageModal">
+                <p>@Global.DeletedMultipleRecords</p>
+            </div>
+            <div class="modal-footer" style="padding: 10px 20px 10px">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-remove"></i> @Global.Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="DeleteModal">
+                    <i class="fa fa-check"></i> @Global.Accept
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@*Código html*@
+
+<form id="InternalBallot" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            <select class="uif-select form-control" id="Branch" data-id="Id" data-name="Description"></select>
+
+            <span class="text-danger" data-valmsg-for="Branch" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.ReceivingBank
+            </label>
+            <select class="uif-select form-control" id="selectReceivingBank" name="selectReceivingBank"
+                    @*data-source='@Url.Content("~/Accounting/CheckControl/GetBankBranchsByBranchId?branchId="+ ViewBag.BranchDefault)'*@
+                    data-native="true" data-id="Id" data-name="Description"
+                    data-val="true" data-val-required="@Global.RequiredField"></select>
+            <span class="text-danger" data-valmsg-for="selectReceivingBank" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.AccountNumber
+            </label>
+            @Html.DropDownList("selectReceivingAccountNumber", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_id = "Id",
+                 data_name = "Number",
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="selectReceivingAccountNumber" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.AccountCurrency
+            </label>
+            <input type="text" value="" id="AccountCurrency" placeholder="" style="text-align: left" disabled="disabled" class="uif2_required" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.CashAmount
+            </label>
+            <input type="text" value="" id="CashAmount" placeholder="" style="text-align: right" disabled="disabled" onkeypress="return OnlyDecimalNumber(event,this)" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.CheckInAmount
+            </label>
+            <input type="text" value="" id="CheckAmount" placeholder="" style="text-align: right" disabled="disabled" onkeypress="return OnlyDecimalNumber(event,this)" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <h3><b>&nbsp;&nbsp;&nbsp;@Global.SearchChecksToDeposit</b></h3>
+
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.PaymentType
+            </label>
+            @Html.DropDownList("SelectPaymentMethodType", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/CheckInternalDepositSlip/GetEnabledPaymentMethodTypes"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="SelectPaymentMethodType" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.IssuingBank
+            </label>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "CheckInternalDepositSlip")" data-displaykey="bankDescription" placeholder='@Global.EnterBankName' id="inputIssuingBank">
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.CheckNumber
+            </label>
+            <input type="text" value="" id="CheckNumber" placeholder="" onkeypress="return JustNumbers(event, this)" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer">
+                <button id="Clean" class="btn btn-default" role="button" type="button">
+                    <i class="fa fa-paint-brush"></i>  @Global.Clean
+                </button>
+                <button id="btnSearch" class="btn btn-primary" role="button">
+                    <i class="fa fa-search"></i>  @Global.Search
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="TableChecksDialog"
+               data-selectiontype="multiple"
+               data-add="true" data-filter="true" data-paginate="true"
+               data-title="@Global.ChecksToDeposit">
+            <thead>
+                <tr>
+                    <th data-property="PaymentTicketItemId" data-visible="false">ItemId</th>
+                    <th data-property="PaymentCode" data-visible="false">PaymentCode</th>
+                    <th data-property="PaymentMethodTypeCode" data-visible="false">PaymentMethodTypeCode</th>
+                    <th data-property="CurrencyCode" data-visible="false">CurrencyCode</th>
+                    <th data-property="BranchCode" data-visible="false">BranchCode</th>
+                    <th data-property="BranchName" data-visible="false">BranchName</th>
+                    <th data-property="BankName">@Global.IssuingBank</th>
+                    <th data-property="IssuingAccountNumber">@Global.AccountNumberCurrent</th>
+                    <th data-property="CheckNumber">@Global.CheckNumber</th>
+                    <th data-property="TechnicalTransaction">@Global.TransactionNumber</th>
+                    <th data-property="ReceiptNumber" data-visible="false">@Global.BillNum</th>
+                    <th data-property="CurrencyName">@Global.Currency</th>
+                    <th data-property="IncomeAmount">@Global.Amount</th>
+                    <th data-property="CheckDate">@Global.PaymentDate</th>   @*CheckDate*@
+                    <th data-property="Holder">@Global.Issuer</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="uif-row">
+    <div class="pull-left">
+        <div class="uif-col-12">
+            <button id="btnAdd" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-plus"></span>  @Global.Add
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="TableAChecksDialog" data-exporttocsv="false" data-exportname="cultura"
+               data-add="false" data-edit="false" data-selectiontype="none"
+               data-delete="true" data-filter="false" data-title="@Global.SelectedChecks">
+            <thead>
+                <tr>
+                    <th data-property="PaymentTicketItemId" data-visible="false">ItemId</th>
+                    <th data-property="PaymentCode" data-visible="false">Id</th>
+                    <th data-property="PaymentMethodTypeCode" data-visible="false">BankId</th>
+                    <th data-property="CurrencyCode" data-visible="false">CurrencyCode</th>
+                    <th data-property="BranchCode" data-visible="false">BranchCode</th>
+                    <th data-property="BranchName" data-visible="false">BranchName</th>
+                    <th data-property="BankName">@Global.IssuingBank</th>
+                    <th data-property="IssuingAccountNumber">@Global.AccountNumberCurrent</th>
+                    <th data-property="CheckNumber">@Global.CheckNumber </th>
+                    <th data-property="TechnicalTransaction">@Global.TransactionNumber</th>
+                    <th data-property="ReceiptNumber" data-visible="false">@Global.BillNum</th>
+                    <th data-property="CurrencyName">@Global.Currency</th>
+                    <th data-property="IncomeAmount">@Global.Amount</th>
+                    <th data-property="CheckDate">@Global.PaymentDate</th>
+                    <th data-property="Holder">@Global.Issuer</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagAccountingDate" value="@ViewBag.AccountingDate" />
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagParamPaymentMethodCash" value="@ViewBag.PaymentMethodCash" />
+<input type="hidden" id="BranchDefault" value="@ViewBag.BranchDefault" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCheckInternalDepositSlip")
+}
+    

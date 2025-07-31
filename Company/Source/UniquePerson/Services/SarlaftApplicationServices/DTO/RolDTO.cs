@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+
+namespace Sistran.Company.Application.SarlaftApplicationServices.DTO
+{
+    [DataContract]
+    public class RolDTO
+    {
+        [DataMember]
+        public int RoleCd { get; set; }
+        [DataMember]
+        public string Description { get; set; }
+        [DataMember]
+        public string SmallDescription { get; set; }
+    }
+}

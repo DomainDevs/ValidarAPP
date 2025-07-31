@@ -1,0 +1,59 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.ParamAuthorizationPolicies.Models.BaseRejectionCausesViewModel
+@{
+    Layout = null;
+}
+@* Temaplte de busqueda en listView search *@
+<script id="searchTemplate" type="text/template">    
+    <div>
+        Descripcion Larga: <strong>{{GroupPolicies.description}}</strong>
+    </div>
+    <div>
+        Descripcion corta: <strong>{{description}} ({{id}})</strong>
+    </div>
+</script>
+
+@* Formulario de busqueda avanzada *@
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.LabelSearchGroundsRejection</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelPolicyGroup</label>
+            <select class="uif-select form-control" id="IdPolicyGroupSearchAdvanzed" data-native="false" data-val="true" data-val-required="true"
+                    data-id="id" data-name="description" name="GroupPolicies"></select>                   
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelDescriptionRejection</label>
+            @Html.TextBoxFor(model => model.Description, new { @Id = "IdDescriptionRejectionSearchAdvanzed" })            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="without-label">
+                <button class="btn btn-primary-Co width-container" id="btnAdvancedSearchListView" type="button"> @Resources.Language.search</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listviewSearch">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchScriptRejection" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoadRejectionCauses" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>

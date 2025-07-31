@@ -1,0 +1,82 @@
+﻿<form id="formCatastrophicInformation" method="get" class="form">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.Event</label>
+                    <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetCatastrophesByDescription", "Claim")"
+                           data-displaykey="Description" name="evenCode" data-name="Description" placeholder="@Resources.Language.PlaceHolderCatastrophicEvent" data-val="true"
+                           data-id="Id" id="inputCatastrophe" required>
+                    <span class="text-danger" data-valmsg-for="evenCode" data-valmsg-replace="true"></span>
+                </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.DateFrom</label>
+                        <input type="text" class="uif-datepicker" id="InputDateTimeFrom" data-val="true" data-max-date="@DateTime.Now.ToString("dd/MM/yyyy")"data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                               data-name="Description" name="DateTimeFrom" data-id="Id" required />
+                        <span class="text-danger" data-valmsg-for="DateTimeFrom" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.DateTo</label>
+                        <input type="text" class="uif-datepicker" id="InputDateTimeTo" data-val="true" data-max-date="@DateTime.Now.ToString("dd/MM/yyyy")" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                               data-name="Description" name="DateTimeTo" required />
+                        <span class="text-danger" data-valmsg-for="DateTimeTo" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="uif-col-4"></div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.TimeFrom</label>
+                        <input type="text" class="uif-Timepicker" id="timepickerFrom" autocomplete="on" required/>
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.TimeTo</label>
+                        <input type="text" class="uif-Timepicker" id="timepickerTo" autocomplete="off" required/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelInfringementDescription</label>
+                    <textarea id="InputInfringementDescription" name="InfringementDescription" rows="6" cols="55" maxlength="250"></textarea>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.Address</label>
+                       <textarea id="InputAddress" name="InputAddress" rows="6" cols="55" maxlength="250"></textarea>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.Country</label>
+                    <select class="uif-select form-control" id="selectCountry" data-val="true" data-source=''
+                           data-id="Id" data-name="Description" name="CountryId" data-selectedid=""
+                            data-filter="true" data-native="false"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.Department</label>
+                    <select class="uif-select form-control" id="selectDepartment" data-val="true" data-source=''
+                            data-id="Id" data-name="Description" name="BranchId" data-selectedid=""
+                            data-filter="true" data-native="false"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelCity</label>
+                    <select class="uif-select form-control" id="selectCity" data-val="true" data-source=''
+                            data-id="Id" data-name="Description" name="BranchId" data-selectedid="" data-filter="true" data-native="false"></select>
+                </div>
+            </div>
+            <div class="uif-modalbuttons width-save">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0299"))
+                {
+                    <button type="button" class="btn btn-default" id="btnCancel" data-dismiss="modal">@Resources.Language.ButtonCancel</button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0298"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnRecord">@Resources.Language.LabelRecord</button>
+                }
+            </div>
+        </div>
+    </div>
+</form>

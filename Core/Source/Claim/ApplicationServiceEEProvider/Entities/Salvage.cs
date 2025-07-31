@@ -1,0 +1,464 @@
+﻿using Sistran.Core.Framework;
+using Sistran.Core.Framework.DAF;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sistran.Core.Application.ClaimServices.EEProvider.Entities
+{
+    /// <summary>
+    /// Definición de entidad Salvage.
+    /// </summary>
+    [
+    PersistentClass("Sistran.Core.Application.ClaimServices.EEProvider.dict"),
+    Serializable(),
+    DescriptionKey("SALVAGE_ENTITY"),
+    TableMap(TableName = "SALVAGE", Schema = "CLM"),
+    ]
+    public partial class Salvage :
+        BusinessObject2
+    {
+        #region static
+        /// <summary>
+        /// Propiedades públicas de la entidad.
+        /// </summary>
+        public static class Properties
+        {
+            public static readonly string SalvageCode = "SalvageCode";
+            public static readonly string CreationDate = "CreationDate";
+            public static readonly string AssignmentDate = "AssignmentDate";
+            public static readonly string EndDate = "EndDate";
+            public static readonly string Description = "Description";
+            public static readonly string UnitQuantity = "UnitQuantity";
+            public static readonly string EstimatedSale = "EstimatedSale";
+            public static readonly string Location = "Location";
+            public static readonly string Observation = "Observation";
+            public static readonly string ClaimCode = "ClaimCode";
+            public static readonly string SubclaimCode = "SubclaimCode";
+            public static readonly string BranchCode = "BranchCode";
+            public static readonly string PrefixCode = "PrefixCode";
+            public static readonly string ClaimNumber = "ClaimNumber";
+        }
+
+        /// <summary>
+        /// Crea una clave primaria para una clase concreta.
+        /// </summary>
+        /// <param name="concreteClass">Clase concreta.</param>
+        /// <param name="salvageCode">Propiedad clave SalvageCode.</param>
+        /// <returns>Clave primaria.</returns>
+        protected static PrimaryKey InternalCreatePrimaryKey<T>(int salvageCode)
+        {
+            Dictionary<string, object> keys = new Dictionary<string, object>();
+            keys.Add(Properties.SalvageCode, salvageCode);
+
+            return new PrimaryKey<T>(keys);
+        }
+
+        protected static PrimaryKey InternalCreatePrimaryKey<T>()
+        {
+            Dictionary<string, object> keys = new Dictionary<string, object>();
+            keys.Add(Properties.SalvageCode, null);
+
+            return new PrimaryKey<T>(keys);
+        }
+
+        /// <summary>
+        /// Crea una clave primaria para esta clase.
+        /// </summary>
+        /// <param name="salvageCode">Propiedad clave SalvageCode.</param>
+        public static PrimaryKey CreatePrimaryKey(int salvageCode)
+        {
+            return InternalCreatePrimaryKey<Salvage>(salvageCode);
+        }
+
+        public static PrimaryKey CreatePrimaryKey()
+        {
+            return InternalCreatePrimaryKey<Salvage>();
+        }
+
+        #endregion
+
+        //*** Object Attributes ********************************
+
+        /// <summary>
+        /// Atributo para la propiedad CreationDate.
+        /// </summary>
+        private DateTime? _creationDate = null;
+        /// <summary>
+        /// Atributo para la propiedad AssignmentDate.
+        /// </summary>
+        private DateTime? _assignmentDate = null;
+        /// <summary>
+        /// Atributo para la propiedad EndDate.
+        /// </summary>
+        private DateTime? _endDate = null;
+        /// <summary>
+        /// Atributo para la propiedad Description.
+        /// </summary>
+        private string _description = null;
+        /// <summary>
+        /// Atributo para la propiedad UnitQuantity.
+        /// </summary>
+        private int? _unitQuantity = null;
+        /// <summary>
+        /// Atributo para la propiedad EstimatedSale.
+        /// </summary>
+        private decimal? _estimatedSale = null;
+        /// <summary>
+        /// Atributo para la propiedad Location.
+        /// </summary>
+        private string _location = null;
+        /// <summary>
+        /// Atributo para la propiedad Observation.
+        /// </summary>
+        private string _observation = null;
+        /// <summary>
+        /// Atributo para la propiedad ClaimCode.
+        /// </summary>
+        private int? _claimCode = null;
+        /// <summary>
+        /// Atributo para la propiedad SubclaimCode.
+        /// </summary>
+        private int? _subclaimCode = null;
+        /// <summary>
+        /// Atributo para la propiedad BranchCode.
+        /// </summary>
+        private int? _branchCode = null;
+        /// <summary>
+        /// Atributo para la propiedad PrefixCode.
+        /// </summary>
+        private int? _prefixCode = null;
+        /// <summary>
+        /// Atributo para la propiedad ClaimNumber.
+        /// </summary>
+        private int? _claimNumber = null;
+        //*** Object Constructors ********************************
+
+        /// <summary>
+        /// Constructor de instancia de la clase en base a las propiedades claves.
+        /// </summary>
+        /// <param name="salvageCode">SalvageCode key property.</param>
+        public Salvage(int salvageCode) :
+            this(Salvage.CreatePrimaryKey(salvageCode), null)
+        {
+        }
+
+        public Salvage() :
+           this(Salvage.CreatePrimaryKey(), null)
+        {
+        }
+
+        /// <summary>
+        /// Constructor de instancia de la clase en base a una clave primaria y a valores iniciales.
+        /// </summary>
+        /// <param name="key">
+        /// Identificador de la instancia de la entidad.
+        /// </param>
+        /// <param name="initialValues">
+        /// Valores para establecer el estado de la instancia.
+        /// </param>
+        public Salvage(PrimaryKey key, IDictionary initialValues) :
+            base(key, initialValues)
+        {
+        }
+
+        /*** Object Properties ********************************/
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad SalvageCode.
+        /// </summary>
+        /// <value>Propiedad SalvageCode.</value>
+        [
+        DescriptionKey("SALVAGE_CODE_PROPERTY"),
+        PersistentProperty(IsKey = true, KeyType = "Identity"),
+        ColumnMap(ColumnName = "SALVAGE_CD", DbType = System.Data.DbType.String),
+        ]
+        public int SalvageCode
+        {
+            get
+            {
+                return (int)this._primaryKey[Properties.SalvageCode];
+            }
+            set
+            {
+                this._primaryKey[Properties.SalvageCode] = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad CreationDate.
+        /// </summary>
+        /// <value>Propiedad CreationDate.</value>
+        [
+        DescriptionKey("CREATION_DATE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "CREATION_DATE", DbType = System.Data.DbType.String),
+        ]
+        public DateTime? CreationDate
+        {
+            get
+            {
+                return this._creationDate;
+            }
+            set
+            {
+                this._creationDate = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad AssignmentDate.
+        /// </summary>
+        /// <value>Propiedad AssignmentDate.</value>
+        [
+        DescriptionKey("ASSIGNMENT_DATE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "ASSIGNMENT_DATE", DbType = System.Data.DbType.String),
+        ]
+        public DateTime? AssignmentDate
+        {
+            get
+            {
+                return this._assignmentDate;
+            }
+            set
+            {
+                this._assignmentDate = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad EndDate.
+        /// </summary>
+        /// <value>Propiedad EndDate.</value>
+        [
+        DescriptionKey("END_DATE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "END_DATE", DbType = System.Data.DbType.String),
+        ]
+        public DateTime? EndDate
+        {
+            get
+            {
+                return this._endDate;
+            }
+            set
+            {
+                this._endDate = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad Description.
+        /// </summary>
+        /// <value>Propiedad Description.</value>
+        [
+        DescriptionKey("DESCRIPTION_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "DESCRIPTION", DbType = System.Data.DbType.String),
+        ]
+        public string Description
+        {
+            get
+            {
+                return this._description;
+            }
+            set
+            {
+                this._description = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad UnitQuantity.
+        /// </summary>
+        /// <value>Propiedad UnitQuantity.</value>
+        [
+        DescriptionKey("UNIT_QUANTITY_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "UNIT_QTY", DbType = System.Data.DbType.String),
+        ]
+        public int? UnitQuantity
+        {
+            get
+            {
+                return this._unitQuantity;
+            }
+            set
+            {
+                this._unitQuantity = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad EstimatedSale.
+        /// </summary>
+        /// <value>Propiedad EstimatedSale.</value>
+        [
+        DescriptionKey("ESTIMATED_SALE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "ESTIMATED_SALE", DbType = System.Data.DbType.Decimal),
+        ]
+        public decimal? EstimatedSale
+        {
+            get
+            {
+                return this._estimatedSale;
+            }
+            set
+            {
+                this._estimatedSale = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad Location.
+        /// </summary>
+        /// <value>Propiedad Location.</value>
+        [
+        DescriptionKey("LOCATION_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "LOCATION", DbType = System.Data.DbType.String),
+        ]
+        public string Location
+        {
+            get
+            {
+                return this._location;
+            }
+            set
+            {
+                this._location = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad Observation.
+        /// </summary>
+        /// <value>Propiedad Observation.</value>
+        [
+        DescriptionKey("OBSERVATION_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "OBSERVATION", DbType = System.Data.DbType.String),
+        ]
+        public string Observation
+        {
+            get
+            {
+                return this._observation;
+            }
+            set
+            {
+                this._observation = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad ClaimCode.
+        /// </summary>
+        /// <value>Propiedad ClaimCode.</value>
+        [
+        DescriptionKey("CLAIM_CODE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "CLAIM_CD", DbType = System.Data.DbType.String),
+        ]
+        public int? ClaimCode
+        {
+            get
+            {
+                return this._claimCode;
+            }
+            set
+            {
+                this._claimCode = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad SubclaimCode.
+        /// </summary>
+        /// <value>Propiedad SubclaimCode.</value>
+        [
+        DescriptionKey("SUBCLAIM_CODE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "SUBCLAIM_CD", DbType = System.Data.DbType.String),
+        ]
+        public int? SubclaimCode
+        {
+            get
+            {
+                return this._subclaimCode;
+            }
+            set
+            {
+                this._subclaimCode = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad BranchCode.
+        /// </summary>
+        /// <value>Propiedad BranchCode.</value>
+        [
+        DescriptionKey("BRANCH_CODE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "BRANCH_CD", DbType = System.Data.DbType.String),
+        ]
+        public int? BranchCode
+        {
+            get
+            {
+                return this._branchCode;
+            }
+            set
+            {
+                this._branchCode = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad PrefixCode.
+        /// </summary>
+        /// <value>Propiedad PrefixCode.</value>
+        [
+        DescriptionKey("PREFIX_CODE_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "PREFIX_CD", DbType = System.Data.DbType.String),
+        ]
+        public int? PrefixCode
+        {
+            get
+            {
+                return this._prefixCode;
+            }
+            set
+            {
+                this._prefixCode = value;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o setea el valor de la propiedad ClaimNumber.
+        /// </summary>
+        /// <value>Propiedad ClaimNumber.</value>
+        [
+        DescriptionKey("CLAIM_NUMBER_PROPERTY"),
+        PersistentProperty(IsNullable = true),
+        ColumnMap(ColumnName = "CLAIM_NUMBER", DbType = System.Data.DbType.String),
+        ]
+        public int? ClaimNumber
+        {
+            get
+            {
+                return this._claimNumber;
+            }
+            set
+            {
+                this._claimNumber = value;
+            }
+        }
+
+    }
+}

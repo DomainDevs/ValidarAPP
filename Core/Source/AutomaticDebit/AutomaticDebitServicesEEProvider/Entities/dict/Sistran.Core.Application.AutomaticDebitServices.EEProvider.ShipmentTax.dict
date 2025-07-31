@@ -1,0 +1,24 @@
+<map version="2.0" type="class" name="ShipmentTax" namespace="Sistran.Core.Application.AutomaticDebitServices.EEProvider" file-version="1.0" description="SHIPMENT_TAX_ENTITY">
+  <properties>
+    <property name="ShipmentId" type="String" size="15" key="true" description="SHIPMENT_ID_PROPERTY" />
+    <property name="PrimeAmount" type="Decimal" precision="18" scale="5" nullable="true" description="PRIME_AMOUNT_PROPERTY" />
+    <property name="CommissionAmount" type="Decimal" precision="18" scale="5" nullable="true" description="COMMISSION_AMOUNT_PROPERTY" />
+    <property name="WithholdingAtSource" type="Decimal" precision="18" scale="5" nullable="true" description="WITHHOLDING_AT_SOURCE_PROPERTY" />
+    <property name="BranchCode" type="Integer" nullable="true" description="BRANCH_CODE_PROPERTY" />
+    <property name="JournalEntryCode" type="Integer" nullable="true" description="JOURNAL_ENTRY_CODE_PROPERTY" />
+    <property name="CollectCode" type="Integer" nullable="true" description="COLLECT_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="SHIPMENT_TAX" schema="ACC" alias="SHIPMENT_TAX" update="true">
+      <columns>
+        <column name="SHIPMENT_ID" type="String" property="ShipmentId" key="true" size="15" />
+        <column name="PRIME_AMOUNT" type="Decimal" property="PrimeAmount" size="19" precision="18" />
+        <column name="COMMISSION_AMOUNT" type="Decimal" property="CommissionAmount" size="19" precision="18" />
+        <column name="WITHHOLDING_AT_SOURCE" type="Decimal" property="WithholdingAtSource" size="19" precision="18" />
+        <column name="BRANCH_CD" type="Int32" property="BranchCode" />
+        <column name="JOURNAL_ENTRY_CD" type="Int32" property="JournalEntryCode" />
+        <column name="COLLECT_CD" type="Int32" property="CollectCode" />
+      </columns>
+    </table>
+  </tables>
+</map>

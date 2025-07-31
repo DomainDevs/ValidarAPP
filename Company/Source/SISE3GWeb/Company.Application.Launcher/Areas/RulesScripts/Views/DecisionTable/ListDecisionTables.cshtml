@@ -1,0 +1,122 @@
+﻿@model Sistran.Core.Application.RulesScriptsServices.Models.DecisionTableComposite
+
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.DecisionTables
+        </div>
+        <div class="column-30 even">
+            <input class="uif-input-search" type="text" placeholder="@Resources.Language.SearchForDecisionTable" id="SearchDecisionTable" />
+            <button class="btn btn-default" id="btnSearchAdvDecisionTable"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+
+<form class="form">
+    <div class="uif-panel">
+
+        <div class="uif-row">
+           
+            <!-- start DecisionTable -->
+            <div class="uif-col-8" id="panelAllRuleSets">
+                <div class="uif-row">
+                    <div class="uif-col-xs-12">
+                        <div id="DecisionTablelist" class="uif-listview">
+                            <div class="header">
+                                <div class="uif-col-xs-8">
+                                    <h4>@Resources.Language.DecisionTables</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end DecisionTable -->
+            <!-- start Menu -->
+            <div class="uif-col-4" id="EdicionTable">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+
+                        <div class="uif-right-bar">
+                            <ul>
+                                <li>
+                                    <a id="Modificar">@Resources.Language.ModifyConcepts</a>
+                                </li>
+                                <li>
+                                    <a id="ModificarDatos">@Resources.Language.ModifyData</a>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end Menu -->
+        </div>
+
+    </div>
+</form>
+
+
+
+<!-- start footer -->
+@section Toolbar
+{
+    <footer>
+        <div class="app-header">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div id="buttonsUnderwriting" class="pull-right">
+                        <button type="button" class="btn btn-default btn-sm" id="btnExit">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.ButtonExit</span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" id="btnExportDecisionTable">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.ButtonExport</span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" id="LoadFromFile">
+                            <i class="fa fa-upload" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.UploadFromFile</span>
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm" id="btnNewTable">
+                            <i class="fa fa-file-o" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.New</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+}
+<!-- end footer -->
+<!-- start template -->
+<script id="template-DecisionTablelist" type="text/template">
+
+    <div>
+        Id <strong>{{RuleBaseId}}</strong>
+        <br>
+        Descripcion <strong>{{Description}}</strong>
+        <br>
+        Nivel <strong>{{LevelsDescription}}</strong>
+        <br>
+        Modulo <strong>{{PackageDescription}}</strong>
+        <br>
+        Publicada <strong>{{Published}}</strong>
+        <br>
+        Fecha De Creacion <strong>{{Current}}</strong>
+    </div>
+    <div class="text-right vertical-center">
+    </div>
+
+</script>
+<!-- end template -->
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/SearchCombo/Obj.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/DecisionTable/ListDecisionTables.js")"></script>
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/DecisionTable/AdvanceSearchDt.js")"></script>
+}
+
+

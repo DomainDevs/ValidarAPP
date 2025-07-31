@@ -1,0 +1,65 @@
+﻿@Html.AntiForgeryToken()
+@Html.Hidden("CurrentDateCoInsurer", DateTime.Now.ToShortDateString())
+<div class="row">
+    <div class="uif-col-12">
+        <ul class="uif-tab" id="tab1">
+            <li class="active"><a href="#tabInformationReInsurer">@Resources.LanguagePerson.Reinsurer</a></li>
+            @*<li><a href="#tabHistorical">@Resources.Language.Historical</a></li>*@
+        </ul>
+
+        <form id="formBasicInformationReInsurer">
+            <div class="uif-tab-content">
+                <div id="tabInformationReInsurer" class="active">
+                    <div class="row">
+                        <div class="uif-col-4">
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.LanguagePerson.codePerson</label>
+                            <input type="text" class="rightAlign" id="codPersonReInsurer" name="IndividualId" style="color: red" disabled />
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.LanguagePerson.CodeReInsurer</label>
+                            <input type="text" class="rightAlign" id="codeReInsurer" name="Id" style="color: red" disabled />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-4">
+                            <label>@Resources.LanguagePerson.DateCreate</label>
+                            <input type="text" id="dateCreationDateReinsurer" class="uif-datepicker" name="CreationDate" disabled />
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.LanguagePerson.DateModifid</label>
+                            <input type="text" id="dateModificationDateReinsurer" class="uif-datepicker" name="ModificationDate" disabled />
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.LanguagePerson.LabelDateLow</label>
+                            <input type="text" id="dateDeclinationDateReinsurer" class="uif-datepicker" name="DeclinationDate" disabled />
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.LanguagePerson.LabelReasonLow</label>
+                            <select class="uif-select" id="reInsurerDeclinedTypes" data-id="Id" data-name="Description" name="ReInsurerDeclinedTypeId"></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-12">
+                            <label>@Resources.LanguagePerson.LabelObservations</label>
+                            @Html.TextArea("Observation", new { id = "inputObservationReInsurer", cols = "12", rows = "10", @class = "textarea" })
+                        </div>
+                    </div>
+                </div>
+                @*<div id="tabHistorical">
+                    <table class="uif-table" data-exporttocsv="false" data-exportname="" data-add="false" data-edit="false" data-delete="false" data-filter="false" data-selectiontype="single">
+                        <thead>
+                            <tr>
+                                <th data-property="dateModificationDateReinsurer">dateModificationDateReinsurer</th>
+                                <th data-property="codPersonReInsurer">codPersonReInsurer</th>
+                                <th data-property="reInsurerDeclinedTypes">reInsurerDeclinedTypes</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>*@
+            </div>
+        </form>
+    </div>
+</div>  

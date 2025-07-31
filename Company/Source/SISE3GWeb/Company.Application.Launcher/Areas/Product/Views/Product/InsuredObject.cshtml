@@ -1,0 +1,110 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Product.Models.InsuredObjectModelsView
+@section Title{
+    <div class="row main-title">
+        <div class="column-80">
+            @Resources.Language.DataRisk
+        </div>
+        <div class="column-20 even">
+            <div id="globalTitle"></div>
+        </div>
+    </div>
+}
+<script id="modalInsuredObjectTemplate" type="text/template">
+    <div><strong>{{Description}}</strong></div>
+    <div>
+        <br />
+        <strong>@Resources.Language.LabelInitialInclude: </strong>
+        <span class="danger">{{InitialInclude}}</span>
+    </div>
+    <div>
+        <br />
+        <strong>@Resources.Language.LabelMandatory:</strong>
+        <span class="danger">{{Mandatory}}</span>
+
+    </div>
+</script>
+
+<form id="formInsuredObjects" class="form form-space-adjusted">
+    <div class="row">
+        <div class="uif-col-4">
+            <div class="row row-space-adjusted">
+                <div class="uif-col-12">
+                    <label class="primary">@Resources.Language.LabelRiskType</label>
+                    <select class="uif-select form-control" id="selectModalInsuredObjectCoverageRiskType" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlRiskType"
+                            name="RiskTypeId"  data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.RiskTypeId)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="primary">@Resources.Language.LabelGroupCoverage</label>
+                    <select class="uif-select form-control" id="selectModalInsuredObjectGroupCoverage" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlGroupCoverage"
+                            data-id="Id" data-name="Description" name="CoverageGroupId"  data-filter="true" data-native="false" disabled></select>
+                    @Html.ValidationMessageFor(model => model.CoverageGroupId)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelInsuranceObject</label>
+                    <select class="uif-select form-control" id="selectModalInsuredObject" data-filter="true" data-native="false" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlInsuranceObject"
+                            data-id="Id" data-name="Description" name="Id"></select>
+                    @Html.ValidationMessageFor(model => model.Id)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-7">
+                    <div class="without-label">
+                        <input type="checkbox" id="chkInitialIncludeInsuredObject" name="InitialIncludeInsuredObject" />
+                        <label for="chkInitialIncludeInsuredObject">@Resources.Language.LabelInitialInclude</label>
+                    </div>
+                </div>
+
+                <div class="uif-col-5">
+                    <div class="without-label">
+                        <input type="checkbox" id="chkMandatoryInsuredObject" name="MandatoryInsuredObject" />
+                        <label for="chkMandatoryInsuredObject">@Resources.Language.LabelMandatory</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">                    
+                    <div class="uif-col-7">
+                        <div class="pull-left" id="panelButtonsRight">
+                            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0591"))
+                            {
+                                <button type="button" class="btn btn-default secondary-Colombia" id="btnModalInsuredObjectAssignCoverage">
+                                    <span class="" aria-hidden="true">@Resources.Language.LabelCoverageInsuredObject</span>
+                                </button>
+                            }
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-8 col-space-adjusted">
+            <div class="uif-listview" id="listModalInsuredObjectData"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-4 center-col-right">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnCancelAssignModalInsuredObject">
+                    <span class="" aria-hidden="true">@Resources.Language.ButtonCancel</span>
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0590"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnAssignModalInsuredObject">
+                        <span class="" aria-hidden="true">@Resources.Language.ButtonAdd</span>
+                    </button>
+                }
+
+            </div>
+        </div>
+        <div class="uif-col-8">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

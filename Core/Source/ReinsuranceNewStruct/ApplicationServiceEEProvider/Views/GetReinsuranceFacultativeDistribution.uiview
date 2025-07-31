@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="GetReinsuranceFacultativeDistribution">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="IssueLayerId">
+          <Column table-alias="IssueLayerLine" name="IssueLayerId" />
+        </SelectValue>
+        <SelectValue alias="Line">
+          <Column table-alias="Line" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CumulusKey">
+          <Column table-alias="IssueLayerLine" name="CumulusKey" />
+        </SelectValue>
+        <SelectValue alias="IsFacultative">
+          <Column table-alias="IssueAllocation" name="IsFacultative" />
+        </SelectValue>
+        <SelectValue alias="CurrencyDescription">
+          <Column table-alias="Currency" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Contract">
+          <Column table-alias="Facultative" name="SlipNumber" />
+        </SelectValue>
+        <SelectValue alias="Broker">
+          <Column table-alias="CompanyA" name="TradeName" />
+        </SelectValue>
+        <SelectValue alias="Reinsurer">
+          <Column table-alias="CompanyB" name="TradeName" />
+        </SelectValue>
+        <SelectValue alias="ParticipationPercentage">
+          <Column table-alias="InstallmentCompany" name="ParticipationPercentage" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="IssueAllocation" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="Premium">
+          <Column table-alias="IssueAllocation" name="Premium" />
+        </SelectValue>
+        <SelectValue alias="Commission">
+          <Column table-alias="IssueAllocation" name="Commission" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join type="Left">
+          <Join type="Left">
+            <Join>
+              <Join>
+                <Join>
+                  <Join>
+                    <Join>
+                      <Join>
+                        <Join>
+                          <Join>
+                            <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.IssueReinsurance, 
+                              Core.Reinsurance.Entities" alias="IssueReinsurance" />
+                            <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.IssueLayer, 
+                              Core.Reinsurance.Entities" alias="IssueLayer" />
+                            <criteria>
+                              <BinaryCriterion type="Equal">
+                                <Column table-alias="IssueReinsurance" name="IssueReinsuranceId" />
+                                <Column table-alias="IssueLayer" name="IssueReinsuranceId" />
+                              </BinaryCriterion>
+                            </criteria>
+                          </Join>
+                          <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.IssueLayerLine, 
+                            Core.Reinsurance.Entities" alias="IssueLayerLine" />
+                          <criteria>
+                            <BinaryCriterion type="Equal">
+                              <Column table-alias="IssueLayer" name="IssueLayerId" />
+                              <Column table-alias="IssueLayerLine" name="IssueLayerId" />
+                            </BinaryCriterion>
+                          </criteria>
+                        </Join>
+                        <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.IssueAllocation, 
+                            Core.Reinsurance.Entities" alias="IssueAllocation" />
+                        <criteria>
+                          <BinaryCriterion type="Equal">
+                            <Column table-alias="IssueLayerLine" name="IssueLayerLineId" />
+                            <Column table-alias="IssueAllocation" name="IssueLayerLineId" />
+                          </BinaryCriterion>
+                        </criteria>
+                      </Join>
+                      <ClassNameTable name="Sistran.Core.Application.Common.Entities.Currency, Core.Common.Entities" alias="Currency" />
+                      <criteria>
+                        <BinaryCriterion type="Equal">
+                          <Column table-alias="IssueAllocation" name="CurrencyId" />
+                          <Column table-alias="Currency" name="CurrencyCode" />
+                        </BinaryCriterion>
+                      </criteria>
+                    </Join>
+                    <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.InstallmentCompany, 
+                            Core.Reinsurance.Entities" alias="InstallmentCompany" />
+                    <criteria>
+                      <BinaryCriterion type="Equal">
+                        <Column table-alias="IssueAllocation" name="ContractCompanyId" />
+                        <Column table-alias="InstallmentCompany" name="InstallmentCompanyId" />
+                      </BinaryCriterion>
+                    </criteria>
+                  </Join>
+                  <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.Facultative, 
+                            Core.Reinsurance.Entities" alias="Facultative" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="InstallmentCompany" name="FacultativeCode" />
+                      <Column table-alias="Facultative" name="FacultativeId" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.FacultativeScope, 
+                            Core.Reinsurance.Entities" alias="FacultativeScope" />
+                <criteria>
+                  <BinaryPredicate type="And">
+                  <BinaryPredicate type="And">
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="Facultative" name="FacultativeId" />
+                      <Column table-alias="FacultativeScope" name="FacultativeId" />
+                    </BinaryCriterion>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="IssueReinsurance" name="EndorsementId" />
+                      <Column table-alias="FacultativeScope" name="EndorsementId" />
+                    </BinaryCriterion>
+                    </BinaryPredicate>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="IssueReinsurance" name="ReinsuranceNumber" />
+                      <Column table-alias="FacultativeScope" name="ReinsuranceNumber" />
+                    </BinaryCriterion>
+                  </BinaryPredicate>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.Line,
+                          Core.Reinsurance.Entities" alias="Line" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="IssueLayerLine" name="LineId" />
+                  <Column table-alias="Line" name="LineId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.UniquePerson.Entities.Company, Core.UniquePerson.Entities" alias="CompanyA" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="InstallmentCompany" name="BrokerReinsuranceCode" />
+                <Column table-alias="CompanyA" name="IndividualId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.UniquePerson.Entities.Company, Core.UniquePerson.Entities" alias="CompanyB" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="InstallmentCompany" name="ReinsuranceCompanyCode" />
+              <Column table-alias="CompanyB" name="IndividualId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

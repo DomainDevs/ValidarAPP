@@ -1,0 +1,35 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.DocumentationReceivedViewModel
+<form>
+<div class="row uif-row-pc" style="padding-top:5px;">
+        @Html.HiddenFor(model => model.SecureName)
+        @Html.HiddenFor(model => model.NumberDocument, new { id = "Documentation-NumberDocument" })        
+        <div class="uif-col col-md-2">
+            <label>@Resources.Language.LabelGuarantee</label>        
+        </div>    
+        <div class="uif-col col-md-6">    
+            <input type="text" id="inputTypeGuaranteeDocumentation" disabled="disabled"/>           
+        </div>    
+</div>
+<br />
+<div class="uif-row">
+    <div class="uif-col-12">
+            <table class="uif-table"
+            id="tableDocumentationReceived"
+            data-title="@Resources.Language.LabelDocumentationReceived"
+            data-source="null"
+            data-add="false"
+            data-edit="false"
+            data-selectiontype="multiple"
+            data-filter="false"
+            data-paginate="false">
+            <thead>
+                <tr>
+                    <th data-property="DocumentCode" data-visible="true">Id</th>
+                    <th data-property="Description">@Resources.Language.LabelDescription</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+</form>

@@ -1,0 +1,102 @@
+﻿<div id="tabPrincipalClaims">
+
+    <ul class="uif-tab">
+        <li class="active"><a href="#tabClaimIndividual"><b>@Resources.Language.ToAddClaimRequests</b></a></li>
+    </ul>
+
+    <div class="uif-tab-content">
+        <div id="tabClaimIndividual" class="active">
+            <div class="row">
+                <div class="uif-col-2">
+                    <label>@Resources.Language.LabelBranch</label>
+                    <select class="uif-select form-control" id="selectBranch" data-val="true"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" name="selectBranch"></select>
+                    <span class="text-danger" data-valmsg-for="selectBranch" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-2">
+                    <label>@Resources.Language.LabelPrefix</label>
+                    <select class="uif-select form-control" id="selectPrefixesOfClaims" data-val="true"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" name="selectPrefixesofClaims"></select>
+                    <span class="text-danger" data-valmsg-for="selectPrefixesofClaims" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.LabelNumberPolicy</label>
+                    <input type="text" class="uif-input rightAlign" id="inputPolicyDocumentNumber" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                           data-name="Description" name="PolicyDocumentNumber" required onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+                    <span class="text-danger" data-valmsg-for="PolicyDocumentNumber" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-3">
+                    <label class="field-required">@Resources.Language.ClaimNumber</label>
+                    <input type="text" class="uif-input rightAlign" id="inputClaimNum" data-val="true" data-val-required="@Resources.Language.RequiredField" data-name="Description" name="inputClaimNum" required />
+                    <span class="text-danger" data-valmsg-for="inputClaimNum" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-2">
+                    <div class="without-label">
+                        <button id="btnSearch" class="btn btn-default secondary-Colombia" type="button">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            @Resources.Language.search
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <br />
+                    <table data-title="<b>@Resources.Language.tabMainRecoverySalvage</b>"
+                           class="uif-table" id="tblClaimsRecoverySalvage" data-source="" data-exporttocsv="false"
+                           data-add="false" data-edit="false" data-delete="false" data-filter="false">
+                        <thead>
+                            <tr>
+                                <th data-property="Id" id="RecoveryOrSalvage"><b>@Resources.Language.Recovery</b></th>
+                                <th data-property="SubClaimId"><b>@Resources.Language.SubClaim</b></th>
+                                <th data-property="Description"><b>@Resources.Language.Description</b></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <div class="row" id="divRecoveries">
+                <div class="uif-col-12">
+                    <table data-title="<b>@Resources.Language.Recoveries</b>" class="uif-table" id="tblRecoveries"
+                           data-selectionType="single" data-paginate="false" data-filter="false">
+                        <thead>
+                            <tr>
+                                <th data-property="Description"><b>@Resources.Language.RecoveryDescription</b></th>
+                                <th data-property="DebtorFullName"><b>@Resources.Language.Debtor</b></th>
+                                <th data-property="TotalAmount" data-type="currency"><b>@Resources.Language.TotalRecovery</b></th>
+                                <th data-property="RecoveryAmount" data-type="currency"><b>@Resources.Language.RecoveryAmount</b></th>
+                                <th data-property="RemainingAmount" data-type="currency"><b>@Resources.Language.RemainingAmount</b></th>
+                                <th data-property="TotalConcept" data-type="currency"><b>@Resources.Language.TotalOfConcept</b></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" id="divSalvages">
+                <div class="uif-col-12">
+                    <table data-title="<b>@Resources.Language.Salvage</b>" class="uif-table" id="tblSalvages"
+                           data-selectionType="single" data-paginate="false" data-filter="false">
+                        <thead>
+                            <tr>
+                                <th data-property="Id"><b>@Resources.Language.SalvageShortNumber</b></th>
+                                <th data-property="CreationDate"><b>@Resources.Language.DischargeDate</b></th>
+                                <th data-property="Description"><b>@Resources.Language.SalvageDescription</b></th>
+                                <th data-property="Location"><b>@Resources.Language.Location</b></th>
+                                <th data-property="UnitsQuantity"><b>@Resources.Language.UnitsQuantityAbbreviation</b></th>
+                                <th data-property="EstimatedSale" data-type="currency"><b>@Resources.Language.TotalSalvage</b></th>
+                                <th data-property="RecoveryAmount" data-type="currency"><b>@Resources.Language.RecoveryAmount</b></th>
+                                <th data-property="RemainingAmount" data-type="currency"><b>@Resources.Language.RemainingAmount</b></th>
+                                <th data-property="TotalConcept" data-type="currency"><b>@Resources.Language.TotalOfConcept</b></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,337 @@
+﻿<input class="hidden" id="_policyId" />
+<input class="hidden" id="_businessTypeId" />
+<input class="hidden" id="_endorsementId" />
+<input class="hidden" id="_riskId" />
+<input class="hidden" id="_number" />
+<input class="hidden" id="_individualId" />
+<input class="hidden" id="_claimId" />
+<input class="hidden" id="_damageCode" />
+<input class="hidden" id="_damageResponsabilitie" />
+
+<!--Formulario Principal-->
+<form id="formEstimation" class="form form-space-adjusted" autocomplete="off">
+    <div class="form form-space-adjusted">
+        <div class="row">
+            <div class="uif-col-12 fit-col-main">
+                <div id="ClaimVehiclePartial">
+                    @Html.Partial("../ClaimVehicle/ClaimVehiclePartial")
+                </div>
+                <div id="ClaimSuretyPartial">
+                    @Html.Partial("../ClaimSurety/ClaimSuretyPartial")
+                </div>
+                <div id="ClaimLocationPartial">
+                    @Html.Partial("../ClaimLocation/ClaimLocationPartial")
+                </div>
+                <div id="ClaimTransportPartial">
+                    @Html.Partial("../ClaimTransport/ClaimTransportPartial")
+                </div>
+                <div id="ClaimAirCraftPartial">
+                    @Html.Partial("../ClaimAirCraft/ClaimAirCraftPartial")
+                </div>
+                <div id="ClaimFidelityPartial">
+                    @Html.Partial("../ClaimFidelity/ClaimFidelityPartial")
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <h5>
+                            <strong>@Resources.Language.CoverageAffected</strong>
+                        </h5>
+                    </div>
+                    <div class="uif-col-12">
+                        <table class="uif-table" data-title="@Resources.Language.Coverages" id="tableCoverage"
+                               data-add="false" data-edit="false" data-delete="false" data-pagesize="5" data-filter="true" data-paginate="true">
+                            <thead>
+                                <tr>
+                                    <th data-property="Id"><b>@Resources.Language.Coverage</b></th>
+                                    <th data-property="Description"><b>@Resources.Language.Description</b></th>
+                                    <th data-property="SubLineBusinessDescription"><b>@Resources.Language.Prefix / @Resources.Language.SubPrefix</b></th>
+                                    <th data-property="InsuredObjectDescription"><b>@Resources.Language.Object</b></th>
+                                    <th data-property="InsuredAmountTotal" data-type="currency"><b>@Resources.Language.InsuredAmount</b></th>
+                                    <th data-property="InsurableAmount" data-type="currency"><b>@Resources.Language.CoverageAmount</b></th>
+                                    <th data-property="OcurrencyLimit" data-type="currency"><b>@Resources.Language.LimitByOcurrence</b></th>
+                                    <th data-property="PersonLimit" data-type="currency"><b>@Resources.Language.LimitByPerson</b></th>
+                                    <th data-property="AggregateLimit" data-type="currency"><b>@Resources.Language.AggregatedLimit</b></th>
+                                    <th data-property="RiskCoverageId" data-visible="false"><b></b></th>
+                                    <th data-property="RiskId" data-visible="false"><b></b></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <hr />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <strong> @Resources.Language.Pretention</strong>
+                    </div>
+                </div>                
+
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <lable class="field-required"> @Resources.Language.AmountPretention</lable>
+                        <input type="text" id="inputClaimedAmount" name="inputClaimedAmount" maxlength="26" data-msg-maxlength="Por favor, no escribas más de 20 caracteres." data-val="true" 
+                               class="rightAlign uif-input" onkeypress="return event.charCode >= 48 && event.charCode <= 58" />                        
+                    </div>
+                    <div class="uif-col-3">
+                        <div class="without-label">
+                            <input id="_chkIsClaimedAmount" type="checkbox" />
+                            <label for="_chkIsClaimedAmount">@Resources.Language.ClaimedIndeterminate</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <strong>@Resources.Language.DescriptionOfDeductible</strong>
+        </div>
+    </div>
+    <div class="uif-row">
+        @*<div class="uif-col-3">
+            <label> @Resources.Language.Code</label>
+            <input type="text" id="coverageDeductibleCode" name="_coverageDeductibleCode" disabled="disabled" />
+        </div>*@
+        <div class="uif-col-12">
+            <label>@Resources.Language.Description:</label>
+            <input type="text" id="coverageDeductibleDescription" name="_coverageDeductibleDescription" disabled="disabled" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.Affected</label>
+            <div class="row">
+                <div class="uif-col-6">
+                    <input type="radio" id="rdbtnInsured" name="coverageAffected" value="Insured" checked="checked" />
+                    <label for="rdbtnInsured">@Resources.Language.InsuredName</label>
+                </div>
+                <div class="uif-col-6">
+                    <input type="radio" id="rdbtnThirdParty" name="coverageAffected" value="ThirdParty" />
+                    <label for="rdbtnThirdParty">@Resources.Language.Third</label>
+                </div>
+            </div>
+        </div>
+        <div id="divDataDeductible">
+            <div class="uif-col-3">
+                <label>@Resources.Language.DocumentNumber</label>
+                <input type="text" id="coverageDocument" class="uif-input" name="_coverageDocument" disabled="disabled" />
+            </div>
+            <div class="uif-col-6">
+                <label>@Resources.Language.FullName</label>
+                <input type="text" id="coverageFullName" class="uif-input" name="_coverageFullName" disabled="disabled" />
+            </div>
+        </div>
+    </div>
+    <div id="divDriverData">
+        <h5>
+            <strong>@Resources.Language.DriverManData</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.Language.DocumentNumber</label>
+                <input type="text" id="inputDriverDocumentNumber" class="uif-autocomplete" data-source="@Url.Action("GetUserByDocumentNumber", "Claim")"
+                       data-displaykey="DocumentNumber" data-id="Id" placeholder="@Resources.Language.PlaceHolderDocumentNumber" name="_DriverDataDocument" onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.FullName</label>
+                <input type="text" id="inputDriverFullName" class="uif-autocomplete" data-source="@Url.Action("GetUserByFullName", "Claim")"
+                       data-displaykey="FullName" data-id="Id" name="dataFullNameId" placeholder="@Resources.Language.PlaceHolderNameSurname" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-3">
+                <label>@Resources.Language.DriverLicenseType</label>
+                <input type="text" id="inputDriverLicenseType" class="uif-input" name="driverLicenseTypeId" />
+            </div>
+
+            <div class="uif-col-3">
+                <label>@Resources.Language.DriverLicenseNumberAbbreviation</label>
+                <input type="text" id="inputDriverDataLicenseNumber" class="uif-input" name="DriverDataLicenseNumberId" onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+            </div>
+
+            <div class="uif-col-3">
+                <label>@Resources.Language.DriverDataVto</label>
+                <input type="text" id="inputDriverDataVto" class="uif-datepicker" name="_DriverDataValidThru" />
+            </div>
+
+            <div class="uif-col-3">
+                <label>@Resources.Language.Age</label>
+                <input type="text" id="inputDataAge" name="_DriverDataAge" maxlength="2" onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+            </div>
+
+        </div>
+    </div>
+    <div id="divThirdPartyVehicle">
+        <h5>
+            <strong>@Resources.Language.ThirdPartyVehicle</strong>
+        </h5>
+        <div class="row">
+
+            <div class="uif-col-4">
+                <label>@Resources.Language.VehiclePlate</label>
+                <input type="text" id="inpuTthirdVehiclePlate" class="uif-autocomplete" data-source="@Url.Action("GetCompanyRiskByPlate", "ClaimVehicle")"
+                       data-displaykey="Description" data-id="Description" placeholder="@Resources.Language.PlaceHolderVehiclePlate" />
+            </div>
+            <div class="uif-col-4">
+                <label>@Resources.Language.VehicleMake</label>
+                <input type="text" id="inpuTVehicleMake" class="uif-autocomplete" name="vehicleMakeId" data-source="@Url.Action("GetVehicleMakesByDescription", "ClaimVehicle")"
+                       data-displaykey="Description" data-id="Id" placeholder="@Resources.Language.PlaceHolderVehicleMake" />
+            </div>
+
+            <div class="uif-col-4">
+                <label>@Resources.Language.VehicleModel</label>
+                <input type="text" id="inpuTVehicleModel" class="uif-autocomplete" name="vehicleModelId" data-source="@Url.Action("GetVehicleModelsByDescription", "ClaimVehicle")"
+                       data-displaykey="Description" data-id="Id" placeholder="@Resources.Language.PlaceHolderVehicleModel" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.Language.Year</label>
+                <input type="text" id="inpuTthirdVehicleYear" class="uif-input" name="YearId"
+                       maxlength="4" min="0" onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+            </div>
+
+            <div class="uif-col-4">
+                <label>@Resources.Language.Color</label>
+                <select class="uif-select form-control" id="selectVehicleColor" name="ColorId" data-id="Id" data-val="true" data-name="Description"
+                        data-filter="true" data-native="false"></select>
+            </div>
+
+            <div class="uif-col-4">
+                <label>@Resources.Language.VehicleEngine</label>
+                <input type="text" id="inpuTVehicleEngine" class="uif-input" name="vehicleEngineId" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="uif-col-4">
+                <label>@Resources.Language.Chassis</label>
+                <input type="text" id="inpuTVehicleChasis" class="uif-input" name="vehicleChasisId" />
+            </div>
+
+            <div class="uif-col-4">
+                <label>@Resources.Language.ThirdVehicleVIN</label>
+                <input type="text" id="inputVehicleVIN" class="uif-input" name="vehicleVINId" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="uif-col-12">
+                <label>@Resources.Language.Observations</label>
+                <textarea name="observationsId" rows="6" cols="85" id="textareaObservations"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="divAffectedProperty">
+        <h5>
+            <strong>@Resources.Language.AffectedProperty</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-12">
+                <label>@Resources.Language.AffectedProperty</label>
+                <textarea name="AffectedProperty" rows="6" cols="85" id="InputAffectedProperty"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div id="divThirdAffected">
+        <h5>
+            <strong>@Resources.Language.ThirdAffected</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-3">
+                <label class="field-required">@Html.Label(@Resources.Language.DocumentNumber)</label>
+                <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Claims/PaymentRequest/GetSuppliersByNameDocumentNumber")"
+                       data-val-required="@Resources.Language.RequiredField" data-displaykey="DocumentNumber" data-val="true"
+                       placeholder="@Resources.Language.PlaceHolderDocumentNumber" id="inputThirdAffectedDocumentNumber" name="ThirdAffectedDocumentNumber" required>
+                <span class="text-danger" data-valmsg-for="inputThirdAffectedDocumentNumber" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Html.Label(@Resources.Language.FullName)</label>
+                <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Claims/PaymentRequest/GetSuppliersByNameDocumentNumber")"
+                       data-val-required="@Resources.Language.RequiredField" data-val="true" data-displaykey="Name"
+                       placeholder="@Resources.Language.PlaceHolderNameSurname" id="inputThirdAffectedDataFullName" name="ThirdAffectedDataFullName" required>
+                <span class="text-danger" data-valmsg-for="inputThirdAffectedDataFullName" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <h5>
+                <strong>@Resources.Language.EstimationList</strong>
+            </h5>
+        </div>
+        <div class="uif-col-12">
+            <table class="uif-table" data-title="@Resources.Language.Estimations" id="tableEstimations"
+                   data-selectiontype="single" data-edit="false" data-filter="false" data-paginate="10">
+                <thead>
+                    <tr>
+                        <th data-property="Id" data-visible="false"><b></b></th>
+                        <th data-property="EstimationConcept"><b>@Resources.Language.Concept</b></th>
+                        <th data-property="StatusCode"><b>@Resources.Language.StateCode</b></th>
+                        <th data-property="Reason"><b>@Resources.Language.Motive</b></th>
+                        <th data-property="Currency"><b>@Resources.Language.ClaimCurrency</b></th>
+                        <th data-property="EstimateAmount" data-type="currency"><b>@Resources.Language.Estimation</b></th>
+                        <th data-property="DeductibleAmount" data-type="currency"><b>@Resources.Language.Deductible</b></th>
+                        <th data-property="Payments" data-type="currency"><b>@Resources.Language.Payments</b></th>
+                        <th data-property="PendingReservation" data-type="currency"><b>@Resources.Language.PendantReserve</b></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="uif-row pull-right">
+        <button type="button" class="btn btn-primary" id="btnSaveSubClaim">Agregar SubSiniestro</button>
+    </div>
+
+    <!--HERE!!-->
+
+    <div id="EstimationsSummaryVehiclePartial">
+        @Html.Partial("../ClaimVehicle/EstimationsSummaryVehicle")
+    </div>
+    <div id="EstimationsSummarySuretyPartial">
+        @Html.Partial("../ClaimSurety/EstimationsSummarySurety")
+    </div>
+    <div id="EstimationsSummaryLocationPartial">
+        @Html.Partial("../ClaimLocation/EstimationsSummaryLocation")
+    </div>
+    <div id="EstimationsSummaryTransportPartial">
+        @Html.Partial("../ClaimTransport/EstimationsSummaryTransport")
+    </div>
+    <div id="EstimationsSummaryAircraftPartial">
+        @Html.Partial("../ClaimAirCraft/EstimationsSummaryAircraft")
+    </div>
+    <div id="EstimationsSummaryFidelityPartial">
+        @Html.Partial("../ClaimFidelity/EstimationsSummaryFidelity")
+    </div>
+    </div>
+    </div>
+    </div>
+</form>
+
+<!--Modal consulta de póliza-->
+<div class="uif-modal" id="ModalEstimations">
+    <div class="uif-modalbody">
+        @Html.Partial("ModalEstimations")
+    </div>
+</div>
+

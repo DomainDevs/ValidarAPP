@@ -1,0 +1,104 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.RelationshipPaymentMethodAccountType;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameters</li>
+        <li>@Global.AutomaticDebit</li>
+        <li>@Global.RelationshipPaymentMethodAccountType</li>
+    </ol>
+}
+
+@section Modals
+{
+    <form id="RelationshipAccountTypeAddForm" class="form">
+        <div class="uif-modal" id="RelationshipAccountTypeModalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/AutomaticDebit/RelationshipAccountTypeModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" id="RelationshipAccountTypeCancelAdd" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="RelationshipAccountTypeSaveAdd" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+    <form id="RelationshipAccountTypeEditForm" class="form">
+        <div class="uif-modal" id="RelationshipAccountTypeModalEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/AutomaticDebit/RelationshipAccountTypeModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="RelationshipAccountTypeSaveEdit" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    @*<div class="uif-modal" id="modalAccountType"></div>*@
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteAccountType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="RelationshipAccountTypeDeleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="RelationshipAccountTypeDeleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="RelationshipAccountTypeDeleteModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+
+<br />
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="RelationshipAccountTypeAlert"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableRelationAccountType" data-exporttocsv="false" data-add="true" data-edit="true"
+               data-delete="true" data-selectiontype="multiple" data-filter="true"
+               data-source="@Url.Action("GetPaymentMethodAccountTypes", "Networks")"
+               data-paginate="true" data-title="@Global.RelationshipPaymentMethodAccountType">
+            <thead>
+                <tr>
+                    <th data-property="Id">Id</th>
+                    <th data-property="Description">@Global.Conduit</th>
+                    <th data-property="AccountTypeId" data-visible="false">AccountTypeId</th>
+                    <th data-property="AccountTypeDescription">@Global.AccountType</th>
+                    <th data-property="DebitCode">@Global.DebitCode</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainRelationshipAccountType")
+}

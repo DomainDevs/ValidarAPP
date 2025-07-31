@@ -1,0 +1,175 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.MainPathCheckPrinting;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.MainPathCheckPrinting</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="CancelCheckPrinting">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="AcceptCheckPrinting" class="btn btn-primary" role="button">
+            <i class="fa fa-check"></i>  @Global.Accept
+        </button>
+    </footer>
+}
+
+
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                CODIGO HTML
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------  *@
+<form id="CheckPrintingForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.Branch</label>
+            @Html.DropDownList("BranchCheckPrinting", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_selectedid = @ViewBag.BranchDefault,
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="BranchCheckPrinting" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.BankName</label>
+            @Html.DropDownList("BankNameCheckPrinting", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="BankNameCheckPrinting" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-4">
+            <label>@Global.BankAccountNumber</label>
+            @Html.DropDownList("AccountNumberCheckPrinting", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_id = "Id",
+                 data_name = "Number",
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="AccountNumberCheckPrinting" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.PaymentSource</label>
+            @Html.DropDownList("OriginPaymentCheckPrinting", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/GeneralLedger/Base/GetPaymentSources"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="OriginPaymentCheckPrinting" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-2">
+            <label>@Global.EstimatedMaxPaymentDate</label>
+            @Html.TextBox("DatePaymentCheckPrinting", "", new
+            {
+                @class = "uif-datepicker",
+                style = "text-align: left",
+                data_mask = "99/99/9999",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="DatePaymentCheckPrinting" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-2">
+            <label>@Global.CheckNumber</label>
+            @Html.TextBox("CheckNumberCheckPrinting", "", new
+            {
+                onkeypress = "return JustNumbers(event, this)",
+                maxlength = "15",
+            })
+        </div>
+
+        <div class="uif-col-4">
+            <label>@Global.Currency</label>
+            @Html.TextBox("CurrencyCheckPrinting", "", new
+            {
+                disabled = "disabled",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="CurrencyCheckPrinting" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+
+<div class="form-footer">
+    <button type="button" class="btn btn-default" id="CleanCheckPrinting">
+        <i class="fa fa-paint-brush"></i>        @Global.Clean
+    </button>
+    <button type="button" class="btn btn-primary" id="SearchCheckPrinting">
+        <i class="fa fa-search"></i>        @Global.Search
+    </button>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertCheckPrinting"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="CheckPrinting" data-exporttocsv="false" data-edit="false" data-delete="true"
+               data-filter="false" data-paginate="true" data-selectiontype="multiple" data-title="@Global.MenuCheks">
+            <thead>
+                <tr>
+                    <th data-property="CheckNumber">@Global.CheckNumber</th>
+                    <th data-property="NumberPaymentOrder">@Global.PaymentOrderNumber</th>
+                    <th data-property="BeneficiaryName">@Global.BeneficiaryName</th>
+                    <th data-property="EstimatedPaymentDate">@Global.EstimatedDate</th>
+                    <th data-property="Amount">@Global.Amount</th>
+                    <th data-visible="false" data-property="CompanyName">CompanyName</th>
+                    <th data-visible="false" data-property="AddressCompany">AddressCompany</th>
+                    <th data-visible="false" data-property="CheckPaymentOrderCode">CheckPaymentOrderCode</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="printReady" hidden="true" style="visibility: hidden">
+    <iframe id="printFrame" width="100%" height="500" scrolling="auto" frameborder="0"></iframe>
+</div>
+
+<input type="hidden" id="ViewBagBranchDisablePrinting" value="@ViewBag.BranchDisable" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/CheckPrinting")
+}

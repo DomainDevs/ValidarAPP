@@ -1,0 +1,115 @@
+﻿<script id="display-paymentConcepts" type="text/template">
+    <div>{{ Description}}  </div>
+</script>
+<div class="row">
+    <div class="uif-col-12">
+        <ul class="uif-tab" id="tabsProvider">
+            <li class="active"><a href="#tabBasicInformation">@Resources.LanguagePerson.LabelBasicInformation</a></li>
+            <li><a href="#tabPaymentConcepts">@Resources.LanguagePerson.LabelPaymentConcepts</a></li>
+        </ul>
+    </div>
+</div>
+<div class="uif-tab-content">
+    <div class="active" id="tabBasicInformation">
+        <form id="formBasicInformationProvider">
+            <div class="row">
+                <div class="uif-col-offset-3"></div>
+                <div class="uif-col-offset-3">
+                    <label>@Resources.LanguagePerson.codePerson</label>
+                    <div id="codePerson" style="color: red; text-align:right">0</div>
+                    <input type="hidden" id="codePersonProvider" name="IndividualId" />
+                    <input type="hidden" id="Origin" name="OriginTypeId" value="1" />
+                </div>
+                <div class="uif-col-offset-3">
+                    <label class="rightAlign">@Resources.LanguagePerson.CodeProvider</label>
+                    <div id="codeProvider" style="color: red">0</div>
+                    <input type="hidden" id="Id" name="Id" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.LanguagePerson.ProviderType</label>
+                    <select class="uif-select" id="selectProviderType" name="ProviderTypeId" data-id="Id" data-name="Description"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.DateCreate</label>
+                    <input type="text" id="dateProviderCreation" class="uif-datepicker" name="CreationDate" disabled />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.DateModifid</label>
+                    <input type="text" id="SupplierdateModificationDate" class="uif-datepicker" name="ModificationDate" disabled />
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.LanguagePerson.Specialty</label>
+
+                    <select class="uif-select" id="selectSpeciality" data-id="Id" data-name="Description" name="Speciality"></select>
+                </div>
+
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.LabelReasonLow</label>
+                    <select class="uif-select" id="selectProviderDeclined" data-id="Id" data-name="Description" name="ProviderDeclinedTypeId"></select>
+                </div>
+
+
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.LabelDateLow</label>
+                    <input type="text" id="SupplierDateDeclinationDate" class="uif-datepicker" name="DeclinationDate" disabled />
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.GroupSupplier</label>
+                    <select class="uif-multiselect form-control" id="selectGroupSupplier" data-native="false" data-id="Id" data-name="Description"
+                             name="GroupSupplier" multiple="multiple"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.LanguagePerson.LabelObservations</label>
+                    @Html.TextArea("Observation", new { id = "inputObservationProvider", cols = "12", rows = "10", @class = "textarea" })
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="tabPaymentConcepts">
+        <div class="row">
+            <div class="uif-col-6">
+                <select class="uif-select" id="selectPaymentConcept" data-id="Id" data-name="Description"></select>
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-listview" id="listVPaymentConcept">
+
+                </div>
+            </div>
+        </div>
+        <div class="row lineDividing">
+            <div class="uif-col-6" id="btnsAgent">
+                <div class="pull-right width-save">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0077"))
+                    {
+                        <button type="button" class="btn btn-default" id="btnPaymentConceptsCancel">
+                            @Resources.LanguagePerson.NewForm
+                        </button>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0078"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnPaymentConceptsAdd">
+                            @Resources.LanguagePerson.AddForm
+                        </button>
+                    }
+                    </div>
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-summary">
+                    <div class="items">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

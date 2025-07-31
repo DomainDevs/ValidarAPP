@@ -1,0 +1,54 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.AccessTypeModelsView
+@using Sistran.Core.Framework.UIF.Web.Helpers;
+
+<form id="formAccess" class="form modal-Colombia">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelModule</label>
+            <select class="uif-select form-control" id="selectModuleAccess" data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentControlModule"
+                    data-id="Id" data-name="Description" name="ModuleId"
+                    data-filter="true" data-native="false"></select>
+            @Html.ValidationMessageFor(model => model.ModuleId)
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelSubmodule</label>
+            <select class="uif-select form-control" id="selectSubModuleAccess" data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentControlSubModule"
+                    data-id="Id" data-name="Description" name="SubModuleId"
+                    data-filter="true" data-native="false"></select>
+            @Html.ValidationMessageFor(model => model.SubModuleId)
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.AccessType</label>
+            <select class="uif-select form-control" id="selectTypeAccess" data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentAccessType"
+                    data-id="Value" data-name="Text" name="TypeId"
+                    data-filter="true" data-native="false"></select>
+            @Html.ValidationMessageFor(model => model.AccessType)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.ParentAccess</label>
+            <select class="uif-select form-control" id="selectHierarchyParent" data-val="true"
+                    data-id="Id" data-name="Description" name="ParentAccessId"
+                    data-filter="true" data-native="false"></select>
+            @Html.ValidationMessageFor(model => model.ParentAccessTypeId)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12" id="divProfileAccess">
+                <table data-paginate="false" data-selectiontype="multiple" data-filter="true" class="uif-table" id="tableProfileAccess"  data-filter="true">
+                    <thead>
+                        <tr>
+                            <th data-property="Assigned" data-visible="false"></th>
+                            <th data-property="AccessId" data-visible="false"></th>
+                            <th data-property="Type">@Resources.Language.Type</th>
+                            <th data-property="Description">@Resources.Language.Description</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+        </div>
+    </div>
+</form>

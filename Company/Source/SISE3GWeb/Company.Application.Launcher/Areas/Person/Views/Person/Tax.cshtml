@@ -1,0 +1,162 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.TaxbyIndividualsViewModel
+<script id="display-tax" type="text/template">
+    <div>@Resources.Language.Role: {{RoleDescription}}</div>
+    <div>@Resources.LanguagePerson.Tax: {{TaxDescription}}</div>
+    <div>@Resources.LanguagePerson.LabelCondition: {{TaxConditionDescription}}</div>
+    <div>@Resources.LanguagePerson.Category: {{TaxCategoryDescription}}</div>
+    <div>@Resources.LanguagePerson.LabelState: {{StateCodeDescription}}</div>
+    <div>@Resources.LanguagePerson.LabelDateStart: {{Datefrom}}</div>
+    <div>@Resources.LanguagePerson.DateUntil: {{DateUntil}}</div>
+    <div>@Resources.LanguagePerson.ExtentPercentage: {{ExtentPercentage}}</div>
+    <div>@Resources.LanguagePerson.OfficialBulletinDate: {{OfficialBulletinDate}}</div>
+    <div>@Resources.LanguagePerson.ResolutionNumber: {{ResolutionNumber}}</div>
+    <div>@Resources.LanguagePerson.TotalRetention: {{TotalRetention}}</div>
+</script>
+<form class="form modal-Colombia" id="formTax">
+    <input type="hidden" id="status" />
+    @*<input type="hidden" id="Id" />*@
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.Roles</label>
+                    <select class="uif-select" id="selectRole" data-id="RoleId" data-name="Description" name="RoleId" required></select>
+                    <span class="text-danger" data-valmsg-for="RoleId" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.Tax</label>
+                    <select class="uif-select" id="selectTax" data-id="Id" data-name="Description" name="TaxId" required></select>
+                    <span class="text-danger" data-valmsg-for="TaxId" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12" id="TaxRateConditionDiv">
+                    <label class="field-required">@Resources.LanguagePerson.LabelCondition</label>
+                    <select class="uif-select" id="selectTaxCondition" data-id="Id" data-name="Description" name="TaxConditionId" required></select>
+                    <span class="text-danger" data-valmsg-for="TaxConditionId" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <hr style="width:100%;text-align:left;margin:0">
+            <div class="row">
+                <div class="uif-col-12">
+                    <h4>@Resources.LanguagePerson.Taxesperindividual</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12" id="TaxRateCategoryDiv">
+                    <label class="field-required">@Resources.LanguagePerson.Category</label>
+                    <select class="uif-select" id="selectTaxCategory" data-id="Id" data-name="Description" name="TaxCategoryId" required></select>
+                    <span class="text-danger" data-valmsg-for="TaxCategoryId" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4" id="TaxRateCountryDiv">
+                    <label class="field-required">@Resources.LanguagePerson.LabelCountry</label>
+                    <select class="uif-select" id="Country" data-id="Id" data-name="Description" name="Country" required></select>
+                    <span class="text-danger" data-valmsg-for="Country" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4" id="TaxRateStateDiv">
+                    <label class="field-required">@Resources.LanguagePerson.LabelState</label>
+                    <select class="uif-select" id="StateCode" data-id="Id" data-name="Description" name="StateCode" required></select>
+                    <span class="text-danger" data-valmsg-for="StateCode" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4" id="TaxRateCityDiv">
+                    <label class="field-required">@Resources.LanguagePerson.LabelCity</label>
+                    <select class="uif-select" id="City" data-id="Id" data-name="Description" name="City" required></select>
+                    <span class="text-danger" data-valmsg-for="City" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6" id="TaxRateEconomicActivityDiv">
+                    <label class="field-required">@Resources.LanguagePerson.LabelEconomyActivity</label>
+                    <select class="uif-select" id="EconomicActivity" data-id="EconomicActivityTaxId" data-name="Description" name="EconomicActivity" required></select>
+                    <span class="text-danger" data-valmsg-for="EconomicActivity" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-6" id="TaxRateLineBusinessDiv">
+                    <label class="field-required">@Resources.LanguagePerson.LabelPrefixTechnical</label>
+                    <select class="uif-select" id="Prefix" data-id="Id" data-name="Description" name="Prefix" required></select>
+                    <span class="text-danger" data-valmsg-for="Prefix" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6" id="TaxRateCoverageDiv">
+                    <label class="field-required">@Resources.Language.LabelCoverage</label>
+                    <select class="uif-select" id="Coverage" data-id="Id" data-name="Description" name="Coverage" required></select>
+                    <span class="text-danger" data-valmsg-for="Coverage" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-6" id="TaxRateTechnicalBranchDiv">
+                    <label class="field-required">@Resources.Language.Branch</label>
+                    <select class="uif-select" id="TechnicalBranch" data-id="Id" data-name="Description" name="TechnicalBranch" required></select>
+                    <span class="text-danger" data-valmsg-for="TechnicalBranch" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <hr style="width:100%;text-align:left;margin-left:0">
+            <div class="row">
+                <div class="uif-col-12">
+                    <h5>@Resources.LanguagePerson.DataForExempt</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.LabelDateStart</label>
+                    @Html.TextBoxFor(model => model.Datefrom, new { id = "inputDateFrom", @class = "uif-datepicker" })
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.DateUntil</label>
+                    @Html.TextBoxFor(model => model.DateUntil, new { id = "inputDateUntil", @class = "uif-datepicker" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.ExtentPercentage</label>
+                    @Html.TextBoxFor(model => model.ExtentPercentage, new { id = "InputExtentPercentage", maxlength = "3" })
+                    @Html.ValidationMessageFor(model => model.ExtentPercentage)
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.OfficialBulletinDate</label>
+                    @Html.TextBoxFor(model => model.OfficialBulletinDate, new { id = "inputOfficialBulletin", @class = "uif-datepicker" })
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.LanguagePerson.ResolutionNumber</label>
+                    <input type="text" id="InputResolutionNumber" class="OnlyNumber" maxlength="14" />
+                </div>
+            </div>
+            <hr style="width:100%;text-align:left;margin-left:0">
+            <div class="row">
+                <div class="uif-col-12">
+                    <input type="checkbox" checked="checked" id="TotalRetention" />
+                    <label for="TotalRetention">@Resources.LanguagePerson.TotalRetention</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-listview" id="listVTax"> </div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6" id="btnsAgent">
+            <div class="pull-right width-save">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0063"))
+                {
+                    <button type="button" class="btn btn-default" id="btnAgentsCancel">
+                        @Resources.LanguagePerson.NewForm
+                    </button>
+                }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0064"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnAgentsAccept">
+                            @Resources.LanguagePerson.AddForm
+                        </button>
+                    }
+                </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

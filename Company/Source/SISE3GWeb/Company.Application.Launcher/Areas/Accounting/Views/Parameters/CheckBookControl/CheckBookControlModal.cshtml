@@ -1,0 +1,58 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Framework.UIF.Web.Areas.Accounting.Models.CheckBookControlModel
+<form id="editCheckBook" onsubmit="return false" class="form">
+    <div class="uif-modalbody">
+        @Html.HiddenFor(m => m.AccountBankId)
+        @Html.HiddenFor(m => m.Id)
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label" for="status">
+                    @Global.Status
+                </label>
+                <select class="uif-select form-control" id="status"
+                        data-source='@Url.Content("~/Accounting/Parameters/GetCheckStatus")' 
+                        data-native="true"
+                        data-id="Id" 
+                        data-name="Description" 
+                        name="status" 
+                        data-val="true"
+                        data-val-required="@Global.RequiredField">
+                </select>
+                <span class="text-danger" data-valmsg-for="status" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label" for="date">
+                    @Global.Date
+                </label>
+                @Html.EditorFor(m => m.DisabledDate,
+                    new
+                    {
+                        htmlAttributes =
+                        new
+                        {
+                            @class = "uif-datepicker form-control",
+                            data_mask = "99/99/9999",
+                            disabled = "disabled",
+                            data_max_date = "",
+                            data_min_date = "@ViewBag.DateAccounting"
+                        }
+                    })
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertModel"></div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="cancelButton" data-dismiss="modal" data-role="button">
+            <i class="fa fa-remove"></i> @Global.Cancel
+        </button>
+        <button type="submit" class="btn btn-primary" id="saveButton" onclick="return false" data-role="button">
+            <i class="fa fa-save"></i> @Global.Save
+        </button>
+    </div>
+</form>

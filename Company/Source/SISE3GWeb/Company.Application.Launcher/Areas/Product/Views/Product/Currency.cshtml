@@ -1,0 +1,26 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Product.Models.CurrencyModelsView
+<form id="editForm">
+    <div class="uif-inline" id="editAction">
+        <div class="uif-row">
+            <div class="uif-col-3">
+                @Resources.Language.Decimal
+                <input type="text" id="DecimalValue" name="DecimalValueForm" maxlength="12"
+                       style="text-align: right" onkeypress="return OnlyDecimalNumber(event, this);" />
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="uif-col-12">
+        <table data-paginate="false" data-selectiontype="multiple" class="uif-table" id="TableCurrency" data-title="@Resources.Language.LabelCurrency" data-edit="true" data-filter="false" data-add="false">
+            <thead>
+                <tr>
+                    <th data-property="Id" data-visible="false">@Resources.Language.LabelCurrencyId</th>
+                    <th data-property="Description">@Resources.Language.LabelCurrency</th>
+                    <th data-property="DecimalQuantity">@Resources.Language.Decimal</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

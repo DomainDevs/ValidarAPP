@@ -1,0 +1,26 @@
+<map version="2.0" type="class" name="GetIssTmpLayerDistribution" namespace="Sistran.Core.Application.ReinsuranceServices.EEProvider" file-version="1.0" description="GET_ISS_TMP_LAYER_DISTRIBUTION_ENTITY">
+  <properties>
+    <property name="EndorsementCode" type="Integer" description="ENDORSEMENT_CODE_PROPERTY" />
+    <property name="TempReinsuranceProcessCode" type="Integer" description="TEMP_REINSURANCE_PROCESS_CODE_PROPERTY" />
+    <property name="TempReinsLayerIssuanceId" type="Integer" key="true" description="TEMP_REINS_LAYER_ISSUANCE_ID_PROPERTY" />
+    <property name="LayerNumber" type="Integer" description="LAYER_NUMBER_PROPERTY" />
+    <property name="LayerPercentage" type="Decimal" precision="12" scale="2" description="LAYER_PERCENTAGE_PROPERTY" />
+    <property name="PremiumPercentage" type="Decimal" precision="12" scale="2" description="PREMIUM_PERCENTAGE_PROPERTY" />
+    <property name="SumAmount" type="Decimal" precision="38" scale="2" nullable="true" description="SUM_AMOUNT_PROPERTY" />
+    <property name="SumPremium" type="Decimal" precision="38" scale="2" nullable="true" description="SUM_PREMIUM_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="GET_ISS_TMP_LAYER_DISTRIBUTION" schema="REINS" alias="GET_ISS_TMP_LAYER_DISTRIBUTION" update="true">
+      <columns>
+        <column name="ENDORSEMENT_CD" type="Int32" property="EndorsementCode" allowNull="false" />
+        <column name="TEMP_REINSURANCE_PROCESS_CD" type="Int32" property="TempReinsuranceProcessCode" allowNull="false" />
+        <column name="TEMP_REINS_LAYER_ISSUANCE_ID" type="Int32" property="TempReinsLayerIssuanceId" key="true" />
+        <column name="LAYER_NUMBER" type="Int32" property="LayerNumber" allowNull="false" />
+        <column name="LAYER_PERCENTAGE" type="Decimal" property="LayerPercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="PREMIUM_PERCENTAGE" type="Decimal" property="PremiumPercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="SUM_AMOUNT" type="Decimal" property="SumAmount" size="19" precision="38" scale="2" />
+        <column name="SUM_PREMIUM" type="Decimal" property="SumPremium" size="19" precision="38" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

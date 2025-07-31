@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="RatingZoneView">
+  <collections>
+    <collection name="RatingZone" type="Sistran.Core.Application.Common.Entities.RatingZone, Core.Common.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, Core.Common.Entities"></collection>
+    <collection name="CountryRatingZone" type="Sistran.Core.Application.Common.Entities.CountryRatingZone, Core.Common.Entities"></collection>
+    <collection name="City" type="Sistran.Core.Application.Common.Entities.City, Core.Common.Entities"></collection>
+    <collection name="State" type="Sistran.Core.Application.Common.Entities.State, Core.Common.Entities"></collection>
+    <collection name="Country" type="Sistran.Core.Application.Common.Entities.Country, Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="RatingZone" destination="CountryRatingZone" name="RatingZoneCountryRatingZone" type="left">
+      <property left="RatingZoneCode" type="Equal" right="RatingZoneCode"></property>
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="RatingZone" destination="Prefix" name="RatingZonePrefix" type="left">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="CountryRatingZone" destination="City" name="CountryRatingZoneCity" type="left">
+      <property left="CityCode" type="Equal" right="CityCode"></property>
+      <property left="StateCode" type="Equal" right="StateCode"></property>
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+    </relation>
+    <relation source="City" destination="State" name="CityState" type="left">
+      <property left="StateCode" type="Equal" right="StateCode"></property>
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+    </relation>
+    <relation source="State" destination="Country" name="StateCountry" type="left">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,55 @@
+<div class="section rows primary">
+    <h3>Riesgos</h3>
+		<table class="table">
+		  <tr>
+				<th style="text-align: center">Nro.</th>
+				<th style="text-align: center">Giro del Negocio</th>
+				<th style="text-align: center">Asegurado</th>
+				<th style="text-align: center">Suma Asegurada</th>
+				<th style="text-align: center">Prima</th>
+				<th style="text-align: center">Facultativo</th>
+				<th style="text-align: center">Estado</th>
+		  </tr>
+		  {{#each riesgos}}
+			<tr class="risk__row" data-riskid={{RISK_ID}} style="cursor:pointer;">
+			  <td>{{RISK_NUM}}</td>
+			  <td style="text-align: left">{{BUSINNES_TURN}}</td>
+			  <td style="text-align: left">{{INSURED_NAME}}</td>
+			  <td style="text-align: right">{{formatNumber LIMIT_AMT minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+			  <td style="text-align: right">{{formatNumber PREMIUM_AMT minimumFractionDigits="2" maximumFractionDigits="5"}}</td>
+			  <td style="text-align: left">{{FACULTATIVE}}</td>
+			  <td style="text-align: left">{{RISK_STATUS}}</td>
+			<tr>
+		  {{/each}}
+	  </table>
+	</div>
+  
+
+<sise-tabs>
+  <sise-tab title="Coberturas">
+        <table class="table">
+            <tr>
+              <th style="text-align: center">Riesgo</th>
+              <th style="text-align: center">Cobertura</th>
+              <th style="text-align: center">Suma Asegurada</th>
+              <th style="text-align: center">Suma Asegurada Total</th>
+              <th style="text-align: center">Tipo Cálculo</th>
+              <th style="text-align: center">Tipo Tasa</th>
+              <th style="text-align: center">Tasa</th>
+              <th style="text-align: center">Prima</th>
+            </tr>
+            {{#each coverages}}
+            <tr>
+                <td style="text-align: left">{{RISK_NUM}}</td>
+                <td style="text-align: left">{{COVERAGE}}</td>
+                <td style="text-align: right">{{formatNumber ENDORSEMENT_LIMIT_AMT minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+                <td style="text-align: right">{{formatNumber LIMIT_AMT minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+                <td style="text-align: left">{{CALCULATE_TYPE}}</td>
+                <td style="text-align: left">{{RATE_TYPE}}</td>
+                <td style="text-align: right">{{RATE}}</td>
+                <td style="text-align: right">{{formatNumber PREMIUM_AMT minimumFractionDigits="0" maximumFractionDigits="0"}}</td>
+          </tr>
+          {{/each}}
+        </table>
+    </sise-tab>
+

@@ -1,0 +1,48 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.FormatGroup;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+   <ol class="breadcrumb global-header-breadcrumb">
+       <li>@Global.Parameters</li>
+       <li>@Global.OutputFormats</li>
+        <li>@Global.FormatGroup</li>
+    </ol>
+}
+
+<script id="listTemplateGroup" type="text/template">
+    <span>
+        <strong>
+            @Global.Description:
+        </strong>
+        <span class="label label-success">
+            {{Description}}
+        </span>
+    </span>
+</script>
+
+<script id="add-template" type="text/template">
+    @Html.Partial("OutputTemplate/TemplateGroupEditor")
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="uif-alert" id="alertTemplateGroup"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="uif-listview" id="alertTemplateGroupListView">
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/TemplateGroup")
+}

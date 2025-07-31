@@ -1,0 +1,286 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "PaymentRequestClaimsMovements";
+}
+
+<script id="request-claims-display-template" type="text/template">
+    <div>
+        <strong>{{BranchName}}</strong> | {{BeneficiaryDocumentNumber}} | {{CurrencyName}} <br>
+        <strong>{{RegistrationDate}}</strong> | {{EstimatedDate}} <br>
+        <strong>{{PaymentSourceDescription}}</strong>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"><span class="text-danger">$ {{TotalAmount}}</span></div>
+    </div>
+</script>
+
+<script id="claims-display-template" type="text/template">
+    <div>
+        <strong>{{BranchName}}</strong> | {{BeneficiaryDocumentNumber}} | {{CurrencyName}} <br>
+        <strong>{{RegistrationDate}}</strong> | {{EstimatedDate}} <br>
+        <strong>{{PaymentSourceDescription}}</strong>
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number"><span class="text-danger">$ {{Amount}}</span></div>
+    </div>
+</script>
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <ul class="uif-tab" id="tabMainClaim">
+                <li class="active"><a href="#tabClaimSearch">@Global.SearchLabel</a></li>
+                <li><a href="#tabSelectedClaim">@Global.Claims</a></li>
+            </ul>
+            <div class="uif-tab-content">
+                <!-- Búsqueda -->
+                <div class="tab-pane active" id="tabClaimSearch">
+                    <!--left col-->
+                    <div class="uif-col-6">
+                        <div class="uif-panel">
+                            <div class="uif-row">
+                                <div class="uif-col-6">
+                                    <label>@Global.SearchBy</label>
+                                    <select class="uif-select form-control" id="selectClaimsSearchBy" data-id="Id" data-name="Description"></select>
+                                    <span class="text-danger" data-valmsg-for="selectClaimsSearchBy" data-valmsg-replace="true" />
+                                </div>
+                                <div class="uif-col-6" id="TitleAgentNumber">
+                                    <label>@Global.AgentDocumentNumber</label>
+                                    @Html.TextBox("ClaimsAgentDocumentNumber", "", new
+                                {
+                                    id = "ClaimsAgentDocumentNumber",
+                                    maxlength = "20",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetAgentByDocumentNumber"),
+                                    data_displaykey = "DocumentNumber",
+                                    placeholder = @Global.EnterAgentDocument,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                    <span class="text-danger" data-valmsg-for="ClaimsAgentDocumentNumber" data-valmsg-replace="true" />
+                                </div>
+                                <div class="uif-col-6" id="TitleInsuredNumber">
+                                    <label>@Global.InsuredDocumentNumber</label>
+                                    @Html.TextBox("ClaimsInsuredDocumentNumber", "", new
+                                {
+                                    id = "ClaimsInsuredDocumentNumber",
+                                    maxlength = "20",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetInsuredByDocumentNumber"),
+                                    data_displaykey = "DocumentNumber",
+                                    placeholder = @Global.EnterInsurdeDocument,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                    <span class="text-danger" data-valmsg-for="ClaimsInsuredDocumentNumber" data-valmsg-replace="true" />
+                                </div>
+                                <div class="uif-col-6" id="TitleSupplierNumber">
+                                    <label>@Global.SupplierDocumentNumber</label>
+                                    @Html.TextBox("ClaimsSupplierDocumentNumber", "", new
+                                {
+                                    id = "ClaimsSupplierDocumentNumber",
+                                    maxlength = "20",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetSuppliersByDocumentNumber"),
+                                    data_displaykey = "DocumentNumber",
+                                    placeholder = @Global.EnterProviderDocument,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                    <span class="text-danger" data-valmsg-for="ClaimsSupplierDocumentNumber" data-valmsg-replace="true" />
+                                </div>
+                            </div>
+                            <div class="uif-row">
+                                <div class="uif-col-12" id="TitleAgentName">
+                                    <label>@Global.AgentName</label>
+                                    @Html.TextBox("ClaimsAgentName", "", new
+                                {
+                                    id = "ClaimsAgentName",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetAgentByName"),
+                                    data_displaykey = "Name",
+                                    placeholder = @Global.EnterAgentName,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                    <span class="text-danger" data-valmsg-for="ClaimsAgentName" data-valmsg-replace="true" />
+                                </div>
+                                <div class="uif-col-12" id="TitleInsuredName">
+                                    <label>@Global.InsuredName</label>
+                                    @Html.TextBox("ClaimsInsuredName", "", new
+                                {
+                                    id = "ClaimsInsuredName",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetInsuredByInsuredName"),
+                                    data_displaykey = "Name",
+                                    placeholder = @Global.EnterInsurdeName,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                    <span class="text-danger" data-valmsg-for="ClaimsInsuredName" data-valmsg-replace="true" />
+                                </div>
+                                <div class="uif-col-12" id="TitleSupplierName">
+                                    <label>@Global.SupplierName</label>
+                                    @Html.TextBox("ClaimsSupplierName", "", new
+                                {
+                                    id = "ClaimsSupplierName",
+                                    @class = "uif-autocomplete",
+                                    data_source = @Url.Content("~/Accounting/Common/GetSuppliersByName"),
+                                    data_displaykey = "Name",
+                                    placeholder = @Global.EnterProviderName,
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                    <span class="text-danger" data-valmsg-for="ClaimsSupplierName" data-valmsg-replace="true" />
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <label>@Global.Branch</label>
+                                    <select class="uif-select form-control" id="selectClaimsBranch" data-id="Id" data-name="Description"></select>
+                                    <input type="hidden" id="MovementBillNumber" />
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <label>@Global.SalePoint</label>
+                                    <select class="uif-select form-control" id="selectClaimsSalePoint" data-id="Id" data-name="Description"></select>
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <label>@Global.Company</label>
+                                    <select class="uif-select form-control" id="selectClaimsCompany" data-id="Id" data-name="Description"></select>
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <label>@Global.Prefix</label>
+                                    <select class="uif-select form-control" id="selectClaimsPrefix" data-id="Id" data-name="Description"></select>
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-6">
+                                    <label>@Global.RequestNumber</label>
+                                    @Html.TextBox("ClaimsRequestNumber", "", new
+                                    {
+                                        @onkeypress = "return JustNumbers(event,this)",
+                                        style = "text-align: right",
+                                        maxlength = "10",
+
+                                    })
+                                </div>
+                                <div class="uif-col-6">
+                                    <label>@Global.DenunciationNumber</label>
+                                    @Html.TextBox("ClaimsDenunciationNumber", "", new
+                                    {
+                                        @onkeypress = "return JustNumbers(event,this)",
+                                        style = "text-align: right",
+                                        maxlength = "10",
+
+                                    })
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <label>@Global.RequestType</label>
+                                    <select class="uif-select form-control" id="selectClaimsRequestType" data-id="Id" data-name="Description"></select>
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-6">
+                                    <label>@Global.DateIncomeFrom</label>
+                                    <input type="text" class="uif-datepicker"
+                                           data-mask="99/99/9999"
+                                           id="ClaimsDateIncomeFrom"
+                                           name="ClaimsDateIncomeFrom"
+                                           value=""
+                                           data-val="false" />
+                                </div>
+                                <div class="uif-col-6">
+                                    <label>@Global.DateIncomeTo</label>
+                                    <input type="text" class="uif-datepicker"
+                                           data-mask="99/99/9999"
+                                           id="ClaimsDateIncomeTo"
+                                           name="ClaimsDateIncomeTo"
+                                           value=""
+                                           data-val="false" />
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-alert" id="alertForm"></div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="pull-right">
+                                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0512"))
+                                    {
+                                        <button type="button" class="btn btn-primary" id="ClaimsSearch">@Global.Search</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end left col-->
+                    <!--right col-->
+                    <div class="uif-col-6">
+                        <div class="uif-panel" data-title="@Global.ClaimsPaymentRequestLabel">
+                            <div id="requestClaimsListView" class="uif-listview">
+                                <div class="footer">
+                                    <div class="col-xs-6">
+                                        @Global.Total
+                                    </div>
+                                    <div class="text-right col-number">
+                                        <b id="TotalRequestClaimsMovement">$0.00</b><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                    <!--end right col-->
+                </div>
+
+                <!-- Items -->
+                <div class="tab-pane" id="tabSelectedClaim">
+                    <div class="uif-panel" data-title="@Global.ApplyRequest">
+                        <div id="claimsListView" class="uif-listview">
+                            <div class="footer">
+                                <div class="col-xs-6">
+                                    @Global.Total
+                                </div>
+                                <div class="text-right col-number">
+                                    <b id="TotalClaimsMovement">$0.00</b><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="pull-right">
+            <div class="uif-modalbuttons">
+                @*<button type="button" class="btn btn-primary" id="ClaimsSearch">@Global.Search</button>*@
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0502"))
+                {
+                    <button type="button" class="btn btn-default" id="ClaimsAcceptMovement">@Global.Accept</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="ConditionText" namespace="Sistran.Core.Application.Quotation" file-version="1.0" description="CONDITION_TEXT_ENTITY">
+  <properties>
+    <property name="ConditionTextId" type="Integer" key="true" description="CONDITION_TEXT_ID_PROPERTY" autonumber="id" />
+    <property name="TextTitle" type="String" size="60" description="TEXT_TITLE_PROPERTY" />
+    <property name="TextBody" type="String" size="2147483647" description="TEXT_BODY_PROPERTY" />
+    <property name="ConditionLevelCode" type="Integer" description="CONDITION_LEVEL_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CONDITION_TEXT" schema="QUO" alias="CONDITION_TEXT" update="true">
+      <columns>
+        <column name="CONDITION_TEXT_ID" type="Int32" property="ConditionTextId" key="true" />
+        <column name="TEXT_TITLE" type="String" property="TextTitle" allowNull="false" size="60" />
+        <column name="TEXT_BODY" type="String" property="TextBody" allowNull="false" size="2147483647" />
+        <column name="CONDITION_LEVEL_CD" type="Int32" property="ConditionLevelCode" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="parameter_id" />
+          <Constant type="Decimal" value="202" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ParamFinancialPlanView">
+  <collections>
+    <collection name="FinancialPlan" type="Sistran.Core.Application.Product.Entities.FinancialPlan, 
+                Core.Product.Entities"></collection>
+    <collection name="PayComponents" type="Sistran.Core.Application.Product.Entities.FirstPayComponent, 
+                Core.Product.Entities"></collection>
+    <collection name="Components" type="Sistran.Core.Application.Quotation.Entities.Component, 
+                Core.Quotation.Entities"></collection>
+  <collection name="PaymentPlan" type="Sistran.Core.Application.Product.Entities.PaymentSchedule, 
+                Core.Product.Entities"></collection>
+  <collection name="PaymentMethod" type="Sistran.Core.Application.Common.Entities.PaymentMethod, 
+                Core.Common.Entities"></collection>
+     <collection name="Currency" type="Sistran.Core.Application.Common.Entities.Currency, 
+                Core.Common.Entities"></collection>
+  
+  </collections>
+  <relations>
+    <relation source="FinancialPlan" destination="PayComponents" name="FinancialPlanPayComponents" type="LEFT">
+      <property left="FinancialPlanId" type="Equal" right="FinancialPlanId"></property>
+    </relation>
+    <relation source="PayComponents" destination="Components" name="PayComponentsComponents" type="LEFT">
+      <property left="ComponentCode" type="Equal" right="ComponentCode"></property>
+    </relation>
+   <relation source="FinancialPlan" destination="PaymentPlan" name="FinancialPlanPaymentPlan" type="Inner">
+      <property left="PaymentScheduleId" type="Equal" right="PaymentScheduleId"></property>
+    </relation>
+  <relation source="FinancialPlan" destination="PaymentMethod" name="FinancialPlanPaymentMethod" type="Inner">
+      <property left="PaymentMethodCode" type="Equal" right="PaymentMethodCode"></property>
+    </relation>
+   <relation source="FinancialPlan" destination="Currency" name="FinancialPlanCurrency" type="Inner">
+      <property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+    </relation>
+  </relations>
+</view>

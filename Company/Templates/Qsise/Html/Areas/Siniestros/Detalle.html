@@ -1,0 +1,140 @@
+<div class="container">
+	<div class="section cols primary">
+		<div>
+      <table>
+        <tr>
+          <td>
+            Sucursal:
+          </td>
+          <td>
+            <span class = "info">{{claims.[0].BRANCH_POLICY}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Ramo:
+          </td>
+          <td>
+            <span class = "info">{{claims.[0].BRANCH}}</span>
+          </td>
+        </tr>
+        <tr>		  
+          <td>
+            Póliza:
+          </td>
+          <td>
+            <span class="info">{{claims.[0].DOCUMENT_NUMBER}}</span>      
+          </td>
+        </tr>      
+        <tr>
+          <td>
+            Siniestro:
+          </td>
+          <td>
+            <span class="info">{{claims.[0].NUMBER}}</span>      
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Sucursal del Reclamo:
+          </td>
+          <td>
+            <span class = "info">{{claims.[0].BRANCH}}</span>
+          </td>
+        </tr>  
+      </table>
+    </div>
+		<div></div>
+		<div></div>	
+	</div>
+	<sise-tabs>
+  	<sise-tab title="SubSiniestros">
+      <table class="table">
+        <tr>
+          <th style="text-align: center">Ramo</th>
+          <th style="text-align: center">P&oacute;liza</th>
+          <th style="text-align: center">Siniestro</th>
+          <th style="text-align: center">Subsiniestro</th>
+          <th style="text-align: center">Analista</th>
+          <th style="text-align: center">Estado</th>
+          <th style="text-align: center">Asegurado</th>
+          <th style="text-align: center">Cobertura</th>
+          <th style="text-align: center">Moneda</th>
+          <th style="text-align: center">Reserva Indem.</th>
+          <th style="text-align: center">Reserva Gastos</th>
+        </tr>
+        {{#each subclaims}}
+          <tr>
+            <td style="text-align: left">{{PREFIX}}</td>
+            <td style="text-align: left">{{DOCUMENT_NUMBER}}</td>
+            <td style="text-align: left">{{NUMBER}}</td>
+            <td style="text-align: left">{{SUB_CLAIM}}</td>
+            <td style="text-align: left"></td>
+            <td style="text-align: left"></td>
+            <td style="text-align: left">{{INSURED_NAME}}</td>
+            <td style="text-align: left">{{COVERAGE}}</td>
+            <td style="text-align: left">{{CURRENCY}}</td>
+            <td style="text-align: right">{{formatNumber RESERVE}}</td>
+            <td style="text-align: right">{{formatNumber RESERVE_EXPENSES}}</td>
+          <tr>
+        {{/each}}
+      </table>
+  	</sise-tab>
+  	<sise-tab title="Pagos">
+  	  <table class="table">
+        <tr>
+          <th style="text-align: center">Subsiniestro</th>
+          <th style="text-align: center">Código</th>
+          <th style="text-align: center">Cheque a nombre de</th>
+          <th style="text-align: center">Clase de pago</th>
+          <th style="text-align: center">Tipo de pago</th>
+          <th style="text-align: center">Nro</th>
+          <th style="text-align: center">Usuario</th>
+          <th style="text-align: center">Fecha solicitud</th>
+          <th style="text-align: center">Moneda</th>
+          <th style="text-align: center">Importe</th>
+          <th style="text-align: center">Recibo</th>
+        </tr>
+        {{#each paysByClaim}}
+          <tr>
+            <td style="text-align: left">{{SUB_CLAIM}}</td>
+            <td style="text-align: left">{{NUMBER}}</td>
+            <td style="text-align: left">{{NAME}}</td>
+            <td style="text-align: left">{{DES_CLASS}}</td>
+            <td style="text-align: left">{{DESCRIPTION}}</td>
+            <td style="text-align: left">{{NUMBER}}</td>
+            <td style="text-align: left">{{USER_ID}}</td>
+            <td style="text-align: center">{{formatDate REGISTRATION_DATE}}</td>
+            <td style="text-align: left">{{DESCRIP_MONY}}</td>
+            <td style="text-align: right">{{formatNumber ESTIMATION_AMOUNT}}</td>
+            <td style="text-align: left">{{CLAIM_NUMBER}}</td>
+          <tr>
+        {{/each}}
+      </table>
+  	</sise-tab>
+  	<sise-tab title="Saldos a Favor">
+  	   <table class="table">
+        <tr>
+          <th style="text-align: center">Subsiniestro</th>
+          <th style="text-align: center">Cobertura</th>
+          <th style="text-align: center">Asegurado</th>
+          <th style="text-align: center">Moneda</th>
+          <th style="text-align: center">Estimaci&oacute;n</th>
+          <th style="text-align: center">Ingreso</th>
+          <th style="text-align: center">Reserva</th>
+        </tr>
+        {{#each positiveBalance}}
+            <tr>
+              <td style="text-align: left">{{SUB_CLAIM}}</td>
+              <td style="text-align: left">{{COVERAGE}}</td>
+              <td style="text-align: left">{{INSURED_NAME}}</td>
+              <td style="text-align: left">{{CURRENCY}}</td>
+              <td style="text-align: right">{{formatNumber ESTIMATES_INDEM}}</td>
+              <td style="text-align: right">{{formatNumber PAYMENTS_INDEM}}</td>
+              <td style="text-align: right">{{formatNumber RESERVE}}</td>
+            <tr>
+        {{/each}}
+      </table>
+  	</sise-tab>
+  </sise-tabs>
+</div>

@@ -1,0 +1,106 @@
+@using Sistran.Core.Framework.UIF.Web.Resources
+@section Title{
+    <div id="mainFinancialPlan" class="row main-title">
+        <div class="column">
+            <div id="Title">@Global.Refinancing</div>
+        </div>
+    </div>
+}
+<form id="formFinancialPlan" class="form without-space" autocomplete="off">
+    <div id="FinancialPlan">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="RefinancingAlert"></div>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-4">
+                <label class="field-required">@Global.Branch</label>
+                <select class="uif-select form-control" id="FinancialBranchId" data-id="Id" data-name="Description"
+                        data-val-required='@Global.RequiredField'
+                        data-native="true" data-selectedid="@ViewBag.BranchDefault"
+                        data-val="true" name="FinancialBranchId"></select>
+                <span class="text-danger" data-valmsg-for="FinancialBranchId" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label">@Global.Prefix</label>
+                <select class="uif-select form-control" id="FinancialPrefixId" data-id="Id" data-name="Description"
+                        data-val-required='@Global.RequiredField'
+                        data-native="true" data-selectedid="@ViewBag.BranchDefault"
+                        data-val="true" name="FinancialPrefixId"></select>
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label">@Global.PolicyNumber</label>
+                <input class="uif-autocomplete" type="text" data-displaykey="Id" data-minLenght="2"
+                       maxlength="30" placeholder="@Global.Policies" id="PolicyFinNumber"
+                       data-source="@Url.Content("~/Accounting/FinancialPlan/GetPoliciesByQuery")" name="PolicyFinNumber" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.EndorsementNumber</label>
+            <select class="uif-select form-control" id="FinancialEndorsement" data-id="Id" data-name="DocumentNum"
+                    data-val-required='@Global.RequiredField'
+                    data-source="null"
+                    data-native="true"
+                    data-val="true" name="FinancialEndorsement"></select>
+            <span class="text-danger" data-valmsg-for="FinancialEndorsement" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Payer</label>
+            <select class="uif-select form-control" id="FinancialPayer" data-id="Id" data-name="Description"
+                    data-val-required='@Global.RequiredField'
+                    data-source="null"
+                    data-native="true"
+                    data-val="true" name="FinancialPayer"></select>
+            <span class="text-danger" data-valmsg-for="FinancialPayer" data-valmsg-replace="true"></span>
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.ChangeMotiveRequestedBy:</label>
+            <input type="text" id="FinancialChangeMotive" name="FinancialChangeMotive" data-val="true" data-val-required='@Global.RequiredField' maxlength="100" />
+            <span class="text-danger" data-valmsg-for="FinancialChangeMotive" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer" style="float: right">
+                <button id="FinancialClean" class="btn btn-default" type="button">
+                    <i class="fa fa-paint-brush"></i>@Global.Clean
+                </button>
+                <button type="button" class="btn btn-primary" id="FinancialSearch">
+                    <i class="fa fa-search"></i>@Global.Search
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+<div id="FinancialIssuanceInfo">
+    @Html.Partial("~/Areas/Accounting/Views/FinancialPlan/PolicyData.cshtml")
+</div>
+<hr />
+<div class="main-content">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <ul class="uif-tab">
+                <li class="active"><a href="#FinancialIssuanceCurrentPlan">@Global.PendingCurrentPlan</a></li>
+                <li><a href="#FinancingNewPlan">@Global.PendingNewPlan</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="uif-tab-content">
+    <div class="active" id="FinancialIssuanceCurrentPlan">
+        @Html.Partial("~/Areas/Accounting/Views/FinancialPlan/FinancialIssuance.cshtml")
+    </div>
+    <div id="FinancingNewPlan">
+        @Html.Partial("~/Areas/Accounting/Views/FinancialPlan/FinancialIssuanceNew.cshtml")
+    </div>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/FinancialPlan")
+}

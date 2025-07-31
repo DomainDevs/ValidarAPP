@@ -1,0 +1,89 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @Global.ProductionDetailList;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Reports</a></li>
+        <li class="active">@Global.ProductionDetailList</li>
+    </ol>
+}
+
+@section modals{
+    <div class="modal fade" id="modalMassiveTotRecordsPrdl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.CurrentPolicies</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="PRDLReportModal">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="PRDLReportForm" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Year
+            </label>
+            <input class="form-control" placeholder='@Global.ExampleYear' data-val="true" data-val-required="@Global.RequiredField"
+                   id="PRDLReportYear" name="PRDLReportYear" type="text" onkeypress="return JustNumbers(event, this);" maxlength="4" min="1900" />
+            <span class="text-danger" data-valmsg-for="PRDLReportYear" data-valmsg-replace="true"></span>
+
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label"> @Global.Month</label>
+            <select class="uif-select form-control" id="PRDLReportMonth" name="PRDLReportMonth"
+                    data-source='@Url.Content("~/Accounting/Common/GetYearMonths")' 
+                    data-id="Id" data-name="Description" data-native="true"></select>
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Day</label>
+            <input class="form-control" data-val="true" id="PRDLReportDay" name="PRDLReportDay"
+                   type="text" onkeypress="return JustNumbers(event, this);" maxlength="2" min="1" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertFormPRDL"></div>
+        </div>
+    </div>
+</form>
+
+@section Toolbar
+{
+    <footer>
+        <button id="PRDLReportClean" class="btn btn-default" role="button">
+            <span class="glyphicon glyphicon-remove"></span>  @Global.Clean
+        </button>
+        <button id="PRDLReportGenerate" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+        </button>
+    </footer>
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("~/Areas/Accounting/Views/Reports/PartialProgressReports.cshtml")
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accountingClosing/bundles/ProductionDetailList")
+}

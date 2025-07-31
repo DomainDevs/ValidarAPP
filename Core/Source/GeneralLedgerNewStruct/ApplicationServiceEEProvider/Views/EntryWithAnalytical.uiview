@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="EntryWithAnalytical">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="LedgerEntry" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="LedgerEntryItem" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="AccountingNature">
+          <Column table-alias="LedgerEntryItem" name="AccountingNature" />
+        </SelectValue>
+        <SelectValue alias="AmountValue">
+          <Column table-alias="LedgerEntryItem" name="AmountValue" />
+        </SelectValue>
+        <SelectValue alias="AmountLocalValue">
+          <Column table-alias="LedgerEntryItem" name="AmountLocalValue" />
+        </SelectValue>
+        <SelectValue alias="ExchangeRate">
+          <Column table-alias="LedgerEntryItem" name="ExchangeRate" />
+        </SelectValue>
+        <SelectValue alias="AccountingAccountId">
+          <Column table-alias="AccountingAccount" name="AccountingAccountId" />
+        </SelectValue>
+        <SelectValue alias="AnalysisId">
+          <Column table-alias="AnalysisEntryItem" name="AnalysisId" />
+        </SelectValue>
+        <SelectValue alias="AnalysisConceptId">
+          <Column table-alias="AnalysisEntryItem" name="AnalysisConceptId" />
+        </SelectValue>
+        <SelectValue alias="ConceptKey">
+          <Column table-alias="AnalysisEntryItem" name="ConceptKey" />
+        </SelectValue>
+        <SelectValue alias="CostCenterId">
+          <Column table-alias="CostCenterEntryItem" name="CostCenterId" />
+        </SelectValue>
+        <SelectValue alias="AccountingDate">
+          <Column table-alias="LedgerEntry" name="AccountingDate" />
+        </SelectValue>
+        <SelectValue alias="AccountingMovementTypeId">
+          <Column table-alias="LedgerEntry" name="AccountingMovementTypeId" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join type="Left">
+          <Join>
+            <Join>
+              <Join>
+                <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.LedgerEntry, Core.GeneralLedger.Entities" alias="LedgerEntry" />
+                <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.LedgerEntryItem, Core.GeneralLedger.Entities" alias="LedgerEntryItem" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="LedgerEntryItem" name="LedgerEntryId" />
+                    <Column table-alias="LedgerEntry" name="LedgerEntryId" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AccountingAccount, Core.GeneralLedger.Entities" alias="AccountingAccount" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="AccountingAccount" name="AccountingAccountId" />
+                  <Column table-alias="LedgerEntryItem" name="AccountingAccountId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AnalysisEntryItem, Core.GeneralLedger.Entities" alias="AnalysisEntryItem" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="AnalysisEntryItem" name="EntryItemId" />
+                <Column table-alias="LedgerEntryItem" name="LedgerEntryItemId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.CostCenterEntryItem, Core.GeneralLedger.Entities" alias="CostCenterEntryItem" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="CostCenterEntryItem" name="EntryItemId" />
+              <Column table-alias="LedgerEntryItem" name="LedgerEntryItemId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

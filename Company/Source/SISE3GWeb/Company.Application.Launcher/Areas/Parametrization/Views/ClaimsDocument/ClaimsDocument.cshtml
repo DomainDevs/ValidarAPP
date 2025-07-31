@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-90">
+        @Resources.Language.ClaimsDocument
+    </div>
+    <div class="column-10 even">
+
+    </div>
+</script>
+
+<form id="formClaimsDocument" autocomplete="off" class="form form-space-adjusted">
+    <br />
+    <div class="uif-col-12">
+        <div class="row">
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.LabelModule</label>
+                <select class="uif-select form-control" id="selectModules" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                        data-id="Id" data-name="Description" name="Module"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="Module" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="uif-col-4">
+                <label class="field-required">@Resources.Language.SubModules</label>
+                <select class="uif-select form-control" id="selectSubModules" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                        data-id="SubModuleId" data-name="Description" name="SubModules"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="SubModules" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </div>
+    <div class="uif-col-12">
+        <table class="uif-table" id="tblsubroles" data-pagesize="10" data-add="true" data-title="<b>Listado de Documentos</b>" data-selectiontype="none" data-delete="true" data-edit="true">
+            <thead>
+                <tr>
+                    <th data-property="Id"><b>@Resources.Language.Code</b></th>
+                    <th data-property="Description"><b>@Resources.Language.Description</b></th>
+                    <th data-property="prefix"><b>@Resources.Language.Prefix</b></th>                    
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</form>
+
+<div class="uif-modal" id="modalClaimsDocument">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/ClaimsDocument/ModalClaimsDocument.cshtml")
+    </div>
+</div>

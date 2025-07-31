@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ProductAgentView">
+  <collections>
+    <collection name="Product" type="Sistran.Core.Application.Product.Entities.Product,Core.Product.Entities"></collection>
+    <collection name="ProductAgent" type="Sistran.Core.Application.Product.Entities.ProductAgent,Core.Product.Entities"></collection>
+    <collection name="Agent" type="Sistran.Core.Application.UniquePerson.Entities.Agent,Core.UniquePerson.Entities"></collection>
+    <collection name="AgentType" type="Sistran.Core.Application.Parameters.Entities.AgentType,Core.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Product" destination="ProductAgent" name="ProductAgentProduct" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="ProductAgent" destination="Agent" name="ProductAgentAgent" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="AgentType" destination="Agent" name="AgentAgentType" type="Inner">
+      <property left="AgentTypeCode" type="Equal" right="AgentTypeCode"></property>
+    </relation>
+  </relations>
+</view>

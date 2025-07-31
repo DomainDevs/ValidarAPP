@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PaymentPersonTypeView">
+  <collections>
+    <collection name="ClaimPersonType" type="Sistran.Core.Application.Claims.Entities.ClaimPersonType,
+                Core.Claims.Entities"></collection>
+    <collection name="PersonType" type="Sistran.Core.Application.Parameters.Entities.PersonType,
+                Core.Parameters.Entities"></collection>    
+  </collections>
+  <relations>
+    <relation source="PersonType" destination="ClaimPersonType" name="PersonTypeClaimPersonType" type="Inner">
+      <property left="PersonTypeCode" type="Equal" right="PersonTypeCode"></property>
+    </relation> 
+   </relations>
+</view>

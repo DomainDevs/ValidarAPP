@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ExpenseView">
+  <collections>
+    <collection name="Component" type="Sistran.Core.Application.Quotation.Entities.Component, Core.Quotation.Entities"></collection>
+    <collection name="ExpenseComponent" type="Sistran.Core.Application.Quotation.Entities.ExpenseComponent, Core.Quotation.Entities"></collection>
+    <collection name="RateType" type="Sistran.Core.Application.Parameters.Entities.RateType, Core.Parameters.Entities"></collection>
+    <collection name="RuleSet" type="Sistran.Core.Application.Script.Entities.RuleSet, Core.Script.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Component" destination="ExpenseComponent" name="ComponentExpenseComponent" type="Inner">
+      <property left="ComponentCode" type="Equal" right="ComponentCode" ></property>
+    </relation>
+    <relation source="ExpenseComponent" destination="RateType" name="RateTypeExpenseComponent" type="Inner">
+      <property left="RateTypeCode" type="Equal" right="RateTypeCode" ></property>
+    </relation>
+    <relation source="ExpenseComponent" destination="RuleSet" name="ExpenseComponentRuleSet" type="Left">
+      <property left="RuleSetId" type="Equal" right="RuleSetId" ></property>
+    </relation>
+  </relations>
+</view>

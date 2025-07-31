@@ -1,0 +1,38 @@
+<map version="2.0" type="class" name="ClaimCoverageAmount" namespace="Sistran.Core.Application.Claims" file-version="1.0" description="CLAIM_COVERAGE_AMOUNT_ENTITY">
+  <properties>
+    <property name="ClaimCoverageCode" type="Integer" key="true" description="CLAIM_COVERAGE_CODE_PROPERTY" />
+    <property name="EstimationTypeCode" type="Integer" key="true" description="ESTIMATION_TYPE_CODE_PROPERTY" />
+    <property name="EstimationTypeStatusCode" type="Integer" nullable="true" description="ESTIMATION_TYPE_STATUS_CODE_PROPERTY" />
+    <property name="EstimationTypeStatusReasonCode" type="Integer" nullable="true" description="ESTIMATION_TYPE_STATUS_REASON_CODE_PROPERTY" />
+    <property name="EstimateAmount" type="Decimal" precision="18" scale="2" description="ESTIMATE_AMOUNT_PROPERTY" />
+    <property name="ExchangeRate" type="Decimal" precision="10" scale="6" description="EXCHANGE_RATE_PROPERTY" />
+    <property name="DeductibleAmount" type="Decimal" precision="18" scale="2" description="DEDUCTIBLE_AMOUNT_PROPERTY" />
+    <property name="VersionCode" type="Integer" nullable="true" description="VERSION_CODE_PROPERTY" />
+    <property name="Date" type="DateTime" description="DATE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+    <property name="EstimateAmountAccumulate" type="Decimal" precision="18" scale="2" description="ESTIMATE_AMOUNT_ACCUMULATE_PROPERTY" />
+    <property name="IsMinimumSalary" type="Boolean" description="IS_MINIMUM_SALARY_PROPERTY" />
+    <property name="MinimumSalariesNumber" type="Decimal" precision="18" scale="2" nullable="true" description="MINIMUM_SALARIES_NUMBER_PROPERTY" />
+    <property name="MinimumSalaryValue" type="Decimal" precision="18" scale="2" nullable="true" description="MINIMUM_SALARY_VALUE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="CLAIM_COVERAGE_AMOUNT" schema="CLM" alias="CLAIM_COVERAGE_AMOUNT" update="true">
+      <columns>
+        <column name="CLAIM_COVERAGE_CD" type="Int32" property="ClaimCoverageCode" key="true" />
+        <column name="ESTIMATION_TYPE_CD" type="Int32" property="EstimationTypeCode" key="true" />
+        <column name="ESTIMATION_TYPE_STATUS_CD" type="Int32" property="EstimationTypeStatusCode" />
+        <column name="ESTIMATION_TYPE_STATUS_REASON_CD" type="Int32" property="EstimationTypeStatusReasonCode" />
+        <column name="ESTIMATE_AMOUNT" type="Decimal" property="EstimateAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="EXCHANGE_RATE" type="Decimal" property="ExchangeRate" allowNull="false" size="19" precision="10" scale="6" />
+        <column name="DEDUCTIBLE_AMOUNT" type="Decimal" property="DeductibleAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="VERSION_CD" type="Int32" property="VersionCode" />
+        <column name="DATE" type="DateTime" property="Date" allowNull="false" />
+        <column name="CURRENCY_CD" type="Int32" property="CurrencyCode" />
+        <column name="ESTIMATE_AMOUNT_ACCUMULATE" type="Decimal" property="EstimateAmountAccumulate" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="IS_MINIMUM_SALARY" type="Boolean" property="IsMinimumSalary" allowNull="false" />
+        <column name="MINIMUM_SALARIES_NUMBER" type="Decimal" property="MinimumSalariesNumber" size="19" precision="18" scale="2" />
+        <column name="MINIMUM_SALARY_VALUE" type="Decimal" property="MinimumSalaryValue" size="19" precision="18" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

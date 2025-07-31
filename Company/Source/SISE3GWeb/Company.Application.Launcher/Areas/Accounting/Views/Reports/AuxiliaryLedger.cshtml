@@ -1,0 +1,115 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.AuxiliaryLedger;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.AccountingReports</li>
+        <li>@Global.AccountingLable</li>
+        <li class="active">@Global.AuxiliaryLedger</li>
+    </ol>
+}
+
+@section modals{
+    <div class="modal fade" id="modalMassiveTotRecordsAl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.TrialBalance</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="ALReportModal">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<form id="ALReportForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("ALReportBranch", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_selectedid = @ViewBag.BranchDefault,
+                 data_val = "true"
+             })
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.DateFrom</label>
+            <input type="text" id="ALReportDateFrom" name="ALReportDateFrom" class="uif-datepicker" data-mask-date="99/99/9999"
+                   maxlength="10" data-val="true" data-val-required="@Global.RequiredField" />
+            <span class="text-danger" data-valmsg-for="ALReportDateFrom" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.DateTo</label>
+            <input type="text" id="ALReportDateTo" name="ALReportDateTo" class="uif-datepicker" data-mask-date="99/99/9999"
+                   maxlength="10" data-val="true" data-val-required="@Global.RequiredField" />
+            <span class="text-danger" data-valmsg-for="ALReportDateTo" data-valmsg-replace="true" />     
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="AccountingNumber">
+                @Global.AccountNumber
+            </label>
+            <input class="uif-autocomplete" type="text"
+                   data-source="@Url.Action("GetAccountintAccountByNumber", "Parameters")"
+                   data-displaykey="AccountingNumber" placeholder='@Global.EnterNumberAccount' id="ALReportAccountingNumber"
+                   data-val="true" data-val-required="@Global.RequiredField" value=""
+                   name="ALReportAccountingNumber" onkeypress="return JustNumbers(event, this);" />
+            <span class="text-danger" data-valmsg-for="ALReportAccountingNumber" data-valmsg-replace="true">
+            </span>
+        </div>
+
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertAL"></div>
+        </div>
+    </div>
+</form>
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="ALReportCancel" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Clean
+            </button>
+
+            <button id="ALReportGenerate" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/AuxiliaryLedger")
+}

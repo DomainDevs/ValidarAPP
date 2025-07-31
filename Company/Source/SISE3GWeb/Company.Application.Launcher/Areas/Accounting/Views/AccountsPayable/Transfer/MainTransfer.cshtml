@@ -1,0 +1,214 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.BankTransfers;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.TransfGenerationBanking</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="CancelMainTransfer">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="GenerateMainTransfer" class="btn btn-primary" role="button">
+            <i class="fa fa-check"></i>  @Global.Generate
+        </button>
+    </footer>
+}
+
+@section Modals
+{
+
+    <form id="formBankAccounts" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalBankAccountsTransfer">
+            <div class="uif-modalbody">
+                @Html.Partial("../AccountsPayable/PaymentOrders/BankAccountsDialog")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+                <button type="button" class="btn btn-primary" id="AcceptMovement">@Global.Accept</button>
+            </div>
+
+        </div>
+    </form>
+
+    <form id="formTransferSave" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalTransferSave">
+            <div class="uif-modalbody">
+                @Html.Partial("../AccountsPayable/Transfer/TransferSaveSuccessModel")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Close</button>
+                <button type="button" class="btn btn-primary" id="AcceptMovementTrans">@Global.Accept</button>
+            </div>
+        </div>
+    </form>
+
+}
+
+
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                CODIGO HTML
+----------------------------------------------------------------------------------------------------------------------------------------------------------  *@
+<form id="MainTransferForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.IssuingAccountNumber</label>
+
+            @Html.TextBox("MainTransferAccountBankNumber", "", new
+                    {
+                        id = "MainTransferAccountBankNumber",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/SearchAccountBank"),
+                        data_displaykey = "AccountNumber",
+                        placeholder = @Global.EnterNumberAccount,
+                        data_val = "false",
+                        data_val_required = @Global.RequiredField
+                    })
+            <span class="text-danger" data-valmsg-for="MainTransferAccountBankNumber" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-6">
+            <label>@Global.IssuingBankAccountName</label>
+
+            @Html.TextBox("MainTransferBankName", "", new
+                    {
+                        id = "MainTransferBankName",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/SearchAccountBank"),
+                        data_displaykey = "LongDescription",
+                        placeholder = @Global.EnterBankName,
+                        data_val = "false",
+                        data_val_required = @Global.RequiredField
+                    })
+            <span class="text-danger" data-valmsg-for="MainTransferBankName" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-3">
+            <label>@Global.Currency</label>
+            @Html.TextBox("CurrencyMainTransfer", "", new
+            {
+                disabled = "disabled",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="CurrencyMainTransfer" data-valmsg-replace="true" />
+
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.PaymentDate</label>
+            @Html.TextBox("DatePaymentMainTransfer", "", new
+            {
+                @class = "uif-datepicker",
+                style = "text-align: left",
+                data_mask = "99/99/9999",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="DatePaymentMainTransfer" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.DeliveryDate</label>
+            @Html.TextBox("DeliveryDateMainTransfer", "", new
+            {
+                @class = "uif-datepicker",
+                style = "text-align: left",
+                data_mask = "99/99/9999",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="DeliveryDateMainTransfer" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.TotalSelected</label>
+            @Html.TextBox("TotalSelectedMainTransfer", "", new
+            {
+                disabled = "disabled",
+            })
+            <span class="text-danger" data-valmsg-for="TotalSelectedMainTransfer" data-valmsg-replace="true" />
+
+        </div>
+
+    </div>
+</form>
+
+<div class="form-footer">
+    <button type="button" class="btn btn-default" id="CleanMainTransfer">
+        <i class="fa fa-paint-brush"></i>        @Global.Clean
+    </button>
+    <button type="button" class="btn btn-primary" id="SearchMainTransfer">
+        <i class="fa fa-search"></i>        @Global.Search
+    </button>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="MainTransfer" data-exporttocsv="false" data-edit="true" data-delete="false" data-selectiontype="single" data-filter="true"
+               data-paginate="true" data-title="@Global.AccountBankConsult">
+            <thead>
+                <tr>
+                    <th data-property="PaymentOrderCode">@Global.PaymentOrderNumber</th>
+                    <th data-property="PersonTypeName">@Global.PayerType</th>
+                    <th data-property="BeneficiaryName">@Global.Beneficiary</th>
+                    <th data-property="EstimatedPaymentDate">@Global.EstimatedDate</th>
+                    <th data-property="BankName">@Global.Bank</th>
+                    <th data-property="BankAccountNumber">@Global.ReceivingBankAccountNumber</th>
+                    <th data-visible="false" data-property="IncomeAmount">@Global.Amount</th>
+                    <th data-property="Amount">@Global.Amount</th>
+                    <th data-visible="false" data-property="BankCode">BankCode</th>
+                    <th data-visible="false" data-property="BeneficiaryDocumentNumber">BeneficiaryDocumentNumber</th>
+                    <th data-visible="false" data-property="AccountBankCode">AccountBankCode</th>
+                    <th data-visible="false" data-property="AdmissionDate">AdmissionDate</th>
+                    <th data-visible="false" data-property="BranchCode">BranchCode</th>
+                    <th data-visible="false" data-property="BranchName">BranchName</th>
+                    <th data-visible="false" data-property="BranchPayCode">BranchPayCode</th>
+                    <th data-visible="false" data-property="BranchPayName">BranchPayName</th>
+                    <th data-visible="false" data-property="CancellationDate">CancellationDate</th>
+                    <th data-visible="false" data-property="CheckNumber">CheckNumber</th>
+                    <th data-visible="false" data-property="CompanyCode">CompanyCode</th>
+                    <th data-visible="false" data-property="CompanyName">CompanyName</th>
+                    <th data-visible="false" data-property="CurrencyCode">CurrencyCode</th>
+                    <th data-visible="false" data-property="CurrencyName">CurrencyName</th>
+                    <th data-visible="false" data-property="ExchangeRate">ExchangeRate</th>
+                    <th data-visible="false" data-property="PersonTypeCode">PersonTypeCode</th>
+                    <th data-visible="false" data-property="PayerName">PayerName</th>
+                    <th data-visible="false" data-property="IndividualId">IndividualId</th>
+                    <th data-visible="false" data-property="PaymentMethodCode">PaymentMethodCode</th>
+                    <th data-visible="false" data-property="PaymentMethodName">PaymentMethodName</th>
+                    <th data-visible="false" data-property="PaymentSourceCode">PaymentSourceCode</th>
+                    <th data-visible="false" data-property="PaymentSourceName">PaymentSourceName</th>
+                    <th data-visible="false" data-property="PayTo">PayTo</th>
+                    <th data-visible="false" data-property="PersonTypeCode">PersonTypeCode</th>
+                    <th data-visible="false" data-property="TempImputationCode">TempImputationCode</th>
+                    <th data-visible="false" data-property="PayTo">UserId</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainTransfer")
+}

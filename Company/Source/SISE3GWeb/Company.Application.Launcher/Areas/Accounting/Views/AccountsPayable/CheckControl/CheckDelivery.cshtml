@@ -1,0 +1,216 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.DeliveryCheck;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.DeliveryCheck</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button type="button" class="btn btn-default" id="CancelCheckDelivery">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="AcceptCheckDelivery" class="btn btn-primary" role="button">
+            <i class="fa fa-check"></i>  @Global.Accept
+        </button>
+    </footer>
+}
+
+<form id="CheckDelivery" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label" for="BranchCheckDelivery">
+                @Global.Branch @Global.Bank
+            </label>
+            @Html.DropDownList("BranchCheckDelivery", Enumerable.Empty<SelectListItem>(), new
+                 {
+                     @class = "uif-select form-control",
+                     data_source = @Url.Content("~/Accounting/Common/GetListBranchesbyUserName"),
+                     data_id = "Id",
+                     data_name = "Description",
+                     data_selectedid = @ViewBag.BranchDefault,
+                     data_native = "true",
+                     data_val = "true",
+                     data_val_required = @Global.RequiredField
+                 })
+            <span class="text-danger" data-valmsg-for="BranchCheckDelivery" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="NameBankCheckDelivery">
+                @Global.BankName
+            </label>
+            @Html.DropDownList("NameBankCheckDelivery", Enumerable.Empty<SelectListItem>(), new
+                 {
+                     @class = "uif-select form-control",
+                     data_id = "Id",
+                     data_name = "Description",
+                     data_native = "true",
+                     data_val = "true",
+                     data_val_required = @Global.RequiredField
+                 })
+            <span class="text-danger" data-valmsg-for="NameBankCheckDelivery" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="AccountNumberCheckDelivery">
+                @Global.BankAccountNumber
+            </label>
+            @Html.DropDownList("AccountNumberCheckDelivery", Enumerable.Empty<SelectListItem>(), new
+                 {
+                     @class = "uif-select form-control",
+                     data_id = "Id",
+                     data_name = "Number",
+                     data_val = "true",
+                     data_native = "true",
+                     data_val_required = @Global.RequiredField
+                 })
+            <span class="text-danger" data-valmsg-for="AccountNumberCheckDelivery" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label" for="DeliveryTypeCheckDelivery">
+                @Global.DeliveryType
+            </label>
+            @Html.DropDownList("DeliveryTypeCheckDelivery", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/LoadTypeDelivery"),
+                 data_id = "Id",
+                 data_native = "true",
+                 data_name = "Description",
+                 data_val = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="DeliveryTypeCheckDelivery" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="numberPaymentOrderCheckDelivery">
+                @Global.PaymentOrderNumber
+            </label>
+            <input type="text" id="numberPaymentOrderCheckDelivery" name="numberPaymentOrderCheckDelivery"
+                   onkeypress=" return JustNumbers(event, this); " onblur=" this.value=this.value.toUpperCase();"
+                   maxlength="10" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" for="checkNumberCheckDelivery">
+                @Global.CheckNumber
+            </label>
+            <input type="text" id="checkNumberCheckDelivery" name="checkNumberCheckDelivery" onkeypress=" return JustNumbers(event, this); "
+                   onblur="this.value = this.value.toUpperCase();" maxlength="15" />
+        </div>
+    </div>
+</form>
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <label class="control-label" for="amountPaymentOrderCheckDelivery">
+            @Global.Amount
+        </label>
+        <input type="text" id="amountPaymentOrderCheckDelivery" name="amountPaymentOrderCheckDelivery"
+               onkeypress=" return JustNumbers(event, this); " onblur="this.value = this.value.toUpperCase();" maxlength="15"
+               style="text-align:right" />
+    </div>
+    <div class="uif-col-4">
+        <label class="control-label" for="checkPayableToCheckDelivery">
+            @Global.CheckPayableTo
+        </label>
+        <input type="text" id="checkPayableToCheckDelivery" name="checkPayableToCheckDelivery" onblur="this.value = this.value.toUpperCase();" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="uif-col-12">
+        <div class="form-footer">
+            <button id="CleanCheckDelivery" class="btn btn-default" role="button">
+                <i class="fa fa-paint-brush"></i>  @Global.Clean
+            </button>
+            <button id="SearchCheckDelivery" class="btn btn-primary" role="button">
+                <i class="fa fa-search"></i>  @Global.Search
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertCheckDelivery"></div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="DeliveryChecksCheckDelivery" data-exporttocsv="false"
+               data-add="false" data-edit="false" data-delete="false" data-selectiontype="multiple" data-filter="false"
+               data-paginate="true" data-title="@Global.MenuCheks">
+            <thead>
+                <tr>
+                    <th data-property="NumberPaymentOrder">@Global.PaymentOrderNumber</th>
+                    <th data-property="CheckNumber">@Global.CheckNumber</th>
+                    <th data-property="BeneficiaryName">@Global.BeneficiaryName</th>
+                    <th data-property="Amount">@Global.Amount</th>
+                    <th data-property="DeliveryDate">@Global.DateReceptionBox</th>
+                    <th data-property="CourierName" data-visible="false">@Global.Delivered</th>
+                    <th data-property="DeliveryDate" data-visible="false">@Global.DateDelivery</th>
+                    <th data-property="CheckPaymentOrderCode" data-visible="false">'CheckPaymentOrderCode'</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<form id="formCheckDelivery" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label" for="dateDeliveryCheckDelivery">
+                @Global.DateDelivery
+            </label>
+            <input type="text" id="dateDeliveryCheckDelivery" name="dateDeliveryCheckDelivery"
+                   onblur="this.value = this.value.toUpperCase();" disabled="disabled" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" id="payerTypeCheckDeliveryLabel">
+                @Global.TypePerson
+            </label>
+            @Html.DropDownList("PayerTypeCheckDelivery", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/LoadPersonType"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_native = "true",
+                 data_val = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="PayerTypeCheckDelivery" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label" id="personReceivingNameCheckDeliveryLabel">
+                @Global.PersonReceivingName
+            </label>
+            <input type="text" id="personReceivingNameCheckDelivery" name="personReceivingNameCheckDelivery"
+                   onblur="this.value = this.value.toUpperCase();" data-val="true" data-val-required="@Global.RequiredField" />
+            <span class="text-danger" data-valmsg-for="personReceivingNameCheckDelivery" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <input type="hidden" id="ViewBagBranchDisableCheckDeliver" value="@ViewBag.BranchDisable" />
+    <input type="hidden" id="ViewBagDeliveryType" value="@ViewBag.DeliveryType" />
+    <input type="hidden" id="ViewBagDateNow" value="@ViewBag.DateNow" />
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/CheckDelivery")
+}

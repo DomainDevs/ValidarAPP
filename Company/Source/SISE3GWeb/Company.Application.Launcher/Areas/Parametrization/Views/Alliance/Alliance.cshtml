@@ -1,0 +1,107 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.AllianceViewModel
+
+@section Title
+{
+    <div id="" class="row main-title">
+        <div id="tittle" class="column-70">
+            @Resources.Language.TitleAlliances
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("Allied", null, new { @class = "uif-input-search", id = "inputAllied", @placeholder = @Resources.Language.SearchAllied })
+        </div>
+    </div>
+}
+
+    <script id="AllianceTemplate" type="text/template">
+        {{#ifCond Status "==" "create"}}
+        <div><strong class="success">{{Description}}</strong></div>
+        {{else ifCond Status "==" "update"}}
+        <div><strong class="warning">{{Description}} ({{AlliedCode}})</strong></div>
+        {{else ifCond Status "==" "delete"}}
+        <div><strong class="danger">{{Description}} ({{AlliedCode}})</strong></div>
+        {{else}}
+        <div><strong>{{Description}} ({{AlliedCode}})</strong></div>
+        {{/ifCond}}
+        <div>{{lblServices}} {{ServicesDescription}}</div>
+    </script>
+
+<form id="formAlliance" autocomplete="off" class="form form-space-adjusted">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row row-space-adjusted">
+                <div class="uif-col-8" style="display:none">
+                    <label class="field-required">@Resources.Language.LabelAlliedCode</label>
+                    @Html.TextBoxFor(model => model.AlliedCode, new { id = "inputAlliedCode", placeholder = @Resources.Language.LabelAlliedCode, disabled = true })
+                    @Html.ValidationMessageFor(model => model.AlliedCode)
+                </div>
+                <div class="uif-col-8">
+                    <label class="field-required">@Resources.Language.LabelDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", placeholder = @Resources.Language.LabelDescription, maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="row row-space-adjusted"></div>
+            @Html.Label(@Resources.Language.LabelServiceQuery)
+            <div class="row">
+                <div class="uif-col-6">
+                    <input type="checkbox" id="chkIsScore" name="IsScore" />
+                    <label for="chkIsScore">@Resources.Language.LabelIsScore</label>
+                </div>
+                <div class="uif-col-6">
+                    <input type="checkbox" id="chkIsFine" name="IsFine" />
+                    <label for="chkIsFine">@Resources.Language.LabelIsFine</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 col-space-adjusted">
+            <div id="listViewAlliance" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewAlliance">
+                    @Resources.Language.New
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAddAlliance">
+                    @Resources.Language.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right" id="buttonsAlliancePanel">
+            <button type="button" class="btn btn-default" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExit
+                </span>
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExport
+                </span>
+            </button>
+            <button class="btn btn-primary" id="btnSave">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+            </button>
+        </div>
+    </footer>
+}
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Alliance")
+}

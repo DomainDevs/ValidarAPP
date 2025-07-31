@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="AccountingConceptTaxView">
+  <collections>
+    <collection name="AccountingConceptTax" type="Sistran.Core.Application.Tax.Entities.AccountingConceptTax, 
+                Core.Tax.Entities"></collection>
+    <collection name="Tax" type="Sistran.Core.Application.Tax.Entities.Tax, 
+                Core.Tax.Entities"></collection>
+    <collection name="TaxCategory" type="Sistran.Core.Application.Tax.Entities.TaxCategory, 
+                Core.Tax.Entities"></collection>
+    <collection name="RateType" type="Sistran.Core.Application.Parameters.Entities.RateType, 
+                Core.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="AccountingConceptTax" destination="Tax" name="TaxAccountingConceptTax" type="Inner">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+    </relation>
+    <relation source="AccountingConceptTax" destination="TaxCategory" name="AccountingConceptTaxTaxCategory" type="Inner">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+      <property left="TaxCategoryCode" type="Equal" right="TaxCategoryCode"></property>
+    </relation>
+    <relation source="Tax" destination="RateType" name="TaxRateType" type="Inner">
+      <property left="RateTypeCode" type="Equal" right="RateTypeCode"></property>
+    </relation>
+  </relations>
+</view>

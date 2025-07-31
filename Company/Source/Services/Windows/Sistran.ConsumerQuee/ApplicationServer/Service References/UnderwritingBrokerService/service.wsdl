@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UnderwritingBrokerService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IUnderwritingBrokerService_CreatePendingOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePendingOperation" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_CreatePendingOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePendingOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_CreatePendingOperationWithParent_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePendingOperationWithParent" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_CreatePendingOperationWithParent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePendingOperationWithParentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_UpdatePendingOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePendingOperation" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_UpdatePendingOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePendingOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_ProcessResponseFromExperienceServiceHistoricPolicies_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessResponseFromExperienceServiceHistoricPolicies" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_ProcessResponseFromExperienceServiceHistoricPolicies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessResponseFromExperienceServiceHistoricPoliciesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_ProcessResponseFromExperienceServiceHistoricSinister_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessResponseFromExperienceServiceHistoricSinister" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_ProcessResponseFromExperienceServiceHistoricSinister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessResponseFromExperienceServiceHistoricSinisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_ProcessResponseFromScoreService_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessResponseFromScoreService" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_ProcessResponseFromScoreService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessResponseFromScoreServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_ProcessResponseFromSimitService_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessResponseFromSimitService" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_ProcessResponseFromSimitService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessResponseFromSimitServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_ExecuteCreatePolicy_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteCreatePolicy" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_ExecuteCreatePolicy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteCreatePolicyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_UpdatePOAndRecordEndorsementOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePOAndRecordEndorsementOperation" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_UpdatePOAndRecordEndorsementOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePOAndRecordEndorsementOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_UpdateMassiveEmissionRows_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMassiveEmissionRows" />
+  </wsdl:message>
+  <wsdl:message name="IUnderwritingBrokerService_UpdateMassiveEmissionRows_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMassiveEmissionRowsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IUnderwritingBrokerService">
+    <wsdl:operation name="CreatePendingOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/CreatePendingOperation" message="tns:IUnderwritingBrokerService_CreatePendingOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/CreatePendingOperationResponse" message="tns:IUnderwritingBrokerService_CreatePendingOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePendingOperationWithParent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/CreatePendingOperationWithParent" message="tns:IUnderwritingBrokerService_CreatePendingOperationWithParent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/CreatePendingOperationWithParentResponse" message="tns:IUnderwritingBrokerService_CreatePendingOperationWithParent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePendingOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/UpdatePendingOperation" message="tns:IUnderwritingBrokerService_UpdatePendingOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/UpdatePendingOperationResponse" message="tns:IUnderwritingBrokerService_UpdatePendingOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromExperienceServiceHistoricPolicies">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromExperienceServiceHistoricPolicies" message="tns:IUnderwritingBrokerService_ProcessResponseFromExperienceServiceHistoricPolicies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromExperienceServiceHistoricPoliciesResponse" message="tns:IUnderwritingBrokerService_ProcessResponseFromExperienceServiceHistoricPolicies_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromExperienceServiceHistoricSinister">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromExperienceServiceHistoricSinister" message="tns:IUnderwritingBrokerService_ProcessResponseFromExperienceServiceHistoricSinister_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromExperienceServiceHistoricSinisterResponse" message="tns:IUnderwritingBrokerService_ProcessResponseFromExperienceServiceHistoricSinister_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromScoreService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromScoreService" message="tns:IUnderwritingBrokerService_ProcessResponseFromScoreService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromScoreServiceResponse" message="tns:IUnderwritingBrokerService_ProcessResponseFromScoreService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromSimitService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromSimitService" message="tns:IUnderwritingBrokerService_ProcessResponseFromSimitService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromSimitServiceResponse" message="tns:IUnderwritingBrokerService_ProcessResponseFromSimitService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteCreatePolicy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/ExecuteCreatePolicy" message="tns:IUnderwritingBrokerService_ExecuteCreatePolicy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/ExecuteCreatePolicyResponse" message="tns:IUnderwritingBrokerService_ExecuteCreatePolicy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePOAndRecordEndorsementOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/UpdatePOAndRecordEndorsementOperation" message="tns:IUnderwritingBrokerService_UpdatePOAndRecordEndorsementOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/UpdatePOAndRecordEndorsementOperationResponse" message="tns:IUnderwritingBrokerService_UpdatePOAndRecordEndorsementOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMassiveEmissionRows">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/UpdateMassiveEmissionRows" message="tns:IUnderwritingBrokerService_UpdateMassiveEmissionRows_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUnderwritingBrokerService/UpdateMassiveEmissionRowsResponse" message="tns:IUnderwritingBrokerService_UpdateMassiveEmissionRows_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="basicEndpoint" type="tns:IUnderwritingBrokerService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreatePendingOperation">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/CreatePendingOperation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePendingOperationWithParent">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/CreatePendingOperationWithParent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePendingOperation">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/UpdatePendingOperation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromExperienceServiceHistoricPolicies">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromExperienceServiceHistoricPolicies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromExperienceServiceHistoricSinister">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromExperienceServiceHistoricSinister" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromScoreService">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromScoreService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromSimitService">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromSimitService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteCreatePolicy">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/ExecuteCreatePolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePOAndRecordEndorsementOperation">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/UpdatePOAndRecordEndorsementOperation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMassiveEmissionRows">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/UpdateMassiveEmissionRows" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IUnderwritingBrokerService" type="tns:IUnderwritingBrokerService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreatePendingOperation">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/CreatePendingOperation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePendingOperationWithParent">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/CreatePendingOperationWithParent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePendingOperation">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/UpdatePendingOperation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromExperienceServiceHistoricPolicies">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromExperienceServiceHistoricPolicies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromExperienceServiceHistoricSinister">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromExperienceServiceHistoricSinister" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromScoreService">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromScoreService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessResponseFromSimitService">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/ProcessResponseFromSimitService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteCreatePolicy">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/ExecuteCreatePolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePOAndRecordEndorsementOperation">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/UpdatePOAndRecordEndorsementOperation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMassiveEmissionRows">
+      <soap:operation soapAction="http://tempuri.org/IUnderwritingBrokerService/UpdateMassiveEmissionRows" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UnderwritingBrokerService">
+    <wsdl:port name="basicEndpoint" binding="tns:basicEndpoint">
+      <soap:address location="http://localhost:4010/External/UnderwritingBrokerService" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IUnderwritingBrokerService" binding="tns:BasicHttpBinding_IUnderwritingBrokerService">
+      <soap:address location="http://localhost:4010/UnderwritingBrokerService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

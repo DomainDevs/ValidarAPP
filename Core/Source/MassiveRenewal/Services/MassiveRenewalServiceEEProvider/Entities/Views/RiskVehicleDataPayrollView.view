@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PolicyRenewalView">
+  <collections>
+    <collection name="RiskVehicle" type="Sistran.Core.Application.Issuance.Entities.RiskVehicle, 
+                Core.Issuance.Entities"></collection>
+    <collection name="CoRiskVehicle" type="Sistran.Core.Application.Issuance.Entities.CoRiskVehicle, 
+                Core.Issuance.Entities"></collection>
+    <collection name="VehicleType" type="Sistran.Core.Application.Common.Entities.VehicleType, 
+                Core.Common.Entities"></collection>
+    <collection name="VehicleMake" type="Sistran.Core.Application.Common.Entities.VehicleMake, 
+                Core.Common.Entities"></collection>
+    <collection name="VehicleModel" type="Sistran.Core.Application.Common.Entities.VehicleModel, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="RiskVehicle" destination="CoRiskVehicle" name="RiskVehicleCoRiskVehicle" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskVehicle" destination="VehicleType" name="RiskVehicleVehicleType" type="Inner">
+      <property left="VehicleTypeCode" type="Equal" right="VehicleTypeCode"></property>
+    </relation>
+    <relation source="RiskVehicle" destination="VehicleMake" name="RiskVehicleVehicleMake" type="Inner">
+      <property left="VehicleMakeCode" type="Equal" right="VehicleMakeCode"></property>
+    </relation>
+    <relation source="RiskVehicle" destination="VehicleModel" name="RiskVehicleVehicleModel" type="Inner">
+      <property left="VehicleModelCode" type="Equal" right="VehicleModelCode"></property>
+    </relation>
+  </relations>
+</view>

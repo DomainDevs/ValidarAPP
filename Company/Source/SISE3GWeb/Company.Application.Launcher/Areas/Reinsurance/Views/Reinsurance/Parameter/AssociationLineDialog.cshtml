@@ -1,0 +1,322 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Application.ReinsuranceServices.DTOs.AssociationLineDTO
+
+<form id="formLinePrefix" onsubmit="return false" class="form">
+    <div class="uif-modalbody">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label field-required"> @Global.Line</label>
+                @Html.DropDownList("LineId", Enumerable.Empty<SelectListItem>(), new
+           {
+               @class = "uif-select",
+               data_source = @Url.Content("~/Reinsurance/Parameter/GetLines"),
+               data_id = "LineId",
+               data_name = "Description",
+               data_selectedid = @Model.LineId,
+               data_val_required = @Global.RequiredField
+           })
+                @Html.ValidationMessage("LineId")
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label field-required">@Global.DateFrom</label>
+                <input type="text" class="uif-datepicker"
+                       data-mask="99/99/9999"
+                       id="DateFrom"
+                       name="DateFrom"
+                       value="@Model.DateFrom"
+                       data-val="true"
+                       data-val-required=@Global.RequiredField />
+                @Html.ValidationMessage("DateFrom")
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label field-required"> @Global.DateTo </label>
+                <input type="text" class="uif-datepicker"
+                       data-mask="99/99/9999"
+                       id="DateTo"
+                       name="DateTo"
+                       value="@Model.DateTo"
+                       data-val="true"
+                       data-val-required=@Global.RequiredField />
+                @Html.ValidationMessage("DateTo")
+            </div>
+
+        </div>
+        <div class="uif-alert" id="alertPrefix"></div>
+        @*POR ASEGURADO*@
+        <div class="uif-row" id="InsuredPanel">
+
+            <div class="uif-col-6">
+                <label class="control-label field-required">@Global.DocumentNumber</label>
+                <input class="uif-autocomplete" type="text"
+                       data-source="@Url.Content("~/Accounting/Common/GetInsuredByDocumentNumber")"
+                       data-displaykey="DocumentNumber"
+                       onkeypress="return JustNumbers(event, this);"
+                       maxlength="15"
+                       placeholder='@Global.EnterDocumentNumber'
+                       id="SearchInsuredAssociationLine"
+                       name="SearchInsuredAssociationLine"
+                       data-val="true"
+                       data-val-required='@Global.RequiredField' />
+                @Html.ValidationMessage("SearchInsuredAssociationLine")
+            </div>
+            <div class="uif-col-6">
+                <label class="control-label field-required">@Global.Insured</label>
+                <input class="uif-autocomplete" type="text"
+                       data-source="@Url.Content("~/Accounting/Common/GetInsuredByInsuredName")"
+                       data-displaykey="Name"
+                       placeholder='@Global.EnterName'
+                       id="SearchInsuredNameAssociationLine"
+                       name="SearchInsuredNameAssociationLine"
+                       data-val="true"
+                       data-val-required='@Global.RequiredField'>
+                @Html.ValidationMessage("SearchInsuredNameAssociationLine")
+            </div>
+        </div>
+
+
+        <div class="uif-row">
+            @*COMBO POR RAMO*@
+            <div class="uif-col-6" id="PrefixComboPanel">
+                <label class="control-label field-required">@Global.Prefix</label>
+                @Html.DropDownList("SelectPrefix", Enumerable.Empty<SelectListItem>(), new
+           {
+               @class = "uif-select form-control",
+               data_id = "Id",
+               data_source = @Url.Content("~/Reinsurance/Process/GetPrefix"),
+               data_name = "Description",
+               data_val = "true",
+               data_native = "true",
+               data_val_required = @Global.RequiredField
+           })
+                @Html.ValidationMessage("SelectPrefix")
+            </div>
+
+            @*COMBO POR RAMO TÉCNICO*@
+            <div class="uif-col-6" id="LineBusinessComboPanel">
+                <label class="control-label field-required"> @Global.Prefix:</label>
+                @Html.DropDownList("SelectLineBusiness",
+                Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select",
+                    data_source = @Url.Content("~/Reinsurance/Parameter/GetLineBusiness"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField,
+                    data_selectedid = @Model.LineBusiness,
+                })
+                @Html.ValidationMessage("SelectLineBusiness")
+            </div>
+
+            @*POR COMBO DE SUBRAMO TÉCNICO*@
+            <div class="uif-col-6" id="SubLineBusinessComboPanel">
+                <label class="control-label field-required"> @Global.SubPrefixFrom:</label>
+                @Html.DropDownList("SelectSubLineBusiness", Enumerable.Empty<SelectListItem>(), new
+           {
+               @class = "uif-select form-control",
+               data_id = "Id",
+               data_name = "Description",
+               data_val = "true",
+               data_native = "true",
+               data_val_required = Global.RequiredField
+           })
+                @Html.ValidationMessage("SelectSubLineBusiness")
+            </div>
+
+            @*OBJETO DE SEGURO--> RIESGO*@
+
+            <div class="uif-col-12" id="AutocompleteRiskPanel">
+
+                <div class="uif-col-12">
+                    <table data-title="@Global.InsuredObject" class=" uif-table" id="TableInsuredObject"
+                           data-add="false" data-delete="false" data-filter="false"
+                           data-edit="false" data-selectiontype="multiple" data-paginate="true"
+                           data-selection>
+                        <thead>
+                            <tr>
+                                <th data-visible="false" data-property="Id">Id</th>
+                                <th data-property="Description">@Global.InsuredObject</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+            @*COBERTURA*@
+            <div class="uif-col-12" id="AutocompleteCoveragePanel">
+                <div class="uif-col-12">
+                    <table data-title="@Global.CoverageDialog_information" class=" uif-table" id="TableCoverages"
+                           data-add="false" data-delete="false" data-filter="false"
+                           data-edit="false" data-selectiontype="multiple" data-paginate="true"
+                           data-selection>
+                        <thead>
+                            <tr>
+                                <th data-visible="false" data-property="Id">Id</th>
+                                <th data-property="Description">@Global.Coverage_Name</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="uif-col-6" id="SelectBusinessType">
+                <label class="control-label field-required">@Global.Operation</label>
+                <select class="uif-select form-control" id="SelectTypeOperation"
+                        name="SelectTypeOperation"
+                        data-val="true"
+                        data-val-required='@Global.RequiredField'
+                        data-id="Id"
+                        data-name="Description"
+                        data-native="true"></select>
+                <span class="text-danger" data-valmsg-for="SelectTypeOperation" data-valmsg-replace="true" />
+            </div>
+
+
+            @*POR TABLA RAMO*@
+            <div class="uif-col-12" id="SelectPrefixPanel">
+                <table data-title="@Global.Prefix" class=" uif-table" id="TablePrefix"
+                       data-add="false"
+                       data-delete="false"
+                       data-filter="true"
+                       data-edit="false"
+                       data-selectiontype="multiple"
+                       data-paginate="true"
+                       data-source='@Url.Content("~/Reinsurance/Process/GetPrefix")'
+                       data-selection>
+                    <thead>
+                        <tr>
+                            <th data-visible="false" data-property="Id">Id</th>
+                            <th data-property="Description">@Global.Prefix</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            @*POR PRODUCTO*@
+            <div class="uif-col-6" id="PrefixProductPanel">
+                <label class="control-label field-required">@Global.Product</label>
+                <select class="uif-multiselect form-control required" id="PrefixByProduct" name="PrefixByProduct"
+                        data-id="Id" data-name="Description" data-val="true"
+                        data-val-required='@Global.RequiredField' data-native="true" multiple="multiple"></select>
+                <span class="text-danger" data-valmsg-for="PrefixByProduct" data-valmsg-replace="true" />
+            </div>
+
+        </div>
+        @*TABLA POR RAMO TÉCNICO*@
+        <div class="uif-row" id="LineBusinessTablePanel">
+            <div class="uif-col-12">
+                <table data-title="@Global.MessageSelectPrefix" class=" uif-table" id="TableSelectLineBusiness"
+                       data-add="false" data-delete="false" data-filter="false"
+                       data-edit="false" data-selectiontype="multiple" data-paginate="true"
+                       data-source=@Url.Content("~/Parameter/GetLineBusiness")
+                       data-selection>
+                    <thead>
+                        <tr id="trAssociationPrefix">
+                            <th data-visible="false" data-property="Id">Id</th>
+                            <th data-property="Description">@Global.Description</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        @*TABLA POR SUBRAMO TÉCNICO*@
+        <div class="uif-row" id="SubLineTablePanel">
+            <div class="uif-col-12">
+                <table data-title="@Global.SubPrefix" class="uif-table" id="TableSelectSubLine"
+                       data-add="false"
+                       data-delete="false"
+                       data-filter="false"
+                       data-edit="false"
+                       data-selectiontype="multiple"
+                       data-paginate="true"
+                       data-selection>
+                    <thead>
+                        <tr>
+                            <th data-visible="false" data-property="Id">Id</th>
+                            <th data-property="Description">@Global.SubPrefix</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        @*POR POLIZA*@
+        <div class="uif-row" id="PolicyPanel">
+            <div class="uif-col-4">
+                <label class="control-label field-required">@Global.Branch</label>
+                <select class="uif-select form-control"
+                        id="BranchAssociationLine"
+                        data-id="Id" data-name="Description"
+                        data-val-required='@Global.RequiredField'
+                        data-source="@Url.Content("~/Reinsurance/Parameter/LoadBranch")"
+                        data-native="true"
+                        data-selectedid="@ViewBag.BranchDefault"
+                        data-val="true"
+                        name="BranchAssociationLine"></select>
+                <span class="text-danger" data-valmsg-for="BranchAssociationLine" data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label field-required">@Global.Prefix</label>
+                <select class="uif-select form-control"
+                        id="PrefixAssociationLine"
+                        data-id="Id"
+                        data-name="Description"
+                        data-val-required='@Global.RequiredField'
+                        data-source="@Url.Content("~/Reinsurance/Parameter/LoadPrefixes")"
+                        data-native="true"
+                        data-selectedid="@ViewBag.BranchDefault"
+                        data-val="true"
+                        name="PrefixAssociationLine"></select>
+                <span class="text-danger" data-valmsg-for="PrefixAssociationLine" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label field-required">@Global.PolicyNumber</label>
+                @Html.TextBox("PolicyNumberAssociationLine", "", new
+           {
+               id = "PolicyNumberAssociationLine",
+               data_minlenght = "3",
+               @class = "uif-autocomplete",
+               data_source = @Url.Content("~/Parameter/GetPolicies"),
+               data_displaykey = "DocumentNumber",
+               placeholder = "Ingrese Póliza",
+               data_val = "true",
+               data_val_required = @Global.RequiredField,
+           })
+                <span class="text-danger" data-valmsg-for="PolicyNumberAssociationLine" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+
+
+        @Html.HiddenFor(model => model.AssociationLineId)
+        @Html.HiddenFor(model => model.AssociationTypeId)
+        @Html.HiddenFor(model => model.DateFrom)
+        @Html.HiddenFor(model => model.DateTo)
+        @Html.HiddenFor(model => model.AssociationColumnId)
+        @Html.HiddenFor(model => model.ValueFrom)
+
+    </div>
+
+    <!-- Modal -->
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0392") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0396"))
+        {
+            <button type="submit" class="btn btn-primary" id="btnLinePrefix"
+                    onclick="return acceptDialogModalParams(event, 'modalParams')">
+                @Global.Save
+            </button>
+        }
+    </div>
+</form>

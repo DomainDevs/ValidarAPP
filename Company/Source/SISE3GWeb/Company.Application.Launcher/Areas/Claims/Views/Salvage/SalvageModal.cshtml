@@ -1,0 +1,81 @@
+﻿<form id="modalSalvageForm">
+    <div class="uif-modal" id="modalSalvage">
+        <div class="uif-modalbody">
+            <div class="uif-row" style=" padding: 10px;">
+                <div id="accSalvageEdition">
+                    <h5>
+                        <strong>@Resources.Language.SalvageEnding</strong>
+                    </h5>
+                    <div class="uif-row">
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.SalvageNumber</label>
+                            <input type="text" id="SalvageId" name="SalvageId" class="rightAlign uif-input" disabled="disabled" />
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.LabelDatehigh</label>
+                            <input type="text" data-val-required="@Resources.Language.RequiredField" name="SalvageCreationDate" data-val="true" id="SalvageCreationDate" class="uif-datepicker" required />
+                            <span class="text-danger" data-valmsg-for="SalvageCreationDate" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.DateOfSale</label>
+                            <input type="text" name="SalvageAssignmentDate" data-val="true" id="SalvageAssignmentDate" class="uif-datepicker" />
+                            <span class="text-danger" data-valmsg-for="SalvageAssignmentDate" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.DateDeclined</label>
+                            <input type="text" data-val="true" id="SalvageEndDate" name="SalvageEndDate" class="uif-datepicker" />
+                            <span class="text-danger" data-valmsg-for="SalvageEndDate" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.DescriptionSalvage</label>
+                            <input type="text" data-val-required="@Resources.Language.RequiredField" data-val="true" name="SalvageDescription" value="" id="SalvageDescription" class="uif-input" maxlength="250" required />
+                            <span class="text-danger" data-valmsg-for="SalvageDescription" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.UnitsQuantityAbbreviation</label>
+                            <input type="text" data-val-required="@Resources.Language.RequiredField" data-val="true" name="SalvageUnitQuantity" value="" id="SalvageUnitQuantity" class="rightAlign uif-input" maxlength="9" required  />
+                            <span class="text-danger" data-valmsg-for="SalvageUnitQuantity" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.EstimatedOfSale</label>
+                            <input type="text" data-val-required="@Resources.Language.RequiredField" data-val="true" name="EstimatedSale" value="" id="SalvageEstimatedSale" class="rightAlign uif-input" maxlength="21" data-msg-maxlength="@string.Format(Resources.Language.MessageMaxLength,16)" data-val="true" required />
+                            <span class="text-danger" data-valmsg-for="EstimatedSale" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-8">
+                            <label>@Resources.Language.Localitation</label>
+                            <input type="text" id="SalvageLocation" name="frmSalvageLocation" maxlength="250" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div id="accSalvageDescription" class="uif-col-12">
+                    <h5>
+                        <strong>@Resources.Language.SalvageRemarks</strong>
+                    </h5>
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <textarea id="SalvageObservations" type="text" name="frmSalvageObservations" style="resize: none; width: 100%;" rows="3" maxlength="250"
+                                      data-val="true"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0333"))
+            {
+                <button type="button" class="btn btn-default" id="btnCancelSalvage" data-dismiss="modal">@Resources.Language.Cancel</button>
+            }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0332"))
+            {
+                <button type="submit" class="btn btn-primary" id="btnSaveSalvage" onclick="return false">@Resources.Language.Accept</button>
+            }
+        </div>
+    </div>
+</form>

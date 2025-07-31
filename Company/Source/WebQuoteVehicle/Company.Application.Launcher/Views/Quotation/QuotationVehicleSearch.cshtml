@@ -1,0 +1,142 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Models.QuotationModelsView
+
+@section Title{
+    <div class="uif-row main-title">
+        <div class="uif-col-6">
+            <div id="globalTitle"></div>
+        </div>
+    </div>
+}
+
+@*@section toolbar
+    {
+        <footer></footer>
+    }*@
+
+<div class="uif-alert" id="alert"></div>
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formQuotationSearch" autocomplete="off" class="form without-space">
+    @Html.HiddenFor(model => model.Title, new { id = "hiddenTitle" })
+    @Html.HiddenFor(model => model.Id, new { id = "hiddenId" })
+    @Html.HiddenFor(model => model.TemporalId, new { id = "hiddenTemporalId" })
+    @Html.HiddenFor(model => model.QuotationVersion, new { id = "hiddenQuotationVersion" })
+    @Html.HiddenFor(model => model.CustomerId, new { id = "hiddenCustomerId" })
+    @Html.HiddenFor(model => model.CustomerType, new { id = "hiddenCustomerType" })
+    @Html.HiddenFor(model => model.UrlPDF, new { id = "hiddenUrlPDF" })
+    <div id="modalUnderwriting">
+        <div class="uif-row">
+            <div class="uif-col-11">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <h5><strong>@Resources.Language.TitlePersonData</strong></h5>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-2">
+                        <input type="radio" name="radioIndividualType" id="radioIndividualTypePerson" value="1" checked="checked" />
+                        <label for="radioIndividualTypePerson">@Resources.Language.LabelSmallPerson</label>
+                        <br />
+                        <input type="radio" name="radioIndividualType" id="radioIndividualTypeCompany" value="2" />
+                        <label for="radioIndividualTypeCompany">@Resources.Language.LabelSmallCompany</label>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.LabelDocument</label>
+                        <select class="uif-select form-control" id="selectDocumentType" data-id="Id" data-name="Description" name="DocumentType"></select>
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.NumberDocument</label>
+                        @Html.TextBoxFor(model => model.Document, new { id = "inputDocument", @maxlength = "14", @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.Document)
+                    </div>
+                    <div class="uif-col-2">
+                        <div class="without-label">
+                            <input type="button" value="@Resources.Language.LabelSearchCustomer" class="btn btn-default secondary-Colombia" id="btnSearchCustomer" />
+                        </div>
+                    </div>
+                    <div class="uif-col-2">
+                        <div class="without-label">
+                            <button class="btn btn-default" id="btnExport">
+                                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                <span class="" aria-hidden="true"></span>
+                                @Resources.Language.LabelExport
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panelPerson">
+                    <div class="uif-row">
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.LabelNames</label>
+                            @Html.TextBoxFor(model => model.Names, new { id = "inputNames", @class = "form-control switch-disabled" })
+                            @Html.ValidationMessageFor(model => model.Names)
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.LabelSurname</label>
+                            @Html.TextBoxFor(model => model.Surname, new { id = "inputSurname", @class = "form-control switch-disabled" })
+                            @Html.ValidationMessageFor(model => model.Surname)
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.LabelSecondSurname</label>
+                            @Html.TextBoxFor(model => model.SecondSurname, new { id = "inputSecondSurname", @class = "form-control switch-disabled" })
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-2">
+                        <div class="without-label">
+                            <input type="button" value="@Resources.Language.LabelClearSearch" class="btn btn-default secondary-Colombia" id="btnNewQuotationSearch" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <table class="uif-table" id="tblSearchQuotation" data-selectiontype="none" data-filter="true" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-visible="false" data-property="DocumentNumber">Nro. de Documento</th>
+                            <th data-visible="false" data-property="Name">Nombres</th>
+                            <th data-visible="false" data-property="Surname">Apellido</th>
+                            <th data-visible="false" data-property="SecondSurname">Segundo Apellido</th>
+                            <th data-property="Branch">Sucursal</th>
+                            <th data-property="Prefix">Ramo</th>
+                            <th data-property="QuotationId">Nro.</th>
+                            <th data-property="DateQuotation">Fecha Cotización</th>
+                            <th data-property="Product">Producto</th>
+                            <th data-property="DeclaredAmount" data-type="currency">Valor Asegurado</th>
+                            <th data-property="PremiumAmount" data-type="currency">Prima Calculada</th>
+                            <th data-property="SentEmail">Envió Correo</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+            <div class="uif-row">
+                <div class="uif-col-2">
+                    <div class="without-label">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/Quotation/QuotationVehicleSearch.js")"></script>
+    <script>
+        $.ajaxSetup({ async: false });
+    </script>
+}

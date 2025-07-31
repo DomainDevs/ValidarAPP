@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CompanyUserBranchView">
+  <collections>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, 
+                Core.Common.Entities"></collection>
+    <collection name="CoBranch" type="Sistran.Core.Application.Common.Entities.CoBranch, 
+                Core.Common.Entities"></collection>
+    <collection name="UserBranch" type="Sistran.Core.Application.UniqueUser.Entities.UserBranch, 
+                  Core.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Branch" destination="CoBranch" name="BranchCoBranch" type="Left">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="Branch" destination="UserBranch" name="BranchUserBranch" type="Left">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+  </relations>
+</view>

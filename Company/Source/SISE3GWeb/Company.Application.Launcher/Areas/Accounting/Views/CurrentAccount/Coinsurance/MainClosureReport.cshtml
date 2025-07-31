@@ -1,0 +1,210 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ClosuresReport;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.CurrentAccount</li>
+        <li>@Global.Coinsurances</li>
+        <li>@Global.ClosuresReport</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        @*<button class="btn btn-primary" id="GenerateReport">
+            <i class="fa fa-list-alt"></i> @Global.Accept
+        </button>*@
+        <button id="btnGenerateTemplateChechingAccount" class="btn btn-primary" role="button" hidden="hidden">
+            <span class="glyphicon glyphicon-flash"></span>  @Global.GenerateFile
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0560"))
+        {
+            <button id="btnMassiveReportChechingAccount" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        }
+    </footer>
+}
+
+<div class="modal fade" id="modalCheckingAccountMassiveReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><b>@Global.ReinsureProcessMassive</b></h4>
+            </div>
+            <div class="modal-body">
+                @Global.ConfirmMessageProcess
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnModalCheckingAccountProcessReport">@Global.Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="uif-panel-pc">
+    <form id="formGenerateReport" method="post">
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label class="control-label">@Global.MonthlyClosings</label>
+                @Html.DropDownList("MonthlyClosings", Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select form-control",
+                    data_source = @Url.Content("~/Accounting/Agent/GetMonthlyClosings"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField,
+                    data_native = "true"
+                })
+                <span class="text-danger" data-valmsg-for="MonthlyClosings" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.DateFrom</label>
+                @Html.TextBox("DateFromMainClosuredReport", "", new
+                    {
+                        id = "DateFromMainClosuredReport",
+                        maxlength = "10",
+                        @class = "uif-datepicker",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                <span class="text-danger" data-valmsg-for="DateFromMainClosuredReport" data-valmsg-replace="true" />
+            </div>
+            <div class="uif-col-3">
+                <label>@Global.DateTo</label>
+                @Html.TextBox("DateToMainClosuredReport", "", new
+                    {
+                        id = "DateToMainClosuredReport",
+                        maxlength = "10",
+                        @class = "uif-datepicker",
+                        data_val = "true",
+                        data_val_required = @Global.RequiredField
+                    })
+                <span class="text-danger" data-valmsg-for="DateToMainClosuredReport" data-valmsg-replace="true" />
+            </div>
+        </div>
+
+        <div class="uif-row" id="rowCurrency">
+            <div class="uif-col-6">
+                <label>@Global.Currency</label>
+                @Html.DropDownList("Currency", Enumerable.Empty<SelectListItem>(), new
+                {
+                    @class = "uif-select form-control",
+                    data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                    data_id = "Id",
+                    data_name = "Description",
+                    data_val = "true",
+                    data_val_required = @Global.RequiredField
+                })
+                <span class="text-danger" data-valmsg-for="Currency" data-valmsg-replace="true" />
+            </div>
+        </div>
+
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label>@Global.GenerateBy</label>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="coptions" id="optionCoinsurance" value="A" checked>
+                        @Global.AnCoinsuranceCompany
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="coptions" id="optionAllCoinsurance" value="T">
+                        @Global.AllCoinsurances
+                    </label>
+                </div>
+            </div>
+            <div class="uif-col-6">
+                <label>@Global.ListSortedBy</label>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="options" id="optionBranch" value="first" checked>
+                        @Global.Branch
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="options" id="optionCompany" value="second">
+                        @Global.Company
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-6">
+                <label>@Global.CoinsuranceDocumentNumber</label>
+                @Html.TextBox("CoinsuranceDocumentNumber", "", new
+                    {
+                        id = "CoinsuranceDocumentNumber",
+                        maxlength = "20",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetCoInsuranceCompaniesByDescription"),
+                        data_displaykey = "TributaryIdCardNo",
+                        placeholder = @Global.EnterReinsuranceDocumentNumber,
+                    })
+            </div>
+            <div class="uif-col-6">
+                <label>@Global.CoinsuranceName</label>
+                @Html.TextBox("CoinsuranceName", "", new
+                    {
+                        id = "CoinsuranceName",
+                        @class = "uif-autocomplete",
+                        data_source = @Url.Content("~/Accounting/Common/GetCoInsuranceCompaniesByDescription"),
+                        data_displaykey = "Description",
+                        placeholder = @Global.EnterCoInsuranceName,
+                    })
+            </div>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="uif-alert" id="alertForm"></div>
+            </div>
+        </div>
+        <div class="uif-row">
+            <table class="uif-table" 
+                   data-source=""
+                   data-exporttocsv="false"
+                   data-exportname="cultura"
+                   data-add="false" 
+                   id="tableMassiveProcessMain"
+                   data-edit="true"
+                   data-delete="false"
+                   data-filter="false"
+                   data-selectiontype="none" 
+                   data-title=@Global.GeneratedReports>
+                <thead>
+                    <tr>
+                        <th data-property="Order" data-visible="false">""</th>
+                        <th data-property="ProcessId">@Global.ProcessId</th>
+                        <th data-property="Description">@Global.Description</th>
+                        <th data-property="RecordsNumber">@Global.RecordsNumber</th>
+                        <th data-property="RecordsProcessed">@Global.ProcessedRecords</th>
+                        <th data-property="Progress">@Global.Progress</th>
+                        <th data-property="Elapsed">@Global.Elapsed</th>
+                        <th data-property="UrlFile">@Global.File</th>
+                        <th data-property="Status" data-visible="false">""</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+        </div>
+    </form>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainClosureReport")
+}

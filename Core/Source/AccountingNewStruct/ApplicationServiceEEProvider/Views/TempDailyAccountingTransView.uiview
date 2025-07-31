@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="TempDailyAccountingTransView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="TempDailyAccountingTransId">
+          <Column table-alias="TempDailyAccountingTrans" name="TempDailyAccountingTransId" />
+        </SelectValue>
+        <SelectValue alias="TempImputationCode">
+          <Column table-alias="TempDailyAccountingTrans" name="TempImputationCode" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="TempDailyAccountingTrans" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="BranchDescription">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+        <SelectValue alias="SalePointCode">
+          <Column table-alias="TempDailyAccountingTrans" name="SalePointCode" />
+        </SelectValue>
+        <SelectValue alias="SalePointDescription">
+          <Column table-alias="SalePoint" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CompanyCode">
+          <Column table-alias="TempDailyAccountingTrans" name="CompanyCode" />
+        </SelectValue>
+        <SelectValue alias="AccountingCompanyDescription">
+          <Column table-alias="Company" name="Description" />
+        </SelectValue>
+        <SelectValue alias="PaymentConceptCode">
+          <Column table-alias="TempDailyAccountingTrans" name="PaymentConceptCode" />
+        </SelectValue>
+        <SelectValue alias="BeneficiaryId">
+          <Column table-alias="TempDailyAccountingTrans" name="BeneficiaryId" />
+        </SelectValue>
+        <SelectValue alias="BeneficiaryDocumentNumber">
+          <Column table-alias="ListPersons" name="DocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="BeneficiaryName">
+          <Column table-alias="ListPersons" name="Name" />
+        </SelectValue>
+        <SelectValue alias="BookAccountCode">
+          <Column table-alias="TempDailyAccountingTrans" name="BookAccountCode" />
+        </SelectValue>
+        <SelectValue alias="AccountingNumber">
+          <Column table-alias="AccountingAccount" name="AccountNumber" />
+        </SelectValue>
+        <SelectValue alias="AccountingName">
+          <Column table-alias="AccountingAccount" name="AccountName" />
+        </SelectValue>
+        <SelectValue alias="AccountingNatureCode">
+          <Column table-alias="TempDailyAccountingTrans" name="AccountingNature" />
+        </SelectValue>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="TempDailyAccountingTrans" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="CurrencyDescription">
+          <Column table-alias="Currency" name="Description" />
+        </SelectValue>
+        <SelectValue alias="IncomeAmount">
+          <Column table-alias="TempDailyAccountingTrans" name="IncomeAmount" />
+        </SelectValue>
+        <SelectValue alias="ExchangeRate">
+          <Column table-alias="TempDailyAccountingTrans" name="ExchangeRate" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="TempDailyAccountingTrans" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="TempDailyAccountingTrans" name="Description" />
+        </SelectValue>
+        <SelectValue alias="BankReconciliationId">
+          <Column table-alias="TempDailyAccountingTrans" name="BankReconciliationId" />
+        </SelectValue>
+        <SelectValue alias="ReceiptNumber">
+          <Column table-alias="TempDailyAccountingTrans" name="ReceiptNumber" />
+        </SelectValue>
+        <SelectValue alias="ReceiptDate">
+          <Column table-alias="TempDailyAccountingTrans" name="ReceiptDate" />
+        </SelectValue>
+        <SelectValue alias="PostdatedAmount">
+          <Column table-alias="TempDailyAccountingTrans" name="PostdatedAmount" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join type="Left">
+              <Join>
+                <Join>
+                  <Join>
+                    <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.TempDailyAccountingTrans,  Core.Accounting.Entities" alias="TempDailyAccountingTrans" />
+                    <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+                    <criteria>
+                      <BinaryCriterion type="Equal">
+                        <Column table-alias="Branch" name="BranchCode" />
+                        <Column table-alias="TempDailyAccountingTrans" name="BranchCode" />
+                      </BinaryCriterion>
+                    </criteria>
+                  </Join>
+                  <ClassNameTable name="Sistran.Core.Application.Common.Entities.SalePoint, Core.Common.Entities" alias="SalePoint" />
+                  <criteria>
+                    <BinaryPredicate type="And">
+                      <BinaryCriterion type="Equal">
+                        <Column table-alias="SalePoint" name="SalePointCode" />
+                        <Column table-alias="TempDailyAccountingTrans" name="SalePointCode" />
+                      </BinaryCriterion>
+                      <!--SE AGREGA UNA CONDICION MAS POR SUCURSAL-->
+                      <BinaryCriterion type="Equal">
+                        <Column table-alias="SalePoint" name="BranchCode" />
+                        <Column table-alias="TempDailyAccountingTrans" name="BranchCode" />
+                      </BinaryCriterion>
+                    </BinaryPredicate>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Company,  Core.Accounting.Entities" alias="Company" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Company" name="CompanyId" />
+                    <Column table-alias="TempDailyAccountingTrans" name="CompanyCode" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.ListPersons,  Core.Accounting.Entities" alias="ListPersons" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="ListPersons" name="IndividualId" />
+                  <Column table-alias="TempDailyAccountingTrans" name="BeneficiaryId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.AccountingAccount,  Core.GeneralLedger.Entities" alias="AccountingAccount" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="AccountingAccount" name="AccountingAccountId" />
+                <Column table-alias="TempDailyAccountingTrans" name="BookAccountCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Currency, Core.Common.Entities" alias="Currency" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Currency" name="CurrencyCode" />
+              <Column table-alias="TempDailyAccountingTrans" name="CurrencyCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

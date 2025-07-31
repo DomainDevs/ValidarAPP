@@ -1,0 +1,76 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @Global.PrefixReinsurances;
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameter</li>
+        <li>@Global.PrefixReinsurances</li>
+    </ol>
+}
+
+@section Modals
+{
+    <form id="addForm" class="form">
+        <div class="uif-modal" id="modalPrefixCumulus">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Reinsurance/Views/Reinsurance/Parameter/ModalPrefixCumulus.cshtml")
+            </div>
+            <div class="uif-row">
+                <div class="uif-modalbuttons">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0388"))
+                    {
+                        <button type="submit" class="btn btn-primary" id="btnSave" onclick="return false">@Global.Save</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form id="editForm" class="form">
+        <div class="uif-modal" id="modalPrefixCumulusEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Reinsurance/Views/Reinsurance/Parameter/ModalPrefixCumulus.cshtml")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0390") )
+                {
+                    <button type="submit" class="btn btn-primary" id="btnSaveEdit" onclick="return false">@Global.Save</button>
+                }
+            </div>
+        </div>
+    </form>
+}
+
+<form id="mainForm" class="form">
+    <div class="uif-modalbody">
+        <div class="uif-alert" id="alertPrefixCumulus"></div>
+
+        <div class="uif-row">
+            <table class="uif-table" data-source="@Url.Content("~/Reinsurance/Parameter/GetPrefixsCumulus")" data-title="" id="tblprefixcumulus" data-add="true" data-edit="true" data-delete="true" data-selectiontype="none" data-hiddencolumns="4,5,6,7">
+                <thead>
+                    <tr>
+                        <th data-property="PrefixDescription">@Global.Prefix</th>
+                        <th data-property="PrefixCumulusDescription">@Global.PrefixCumulus</th>
+                        <th data-property="TypeExerciceDescripcion">@Global.TypeExercice</th>
+                        <th data-property="Location" data-type="boolean">@Global.Location</th>
+                        <th data-property="PrefixCumulusId" data-visible="false"></th>
+                        <th data-property="PrefixCD" data-visible="false"> </th>
+                        <th data-property="PrefixCumulusCD" data-visible="false"></th>
+                        <th data-property="TypeExercice" data-visible="false"></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+
+@section scripts{
+    @Scripts.Render("~/reinsurance/bundles/PrefixCumulus")
+}

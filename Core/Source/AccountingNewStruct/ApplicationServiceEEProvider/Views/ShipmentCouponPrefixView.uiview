@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="ShipmentCouponPrefixView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="ShipmentCode">
+          <Column table-alias="ShipmentCoupon" name="ShipmentCode" />
+        </SelectValue>
+        <SelectValue alias="EndorsementId">
+          <Column table-alias="ShipmentCoupon" name="EndorsementId" />
+        </SelectValue>
+        <SelectValue alias="IsTemporal">
+          <Column table-alias="ShipmentCoupon" name="IsTemporal" />
+        </SelectValue>
+        <SelectValue alias="DescriptionRedu">
+          <Column table-alias="ShipmentCoupon" name="DescriptionRedu" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="ShipmentCoupon" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="PrefixCode">
+          <Column table-alias="ShipmentCoupon" name="PrefixCode" />
+        </SelectValue>
+        <SelectValue alias="PrefixDescription">
+          <Column table-alias="Prefix" name="Description" />
+        </SelectValue>
+        <SelectValue alias="DocumentNumber">
+          <Column table-alias="Endorsement" name="DocumentNum" />
+        </SelectValue>
+        <SelectValue alias="EndorsementTypeCode">
+          <Column table-alias="Endorsement" name="EndoTypeCode" />
+        </SelectValue>
+        <SelectValue alias="StatusCode">
+          <Column table-alias="ShipmentCoupon" name="StatusCode" />
+        </SelectValue>
+        <SelectValue alias="CouponStatusCode">
+          <Column table-alias="ShipmentCoupon" name="CouponStatusCode" />
+        </SelectValue>
+        <SelectValue alias="CouponStatusBankCode">
+          <Column table-alias="CouponStatus" name="CouponStatusBankCode" />
+        </SelectValue>
+        <SelectValue alias="RealDatePayment">
+          <Column table-alias="ShipmentCoupon" name="RealDatePayment" />
+        </SelectValue>
+        <SelectValue alias="CouponStatusDescription">
+          <Column table-alias="CouponStatus" name="Description" />
+        </SelectValue>
+        <SelectValue alias="TotalAmount">
+          <Column table-alias="ShipmentCoupon" name="TotalAmount" />
+        </SelectValue>
+        <SelectValue alias="BankNetworkCode">
+          <Column table-alias="BankNetworkStatus" name="BankNetworkCode" />
+        </SelectValue>
+        <SelectValue alias="PolicyDocumentNumber">
+          <Column table-alias="Policy" name="DocumentNumber" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join type="Left">
+            <Join type="Left">
+              <Join>
+                <Join>
+                  <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.ShipmentCoupon,  Core.Accounting.Entities" alias="ShipmentCoupon" />
+                  <ClassNameTable name="Sistran.Core.Application.Common.Entities.Prefix, Core.Common.Entities" alias="Prefix" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="Prefix" name="PrefixCode" />
+                      <Column table-alias="ShipmentCoupon" name="PrefixCode" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Issuance.Entities.Policy, Core.Issuance.Entities" alias="Policy" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Policy" name="PolicyId" />
+                    <Column table-alias="ShipmentCoupon" name="PolicyId" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Issuance.Entities.Endorsement, Core.Issuance.Entities" alias="Endorsement" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="Endorsement" name="PolicyId" />
+                  <Column table-alias="Policy" name="PolicyId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CouponStatus,  Core.Accounting.Entities" alias="CouponStatus" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="CouponStatus" name="CouponStatusBankCode" />
+                <Column table-alias="ShipmentCoupon" name="CouponStatusBankCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.BankNetworkStatus,  Core.Accounting.Entities" alias="BankNetworkStatus" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="BankNetworkStatus" name="CouponStatusCode" />
+              <Column table-alias="CouponStatus" name="CouponStatusId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>
+

@@ -1,0 +1,54 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.PolicyModelsView
+
+<form id="formRiskFromPolicy" class="form">
+    <div class="row">
+        <div class="uif-col-6">
+            <input type="radio" id="chkTemporal" name="chkTemporal" />
+            <label>@Resources.Language.Temporal</label>
+        </div>
+        <div class="uif-col-6">
+            <input type="radio" id="chkPolicy" name="chkTemporal" />
+            <label>@Resources.Language.Policy</label>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-6">
+                <label>@Resources.Language.LabelTemporal</label>
+                @Html.TextBoxFor(model => model.Id, new { id = "inputRiskFromTemporal", @class = "uif-input-search" })
+                @Html.ValidationMessageFor(model => model.Id)
+            </div>
+            <div class="uif-col-6">
+                <label>@Resources.Language.LabelPolicyNumber</label>
+                @Html.TextBoxFor(model => model.Id, new { id = "inputPolicyNumber", @class = "uif-input-search" })
+                @Html.ValidationMessageFor(model => model.Id)
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-col-6">
+                <label>@Resources.Language.LabelPrefixCommercial</label>
+                <select class="uif-select form-control" id="selectPrefixRisk" data-val="true" data-native="false" )'
+                        data-val-required="@Resources.Language.ErrorDocumentPrefix" data-id="Id" data-name="Description" name="PrefixId"></select>
+                @Html.ValidationMessageFor(model => model.PrefixId)
+            </div>
+            <div class="uif-col-6">
+                <label>@Resources.Language.LabelBranch</label>
+                <select class="uif-select form-control" id="selectBranchRisk" data-val="true" )'
+                        data-val-required="@Resources.Language.ErrorDocumentBranch" data-id="Id" data-native="false" data-name="Description" name="BranchId"></select>
+                @Html.ValidationMessageFor(model => model.BranchId)
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="pull-right">
+            </div>
+        </div>
+    </div>
+</form>

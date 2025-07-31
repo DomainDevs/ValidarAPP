@@ -1,0 +1,51 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Product.Models.RiskTypesModelsView
+<script id="RiskTypeTemplate" type="text/template">
+    <div><strong>@Resources.Language.LabelRiskType: {{Description}}</strong></div>
+    <div><strong>@Resources.Language.LabelMaximumNumberRisk: {{MaxRiskQuantity}}</strong></div>
+    <div class="hidden">
+        {{StatusTypeService}}
+    </div>
+</script>
+<form id="formRiskType" class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelRiskType</label>
+                    <select class="uif-select form-control" id="selectModalRiskType" data-val="true"
+                            data-source=""
+                            data-val-required="@Resources.Language.ErrorDocumentControlRiskType"
+                            data-id="Id" data-name="Description" name="Id"  data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.Id)
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelMaximumNumberRisk</label>
+                    @Html.TextBoxFor(model => model.MaxRiskQuantity, new { id = "inputModalMaximumNumberRisk", placeholder = @Resources.Language.LabelMaximumNumberRisk })
+                    @Html.ValidationMessageFor(model => model.MaxRiskQuantity)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-listview" id="listModalRiskType">
+            </div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" id="btnCancelRiskType">
+                    <span class="" aria-hidden="true">@Resources.Language.NewForm</span>
+                </button>
+                <button type="button" class="btn btn-primary" id="btnModalAddRiskType">
+                    <span class="" aria-hidden="true">@Resources.Language.AddForm</span>
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

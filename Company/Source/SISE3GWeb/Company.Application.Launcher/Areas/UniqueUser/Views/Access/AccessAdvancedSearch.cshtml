@@ -1,0 +1,76 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.AccessModelsView
+<script id="advancedSearchTemplate" type="text/template">
+    <div>
+        {{ModuleDescription}} - {{SubModuleDescription}}
+    </div>
+    <div>
+        @Resources.Language.Name: <strong>{{Description}}</strong>
+    </div>
+    <div>
+        <strong>{{AccessTypeDescription}}</strong>
+    </div>
+</script>
+
+<div class="uif-alert" id="alertAdvanced"></div>
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelModule</label>
+            <select class="uif-select form-control" id="searchModule" data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentControlModule"
+                    data-id="Id" data-name="Description" name="ModuleId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelSubmodule</label>
+            <select class="uif-select form-control" id="searchSubModule" data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentControlModule"
+                    data-id="Id" data-name="Description" name="ModuleId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.EnabledDisabled</label>
+            <select class="uif-select form-control" id="searchEnabledType" data-val="true"
+                    data-id="Value" data-name="Text" name="StatusId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.AccessType</label>
+            <select class="uif-select form-control" id="searchAccessType" data-val="true"
+                    data-val-required="@Resources.Language.ErrorDocumentAccessType"
+                    data-id="Value" data-name="Text" name="TypeId"
+                    data-filter="true" data-native="false"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="without-label">
+                <button type="button" name="name" id="btnAdvancedSearch" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listViewSearchAdvanced">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancel" data-dismiss="modal" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoad" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+

@@ -1,0 +1,164 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = Global.SearchLabel + " " + Global.InternalBallot;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.BallotsAdministration</li>
+        <li>@Global.SearchLabel @Global.InternalBallot</li>
+    </ol>
+}
+
+@section Modals
+{
+
+    <div class="uif-modal" id="modalView">
+        <div class="uif-modalbody">
+            @Html.Partial("../CardInternalDepositSlip/CardInternalDepositSlipModal")
+        </div>
+    </div>
+
+    <div class="uif-modal" id="modalView1">
+        <div class="uif-modalbody">
+            @Html.Partial("../CardInternalDepositSlip/CardInternalDepositSlipSaveSuccessModal")
+        </div>
+    </div>
+
+    <div class="uif-modal" id="modalViewDetail">
+        <div class="uif-modalbody">
+            @Html.Partial("CardDetails")
+        </div>
+    </div>
+
+    <!-- Modal confirmación de grabación -->
+    <div class="modal fade" id="modalSave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="saveMessageTitle">@Global.SearchBallotsCancellationBallot</label></h4>
+                </div>
+                <div class="modal-body" id="saveMessageModal">
+                    <p>@Global.InternalBallotCancelationQuestion</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> @Global.No
+                    </button>
+                    <button type="button" class="btn btn-primary" id="YesModalCardDepositSlipsSearch">
+                        <i class="fa fa-check"></i> @Global.Yes
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+<!-- Modal Mensaje de grabación -->
+<div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times-circle">
+                    </i>
+                </button>
+                <h4 class="modal-title"><label id="saveMessageTitle">@Global.SearchBallotsCancellationBallot</label></h4>
+            </div>
+            <div class="modal-body" id="BodyModalMessage">
+                <p>@Global.InternalBallotAlreadyInExternalBallot</p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal Mensaje de grabación 2-->
+<div class="modal fade" id="modalMessage1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times-circle">
+                    </i>
+                </button>
+                <h4 class="modal-title"><label id="saveMessageTitle">@Global.SearchBallotsCancellationBallot</label></h4>
+            </div>
+            <div class="modal-body" id="BodyModalMessage1">
+                <p>@Global.CancelBallotSuccess</p>
+            </div>
+            <div class="modal-footer" style="padding: 10px 20px 10px">
+                <button type="button" class="btn btn-primary" id="AcceptModalCardDepositSlipsSearch">
+                    <i class="fa fa-check"></i> @Global.Accept
+                </button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+    <!-- /.Modal de Eliminación -->
+<div class="modal fade" id="modalDeleteBallot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times-circle">
+                    </i>
+                </button>
+                <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+            </div>
+            <div class="modal-body" id="deleteMessageModal">
+                <p>@Global.DeleteBallot</p>
+            </div>
+            <div class="modal-footer" style="padding: 10px 20px 10px">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-remove"></i> @Global.Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="DeleteModalCardDeposit">
+                    <i class="fa fa-check"></i> @Global.Accept
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="CancelCardsCardDepositSlipsSearch" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i> @Global.Annul
+        </button>
+        <button id="EditCardsDepositSlipsSearch" class="btn btn-primary" role="button">
+            <i class="fa fa-edit"></i> @Global.Edit
+        </button>
+    </footer>
+}
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable"/>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("CardDepositSlipSearch")
+        </div>
+   </div>
+</div>
+
+<div class="uif-row">
+    
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCardDepositSlipSearch")
+}

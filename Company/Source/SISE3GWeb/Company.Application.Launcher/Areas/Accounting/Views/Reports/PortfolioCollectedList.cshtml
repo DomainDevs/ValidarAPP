@@ -1,0 +1,290 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @Global.PortfolioCollected;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.PortfolioReports</li>
+        <li class="active">@Global.PortfolioCollected</li>
+    </ol>
+
+}
+
+
+
+
+<form id="ReportFormPortfolioCollected" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("BranchPortfolioCollected", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetListBranchesbyUserName"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_selectedid = @ViewBag.BranchDefault,
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             } , @ViewBag.BranchDefault)
+            <span class="text-danger" data-valmsg-for="BranchPortfolioCollected" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.Prefix
+            </label>
+            @Html.DropDownList("PrefixPortfolioCollected", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Common/GetPrefixes"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_val = "true",
+                 data_native = "true",
+                 data_val_required = @Global.RequiredField
+             })
+            <span class="text-danger" data-valmsg-for="PrefixPortfolioCollected" data-valmsg-replace="true" />
+        </div>
+
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.DateFrom</label>
+                @Html.TextBox("StartDatePortfolioCollected", "", new
+                {
+                   style = "text-align: left",
+                   maxlength = "40",
+                   data_val = "true",
+                   data_name = "StartDatePortfolioCollected",
+                   @class = "uif-datepicker",
+                   data_mask = "99/99/9999",
+                   data_val_required = @Global.RequiredField
+               })
+                <span class="text-danger" data-valmsg-for="StartDatePortfolioCollected" data-valmsg-replace="true" />
+            </div>
+        <div class="uif-col-6">
+            <label>@Global.DateTo</label>
+            @Html.TextBox("EndDatePortfolioCollected", "", new
+               {
+                   style = "text-align: left",
+                   maxlength = "40",
+                   data_val = "true",
+                   data_name = "EndDatePortfolioCollected",
+                   @class = "uif-datepicker",
+                   data_mask = "99/99/9999",
+                   data_val_required = @Global.RequiredField
+               })
+            <span class="text-danger" data-valmsg-for="EndDatePortfolioCollected" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+              @Global.PortfolioCollectedBy
+            <div class="radio">
+                <label>
+                    <input type="radio" class="cPersonTypePortfolioCollected"  name="options1" id="allCompanyPortfolioCollected" value="AC" checked>
+                    @Global.AllCompany
+                </label>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label">
+                <input type="radio" class="cPersonTypePortfolioCollected" name="options1" id="insuredRadioPortfolioCollected" value="1">
+                @Global.DocNumInsured 
+                 </label>
+
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                   data-displaykey="DocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="20"
+                   placeholder='@Global.EnterDocumentNumber' id="DocumentInsuredPortfolioCollected"
+                   name="DocumentInsuredPortfolioCollected" hidden="hidden"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="DocumentInsuredPortfolioCollected" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.InsuredName
+            </label>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetInsuredByInsuredName", "Common")"
+                   data-displaykey="Name" maxlength="100"
+                   placeholder='@Global.EnterInsurdeName' id="InsuredPortfolioCollected"
+                   name="InsuredPortfolioCollected" hidden="hidden"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="InsuredPortfolioCollected" data-valmsg-replace="true">
+            </span>
+            
+        </div>
+      </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label">
+                <input type="radio" class="cPersonTypePortfolioCollected" name="options1" id="brokerRadioPortfolioCollected" value="2">
+                @Global.AgentDocumentNumber
+            </label>
+            @Html.TextBox("DocumentBrokerPortfolioCollected", "", new
+           {
+               id = "DocumentBrokerPortfolioCollected",
+               maxlength = "50",
+               @class = "uif-autocomplete",
+               data_source = @Url.Content("~/Accounting/Common/GetAgentByDocumentNumber"),
+               data_displaykey = "DocumentNumber",
+               placeholder = @Global.EnterAgentDocument,
+               data_val = "true",
+               data_val_required = @Global.RequiredField
+           })
+            <span id="spanDocumentBroker" class="text-danger" data-valmsg-for="DocumentBrokerPortfolioCollected" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label class="control-label">
+                @Global.AgentName
+            </label>
+             @Html.TextBox("BrokerPortfolioCollected", "", new
+               {
+                   id = "BrokerPortfolioCollected",
+                   maxlength = "50",
+                   @class = "uif-autocomplete",
+                   data_source = @Url.Content("~/Accounting/Common/GetAgentByName"),
+                   data_displaykey = "Name",
+                   placeholder = @Global.EnterAgentName,
+                   data_val = "true",
+                   data_val_required = @Global.RequiredField
+               })
+            <span id="spanBroker" class="text-danger" data-valmsg-for="BrokerPortfolioCollected" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label class="control-label">
+                <input type="radio" class="cPersonTypePortfolioCollected" name="options1" id="userRadioPortfolioCollected" value="3">
+                @Global.User
+            </label>
+            <br />
+            @Html.TextBox("UserPortfolioCollected", "", new
+           {
+               id = "UserPortfolioCollected",
+               maxlength = "50",
+               @class = "uif-autocomplete",
+               data_source = @Url.Content("~/Accounting/BillSearch/GetUsers"),
+               data_displaykey = "value",
+               placeholder = "Tipea nombre usuario.",
+               data_val = "true",
+               data_val_required = @Global.RequiredField
+           })
+            <span id="spanUser" class="text-danger" data-valmsg-for="UserPortfolioCollected" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <br />
+                <label>@Global.ListCollections</label>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="options2" id="allPortfolioCollected" value="1" checked>
+                        @Global.All
+                    </label>
+                    <label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="options2" id="billingPortfolioCollected" value="2">
+                        @Global.Billing
+                    </label>
+                    @*Se comenta el radiobutton de amortizaciones porque todavía no se encuentra desarrollado Amortizaciones*@
+                    @*<label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="options2" id="amortizationPortfolioCollected" value="AM">
+                            @Global.Amortization
+                        </label>*@
+                </div>
+            </div>
+        </div>
+</form>
+
+@section Toolbar
+    {
+    <footer>
+        <button id="CancelPortfolioCollected" class="btn btn-default" role="button">
+            <span class="glyphicon glyphicon-remove"></span>  @Global.Clean
+        </button>
+        <button id="MassiveReportPortfolioCollected" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+        </button>
+    </footer>
+}
+
+@section modals{
+
+    @*VENTANAS MODALES DE CONFIRMACION*@
+    <!-- Modal Confirma proceso de masivos-->
+    <div class="modal fade" id="modalMassiveTotRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.PortfolioCollected</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnModalPortfolioCollected">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalMassiveNo">@Global.No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal Confirmacion del Proceso Masivo de cada reporte -->
+    <div class="modal fade" id="modalMassiveReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.PortfolioCollected</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.ConfirmMessageProcess
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnModalMassiveProcessReport">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/PortfolioCollectedList")
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>

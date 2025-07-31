@@ -1,0 +1,116 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "DialogApplicationReceipt";
+}
+<style>
+    .ptitle {
+        text-align: center;
+    }
+</style>
+
+<script id="ltvAplicationReceiptTemplate" type="text/template">
+
+    <div class="col-xs-6 text-left">
+        <strong>{{MovementType}}</strong>
+    </div>
+    <div class="col-xs-3 text-right col-number">
+        <div class="text-left vertical-center">
+            <div class="number">{{Debits}}</div>
+        </div>
+    </div>
+    <div class="col-xs-3 text-right col-number">
+        <div class="text-left vertical-center">
+            <div class="number">{{Credits}}</div>
+        </div>
+    </div>
+    <br>
+</script>
+
+
+<div class="uif-panel" data-title="@Global.ApplicationReceiptTitle" >
+    <div class="row height-100 flex">
+        <div class="col-xs-12 col-md-6 no-padding-right col-left">
+            <div class="uif-panel" data-title="@Global.DialogApplicationReceiptApplicationTitle" >
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <label>@Global.BillNum</label>
+
+                    <input type="text" id="_NumberReceipt" name="_NumberReceipt" disabled="disabled"/>
+                </div>
+                <div class="uif-col-3">
+                    <label>@Global.AccountingDate</label>
+                    <input type="text" id="_AccountingDate" name="_AccountingDate" disabled="disabled"/>
+                </div>
+                <div class="uif-col-3">
+                    <label>@Global.DocNumPayer</label>
+                    <input type="text" id="DocumentNumber" name="DocumentNumber" disabled="disabled"/>
+                </div>
+                <div class="uif-col-3">
+                    <label>@Global.BillAmount</label>
+                    <input type="text" id="_ReceiptAmount" name="_ReceiptAmount" disabled="disabled" style="text-align: right"/>
+                </div>
+            </div>
+            <div class="uif-row">
+
+                <div class="uif-col-4">
+                    @Global.Branch
+                    <input type="text" id="_BranchName" name="_BranchName" disabled="disabled"/>
+                </div>
+                <div class="uif-col-4">
+                    @Global.IncomeConcept
+                    <input type="text" id="_EntryConcept" name="_EntryConcept" disabled="disabled"/>
+                </div>
+                <div class="uif-col-4">
+                    @Global.PostedValue
+                    <input type="text" id="_PostdatedValue" name="_PostdatedValue" disabled="disabled" style="text-align: right"/>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    @Global.Description
+                    <input type="text" id="_DescriptionAR" name="_DescriptionAR" disabled="disabled"/>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    @Global.Observations
+                    <input type="text" id="_Observations" name="_Observations"/>
+
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6 no-padding-left col-right">
+            <div class="uif-panel " data-title="@Global.MovementSummary">
+                <div id="ltvAplicationReceipt" class="uif-listview">
+                    <div class="header">
+                        <div class="col-xs-5 text-center">
+                            <b>@Global.Concept</b>
+                        </div>
+                        <div class="col-xs-3">
+                            <b>@Global.Debit</b>
+                        </div>
+                        <div class="col-xs-3">
+                            <b>@Global.Credit</b>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="col-xs-8 text-center">
+                            <b>@Global.Total</b>
+                        </div>
+                        <div class="col-xs-4 text-right col-number">
+                            <b id="TotalDebit">$0.00</b><br>
+                        </div>
+                        <div class="col-xs-4 text-right col-number">
+                            <b id="TotalCredit">$0.00</b><br>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  

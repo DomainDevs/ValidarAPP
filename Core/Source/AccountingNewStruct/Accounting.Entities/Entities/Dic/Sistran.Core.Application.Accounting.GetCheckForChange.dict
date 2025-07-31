@@ -1,0 +1,42 @@
+<map version="2.0" type="class" name="GetCheckForChange" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="GET_CHECK_FOR_CHANGE_ENTITY">
+  <properties>
+    <property name="PaymentCode" type="Integer" key="true" description="PAYMENT_CODE_PROPERTY" />
+    <property name="PaymentMethodTypeCode" type="Integer" nullable="true" description="PAYMENT_METHOD_TYPE_CODE_PROPERTY" />
+    <property name="IssuingBankCode" type="Integer" nullable="true" description="ISSUING_BANK_CODE_PROPERTY" />
+    <property name="BankName" type="String" size="50" description="BANK_NAME_PROPERTY" />
+    <property name="IssuingAccountNumber" type="String" size="50" nullable="true" description="ISSUING_ACCOUNT_NUMBER_PROPERTY" />
+    <property name="DocumentNumber" type="String" size="50" nullable="true" description="DOCUMENT_NUMBER_PROPERTY" />
+    <property name="CollectCode" type="Integer" nullable="true" description="COLLECT_CODE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+    <property name="CurrencyDescription" type="String" size="50" description="CURRENCY_DESCRIPTION_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="16" scale="2" nullable="true" description="AMOUNT_PROPERTY" />
+    <property name="ExchangeRate" type="Decimal" precision="18" scale="6" nullable="true" description="EXCHANGE_RATE_PROPERTY" />
+    <property name="IncomeAmount" type="Decimal" precision="16" scale="2" nullable="true" description="INCOME_AMOUNT_PROPERTY" />
+    <property name="DatePayment" type="DateTime" nullable="true" description="DATE_PAYMENT_PROPERTY" />
+    <property name="Holder" type="String" size="100" nullable="true" description="HOLDER_PROPERTY" />
+    <property name="CollectStatus" type="Integer" nullable="true" description="COLLECT_STATUS_PROPERTY" />
+    <property name="InternalBallot" type="Integer" nullable="true" description="INTERNAL_BALLOT_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="GET_CHECK_FOR_CHANGE" schema="ACC" alias="GET_CHECK_FOR_CHANGE" update="true">
+      <columns>
+        <column name="PAYMENT_CD" type="Int32" property="PaymentCode" key="true" />
+        <column name="PAYMENT_METHOD_TYPE_CD" type="Int32" property="PaymentMethodTypeCode" />
+        <column name="ISSUING_BANK_CD" type="Int32" property="IssuingBankCode" />
+        <column name="BANK_NAME" type="String" property="BankName" allowNull="false" size="50" />
+        <column name="ISSUING_ACCOUNT_NUMBER" type="String" property="IssuingAccountNumber" size="50" />
+        <column name="DOCUMENT_NUMBER" type="String" property="DocumentNumber" size="50" />
+        <column name="COLLECT_CD" type="Int32" property="CollectCode" />
+        <column name="CURRENCY_CD" type="Int32" property="CurrencyCode" />
+        <column name="CURRENCY_DESCRIPTION" type="String" property="CurrencyDescription" allowNull="false" size="50" />
+        <column name="AMOUNT" type="Decimal" property="Amount" size="19" precision="16" scale="2" />
+        <column name="EXCHANGE_RATE" type="Decimal" property="ExchangeRate" size="19" precision="18" scale="6" />
+        <column name="INCOME_AMOUNT" type="Decimal" property="IncomeAmount" size="19" precision="16" scale="2" />
+        <column name="DATE_PAYMENT" type="DateTime" property="DatePayment" />
+        <column name="HOLDER" type="String" property="Holder" size="100" />
+        <column name="COLLECT_STATUS" type="Int32" property="CollectStatus" />
+        <column name="INTERNAL_BALLOT" type="Int32" property="InternalBallot" />
+      </columns>
+    </table>
+  </tables>
+</map>

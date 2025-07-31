@@ -1,0 +1,427 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.RequestForPayments
+    </div>
+
+    <div class="column-20 hideSearchClaim">
+        @Resources.Language.LabelSearchClaimNumber&nbsp;<span id="inputClaimBranch"> </span>
+    </div>
+
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsRescue" class="footerUnderwriting">
+        <button class="btn btn-primary" id="btnPrintPaymentRequest" style="display: none;">
+            <span class="fa fa-print" aria-hidden="true">&nbsp;@Resources.Language.LabelPrinter</span>
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0340"))
+        {
+            <button class="btn btn-primary" id="btnSavePaymentRequest">
+                <span class="fa fa-floppy-o" aria-hidden="true">&nbsp;@Resources.Language.ButtonSave</span>
+            </button>
+        }
+    </div>
+</script>
+
+<div id="modalSearch">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <h5><strong>@Resources.Language.LabelBasicInformation</strong></h5>
+                </div>
+            </div>
+            <form id="formPaymentRequest">
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.OriginOfPayment</label>
+                        <select class="uif-select form-control" id="selectPaymentSource" data-val="true"
+                                data-val-required="@Resources.Language.RequiredField" data-native="false"
+                                data-id="Id" data-name="Description" name="paymentSourceId" required></select>
+                    </div>
+                    <div class="uif-col-7">
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.MovementType</label>
+                        <select class="uif-select form-control" id="selectMovementType" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                data-id="Id" data-name="Description" name="movementTypeId" data-filter="true" data-native="false" required></select>
+                        <span class="text-danger" data-valmsg-for="movementTypeId" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.PaymentBranch</label>
+                        <select class="uif-select form-control" id="selectPaymentBranch" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                data-id="Id" data-name="Description" name="paymentBranchId" data-filter="true" data-native="false" required></select>
+                        <span class="text-danger" data-valmsg-for="paymentBranchId" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.EstimatedPaymentDate</label>
+                        <input type="text" data-val-required="@Resources.Language.RequiredField" data-min-date="@DateTime.Now.ToString("dd/MM/yyyy")" name="EstimatedDate" data-val="true" id="inputEstimatedDate" class="uif-datepicker" required />
+                        <span class="text-danger" data-valmsg-for="EstimatedDate" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.RegistrationDate</label>
+                        <input type="text" name="RegistrationDate" data-val="true" id="inputRegistrationDate" class="uif-input" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.AccountingDate</label>
+                        <input type="text" name="AccountingDate" data-val="true" id="inputAccountingDate" class="uif-input" disabled="disabled" />
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.PayTo</label>
+                        <select class="uif-select form-control" id="selectPayTo" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                data-native="false" data-id="Id" data-name="Description" name="payToId" required></select>
+                        <span class="text-danger" data-valmsg-for="payToId" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <div id="divInsured" hidden="hidden">
+                        <div class="uif-col-3">
+                            <label class="field-required">@Html.Label(@Resources.Language.DocumentNumber)</label>
+                            <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Claims/PaymentRequest/GetInsuredByNameDocumentNumber")"
+                                   data-val-required="@Resources.Language.RequiredField" data-displaykey="DocumentNumber" data-val="true" placeholder="@Resources.Language.PlaceHolderDocumentNumber" id="DocumentNumberInsured" name="DocumentNumberInsured">
+                            <span class="text-danger" data-valmsg-for="DocumentNumberInsured" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Html.Label(@Resources.Language.FullName)</label>
+                            <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Claims/PaymentRequest/GetInsuredByNameDocumentNumber")"
+                                   data-val-required="@Resources.Language.RequiredField" data-val="true" data-displaykey="FullName" placeholder="@Resources.Language.PlaceHolderNameSurname" id="FullNameInsured" name="FullNameInsured">
+                            <span class="text-danger" data-valmsg-for="FullNameInsured" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div id="divThirdparty" hidden="hidden">
+                        <div class="uif-col-3">
+                            <label class="field-required">@Html.Label(@Resources.Language.DocumentNumber)</label>
+                            <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Claims/Claim/GetThirdPartyByDescriptionInsuredSearchType")"
+                                   data-val-required="@Resources.Language.RequiredField" data-displaykey="DocumentNumber" data-val="true"
+                                   placeholder="@Resources.Language.PlaceHolderDocumentNumber" id="InputDocumentNumberThirdParty" name="DocumentNumberThirdParty" required>
+                            <span class="text-danger" data-valmsg-for="InputDocumentNumberThirdParty" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Html.Label(@Resources.Language.FullName)</label>
+                            <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Claims/Claim/GetThirdPartyByDescriptionInsuredSearchType")"
+                                   data-val-required="@Resources.Language.RequiredField" data-val="true" data-displaykey="FullName"
+                                   placeholder="@Resources.Language.PlaceHolderNameSurname" id="InputFullNameThirdParty" name="FullNameThirdParty" required>
+                            <span class="text-danger" data-valmsg-for="InputFullNameThirdParty" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div id="divSupplier" hidden="hidden">
+                        <div class="uif-col-3">
+                            <label class="field-required">@Html.Label(@Resources.Language.DocumentNumber)</label>
+                            <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Claims/PaymentRequest/GetSuppliersByNameDocumentNumber")"
+                                   data-val-required="@Resources.Language.RequiredField" data-val="true" data-displaykey="DocumentNumber"
+                                   placeholder="@Resources.Language.PlaceHolderDocumentNumber" id="DocumentNumberSupplier" name="DocumentNumberSupplier" required>
+                            <span class="text-danger" data-valmsg-for="DocumentNumberSupplier" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Html.Label(@Resources.Language.FullName)</label>
+                            <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Claims/PaymentRequest/GetSuppliersByNameDocumentNumber")"
+                                   data-val-required="@Resources.Language.RequiredField" data-val="true" data-displaykey="Name"
+                                   placeholder="@Resources.Language.PlaceHolderNameSurname" id="FullNameSupplier" name="FullNameSupplier" required>
+                            <span class="text-danger" data-valmsg-for="FullNameSupplier" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.PaymentCurrency</label>
+                        <select class="uif-select form-control" id="selectPaymentCurrency" data-val="true" data-id="Id"
+                                data-val-required="@Resources.Language.RequiredField" data-name="Description" name="PaymentCurrencyId"
+                                data-native="false" data-filter="true" required></select>
+                        <span class="text-danger" data-valmsg-for="PaymentCurrencyId" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.LabelMethodPayment</label>
+                        <select class="uif-select form-control" id="selectPaymentMethod" data-val="true" data-id="Id"
+                                data-val-required="@Resources.Language.RequiredField" data-name="Description"
+                                data-native="false" data-filter="true" name="methodPayment" required></select>
+                        <span class="text-danger" data-valmsg-for="methodPayment" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.TotalValueToPayforClaims</label>
+                        <input type="text" name="inpuntTotalAmount" data-val="true" id="inpuntTotalAmount" class="rightAlign uif-input" data-val-required="@Resources.Language.RequiredField" required />
+                        <span class="text-danger" data-valmsg-for="inpuntTotalAmount" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <div class="without-label">
+                            <button type="button" class="btn btn-default secondary-Colombia" id="btnTaxStatus">
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                @Resources.Language.TaxStatus
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <label class="field-required">@Resources.Language.LabelDescription</label>
+                        <textarea id="inputDescription" type="text" name="Description" style="resize: none; width: 100%;" rows="3" maxlength="300"
+                                  data-val="true" data-val-required="@Resources.Language.RequiredField"></textarea>
+                        <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            </form>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div id="divRteICA">
+                        @Html.Partial("~/Areas/Claims/Views/PaymentRequest/RetentionIndustryAndCommerce.cshtml")
+                    </div>
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <input id="_chkMultipleBilling" type="checkbox" />
+                        <label for="_chkMultipleBilling">@Resources.Language.VariousInvoicesbyClaim</label>
+                    </div>
+                </div>
+            </div>
+
+            <form id="formVoucher">
+                <div id="divBilling">
+                    <div class="uif-row">
+                        <div class="uif-col-12">
+                            <h5><strong>@Resources.Language.InvoiceInformation</strong></h5>
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.TypeOfVoucher</label>
+                            <select class="uif-select form-control" id="selectVoucherType" data-val="true"
+                                    data-val-required="@Resources.Language.RequiredField" data-filter="true"
+                                    data-id="Id" data-name="Description" data-native="false" name="voucherType" required></select>
+                            <span class="text-danger" data-valmsg-for="voucherType" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.VoucherNumber</label>
+                            <input type="text" name="VoucherNumber" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                   id="inputVoucherNumber" class="uif-input" required />
+                            <span class="text-danger" data-valmsg-for="VoucherNumber" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.LabelDate</label>
+                            <input type="text" name="VoucherDate" data-val-required="@Resources.Language.RequiredField"
+                                   data-val="true" id="inputVoucherDate" class="uif-datepicker" required data-max-date="@DateTime.Now.ToString("dd/MM/yyyy")" />
+                            <span class="text-danger" data-valmsg-for="VoucherDate" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.InvoiceCurrency</label>
+                            <select class="uif-select form-control" id="selectInvoiceCurrency" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="invoiceCurrencyId" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="invoiceCurrencyId" data-valmsg-replace="true"></span>
+
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label class="field-required">@Resources.Language.ExchangeRate</label>
+                            <input type="text" name="ExchangeRate" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                   id="inputExchangeRate" class="rightAlign uif-input" disabled="disabled" required />
+                            <span class="text-danger" data-valmsg-for="ExchangeRate" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <h5><strong>@Resources.Language.Claims</strong></h5>
+                </div>
+                <div class="uif-col-12">
+                    <ul class="uif-tab nav nav-tabs">
+                        <li id="tabClaims" class="active"><a href="#addClaims" data-toggle="tab"><strong>@Resources.Language.AddClaims</strong></a></li>
+                        <li id="tabSummClaims" class=""><a href="#summaryClaims" data-toggle="tab"><strong>@Resources.Language.SummaryClaims</strong></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="addClaims" class="tab-pane active" style="height:200px">
+                            <form id="formClaims">
+                                <div class="uif-col-2">
+                                    <label>@Resources.Language.LabelBranch</label>
+                                    <select class="uif-select form-control" id="selectBranch" data-val="true"
+                                            data-id="Id" data-name="Description" name="BranchId" data-filter="true" data-native="false"></select>
+                                    <span class="text-danger" data-valmsg-for="BranchId" data-valmsg-replace="true"></span>
+                                </div>
+
+                                <div class="uif-col-2">
+                                    <label>@Resources.Language.LabelPrefix</label>
+                                    <select class="uif-select form-control" id="selectPrefixesofClaims"
+                                            data-id="Id" data-name="Description" name="PrefixId" data-filter="true" data-native="false"></select>
+                                    <span class="text-danger" data-valmsg-for="PrefixId" data-valmsg-replace="true"></span>
+                                </div>
+
+                                <div class="uif-col-3">
+                                    <label class="field-required">@Resources.Language.LabelNumberPolicy</label>
+                                    <input type="text" class="uif-input rightAlign" id="inputPolicyDocumentNumber" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                           data-name="Description" name="PolicyDocumentNumber" required onkeypress="return event.charCode >= 48 && event.charCode <= 58" />
+                                    <span class="text-danger" data-valmsg-for="PolicyDocumentNumber" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="uif-col-3">
+                                    <label class="field-required">@Resources.Language.ClaimNumber</label>
+                                    <input type="text" name="ClaimNumber" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                           id="inputClaimNumber" class="uif-input rightAlign" required />
+                                    <span class="text-danger" data-valmsg-for="ClaimNumber" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="uif-col-2">
+                                    <div class="without-label">
+                                        <button type="button" class="btn btn-default secondary-Colombia" id="btnSearchClaim">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                            @Resources.Language.search
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="uif-col-12">
+                                <table class="uif-table" id="tblClaims" data-source="" data-exporttocsv="false" data-exportname="cultura"
+                                       data-add="false" data-edit="false" data-delete="false" data-filter="false" data-selectiontype="single"
+                                       data-alignactions="left">
+                                    <thead>
+                                        <tr>
+                                            <th data-property="PolicyHolderName">@Resources.Language.Holder</th>
+                                            <th data-property="PolicyDocumentNumber">@Resources.Language.LabelNroPolicy</th>
+                                            <th data-property="SubClaim">@Resources.Language.SubClaim</th>
+                                            <th data-property="RiskDescription">@Resources.Language.LabeltitleRisk</th>
+                                            <th data-property="CoverageDescription">@Resources.Language.LabelTitleCoverage</th>
+                                            <th data-property="Insured">@Resources.Language.InsuredName / @Resources.Language.Third</th>
+                                            <th data-property="Currency">@Resources.Language.LabelCoin</th>
+                                            <th data-property="EstimationType">@Resources.Language.EstimationType</th>
+                                            <th data-property="PaymentValue" data-type="currency">@Resources.Language.TotalPayments</th>
+                                            <th data-property="EstimateAmount" data-type="currency">@Resources.Language.EstimateValue</th>
+                                            <th data-property="TotalConcept" data-type="currency">@Resources.Language.TotalConcept</th>
+                                            <th data-property="TotalTax" data-type="currency">@Resources.Language.TotalTax</th>
+                                            <th data-property="TotalRetention" data-type="currency">@Resources.Language.TotalRetention</th>
+                                            <th data-property="Total" data-type="currency">@Resources.Language.Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="summaryClaims" class="tab-pane" style="height:200px">
+                            <div class="uif-col-12">
+                                <table class="uif-table" id="tblSummaryClaims" data-source="" data-exporttocsv="false" data-exportname="cultura"
+                                       data-add="false" data-edit="false" data-delete="false" data-filter="false" data-selectiontype="single"
+                                       data-alignactions="left">
+                                    <thead>
+                                        <tr>
+                                            <th data-property="SubClaim">@Resources.Language.SubClaim</th>
+                                            <th data-property="RiskDescription">@Resources.Language.LabeltitleRisk</th>
+                                            <th data-property="CoverageDescription">@Resources.Language.LabelTitleCoverage</th>
+                                            <th data-property="Insured">@Resources.Language.InsuredName / @Resources.Language.Third</th>
+                                            <th data-property="Currency">@Resources.Language.LabelCoin</th>
+                                            <th data-property="EstimationType">@Resources.Language.EstimationType</th>
+                                            <th data-property="TotalConcept" data-type="currency">@Resources.Language.TotalConcept</th>
+                                            <th data-property="TotalTax" data-type="currency">@Resources.Language.TotalTax</th>
+                                            <th data-property="TotalRetention" data-type="currency">@Resources.Language.TotalRetention</th>
+                                            <th data-property="Total" data-type="currency">@Resources.Language.Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-7"><br /></div>
+                <div class="uif-col-2"><br /></div>
+                <div class="uif-col-3">
+                    <label id="lblTotalFinish" class="field-required">@Resources.Language.TotalFinish</label>
+                    <input type="text" name="DateAssignment" data-val="true" id="inpuntTotalFinish" class="rightAlign uif-input" required disabled="disabled" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*MODAL PARA CONCEPTOS DE PAGO VARIOS VOUCHERS*@
+<div class="uif-modal" id="modalMultipleBillingInformationDialog">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Claims/Views/PaymentRequest/MultipleBillingInformationDialog.cshtml")
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnMultiplePaymentConceptClose" data-dismiss="modal">@Resources.Language.Cancel</button>
+        <button type="button" class="btn btn-primary" id="btnMultiplePaymentConcept">@Resources.Language.Accept</button>
+    </div>
+</div>
+
+@*MODAL PARA CONCEPTOS DE PAGO*@
+<div class="uif-modal" id="modalSingleBillingInformationDialog">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Claims/Views/PaymentRequest/ModelSingleBillingInformationDialog.cshtml")
+    </div>
+    <div class="uif-modalbuttons">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0339"))
+        {
+            <button type="button" class="btn btn-default" id="btnPaymentConceptClose" data-dismiss="modal">@Resources.Language.Cancel</button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0338"))
+        {
+            <button type="button" class="btn btn-primary" id="btnPaymentConcept">@Resources.Language.Accept</button>
+        }
+        </div>
+</div>
+@*MODAL PARA DESPLIEGA IMPUESTOS*@
+<div class="uif-modal" id="modalTaxSelectionDialog">
+    <div class="uif-modalbody">
+        @*@Html.Partial("~/Areas/Claims/Views/PaymentRequest/ModalTaxSelection.cshtml")*@
+
+        <form id="formClaimViaBaloto" class="form">
+            <div class="uif-row">
+                <div class="uif-col-12">
+
+                    <table class="uif-table" id="tblTaxSelection" data-source="" data-exporttocsv="false"
+                           data-add="false" data-edit="false" data-delete="false" data-filter="false" data-selectiontype="multiple" data-paginate="false">
+                        <thead>
+                            <tr>
+                                <th data-property="TaxCode" data-visible="false"><b>TaxCode</b></th>
+                                <th data-property="TaxDescription" data-visible="true"><b>@Resources.Language.Taxes</b></th>
+                                <th data-property="TaxCategoryCode" data-visible="false"><b>TaxCategoryCode</b></th>
+                                <th data-property="TaxCategoryDescription" data-visible="true"><b>@Resources.Language.TaxByCategory</b></th>
+                                <th data-property="TaxConditionCode" data-visible="false"><b>TaxConditionCode</b></th>
+                                <th data-property="TaxConditionDescription"><b>@Resources.Language.TaxCondition</b></th>
+                                <th data-property="Rate" data-visible="false">Rate</th>
+                                <th data-property="RateTypeCode" data-visible="false">RateTypeCode</th>
+                                <th data-property="RateDescription" data-visible="false">RateDescription</th>
+                                <th data-property="IsRetention" data-visible="false">IsRetention</th>
+                                <th data-property="Select" data-visible="false">Select</th>
+                                <th data-property="TemporalId" data-visible="false">TemporalId</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-alert" id="alertTaxSelection"></div>
+            </div>
+        </form>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-primary" id="btnTaxSelection">@Resources.Language.Accept</button>
+    </div>
+
+</div>
+
+@*MODAL DESPLIEGA CONDICION IMPOSITIVA*@
+<div class="modal fade bs-example-modal-lg" id="modalTaxConditionDialog" tabindex="-1"
+     role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+            </div>
+            @Html.Partial("ModalTaxCondition")
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnTaxConditionModal">@Resources.Language.Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

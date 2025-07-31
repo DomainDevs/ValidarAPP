@@ -1,0 +1,114 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.InfringementGroupViewModel
+
+@section Title
+{
+    <div id="" class="row main-title">
+        <div id="tittle" class="column-70">
+            @Resources.Language.TitleInfringementGroup
+        </div>
+        <div class="column-30 even">
+            @Html.TextBox("inputInfringementGroup", null, new { @class = "uif-input-search", id = "inputInfringementGroup", @placeholder = @Resources.Language.SearchInfringementGroup })
+        </div>
+    </div>
+}
+
+    <script id="InfringementGroupTemplate" type="text/template">
+        {{#ifCond StatusTypeService "==" 2}}
+        <div><strong class="success">{{Description}}</strong></div>
+        {{else ifCond StatusTypeService "==" 3}}
+        <div><strong class="warning">{{Description}} ({{InfringementGroupCode}})</strong></div>
+        {{else}}
+        <div><strong>{{Description}} ({{InfringementGroupCode}})</strong></div>
+        {{/ifCond }}
+
+
+        <div>@Resources.Language.LabelDaysPeriodOne: <strong>{{InfrigementOneYear}}</strong></div>
+        <div>@Resources.Language.LabelDaysPeriodTwo: <strong>{{InfrigementThreeYear}}</strong></div>
+        <div><strong>{{LabelGroupEnabled}}</strong></div>
+    </script>
+
+<form id="formInfringementGroup" autocomplete="off" class="form form-space-adjusted">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row row-space-adjusted"></div>
+            <div class="row row-space-adjusted">
+                <div class="uif-col-8">
+                    <label>@Resources.Language.LabelInfringementGroupDescription</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputInfringementGroupDescription", placeholder = @Resources.Language.LabelInfringementGroupDescription })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-4">
+                    <div>
+                        <label>@String.Empty</label>
+                    </div>
+                    <div class="row-space-adjusted">
+                        <input type="checkbox" id="chkIsActive" name="IsActive" />
+                        <label for="chkIsActive">@Resources.Language.LabelEnabled</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-space-adjusted">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDaysCountPeriodOne</label>
+                    @Html.TextBoxFor(model => model.InfrigementOneYear, new { id = "inputInfrigementOneYear", placeholder = @Resources.Language.LabelDaysCountPeriodOne })
+                    @Html.ValidationMessageFor(model => model.InfrigementOneYear)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDaysCountPeriodTwo</label>
+                    @Html.TextBoxFor(model => model.InfrigementThreeYear, new { id = "inputInfrigementThreeYear", placeholder = @Resources.Language.LabelDaysCountPeriodTwo })
+                    @Html.ValidationMessageFor(model => model.InfrigementThreeYear)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 col-space-adjusted">
+            <div id="listViewInfringementGroup" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewInfringementGroup">
+                    @Resources.Language.New
+                </button>
+                <button type="button" class="btn btn-primary" id="btnAddInfringementGroup">
+                    @Resources.Language.Add
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right" id="buttonsInfringementGroupPanel">
+            <button type="button" class="btn btn-default" id="btnExitInfringementGroup">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExit
+                </span>
+            </button>
+            <button class="btn btn-default" id="btnExportInfringementGroup">
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">
+                    @Resources.Language.ButtonExport
+                </span>
+            </button>
+            <button class="btn btn-primary" id="btnSaveInfringementGroup">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+            </button>
+        </div>
+    </footer>
+}
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/InfringementGroup")
+}

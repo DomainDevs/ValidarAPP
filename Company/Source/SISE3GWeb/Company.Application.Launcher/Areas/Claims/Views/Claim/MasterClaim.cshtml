@@ -1,0 +1,94 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column" id="titleClaimVehicle">
+        @Resources.Language.VehicleClaim &nbsp; <span id="vehicleClaimNumberEdit">@Resources.Language.Claim1:&nbsp;</span>
+    </div>
+    <div class="column" id="titleClaimSurety">
+        @Resources.Language.SuretyClaim &nbsp; <span id="suretyClaimNumberEdit">@Resources.Language.Claim1:&nbsp;</span>
+    </div>
+    <div class="column" id="titleClaimLocation">
+        @Resources.Language.LocationClaim &nbsp; <span id="locationClaimNumberEdit">@Resources.Language.Claim1:&nbsp;</span>
+    </div>
+    <div class="column" id="titleEstimations">
+        @Resources.Language.LabelEstimations
+    </div>
+    <div class="column" id="titleClaimTransport">
+        @Resources.Language.TransportClaim &nbsp; <span id="transportClaimNumberEdit">@Resources.Language.Claim1:&nbsp;</span>
+    </div>
+    <div class="column" id="titleClaimAirCraft">
+        @Resources.Language.AirCraftClaim &nbsp; <span id="airCraftClaimNumberEdit">@Resources.Language.Claim1:&nbsp;</span>
+    </div>
+    <div class="column" id="titleClaimFidelity">
+        @Resources.Language.FidelityClaim &nbsp; <span id="fidelityClaimNumberEdit">@Resources.Language.Claim1:&nbsp;</span>
+    </div>
+    <div class="column-20 hideSearchClaim">
+        @Resources.Language.Policy:&nbsp;<span id="inputSearchPolicyByclaims"> </span>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0304"))
+    {
+        <button class="btn btn-primary new" id="btnSaveClaim">
+            <span class="" aria-hidden="true">@Resources.Language.SaveClaim</span>
+        </button>
+    }
+
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0303"))
+    {
+        <button class="btn btn-default new" id="btnCloseEstimation">
+            <span class="" aria-hidden="true">@Resources.Language.ButtonClose</span>
+        </button>
+    }
+
+</script>
+<div>
+    <!--Formulario Denuncia-->
+    <div div class="row" id="claim">
+        <div class="uif-col-12">
+            @Html.Partial("Claim")
+        </div>
+    </div>
+    <!--Formulario Estimacion-->
+    <div div class="row" id="claimEstimation">
+        <div class="uif-col-12">
+            @Html.Partial("MasterEstimation")
+        </div>
+    </div>
+</div>
+
+<!--Modal consulta de póliza-->
+<div class="uif-modal" id="modalPolicyConsult">
+    <div class="uif-modalbody">
+        @Html.Partial("ModalPolicyConsult")
+    </div>
+</div>
+
+<!--Modal datos de inspeccion-->
+<div class="uif-modal" id="modalAdjusterAnalyst">
+    <div class="uif-modalbody">
+        @Html.Partial("ModalAdjusterAnalyst")
+    </div>
+</div>
+
+<!--Evento Catastrófico -->
+<div class="uif-modal" id="modalCatastrophicInformation">
+    <div class="uif-modalbody">
+        @Html.Partial("ModalCatastrophicInformation")
+    </div>
+</div>
+
+<!--Coaseguro -->
+<div class="uif-modal" id="modalCoInsuranceCompany">
+    <div class="uif-modalbody">
+        @Html.Partial("ModalCoInsuranceCompany")
+    </div>
+</div>
+
+<!--Denuncias por póliza -->
+<div class="uif-modal" id="modalClaimsPolicy">
+    <div class="uif-modalbody">
+        @Html.Partial("ModalClaimsPolicy")
+    </div>
+</div>

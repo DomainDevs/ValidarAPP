@@ -1,0 +1,584 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @Global.ReinsurePolicies;
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.ReinsuranceManual</li>
+        <li>@Global.ReinsurePolicies</li>
+    </ol>
+}
+
+@*BOTONES DE LA BARRA INFERIOR*@
+@section Toolbar
+{
+    <footer>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0406"))
+        {
+            <button id="btnReinsurance" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-repeat"></span>  @Global.btnReinsuranceEndorsement
+            </button>
+        }
+
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0403"))
+        {
+            <button id="btnLoadReinsurance" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-upload"></span>  @Global.Adjustment
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0416"))
+        {
+            <button id="btnRecalculate" class="btn btn-primary">
+                <span class="glyphicon glyphicon-cog"></span>  @Global.btnRecalculate @Global.Reinsurance
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0419"))
+        {
+            <button id="btnSaveReinsurance" class="btn btn-primary">
+                <span class="glyphicon glyphicon-floppy-saved"></span>  @Global.RecordReinsurance
+            </button>
+        }
+    </footer>
+}
+
+<ul class="uif-tab" id="tabsIssReinsurance">
+    <li class="active">
+        <a href="#tabGeneral">@Global.SearchLabel</a>
+    </li>
+    <li>
+        <a href="#tabModificacionReins" id="tabTitleModificacion">@Global.TitleModificationReinsurance</a>
+    </li>
+</ul>
+
+<div class="uif-tab-content">
+    <div id="tabGeneral" class="active">
+        <div class="uif-row">
+            <div class="uif-col-2">
+                @Global.Branch
+                @Html.DropDownList("ReinsurePoliciesSelectBranch", Enumerable.Empty<SelectListItem>(), new
+           {
+               @class = "uif-select form-control",
+               data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+               data_id = "Id",
+               data_name = "Description",
+               data_val = "true",
+               data_native = "true"
+           })
+
+
+            </div>
+            <div class="uif-col-2">
+                @Global.Prefix
+                <select class="uif-select form-control" id="ReinsurePoliciesSelectPrefix"
+                        name="ReinsurePoliciesSelectPrefix"
+                        data-source='@Url.Content("~/Reinsurance/Process/GetPrefix")'
+                        data-id="Id"
+                        data-native="true"
+                        data-val="true"
+                        data-name="Description"></select>
+            </div>
+            <div class="uif-col-2">
+                @Global.PolicyNumber
+                <input type="text" id="ReinsurePoliciesPolicyNumber" name="ReinsurePoliciesPolicyNumber" maxlength="12"
+                       onkeypress="return JustNumbers(event);" />
+            </div>
+            <div class="uif-col-2">
+                @Global.EndorsementNumber
+                <input type="text" id="ReinsurePoliciesEndorsementNumber" name="ReinsurePoliciesEndorsementNumber" maxlength="2" onkeypress="return JustNumbers(event);" />
+            </div>
+            <div class="uif-col-4">
+                <br />
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0402"))
+                {
+                    <button class="btn btn-primary btn-block" id="ReinsurePoliciesSearch">
+                        <span class="glyphicon glyphicon-search"></span>  @Global.Search
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="uif-alert" id="alertReinsurePolicieSearch"></div>
+        <div class="uif-alert" id="alertReinsurePolicy"></div>
+        <div class="uif-alert" id="reinsurePolicyAccountingAlert"></div>
+        <div class="uif-alert" id="alertReinsuranceDate"></div>
+        <div class="active" id="tabEndorsement">
+            <table data-title="@Global.Endorsements" class="uif-table" id="tableEndorsement"
+                   data-add="false" data-paginate="false" data-filter="false">
+                <thead>
+                    <tr>
+                        <th data-visible="false" data-property="EndorsementId">EndorsementId</th>
+                        <th data-visible="false" data-property="PolicyId">PolicyId</th>
+                        <th data-property="EndorsementNumber">@Global.EndorsementNumber</th>
+                        <th data-property="Description">@Global.EndorsementType</th>
+                        <th data-property="IssueDate" data-type="date">@Global.IssueDate</th>
+                        <th data-property="CurrentFrom" data-type="date">@Global.CurrentFrom</th>
+                        <th data-property="CurrentTo" data-type="date">@Global.CurrentTo</th>
+                        <th data-property="Currency">@Global.Currency</th>
+                        <th data-property="InsuredAmount" data-type="currency">@Global.InsuredAmount</th>
+                        <th data-property="Prime" data-type="currency">@Global.Prime</th>
+                        <th data-property="ResponsibilityMaximumAmount" data-type="currency">@Global.MaximumLiabilityAmount</th>
+                        <th data-property="OperationType">@Global.OperationType</th>
+                        <th data-property="InsuredCd">@Global.InsuredCode</th>
+                        <th data-property="InsuredName">@Global.InsuredName</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="panelReinsurances">
+            <table data-title="@Global.Reinsurance" class="uif-table" id="reinsurePoliciesTableReinsurances"
+                   data-selectiontype="none">
+                <thead>
+                    <tr>
+                        <th data-property="LayerNumber">@Global.LayerNumber</th>
+                        <th data-property="LayerPercentage">@Global.LayerPercentage</th>
+                        <th data-property="Line">@Global.Line</th>
+                        <th data-property="CumulusKey">@Global.CumulusKey</th>
+                        <th data-property="ContractId" data-visible="false">ContractId</th>
+                        <th data-property="ContractDescription">@Global.Contract</th>
+                        <th data-property="LevelNumber">@Global.LevelNumber</th>
+                        <th data-property="TradeName">@Global.Company</th>
+                        <th data-property="AmountSum" data-type="currency">@Global.Sum</th>
+                        <th data-property="PremiumSum" data-type="currency">@Global.Prime</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        @*GRILLA DE ERRORES*@
+        <div id="panelDistributionErrors">
+            <div id="tabistributionErrors">
+                <table data-title="@Global.ErrorDistribution" class="uif-table" id="tableDistributionErrors"
+                       data-selectiontype="none" data-paginate="true" data-filter="false">
+                    <thead>
+                        <tr>
+
+                            <th data-property="RiskNumber">@Global.RiskNumber</th>
+                            <th data-property="CoverageNumber">@Global.CoverageNumber</th>
+                            <th data-property="Description">@Global.Description</th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="tabModificacionReins">
+
+        <ul class="nav nav-tabs" role="tablist" id="reinsurancePoliciesTabModifi">
+            <li id="litabLayer" class="active"><a role="tab" data-toggle="tab" href="#tabModificationLayer">@Global.TitleLayers</a></li>
+            <li id="litabLines"><a role="tab" data-toggle="tab" href="#tabLines">@Global.Lines</a></li>
+            <li id="litabDistribuitionContract"><a role="tab" data-toggle="tab" href="#tabAllocation">@Global.TitleDistributionContracts</a></li>
+            <li id="litabFacultative" class="disabled"><a href="#tabFacultative">@Global.TitleFacultativeContract</a></li>
+        </ul>
+        <div class="uif-tab-content">
+            <div class="active" id="tabModificationLayer">
+                <div class="uif-alert" id="alertModification"></div>
+                <div class="uif-alert" id="LayerPolicyModificationAccountingAlert"></div>
+                <b id="pnlLayers"></b>
+                <table data-title="@Global.Layer" class="uif-table" id="tableReinsuranceLayer"
+                       data-add="true" data-edit="true" data-filter="false">
+                    <thead>
+                        <tr>
+                            <th data-property="TmpReinsuranceProcessId" data-visible="false">TmpReinsuranceProcessId</th>
+                            <th data-property="TempIssueLayerId" data-visible="false">TempIssueLayerId</th>
+                            <th data-property="LayerNumber" data-visible="true">@Global.LayerNumber</th>
+                            <th data-property="LayerPercentage">@Global.PercentageInsuredAmount</th>
+                            <th data-property="PremiumPercentage">@Global.PremiumPercentage</th>
+                            <th data-property="SumAmount" data-type="currency">@Global.InsuredAmount</th>
+                            <th data-property="PremiumAmount" data-type="currency">@Global.PremiumAmount</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="tabLines">
+                <div class="uif-alert" id="alertReinsurePolicieLine"></div>
+                <div class="uif-alert" id="LinePolicyModificationAccountingAlert"></div>
+                <b id="pnlLine"></b>
+
+                <table data-title="@Global.Line" class="uif-table" id="tableLineModificationReinsurance"
+                       data-add="false" data-edit="true" data-paginate="false" data-filter="false">
+                    <thead>
+                        <tr>
+                            <th data-property="TempLayerLineId" data-visible="false">TempLayerLineId</th>
+                            <th data-property="LineId" data-visible="false">@Global.Line</th>
+                            <th data-property="LineDescription">@Global.Description</th>
+                            <th data-property="CumulusType">@Global.CumulusType</th>
+                            <th data-property="CumulusKey">@Global.CumulusKey</th>
+                            <th data-property="RetainedSum" data-type="currency">@Global.RetainedSum</th>
+                            <th data-property="GivenSum" data-type="currency">@Global.GivenSum</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="tabAllocation">
+                <div class="uif-alert" id="alertContract"></div>
+                <div class="uif-alert" id="ContractPolicyModificationAccountingAlert"></div>
+                <b id="pnlContract"></b>
+
+                <table data-title="@Global.Contract" class="uif-table" id="tableContracts"
+                       data-edit="true" data-paginate="false" data-filter="false" data-selectiontype="none">
+                    <thead>
+                        <tr>
+                            <th data-property="ReinsuranceAllocationId" data-visible="false">TmpIssueAllocationId</th>
+                            <th data-property="MovementSourceId" data-visible="false">TmpLayerLineId</th>
+                            <th data-property="Contract.SmallDescription">@Global.Description</th>
+                            <th data-property="Contract.ContractLevels[0].Number">@Global.LevelNumber</th>
+                            <th data-property="Amount.Value" data-type="currency">@Global.Sum</th>
+                            <th data-property="Premium.Value" data-type="currency">@Global.Prime</th>
+                            <th data-property="TotalSum" data-type="currency" data-visible="false">TotSum</th>
+                            <th data-property="TotalPremium" data-type="currency" data-visible="false">TotPremium</th>
+                            <th data-property="Facultative" data-visible="false">Facultative</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!--FACULTATIVOS-->
+            <div id="tabFacultative">
+                <div class="uif-alert" id="alertFacultative"></div>
+                <div class="uif-alert" id="reinsurePolicyModificationAccountingAlert"></div>
+                <div class="uif-alert" id="reinsurePolicyFacultativeAlert"></div>
+
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <b id="pnlFacultative"></b>
+                    </div>
+                </div>
+                <div>
+                    <form id="formCalculateFacultative" class="form">
+
+                        <div class="uif-row" id="divSlips">
+                            <div class="uif-col-4">
+                                @Global.LoadFacultativeLabel
+                                <select class="uif-select form-control" id="SelectSlips"
+                                        name="SelectSlips"
+                                        data-id="FacultativeId"
+                                        data-native="true"
+                                        data-val="true"
+                                        data-name="SlipNumber"></select>
+
+                            </div>
+                        </div>
+                        <div class="uif-row">
+                            <div class="uif-col-4">
+                                <label class="field-required">
+                                    @Global.Description:
+                                </label>
+                                <input type="text"
+                                       id="txtFacultativeDesciption"
+                                       name="txtFacultativeDesciption"
+                                       maxlength="90"
+                                       minlength="3"
+                                       data-val="true"
+                                       data-val-required="@Global.RequiredField" />
+                                <span class="text-danger" data-valmsg-for="txtFacultativeDesciption" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="uif-col-2">
+                                <label class="field-required">
+                                    @Global.ParticipationPercentage:
+                                </label>
+                                <input type="text"
+                                       id="txtValueAmountPercentage"
+                                       name="txtValueAmountPercentage"
+                                       style="text-align:right"
+                                       maxlength="5"
+                                       onkeypress="return OnlyDecimalNumber(event, this)"
+                                       data-val="true"
+                                       data-val-required="@Global.RequiredField"
+                                       data-val-range-min="1"
+                                       data-val-range-max="100"
+                                       data-val-range="@Global.ErrorPercentageHigher" />
+                                <span class="text-danger" data-valmsg-for="txtValueAmountPercentage" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="uif-col-2">
+                                <label class="field-required">
+                                    @Global.ValueAmount:
+                                </label>
+                                <input type="text"
+                                       id="txtValueAmount"
+                                       ame="txtValueAmount"
+                                       style="text-align:right"
+                                       readonly
+                                       data-val="true"
+                                       data-val-required="@Global.RequiredField" />
+                                <span class="text-danger" data-valmsg-for="txtValueAmount" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="uif-col-2">
+                                <label class="field-required">
+                                    @Global.PremiumPercentage:
+                                </label>
+                                <input type="text"
+                                       id="txtPremiumPercentage"
+                                       name="txtPremiumPercentage"
+                                       style="text-align:right" maxlength="5"
+                                       onkeypress="return OnlyDecimalNumber(event,this)"
+                                       data-val="true"
+                                       data-val-required="@Global.RequiredField"
+                                       data-val-range-min="1"
+                                       data-val-range-max="100"
+                                       data-val-range="@Global.ErrorPercentageHigher" />
+                                <span class="text-danger" data-valmsg-for="txtPremiumPercentage" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="uif-col-2">
+                                <label class="field-required">
+                                    @Global.ValuePremium:
+                                </label>
+                                <input type="text"
+                                       id="txtValuePremium"
+                                       name="txtValuePremium"
+                                       style="text-align:right"
+                                       readonly
+                                       data-val="true"
+                                       data-val-required="@Global.RequiredField" />
+                                <span class="text-danger" data-valmsg-for="txtValuePremium" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-10">
+                        <table data-title="@Global.Company" class="uif-table" id="tableFacultatives" data-add="true" data-edit="true"
+                               data-selectiontype="single" data-paginate="false" data-filter="false">
+                            <thead>
+                                <tr>
+                                    <th data-property="TempFacultativeCompanyId" data-visible="false">TempFacultativeCompanyId</th>
+                                    <th data-property="TempFacultativeId" data-visible="false">TempFacultativeId</th>
+                                    <th data-property="BrokerReinsuranceId" data-visible="false">BrokerReinsuranceId</th>
+                                    <th data-property="BrokerDescription">@Global.Agent</th>
+                                    <th data-property="ReinsuranceCompanyId" data-visible="false">ReinsuranceCompanyId</th>
+                                    <th data-property="DescriptionCompany">@Global.Company</th>
+                                    <th data-property="ParticipationPercentage">@Global.ParticipationPercentage</th>
+                                    <th data-property="SumValueParticipation" data-type="currency">@Global.ParticipationAmount</th>
+                                    <th data-property="PremiumPercentage">@Global.PremiumPercentage</th>
+                                    <th data-property="SumValuePremium" data-type="currency">@Global.PremiumAmount</th>
+                                    <th data-property="CommissionPercentage">@Global.CommissionPercentage</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="uif-col-2">
+                        <div class="uif-right-bar">
+                            <ul>
+                                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0424"))
+                                {
+                                    <li><a href="#" onclick="paymentPlansReinsFacultative();">@Global.ReinsPaymentPlan</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section modals{
+
+    <form id="ReinsPaymentFacultativeForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="ModalPaymentFacultative">
+            <div class="uif-modalbody">
+                @Html.Partial("../Reinsurance/Process/ReinsurePaymentPlanFacultative")
+            </div>
+        </div>
+    </form>
+
+    <form id="formLayerLine" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalLineReinsurance">
+            <div class="uif-modalbody">
+                @Html.Partial("../Reinsurance/Process/ModificationReinsuranceLineDialog")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="btnLayerLine">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="formReinsLayer" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalReinsuranceLayer">
+            <div class="uif-modalbody">
+                @Html.Partial("../Reinsurance/Process/ModificationReinsuranceLayerDialog")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0410") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0413"))
+                {
+                    <button type="submit" class="btn btn-primary" id="btnReinsLayer">@Global.Save</button>
+                }
+            </div>
+        </div>
+    </form>
+    <form id="formReinsAllocation" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalReinsuranceContract">
+            <div class="uif-modalbody">
+                @Html.Partial("../Reinsurance/Process/ModificationReinsuranceContractDialog")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="btnReinsAllocation" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="formReinsFacultative" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalReinsuranceFacultative">
+            <div class="uif-modalbody">
+                @Html.Partial("../Reinsurance/Process/ModificationReinsuranceFacultativeDialog")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0414"))
+                {
+                    <button type="submit" class="btn btn-primary" id="btnReinsFacultative" onclick="return false">@Global.Save</button>
+                }
+            </div>
+        </div>
+    </form>
+
+    @*VENTANAS MODALES DE CONFIRMACION*@
+    <!-- Modal reaseguros -->
+    <div class="modal fade" id="modalReinsurance" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.Reinsurance</b></h4>
+                </div>
+                <div class="modal-body" id="ConfirmPolicyNotcurrent">
+                    @Resources.Language.MessagePolicyNotCurrent
+                </div>
+                <div class="modal-body" id="ConfirmMessageProcess">
+                    @Global.ConfirmMessageProcess
+                </div>
+                <div class="modal-footer">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0407"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnModalReinsurance">@Global.Yes</button>
+                    }
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal modalLoadReinsurance -->
+    <div class="modal fade" id="modalLoadReinsurance" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.Reinsurance</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.ConfirmMessageLoadReinsurance
+                </div>
+                <div class="modal-footer">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0404"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnModalLoadReinsurance">@Global.Yes</button>
+                    }
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal modalDeleteReinsuranceLayer -->
+    <div class="modal fade" id="modalDeleteReinsuranceLayer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.Reinsurance</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.DeleteConfirmationMessage
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnModalReinsuranceDelete">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal modalRecalculateReinsurance -->
+    <div class="modal fade" id="modalRecalculateReinsurance" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.Reinsurance</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.ConfirmMessageRecalculateReinsurance
+                </div>
+                <div class="modal-footer">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0417"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnModalRecalculateReinsurance">@Global.Yes</button>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0418"))
+                    {
+                        <button type="button" class="btn btn-default" id="btnModalNotRecalculateReinsurance" data-dismiss="modal">@Global.No</button>
+                    }
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal modalRecalculateReinsurance -->
+    <div class="modal fade" id="modalSaveReinsurance" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.Reinsurance</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.ConfirmMessageSaveReinsurance
+                </div>
+                <div class="modal-footer">
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0420"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnModalSaveReinsurance">@Global.Yes</button>
+                    }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0421"))
+                    {
+                        <button type="button" class="btn btn-default" id="btnModalCancelReinsurance" data-dismiss="modal">@Global.No</button>
+                    }
+                    </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal modalLoadFacultative -->
+    <div class="modal fade" id="modalLoadFacultative" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.TitleFacultativeContract</b></h4>
+                </div>
+                <div class="modal-body" id="txtModalFacultative">
+                    <b id="pnlModalFacultative"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnModalLoadFacultative">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+@section scripts{
+    @Scripts.Render("~/reinsurance/bundles/ReinsurePolicies")
+}
+<input type="hidden" id="ViewBagReinsuranceDate" value="@ViewBag.ReinsuranceDate" />

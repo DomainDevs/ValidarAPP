@@ -1,0 +1,111 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.AccountingEntryModel
+
+@{
+    ViewBag.Title = "EditModal";
+    Layout = null;
+}
+
+<div class="uif-row">
+    <div class="uif-col-3">
+        @Html.HiddenFor(model => model.AccountingAccountId)
+        <label>@Global.CodeConcept</label>
+        <input class="uif-autocomplete" type="text"
+               data-source="@Url.Action("GetInformationAccountant", "Base")"
+               data-displa data-displaykey="Id" 
+               id="conceptId" data-minlenght="1" />
+    </div>
+    <div class="uif-col-3">
+        <label>@Global.AccountingConcept</label><br />
+        <input class="uif-autocomplete" type="text"
+               data-source="@Url.Action("GetInformationAccountantByDescrition", "Base")"
+               data-displaykey="Description" 
+               id="conceptDescription" />
+    </div>
+    <div class="uif-col-3">
+        <label>@Global.LedgerAccountNumber</label>
+        <input class="uif-autocomplete" type="text"
+               data-source="@Url.Action("AutoCompleteSource", "Documentation")"
+               data-displaykey="Empresa" 
+               id="accountingAccountNumber">
+    </div>
+    <div class="uif-col-3">
+        <label>@Global.AccountingAccountName</label>
+        <input type="text" placeholder="" id="accountingAccountDescription" disabled="disabled">
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-3">
+        <label>Naturaleza Contable</label>
+        @Html.DropDownListFor(obj => obj.AccountingNatureId, Enumerable.Empty<SelectListItem>(),
+       new { @class = "uif-select",
+           data_source = @Url.Content("/GeneralLedger/Base/GetNatures"),
+           data_id = "AccountingNatureId", data_name = "Description",
+           data_selectedid = "@Model.AccountingNature" })
+        @Html.ValidationMessageFor(model => model.AccountingNatureId)
+    </div>
+    <div class="uif-col-3">
+        <label>@Global.Currency</label>
+        @Html.DropDownListFor(obj => obj.CurrencyId, Enumerable.Empty<SelectListItem>(),
+       new { @class = "uif-select",
+           data_source = @Url.Content("/GeneralLedger/Base/GetCurrencies"),
+           data_id = "Id",
+           data_name = "Description",
+           id = "ddlCurrencies",
+           data_selectedid = "@Model.CurrencyId" })
+        @Html.ValidationMessageFor(obj => obj.CurrencyId)
+    </div>
+    <div class="uif-col-3">
+        <label>@Global.Exchange</label>
+        @Html.TextBoxFor(model => model.ExchangeRate, new { id = "exchange", disabled = "disabled" })
+        @Html.ValidationMessageFor(model => model.ExchangeRate)
+    </div>
+    <div class="uif-col-3">
+        <label>@Global.Amount</label>
+        @Html.TextBoxFor(model => model.Amount)
+        @Html.ValidationMessageFor(model => model.Amount)
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-3">
+        <label>@Global.DocumentNumber</label>
+        
+        @Html.HiddenFor(model => model.IndividualId)
+        @Html.TextBoxFor(model => model.DocumentNumber,
+                          new { @class = "uif-autocomplete",
+                              data_source = @Url.Action("GetPersonsByDocumentNumber", "Base"),
+                              data_displaykey = "DocumentNumber",
+                              id = "payerDocumentNumber",
+                              placeholder = "Documento" })
+        @Html.ValidationMessageFor(model => model.IndividualId)
+     </div>
+    <div class="uif-col-9">
+        <label>Persona/Empresa</label>
+        <input type="text" placeholder="" id="payerName" disabled="disabled">
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <label>@Global.MovementDescription</label>
+        @Html.TextBoxFor(model => model.Description)
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+    <div class="uif-col-3">
+
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-3">
+        <label>@Global.BankConciliation</label>
+        <select class="uif-select form-control" id="BankReconciliationId" data-source="@Url.Content("~/Base/GetBankMovements")" data-id="BankReconciliationId" data-name="Description" name="BankReconciliationId"></select>
+    </div>
+    <div class="uif-col-3">
+        <label>@Global.VoucherNumber</label>
+        <input type="text" id="ReceiptNumber" name="ReceiptNumber" />
+    </div>
+    <div class="uif-col-3">
+        <label>@Global.DateVoucher</label>
+        <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="receiptDate" name="ReceiptDate" />
+    </div>
+</div>
+

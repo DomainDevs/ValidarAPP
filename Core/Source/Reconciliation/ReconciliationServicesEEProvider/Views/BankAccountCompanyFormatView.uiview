@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="BankAccountCompanyFormatView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="BankAccountCompanyFormatId">
+          <Column table-alias="BankAccountCompanyFormat" name="BankAccountCompanyFormatId" />
+        </SelectValue>
+        <SelectValue alias="BankAccountCompanyCode">
+          <Column table-alias="BankAccountCompanyFormat" name="BankAccountCompanyCode" />
+        </SelectValue>
+        <SelectValue alias="BankCode">
+          <Column table-alias="BankAccountCompany" name="BankCode" />
+        </SelectValue>
+        <SelectValue alias="BankDescription">
+          <Column table-alias="Bank" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AccountTypeDescription">
+          <Column table-alias="AccountType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AccountNumber">
+          <Column table-alias="BankAccountCompany" name="AccountNumber" />
+        </SelectValue>
+        <SelectValue alias="FormatCode">
+          <Column table-alias="BankAccountCompanyFormat" name="FormatCode" />
+        </SelectValue>
+        <SelectValue alias="FormatDescription">
+          <Column table-alias="Format" name="Description" />
+        </SelectValue>
+        <SelectValue alias="FileType">
+          <Column table-alias="Format" name="FileType" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <Join>
+                <ClassNameTable name="Sistran.Core.Application.ReconciliationServices.EEProvider.Entities.BankAccountCompanyFormat, Core.ReconciliationServices.EEProvider" alias="BankAccountCompanyFormat" />
+                <ClassNameTable name="Sistran.Core.Application.AccountingServices.EEProvider.Entities.BankAccountCompany, Core.AccountingServices.EEProvider" alias="BankAccountCompany" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="BankAccountCompany" name="BankAccountCompanyId" />
+                    <Column table-alias="BankAccountCompanyFormat" name="BankAccountCompanyCode" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.ReportingServices.Provider.Entities.Format, Core.ReportingServices.Provider" alias="Format" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="Format" name="FormatCode" />
+                  <Column table-alias="BankAccountCompanyFormat" name="FormatCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Common.Entities.Bank, Core.Common.Entities" alias="Bank" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Bank" name="BankCode" />
+                <Column table-alias="BankAccountCompany" name="BankCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.AccountingServices.EEProvider.Entities.AccountType, Core.AccountingServices.EEProvider" alias="AccountType" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="AccountType" name="AccountTypeCode" />
+              <Column table-alias="BankAccountCompany" name="AccountTypeCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

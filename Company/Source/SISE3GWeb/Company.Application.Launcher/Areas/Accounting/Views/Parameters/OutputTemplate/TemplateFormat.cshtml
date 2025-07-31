@@ -1,0 +1,127 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.Format;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameters</li>
+        <li>@Global.OutputFormats</li>
+        <li class="active">@Global.Format</li>
+    </ol>
+}
+
+@section Modals
+{
+    <!--Grabar Plantilla-->
+    <form id="addTemplateForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/OutputTemplate/TemplateFormatModal")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-remove"></i> @Global.Cancel
+                </button>
+                <button type="submit" class="btn btn-primary" id="saveAddFieldTemplate" onclick="return false">
+                    <i class="fa fa-save"></i> @Global.Save
+                </button>
+            </div>
+        </div>
+    </form>
+    <!-- Editar Plantilla -->
+    <form id="editTemplateForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/OutputTemplate/TemplateFormatModal")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-remove"></i> @Global.Cancel
+                </button>
+                <button type="submit" class="btn btn-primary" id="saveEdit" onclick="return false">
+                    <i class="fa fa-save"></i> @Global.Save
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="deleteFieldModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<form id="formRange" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-4" id="divOperationType">
+            <label class="control-label">
+                @Global.FormatGroup
+            </label>
+            @Html.DropDownList("StructureType", Enumerable.Empty<SelectListItem>(), new
+             {
+                 @class = "uif-select form-control",
+                 data_source = @Url.Content("~/Accounting/Parameters/GetStructureList"),
+                 data_id = "Id",
+                 data_name = "Description",
+                 data_val = "true",
+                 headen = "headen",
+             })
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="TemplateTable" data-exporttocsv="false" data-add="true" data-edit="true"
+                   data-delete="true" data-selectiontype="none" data-filter="true"
+                   data-paginate="true" data-title=@Global.Format>
+                <thead>
+                    <tr>
+                        <th data-property="Id" data-visible="false">Id</th>
+                        <th data-property="Description">@Global.Description</th>
+                        <th data-property="FileTypeCd" data-visible="false">fileTypeCd</th>
+                        <th data-property="FileTypeDescription">@Global.FileType</th>
+                        <th data-property="CurrentFrom">@Global.CurrentFrom</th>
+                        <th data-property="CurrentTo">@Global.CurrentTo</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/TemplateFormat")
+}

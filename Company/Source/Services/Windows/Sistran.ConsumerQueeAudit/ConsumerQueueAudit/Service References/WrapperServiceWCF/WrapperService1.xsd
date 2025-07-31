@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Quote">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="quoteRequest" type="tns:QuoteRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="QuoteRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="insuredQuotation" type="tns:InsuredQuotation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="policyQuotation" type="tns:PolicyQuotation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="riskQuotation" type="tns:RiskQuotation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InsuredQuotation">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="typeCardCode" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="idCardNro" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="gender" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="surname" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="birthDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="maritalStatus" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="stateCode" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PolicyQuotation">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="sourceCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="businessId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="productId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="requestId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="branchCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="policyTypeCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="agentCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="agentAgencyTypeCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="allianceId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="allianceBranchId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="allianceSalePointId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="allianceProposalNumber" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="accountName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="currencyCode" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RiskQuotation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="licensePlate" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="engineSerialNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="chassisSerialNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="fasecoldaMakeId" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="fasecoldaModelId" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="vehicleUseCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="vehicleColorCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="vehicleYear" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="isNew" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="vehiclePrice" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="vehicleAmountDetail" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="coverGroupId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="assistanceCode" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="limitRcCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ratingZoneCode" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QuoteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="QuoteResult" type="tns:QuoteResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="QuoteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="listQuoteResult" type="tns:ArrayOfQuoteResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfQuoteResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QuoteResult" nillable="true" type="tns:QuoteResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QuoteResult">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TempId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="BranchCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SourceCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="BusinessId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RequestId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProductIdResponse" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CurrentFrom" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CurrentTo" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LicensePlate" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CoverGroupId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AssistanceCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LimitRcCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LimitRcSum" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="GoodExperienceNum" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MaximumVigency" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="IsEffectiveDate" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RatingZoneCode" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="VehiclePrice" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="VehiclePriceDetail" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PremiumAmount" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AssistanceAmount" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ExpensesAmount" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TaxAmount" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalPremiumAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateQuotationListFromJson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="listCompanyVehicleLikeJson" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateQuotationListFromJsonResponse">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="RegisterExternalInformationLog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="externalInfromationLog" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterExternalInformationLogResponse">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="loadCacheByJson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="HistoryVersionJson" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="loadCacheByJsonResponse">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="CreateVersionHistoryExternal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="userId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateVersionHistoryExternalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="CreateVersionHistoryExternalResult" type="tns:VersionHistory" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="VersionHistory">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Guid" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UserId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="VersionDatetime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SaveListInfringementSimit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="listInfringementSimit" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveListInfringementSimitResponse">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="GetNodeRulSet">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="GetNodeRulSetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetNodeRulSetResult" type="tns:ArrayOfNodeRulesetStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfNodeRulesetStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NodeRulesetStatus" nillable="true" type="tns:NodeRulesetStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NodeRulesetStatus">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Node" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Guid" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CreationDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetVersionHistory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="count" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVersionHistoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetVersionHistoryResult" type="tns:ArrayOfVersionHistory" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfVersionHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VersionHistory" nillable="true" type="tns:VersionHistory" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

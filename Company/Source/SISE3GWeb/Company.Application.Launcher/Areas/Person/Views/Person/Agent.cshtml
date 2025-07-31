@@ -1,0 +1,129 @@
+﻿@Html.AntiForgeryToken()
+@Html.Hidden("CurrentDateAgent", DateTime.Now.ToShortDateString())
+    <div class="row">
+        <div class="uif-col-12">
+            <ul class="nav nav-tabs uif-tab-pc" id="tabsAgent">
+                <li class="tabAgents" id="optionAgent" >
+                    <a href="#tabAgent" id="linkAgent" data-toggle="tab" class="">@Resources.LanguagePerson.LabelBasicInformation</a>
+                </li>
+                <li class="tabAgents" id="optionAgency">
+                    <a href="#tabAgency" id="linkAgency" data-toggle="tab" class="">@Resources.LanguagePerson.LabelIntermediaryAgencies</a>
+                </li>
+                <li class="tabAgents" id="optionPrefix">
+                    <a href="#tabPrefix" id="linkPrefix" data-toggle="tab" class="">@Resources.LanguagePerson.LabelPrefixEnabled</a>
+                </li>
+                
+                <li class="tabAgents" id="optionComission">
+                    <a href="#tabComission" id="linkComission" data-toggle="tab" class="">@Resources.LanguagePerson.LabelCommissions</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tabAgent" class="tab-pane">
+                    <div class="uif-col-12">
+                        <div>
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <div class="uif-col-4">
+                                        <label class="field-required">@Resources.LanguagePerson.TypeIntermediary</label>
+                                        <select class="uif-select form-control" id="typeIntermediary" data-id="Id" data-name="SmallDescription" data-default="1"></select>
+                                    </div>
+                                    <div class="uif-col-2" style="padding-top: 10px">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="person" value="mactive" id="agentActive">@Resources.LanguagePerson.Active
+                                        </label>
+
+                                    </div>
+                                    <div class="uif-col-1" style="padding-top: 10px">
+
+                                        <label class="radio-inline">
+                                            <input type="radio" name="person" value="mdisabled" id="downAgent">@Resources.LanguagePerson.Declined
+                                        </label>
+
+                                    </div>
+                                    <div class="uif-col-2">
+                                        <label>@Resources.LanguagePerson.codePerson</label>
+                                        <div id="CodPersonAgent" style="color: red">0</div>
+                                    </div>
+                                    <div class="uif-col-2" style="text-align: left">
+                                        <input type="checkbox" id="checkCommissionDiscount" />
+                                        <label class="control-label" for="checkCommissionDiscount">@Resources.LanguagePerson.LabelCommissionsDiscounted</label>
+                                    </div>
+                                    @*     <div class="uif-col-3">
+            <label>@Resources.Language.CodIntermediary</label>
+            <div id="CodIntermediary" style="color: red">0</div>
+            PENDIENTE DEFINICION-> CORREO ENVIADO
+        </div>*@
+
+                                </div>
+                            </div>
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <div class="uif-col-3">
+                                        <label>@Resources.LanguagePerson.ReasonDeclined</label>
+                                        <select class="uif-select form-control" id="agentDeclinedTypes" data-id="Id" data-name="Description"></select>
+                                    </div>
+                                    <div class="uif-col-3">
+                                        <label>@Resources.LanguagePerson.DateDeclined</label>
+                                        <input type="text" class="uif-datepicker" data-type="date" data-mask="99/99/9999" id="InputDateDeclinedAgent" disabled="disabled" maxlength="14" />
+                                    </div>
+                                    <div class="uif-col-3">
+                                        <label>@Resources.LanguagePerson.DateCreate</label>
+                                        <input type="text" class="uif-datepicker" data-type="date" data-mask="99/99/9999" id="InputDateCreateAgent" disabled="disabled" maxlength="14" />
+                                    </div>
+                                    <div class="uif-col-3">
+                                        <label>@Resources.LanguagePerson.DateModifid</label>
+                                        <input type="text" class="uif-datepicker" data-type="date" data-mask="99/99/9999" id="InputDateModifidAgent" disabled="disabled" maxlength="14" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <div class="uif-col-3">
+                                        <label class="field-required">@Resources.LanguagePerson.LabelCheckNameOf</label>
+                                        <input type="text" id="AgentCheckPayableTo" />
+                                    </div>
+                                    <div class="uif-col-3">
+                                        <label class="field-required">@Resources.LanguagePerson.LabelAgentGroup</label>
+                                        <select class="uif-select form-control" id="AgentGroup" data-id="Id" data-name="Description"></select>
+                                    </div>
+                                    <div class="uif-col-3">
+                                        <label class="field-required">@Resources.LanguagePerson.LabelAgentChannel</label>
+                                        <select class="uif-select form-control" id="AgentSalesChannel" data-id="Id" data-name="Description"></select>
+                                    </div>
+                                    <div class="uif-col-3">
+                                        <label class="field-required">@Resources.LanguagePerson.LabelAgentLocker</label>
+                                        <input type="text" id="AgentLocker" maxlength="5" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <div class="uif-col-6">
+                                        <label>@Resources.LanguagePerson.LabelAgentExecutive</label>
+                                        <input class="uif-input-search" id="InputAgentExecutive" data-minlenght="3" type="text">
+                                    </div>
+                                    <div class="uif-col-6">
+                                        <label>@Resources.LanguagePerson.Notes</label>
+                                        <textarea rows="4" id="notesAgent" style="resize: none" maxlength="79">
+                                    </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tabAgency" class="tab-pane">
+                    @Html.Partial("~/Areas/Person/Views/Person/Agency.cshtml")
+                </div>
+                <div id="tabPrefix" class="tab-pane">   	
+                    @Html.Partial("~/Areas/Person/Views/Person/Prefix.cshtml")
+                </div>
+                <div id="tabComission" class="tab-pane">
+                    @Html.Partial("~/Areas/Person/Views/Person/ComissionAgency.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    

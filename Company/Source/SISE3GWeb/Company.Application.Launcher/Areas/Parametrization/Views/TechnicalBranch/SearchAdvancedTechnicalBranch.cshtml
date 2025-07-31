@@ -1,0 +1,66 @@
+﻿
+@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.TechnicalBranchViewModel
+<script id="AdvancedBranchTemplate" type="text/template">
+    <div>Código de ramo: <strong>{{Id}}</strong></div>
+    <div>
+        <br>
+        Descripción larga: <strong>{{Description}}</strong>
+    </div>
+    <div>
+        <br>
+        Descripción corta: <strong>{{ShortDescription}}</strong>
+    </div>
+</script>
+<form id="formSearchAdvancedTechnicalBranch" class="form">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.LabelAdvancedSearchTechnicalBranch</h4>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelNameofbranchCommercial</label>
+            @Html.TextBoxFor(model => model.TechnicalBranchName, new { id = "inputNameTechnicalBranch", placeholder = @Resources.Language.PlaceHolderTechnicalBranchName })
+            
+            @Html.ValidationMessageFor(model => model.TechnicalBranchName)
+        </div>
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelRiskTypeCovered</label>
+            <select class="uif-select form-control" id="selectRiskTypeCovered" data-id="Value" data-name="Text" name="PrefixId"
+                    data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"
+                    data-filter="true" data-native="false"></select>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="without-label">
+                <button type="button" name="name" id="btnAdvancedSearchTechnicalBranch" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listViewSearchAdvanced">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchAdv" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoadUser" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@*@section Scripts
+{
+    
+   <script src="@Url.Content("~/Areas/Parametrization/Scripts/TechnicalBranch/AdvancedSearchTechnicalBranch.js")"></script>
+    
+}*@

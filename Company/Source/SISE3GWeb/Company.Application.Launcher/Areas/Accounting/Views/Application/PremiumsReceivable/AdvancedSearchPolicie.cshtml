@@ -1,0 +1,334 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@*<script id="ItemToPayViewTemplate" type="text/template">
+    <div><label><b>@Global.BranchPrefixPolicyEndorsement</b>:</label> <span class="label label-warning">{{BranchPrefixPolicyEndorsement}}</span> </div>
+    <div><label><b>@Global.Quota:</b></label> {{PaymentNumber}}</div>
+    <div><label><b>@Global.DocNumInsured:</b></label> {{InsuredDocumentNumberName}} </div>
+    <div><label><b>@Global.DocNumPayer:</b></label> {{PayerDocumentNumberName}} </div>
+    <div><label><b>@Global.Currency:</b></label> {{CurrencyDescription}} <label><b>@Global.Balance:</b></label> {{PaymentAmount}}</div>
+    <div><label><b>@Global.PayExpDate:</b></label> {{PaymentExpirationDate}}</div>
+    <div><label><b>@Global.BusinessType:</b></label> {{BussinessTypeDescription}}</div>
+</script>*@
+
+<script id="ItemToApplyViewTemplate" type="text/template">
+    <div><label><b>@Global.BranchPrefixPolicyEndorsement</b>:</label> <span class="label label-warning">{{BranchPrefixPolicyEndorsement}}</span> </div>
+    <div><label><b>@Global.Quota:</b></label> {{PaymentNumber}}</div>
+    <div><label><b>@Global.Currency:</b></label> {{CurrencyDescription}} </div>
+    <div><label><b>@Global.PayExpDate:</b></label> {{PaymentExpirationDate}}</div>
+    <div><label><b>@Global.DocNumPayer:</b></label> {{PayerDocumentNumberName}} </div>
+    <div><label><b>UPD:</b></label> {{Upd}} </div>
+    <div><label><b>@Global.QuotaValue:</b></label> {{PaymentAmount}}</div>
+    <div><label><b>@Global.DialogCommissionRetainedCommissionGranted:</b></label> {{DiscountedCommission}}</div>
+    <div><label><b>@Global.ValueToCollect:</b></label> {{ValueToCollect}}</div>
+    <div><label><b>@Global.Balance:</b></label> {{PaymentAmount}} </div>
+    <div><label><b>@Global.AgentDocumentNumber:</b></label> {{PolicyAgentDocumentNumber}}</div>
+    <div><label><b>@Global.DialogCommissionRetainedOutstandingCommission:</b></label> {{PendingCommission}}</div>
+    <div><label><b>@Global.DialogDepositPremiumsOverPayment:</b></label> {{ExcessPayment}}</div>
+    <di hidden="hidden">{{CurrencyId}}</di>
+</script>
+
+
+
+<form id="PoliciesSearchForm" onsubmit="return false" class="form">
+    <ul class="uif-tab" id="policiesSearchTab">
+        <li class="active"><a href="#searchTab">@Global.DialogSearchPolicyTitle</a></li>
+        <li><a href="#policiesTab">@Global.Policies</a></li>
+    </ul>
+    <div class="uif-tab-content">
+        <div class="tab-pane active" id="searchTab">
+            <div id="upperPanel">
+                @*Panel Superior*@
+                <div class="row height-100 flex">
+                    <div class="col-xs-12 col-md-6 no-padding-right col-left">
+                        <h5><b>@Global.DialogSearchPolicyTitle</b></h5>
+                        <div class="uif-row">
+                            <div class="uif-col-12">
+                                <label class="control-label">@Global.SearchBy</label>
+                                <select class="uif-select form-control" id="SearchBy" data-id="Id" data-name="Description"></select>
+                                <span class="text-danger" data-valmsg-for="SearchBy" data-valmsg-replace="true" />
+                            </div>
+                        </div>
+
+                        @*POR ASEGURADO*@
+                        <div id="insuredSearch" class="uif-row">
+                            <div class="uif-col-5">
+                                <label class="control-label">@Global.DocNumInsured</label>
+                                <br />
+                                <input class="uif-autocomplete" type="text"
+                                       data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                                       data-displaykey="DocumentNumber"
+                                       onkeypress="return JustNumbers(event, this);"
+                                       maxlength="20"
+                                       placeholder='@Global.EnterDocumentNumber'
+                                       id="InsuredDocumentNumber"
+                                       name="InsuredDocumentNumber"
+                                       data-val="true"
+                                       data-val-required='@Global.RequiredField' />
+
+
+
+                                <span class="text-danger" data-valmsg-for="InsuredDocumentNumber" data-valmsg-replace="true">
+                                </span>
+                            </div>
+                            <div class="uif-col-7">
+                                <label class="control-label">@Global.InsuredName</label>
+                                <br />
+                                <input class="uif-autocomplete" type="text"
+                                       data-source="@Url.Action("GetInsuredByInsuredName", "Common")"
+                                       data-displaykey="Name"
+                                       placeholder='@Global.EnterName'
+                                       id="InsuredName"
+                                       maxlength="100"
+                                       name="InsuredName"
+                                       data-val="true"
+                                       data-val-required='@Global.RequiredField' />
+
+                                <span class="text-danger" data-valmsg-for="InsuredName" data-valmsg-replace="true">
+                                </span>
+                            </div>
+                        </div>
+                        @*POR PAGADOR*@
+                        <div class="uif-row" id="payerSearch">
+                            <div class="uif-col-5">
+                                <label class="control-label">@Global.DocNumPayer</label>
+                                <br />
+                                <input class="uif-autocomplete" type="text"
+                                       data-source="@Url.Action("GetInsuredByDocumentNumber", "Common")"
+                                       data-displaykey="DocumentNumber"
+                                       onkeypress="return JustNumbers(event, this);"
+                                       maxlength="20"
+                                       placeholder='@Global.EnterDocumentNumber'
+                                       id="PayerDocumentNumber"
+                                       name="PayerDocumentNumber"
+                                       data-val="true"
+                                       data-val-required='@Global.RequiredField' />
+
+                                <span class="text-danger" data-valmsg-for="PayerDocumentNumber" data-valmsg-replace="true" />
+                            </div>
+                            <div class="uif-col-7">
+                                <label class="control-label">@Global.NamePayer</label>
+                                <br />
+                                <input class="uif-autocomplete" type="text"
+                                       data-source="@Url.Action("GetInsuredByInsuredName", "Common")"
+                                       data-displaykey="Name"
+                                       placeholder='@Global.EnterPayerName'
+                                       id="PayerName"
+                                       maxlength="100"
+                                       name="PayerName"
+                                       data-val="true"
+                                       data-val-required='@Global.RequiredField' />
+
+
+                                <span class="text-danger" data-valmsg-for="PayerName" data-valmsg-replace="true" />
+                            </div>
+                        </div>
+                        @*POR AGENTE*@
+                        <div class="uif-row" id="agentSearch">
+                            <div class="uif-col-5">
+                                <label class="control-label">@Global.AgentDocumentNumber</label>
+                                <br />
+                                <input class="uif-autocomplete" type="text"
+                                       data-source="@Url.Action("GetAgentByDocumentNumber", "Common")"
+                                       data-displaykey="DocumentNumber"
+                                       placeholder='@Global.EnterAgentDocument'
+                                       id="AgentDocumentNumberDialog"
+                                       name="AgentDocumentNumberDialog"
+                                       data-val-required='@Global.RequiredField'
+                                       data-val="true" />
+                                <span class="text-danger" data-valmsg-for="AgentDocumentNumberDialog" data-valmsg-replace="true" />
+                            </div>
+                            <div class="uif-col-7">
+                                <label class="control-label">@Global.AgentName</label>
+                                <br />
+                                <input class="uif-autocomplete" type="text"
+                                       data-source="@Url.Action("GetAgentByName", "Common")"
+                                       data-displaykey="Name"
+                                       placeholder='@Global.EnterAgentName'
+                                       id="AgentNameDialog"
+                                       name="AgentNameDialog"
+                                       data-val-required='@Global.RequiredField'
+                                       data-val="true" />
+                                <span class="text-danger" data-valmsg-for="AgentNameDialog" data-valmsg-replace="true" />
+                            </div>
+                        </div>
+                        @*POR GRUPO*@
+                        <div class="uif-row" id="groupSearch">
+                            <div class="uif-col-5">
+                                <label class="control-label">@Global.CodeGroup</label>
+                                <br />
+                                <input class="uif-autocomplete"
+                                       type="text"
+                                       data-source="@Url.Action("GetBillingGroupByNumber", "PremiumsReceivable")"
+                                       data-displaykey="Id"
+                                       placeholder='@Global.EnterGroupCode'
+                                       id="GroupNumber"
+                                       name="GroupNumber"
+                                       data-minlenght="1"
+                                       onkeypress="return JustNumbers(event, this);"
+                                       maxlength="10">
+                            </div>
+                            <div class="uif-col-7">
+                                <label class="control-label">@Global.NameGroup</label>
+                                <br />
+                                <input class="uif-autocomplete"
+                                       type="text"
+                                       data-source="@Url.Action("GetBillingGroupByName", "PremiumsReceivable")"
+                                       data-displaykey="Description"
+                                       placeholder='@Global.EnterGroupName'
+                                       id="GroupName"
+                                       name="GroupName">
+                            </div>
+                        </div>
+                        @*POR FACTURA*@
+                        <div class="uif-row" id="salesTicketSearch">
+                            <div class="uif-col-5">
+                                <label class="control-label">@Global.BillNumber</label>
+                                <br />
+                                <input type="text" id="SaleTicketDocumentNumber" onkeypress=" return JustNumbers(event, this); " maxlength="10" />
+                            </div>
+                        </div>
+
+                        <div id="SearchAdvancedSection" title="@Global.SearchLabel @Global.Advanced">
+                            <div class="uif-row">
+                                <div class="uif-col-5">
+                                    <label class="control-label">@Global.Branch</label>
+                                    <br />
+                                </div>
+                                <div class="uif-col-7">
+                                    <label class="control-label">@Global.Prefix</label>
+                                    <br />
+                                    <select class="uif-select form-control" id="PrefixSearch" data-id="Id" data-name="Description"></select>
+                                </div>
+                            </div>
+                            @*POR POLIZA*@
+                            <div class="uif-row">
+                                <div id="policySearch">
+                                    <div class="uif-col-5">
+                                        <label class="control-label">@Global.PolicyNumber</label>
+                                        <br />
+                                        <input type="text" id="PolicyDocumentNumber"
+                                               onkeypress=" return JustNumbers(event, this); "
+                                               data-val-required='@Global.RequiredField'
+                                               data-val="true"
+                                               name="PolicyDocumentNumber"
+                                               maxlength="10" />
+                                        @*<span class="text-danger" data-valmsg-for="PolicyDocumentNumber" data-valmsg-replace="true" />*@
+                                    </div>
+
+                                    <div class="uif-col-3">
+                                        <label class="control-label">@Global.Endorsement</label>
+                                        <br />
+                                        <input type="text" id="Endorsement"
+                                               onkeypress=" return JustNumbers(event, this); " maxlength="10" />
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="uif-row">
+                                <div class="uif-col-5">
+                                    <label class="control-label">@Global.PayExpDateQuotaFrom</label>
+                                    <br />
+                                    <input type="text" class="uif-datepicker"
+                                           data-mask="99/99/9999"
+                                           id="PayExpDateQuotaFrom"
+                                           name="PayExpDateQuotaFrom"
+                                           value="@ViewBag.DateAccounting"
+                                           data-val="false" />
+                                </div>
+                                <div class="uif-col-5">
+                                    <label class="control-label">@Global.PayExpDateQuotaTo</label>
+                                    <br />
+                                    <input type="text" class="uif-datepicker"
+                                           data-mask="99/99/9999"
+                                           id="PayExpDateQuotaTo"
+                                           name="PayExpDateQuotaTo"
+                                           value="@ViewBag.DateAccounting"
+                                           data-val="false" />
+                                </div>
+                            </div>
+
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <div class="uif-alert" id="alertPrime"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="uif-row">
+                            <div class="uif-col-12">
+                                <div class="pull-right">
+                                    <button id="CleanSearchPoliciesButton" class="btn btn-default" role="button">
+                                        <i class="fa fa-paint-brush"></i> @Global.Clean
+                                    </button>
+                                    <button id="SearchSearchPoliciesButton" class="btn btn-primary" role="button">
+                                        <i class="fa fa-search"></i> @Global.Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="uif-row">
+                            <div class="uif-col-12">
+                                <div class="uif-alert" id="alertItemToPayView"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 no-padding-left col-right">
+                        <h5><b>@Global.SearchLabel</b></h5>
+                        <div id="ItemToPayView" class="uif-listview">
+                            <div class="footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*Final Panel Superior*@
+            </div>
+        </div>
+        <div class="tab-pane" id="policiesTab">
+            <div id="lowerPanel">
+                @*Panel Inferior*@
+                <div class="row height-100 flex">
+                    <div class="col-xs-12 col-md-6 no-padding-right col-left">
+                        <h5><b>@Global.Policies</b></h5>
+                        <div id="ItemToApplyView" class="uif-listview">
+                            <div class="footer">
+                            </div>
+                        </div>
+                        <div class="uif-col-12">
+                            <div class="uif-alert" id="alertPrimeApply"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6 no-padding-left col-right">
+                        @*MODAL PARA MODIFICAR EL MONTO A PAGAR*@
+                        <div class="uif-row" id="SelecEditPartial">
+                            <div class="uif-col-4">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="options" id="AmountToPayCheck" value="1" checked>
+                                        @Global.AmountToPay
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="uif-col-4">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="options" id="CommissionCheck" value="2">
+                                        @Global.DialogCommissionRetainedCommissionGranted
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.Partial("~/Areas/Accounting/Views/Application/PremiumsReceivable/DialogDepositPremiums.cshtml")
+                        @Html.Partial("~/Areas/Accounting/Views/Application/PremiumsReceivable/DialogCommissionRetained.cshtml")
+                    </div>
+                </div>
+                @*Final Panel Inferior*@
+            </div>
+        </div>
+    </div>
+</form>
+
+

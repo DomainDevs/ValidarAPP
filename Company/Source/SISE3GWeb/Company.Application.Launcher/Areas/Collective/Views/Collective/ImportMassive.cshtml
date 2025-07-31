@@ -1,0 +1,112 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Collective.Models.CollectiveModelView
+
+@section Title{
+    <div class="row main-title">
+        <div class="column-80">
+            @Resources.Language.RisksUploadProcessImport
+        </div>
+        <div class="column-20 even">
+            <i class="fa fa-file-o" aria-hidden="true"></i>
+            @Resources.Language.Temporal:&nbsp;<span id="inputNewTemporal">@Html.DisplayFor(model => model.TempId)</span>
+        </div>
+    </div>
+}
+@section Toolbar
+{
+<footer>
+    <div id="btnBottomMain">
+        <div id="buttonsImport" class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.Close
+            </button>
+            <button type="button" class="btn btn-primary" id="btnImportMassive">
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonImport
+            </button>
+
+        </div>
+    </div>
+</footer>
+
+}
+
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formCollective" autocomplete="off">
+
+    @Html.AntiForgeryToken()
+    <div id="modalCollective">
+        <br />
+        @Html.HiddenFor(model => model.IdPrefixCommercial, new { id = "hiddenPrefixCommercial" })
+        @Html.HiddenFor(model => model.IdBranch, new { id = "hiddenBranch" })
+        @Html.HiddenFor(model => model.IdCommercialProduct, new { id = "hiddenProduct" })
+        @Html.HiddenFor(model => model.EndorsementType, new { id = "hiddenEndorsement" })
+        @Html.HiddenFor(model => model.TempId, new { id = "hiddenTempId" })
+
+        @Html.HiddenFor(model => model.IdAgencyMainAgent, new { id = "hiddenAgentAgency" })
+        @Html.HiddenFor(model => model.MainAgentCode, new { id = "hiddenAgentPrincipal" })
+        @Html.HiddenFor(model => model.SalesPoint, new { id = "hiddenSalesPoint" })
+        <div class="row">
+            <div class="uif-col-9">
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label>@Resources.Language.LabelSourceTemporal</label>
+                        @Html.TextBoxFor(model => model.IdLoad, new { id = "inputLoadSearch", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderTemporary })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--tabla estado cargue-->
+        <div class="row">
+            <div class="uif-col-12">
+                <table data-paginate="true" data-selectiontype="multiple" class="uif-table" id="TableLoad" data-title="@Resources.Language.LabelAssociatedProcesses" data-filter="false" data-add="false">
+
+                    <thead>
+                        <tr>
+                            <th data-property="TempId" data-visible="false">@Resources.Language.LabelTemporal</th>
+                            <th data-property="MassiveLoadId">@Resources.Language.LabelLoad</th>
+                            <th data-property="Date" data-type="date">@Resources.Language.LabelDate</th>
+                            <th data-property="Description">@Resources.Language.LabelDescription</th>
+                            <th data-property="CountRiskProcessed">@Resources.Language.LabelCorrectRecords</th>
+                            <th data-property="CountRiskErrors">@Resources.Language.LabelRecordsWithErrors</th>
+                            <th data-property="CountRisk">@Resources.Language.LabelRisks</th>
+                            <th data-property="StateDescription">@Resources.Language.LabelStatus</th>
+                            <th data-property="State" data-visible="false">stateId</th>
+                            <th data-property="AccountName">@Resources.Language.LabelUser</th>
+                        </tr>
+
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>@Resources.Language.LabelTotal</th>
+                            <th></th>
+                            <th></th>
+                            <th id="CountRiskProcessed"></th>
+                            <th id="CountRiskPending"></th>
+                            <th id="CountRisk"></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</form>
+@section Scripts
+{
+  @Scripts.Render("~/bundle/js/ImportMassive");
+}

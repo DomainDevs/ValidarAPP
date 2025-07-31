@@ -1,0 +1,30 @@
+<map version="2.0" type="class" name="BallotDeposit" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="GET_BALLOT_TO_DEPOSIT_ENTITY">
+  <properties>
+    <property name="UserId" type="Integer" nullable="true" description="USER_ID_PROPERTY" />
+    <property name="Status" type="Integer" nullable="true" description="STATUS_PROPERTY" />
+    <property name="BankCode" type="Integer" nullable="true" description="BANK_CODE_PROPERTY" />
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="AccountNumber" type="String" size="50" nullable="true" description="ACCOUNT_NUMBER_PROPERTY" />
+    <property name="PaymentTicketCode" type="Integer" key="true" description="PAYMENT_TICKET_CODE_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" nullable="true" description="AMOUNT_PROPERTY" />
+    <property name="CashAmount" type="Decimal" precision="18" scale="2" nullable="true" description="CASH_AMOUNT_PROPERTY" />
+    <property name="Currency" type="String" size="50" description="CURRENCY_PROPERTY" />
+    <property name="RegisterDate" type="DateTime" nullable="true" description="REGISTER_DATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="GET_BALLOT_TO_DEPOSIT" schema="ACC" alias="GET_BALLOT_TO_DEPOSIT" update="true">
+      <columns>
+        <column name="USER_ID" type="Int32" property="UserId" />
+        <column name="STATUS" type="Int32" property="Status" />
+        <column name="BANK_CD" type="Int32" property="BankCode" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="ACCOUNT_NUMBER" type="String" property="AccountNumber" size="50" />
+        <column name="PAYMENT_TICKET_CD" type="Int32" property="PaymentTicketCode" key="true" />
+        <column name="AMOUNT" type="Decimal" property="Amount" size="19" precision="18" scale="2" />
+        <column name="CASH_AMOUNT" type="Decimal" property="CashAmount" size="19" precision="18" scale="2" />
+        <column name="CURRENCY" type="String" property="Currency" allowNull="false" size="50" />
+        <column name="REGISTER_DATE" type="DateTime" property="RegisterDate" />
+      </columns>
+    </table>
+  </tables>
+</map>

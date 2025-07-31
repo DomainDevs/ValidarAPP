@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="EntryConsultation">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="EntryId">
+          <Column table-alias="Entry" name="EntryId" />
+        </SelectValue>
+        <SelectValue alias="AccountingAccountId">
+          <Column table-alias="AccountingAccount" name="AccountingAccountId" />
+        </SelectValue>
+        <SelectValue alias="AccountNumber">
+          <Column table-alias="AccountingAccount" name="AccountNumber" />
+        </SelectValue>
+        <SelectValue alias="AccountName">
+          <Column table-alias="AccountingAccount" name="AccountName" />
+        </SelectValue>
+        <SelectValue alias="AccountingNature">
+          <Column table-alias="Entry" name="AccountingNature" />
+        </SelectValue>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="Entry" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="AmountValue">
+          <Column table-alias="Entry" name="AmountValue" />
+        </SelectValue>
+        <SelectValue alias="AmountLocalValue">
+          <Column table-alias="Entry" name="AmountLocalValue" />
+        </SelectValue>
+        <SelectValue alias="Date">
+          <Column table-alias="Entry" name="Date" />
+        </SelectValue>
+        <SelectValue alias="EntryDescription">
+          <Column table-alias="Entry" name="Description" />
+        </SelectValue>
+        <SelectValue alias="EntryNumber">
+          <Column table-alias="Entry" name="EntryNumber" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="Entry" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="UserCode">
+          <Column table-alias="Entry" name="UserCode" />
+        </SelectValue>
+        <SelectValue alias="EntryDestinationId">
+          <Column table-alias="Entry" name="EntryDestinationId" />
+        </SelectValue>
+        <SelectValue alias="EntryDestinationDescription">
+          <Column table-alias="EntryDestination" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AccountingMovementTypeId">
+          <Column table-alias="Entry" name="AccountingMovementTypeId" />
+        </SelectValue>
+        <SelectValue alias="AccountingMovementTypeDescription">
+          <Column table-alias="AccountingMovementType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="RegisterDate">
+          <Column table-alias="Entry" name="RegisterDate" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join type="Left">
+            <Join>
+              <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.Entry, Core.GeneralLedger.Entities" alias="Entry" />
+              <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AccountingAccount, Core.GeneralLedger.Entities" alias="AccountingAccount" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="AccountingAccount" name="AccountingAccountId" />
+                  <Column table-alias="Entry" name="AccountingAccountId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.EntryDestination, Core.GeneralLedger.Entities" alias="EntryDestination" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="EntryDestination" name="EntryDestinationId" />
+                <Column table-alias="Entry" name="EntryDestinationId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AccountingMovementType, Core.GeneralLedger.Entities" alias="AccountingMovementType" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="AccountingMovementType" name="AccountingMovementTypeId" />
+              <Column table-alias="Entry" name="AccountingMovementTypeId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

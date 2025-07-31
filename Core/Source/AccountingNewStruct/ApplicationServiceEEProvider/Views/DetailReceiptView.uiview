@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="DetailReceiptView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PaymentTypeId">
+          <Column table-alias="Payment" name="PaymentMethodTypeCode" />
+        </SelectValue>
+        <SelectValue alias="PaymentTypeDescription">
+          <Column table-alias="PaymentMethodType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CurrencyId">
+          <Column table-alias="Payment" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="Currency">
+          <Column table-alias="Currency" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="Payment" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="Exchange">
+          <Column table-alias="Payment" name="ExchangeRate" />
+        </SelectValue>
+        <SelectValue alias="LocalAmount">
+          <Column table-alias="Payment" name="IncomeAmount" />
+        </SelectValue>
+        <SelectValue alias="DocumentNumber">
+          <Column table-alias="Payment" name="DocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="Voucher">
+          <Column table-alias="Payment" name="Voucher" />
+        </SelectValue>
+        <SelectValue alias="CardType">
+          <Column table-alias="Payment" name="CreditCardTypeCode" />
+        </SelectValue>
+        <SelectValue alias="CardTypeName">
+          <Column table-alias="CreditCardType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AuthorizationNumber">
+          <Column table-alias="Payment" name="AuthorizationNumber" />
+        </SelectValue>
+        <SelectValue alias="ValidThruMonth">
+          <Column table-alias="Payment" name="ValidMonth" />
+        </SelectValue>
+        <SelectValue alias="ValidThruYear">
+          <Column table-alias="Payment" name="ValidYear" />
+        </SelectValue>
+        <SelectValue alias="IssuingBankId">
+          <Column table-alias="Payment" name="IssuingBankCode" />
+        </SelectValue>
+        <SelectValue alias="IssuinBankName">
+          <Column table-alias="Bank" name="Description" />
+        </SelectValue>
+        <SelectValue alias="IssuingBankAccountNumber">
+          <Column table-alias="Payment" name="IssuingAccountNumber" />
+        </SelectValue>
+        <SelectValue alias="IssuerName">
+          <Column table-alias="Payment" name="Holder" />
+        </SelectValue>
+        <SelectValue alias="RecievingBankId">
+          <Column table-alias="Payment" name="ReceivingBankCode" />
+        </SelectValue>
+        <SelectValue alias="RecievingBankAccountNumber">
+          <Column table-alias="Payment" name="ReceivingAccountNumber" />
+        </SelectValue>
+        <SelectValue alias="SerialVoucher">
+          <Column table-alias="Payment" name="SerialVoucher" />
+        </SelectValue>
+        <SelectValue alias="SerialNumber">
+          <Column table-alias="Payment" name="SerialNumber" />
+        </SelectValue>
+        <SelectValue alias="Date">
+          <Column table-alias="Payment" name="DatePayment" />
+        </SelectValue>
+        <SelectValue alias="CollectId">
+          <Column table-alias="Collect" name="CollectId" />
+        </SelectValue>
+        <SelectValue alias="PaymentStatus">
+          <Column table-alias="Payment" name="Status" />
+        </SelectValue>
+        <SelectValue alias="Taxes">
+          <Column table-alias="Payment" name="Taxes" />
+        </SelectValue>
+        <SelectValue alias="StatusDescription">
+          <Column table-alias="StatusPayment" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CollectCode">
+          <Column table-alias="Payment" name="CollectCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join type="Left">
+          <Join type="Left">
+            <Join>
+              <Join>
+                <Join>
+                  <Join type="Left">
+                    <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Payment, Core.Accounting.Entities" alias="Payment" />
+                    <ClassNameTable name="Sistran.Core.Application.Common.Entities.Bank, Core.Common.Entities" alias="Bank" />
+                    <criteria>
+                      <BinaryCriterion type="Equal">
+                        <Column table-alias="Bank" name="BankCode" />
+                        <Column table-alias="Payment" name="IssuingBankCode" />
+                      </BinaryCriterion>
+                    </criteria>
+                  </Join>
+                  <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Collect, Core.Accounting.Entities" alias="Collect" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="Collect" name="CollectId" />
+                      <Column table-alias="Payment" name="CollectCode" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>                
+                <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentType, Core.Accounting.Entities" alias="PaymentMethodType" />
+                
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="PaymentMethodType" name="PaymentTypeCode" />
+                    <Column table-alias="Payment" name="PaymentMethodTypeCode" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Common.Entities.Currency, Core.Common.Entities" alias="Currency" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="Currency" name="CurrencyCode" />
+                  <Column table-alias="Payment" name="CurrencyCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Common.Entities.CreditCardType, Core.Common.Entities" alias="CreditCardType" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="CreditCardType" name="CreditCardTypeCode" />
+                <Column table-alias="Payment" name="CreditCardTypeCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.StatusPayment, Core.Accounting.Entities" alias="StatusPayment" />
+          <criteria>
+            <BinaryPredicate type="And">
+              <BinaryCriterion type="Equal">
+                <Column table-alias="StatusPayment" name="Status" />
+                <Column table-alias="Payment" name="Status" />
+              </BinaryCriterion>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="StatusPayment" name="PaymentMethodTypeCode" />
+                <Column table-alias="Payment" name="PaymentMethodTypeCode" />
+              </BinaryCriterion>
+            </BinaryPredicate>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

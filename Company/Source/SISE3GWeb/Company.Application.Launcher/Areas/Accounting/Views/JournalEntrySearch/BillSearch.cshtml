@@ -1,0 +1,115 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="main-content">
+
+    <div class="uif-row background-grey grow">
+        <div class="uif-col-xs-12">
+            <form id="JurnalEntrySearchForm" onsubmit=" return false ">
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label class="control-label">@Global.Branch</label>
+
+                        @Html.DropDownList("BranchJurnalEntrySearch", Enumerable.Empty<SelectListItem>(), new
+                   {
+                       @class = "uif-select form-control",
+                       data_source = @Url.Content("~/BillSearch/LoadBranch"),
+                       data_id = "Id",
+                       data_name = "Description",
+                       data_selectedid = @ViewBag.BranchDefault,
+                       data_native = "true",
+                       data_val = "true",
+                       data_val_required = @Global.RequiredField
+                   })
+
+
+
+                        <span class="text-danger" data-valmsg-for="BranchJurnalEntrySearch" data-valmsg-replace="true">
+                        </span>
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">@Global.User</label>
+                        <br />
+                        <input type="text" maxlength="40" class="uif-autocomplete" id="UserSearch" name="UserSearch"
+                               data-source="@Url.Action("GetUsers", "BillSearch")" data-displaykey="value" placeholder="" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">@Global.TransactionNumber</label>
+                        <br />
+                        <input type="text" id="technicalTransactionJE" name="technicalTransactionJE"
+                               onkeypress=" return JustNumbers(event, this); " maxlength="10" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label class="control-label">@Global.StartDate</label>
+                        <br />
+                        <input type="text" id="DateFromJournalEntry" name="DateFromJournalEntry"
+                               data-mask="99/99/9999" class="uif-datepicker" maxlength="10" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">@Global.DateTo</label>
+                        <br />
+                        <input type="text" id="DateToJournalEntry" name="DateToJournalEntry"
+                               data-mask="99/99/9999" class="uif-datepicker" maxlength="10" />
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="control-label">@Global.Status</label>
+                        <select class="uif-select form-control" id="ReceiptStatus" data-id="Id" data-name="Description"
+                                data-source="@Url.Content("~/BillSearch/GetJurnalEntryStatus")"
+                                data-native="true" data-val="true" name="ReceiptStatus"></select>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-alert" id="alertJurnalEntry"></div>
+                    </div>
+                </div>
+
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="form-footer">
+                            <button id="CleanSearchJournal" class="btn btn-default" role="button">
+                                <i class="fa fa-paint-brush"></i>  @Global.Clean
+                            </button>
+                            <button type="submit" id="SearchJournal" class="btn btn-primary" role="button" onclick="return false">
+                                <i class="fa fa-search"></i>  @Global.Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <table class="uif-table" id="SearchJournalEntryTable" data-exporttocsv="false" data-edit="false" data-delete="false"
+                           data-filter="false" data-paginate="true" data-title="@Global.SearchLabel">
+                        <thead>
+                            <tr>
+                                <th data-visible="false" data-property="ImputationCode">@Global.BillNum</th>
+                                <th data-property="TechnicalTransaction">@Global.TransactionNumber</th>
+                                <th data-visible="false" data-property="JournalEntryStatus">JournalEntryStatus</th>
+                                <th data-visible="false" data-property="JournalEntryId">JournalEntryId</th>
+                                <th data-property="StatusDescription">@Global.Status</th>
+                                <th data-property="AccountName">@Global.User</th>
+                                <th data-visible="false" data-property="BranchCode">BranchCode</th>
+                                <th data-property="BranchDescription">@Global.Branch</th>
+                                <th data-property="RegisterDate">@Global.RegisterDate</th>
+                                <th data-property="AccountingDate">@Global.AccountingDate</th>
+                                <th data-visible="false" data-property="PayerId">PayerId</th>
+                                <th data-property="Payer">@Global.Depositor</th>
+                                <th data-visible="false" data-property="DocumentNumber">DocumentNumber</th>
+                                <th data-property="Comments">@Global.Description</th>
+                                <th data-visible="false" data-property="AccountingTransaction">AccountingTransaction</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+

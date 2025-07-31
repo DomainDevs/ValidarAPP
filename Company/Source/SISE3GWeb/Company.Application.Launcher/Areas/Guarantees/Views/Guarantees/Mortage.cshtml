@@ -1,0 +1,119 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Guarantees.Models.MortageViewModel
+<form id="AddMortage" name="AddMortage">
+    @Html.AntiForgeryToken()
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-8">
+            <label>@Resources.Language.Address </label>
+            @Html.TextBoxFor(model => model.Address, new { id = "Mortage-Address", @class = "changeToUpper" })
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelCountry</label>
+            <input class="uif-input-search"
+                   data-val="true" id="inputCountry-Mortage" name="inputCountry-Mortage" placeholder="@Resources.Language.NameCountry" type="text">
+            @Html.ValidationMessageFor(model => model.Country)
+        </div>
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelState</label>
+            <input class="uif-input-search"
+                   data-val="true" id="inputState-Mortage" name="inputState-Mortage" placeholder="@Resources.Language.NameDepartment" type="text">
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelCity</label>
+            <input class="uif-input-search"
+                   data-val="true" id="inputCity-Mortage" name="inputCity-Mortage" placeholder="@Resources.Language.NameCity" type="text">
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+
+        <div class="uif-col col-md-2">
+            <label class="field-required">@Resources.Language.LabelMortageType</label>
+            <select class="uif-select form-control" id="Mortage-AssetType" data-val="true" data-native="false" data-source="@Url.Content("~/Guarantees/Guarantees/GetAssetType")" data-val-required="@Resources.Language.ErrorDocumentControlMortageType" data-id="Code" data-name="Description" name="MortageType"></select>
+            @Html.ValidationMessageFor(model => model.MortageType)
+        </div>
+
+        <div class="uif-col col-md-2">
+            <label class="field-required">@Resources.Language.LabelDeedNumber </label>
+            @Html.TextBoxFor(model => model.DeedNumber, new { id = "Mortage-DeedNumber" })
+            @Html.ValidationMessageFor(model => model.DeedNumber)
+        </div>
+
+        <div class="uif-col col-md-2">
+            <label class="field-required">@Resources.Language.LabelValuationValue</label>
+            @Html.TextBoxFor(model => model.ValuationValue, new { id = "Mortage-ValuationValue", placeholder = "0", @class = "numberWithCommas rightAlign" })
+            @Html.ValidationMessageFor(model => model.ValuationValue)
+        </div>
+
+        <div class="uif-col col-md-3">
+            <label>@Resources.Language.LabelCoin </label>
+            <select class="uif-select form-control" id="Mortage-Currency" data-val="true" data-native="false" data-val-required="@Resources.Language.ErrorDocumentControlCurrency" data-id="Id" data-name="Description" name="Currency" data-source="@Url.Content("~/Guarantees/Guarantees/GetCurrencies")"></select>
+            @Html.ValidationMessageFor(model => model.Currency)
+        </div>
+
+        <div class="uif-col col-md-3">
+            <label>@Resources.Language.LabelValuationDate </label>
+            @Html.TextBoxFor(model => model.ValuationDate, "{0:dd/MM/yyyy}", new { id = "Mortage-ValuationDate", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.ValuationDate)
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-4">
+            <label>@Resources.Language.LabelAdjusterNames </label>
+            @Html.TextBoxFor(model => model.AdjusterNames, new { id = "Mortage-AdjusterNames", @class = "changeToUpper" })
+            @Html.ValidationMessageFor(model => model.AdjusterNames)
+        </div>
+
+        <div class="uif-col col-md-2">
+            <label>@Resources.Language.LabelMeasureArea</label>
+            @Html.TextBoxFor(model => model.MeasureArea, new { id = "Mortage-MeasureArea", placeholder = "0", @class = "numberWithCommas rightAlign" })
+            @Html.ValidationMessageFor(model => model.MeasureArea)
+        </div>
+
+        <div class="uif-col col-md-2">
+            <label>@Resources.Language.LabelBuiltArea</label>
+            @Html.TextBoxFor(model => model.BuiltArea, new { id = "Mortage-BuiltArea", placeholder = "0", @class = "numberWithCommas rightAlign" })
+            @Html.ValidationMessageFor(model => model.BuiltArea)
+        </div>
+
+        <div class="uif-col col-md-4">
+            <label>@Resources.Language.LabelUnitOfMeasure </label>
+            <select class="uif-select form-control" id="Mortage-UnitOfMeasure" data-val="true" data-native="false" data-source="@Url.Content("~/Guarantees/Guarantees/GetUnitsOfMeasure")" data-val-required="@Resources.Language.ErrorDocumentUnitOfMeasure" data-id="Id" data-name="Description" name="UnitOfMeasure"></select>
+            @Html.ValidationMessageFor(model => model.UnitOfMeasure)
+        </div>
+    </div>
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-4">
+            <label>@Resources.Language.LabelCompanyInsured </label>
+            <input class="uif-autocomplete" name="Company" type="text" data-source="@Url.Action("GetCoInsuranceCompanies", "Guarantees")"
+                   data-displaykey="Description" data-minlenght="2" data-maxlenght="5" id="Mortage-Company">
+            @Html.ValidationMessageFor(model => model.Company)
+        </div>
+
+        <div class="uif-col col-md-2">
+            <label>@Resources.Language.LabelNroPolicy</label>
+            @Html.TextBoxFor(model => model.NumberPolicy, new { id = "Mortage-NumberPolicy" })
+            @Html.ValidationMessageFor(model => model.NumberPolicy)
+        </div>
+
+        <div class="uif-col col-md-6">
+            <label>@Resources.Language.LabelInsuredValue</label>
+            @Html.TextBoxFor(model => model.InsuredValue, new { id = "Mortage-InsuredValue", @class = "numberWithCommas rightAlign" })
+            @Html.ValidationMessageFor(model => model.InsuredValue)
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelObservations</label>
+            @Html.TextAreaFor(model => model.Observation, new { id = "Mortage-Observations", cols = "12", rows = "2", style = "resize: none", @class = "changeToUpper" })
+        </div>
+    </div>
+</form>

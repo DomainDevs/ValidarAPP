@@ -1,0 +1,188 @@
+﻿<div class="row">
+    <div class="uif-col-12" id="main">
+    </div>
+</div>
+
+<div class="uif-modal" id="modalDialogListPerson">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/DialogList.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalDialogListAgentExecutive">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/DialogListAgentExecutive.cshtml")
+    </div>
+</div>
+
+@section Title
+{
+    <div class="row main-title">
+        <div class="column">
+        </div>
+    </div>
+}
+
+@section breadcrumb
+{
+    <div id="breadcrumb"></div>
+}
+
+@section Toolbar
+{
+    <footer></footer>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Person");
+    @Scripts.Render("~/bundle/js/Guarantees");
+
+    <script type="text/javascript">
+
+        var cont = 0;
+        function fillDForm(fact, num) {
+            fact[cont++] = num++;
+
+            if (num > 259) {
+                return fact;
+            } else {
+                fillDForm(fact, num == 211 ? ++num : num);
+            }
+        }
+
+        var isAuthorize = {
+            '0095': @(Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0095")?1:0),
+            '0150': @(Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0150") ?1:0),
+            '0153': @(Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0153") ?1:0),
+            '0156': @(Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0156") ?1:0)
+        }
+
+        var glbPersonOnline = null;
+        var glbPolicy = null;
+        var glbRisk = null;
+        var glbCoverage = null;
+        var glbUser = null;
+        var glbPersonIndividualId = null;
+        var gblProspectData = null;
+        var router = uif2.router({ container: "#main" });
+
+        var afterCallGuarantee = function (params, error) {
+            new Guarantee();
+            new GuaranteeRequest();
+            objBindPolicy.bindEvents();
+            objBinnacle.bindEvents();
+            objDocumentationReceived.bindEvents();
+            objFixedTermDeposit.bindEvents();
+            objGuarantors.bindEvents();
+            objMortage.bindEvents();
+            objOther.bindEvents();
+            objPledge.bindEvents();
+            objPrefixAssocieted.bindEvents();
+            objPromissoryNote.bindEvents();
+        }
+        var afterCallGuarantees = function (params, error) {
+            new Guarantee();
+            new GuaranteeRequest();
+            new SearchInsured();
+            objBindPolicy.bindEvents();
+            objBinnacle.bindEvents();
+            objDocumentationReceived.bindEvents();
+            objFixedTermDeposit.bindEvents();
+            objGuarantors.bindEvents();
+            objMortage.bindEvents();
+            objOther.bindEvents();
+            objPledge.bindEvents();
+            objPrefixAssocieted.bindEvents();
+            objPromissoryNote.bindEvents();
+
+        }
+        var afterCallSearchInsured = function (params, error) {
+            new SearchInsured();
+        };
+
+        var afterCallPersonNatural = function (params, error) {
+            new PersonNatural();
+        }
+
+        var afterCallProspectusNatural = function (params, error) {
+            new ProspectusNatural();
+        }
+
+        var afterCallProspectusLegal = function (params, error) {
+            new ProspectusLegal();
+        }
+
+        var afterCallPersonLegal = function (params, error) {
+            new PersonLegal();
+        }
+
+        var afterCallPerson = function (params, error) {
+            new Persons();
+        }
+        var afterCallProduct = function (params, error) {
+
+        }
+        router.add("prtGuaranteeE", rootPath + "Guarantees/Guarantees/Guarantees", afterCallGuarantee);
+        router.add("prtGuarantees", rootPath + "Guarantees/Guarantees/SearchInsured", afterCallSearchInsured);
+        router.add("prtPerson", rootPath + "Person/Person/Persons", afterCallPerson);
+        router.add("prtPersonNatural", rootPath + "Person/Person/PersonNatural", afterCallPersonNatural);
+        router.add("prtPersonLegal", rootPath + "Person/Person/PersonLegal", afterCallPersonLegal);
+        router.add("prtProspectusNatural", rootPath + "Person/Person/ProspectusNatural", afterCallProspectusNatural);
+        router.add("prtProspectusLegal", rootPath + "Person/Person/ProspectusLegal", afterCallProspectusLegal);
+
+        var GetQueryParameter = function (parameterName) {
+            var queryParameters = window.location.search.substring(1);
+            var parameters = queryParameters.split("&");
+            for (var i = 0; i < parameters.length; i++) {
+                var parameter = parameters[i].split("=");
+                if (parameter[0] == parameterName) {
+                    return parameter[1];
+                }
+            }
+        }
+        var ExecutePerson = function () {
+            new AdvancedSearch();
+            if (GetQueryParameter('typeGuarantee') == 1) {
+                router.run("prtPersonNatural");
+            }
+            else if (GetQueryParameter('typeGuarantee') == 2) {
+                router.run("prtPersonLegal");
+            }
+            else {
+                PersonRequest.GetParameters().done(function (data) {
+                    if (data.success) {
+                        var parametersType = data.result.find(GetParameterType, ['PersonType']);
+                        var personType = parametersType.Value;
+                        switch (personType) {
+                            case TypePerson.PersonNatural:
+                                router.run("prtPersonNatural");
+                                break;
+                            case TypePerson.PersonLegal:
+                                router.run("prtPersonLegal");
+                                break;
+                            case TypePerson.ProspectNatural:
+                                router.run("prtProspectusNatural");
+                                break;
+                            case TypePerson.ProspectLegal:
+                                router.run("prtProspectusLegal");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+            }
+        }
+        var GetParameterType = function (parameter) {
+            return parameter.Description == this[0];
+        };
+        ExecutePerson();
+    </script>
+}
+
+<script type="text/javascript">
+    var policyModel = {};
+    policyModel = '@Html.Raw(Json.Encode(Model))';
+</script>
+

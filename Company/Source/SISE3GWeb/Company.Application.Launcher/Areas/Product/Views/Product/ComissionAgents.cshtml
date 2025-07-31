@@ -1,0 +1,72 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Product.Models.CommisionAgentModelsView
+<script id="agenciesAgentTemplate" type="text/template">
+    <div><strong>({{AgencyId}})</strong> {{AgencyName}}</div>
+    <div>
+        <br />
+    </div>
+    <div>
+        <strong>Comisión:</strong>
+        <div class="danger">{{CommissPercentage}} % </div>
+    </div>
+    <div><strong>Comisión adicional: </strong>{{AdditionalCommissionPercentage}} %</div>
+    <div class="hidden">
+        {{StatusTypeService}}
+    </div>
+</script>
+
+<form id="formAgenciesAgentComission" class="form modal-Colombia">
+    <div class="row" id="mainModalAgents">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.PrincipalAgent</label>
+                    <input type="text" placeholder="@Resources.Language.PrincipalAgent" id="inputModalAgenciesAgentDescription" required="required" maxlength="100" readonly/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelAgentAgencyAssign</label>
+                    <select class="uif-select form-control" id="selectModalAgenciesAgent" data-id="Id" data-name="FullName" name="AgencyId"
+                               data-val-required="@Resources.Language.ErrorDocumentControlAgency"  data-filter="true" data-native="false">
+                    </select>
+                    @Html.ValidationMessageFor(model => model.AgencyId)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelPercentageCommission</label>
+                    @Html.TextBoxFor(model => model.Percentage, new { id = "inputModalAgenciesComission", placeholder = @Resources.Language.LabelPercentageCommission, maxlength = "5" })
+                    @Html.ValidationMessageFor(model => model.Percentage)
+
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.Language.LabelCommisionAdditional</label>
+                    @Html.TextBoxFor(model => model.PercentageAdditional, new { id = "inputModalAgenciesAdditionalComission", placeholder = @Resources.Language.LabelCommisionAdditional, maxlength = "5" })
+                    @Html.ValidationMessageFor(model => model.PercentageAdditional)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-listview" id="listModalAgencyComissionData">
+            </div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnCancelAgenciesAgentComission">
+                    <span class="" aria-hidden="true">@Resources.Language.NewForm</span>
+                </button>
+                <button type="button" class="btn btn-primary" id="btnSaveAgenciesAgentComission">
+                    <span class="" aria-hidden="true">@Resources.Language.AddForm</span>
+                </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

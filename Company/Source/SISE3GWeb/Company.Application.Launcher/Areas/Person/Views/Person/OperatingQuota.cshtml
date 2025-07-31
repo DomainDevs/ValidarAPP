@@ -1,0 +1,83 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.OperatingQuotaViewModel
+
+<script id="operatingQuotaTemplate" type="text/template">    
+    <div>Ramo: {{LineBusiness.Description}}</div>
+    <div>Moneda: {{Amount.Currency.Description}}</div>
+    <div>Cupo Operativo: {{Amount.Value}}</div>
+    <div>Fecha Hasta: {{CurrentTo}}</div>
+
+</script>
+<form class="modal-Colombia">
+    <div class="uif-alert" id="alert"></div>
+    <div id="uif-spinner-loading" hidden="hidden">
+        <div class="spinner spinner-three-bounce">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-6">
+            @Html.HiddenFor(model => model.IndividualId, new { id = "IndividualId" })
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelPrefixCommercial</label>
+                    <select class="uif-select form-control" id="OperatingQuota-LineBusinessCd" data-val="true" data-val-required="@Resources.LanguagePerson.ErrorDocumentControlPrefixCommercial" data-id="Id" data-name="Description" name="PrefixId">
+                        <!--arreglar-->
+                    </select>
+                    @Html.ValidationMessageFor(model => model.LineBusinessCd)
+                </div>
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelCoin </label>
+                    <select class="uif-select form-control" id="OperatingQuota-Currency" data-val="true" data-val-required="@Resources.LanguagePerson.ErrorDocumentControlCurrency" data-id="Id" data-name="Description" name="Currency" disabled></select>
+                    @Html.ValidationMessageFor(model => model.Currency)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.LabelOperationalCapacity</label>
+                    <input class="form-control required digits rightAlign" type="text" id="OperatingQuota-OperatingQuotaAmt" maxlength="16" placeholder="0" autocomplete="off" />
+                    @Html.ValidationMessageFor(model => model.OperatingQuotaAmt)
+                </div>
+
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.LanguagePerson.DateUntil</label>
+                    @Html.TextBoxFor(model => model.CurrentTo, new { id = "OperatingQuota-CurrentTo", @class = "uif-datepicker" })
+                    @Html.ValidationMessageFor(model => model.CurrentTo)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listOperatingQuota" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0059"))
+                {
+                    <button type="button" class="btn btn-default" id="btnrNewOperatingQuota">
+                        <span aria-hidden="true"></span>
+                        @Resources.LanguagePerson.NewForm
+                    </button>
+                }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0060"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnAcceptOperatingQuota">
+                            <span aria-hidden="true"></span>
+                            @Resources.LanguagePerson.AddForm
+                        </button>
+                    }
+                </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

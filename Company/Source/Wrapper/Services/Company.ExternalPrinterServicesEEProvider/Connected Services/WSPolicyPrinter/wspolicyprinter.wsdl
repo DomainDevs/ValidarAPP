@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GenerateWSPolicyPrinter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrefixNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DocumentNumber" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndorsementId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailUser" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="YearEndorsement" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="AllInformation" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FrontPage" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PaymentFormat" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="AllInsured" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Payment" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Coverages" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Annexes" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Fee" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Clauses" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Certificate" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="AllCertificate" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CertificateSince" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CertificateUntil" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="LetterInstruction" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="InsuranceObject" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="printBinary" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateWSPolicyPrinterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateWSPolicyPrinterResult" type="tns:PrinterClass" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PrinterClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrinterBinary" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XMLFTP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Authentication" type="tns:Authentication" />
+      <s:complexType name="Authentication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GenerateWSPolicyFormatCollect">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrefixNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DocumentNumber" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndorsementId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="printBinary" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateWSPolicyFormatCollectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateWSPolicyFormatCollectResult" type="tns:PrinterClass" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultDataBasicPolicy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrefixNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DocumentNumber" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="clave_int" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultDataBasicPolicyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultDataBasicPolicyResult" type="tns:BasicsPolicy" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BasicsPolicy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ResulBasics" type="tns:DatesBasicsPolicyClass" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DatesBasicsPolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cod_suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="desc_suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cod_ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="desc_ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nro_pol" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipo_doc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nro_doc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cod_cli" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombre_cli" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="apellido1_cli" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="apellido2_cli" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="clave_int" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nro_endo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="anio_emi_endo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipo_doc_agente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nro_doc_agente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombre_agente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fec_ini_vig" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fec_fin_vig" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipo_pol" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="placa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="model" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="marca" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombre_producto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="valor_prima" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="periodicidad_prima" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="val_aseg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="val_ahorro" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConsultCoveragePolicy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrefixNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DocumentNumber" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultCoveragePolicyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultCoveragePolicyResult" type="tns:CoveragePolicy" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CoveragePolicy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ListCoveragePolicyClass" type="tns:ArrayOfCoveragePolicyClass" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCoveragePolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CoveragePolicyClass" nillable="true" type="tns:CoveragePolicyClass" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CoveragePolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cod_suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="desc_suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cod_ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="desc_ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nro_pol" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nro_riesgo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descripcion_Riesgo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_cobertura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion_Cobertura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Suma_asegurada" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Suma_asegurada_acum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Estado_cobertura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Deducible_cobertura" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConsultMultiriskHomePolicy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrefixNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DocumentNumber" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultMultiriskHomePolicyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultMultiriskHomePolicyResult" type="tns:Multirisk" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Multirisk">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MultiriskHome" type="tns:ArrayOfMultiriskHomeClass" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMultiriskHomeClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MultiriskHomeClass" nillable="true" type="tns:MultiriskHomeClass" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MultiriskHomeClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id_vivienda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipo_Vivienda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="direccion_vivienda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_ciudad_vivienda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_ciudad_vivienda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_departamento_vivienda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_departamento_vivienda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_pais_vivienda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_pais_vivienda" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="valor_contenido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="valor_vivienda" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConsultDataClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Tipodoc" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Nrodoc" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Codcli" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultDataClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultDataClientResult" type="tns:BasicsClient" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BasicsClient">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ResulClient" type="tns:DatesBasicClientClass" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DatesBasicClientClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo_Doc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_Doc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Primer_Apellido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Segundo_Apellido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Direccion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo_Persona" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Correo_Electronico" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sexo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Estado_Civil" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Departamento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ciudad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Codigo_Cliente" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConsulBenefPolicy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrefixNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DocumentNumber" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Endorsement_nro" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsulBenefPolicyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsulBenefPolicyResult" type="tns:BenefPolicy" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BenefPolicy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ListBenefPolicyClass" type="tns:ArrayOfBenefPolicyClass" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBenefPolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BenefPolicyClass" nillable="true" type="tns:BenefPolicyClass" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BenefPolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_Suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_Ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_Poliza" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_Endoso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo_Identificacion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_Identificacion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Apellido1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Apellido2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Direccion_Beneficiario" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetConsulEndorsementPolicy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BranchId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrefixNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DocumentNumber" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Typequery" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConsulEndorsementPolicyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConsulEndorsementPolicyResult" type="tns:EndorsementPolicy" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EndorsementPolicy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ListEndorsementPolicyClass" type="tns:ArrayOfEndorsementPolicyClass" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEndorsementPolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EndorsementPolicyClass" nillable="true" type="tns:EndorsementPolicyClass" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EndorsementPolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_Suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_Ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_Poliza" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_Endoso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Endoso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fec_emi" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fec_vig_desde" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fec_vig_hasta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vlr_Aseg_Endoso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vlr_Prima_Endoso" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetConsulSinisterPolicy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="codsuc" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="codramo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="numpoliza" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="numendoso" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="fecdesdesin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fechastasin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fecdesdeavisin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fechastaavisin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fecdesdepagsin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fechastapagsin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConsulSinisterPolicyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConsulSinisterPolicyResult" type="tns:SinisterPolicy" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SinisterPolicy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ListSinisterPolicyClass" type="tns:ArrayOfSinisterPolicyClass" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSinisterPolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SinisterPolicyClass" nillable="true" type="tns:SinisterPolicyClass" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SinisterPolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cod_suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nom_suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_Ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Ramo_Com" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_pol" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_Endoso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="txt_desc_endo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_Reclamo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_Ramo_tec" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Ramo_Tec" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sucursal_reclamo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fec_siniestro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fecha_Aviso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fecha_pago" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="vlr_pagado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="clase_pago" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nro_riesgo_sin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Amparo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetConsulRecoveriesPolicy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="codsuc" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="codramo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="numpoliza" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="numendoso" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="fecinimora" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fecfinmora" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fecdesdeultpago" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fechastaultpago" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fecdesdeproxpago" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fechastaproxpago" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConsulRecoveriesPolicyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConsulRecoveriesPolicyResult" type="tns:RecoveriesPolicy" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RecoveriesPolicy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ListRecoveriesPolicyClass" type="tns:ArrayOfRecoveriesPolicyClass" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRecoveriesPolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RecoveriesPolicyClass" nillable="true" type="tns:RecoveriesPolicyClass" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RecoveriesPolicyClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_Suc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Sucursal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cod_Ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Ramo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_Poliza" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nro_Endoso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc_Grupo_Endoso" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Saldo_en_Mora" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fecha_Desde_Mora" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fecha_Ultimo_Pago" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Valor_Ultimo_Pago" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fecha_Proximo_Pago" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Valor_Total_a_Pagar" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PrinterClass" nillable="true" type="tns:PrinterClass" />
+      <s:element name="BasicsPolicy" nillable="true" type="tns:BasicsPolicy" />
+      <s:element name="CoveragePolicy" nillable="true" type="tns:CoveragePolicy" />
+      <s:element name="Multirisk" nillable="true" type="tns:Multirisk" />
+      <s:element name="BasicsClient" nillable="true" type="tns:BasicsClient" />
+      <s:element name="BenefPolicy" nillable="true" type="tns:BenefPolicy" />
+      <s:element name="EndorsementPolicy" nillable="true" type="tns:EndorsementPolicy" />
+      <s:element name="SinisterPolicy" nillable="true" type="tns:SinisterPolicy" />
+      <s:element name="RecoveriesPolicy" nillable="true" type="tns:RecoveriesPolicy" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GenerateWSPolicyPrinterSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateWSPolicyPrinter" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyPrinterSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateWSPolicyPrinterResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyPrinterAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyFormatCollectSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateWSPolicyFormatCollect" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyFormatCollectSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateWSPolicyFormatCollectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataBasicPolicySoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultDataBasicPolicy" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataBasicPolicySoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultDataBasicPolicyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultCoveragePolicySoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultCoveragePolicy" />
+  </wsdl:message>
+  <wsdl:message name="ConsultCoveragePolicySoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultCoveragePolicyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultMultiriskHomePolicySoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultMultiriskHomePolicy" />
+  </wsdl:message>
+  <wsdl:message name="ConsultMultiriskHomePolicySoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultMultiriskHomePolicyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataClientSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultDataClient" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataClientSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultDataClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsulBenefPolicySoapIn">
+    <wsdl:part name="parameters" element="tns:ConsulBenefPolicy" />
+  </wsdl:message>
+  <wsdl:message name="ConsulBenefPolicySoapOut">
+    <wsdl:part name="parameters" element="tns:ConsulBenefPolicyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulEndorsementPolicySoapIn">
+    <wsdl:part name="parameters" element="tns:GetConsulEndorsementPolicy" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulEndorsementPolicySoapOut">
+    <wsdl:part name="parameters" element="tns:GetConsulEndorsementPolicyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulSinisterPolicySoapIn">
+    <wsdl:part name="parameters" element="tns:GetConsulSinisterPolicy" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulSinisterPolicySoapOut">
+    <wsdl:part name="parameters" element="tns:GetConsulSinisterPolicyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulRecoveriesPolicySoapIn">
+    <wsdl:part name="parameters" element="tns:GetConsulRecoveriesPolicy" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulRecoveriesPolicySoapOut">
+    <wsdl:part name="parameters" element="tns:GetConsulRecoveriesPolicyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyPrinterHttpGetIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+    <wsdl:part name="EndorsementId" type="s:string" />
+    <wsdl:part name="emailUser" type="s:string" />
+    <wsdl:part name="YearEndorsement" type="s:string" />
+    <wsdl:part name="AllInformation" type="s:string" />
+    <wsdl:part name="FrontPage" type="s:string" />
+    <wsdl:part name="PaymentFormat" type="s:string" />
+    <wsdl:part name="AllInsured" type="s:string" />
+    <wsdl:part name="Payment" type="s:string" />
+    <wsdl:part name="Coverages" type="s:string" />
+    <wsdl:part name="Annexes" type="s:string" />
+    <wsdl:part name="Fee" type="s:string" />
+    <wsdl:part name="Clauses" type="s:string" />
+    <wsdl:part name="Certificate" type="s:string" />
+    <wsdl:part name="AllCertificate" type="s:string" />
+    <wsdl:part name="CertificateSince" type="s:string" />
+    <wsdl:part name="CertificateUntil" type="s:string" />
+    <wsdl:part name="LetterInstruction" type="s:string" />
+    <wsdl:part name="InsuranceObject" type="s:string" />
+    <wsdl:part name="printBinary" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyPrinterHttpGetOut">
+    <wsdl:part name="Body" element="tns:PrinterClass" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyFormatCollectHttpGetIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+    <wsdl:part name="EndorsementId" type="s:string" />
+    <wsdl:part name="emailUser" type="s:string" />
+    <wsdl:part name="printBinary" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyFormatCollectHttpGetOut">
+    <wsdl:part name="Body" element="tns:PrinterClass" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataBasicPolicyHttpGetIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+    <wsdl:part name="clave_int" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataBasicPolicyHttpGetOut">
+    <wsdl:part name="Body" element="tns:BasicsPolicy" />
+  </wsdl:message>
+  <wsdl:message name="ConsultCoveragePolicyHttpGetIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultCoveragePolicyHttpGetOut">
+    <wsdl:part name="Body" element="tns:CoveragePolicy" />
+  </wsdl:message>
+  <wsdl:message name="ConsultMultiriskHomePolicyHttpGetIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultMultiriskHomePolicyHttpGetOut">
+    <wsdl:part name="Body" element="tns:Multirisk" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataClientHttpGetIn">
+    <wsdl:part name="Tipodoc" type="s:string" />
+    <wsdl:part name="Nrodoc" type="s:string" />
+    <wsdl:part name="Codcli" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataClientHttpGetOut">
+    <wsdl:part name="Body" element="tns:BasicsClient" />
+  </wsdl:message>
+  <wsdl:message name="ConsulBenefPolicyHttpGetIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+    <wsdl:part name="Endorsement_nro" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsulBenefPolicyHttpGetOut">
+    <wsdl:part name="Body" element="tns:BenefPolicy" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulEndorsementPolicyHttpGetIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+    <wsdl:part name="Typequery" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulEndorsementPolicyHttpGetOut">
+    <wsdl:part name="Body" element="tns:EndorsementPolicy" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulSinisterPolicyHttpGetIn">
+    <wsdl:part name="codsuc" type="s:string" />
+    <wsdl:part name="codramo" type="s:string" />
+    <wsdl:part name="numpoliza" type="s:string" />
+    <wsdl:part name="numendoso" type="s:string" />
+    <wsdl:part name="fecdesdesin" type="s:string" />
+    <wsdl:part name="fechastasin" type="s:string" />
+    <wsdl:part name="fecdesdeavisin" type="s:string" />
+    <wsdl:part name="fechastaavisin" type="s:string" />
+    <wsdl:part name="fecdesdepagsin" type="s:string" />
+    <wsdl:part name="fechastapagsin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulSinisterPolicyHttpGetOut">
+    <wsdl:part name="Body" element="tns:SinisterPolicy" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulRecoveriesPolicyHttpGetIn">
+    <wsdl:part name="codsuc" type="s:string" />
+    <wsdl:part name="codramo" type="s:string" />
+    <wsdl:part name="numpoliza" type="s:string" />
+    <wsdl:part name="numendoso" type="s:string" />
+    <wsdl:part name="fecinimora" type="s:string" />
+    <wsdl:part name="fecfinmora" type="s:string" />
+    <wsdl:part name="fecdesdeultpago" type="s:string" />
+    <wsdl:part name="fechastaultpago" type="s:string" />
+    <wsdl:part name="fecdesdeproxpago" type="s:string" />
+    <wsdl:part name="fechastaproxpago" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulRecoveriesPolicyHttpGetOut">
+    <wsdl:part name="Body" element="tns:RecoveriesPolicy" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyPrinterHttpPostIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+    <wsdl:part name="EndorsementId" type="s:string" />
+    <wsdl:part name="emailUser" type="s:string" />
+    <wsdl:part name="YearEndorsement" type="s:string" />
+    <wsdl:part name="AllInformation" type="s:string" />
+    <wsdl:part name="FrontPage" type="s:string" />
+    <wsdl:part name="PaymentFormat" type="s:string" />
+    <wsdl:part name="AllInsured" type="s:string" />
+    <wsdl:part name="Payment" type="s:string" />
+    <wsdl:part name="Coverages" type="s:string" />
+    <wsdl:part name="Annexes" type="s:string" />
+    <wsdl:part name="Fee" type="s:string" />
+    <wsdl:part name="Clauses" type="s:string" />
+    <wsdl:part name="Certificate" type="s:string" />
+    <wsdl:part name="AllCertificate" type="s:string" />
+    <wsdl:part name="CertificateSince" type="s:string" />
+    <wsdl:part name="CertificateUntil" type="s:string" />
+    <wsdl:part name="LetterInstruction" type="s:string" />
+    <wsdl:part name="InsuranceObject" type="s:string" />
+    <wsdl:part name="printBinary" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyPrinterHttpPostOut">
+    <wsdl:part name="Body" element="tns:PrinterClass" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyFormatCollectHttpPostIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+    <wsdl:part name="EndorsementId" type="s:string" />
+    <wsdl:part name="emailUser" type="s:string" />
+    <wsdl:part name="printBinary" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateWSPolicyFormatCollectHttpPostOut">
+    <wsdl:part name="Body" element="tns:PrinterClass" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataBasicPolicyHttpPostIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+    <wsdl:part name="clave_int" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataBasicPolicyHttpPostOut">
+    <wsdl:part name="Body" element="tns:BasicsPolicy" />
+  </wsdl:message>
+  <wsdl:message name="ConsultCoveragePolicyHttpPostIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultCoveragePolicyHttpPostOut">
+    <wsdl:part name="Body" element="tns:CoveragePolicy" />
+  </wsdl:message>
+  <wsdl:message name="ConsultMultiriskHomePolicyHttpPostIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultMultiriskHomePolicyHttpPostOut">
+    <wsdl:part name="Body" element="tns:Multirisk" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataClientHttpPostIn">
+    <wsdl:part name="Tipodoc" type="s:string" />
+    <wsdl:part name="Nrodoc" type="s:string" />
+    <wsdl:part name="Codcli" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultDataClientHttpPostOut">
+    <wsdl:part name="Body" element="tns:BasicsClient" />
+  </wsdl:message>
+  <wsdl:message name="ConsulBenefPolicyHttpPostIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+    <wsdl:part name="Endorsement_nro" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsulBenefPolicyHttpPostOut">
+    <wsdl:part name="Body" element="tns:BenefPolicy" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulEndorsementPolicyHttpPostIn">
+    <wsdl:part name="BranchId" type="s:string" />
+    <wsdl:part name="PrefixNum" type="s:string" />
+    <wsdl:part name="DocumentNumber" type="s:string" />
+    <wsdl:part name="Typequery" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulEndorsementPolicyHttpPostOut">
+    <wsdl:part name="Body" element="tns:EndorsementPolicy" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulSinisterPolicyHttpPostIn">
+    <wsdl:part name="codsuc" type="s:string" />
+    <wsdl:part name="codramo" type="s:string" />
+    <wsdl:part name="numpoliza" type="s:string" />
+    <wsdl:part name="numendoso" type="s:string" />
+    <wsdl:part name="fecdesdesin" type="s:string" />
+    <wsdl:part name="fechastasin" type="s:string" />
+    <wsdl:part name="fecdesdeavisin" type="s:string" />
+    <wsdl:part name="fechastaavisin" type="s:string" />
+    <wsdl:part name="fecdesdepagsin" type="s:string" />
+    <wsdl:part name="fechastapagsin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulSinisterPolicyHttpPostOut">
+    <wsdl:part name="Body" element="tns:SinisterPolicy" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulRecoveriesPolicyHttpPostIn">
+    <wsdl:part name="codsuc" type="s:string" />
+    <wsdl:part name="codramo" type="s:string" />
+    <wsdl:part name="numpoliza" type="s:string" />
+    <wsdl:part name="numendoso" type="s:string" />
+    <wsdl:part name="fecinimora" type="s:string" />
+    <wsdl:part name="fecfinmora" type="s:string" />
+    <wsdl:part name="fecdesdeultpago" type="s:string" />
+    <wsdl:part name="fechastaultpago" type="s:string" />
+    <wsdl:part name="fecdesdeproxpago" type="s:string" />
+    <wsdl:part name="fechastaproxpago" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetConsulRecoveriesPolicyHttpPostOut">
+    <wsdl:part name="Body" element="tns:RecoveriesPolicy" />
+  </wsdl:message>
+  <wsdl:portType name="WSPolicyPrinterSoap">
+    <wsdl:operation name="GenerateWSPolicyPrinter">
+      <wsdl:input message="tns:GenerateWSPolicyPrinterSoapIn" />
+      <wsdl:output message="tns:GenerateWSPolicyPrinterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWSPolicyFormatCollect">
+      <wsdl:input message="tns:GenerateWSPolicyFormatCollectSoapIn" />
+      <wsdl:output message="tns:GenerateWSPolicyFormatCollectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataBasicPolicy">
+      <wsdl:input message="tns:ConsultDataBasicPolicySoapIn" />
+      <wsdl:output message="tns:ConsultDataBasicPolicySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultCoveragePolicy">
+      <wsdl:input message="tns:ConsultCoveragePolicySoapIn" />
+      <wsdl:output message="tns:ConsultCoveragePolicySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultMultiriskHomePolicy">
+      <wsdl:input message="tns:ConsultMultiriskHomePolicySoapIn" />
+      <wsdl:output message="tns:ConsultMultiriskHomePolicySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataClient">
+      <wsdl:input message="tns:ConsultDataClientSoapIn" />
+      <wsdl:output message="tns:ConsultDataClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsulBenefPolicy">
+      <wsdl:input message="tns:ConsulBenefPolicySoapIn" />
+      <wsdl:output message="tns:ConsulBenefPolicySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulEndorsementPolicy">
+      <wsdl:input message="tns:GetConsulEndorsementPolicySoapIn" />
+      <wsdl:output message="tns:GetConsulEndorsementPolicySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulSinisterPolicy">
+      <wsdl:input message="tns:GetConsulSinisterPolicySoapIn" />
+      <wsdl:output message="tns:GetConsulSinisterPolicySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulRecoveriesPolicy">
+      <wsdl:input message="tns:GetConsulRecoveriesPolicySoapIn" />
+      <wsdl:output message="tns:GetConsulRecoveriesPolicySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSPolicyPrinterHttpGet">
+    <wsdl:operation name="GenerateWSPolicyPrinter">
+      <wsdl:input message="tns:GenerateWSPolicyPrinterHttpGetIn" />
+      <wsdl:output message="tns:GenerateWSPolicyPrinterHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWSPolicyFormatCollect">
+      <wsdl:input message="tns:GenerateWSPolicyFormatCollectHttpGetIn" />
+      <wsdl:output message="tns:GenerateWSPolicyFormatCollectHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataBasicPolicy">
+      <wsdl:input message="tns:ConsultDataBasicPolicyHttpGetIn" />
+      <wsdl:output message="tns:ConsultDataBasicPolicyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultCoveragePolicy">
+      <wsdl:input message="tns:ConsultCoveragePolicyHttpGetIn" />
+      <wsdl:output message="tns:ConsultCoveragePolicyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultMultiriskHomePolicy">
+      <wsdl:input message="tns:ConsultMultiriskHomePolicyHttpGetIn" />
+      <wsdl:output message="tns:ConsultMultiriskHomePolicyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataClient">
+      <wsdl:input message="tns:ConsultDataClientHttpGetIn" />
+      <wsdl:output message="tns:ConsultDataClientHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsulBenefPolicy">
+      <wsdl:input message="tns:ConsulBenefPolicyHttpGetIn" />
+      <wsdl:output message="tns:ConsulBenefPolicyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulEndorsementPolicy">
+      <wsdl:input message="tns:GetConsulEndorsementPolicyHttpGetIn" />
+      <wsdl:output message="tns:GetConsulEndorsementPolicyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulSinisterPolicy">
+      <wsdl:input message="tns:GetConsulSinisterPolicyHttpGetIn" />
+      <wsdl:output message="tns:GetConsulSinisterPolicyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulRecoveriesPolicy">
+      <wsdl:input message="tns:GetConsulRecoveriesPolicyHttpGetIn" />
+      <wsdl:output message="tns:GetConsulRecoveriesPolicyHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSPolicyPrinterHttpPost">
+    <wsdl:operation name="GenerateWSPolicyPrinter">
+      <wsdl:input message="tns:GenerateWSPolicyPrinterHttpPostIn" />
+      <wsdl:output message="tns:GenerateWSPolicyPrinterHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWSPolicyFormatCollect">
+      <wsdl:input message="tns:GenerateWSPolicyFormatCollectHttpPostIn" />
+      <wsdl:output message="tns:GenerateWSPolicyFormatCollectHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataBasicPolicy">
+      <wsdl:input message="tns:ConsultDataBasicPolicyHttpPostIn" />
+      <wsdl:output message="tns:ConsultDataBasicPolicyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultCoveragePolicy">
+      <wsdl:input message="tns:ConsultCoveragePolicyHttpPostIn" />
+      <wsdl:output message="tns:ConsultCoveragePolicyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultMultiriskHomePolicy">
+      <wsdl:input message="tns:ConsultMultiriskHomePolicyHttpPostIn" />
+      <wsdl:output message="tns:ConsultMultiriskHomePolicyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataClient">
+      <wsdl:input message="tns:ConsultDataClientHttpPostIn" />
+      <wsdl:output message="tns:ConsultDataClientHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsulBenefPolicy">
+      <wsdl:input message="tns:ConsulBenefPolicyHttpPostIn" />
+      <wsdl:output message="tns:ConsulBenefPolicyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulEndorsementPolicy">
+      <wsdl:input message="tns:GetConsulEndorsementPolicyHttpPostIn" />
+      <wsdl:output message="tns:GetConsulEndorsementPolicyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulSinisterPolicy">
+      <wsdl:input message="tns:GetConsulSinisterPolicyHttpPostIn" />
+      <wsdl:output message="tns:GetConsulSinisterPolicyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulRecoveriesPolicy">
+      <wsdl:input message="tns:GetConsulRecoveriesPolicyHttpPostIn" />
+      <wsdl:output message="tns:GetConsulRecoveriesPolicyHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSPolicyPrinterSoap" type="tns:WSPolicyPrinterSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GenerateWSPolicyPrinter">
+      <soap:operation soapAction="http://tempuri.org/GenerateWSPolicyPrinter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GenerateWSPolicyPrinterAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWSPolicyFormatCollect">
+      <soap:operation soapAction="http://tempuri.org/GenerateWSPolicyFormatCollect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataBasicPolicy">
+      <soap:operation soapAction="http://tempuri.org/ConsultDataBasicPolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultCoveragePolicy">
+      <soap:operation soapAction="http://tempuri.org/ConsultCoveragePolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultMultiriskHomePolicy">
+      <soap:operation soapAction="http://tempuri.org/ConsultMultiriskHomePolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataClient">
+      <soap:operation soapAction="http://tempuri.org/ConsultDataClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsulBenefPolicy">
+      <soap:operation soapAction="http://tempuri.org/ConsulBenefPolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulEndorsementPolicy">
+      <soap:operation soapAction="http://tempuri.org/GetConsulEndorsementPolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulSinisterPolicy">
+      <soap:operation soapAction="http://tempuri.org/GetConsulSinisterPolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulRecoveriesPolicy">
+      <soap:operation soapAction="http://tempuri.org/GetConsulRecoveriesPolicy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSPolicyPrinterSoap12" type="tns:WSPolicyPrinterSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GenerateWSPolicyPrinter">
+      <soap12:operation soapAction="http://tempuri.org/GenerateWSPolicyPrinter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GenerateWSPolicyPrinterAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWSPolicyFormatCollect">
+      <soap12:operation soapAction="http://tempuri.org/GenerateWSPolicyFormatCollect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataBasicPolicy">
+      <soap12:operation soapAction="http://tempuri.org/ConsultDataBasicPolicy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultCoveragePolicy">
+      <soap12:operation soapAction="http://tempuri.org/ConsultCoveragePolicy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultMultiriskHomePolicy">
+      <soap12:operation soapAction="http://tempuri.org/ConsultMultiriskHomePolicy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataClient">
+      <soap12:operation soapAction="http://tempuri.org/ConsultDataClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsulBenefPolicy">
+      <soap12:operation soapAction="http://tempuri.org/ConsulBenefPolicy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulEndorsementPolicy">
+      <soap12:operation soapAction="http://tempuri.org/GetConsulEndorsementPolicy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulSinisterPolicy">
+      <soap12:operation soapAction="http://tempuri.org/GetConsulSinisterPolicy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulRecoveriesPolicy">
+      <soap12:operation soapAction="http://tempuri.org/GetConsulRecoveriesPolicy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSPolicyPrinterHttpGet" type="tns:WSPolicyPrinterHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GenerateWSPolicyPrinter">
+      <http:operation location="/GenerateWSPolicyPrinter" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWSPolicyFormatCollect">
+      <http:operation location="/GenerateWSPolicyFormatCollect" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataBasicPolicy">
+      <http:operation location="/ConsultDataBasicPolicy" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultCoveragePolicy">
+      <http:operation location="/ConsultCoveragePolicy" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultMultiriskHomePolicy">
+      <http:operation location="/ConsultMultiriskHomePolicy" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataClient">
+      <http:operation location="/ConsultDataClient" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsulBenefPolicy">
+      <http:operation location="/ConsulBenefPolicy" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulEndorsementPolicy">
+      <http:operation location="/GetConsulEndorsementPolicy" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulSinisterPolicy">
+      <http:operation location="/GetConsulSinisterPolicy" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulRecoveriesPolicy">
+      <http:operation location="/GetConsulRecoveriesPolicy" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSPolicyPrinterHttpPost" type="tns:WSPolicyPrinterHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GenerateWSPolicyPrinter">
+      <http:operation location="/GenerateWSPolicyPrinter" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateWSPolicyFormatCollect">
+      <http:operation location="/GenerateWSPolicyFormatCollect" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataBasicPolicy">
+      <http:operation location="/ConsultDataBasicPolicy" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultCoveragePolicy">
+      <http:operation location="/ConsultCoveragePolicy" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultMultiriskHomePolicy">
+      <http:operation location="/ConsultMultiriskHomePolicy" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultDataClient">
+      <http:operation location="/ConsultDataClient" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsulBenefPolicy">
+      <http:operation location="/ConsulBenefPolicy" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulEndorsementPolicy">
+      <http:operation location="/GetConsulEndorsementPolicy" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulSinisterPolicy">
+      <http:operation location="/GetConsulSinisterPolicy" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsulRecoveriesPolicy">
+      <http:operation location="/GetConsulRecoveriesPolicy" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSPolicyPrinter">
+    <wsdl:port name="WSPolicyPrinterSoap" binding="tns:WSPolicyPrinterSoap">
+      <soap:address location="http://coboarqaxa01/cpt/webservices/printer/wspolicyprinter.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSPolicyPrinterSoap12" binding="tns:WSPolicyPrinterSoap12">
+      <soap12:address location="http://coboarqaxa01/cpt/webservices/printer/wspolicyprinter.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSPolicyPrinterHttpGet" binding="tns:WSPolicyPrinterHttpGet">
+      <http:address location="http://coboarqaxa01/cpt/webservices/printer/wspolicyprinter.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSPolicyPrinterHttpPost" binding="tns:WSPolicyPrinterHttpPost">
+      <http:address location="http://coboarqaxa01/cpt/webservices/printer/wspolicyprinter.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

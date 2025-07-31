@@ -1,0 +1,172 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.PaymentOrders;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.OutcomeReports</li>
+        <li class="active">@Global.PaymentOrders</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="CancelPaymentOrders" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Clean
+            </button>
+            <button id="MassiveReportPaymentOrders" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+<form id="ReportFormPaymentOrders" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">
+                @Global.Branch
+            </label>
+            @Html.DropDownList("BranchPaymentOrders", Enumerable.Empty<SelectListItem>(), new
+                  {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetBranchs"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_val = "true",
+                            data_selectedid = @ViewBag.BranchDefault,
+                            data_native = "true",
+                            data_val_required = @Global.RequiredField
+                  })
+            <span class="text-danger" data-valmsg-for="BranchPaymentOrders" data-valmsg-replace="true" />
+        </div>
+   
+        <div class="uif-col-4">
+            <label>@Global.DateFrom</label>
+
+            @Html.TextBox("StartDatePaymentOrders", "", new
+            {
+               @class = "uif-datepicker",
+               style = "text-align: left",
+               data_mask = "99/99/9999",
+               data_val = "true",
+               data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="StartDatePaymentOrders" data-valmsg-replace="true" />
+        </div>
+
+        <div class="uif-col-4">
+            <label>@Global.DateTo</label>
+
+            @Html.TextBox("EndDatePaymentOrders", "", new
+            {
+               @class = "uif-datepicker",
+               style = "text-align: left",
+               data_mask = "99/99/9999",
+               data_val = "true",
+               data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="EndDatePaymentOrders" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="pending" value="1" checked>
+                    @Global.Pending
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-4">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="paid" value="2">
+                    @Global.Paid
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-4">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="annulled" value="3">
+                    @Global.Annulled
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+
+    @section modals{
+
+        @*VENTANAS MODALES DE CONFIRMACION*@
+        <!-- Modal Confirma proceso de masivos reaseguros -->
+        <div class="modal fade" id="modalMassiveTotRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><b>@Global.PaymentOrders</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <b id="pnlModalTotRecords"></b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnModalPaymentOrder">@Global.Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalMassiveNo">@Global.No</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- Modal Confirmacion del Proceso Masivo de cada reporte -->
+        <div class="modal fade" id="modalMassiveReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><b>@Global.PaymentOrders</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        @Global.ConfirmMessageProcess
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnModalMassiveProcessReport">@Global.Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @*VIEWBAGS*@
+    <input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+    <input type="hidden" id="ViewBagBranchDefault" value="@ViewBag.BranchDefault" />
+    
+    @section scripts
+    {
+        @Scripts.Render("~/accounting/bundles/PaymentOrders")
+    }
+
+</form>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>
+

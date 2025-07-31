@@ -1,0 +1,492 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.PolicyModelsView
+
+
+<style>
+    .loader {
+        z-index: 11000;
+    }
+</style>
+
+<script id="title-template" type="text/template">
+    <div class="column-40" id="titleMain">
+        @Resources.LanguagePerson.LabelDataPerson
+    </div>
+    <div class="column-30 no-padding" id="typeSearch">
+        <select class="uif-select important" id="selectSearchPersonType" data-val="true" data-val-required="@Resources.LanguagePerson.ErrorDocumentPersonType"
+                data-id="Value" data-name="Text" name="PersonTypeId"></select>
+    </div>
+    <div class="column-30 even" id="documentSearch">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputDocument", @placeholder = @Resources.LanguagePerson.holderIdentificationDocument })
+        <button class="btn btn-default" id="btnSearchAdvPerson"><i class="fa fa-angle-down"></i></button>
+    </div>
+
+</script>
+
+<script id="footer-template" type="text/template">
+    <div id="btnBottomMain">
+        <button type="button" class="btn btn-default" id="btnCancelView">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            @Resources.LanguagePerson.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0096") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0151") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0154") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0157"))
+        {
+            <button type="button" class="btn btn-default" id="btnNewPerson">
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                @Resources.LanguagePerson.ButtonNewPerson
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0095") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0150") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0153") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0156"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSavePerson">
+                <i class="fa fa-save" aria-hidden="true"></i>
+                @Resources.LanguagePerson.LabelRecord
+            </button>
+        }
+    </div>
+</script>
+<div class="uif-alert" id="alert"></div>
+<input type="hidden" id="individualId" value="@ViewBag.IndividualId" />
+<div class="uif-modal" id="modalNewPerson">
+    <div class="uif-modalbody">
+        <form class="modal-Colombia">
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0096"))
+            {
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="searchType" id="naturalPerson" checked="checked" value="naturalPerson">@Resources.LanguagePerson.NaturalPerson
+                        </label>
+                    </div>
+                </div>
+            }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0151"))
+            {
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="searchType" id="legalPerson" value="legalPerson">@Resources.LanguagePerson.LegalPerson
+                        </label>
+                    </div>
+                </div>
+            }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0154"))
+            {
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="searchType" id="naturalprospectus" value="naturalprospectus">@Resources.LanguagePerson.Naturalprospectus
+                        </label>
+                    </div>
+                </div>
+            }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0157"))
+            {
+                <div class="row">
+                    <div class="uif-col-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="searchType" id="legalprospectus" value="legalprospectus">@Resources.LanguagePerson.Legalprospectus
+                        </label>
+                    </div>
+                </div>
+            }
+        </form>
+    </div>
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnCancelNewPerson" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        <button type="button" class="btn btn-primary btn-main" id="btnAcceptNewPerson">@Resources.LanguagePerson.Accept</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalSarlaft">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/Sarlaft.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomSarlaft">
+        <button type="button" class="btn btn-default" id="btnCancelSarlaft" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        <button type="button" class="btn btn-primary  btn-main " id="btnAcceptSarlaft">@Resources.LanguagePerson.Accept</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalStaffLabour">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/StaffLabour.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomStaffLabour">
+        <button type="button" class="btn btn-default" id="btnCancelStaffLabour" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0044"))
+        {
+            <button type="button" class="btn btn-primary btn-main " id="btnAcceptStaffLabour" data-dismiss="modal">@Resources.LanguagePerson.Accept</button>
+        }
+    </div>
+</div>
+
+<div id="modalAddress" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/Address.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.AddressViewModel())
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomAddress">
+        <button type="button" class="btn btn-default" id="btnCloseAddress">@Resources.LanguagePerson.Close</button>
+        <button type="button" class="btn btn-primary btn-main" id="btnAcceptAddress">@Resources.LanguagePerson.Accept</button>
+    </div>
+</div>
+
+<div id="modalEmail" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/Email.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.EmailViewModel())
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomEmail">
+        <button type="button" class="btn btn-default" id="btnCancelEmail" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        <button type="button" class="btn btn-primary btn-main" id="btnAcceptEmail">@Resources.LanguagePerson.Accept</button>
+    </div>
+</div>
+
+<div id="modalPhone" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/Phone.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.PhoneViewModel())
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomPhone">
+        <button type="button" class="btn btn-default" id="btnCancelPhone" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        <button type="button" class="btn btn-primary btn-main" id="btnAcceptPhone">@Resources.LanguagePerson.ButtonSave</button>
+    </div>
+</div>
+
+<div id="modalMeansPayment" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/MeansPayment.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomMethodPayment">
+        <button type="button" class="btn btn-default" id="btnCancelMeasnPayment" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0048"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptMeasnPayment" data-dismiss="modal">@Resources.LanguagePerson.Accept</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal" id="modalformAgent">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/Agent.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.AgentModelsView())
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomAgent">
+        <button type="button" class="btn btn-default" id="btnCloseAgent" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0082"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnRecordAgent">@Resources.LanguagePerson.ButtonSave</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal" id="modalDialogListAgentExecutive">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/DialogListAgentExecutive.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalformCoInsurer">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/CoInsurer.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.AgentModelsView())
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomCoInsurer">
+        <button type="button" class="btn btn-default" id="btnCloseCoInsurer" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0148"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnRecordCoInsurer">@Resources.LanguagePerson.ButtonSave</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal" id="modalformReInsurer">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ReInsurer.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomCoInsurer">
+        <button type="button" class="btn btn-default" id="btnCloseReInsurer" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0146"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnRecordReInsurer">@Resources.LanguagePerson.ButtonSave</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal" id="modalformInsured">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/Insured.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomInsured">
+        <button type="button" class="btn btn-default" id="btnCancel" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @*@if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0070"))
+            {*@
+        <button type="button" class="btn btn-primary btn-main" id="btnAcceptInsured">@Resources.LanguagePerson.ButtonSave</button>
+        @*}*@
+    </div>
+</div>
+
+<div class="uif-modal" id="modalRepresentlegal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/Representlegal.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomRepresentLegal">
+        <button type="button" class="btn btn-default" id="btnCloseRepresentLegal" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        <button type="button" class="btn btn-primary btn-main" id="btnrecordRepresentLegal">@Resources.LanguagePerson.Accept</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalPartNer">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/PartNer.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomPartner">
+        <button type="button" class="btn btn-default" id="btnCancelPartner" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        <button type="button" class="btn btn-primary btn-main" id="btnAcceptPartner" data-dismiss="modal">@Resources.LanguagePerson.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalConsortiumMembers">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ConsortiumMembers.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomTypePartnership">
+        <button type="button" class="btn btn-default" id="btnCancelTypePartnership" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0118"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptTypePartnership">@Resources.LanguagePerson.ButtonSave</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal" id="modalBusinessName">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/BusinessName.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomBusinessName">
+        <button type="button" class="btn btn-default" id="btnCloseBusinessName" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0102"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptBusinessName" data-dismiss="modal">@Resources.LanguagePerson.ButtonSave</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal" id="modalOperatingQuota">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/OperatingQuota.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Person.Models.OperatingQuotaViewModel())
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomOperatingQuota">
+        <button type="button" class="btn btn-default" id="btnCancelOperatingQuotas" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0058"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptOperatingQuotas" data-dismiss="modal">@Resources.LanguagePerson.Accept</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal modal-Colombia" id="modalProvider">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/Provider.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomProvider">
+        <button type="button" class="btn btn-default" id="btnCancelProvider" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0073"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptProvider">@Resources.LanguagePerson.ButtonSave</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal modal-Colombia" id="modalThird">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/Third.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomThird">
+        <button type="button" class="btn btn-default" id="btnCancelThird" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0080"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptThird">@Resources.LanguagePerson.ButtonSave</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal modal-Colombia" id="modalTax">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/Tax.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomTax">
+        <button type="button" class="btn btn-default" id="btnCancelTax" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0062"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptTax">@Resources.LanguagePerson.Accept</button>
+        }
+    </div>
+</div>
+<div class="uif-modal modal-Colombia" id="modalAdditionalData">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/AdditionalDataPn.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomTax">
+        <button type="button" class="btn btn-default" id="btnCancelTax" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0062"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptTax">@Resources.LanguagePerson.Accept</button>
+        }
+    </div>
+</div>
+<div class="uif-modal" id="modalBankTransfers">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/BankTransfers.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomBankTransfers">
+        <button type="button" class="btn btn-default" id="btnCancelBankTransfers" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0066"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptBankTransfers">@Resources.LanguagePerson.Accept</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal" id="modalElectronicBilling">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ElectronicBilling.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomeElectronicBilling">
+        @if(Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0801"))
+        {
+            <button type = "button" class="btn btn-default" id="btnCancelElectronicBilling" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        }
+        @if(Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0802"))
+        {
+            <button type = "button" class="btn btn-primary btn-main" id="btnAcceptElectronicBilling">@Resources.LanguagePerson.Accept</button>
+        }
+    </div>
+</div>
+
+<div class="uif-modal" id="modalElectronicBilling">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ElectronicBilling.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomeElectronicBilling">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0801"))
+        {
+            <button type="button" class="btn btn-default" id="btnCancelElectronicBilling" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0802"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptElectronicBilling">@Resources.LanguagePerson.Accept</button>
+        }
+        </div>
+</div>
+
+<div class="uif-modal modal-Colombia" id="modalEmployee">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Employee/Employee.cshtml")
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomEmployee">
+        <button type="button" class="btn btn-default" id="btnCancelEmployee" data-dismiss="modal">@Resources.LanguagePerson.Close</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0094"))
+        {
+            <button type="button" class="btn btn-primary btn-main" id="btnAcceptEmployee">@Resources.LanguagePerson.ButtonSave</button>
+        }
+    </div>
+</div>
+
+
+@* Main Person & Compañia *@
+<div class="uif-modal" id="modalListSearchCountries">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ListCountries.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalListSearchStates">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ListStates.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalListSearchCities">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ListCities.cshtml")
+    </div>
+</div>
+@* Personas Modal Address *@
+<div class="uif-modal" id="modalListSearchCountriesAdPn">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ListCountriesAdPn.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalListInsMain">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ListMain.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalListSearchStatesAdPn">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ListStatesAdPn.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalListSearchContryInfoPn">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ListCountryInfoPer.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalListSearchCitiesAdPn">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ListCitiesAdPn.cshtml")
+    </div>
+</div>
+@* Compañia *@
+<div class="uif-modal" id="modalListSearchCountriesOrigin">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/ListCountriesOrigin.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalDialogListPerson">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Person/Views/Person/DialogList.cshtml")
+    </div>
+</div>
+<div class="uif-modal" id="modalDialogListAll">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="active">
+                    <table class="uif-table" data-title="" data-selectiontype="none" id="tableResultsAll" data-filter="false" data-paginate="true">
+                        <thead>
+                            <tr>
+                                <th data-property="Id">@Resources.LanguagePerson.LabelId</th>
+                                <th data-property="Code">@Resources.LanguagePerson.LabelDocument</th>
+                                <th data-property="Description">@Resources.LanguagePerson.LabelDescription</th>
+                                <th data-property="TypePerson">@Resources.LanguagePerson.PersonType</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uif-modal" id="modalDialogListInsured">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="active">
+                    <table class="uif-table" data-title="" data-selectiontype="none" id="tableResultsInsured" data-filter="false" data-paginate="true">
+                        <thead>
+                            <tr>
+                                <th data-property="Id">@Resources.LanguagePerson.LabelId</th>
+                                <th data-property="Code">@Resources.LanguagePerson.LabelCode</th>
+                                <th data-property="Description">@Resources.LanguagePerson.LabelDescription</th>
+                                <th data-property="Description2">@Resources.LanguagePerson.LabelDescription II</th>
+                                <th data-property="DateDeclined">Fecha Declinacion</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

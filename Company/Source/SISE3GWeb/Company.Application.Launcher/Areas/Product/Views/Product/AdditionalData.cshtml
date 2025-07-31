@@ -1,0 +1,201 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Product.Models.FormsModelsView
+<div id="mainAdditionalData">
+	<div class="row">
+		<div class="uif-col-12">
+			<div class="row row-space-adjusted" id="additionalDataMenu">
+				<div class="uif-col-5">
+					<label>@Resources.Language.Options</label>
+					<select class="uif-select form-control" id="selectModalFormAdditionalData" data-val="true" name="ModulesAdditionalData"
+							data-id="Id" data-name="Description" data-filter="true" data-native="false"></select>
+				</div>
+			</div>
+			<div class="row" id="sectionDisplayInfo">
+				<div class="uif-col-12">
+					<div class="row" id="productForms" hidden="hidden">
+                        <form id="formProductForms" class="form">
+                            <input type="hidden" id="hdnIndexForm" />
+                            <input type="hidden" id="hdnFormId" />
+                            <input type="hidden" id="hdnStatusTypeService" />
+                            <div class="row">
+                                <div class="uif-col-5">
+                                    <div class="row">
+                                        <div class="uif-col-12">
+                                            @Html.LabelFor(model => model.FormNumber, new { @class = "field-required" })
+                                            @Html.TextBoxFor(model => model.FormNumber, new { id = "inputModalFormNumber" })
+                                            @Html.ValidationMessageFor(model => model.FormNumber)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="uif-col-12">
+                                            @Html.LabelFor(model => model.CurrentFrom, new { @class = "field-required" })
+                                            @Html.TextBoxFor(model => model.CurrentFrom, new { id = "inputCurrentFrom", @class = "uif-datepicker", Value = DateTime.Now.ToString("dd/MM/yyyy") })
+                                            @Html.ValidationMessageFor(model => model.CurrentFrom)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="uif-col-12">
+
+                                            @Html.LabelFor(model => model.CoverageGroupId, new { @class = "field-required" })
+                                            <select class="uif-select form-control" id="selectFormsGroupCoverage" data-val="true" data-id="Id" data-name="Description"
+                                                    data-val-required="@Resources.Language.ErrorDocumentControlGroupCoverage" name="CoverageGroupId" required
+                                                    data-filter="true" data-native="false"></select>
+                                            @Html.ValidationMessageFor(model => model.CoverageGroupId)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="uif-col-7 col-space-adjusted">
+                                    <script id="display-template-ProductForms" type="text/template">
+                                        <div>
+                                            <label><b>@Resources.Language.LabelFormNumber: {{FormNumber}}</b></label>
+                                        </div>
+                                        <div>
+                                            <label>@Resources.Language.LabelCurrentDate: {{StrCurrentFrom}}</label>
+                                        </div>
+                                        <div>
+                                            <label>@Resources.Language.LabelGroupCoverages: {{Description}}</label>
+                                        </div>
+                                        <input type="hidden" value="{{CoverGroupId}}" />
+                                        <input type="hidden" value="{{FormId}}" />
+                                        <input type="hidden" value="{{StatusTypeService}}" />
+                                    </script>
+                                    <div class="uif-listview delete-space-row" id="listModalProductForms"></div>
+                                </div>
+                            </div>
+                            <div class="row lineDividing">
+                                <div class="uif-col-5 center-col-right">
+                                    <div class="pull-right width-save">
+                                        <button type="button" class="btn btn-default" id="btnCancelForms">
+                                            <span class="" aria-hidden="true">@Resources.Language.NewForm</span>
+                                        </button>
+                                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0601"))
+                                        {
+                                            <button type="button" class="btn btn-primary" id="btnAssignForms">
+                                                <span class="" aria-hidden="true">@Resources.Language.AddForm</span>
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="uif-col-7">
+                                    <div class="uif-summary">
+                                        <div class="items">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+					</div>
+					<div class="row" id="productActivities" hidden="hidden">
+						<div class="uif-col-12">
+							<div class="has-scroll">
+								<div class="uif-inline" id="editTableProductAtivities">
+									<div class="row">
+										<label id="nameProductAtivities"></label>
+										<input type="hidden" id="IdProductAtivities" />
+									</div>
+									<div class="row">
+										<input type="checkbox" id="chkAssignedProductAtivities" />
+										<label for="chkAssignedProductAtivities">@Resources.Language.LabelAssigned.ToUpper()</label>
+										<input type="checkbox" id="chkDefaultProductAtivities" />
+										<label for="chkDefaultProductAtivities">@Resources.Language.LabelDefault.ToUpper()</label>
+									</div>
+								</div>
+								<table class="uif-table" id="tableProductAtivities"
+									   data-title=""
+									   data-add="false"
+									   data-edit="true"
+									   data-delete="false"
+									   data-filter="true"
+									   data-selectiontype="none"
+									   data-paginate="true">
+									<thead>
+                                        <tr>
+                                            <th data-property="Id" style="width:10% !important">@Resources.Language.Code.ToUpper()</th>
+                                            <th data-property="IsSelected" data-type="boolean" style="width:10% !important">@Resources.Language.LabelAssigned.ToUpper()</th>
+                                            <th data-property="IsDefault" data-type="boolean" style="width:10% !important">@Resources.Language.LabelDefault.ToUpper()</th>
+                                            <th data-property="Description" style="width:auto !important">@Resources.Language.LabelDescription.ToUpper() </th>
+                                        </tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="row" id="productLimitRc" hidden="hidden">
+						<div class="uif-col-12">
+							<div class="has-scroll">
+								<label>@Resources.Language.LabelPolicyType</label>
+								<select class="uif-select form-control" id="selectModalPolicyTypeRc" data-val="true" name="PolicyTypeId"
+										data-id="Id" data-name="Description"  data-filter="true" data-native="false"></select>
+								<div class="uif-inline" id="editTableProductLimitRC">
+									<div class="row">
+										<label id="nameProductLimitRC"></label>
+										<input type="hidden" id="IdProductLimitRC" />
+									</div>
+									<div class="row">
+										<input type="checkbox" id="chkAssignedProductLimitRC" />
+										<label for="chkAssignedProductLimitRC">@Resources.Language.LabelAssigned.ToUpper()</label>
+										<input type="checkbox" id="chkDefaultProductLimitRC" />
+										<label for="chkDefaultProductLimitRC">@Resources.Language.LabelDefault.ToUpper()</label>
+									</div>
+								</div>
+								<table class="uif-table" id="tableProductLimitRC"
+									   data-title=""
+									   data-add="false"
+									   data-edit="true"
+									   data-delete="false"
+									   data-filter="true"
+									   data-selectiontype="none"
+									   data-paginate="true">
+									<thead>
+										<tr>
+											<th data-property="Id">@Resources.Language.CodeLimitRc.ToUpper()</th>
+											<th data-property="IsSelected" data-type="boolean">@Resources.Language.LabelAssigned.ToUpper()</th>
+											<th data-property="IsDefault" data-type="boolean">@Resources.Language.LabelDefault.ToUpper()</th>
+											<th data-property="Description">@Resources.Language.LabelDescription.ToUpper() </th>
+											<th data-property="PolicyTypeId" data-visible="false"></th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row" id="productDeduct" hidden="hidden">
+						<div class="uif-col-12">
+							<div class="has-scroll">
+								<div class="uif-inline" id="editTableProductDeduct">
+									<div class="row">
+										<label id="nameProductDeduct"></label>
+										<input type="hidden" id="IdProductDeduct" />
+									</div>
+									<div class="row">
+										<input type="checkbox" id="chkAssignedProductDeduct" />
+										<label for="chkAssignedProductDeduct">@Resources.Language.LabelAssigned.ToUpper()</label>
+									</div>
+								</div>
+								<table class="uif-table" id="tableProductDeduct"
+									   data-title=""
+									   data-add="false"
+									   data-edit="true"
+									   data-delete="false"
+									   data-filter="true"
+									   data-selectiontype="none"
+									   data-paginate="true">
+									<thead>
+										<tr>
+                                            <th data-property="DeductId">@Resources.Language.Code.ToUpper()</th>
+											<th data-property="IsSelected" data-type="boolean">@Resources.Language.LabelAssigned.ToUpper()</th>											
+											<th data-property="Description">@Resources.Language.LabelDescription.ToUpper() </th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

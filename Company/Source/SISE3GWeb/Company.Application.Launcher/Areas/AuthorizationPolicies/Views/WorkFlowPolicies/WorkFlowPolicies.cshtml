@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = null;
+}
+
+@*Título*@
+<script id="title-template" type="text/template">
+    <div class="column">
+        <div id="Title">Entrega de Pólizas</div>
+    </div>
+</script>
+
+@*Busqueda Poliza*@
+<div class="uif-col-12">
+    <div class="row">
+        <div class="uif-col-6">
+            <label class="field-required">@Resources.Language.LabelEventGroups</label>
+            <select class="uif-select" id="selectEventGroup" data-val="true" data-val-required="" data-native="false" data-id="Id" data-name="Description" name="Prefix" ></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelCurrentDate</label>
+            <input type="text" value="" class="uif-datepicker" id="dpStartDate" data-max-date="15/01/2025" />
+        </div>
+        <div class="uif-col-3">
+            <label class="field-required">@Resources.Language.LabelDateEnd</label>
+            <input type="text" value="" class="uif-datepicker" id="dpFinishDate" data-max-date="15/01/2025" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.Users</label>
+            <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/WorkFlowPolicies/GetUsersByDescription")" data-displaykey="AccountName" placeholder="" data-displayrecords="5" id="autocompleteUsers">
+        </div>
+        <div class="uif-col-2">
+            <div class="without-label">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0626"))
+                {
+                    <button id="btnSearchWorkFlowPolicies" tabindex="0" class="btn btn-default secondary" type="button"> <i class="fa fa-search" aria-hidden="true"></i> Buscar </button>
+                }
+
+            </div>
+        </div>
+    </div>
+    <row>
+        <div class="uif-col-8">
+            <table id="tblPolicies" class="uif-table" data-source="" data-exporttocsv="false" data-add="false" data-edit="false" data-delete="false" data-filter="false" data-selectiontype="multiple">
+                <thead>
+                    <tr>
+                        <th data-property="UserAccountName">Usuario</th>
+                        <th data-property="EventDate">Fecha Evento</th>
+                        <th data-property="BranchDescription">Sucursal</th>
+                        <th data-property="PrefixDescription">Ramo</th>
+                        <th data-property="PolicyNumber">Póliza</th>
+                        <th data-property="EndorsementNumber">Endoso</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="uif-col-4">
+            <label class="field-required">@Resources.Language.LabelObservations</label>
+            <textarea rows="8" id="txtObservations"></textarea>
+        </div>
+    </row>
+</div>
+
+
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExitDelegation">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0627"))
+        {
+            <button class="btn btn-primary" id="btnSaveEventAuthorizations">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.Deliver
+            </button>
+        }
+
+    </div>
+</script>
+
+
+

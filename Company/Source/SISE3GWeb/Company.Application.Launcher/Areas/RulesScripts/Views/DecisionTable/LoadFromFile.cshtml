@@ -1,0 +1,73 @@
+﻿@section Title
+{
+    <div class="row main-title">
+        <div class="column">
+            @Resources.Language.LoadDecisionTableFromExcel
+        </div>
+    </div>
+}
+
+
+<div class="uif-row">
+    <div class="uif-col-6">
+
+        <input class="uif-inputfile" type="file" id="LoadFileXML" data-input="true" accept=".xml, .txt" data-text="Seleccionar archivo XML">
+        <textarea id="TxtPreviewXML" rows="25" readonly style="white-space: pre;"></textarea>
+        <input type="hidden" id="nameFileXML" />
+    </div>
+    <div class="uif-col-6">
+        <input class="uif-inputfile" type="file" id="LoadFileXLS" data-input="true" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" data-text="Seleccionar archivo Excel">
+        <div id="divPreviewXls">
+            @Html.Action("PreviewXLSFile", "DecisionTable", new { area = "RulesScripts", pathXml = "", pathXls = "", save = false })
+        </div>
+    </div>
+</div>
+
+
+
+@section Modals
+{
+    <form id="formRulesModalEditAddData" class="form">
+        <div class="uif-modal" id="ModalPreviewFile">
+            <div class="uif-modalbody">
+                <div id="ModalContent"></div>
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Cancel</button>
+            </div>
+        </div>
+    </form>
+}
+
+
+@section Toolbar
+{
+    <footer>
+        <div class="app-header">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default btn-sm" id="btnExit">
+                            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.ButtonClose</span>
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm" id="btnLoad">
+                            <i class="fa fa-upload" aria-hidden="true"></i>
+                            <span class="" aria-hidden="true">@Resources.Language.Load</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+}
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Areas/RulesScripts/Scripts/DecisionTable/LoadFromExcel.js")"></script>
+}
+
+
+
+

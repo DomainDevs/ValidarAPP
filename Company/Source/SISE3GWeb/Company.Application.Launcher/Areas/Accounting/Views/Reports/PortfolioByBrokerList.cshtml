@@ -1,0 +1,89 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @Global.PortfolioByBroker;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+
+<ol class="breadcrumb global-header-breadcrumb">
+    <li>@Global.Reports</li>
+    <li>@Global.PortfolioReports</li>
+    <li class="active">@Global.PortfolioByBroker</li>
+</ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="PBBLReportClean" class="btn btn-default" role="button">
+            <span class="glyphicon glyphicon-remove"></span>  @Global.Clean
+        </button>
+        <button id="PBBLReportGenerate" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+        </button>
+    </footer>
+}
+
+@section modals{
+
+    @*VENTANAS MODALES DE CONFIRMACION*@
+    <!-- Modal Confirma proceso de masivos-->
+    <div class="modal fade" id="modalMassiveTotRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.PortfolioByBroker</b></h4>
+                </div>
+                <div class="modal-body">
+                    <b id="pnlModalTotRecords"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="PBBLReportModal">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+
+<form id="ReportFormatPBBLR" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label>@Global.DateFrom</label>
+            <input type="text" value="" class="uif-datepicker" data-mask="99/99/9999" id="PBBLReportDateFrom"
+                   name="PBBLReportDateFrom" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="PBBLReportDateFrom" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label>@Global.DateTo</label>
+            <input type="text" value="" class="uif-datepicker" data-mask="99/99/9999" id="PBBLReportDateTo"
+                   name="PBBLReportDateTo" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="PBBLReportDateTo" data-valmsg-replace="true" />
+    </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertPBBLR"></div>
+        </div>
+    </div>
+
+
+
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/PortfolioByBrokerList")
+}
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>
+

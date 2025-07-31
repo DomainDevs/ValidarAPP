@@ -1,0 +1,141 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Person.Models.BankTransfersViewModel
+
+<script id="bankTransfersTemplate" type="text/template">
+    <div><strong>{{PaymentBeneficiary}}</strong></div>
+    <div>{{BankDescription}}</div>
+    <div>{{AccountTypeDescription}}</div>
+    <div>{{AccountNumber}} </div>
+</script>
+<form class="form modal-Colombia" id="formBankTransfers">
+    <input type="hidden" id="status" />
+    @*<input type="hidden" id="Id" />*@
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.BeneficiaryType</label>
+                    <input class='upperCase-co' type="text" id="inputBeneficiaryType" maxlength="65" />
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="field-required" for="PaymentType">@Resources.LanguagePerson.PaymentType</label>
+            </div>
+            <div class="row">
+                    <div class="uif-col-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="rbPaymentType" checked="checked" id="Check"  value="1">@Resources.LanguagePerson.Check
+                        </label>
+                    </div>
+                    <div class="uif-col-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="rbPaymentType" id="Transfer" value="2">@Resources.LanguagePerson.Transfer
+                        </label>
+                    </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.DateCreate</label>
+                    <input type="text" class="uif-datepicker" id="InscriptionDate" disabled />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.Bank</label>
+                    <select class="uif-select" id="selectBank" data-id="Id" data-name="Description" name="BankId"></select>
+                </div>
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.BranchBank</label>
+                    <input class='upperCase-co' type="text" id="inputBranchBank" maxlength="50" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.BankSquare</label>
+                    <input class='upperCase-co' type="text" id="inputBankSquare" maxlength="30" />
+                </div>
+                <div class="uif-col-12">
+                    <label>@Resources.LanguagePerson.Address</label>
+                    <input class='upperCase-co' type="text" id="inputAddress" maxlength="30" />
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="uif-col-12">
+                    <label>@Resources.LanguagePerson.Country</label>
+                    <select class="uif-select" id="selectCountry" data-id="Id" data-name="Description" name="CountryId"></select>
+                </div>
+                <div class="uif-col-12">
+                    <label>@Resources.LanguagePerson.City</label>
+                    <input class='upperCase-co' type="text" id="inputCity" maxlength="50" />
+                    @*<select class="uif-select" id="selectCity" data-id="Id" data-name="Description" name="CityId"></select>*@
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.AccountType</label>
+                    <select class="uif-select" id="selectAccountType" data-id="Code" data-name="Description" name="AccountTypeId"></select>
+                </div>
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.Currency</label>
+                    <select class="uif-select" id="selectCurrency" data-id="Id" data-name="Description" name="CurrencyId"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.AccountNumber</label>
+                    <input class='upperCase-co' type="text" id="inputAccountNumber" maxlength="20" onkeypress="return JustNumbers(event,this);" />
+                </div>
+               
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <input type="checkbox" id="IntermediaryBank" />
+                    <label for="IntermediaryBank">@Resources.LanguagePerson.IntermediaryBank</label>
+                </div>
+                <div class="uif-col-12">
+                    <input type="checkbox" id="Active" />
+                    <label for="Active">@Resources.LanguagePerson.Active</label>
+                </div>
+                <div class="uif-col-12">
+                    <input type="checkbox" id="DefaultAccount" />
+                    <label for="DefaultAccount">@Resources.LanguagePerson.DefaultAccount</label>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-listview" id="listVBankTransfers"> </div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6" id="btnsAgent">
+            <div class="pull-right width-save">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0067"))
+                {
+                    <button type="button" class="btn btn-default" id="btnBankNew">
+                        @Resources.LanguagePerson.NewForm
+                    </button>
+                }
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0068"))
+                    {
+                        <button type="button" class="btn btn-primary" id="btnBankAdd">
+                            @Resources.LanguagePerson.AddForm
+                        </button>
+                    }
+                </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

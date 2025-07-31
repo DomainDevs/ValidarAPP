@@ -1,0 +1,71 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    //ViewBag.Title = @Global.PartialClousureCommissions;
+    ViewBag.Title = @ViewBag.TitleClousure;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.CurrentAccount</li>
+        <li>@Global.Intermediaries</li>
+        <li>@ViewBag.TitleClousure</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0556"))
+        {
+            <button class="btn btn-default" id="CancelPartialClosure">
+                <i class="fa fa-remove"></i>  @Global.Cancel
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0555"))
+        {
+            <button class="btn btn-primary" id="AcceptPartialClosure">
+                <i class="fa fa-list-alt"></i> @Global.Accept
+            </button>
+        }
+
+
+    </footer>
+}
+
+<form id="formPartialClosure" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Date</label>
+            @Html.TextBox("DatePartialClosure", "", new
+       {
+           id = "DatePartialClosure",
+           maxlength = "10",
+           @class = "uif-datepicker",
+           data_mask = "99/99/9999",
+           data_max_date = @ViewBag.AccountingDate,
+           data_val = "true",
+           data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="DatePartialClosure" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+</form>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagDay" value="@ViewBag.Day" />
+<input type="hidden" id="ViewBagMonth" value="@ViewBag.Month" />
+<input type="hidden" id="ViewBagYear" value="@ViewBag.Year" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainPartialClosure")
+}

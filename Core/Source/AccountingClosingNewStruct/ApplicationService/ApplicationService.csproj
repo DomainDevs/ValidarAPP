@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9B455325-D55A-4239-991F-95737D8A5565}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.AccountingClosingServices</RootNamespace>
+    <AssemblyName>Core.AccountingClosing</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTOs\AccountingAccountDTO.cs" />
+    <Compile Include="DTOs\AccountingAccountTypeDTO.cs" />
+    <Compile Include="DTOs\AccountingClosingDTO.cs" />
+    <Compile Include="DTOs\AccountingClosingReportDTO.cs" />
+    <Compile Include="DTOs\AccountingCompanyDTO.cs" />
+    <Compile Include="DTOs\AccountingConceptDTO.cs" />
+    <Compile Include="DTOs\AccountingMovementTypeDTO.cs" />
+    <Compile Include="DTOs\AmountDTO.cs" />
+    <Compile Include="DTOs\AnalysisCodeDTO.cs" />
+    <Compile Include="DTOs\AnalysisConceptDTO.cs" />
+    <Compile Include="DTOs\AnalysisDTO.cs" />
+    <Compile Include="DTOs\AnalysisTreatmentDTO.cs" />
+    <Compile Include="DTOs\BranchDTO.cs" />
+    <Compile Include="DTOs\ClosureTempEntryGenerationDTO.cs" />
+    <Compile Include="DTOs\CostCenterDTO.cs" />
+    <Compile Include="DTOs\CostCenterTypeDTO.cs" />
+    <Compile Include="DTOs\CurrencyDTO.cs" />
+    <Compile Include="DTOs\EntryDestinationDTO.cs" />
+    <Compile Include="DTOs\EntryTypeDTO.cs" />
+    <Compile Include="DTOs\EntryTypeItemDTO.cs" />
+    <Compile Include="DTOs\ExchangeDifferenceReportDTO.cs" />
+    <Compile Include="DTOs\ExchangeRateDTO.cs" />
+    <Compile Include="DTOs\IndividualDTO.cs" />
+    <Compile Include="DTOs\LedgerEntryDTO.cs" />
+    <Compile Include="DTOs\LedgerEntryItemDTO.cs" />
+    <Compile Include="DTOs\MassiveReportDTO.cs" />
+    <Compile Include="DTOs\MonthlyProcessModelDTO.cs" />
+    <Compile Include="DTOs\MonthlyProcessSummaryModelDTO.cs" />
+    <Compile Include="DTOs\PaymentConceptDTO.cs" />
+    <Compile Include="DTOs\PostDatedDTO.cs" />
+    <Compile Include="DTOs\PrefixDTO.cs" />
+    <Compile Include="DTOs\ReceiptDTO.cs" />
+    <Compile Include="DTOs\ReconciliationMovementTypeDTO.cs" />
+    <Compile Include="DTOs\SalePointDTO.cs" />
+    <Compile Include="Enums\EnumType.cs" />
+    <Compile Include="IAccountingClosingApplicationService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Condition="'$(BuildingInsideVisualStudio)' == 'true'" Include="..\packages\Sistran.Core.Analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\AccountingClosing\ApplicationService\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\ProjectDeployBranch.msbuild" />
+</Project>

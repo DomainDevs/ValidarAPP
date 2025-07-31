@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column-80">
+        <div id="Title"> @Resources.Language.AuthorizedPolicies</div>
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "txtSearch" })
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div>
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-primary" id="btnIssuePolicy">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true">@Resources.Language.IssuePolicy</span>
+        </button>
+    </div>
+</script>
+
+<div class="uif-col-12">
+    <table data-paginate="true" data-selectiontype="single" class="uif-table" id="TablePolicies" data-filter="false">
+        <thead>
+        <tr>
+            <th data-property="DateRequest" data-sort="desc">@Resources.Language.LabelDate</th>
+            <th data-property="TemporalId">@Resources.Language.Temporal</th>
+            <th data-property="EndorsementType">@Resources.Language.attributeListEndorsementType</th>
+            <th data-property="Branch">@Resources.Language.Branch</th>
+            <th data-property="Prefix">@Resources.Language.Prefix</th>
+            <th data-property="DocumentNumber">@Resources.Language.LabelNumberPolicy</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>

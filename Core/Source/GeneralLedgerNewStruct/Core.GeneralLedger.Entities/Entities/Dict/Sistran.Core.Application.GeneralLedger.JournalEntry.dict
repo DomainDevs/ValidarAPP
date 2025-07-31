@@ -1,0 +1,34 @@
+<map version="2.0" type="class" name="JournalEntry" namespace="Sistran.Core.Application.GeneralLedger" file-version="1.0" description="JOURNAL_ENTRY_ENTITY">
+  <properties>
+    <property name="JournalEntryId" type="Integer" key="true" description="JOURNAL_ENTRY_ID_PROPERTY" autonumber="Identity"/>
+    <property name="AccountingCompanyId" type="Integer" nullable="true" description="ACCOUNTING_COMPANY_ID_PROPERTY" />
+    <property name="AccountingModuleId" type="Decimal" precision="4" scale="2" nullable="true" description="ACCOUNTING_MODULE_ID_PROPERTY" />
+    <property name="BranchCode" type="Integer" nullable="true" description="BRANCH_CODE_PROPERTY" />
+    <property name="SalePointCode" type="Integer" nullable="true" description="SALE_POINT_CODE_PROPERTY" />
+    <property name="TechnicalTransaction" type="Integer" nullable="true" description="TECHNICAL_TRANSACTION_PROPERTY" />
+    <property name="EntryNumber" type="Integer" nullable="true" description="ENTRY_NUMBER_PROPERTY" />
+    <property name="Description" type="String" size="200" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="RegisterDate" type="DateTime" nullable="true" description="REGISTER_DATE_PROPERTY" />
+    <property name="UserCode" type="Integer" nullable="true" description="USER_CODE_PROPERTY" />
+    <property name="Status" type="Integer" nullable="true" description="STATUS_PROPERTY" />
+    <property name="AccountingDate" type="DateTime" description="ACCOUNTING_DATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="JOURNAL_ENTRY" schema="GL" alias="JOURNAL_ENTRY" update="true">
+      <columns>
+        <column name="JOURNAL_ENTRY_ID" type="Int32" property="JournalEntryId" key="true" identity="true" />
+        <column name="ACCOUNTING_COMPANY_ID" type="Int32" property="AccountingCompanyId" />
+        <column name="ACCOUNTING_MODULE_ID" type="Decimal" property="AccountingModuleId" size="19" precision="4" scale="2" />
+        <column name="BRANCH_CD" type="Byte" property="BranchCode" />
+        <column name="SALE_POINT_CD" type="Int16" property="SalePointCode" />
+        <column name="TECHNICAL_TRANSACTION" type="Int32" property="TechnicalTransaction" />
+        <column name="ENTRY_NUMBER" type="Int32" property="EntryNumber" />
+        <column name="DESCRIPTION" type="String" property="Description" size="200" />
+        <column name="REGISTER_DATE" type="DateTime" property="RegisterDate" />
+        <column name="USER_CD" type="Int32" property="UserCode" />
+        <column name="STATUS" type="Int32" property="Status" />
+        <column name="ACCOUNTING_DATE" type="DateTime" property="AccountingDate" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+</map>

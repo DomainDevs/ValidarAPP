@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="MassiveLoadView">
+  <collections>
+    <collection name="MassiveLoad" type="Sistran.Core.Application.Massive.Entities.MassiveLoad, 
+                Core.Massive.Entities"></collection>
+    <collection name="LoadType" type="Sistran.Core.Application.Massive.Entities.LoadType, 
+                Core.Massive.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="MassiveLoad" destination="LoadType" name="MassiveLoadLoadType" type="Inner">
+      <property left="LoadTypeId" type="Equal" right="LoadTypeCode"></property>
+    </relation>
+  </relations>
+</view>

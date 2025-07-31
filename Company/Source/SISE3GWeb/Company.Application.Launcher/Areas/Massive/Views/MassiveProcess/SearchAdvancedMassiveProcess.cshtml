@@ -1,0 +1,69 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Massive.Models.MassiveProcessViewModel
+@*<script id="advancedSearchMassiveProcessTemplate" type="text/template">
+        <div>@Resources.Language.SubBranchCode: <strong>{{Id}}</strong></div>
+        <div>
+            <br>
+            @Resources.Language.NameLengthofSubBranch:<strong>{{Description}}</strong>
+        </div>
+    </script>*@
+
+<div class="uif-alert" id="alertAdvanced"></div>
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedProcesses</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelProcessType</label>
+            <select class="uif-select form-control" id="selectProcessTypes" data-id="Value" data-native="false" data-name="Text" name="ProcessTypes"
+                    data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixTechnical"></select>
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelProcessStatus</label>
+            <select class="uif-select form-control" id="selectMassiveLoadStatus" data-id="Value" data-native="false" data-name="Text" name="MassiveLoadStatus"
+                    data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixTechnical"></select>
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.Description</label>
+            @Html.TextBoxFor(model => model.Description, new { id = "inputDescriptionSearch", placeholder = @Resources.Language.Description })
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-4">
+            <label>@Resources.Language.LabelDateStart</label>
+            @Html.TextBoxFor(model => model.CurrentFrom, "{0:dd/MM/yyyy}", new { id = "inputFromDate", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.CurrentFrom)
+        </div>
+        <div class="uif-col-4">
+            <label>@Resources.Language.DateUntil</label>
+            @Html.TextBoxFor(model => model.CurrentTo, "{0:dd/MM/yyyy}", new { id = "inputToDate", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.CurrentTo)
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelUser</label>
+            <select class="uif-select form-control" id="selectUsers" data-id="UserId" data-native="false" data-name="AccountName" name="User"
+                    data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixTechnical"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <button type="button" name="name" id="btnShowAdvancedSearch" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listViewSearchAdvancedMassiveProcess">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearchAdv" type="button">@Resources.Language.Close</button>
+            </div>
+        </div>
+    </div>
+</form>

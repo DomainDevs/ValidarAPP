@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CompanyInsurerView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="IndividualId">
+          <Column table-alias="Company" name="IndividualId" />
+        </SelectValue>
+        <SelectValue alias="TradeName">
+          <Column table-alias="Company" name="TradeName" />
+        </SelectValue>
+        <SelectValue alias="TributaryIdNo">
+          <Column table-alias="Company" name="TributaryIdNo" />
+        </SelectValue>
+        <SelectValue alias="CompanyTypeCode">
+          <Column table-alias="Company" name="CompanyTypeCode" />
+        </SelectValue>
+        <SelectValue alias="DocumentTypeCode">
+          <Column table-alias="Company" name="TributaryIdTypeCode" />
+        </SelectValue>
+        <SelectValue alias="IndividualTypeCode">
+          <Column table-alias="Individual" name="IndividualTypeCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.UniquePerson.Entities.Company, Core.UniquePerson.Entities" alias="Company" />
+            <ClassNameTable name="Sistran.Core.Application.UniquePerson.Entities.Individual, Core.UniquePerson.Entities" alias="Individual" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="Individual" name="IndividualId" />
+                <Column table-alias="Company" name="IndividualId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.UniquePerson.Entities.Insured, Core.UniquePerson.Entities" alias="Insured" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Insured" name="IndividualId" />
+              <Column table-alias="Company" name="IndividualId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CoverageProductView">
+  <collections>    
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, Core.Quotation.Entities"></collection>        
+    <collection name="SubLineBusiness" type="Sistran.Core.Application.Common.Entities.SubLineBusiness, Core.Common.Entities"></collection>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, Core.Common.Entities"></collection>    
+    <collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, Core.Quotation.Entities"></collection>    
+  </collections>
+  <relations>    
+    <relation source="Coverage" destination="InsuredObject" name="CoverageInsuredObject" type="Inner">
+      <property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+    </relation>    
+    <relation source="Coverage" destination="LineBusiness" name="CoverageLineBusiness" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="Coverage" destination="SubLineBusiness" name="CoverageSubLineBusiness" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+      <property left="SubLineBusinessCode" type="Equal" right="SubLineBusinessCode"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,69 @@
+﻿<script id="templateReason" type="text/templateReason">
+    <div><strong>{{Description}}</strong></div>
+</script>
+
+<form id="formReason" class="form">
+    <input type="hidden" name="Id" id="Id" />
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required"><b>@Resources.Language.Prefix</b></label>
+                    <select class="uif-select form-control" id="selectPrefix" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                            data-id="Id" data-name="Description" name="selectPrefix" data-filter="true" data-native="false" required></select>
+                    <span class="text-danger" data-valmsg-for="selectPrefix" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-6">
+                    <label>@string.Empty</label>
+                    <div class="row-space-adjusted">
+                        <input id="enabledEstimationType" type="checkbox" />
+                        <label for="enabledEstimationType">@Resources.Language.Enabled</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required"><b>@Resources.Language.Description</b></label>
+                    <label id="lblIdStatus" hidden></label>
+                    <label id="lblIdReason" hidden></label>
+                    <input class="uif-input" type="text" data-val="true" id="inputDescription" name="inputDescription" data-val-required="@Resources.Language.RequiredField">
+                    <span class="text-danger" data-valmsg-for="inputDescription" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="pull-right width-save" style="padding-top: 10px;">
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0348"))
+                        {
+                            <button type="button" class="btn btn-default" id="btnCancelEditReason">
+                                <span aria-hidden="true"></span>
+                                @Resources.Language.Cancel
+                            </button>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0349"))
+                        {
+                            <button type="button" class="btn btn-primary" id="btnAddReason">
+                                <span aria-hidden="true"></span>
+                                @Resources.Language.AddForm
+                            </button>
+                        }
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0350"))
+                        {
+                            <button type="button" class="btn btn-primary" id="btnSaveReason" hidden>
+                                <span aria-hidden="true"></span>
+                                @Resources.Language.ButtonSave
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listReason" class="uif-listview"></div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        </div>
+    </div>
+</form>

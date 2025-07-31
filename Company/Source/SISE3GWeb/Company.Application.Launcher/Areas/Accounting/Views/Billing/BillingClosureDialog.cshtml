@@ -1,0 +1,63 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.BankNetwork
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.Description</label>
+            <br />
+            @Html.TextBoxFor(model => model.Description)
+            @Html.ValidationMessage("Description", @Global.ValidationRequired)
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.TypeTax</label>
+            <select class="uif-select form-control" id="selectTaxCategory" name="selectTaxCategory"
+                    data-source='@Url.Content("~/Common/GetTaxCategory")' data-id="Id"
+                    data-name="Description"></select>
+            @Html.ValidationMessage("selectTaxCategory", @Global.ValidationRequired)
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.CommissionValue</label>
+            @*@Html.TextBoxFor(model => model.Commission.LocalAmount, new { @data_mask = "000000000000.00" })*@
+            @Html.TextBoxFor(model => model.Commission.LocalAmount, new { maxlength = "15", @onkeypress = "return OnlyDecimalNumber(event,this)" })
+            @Html.ValidationMessage("Commission.LocalAmount", @Global.ValidationRequired)
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.RetriesNumber</label>
+            @Html.TextBoxFor(model => model.RetriesNumber, new { @data_mask = "00000" })
+            @Html.ValidationMessage("RetriesNumber", @Global.ValidationRequired)
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <br />
+            @*
+            <label class="btn btn-default btn-block">
+                <span class="glyphicon glyphicon-check"></span><input type="checkbox" id="HasTaxCheck"> @Global.HasTax
+            </label>
+            *@
+            <span class="glyphicon glyphicon-check" id="checkHasTax"></span><input type="checkbox" id="HasTaxCheck"> @Global.HasTax
+            @Html.ValidationMessage("HasTax", @Global.ValidationRequired)
+        </div>
+        <div class="uif-col-6">
+            <br />
+            @*
+            <label class="btn btn-default btn-block">
+                <span class="glyphicon glyphicon-check"></span><input type="checkbox" id="RequiresNotificationCheck"> @Global.PreNotifications
+            </label>
+            *@
+            <span class="glyphicon glyphicon-check" id="checkRequiresNotification"></span><input type="checkbox" id="RequiresNotificationCheck"> @Global.PreNotifications
+            @Html.ValidationMessage("RequiresNotification", @Global.ValidationRequired)
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PerilLineBusinessView">
+  <collections>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, 
+                 Core.Common.Entities"></collection>
+    <collection name="PerilLineBusiness" type="Sistran.Core.Application.Quotation.Entities.PerilLineBusiness, 
+                 Core.Quotation.Entities"></collection>
+    <collection name="Peril" type="Sistran.Core.Application.Quotation.Entities.Peril, 
+                 Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="PerilLineBusiness" destination="LineBusiness" name="PerilLineBusinessLineBusiness" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="PerilLineBusiness" destination="Peril" name="PerilLineBusinessPeril" type="Inner">
+      <property left="PerilCode" type="Equal" right="PerilCode"></property>
+    </relation>    
+  </relations>
+</view>

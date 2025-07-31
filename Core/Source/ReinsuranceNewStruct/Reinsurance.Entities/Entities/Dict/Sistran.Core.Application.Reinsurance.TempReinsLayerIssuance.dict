@@ -1,0 +1,20 @@
+<map version="2.0" type="class" name="TempReinsLayerIssuance" namespace="Sistran.Core.Application.Reinsurance" file-version="1.0" description="TEMP_REINS_LAYER_ISSUANCE_ENTITY">
+  <properties>
+    <property name="TempReinsLayerIssuanceId" type="Integer" key="true" description="TEMP_REINS_LAYER_ISSUANCE_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="TempIssueCode" type="Integer" description="TEMP_ISSUE_CODE_PROPERTY" />
+    <property name="LayerNumber" type="Integer" description="LAYER_NUMBER_PROPERTY" />
+    <property name="LayerPercentage" type="Decimal" precision="12" scale="2" description="LAYER_PERCENTAGE_PROPERTY" />
+    <property name="PremiumPercentage" type="Decimal" precision="12" scale="2" description="PREMIUM_PERCENTAGE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="TEMP_REINS_LAYER_ISSUANCE" schema="REINS" alias="TEMP_REINS_LAYER_ISSUANCE" update="true">
+      <columns>
+        <column name="TEMP_REINS_LAYER_ISSUANCE_ID" type="Int32" property="TempReinsLayerIssuanceId" key="true" identity ="true"/>
+        <column name="TEMP_ISSUE_CD" type="Int32" property="TempIssueCode" allowNull="false" />
+        <column name="LAYER_NUMBER" type="Int32" property="LayerNumber" allowNull="false" />
+        <column name="LAYER_PERCENTAGE" type="Decimal" property="LayerPercentage" allowNull="false" size="19" precision="12" scale="2" />
+        <column name="PREMIUM_PERCENTAGE" type="Decimal" property="PremiumPercentage" allowNull="false" size="19" precision="12" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

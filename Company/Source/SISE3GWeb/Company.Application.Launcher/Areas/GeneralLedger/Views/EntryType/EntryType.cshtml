@@ -1,0 +1,112 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li><a href="/Home">@Global.Parameter</a></li>
+        <li class="active">@Global.EntryType</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal" id="modalEntryTpe">
+    </div>
+    <div class="uif-modal" id="accountingModal">
+    </div>
+    <div class="form">
+        <!-- /.Modal de Eliminación -->
+        <div class="modal fade" id="modalDeleteAcc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding: 10px">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="fa fa-times-circle">
+                            </i>
+                        </button>
+                        <h4 class="modal-title"><label id="deleteMessageTitleAcc">@Global.Delete</label></h4>
+                    </div>
+                    <div class="modal-body" id="deleteMessageModalAcc">
+                        <p class="text-primary">@Global.DeleteConfirmationMessage</p>
+                    </div>
+                    <div class="modal-footer" style="padding: 10px 20px 10px">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <i class="fa fa-times"></i> @Global.Cancel
+                        </button>
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0773"))
+                        {
+                            <button type="button" class="btn btn-primary" id="btnDeleteModalAcc">
+                                <i class="fa fa-check"></i> @Global.Accept
+                            </button>
+                        }
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+}
+<div class="uif-alert" id="alertEntryType"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="uif-table" data-source='@Url.Content("~/GeneralLedger/EntryType/GetEntryTypes")'
+               data-title="@Global.EntryType" id="tblEntryType" data-edit="true" data-delete="true"
+               data-filter="true" data-paginate="true" data-selectiontype="single" data-pagesize="10" data-add="true">
+            <thead>
+                <tr>
+                    <th data-property="EntryTypeId" data-visible="false">Id</th>
+                    <th data-property="Description">@Global.Description</th>
+                    <th data-property="SmallDescription">@Global.SmallDescription</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<br />
+<div class="uif-alert" id="alertAccount"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="uif-table" data-source="null" data-title="@Global.AccountingAccount"
+               id="tblAccount" data-edit="true" data-delete="true" data-filter="true" data-paginate="true"
+               data-selectiontype="none" data-pagesize="10" data-add="true">
+            <thead>
+                <tr>
+                    <th data-property="Description">@Global.Description</th>
+                    <th data-property="AccountingNatureDescription">@Global.Nature</th>
+                    <th data-property="CurrencyDescription">@Global.Currency</th>
+                    <th data-property="AnalysisDescription">@Global.Analysis</th>
+                    <th data-property="CostCenterDescription">@Global.CostCenter</th>
+                    <th data-property="PaymentConceptDescription">@Global.Concept</th>
+                    <th data-property="AccountingMovementTypeDescription">@Global.MovementType</th>
+                    <th data-property="AccountingAccountNumber" data-visible="false">AccountingAccountNumber</th>
+                    <th data-property="AccountingAccountDescription" data-visible="false">AccountingAccountDescription</th>
+                    <th data-property="AnalysisId" data-visible="false">AnalysisId</th>
+                    <th data-property="CostCenterId" data-visible="false">CostCenterId</th>
+                    <th data-property="PaymentConceptCd" data-visible="false">PaymentConceptCd</th>
+                    <th data-property="AccountingMovementTypeId" data-visible="false">AccountingMovementTypeId</th>
+                    <th data-property="EntryTypeAccountingId" data-visible="false">Id</th>
+                    <th data-property="EntryTypeCd" data-visible="false">EntryType</th>
+                    <th data-property="AccountingNatureId" data-visible="false">AccountingNatureId</th>
+                    <th data-property="CurrencyId" data-visible="false">CurrencyId</th>
+                    <th data-property="AccountingAccountId" data-visible="false">AccountingAccountId</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <input type="hidden" id="tempEntryTypeId" value="0" />
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="hiddenEntryType" value="true" />
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/EntryType")
+}

@@ -1,0 +1,25 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Massive.Models.BillingGroupViewModel
+<form id="formBillingGroup" autocomplete="off" class="form">
+    <div class="uif-panel" data-title="" id="panelBillingGroup">   
+        <div class="uif-alert" id="alert"></div> 
+        <div class="row">
+            <div class="uif-col-9">
+                <div class="row">        
+                    <div class="uif-col-4">
+                        <label  class="field-required">@Resources.Language.LabelNroGroup</label>
+                        @Html.TextBoxFor(model => model.Id, new { id = "inputBillingGroupId", disabled = "disabled"})            
+                    </div>
+                    <div class="uif-col-8">
+                        <label  class="field-required">@Resources.Language.LabelDescriptionGroup</label>
+                        @Html.TextBoxFor(model => model.Description, new { id = "inputBillingGroupDescription"})
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>       
+                </div>                        
+            </div>
+            <div class="uif-modalbuttons width-save">
+                <button type="button" class="btn btn-default" id="btnBillingGroupClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+                <button type="button" class="btn btn-primary" id="btnBillingGroupSave">@Resources.Language.ButtonSave</button>                   
+            </div>
+        </div>
+    </div>
+</form>

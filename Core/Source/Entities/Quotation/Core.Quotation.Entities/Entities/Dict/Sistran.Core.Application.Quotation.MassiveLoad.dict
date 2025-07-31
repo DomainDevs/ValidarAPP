@@ -1,0 +1,56 @@
+<map version="2.0" type="class" name="MassiveLoad" namespace="Sistran.Core.Application.Quotation" file-version="1.0" description="MASSIVE_LOAD_ENTITY">
+  <properties>
+    <property name="MassiveLoadId" type="Integer" key="true" autonumber="id" description="MASSIVE_LOAD_ID_PROPERTY" />
+    <property name="AgentAgencyId" type="Integer" nullable="true" description="AGENT_AGENCY_ID_PROPERTY" />
+    <property name="Description" type="String" size="60" description="DESCRIPTION_PROPERTY" />
+    <property name="MassiveLoadTypeCode" type="Integer" description="MASSIVE_LOAD_TYPE_CODE_PROPERTY" />
+    <property name="AgentId" type="Integer" nullable="true" description="AGENT_ID_PROPERTY" />
+    <property name="ProductId" type="Integer" nullable="true" description="PRODUCT_ID_PROPERTY" />
+    <property name="SalePointCode" type="Integer" nullable="true" description="SALE_POINT_CD_PROPERTY" />
+    <property name="PrefixCode" type="Integer" nullable="true" description="PREFIX_CD_PROPERTY" />
+    <property name="BranchCode" type="Integer" nullable="true" description="BRANCH_CD_PROPERTY" />
+    <property name="FileName" type="String" size="255" nullable="false" description="FILE_NAME_PROPERTY" />
+    <property name="Worksheet" type="String" size="50" nullable="false" description="WORKSHEET_PROPERTY" />
+    <property name="UserId" type="Integer" nullable="false" description="USER_ID_PROPERTY" />
+    <property name="State" type="Integer" nullable="false" description="STATE_PROPERTY" />
+    <property name="FieldSetId" type="Integer" nullable="false" description="FIELD_SET_ID_PROPERTY" />
+    <property name="ProcessId" type="Integer" nullable="false" description="PROCESS_ID_PROPERTY" />
+    <property name="RequestNum" type="Integer" nullable="true" description="REQUEST_NUM_PROPERTY" />
+    <property name="BillingGroupCode" type="Integer" nullable="true" description="BILLING_GROUP_CD_PROPERTY" />
+    <property name="BeginDate" type="DateTime" nullable="true" description="BEGIN_DATE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="MASSIVE_LOAD" schema="QUO" alias="MASSIVE_LOAD" update="true">
+      <columns>
+        <column name="AGENT_AGENCY_ID" type="Decimal" property="AgentAgencyId" />
+        <column name="AGENT_ID" type="Decimal" property="AgentId" />
+        <column name="PRODUCT_ID" type="Decimal" property="ProductId" />
+        <column name="MASSIVE_LOAD_TYPE_CD" type="Decimal" property="MassiveLoadTypeCode" allowNull="false" />
+        <column name="MASSIVE_LOAD_ID" type="Decimal" property="MassiveLoadId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" />
+        <column name="SALE_POINT_CD" type="Decimal" property="SalePointCode" />
+        <column name="PREFIX_CD" type="Decimal" property="PrefixCode" />
+        <column name="BRANCH_CD" type="Decimal" property="BranchCode" />
+        <column name="FILE_NAME" type="String" property="FileName" />
+        <column name="WORKSHEET" type="String" property="Worksheet" />
+        <column name="USER_ID" type="Int32" property="UserId" />
+        <column name="STATE" type="Int32" property="State" />
+        <column name="FIELD_SET_ID" type="Int32" property="FieldSetId" />
+        <column name="PROCESS_ID" type="Int32" property="ProcessId" />
+        <column name="REQUEST_NUM" type="Int32" property="RequestNum" />
+        <column name="BILLING_GROUP_CD" type="Int32" property="BillingGroupCode" />
+        <column name="BEGIN_DATE" type="DateTime" property="BeginDate" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="id" schema="COMM" table="parameter" column="number_parameter" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="DESCRIPTION" />
+          <Constant type="String" value="MassiveLoad" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

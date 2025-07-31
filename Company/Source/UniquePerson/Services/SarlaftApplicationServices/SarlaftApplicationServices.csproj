@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7CCAC439-3064-42EC-83F7-9D593EE7820E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Company.Application.SarlaftApplicationServices</RootNamespace>
+    <AssemblyName>Company.SarlaftApplicationServices</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Company.ModelServices">
+      <HintPath>..\..\..\..\Bin\Application\Company\ModelServices\Company.ModelServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Company.UniquePerson.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Company\Entities\UniquePerson\Company.UniquePerson.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AuthorizationPoliciesServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Services\Core\AuthorizationPolicies\AuthorizationPoliciesService\Core.AuthorizationPoliciesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTO\EconomicActivityDTO.cs" />
+    <Compile Include="DTO\EventDTO.cs" />
+    <Compile Include="DTO\EventGroupDTO.cs" />
+    <Compile Include="DTO\InternationalOperationDTO.cs" />
+    <Compile Include="DTO\CustomerKnowledgeDTO.cs" />
+    <Compile Include="DTO\LegalRepresentativeDTO.cs" />
+    <Compile Include="DTO\CoPartnersDTO.cs" />
+    <Compile Include="DTO\FinalBeneficiaryDTO.cs" />
+    <Compile Include="DTO\PepsDTO.cs" />
+    <Compile Include="DTO\RelationShipDTO.cs" />
+    <Compile Include="DTO\LinkDTO.cs" />
+    <Compile Include="DTO\PartnersDTO.cs" />
+    <Compile Include="DTO\CoSarlaftDTO.cs" />
+    <Compile Include="DTO\EntityDTO.cs" />
+    <Compile Include="DTO\TmpSarlaftOperationDTO.cs" />
+    <Compile Include="DTO\RolDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="DTO\PersonDTO.cs" />
+    <Compile Include="DTO\FinancialSarlaftDTO.cs" />
+    <Compile Include="DTO\SarlaftDTO.cs" />
+    <Compile Include="DTO\SarlaftExonerationDTO.cs" />
+    <Compile Include="ISarlaftApplicationServices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SarlaftBusinessServices\SarlaftBusinessServices.csproj">
+      <Project>{D7456C8F-245A-435B-B1CA-D03157040D6B}</Project>
+      <Name>SarlaftBusinessServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniquePersonAplicationService\Company.UniquePersonAplicationServices.csproj">
+      <Project>{A7078692-892D-42A8-B388-F51551CCCAB7}</Project>
+      <Name>Company.UniquePersonAplicationServices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Company\UniquePerson\SarlaftApplicationServices\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

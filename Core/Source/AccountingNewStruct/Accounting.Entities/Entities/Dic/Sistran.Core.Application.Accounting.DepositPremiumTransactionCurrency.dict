@@ -1,0 +1,28 @@
+<map version="2.0" type="class" name="DepositPremiumTransactionCurrency" namespace="Sistran.Core.Application.Accounting" file-version="1.0" description="DEPOSIT_PREMIUM_TOTAL_ENTITY">
+  <properties>
+    <property name="DepositPremiumTransactionCode" type="Integer" key="true" description="DEPOSIT_PREMIUM_TRANSACTION_CODE_PROPERTY" />
+    <property name="CollectCode" type="Decimal" precision="18" scale="2" nullable="true" description="COLLECT_CODE_PROPERTY" />
+    <property name="PayerId" type="Integer" nullable="true" description="PAYER_ID_PROPERTY" />
+    <property name="RegisterDate" type="DateTime" nullable="true" description="REGISTER_DATE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" nullable="true" description="AMOUNT_PROPERTY" />
+    <property name="Used" type="Decimal" precision="38" scale="2" description="USED_PROPERTY" />
+    <property name="TempUsed" type="Decimal" precision="38" scale="2" description="TEMP_USED_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="DEPOSIT_PREMIUM_TOTAL" schema="ACC" alias="DEPOSIT_PREMIUM_TOTAL" update="true">
+      <columns>
+        <column name="DEPOSIT_PREMIUM_TRANSACTION_CD" type="Int32" property="DepositPremiumTransactionCode" key="true" />
+        <column name="COLLECT_CD" type="Decimal" property="CollectCode" size="19" precision="18" scale="2" />
+        <column name="PAYER_ID" type="Int32" property="PayerId" />
+        <column name="REGISTER_DATE" type="DateTime" property="RegisterDate" />
+        <column name="CURRENCY_CD" type="Int32" property="CurrencyCode" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" size="50" />
+        <column name="AMOUNT" type="Decimal" property="Amount" size="19" precision="18" scale="2" />
+        <column name="USED" type="Decimal" property="Used" allowNull="false" size="19" precision="38" scale="2" />
+        <column name="TEMP_USED" type="Decimal" property="TempUsed" allowNull="false" size="19" precision="38" scale="2" />
+      </columns>
+    </table>
+  </tables>
+</map>

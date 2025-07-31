@@ -1,0 +1,106 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.CompanyBankAccount;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.CompanyBankAccount</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal" id="modalCompanyBankAccount">
+        <div class="uif-modalbody">
+            @Html.Partial("../Parameters/CompanyBankAccount/CompanyBankAccountModal")
+        </div>
+    </div>
+
+    @* Modal de ingreso cuentas bancarias compañia *@
+    <form id="MainCompanyBankAccountAddForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalAddCompanyBankAccount">
+            <div class="uif-modalbody">
+                @Html.Partial("../Parameters/CompanyBankAccount/CompanyBankAccountEditor")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove"></i> @Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="CompanyBanKAccountSaveAdd" name="CompanyBanKAccountSaveAdd" onclick="return false"><i class="fa fa-save"></i> @Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+}
+
+<div class="uif-row">
+    <div class="uif-col-6">
+        <label class="control-label">
+            @Global.Branch
+        </label>
+        <select class="uif-select form-control" id="BranchSelect"
+                data-id="Id"
+                data-name="Description"
+                data-selectedid="@ViewBag.BranchDefault"
+                data-native="true"
+                name="BranchSelect"></select>
+    </div>
+    <div class="uif-col-6">
+        <label class="control-label">
+            @Global.Bank
+        </label>
+        <select class="uif-select form-control" id="BankSelectBankAccount"
+                data-id="Id"
+                data-name="Description"
+                data-native="true"
+                name="BankSelect">
+        </select>
+    </div>
+   
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertCompanyBankAccount"></div>
+    </div>
+</div>
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchDisableBankAccount" value="@ViewBag.BranchDisable" />
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table data-title="@Global.CompanyBankAccount" class="uif-table" id="tableCompanyBankAccount"
+               data-add="true" data-edit="true" data-delete="false" data-selectiontype="none">
+            <thead>
+                <tr>
+                    <th data-visible="false" data-property="CompanyBankAccountId">CompanyBankAccountId</th>
+                    <th data-visible="true" data-property="AccountTypeDescription">@Global.AccountType</th>
+                    <th data-visible="true" data-property="AccountNumber">@Global.AccountNumber</th>
+                    <th data-visible="true" data-property="CurrencyDescription">@Global.Currency</th>
+                    <th data-visible="true" data-property="EnabledDescription">@Global.Status</th>
+                    <th data-visible="true" data-property="DisableDate">@Global.Date</th>
+                    <th data-visible="true" data-property="AccountingNumberBankAccount">@Global.AccountingAccountNumber</th>
+                    <th data-visible="true" data-property="AccountingNameBank">@Global.AccountingAccountName</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+<script id="add-templateMainBank" type="text/template">
+    @Html.Partial("../Parameters/CompanyBankAccount/CompanyBankAccountEditor")
+</script>
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCompanyBankAccount")
+}

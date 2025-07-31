@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{303E138A-36AB-423B-8C91-B204A2F16467}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Company.Application.Location.PropertyServices</RootNamespace>
+    <AssemblyName>Company.Location.PropertyServices</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>..\..\..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>..\..\..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Company.Locations">
+      <HintPath>..\..\..\..\..\..\Bin\Services\Company\Location\Services\Locations\Company.Locations.dll</HintPath>
+    </Reference>
+    <Reference Include="Company.UnderwritingServices">
+      <HintPath>..\..\..\..\..\..\Bin\Services\Company\Underwriting\UnderwritingServices\Company.UnderwritingServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Company.UnderwritingUtilities">
+      <HintPath>..\..\..\..\..\..\Bin\Application\Company\Underwriting\UnderwritingUtilities\Company.UnderwritingUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices">
+      <HintPath>..\..\..\..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions">
+      <HintPath>..\..\..\..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Location.PropertyServices">
+      <HintPath>..\..\..\..\..\..\Bin\Services\Core\Location\Property\PropertyServices\Core.Location.PropertyServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Locations">
+      <HintPath>..\..\..\..\..\..\Bin\Services\Core\Location\Services\Locations\Core.Locations.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UnderwritingServices">
+      <HintPath>..\..\..\..\..\..\Bin\Services\Core\Underwriting\UnderwritingServices\Core.UnderwritingServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServices">
+      <HintPath>..\..\..\..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTO\ClauseDTO.cs" />
+    <Compile Include="DTO\CoverageDTO.cs" />
+    <Compile Include="DTO\EndorsmentDTO.cs" />
+    <Compile Include="DTO\InsuredObjectDTO.cs" />
+    <Compile Include="DTO\TextDTO.cs" />
+    <Compile Include="Enum\EnumsAdjustmentPeriod.cs" />
+    <Compile Include="Enum\EnumsDeclarationPeriod.cs" />
+    <Compile Include="Enum\Status.cs" />
+    <Compile Include="IPropertyService.cs" />
+    <Compile Include="Models\CompanyAdjustPeriod.cs" />
+    <Compile Include="Models\CompanyApartmentOrOffice.cs" />
+    <Compile Include="Models\CompanyAssuranceMode.cs" />
+    <Compile Include="Models\CompanyConstructionType.cs" />
+    <Compile Include="Models\CompanyDeclarationPeriod.cs" />
+    <Compile Include="Models\CompanyDistrict.cs" />
+    <Compile Include="Models\CompanyEndorsementDetail.cs" />
+    <Compile Include="Models\CompanyEndorsementPeriod.cs" />
+    <Compile Include="Models\CompanyHouseType.cs" />
+    <Compile Include="Models\CompanyLocation.cs" />
+    <Compile Include="Models\CompanyNomenclatureAddress.cs" />
+    <Compile Include="Models\CompanyPropertyRisk.cs" />
+    <Compile Include="Models\CompanyRiskSubActivity.cs" />
+    <Compile Include="Models\CompanyRouteType.cs" />
+    <Compile Include="Models\CompanyUseHouse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Company\Location\Property\PropertyServices\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

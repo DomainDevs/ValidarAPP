@@ -1,0 +1,116 @@
+﻿  <form id="formPolicyConsult" class="form">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+            <ul class="uif-tab">
+                <li class="active"><a href="#policyDataTab">@Resources.Language.PolicyDataTab</a></li>
+                <li class=""><a href="#portfolioDataTab">@Resources.Language.PortfolioDataTab</a></li>
+                <li class=""><a href="#sinisterDataTab">@Resources.Language.SinisterDataTab</a></li>
+            </ul>
+
+            <!-- contenido de los tabs -->
+            <div class="tab-content">
+                <div id="policyDataTab" class="tab-pane active">
+                    <div class="uif-row">
+                        <div class="uif-col-6">
+                            <label>@Resources.Language.Holder</label>
+                            <input type="text" class="form-control" id="_policyHolder" disabled="disabled" />
+                        </div>
+                        <div class="uif-col-6">
+                            <label>@Resources.Language.LabelIntermediary</label>
+                            <input type="text" class="form-control" id="_policyIntermediary" disabled="disabled" />
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-6">
+                            <label>@Resources.Language.LabelEndorsement</label>
+                            <input type="text" class="form-control" id="_policyEndorsement" disabled="disabled" />
+                        </div>
+                        <div class="uif-col-6">
+                            <label>@Resources.Language.LabelPolicyType</label>
+                            <input type="text" class="form-control" id="_policyType" disabled="disabled" />
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.BusinessType</label>
+                            <input type="text" class="form-control" id="_policyBusinessType" disabled="disabled" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.IssuingDate</label>
+                            <input type="text" class="form-control" id="_policyIssuingDate" disabled="disabled" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.ValidSince</label>
+                            <input type="text" class="form-control" id="_policyValidSince" disabled="disabled" />
+                        </div>
+                        <div class="uif-col-2">
+                            <label>@Resources.Language.ValidTo</label>
+                            <input type="text" class="form-control" id="_policyValidTo" disabled="disabled" />
+                        </div>
+                    </div>
+                </div>
+                <div id="portfolioDataTab" class="tab-pane">
+                    <div class="uif-row">
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.IssuedPrime</label>
+                            <input type="text" class="form-control" id="_policyIssuedPrime" disabled="disabled" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.LabelTableExpenses</label>
+                            <input type="text" class="form-control" id="_policuTableExpenses" disabled="disabled" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.LabelTableTaxes</label>
+                            <input type="text" class="form-control" id="_policyTableTaxes" disabled="disabled" />
+                        </div>
+                        <div class="uif-col-3">
+                            <label>@Resources.Language.LabelTotalBonus</label>
+                            <input type="text" class="form-control" id="_policyTotalBonus" disabled="disabled" />
+                        </div>
+                    </div>
+                    <table id="tblPortfolio" class="uif-table" data-source="" data-selectiontype="none" data-filter="false">
+                        <thead>
+                            <tr>
+                                <th data-property="PolicyId" data-visible="false"></th>
+                                <th data-property="PaymentNum"><b>@Resources.Language.PaymentNumPolicyPortfolioDetail</b></th>
+                                <th data-property="PaymentAmount"><b>@Resources.Language.PaymentAmountPolicyPortfolioDetail</b></th>
+                                <th data-property="PayExpDate"><b>@Resources.Language.DueDate</b></th>
+                                <th data-property="PaymentDate"><b>@Resources.Language.PaymentDatePolicyPortfolioDetail</b></th>
+                                <th data-property="PaidAmount"><b>@Resources.Language.PaidAmountPolicyPortfolioDetail</b></th>
+                                <th data-property="StatusPayment"><b>@Resources.Language.State</b></th>
+                                <th data-property="Number"><b>@Resources.Language.NumberPolicyPortfolioDetail</b></th>
+                                <th data-property="Description"><b>@Resources.Language.Observations</b></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div id="sinisterDataTab" class="tab-pane">
+                    <table id="tblClaimsList" class="uif-table" data-source="" data-selectiontype="none" data-filter="false">
+                        <thead>
+                            <tr>
+                                <th data-property="ClaimId" data-visible="false"></th>
+                                <th data-property="Number"><b>@Resources.Language.NumberSinister</b></th>
+                                <th data-property="OccurrenceDate"><b>@Resources.Language.LabelSinisterDate</b></th>
+                                <th data-property="EstimatedValue" data-type="currency"><b>@Resources.Language.EstimatedValue</b></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons" id="buttonPolicyConsult">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0293"))
+        {
+            <button type="button" class="btn btn-primary" id="btnCancelAdd" data-dismiss="modal">@Resources.Language.Accept</button>
+        }
+        </div>
+</form>
+       
+
+
+
+
+

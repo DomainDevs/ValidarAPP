@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+}
+<script id="display-template-Events" type="text/template">
+    <div class="template-Events">
+        <input type="hidden" value="{{Id}}" />
+        <div>@Resources.Language.LabelEventGroup.ToUpper(): {{GroupEventDescription}}</div>
+        <br />
+        <div>@Resources.Language.LabelEvent.ToUpper() : </>{{Description}}</div>
+        <br />
+        <div>{{State}}</div>
+    </div>
+</script>
+<div class="row">
+    <div class="uif-col-3">
+        <div class="row">
+            <div class="uif-col-12">
+                <label>@Resources.Language.LabelTabEventGroup</label>
+                <select class="uif-select form-control" id="selectGroupEvent" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                        data-id="Id" data-name="GroupEventDescription" name="groupEvent" data-native="false" required></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <label>@Resources.Language.EventStatus</label>
+                <select class="uif-select form-control" id="selectStatusEvent" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                        data-id="Id" data-name="Description" name="statusEvent" data-native="false" required></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <label>@Resources.Language.LabelPrefix</label>
+                <select class="uif-select form-control" id="selectPrefix" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                        data-id="Id" data-name="Description" name="prefix" data-native="false" required></select>
+            </div>
+        </div>
+    </div>
+    <div class="uif-col-6">
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="uif-listview" id="listViewEvents"></div>
+            </div>
+        </div>
+    </div>
+    <div class="uif-col-3">
+        <div class="uif-right-bar">
+            <ul>
+                <li>
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0654"))
+                    {
+                        <a href="#" id="conditions">@Resources.Language.LabelConditions</a>
+                    }
+                </li>
+                <li>
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0656"))
+                    {
+                        <a href="#" id="authorizedUsers">@Resources.Language.AuthorizedUsers</a>
+                    }
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="uif-modal" id="eventEditModal">
+    <div class="uif-modalbody">
+        @Html.Partial("../EventsSarlaftModal/EventEditModal")
+    </div>
+</div>
+<div class="uif-modal" id="conditionsAndUsers">
+    <div class="uif-modalbody">
+        @Html.Partial("../EventsSarlaftModal/ConditionsAndUsersModal")
+    </div>
+</div>
+

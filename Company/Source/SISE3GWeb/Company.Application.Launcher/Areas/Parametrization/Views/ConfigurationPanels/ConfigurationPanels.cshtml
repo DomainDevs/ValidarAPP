@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.ConfigurationPanels
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0354"))
+        {
+            <button class="btn btn-primary" id="btnAdd">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span aria-hidden="true"></span>
+                @Resources.Language.ButtonNew
+            </button>
+        }
+    </div>
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column" id="titleRecovery">
+        <div class="column">
+            @Resources.Language.Recoveries
+        </div>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <footer>
+        <div>
+            <button id="btnAdd" class="btn btn-default">
+                <i class="fa fa-eraser" aria-hidden="true"></i> @Resources.Language.Add
+            </button>
+            <button id="btnCancel" class="btn btn-primary">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> @Resources.Language.Cancel
+            </button>
+        </div>
+    </footer>
+</script>
+
+<form id="formConfigurationPanels" autocomplete="off" class="form form-space-adjusted">
+    <br />
+    <br />
+    <div id="myDiv">
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="row">
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelPrefix:</label>
+                        <select class="uif-select form-control" required="required" name="prefixId"
+                                id="selectPrefixesofClaims" data-id="Id" data-name="Description"
+                                data-filter="true" data-native="false"></select>
+                        <span class="text-danger" data-valmsg-for="selectPrefixesofClaims" data-valmsg-replace="true" style="color:red;"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelLineBusiness:</label>
+                        <select class="uif-select form-control" required="required" name="lineBusiness"
+                                id="selecLineBusinessofClaims" data-id="Id" data-name="Description"
+                                data-filter="true" data-native="false"></select>
+                        <span class="text-danger" data-valmsg-for="selecLineBusinessofClaims" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-3">
+                        <label>@Resources.Language.LabelSubLineBusiness:</label>
+                        <select class="uif-select form-control" required="required" name="subLinebusiness"
+                                id="selectSubLineBusinessofClaims" data-id="Id" data-name="Description"
+                                data-filter="true" data-native="false"></select>
+                        <span class="text-danger" data-valmsg-for="selectSubLineBusinessofClaims" data-valmsg-replace="true"></span>
+                    </div>
+
+                </div>
+
+                <br /> <br /> <br />
+
+                <div class="row">
+                    <div class="uif-col-12">
+                        <table class="uif-table" data-title="<b>@Resources.Language.CoveragePercentage</b>" id="tblActivePanel" data-selectiontype="none" data-add="false" data-edit="true" data-delete="false" data-filter="true" data-paginate="true">
+                            <thead>
+                                <tr>
+                                    <th data-property="CoverageId" data-visible="false">Id</th>
+                                    <th data-property="PrintDescription"><b>@Resources.Language.ToEnableCoverage</b></th>
+                                    <th data-property="IsEnabledDriver"><b>@Resources.Language.DriverMan</b></th>
+                                    <th data-property="IsEnabledThird"><b>@Resources.Language.Third</b></th>
+                                    <th data-property="IsEnabledThirdPartyVehicle"><b>@Resources.Language.ThirdPartyVehicle</b> </th>
+                                    <th data-property="IsEnabledAffectedProperty"><b>@Resources.Language.AffectedProperty</b> </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<div class="uif-modal" id="activePanelModel">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/ConfigurationPanels/ActivePanelCoverage.cshtml")
+    </div>
+    <div class="uif-modalbuttons">
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0356"))
+        {
+            <button type="button" class="btn btn-default" id="btnCancels" data-dismiss="modal">@Resources.Language.Cancel</button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0355"))
+        {
+            <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.Save</button>
+        }
+    </div>
+</div>

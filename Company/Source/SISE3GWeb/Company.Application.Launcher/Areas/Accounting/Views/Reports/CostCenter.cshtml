@@ -1,0 +1,202 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.CostCenter;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Reports</li>
+        <li>@Global.AccountingReports</li>
+        <li>@Global.Accounts</li>
+        <li class="active">@Global.CostCenter</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button id="CancelCostCenter" class="btn btn-default" role="button">
+                <i class="fa fa-remove"></i>  @Global.Clean
+            </button>
+            <button id="MassiveCostCenter" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+            </button>
+        </div>
+    </footer>
+}
+
+<form id="ReportFormCostCenter" onsubmit=" return false ">
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label class="control-label">
+                @Global.CostCenter
+            </label>
+           
+            @Html.DropDownList("CostCenterReport", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/GeneralLedger/Base/GetCostCenters"),
+           data_id = "CostCenterId",
+           data_name = "Description",
+           data_selectedid = @ViewBag.ViewBagControlSpanCostCenter,
+           data_val = "true",
+           data_native = "true",
+           //data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="CostCenterReport" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-1">
+            <label class="control-label">@Global.All</label>
+            <div class="checkbox">
+                <input type="checkbox" id="checkAllCostCenter" value="1">
+                <label for="checkAllCostCenter"></label>
+            </div>
+        </div>
+        @*<div class="uif-col-1">
+            <span class="glyphicon glyphicon-check" id="checkAllCostCenter"></span><input type="checkbox" id="checkAllCostCenter"> @Global.All
+        </div>*@
+        <div class="uif-col-3">
+            <label>@Global.DateFrom</label>
+            @Html.TextBox("StartDateCostCenter", "", new
+            {
+               @class = "uif-datepicker",
+               style = "text-align: left",
+               data_mask = "99/99/9999",
+               data_val = "true",
+               data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="StartDateCostCenter" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.DateTo</label>
+            @Html.TextBox("EndDateCostCenter", "", new
+            {
+                @class = "uif-datepicker",
+                style = "text-align: left",
+                data_mask = "99/99/9999",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="EndDateCostCenter" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4 ">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="TransactionEntriesCostCenter" value="2">
+                    @Global.Transaction o @Global.Entries
+                </label>
+            </div>
+         </div>
+
+            <div class="uif-col-3">
+                <label>@Global.Transaction o @Global.Entries</label>
+                <input type="text" id="TransactionEntriesTextCostCenter" name="TransactionEntriesTextCostCenter" disabled="disabled" />
+            </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4" id="divRangeAccounts">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="options" id="RangeAccountsCostCenter" value="3">
+                    @Global.RangeAccounts
+                </label>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="AccountingNumberFromCostCenter">
+                @Global.AccountFrom
+            </label>
+            <input class="uif-autocomplete" type="text"
+                   data-source="@Url.Action("GetAccountintAccountByNumber", "Parameters")"
+                   data-displaykey="AccountingNumber" placeholder='@Global.EnterNumberAccount' id="AccountingNumberFromCostCenter"
+                   data-val="true" data-val-required="@Global.RequiredField" value="" hidden="hidden"
+                   name="AccountingNumberFromCostCenter" onkeypress="return JustNumbers(event, this);" />
+            <span class="text-danger" data-valmsg-for="AccountingNumberFromCostCenter" data-valmsg-replace="true">
+            </span>
+           
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label" for="AccountingNumberToCostCenter">
+                @Global.AccountTo
+            </label>
+            <input class="uif-autocomplete" type="text"
+                   data-source="@Url.Action("GetAccountintAccountByNumber", "Parameters")"
+                   data-displaykey="AccountingNumber" placeholder='@Global.EnterNumberAccount' id="AccountingNumberToCostCenter"
+                   data-val="true" data-val-required="@Global.RequiredField" value="" hidden="hidden"
+                   name="AccountingNumberToCostCenter" onkeypress="return JustNumbers(event, this);" />
+            <span class="text-danger" data-valmsg-for="AccountingNumberToCostCenter" data-valmsg-replace="true">
+            </span>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+
+    @section modals{
+
+        @*VENTANAS MODALES DE CONFIRMACION*@
+        <!-- Modal Confirma proceso de masivos reaseguros -->
+        <div class="modal fade" id="modalMassiveTotRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><b>@Global.CostCenter</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <b id="pnlModalTotRecords"></b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnModalCostCenter">@Global.Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalMassiveNo">@Global.No</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- Modal Confirmacion del Proceso Masivo de cada reporte -->
+        <div class="modal fade" id="modalMassiveReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><b>@Global.CostCenter</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        @Global.ConfirmMessageProcess
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnModalMassiveProcessReport">@Global.Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @section scripts
+    {
+        @Scripts.Render("~/accounting/bundles/CostCenter")
+    }
+
+</form>
+@*<input type="hidden" id="ViewBagControlSpanCostCenter" value="true" />*@
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div style="padding: 0 0 0 0">
+            @Html.Partial("PartialProgressReports")
+        </div>
+    </div>
+</div>

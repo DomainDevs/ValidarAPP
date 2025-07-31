@@ -1,0 +1,56 @@
+﻿<div class="row">
+    <div class="col-xs-2"><button id="loadFromStorage" class="btn btn-primary">Cargar</button></div>
+    <div class="col-xs-2"><button id="saveOnStorage" class="btn btn-primary">Guardar</button></div>
+    <div class="col-xs-2"><button id="iniciar" data-status="pausado" class="btn btn-primary">Iniciar</button></div>
+
+    <div class="col-xs-2">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="emision" id="btnEmision">
+            <label class="form-check-label" for="btnEmision">
+                EMISON
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="reaseguros" id="btnReaseguros">
+            <label class="form-check-label" for="btnReaseguros">
+                REASEGUROS
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="qsise" id="btnQSise">
+            <label class="form-check-label" for="btnQSise">
+                QSISE
+            </label>
+        </div>
+    </div>
+    <div class="col-xs-2"><button id="procesarTabla" class="btn btn-primary">Procesar tabla</button></div>
+    <div class="col-xs-2"><button id="diferencias" class="btn btn-primary">Diferencias</button></div>
+</div>
+<div class="row">
+    <div class="col-xs-2"><input id="buscar" class="uif-input-search" type="text" placeholder="Numero de documento" /></div>
+    <div class="col-xs-2"><input id="buscarDiferencia" class="uif-input-search" type="text" placeholder=" > Diferencia" /></div>
+    <div class="col-xs-2"><label id="tiempo"></label></div>
+</div>
+
+
+<table id="tabla" class="uif-table" data-filter="true" data-selectiontype="none" data-edit="true" data-exporttocsv="true" data-exportname="Diferencia_Cumulos">
+    <thead>
+        <tr>
+            <th data-property="Nombre">Nombre</th>
+            <th data-property="Documento">Documento</th>
+            <th data-property="IndividualId">Individual</th>
+            <th data-property="CumuloEmision" data-type="currency">Cumulo Emision</th>
+            <th data-property="CumuloReas" data-type="currency">Cumulo Reaseguros</th>
+            <th data-property="CumuloQSise" data-type="currency">Cumulo QSISE</th>
+
+            <th data-property="Diferencia" data-type="currency">Diferencia</th>
+
+        </tr>
+    </thead>
+</table>
+
+
+
+@section scripts{
+    <script src="~/Scripts/Index2.js"></script>
+}

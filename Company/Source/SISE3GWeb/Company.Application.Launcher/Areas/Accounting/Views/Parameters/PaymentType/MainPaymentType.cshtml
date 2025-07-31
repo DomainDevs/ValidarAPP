@@ -1,0 +1,50 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = Global.PaymentType;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameters</li>
+        <li>@Global.Billing</li>
+        <li>@Global.PaymentType</li>
+    </ol>
+}
+
+@section modals{
+    <div class="uif-modal" id="modalPaymentType"></div>
+}
+
+<div class="row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertPaymentType"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="uif-col-12">
+        <table class="uif-table" data-source='@Url.Content("~/Accounting/Parameters/GetPaymentTypes")'
+               data-title="@Global.ParameterizationPaymentType" id="tblPaymentType"
+               data-edit="true" data-delete="false" data-filter="true" data-paginate="true"
+               data-selectiontype="none" data-pagesize="10" data-add="false">
+            <thead>
+                <tr>
+                    <th data-property="Id" data-visible="false">Id</th>
+                    <th data-property="Description">@Global.Description</th>
+                    <th data-property="Billing" data-type="boolean">@Global.CashReceipt</th>
+                    <th data-property="PaymentOrder" data-type="boolean">@Global.PaymentOrder</th>
+                    <th data-property="InternalBallot" data-type="boolean">@Global.InternalBallot</th>
+                    <th data-property="PaymentRequest" data-type="boolean">@Global.VariousPaymentRequest</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainPaymentType")
+}

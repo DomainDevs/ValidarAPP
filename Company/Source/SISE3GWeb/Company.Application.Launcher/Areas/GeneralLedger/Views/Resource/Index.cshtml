@@ -1,0 +1,48 @@
+﻿
+@using System.Collections
+@using System.Globalization
+@using System.Resources
+@using System.Threading
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    Layout = null;
+    // Get a set of resources appropriate to
+    // the culture defined by the browser
+
+    string virtualPath = HttpContext.Current.Request.UrlReferrer.AbsolutePath;
+    string[] pathParts = virtualPath.Split('/');
+
+
+    if (virtualPath == "/") //cuando se depura
+    {
+        Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("es-GT");
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-GT");
+    }
+    else
+    {
+
+        if (pathParts[1] == "en" || pathParts[2] == "en")
+        {
+            Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-us");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-us");
+
+        }
+        else
+        {
+            Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("es-GT");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-GT");
+        }
+    }
+
+    ResourceSet resourceSet = @Global.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+
+}
+
+// Define the empty object in javascript
+var Resources = {};
+@foreach (DictionaryEntry res in resourceSet)
+{
+    // Create a property on the javascript object for each text resource
+    @:Resources.@res.Key = "@Html.Raw(HttpUtility.JavaScriptStringEncode(res.Value.ToString()))";
+}

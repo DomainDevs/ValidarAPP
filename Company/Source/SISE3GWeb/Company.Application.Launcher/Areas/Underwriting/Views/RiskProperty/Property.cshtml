@@ -1,0 +1,376 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.RiskPropertyViewModel
+
+<script id="title-template" type="text/template">
+    <div class="column-80">
+        @Resources.Language.DataRisk
+    </div>
+    <div class="column-20 even">
+        <i class="fa fa-file-o" aria-hidden="true"></i>
+        <div id="globalTitle"></div>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div id="buttonsProperty">
+        <button type="button" class="btn btn-default" id="btnClose">
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonClose
+        </button>
+        <button type="button" class="btn btn-default" id="btnDeleteRisk">
+            <span class="" aria-hidden="true">
+                @Resources.Language.RiskDelete
+            </span>
+        </button>
+        <button type="button" class="btn btn-default" id="btnAddRisk">
+            <span class="" aria-hidden="true">
+                @Resources.Language.RiskNew
+            </span>
+        </button>
+        <button type="button" class="btn btn-primary" id="btnAccept">
+            <span aria-hidden="true"></span>
+            @Resources.Language.RiskSave
+        </button>
+    </div>
+</script>
+
+<script id="insuredObjectDisplayTemplate" type="text/template">
+    <div><strong>{{Description}}</strong></div>
+    <div>@Resources.Language.LabelSumInsured: <b class="warning">{{Amount}}</b></div>
+    <div>@Resources.Language.LabelPremium: <b class="warning">{{Premium}}</b></div>
+</script>
+
+<div class="uif-alert" id="alert"></div>
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalBeneficiaries">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Beneficiaries.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.BeneficiaryModelsView())
+    </div>
+    <div id="buttonsBeneficiaries" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnBeneficiaryClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnBeneficiarySave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalAdditionalData">
+    <div class="uif-modalbody">
+        <form id="formAdditionalData">
+            @Html.Partial("~/Areas/Underwriting/Views/RiskProperty/AdditionalData.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.PropertyAdditionalDataViewModel())
+        </form>
+    </div>
+    <div id="buttonsAdditionalData" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnAdditionalDataClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnAdditionalDataSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalTexts">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Texts.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.TextsModelsView())
+    </div>
+    <div id="buttonsTexts" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnTextClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnTextSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalClauses">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Clauses.cshtml")
+    </div>
+    <div id="buttonsClauses" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" id="btnClausesClose" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnClausesSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<form id="FormExecuteScript">
+    <div class="uif-modal" id="ModalExecuteScript">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/RulesScripts/Views/Scripts/ExecuteScript.cshtml")
+        </div>
+        <div class="uif-modalbuttons width-save">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+            <button type="button" class="btn btn-primary" onclick="return false" id="btnRecordScrip">@Resources.Language.ButtonSave</button>
+        </div>
+    </div>
+</form>
+
+<div class="uif-modal" id="modalIndividualDetail">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/IndividualDetail.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalIndividualSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/IndividualResults.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalTextSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/TextsResults.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalPersonOnline">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/PersonOnline.cshtml")
+    </div>
+</div>
+
+<form id="formProperty" class="form without-space">
+    <div id="modalProperty">
+        <div class="row">
+            <div class="uif-col-6">
+                <div class="row box-title">
+                    <div class="col-md-2">
+                        <label>@Resources.Language.LabelRiskData</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select class="uif-select form-control" id="selectRisk" data-native="false" data-id="Id" data-name="Description" name="RiskId"></select>
+                        @Html.ValidationMessageFor(model => model.RiskId)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="uif-col-12">
+                        <div class="row">
+                            <div class="uif-col-12">
+                                <label class="field-required">@Resources.Language.LabelPrincipalInsured</label>
+                                <div class="input-with-buttons">
+                                    @Html.TextBoxFor(model => model.InsuredName, new { id = "inputInsured", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+                                    @Html.ValidationMessageFor(model => model.InsuredName)
+                                    <button type="button" class="btn btn-default secondary-Colombia" id="btnDetail">
+                                        @Resources.Language.ButtonDetail
+                                    </button>
+                                    <button type="button" class="btn btn-default secondary-Colombia" id="btnConvertProspect">
+                                        @Resources.Language.ButtonConvertProspect
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-6">
+                                <input type="radio" id="withNomenclature" name="Nomenclature" />
+                                <label for="withNomenclature">@Resources.Language.LabelWithNomenclature</label>
+                            </div>
+                            <div class="uif-col-6">
+                                <input type="radio" id="withOutNomenclature" name="Nomenclature" checked />
+                                <label for="withOutNomenclature">@Resources.Language.LabelWithoutNomenclature</label>
+                            </div>
+
+
+                        </div>
+                        <div id="panelAddressNomenclature" style="display:none;">
+                            <div class="row">
+                                <div class="uif-col-4">
+                                    <label>@Resources.Language.LabelType</label>
+                                    <select class="uif-select form-control Nomenclature" data-native="false" id="selectRouteType" data-id="Id" data-name="Description" name="Type"></select>
+                                    @Html.ValidationMessageFor(model => model.RouteTypeId)
+                                </div>
+                                <div class="uif-col-6">
+                                    <label>@Resources.Language.LabelTableName</label>
+                                    @Html.TextBoxFor(model => model.Name, new { id = "inputName", @class = "Nomenclature" })
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </div>
+                                <div class="uif-col-2">
+                                    <label>@Resources.Language.LabelLetter</label>
+                                    @Html.TextBoxFor(model => model.Letter, new { id = "inputLetter", @class = "Nomenclature" })
+                                    @Html.ValidationMessageFor(model => model.Letter)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="uif-col-4">
+                                    <label>@Resources.Language.LabelSufix 1</label>
+                                    <select class="uif-select form-control Nomenclature" data-native="false" id="selectSuffix1" data-id="Id" data-name="Description" name="Suffix1"></select>
+                                    @Html.ValidationMessageFor(model => model.Suffix1Id)
+                                </div>
+                                <div class="uif-col-2">
+                                    <label>@Resources.Language.LabelNro 1</label>
+                                    @Html.TextBoxFor(model => model.Number1, "{0:#.#}", new { id = "inputNro1", @class = "Nomenclature" })
+                                    @Html.ValidationMessageFor(model => model.Number1)
+                                </div>
+                                <div class="uif-col-2">
+                                    <label>@Resources.Language.LabelLetter</label>
+                                    @Html.TextBoxFor(model => model.Letter2, new { id = "inputLetter2", @class = "Nomenclature" })
+                                    @Html.ValidationMessageFor(model => model.Letter2)
+                                </div>
+                                <div class="uif-col-2">
+                                    <label>@Resources.Language.LabelNro 2</label>
+                                    @Html.TextBoxFor(model => model.Number2, "{0:#.#}", new { id = "inputNro2", @class = "Nomenclature" })
+                                    @Html.ValidationMessageFor(model => model.Number2)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="uif-col-4">
+                                    <label>@Resources.Language.LabelSufix 2</label>
+                                    <select class="uif-select form-control Nomenclature" data-native="false" id="selectSuffix2"
+                                            data-id="Id" data-name="Description" name="Suffix2"></select>
+                                    @Html.ValidationMessageFor(model => model.Suffix2Id)
+                                </div>
+                                <div class="uif-col-4">
+                                    <label>@Resources.Language.LabelApartmentOrOffice</label>
+                                    <select class="uif-select form-control Nomenclature" data-native="false" id="selectAparmentOrOffice"
+                                            data-id="Id" data-name="Description" name="ApartmentOrOffice"></select>
+                                    @Html.ValidationMessageFor(model => model.ApartmentOrOfficeId)
+                                </div>
+                                <div class="uif-col-2">
+                                    <label>@Resources.Language.LabelNro 3</label>
+                                    @Html.TextBoxFor(model => model.Number3, "{0:#.#}", new { id = "inputNro3", @class = "Nomenclature" })
+                                    @Html.ValidationMessageFor(model => model.Number3)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-8">
+                                <label class="field-required">@Resources.Language.LabelFullAddress </label>
+                                <input class="uif-autocomplete" type="text" data-source="@Url.Content("~/Underwriting/Underwriting/GetNomenclaturesTask")" data-displaykey="nomenclature" placeholder="Ingrese La Dirección" data-displayrecords="5" data-minLenght="3" id="inputFullAddress" name="inputFullAddress" data-val="true" />
+                                @*<input class="uif-autocomplete" type="text" data-source="@Url.Action("GetNomenclaturesTask", "../Underwriting/Underwriting")" data-displaykey="nomenclature" placeholder="Ingrese La Dirección" data-displayrecords="5  data-minLenght="3" id="inputFullAddress" name="Nomenclatura"  data-queryParameter="Nomenclatura"  data-id="ID"  maxlength="100"   autocomplete="on" required />*@
+                                <span id="ReqinputAddress" style="display:none" class="text-danger field-validation-error" data-valmsg-replace="true"><span class="">@Resources.Language.ErrorDocumentFullAddress</span></span>
+                            </div>
+                            <div class="uif-col-4">
+                                <label class="field-required">@Resources.Language.LabelCountry</label>
+                                <select class="uif-select form-control" data-val="true" data-native="false" data-val-required="@Resources.Language.ErrorDocumentControlCountry" name="CountryCode" id="selectCountry" data-id="Id" data-name="Description" data-filter="true"></select>
+                                @Html.ValidationMessageFor(model => model.CountryCode)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-4">
+                                <label>@Resources.Language.LabelCodDane</label>
+                                <input class="uif-autocomplete" name="DaneCode" type="text" data-source="@Url.Content("~/Underwriting/RiskProperty/GetDaneCodeByQuery")" data-displaykey="DANECode" placeholder="@Resources.Language.EnterCodeDANE" id="inputDaneCode" data-minlenght="2" data-maxlenght="5">
+                                @Html.ValidationMessageFor(model => model.DaneCode)
+                            </div>
+
+                            <div class="uif-col-4">
+                                <label class="field-required">@Resources.Language.LabelState</label>
+                                <select class="uif-select form-control" data-native="false" name="StateCode" data-id="Id" data-name="Description" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlState" id="selectState" data-source="" data-filter="true"></select>
+                                @Html.ValidationMessageFor(model => model.StateCode)
+                            </div>
+                            <div class="uif-col-4">
+                                <label class="field-required">@Resources.Language.LabelCity</label>
+                                <select class="uif-select form-control" data-native="false" id="selectCity" name="CityCode" data-id="Id" data-name="Description" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlCity" data-source="" data-filter="true"></select>
+                                @Html.ValidationMessageFor(model => model.CityCode)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-4">
+                                <label>@Resources.Language.LabelRateZone</label>
+                                @Html.TextBoxFor(model => model.RateZoneDescription, new { id = "inputRateZone" })
+                                @Html.ValidationMessageFor(model => model.RateZoneDescription)
+                            </div>
+                            <div class="uif-col-8">
+                                <label class="field-required">@Resources.Language.LabelActivityRisk</label>
+                                <select class="uif-select form-control" data-native="false" id="selectRiskActivity" name="RiskActivityDescription" data-id="Id" data-name="Description" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlRiskActivity" data-source="" data-filter="true"></select>
+                                @Html.ValidationMessageFor(model => model.RiskActivityDescription)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-4">
+                                <input type="checkbox" id="chkIsFacultative" name="chkIsFacultative" />
+                                <label for="chkIsFacultative">@Resources.Language.LabelIsOptional</label>
+                                <input type="checkbox" id="chkIsRetention" name="IsRetention" />
+                                <label for="chkIsRetention">@Resources.Language.LabelRetention</label>
+                            </div>
+                            <div class="uif-col-8">
+                                <label class="field-required">@Resources.Language.LabelSubActivityRisk</label>
+                                <select class="uif-select form-control" data-native="false" id="selectRiskSubActivity" name="RiskSubActivityId" data-id="Id" data-name="Description" data-val="true"
+                                        data-val-required="@Resources.Language.EnterSubActivityRisk"></select>
+                                @Html.ValidationMessageFor(model => model.RiskSubActivityId)
+                            </div>
+                        </div>
+                        <div class="row">
+                            @*<div class="uif-col-4">
+                                    <label class="field-required">@Resources.Language.LabelAssuranceMode</label>
+                                    <select class="uif-select form-control" data-native="false" id="selectAssuranceMode" data-id="Id" data-name="Description" name="AssuranceModeId" data-val="true" data-val-required="@Resources.Language.EnterAssuranceMode"></select>
+                                    @Html.ValidationMessageFor(model => model.AssuranceModeId)
+                                </div>*@
+
+                            <div class="uif-col-12">
+                                <label class="field-required">@Resources.Language.LabelForRiskType</label>
+                                <select class="uif-select form-control" data-native="false" id="selectRiskTypeLocation" data-id="Id" data-name="Description" name="RiskType" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlRiskType"></select>
+                                @Html.ValidationMessageFor(model => model.RiskType)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="uif-col-4">
+                                <label>@Resources.Language.SeismicZone</label>
+                                @Html.TextBoxFor(model => model.SeismicZone, new { id = "SeismicZone", disabled = false })
+                                @Html.ValidationMessageFor(model => model.SeismicZone)
+                            </div>
+                            <div class="uif-col-8">
+                                <label class="field-required">@Resources.Language.LabelGroupCoverage</label>
+                                <select class="uif-select form-control" data-native="false" id="selectGroupCoverage" data-id="Id" data-name="Description" name="GroupCoverage" data-val="true" data-val-required="@Resources.Language.ErrorGroupCoverage"></select>
+                                @Html.ValidationMessageFor(model => model.GroupCoverage)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-col-4 fit-col-secondary">
+                <div id="listInsuredObjects" class="uif-listview"></div>
+            </div>
+            <div class="uif-col-2 fit-col-secondary">
+                <div class="uif-right-bar without-border-left" id="panelButtonsRightRisk">
+                    <div class="right-bar-title">
+                        <a href="#" id="btnScript">
+                            <i class="fa fa-gear"></i>
+                            <b class="primary">@Resources.Language.LabelScript</b>
+                        </a>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="#" id="btnBeneficiary">@Resources.Language.LabelBeneficiary</a>
+                            <p id="selectedBeneficiaries"></p>
+                        </li>
+                        <li>
+                            <a href="#" id="btnAdditionalData">@Resources.Language.LabelAdditionalData</a>
+                            <p id="selectedAdditionalData"></p>
+                        </li>
+                        <li>
+                            <a href="#" id="btnTexts">@Resources.Language.LabelText</a>
+                            <p id="selectedTexts"></p>
+                        </li>
+                        <li>
+                            <a href="#" id="btnClauses">@Resources.Language.LabelClauses</a>
+                            <p id="selectedClauses"></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row lineDividing">
+            <div class="uif-col-6">
+            </div>
+            <div class="uif-col-4">
+                <div class="uif-summary">
+                    <div class="items">
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelInsuredValue</div>
+                                <div id="inputAmountInsured">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.LabelPremium</div>
+                                <div id="inputPremium">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

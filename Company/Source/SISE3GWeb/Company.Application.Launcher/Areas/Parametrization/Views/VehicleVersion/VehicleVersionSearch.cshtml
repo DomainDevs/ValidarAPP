@@ -1,0 +1,70 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.VehicleVersionViewModel
+
+<script id="advancedSearchTemplate" type="text/template">
+	<div>
+		@Resources.Language.Make: <strong>{{DescriptionMake}} ({{VehicleMakeServiceQueryModel}})</strong>
+	</div>
+	<div>
+		@Resources.Language.Model: <strong>{{DescriptionModel}} ({{VehicleModelServiceQueryModel}})</strong>
+	</div>
+	<div>
+		@Resources.Language.VehicleVersion: <strong> {{Description}} ({{{Id}}})</strong>
+	</div>
+
+</script>
+
+<form class="form" id="frmAdvanzedSearch">
+	<div class="row">
+		<div class="uif-col-12">
+			<h4>@Resources.Language.AdvancedSearch</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+			@Html.LabelFor(model => model.VehicleMakeServiceQueryModel, htmlAttributes: new { @class = "control-label field-required" })
+			<select data-filter="true" data-native="false" class="uif-select form-control" id="VehicleMakeServiceQueryModelSearch" name="VehicleMakeServiceQueryModel"
+					data-source='@Url.Content("~/Parametrization/VehicleVersion/GetMakes")'
+					data-id="Id" data-name="Description"
+					data-val="true"
+					data-val-required="@Resources.Language.ErrorDocumentControlMake"></select>
+			<span class="text-danger" data-valmsg-for="VehicleMakeServiceQueryModelSearch" data-valmsg-replace="true"></span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+			@Html.LabelFor(model => model.VehicleModelServiceQueryModel, htmlAttributes: new { @class = "control-label field-required" })
+			<select data-filter="true" data-native="false" class="uif-select form-control" id="VehicleModelServiceQueryModelSearch" name="VehicleModelServiceQueryModel"
+					data-id="Id" data-name="Description"
+					data-val="true"
+					data-val-required="@Resources.Language.ErrorDocumentControlModel"></select>
+			<span class="text-danger" data-valmsg-for="VehicleModelServiceQueryModelSearch" data-valmsg-replace="true"></span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+			<label>@Resources.Language.NameVersion</label>
+			@Html.TextBoxFor(model => model.Description, htmlAttributes: new { @class = "form-control", @Id= "DescriptionSearch",@maxlength="50" })
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+            <button class="btn btn-primary-Co width-container" id="btnSearchAdvanzed" type="button"> @Resources.Language.search</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+			<div class="uif-listview" id="lvSearchAdvVehicleVersion">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+			<div class="pull-right width-save">
+				<button class="btn btn-default" id="btnCancelSearchAdvVehicle" type="button">@Resources.Language.Close</button>
+				<button class="btn btn-primary" id="btnOkSearchAdvVehicle" type="button">@Resources.Language.Accept</button>
+			</div>
+		</div>
+	</div>
+</form>
+
+

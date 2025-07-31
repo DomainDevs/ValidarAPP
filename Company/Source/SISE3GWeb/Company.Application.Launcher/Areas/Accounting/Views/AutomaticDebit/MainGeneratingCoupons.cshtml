@@ -1,0 +1,183 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.GeneratingCoupons;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AutomaticDebit</li>
+        <li>@Global.GeneratingCoupons</li>
+    </ol>
+}
+
+
+@section Modals
+{
+    <!-- Modal confirmación de generación -->
+    <div class="modal fade" id="modalSave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="saveMessageTitle">@Global.GeneratingCoupons</label></h4>
+                </div>
+                <div class="modal-body" id="saveMessageModal">
+                    <p>@Global.MessageGenerateCouponsDialog</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnGenerateModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="btnCancel" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="btnGenerateCoupon" class="btn btn-primary" role="button">
+            <i class="fa fa-save"></i>  @Global.Generate
+        </button>
+    </footer>
+}
+
+<form id="formCoupons" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.Net</label>
+            <select class="uif-select form-control"
+                    id="selectNet"
+                    name="selectNet"
+                    data-val="true"
+                    data-val-required='@Global.RequiredField'
+                    data-source='@Url.Content("~/Accounting/Common/GetNets")'
+                    data-id="Id"
+                    data-name="Description"
+                    data-native="true">
+            </select>
+            <span class="text-danger" data-valmsg-for="selectNet" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Branch</label>
+            <select class="uif-select form-control" id="selectBranch" data-native="true"
+                    data-source='@Url.Content("~/Accounting/Common/GetBranchs")'
+                    data-id="Id"
+                    data-name="Description"
+                    data-selectedid="@ViewBag.BranchDefault"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Prefix</label>
+            <select class="uif-select form-control" id="selectPrefix" data-native="true"
+                    data-source='@Url.Content("~/Accounting/Common/GetPrefixes")'
+                    data-id="Id"
+                    data-name="Description"></select>
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.Policy</label>
+            <input type="text" value=""
+                   id="PolicyNumber"
+                   placeholder=""
+                   data-pattern="000000000000000" class="uif-mask" />
+        </div>
+    </div>
+
+    @*<div class="uif-row">
+       
+    </div>*@
+
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.SendDateTime</label>
+            <input type="text" value="@ViewBag.CurrentDate"
+                   class="uif-datepicker"
+                   data-mask="99/99/9999 99:99"
+                   id="SendDateTime"/>
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.LotNumberGenerated</label>
+            <input type="text" value=""
+                   id="LotNumber"
+                   disabled="disabled" placeholder=""
+                   data-pattern="00000000000000000000"
+                   class="uif-mask"/>
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.RetryCount</label>
+            <input type="text" value=""
+                   id="RetryCount"
+                   placeholder=""
+                   data-pattern="0000"
+                   class="uif-mask"/>
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.FilterBy @Global.Status</label>
+            <select class="uif-select form-control"
+                    id="SelectLotStatus"
+                    name="SelectLotStatus"
+                    data-val="true"
+                    data-source='@Url.Content("~/Accounting/AutomaticDebit/GetShipmentStatus")'
+                    data-id="Id"
+                    data-name="Description"
+                    data-native="true"></select>
+        </div>
+    </div>
+    @*<div class="uif-row">
+   
+    </div>*@       
+</form>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alert"></div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div id="processMessage">
+            @*<p><img src="@Url.Content("~/Images/468.gif")" /> @Global.Processing</p>*@
+        </div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableProcess" data-exporttocsv="false" data-edit="false" data-delete="false" data-filter="false"
+               data-paginate="true" data-title="@Global.PendingProcesses" data-selectiontype="none">
+            <thead>
+                <tr>
+                    <th data-property="Id" style="text-align:left">Id</th>
+                    <th data-property="Description" style="text-align:left">@Global.Description</th>
+                    <th data-property="BankNetworkId" data-visible="false">BankNetworkId</th>
+                    <th data-property="LotNumber" style="text-align:left">@Global.LotNumber</th>
+                    <th data-property="RecordsNumber" style="text-align:left">@Global.RecordsNumber</th>
+                    <th data-property="RecordsProcessed" style="text-align:left">@Global.ProcessedRecords</th>
+                    <th data-property="RecordsFailed" style="text-align:left">@Global.FailedRecords</th>
+                    <th data-property="Progress" style="text-align:left">@Global.Progress</th>
+                    <th data-property="Elapsed" style="text-align:left">@Global.Elapsed</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@*ViewBags*@
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+<input type="hidden" id="ViewBagBranchDefault" value="@ViewBag.BranchDefault" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainGeneratingCoupons")
+}

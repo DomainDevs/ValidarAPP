@@ -1,0 +1,138 @@
+﻿@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.LabelScript
+        </div>
+        <div class="column-30 even">
+            <input class="uif-input-search" type="text" placeholder="@Resources.Language.SearchForScript" id="SearchScript" />
+            <button class="btn btn-default" id="btnSearchAdvScript"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+<!-- template -->
+<script id="template-Scripts" type="text/template">
+    <div>
+        @Resources.Language.LabelId <strong>{{ScriptId}}</strong>
+        <br />
+        @Resources.Language.LabelDescription <strong>{{Description}}</strong>
+        <br />
+        @Resources.Language.LabelLevels <strong>{{LevelDescription}}</strong>
+    </div>
+</script>
+<!-- /template -->
+
+<input type="hidden" id="scriptId" name="cityWolfan" value="-1">
+
+
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-12" id="addGuion">
+            @Html.Action("GuionAdd", "Scripts", new { Area = "RulesScripts" })
+        </div>
+        @*<div class="uif-col-7" id="Listaguiones">
+                <div id="ScriptsListView" class="uif-listview">
+                </div>
+            </div>*@
+    </div>
+</div>
+
+
+
+
+<!-- start footer -->
+@section Toolbar
+{
+    <footer>
+        <div class="app-header">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div id="buttonsUnderwriting" class="pull-right">
+                        <button type="button" class="btn btn-default" id="btnExit">
+                            <span class="fa fa-times-circle"></span>
+                            @Resources.Language.ButtonExit
+                        </button>
+                        <button type="button" class="btn btn-default" id="btnNew">
+                            <span class="fa fa-plus"></span>
+                            @Resources.Language.New
+                        </button>
+                        <button type="button" class="btn btn-default" id="btnDelete">
+                            <span class="fa fa-trash"></span>
+                            @Resources.Language.Delete
+                        </button>
+                        <button type="button" class="btn btn-default" id="btnExport">
+                            <span class="fa fa-download"></span>
+                            @Resources.Language.ButtonExport
+                        </button>
+                        <button type="button" class="btn btn-default" id="btnExecuteScript">
+                            <span class="fa fa-check-circle"></span>
+                            @Resources.Language.Preview
+                        </button>
+
+                        <button type="button" class="btn btn-primary" id="btnRecord">
+                            <span class="fa fa-floppy-o"></span>
+                            @Resources.Language.ButtonSave
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+}
+<!-- end footer -->
+
+@section Modals
+{
+    <form id="FormQuestion">
+        <div class="uif-modal" id="ModalPregunta">
+            <div class="uif-modalbody">
+                @Html.Partial("SearchQuestion")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+                <button type="button" id="" class="btn btn-primary addQuestion">@Resources.Language.ButtonAccept</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="FormAnswer">
+        <div class="uif-modal" id="ModalRespuesta">
+            <div class="uif-modalbody">
+                @Html.Partial("SearchAnswer")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+                <button type="button" class="btn btn-primary addAnswer" onclick="return false">@Resources.Language.ButtonAccept</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="FormViewScript">
+        <div class="uif-modal" id="ModalViewScript">
+            <div class="uif-modalbody">
+                @Html.Partial("ViewScript")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="FormExecuteScript">
+        <div class="uif-modal" id="ModalExecuteScript">
+            <div class="uif-modalbody">
+                @Html.Partial("ExecuteScript")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+                <button type="button" class="btn btn-primary" onclick="return false" id="btnRecordScrip">@Resources.Language.ButtonSave</button>
+            </div>
+        </div>
+    </form>
+}
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Scripts")
+}

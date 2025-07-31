@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+@*Fields ListView*@
+<script id="advSearchTemplate" type="text/template">
+    <div>
+        <div>
+            @Resources.Language.LabelDeductible: <strong>
+                {{DeductValue}}  {{DeductibleUnit.Description}}  {{DeductibleSubject.Description}}  , Mínimo  {{MinDeductValue}}
+                {{MinDeductibleUnit.Description}}  {{MinDeductibleSubject.Description}} ({{Id}} )
+            </strong>
+        </div>
+        <div>
+            @Resources.Language.LabelPrefixCommercial: <strong>{{LineBusiness.Description}}</strong>
+        </div>
+        <div>
+            @Resources.Language.LabelCurrency: <strong>{{Currency.Description}}</strong>
+        </div>
+    </div>
+</script>
+
+@*Formulario Principal*@
+<form class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelPrefixCd</label>
+            <select class="uif-select form-control" id="selectLineBusinessAdv" data-id="Id" data-name="Description" data-filter="true" data-native="false"></select>
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.Value</label>
+            @Html.TextBox("Value", null, new { id = "inputValueAdv", maxlength = "50" })
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.Unit</label>
+            <select class="uif-select form-control" id="selectUnitAdv"
+                    data-id="Id" data-name="Description" name="UnitId" data-filter="true" data-native="false"></select>
+        </div>
+
+        <div class="uif-col-6 select-right" id="divSelectRight">
+            <label>@Resources.Language.ApplyOn</label>
+            <select class="uif-select form-control " id="selectApplyOnAdv"
+                    style="right: 0px !important;"
+                    data-id="Id" data-name="Description" name="ApplyOnId"
+                    data-filter="true" data-native="false" ></select>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <button class="btn btn-primary-Co width-container" id="btnAdvancedSearchDeduct" type="button">
+                <span aria-hidden="true">@Resources.Language.ButtonSearch</span>
+            </button>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="listViewSearchAdvanced"></div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="pull-right width-save">
+                <button class="btn btn-default" id="btnCancelSearch" data-dismiss="modal" type="button">@Resources.Language.Close</button>
+                <button class="btn btn-primary" id="btnLoad" type="button">@Resources.Language.Accept</button>
+            </div>
+        </div>
+    </div>
+</form>

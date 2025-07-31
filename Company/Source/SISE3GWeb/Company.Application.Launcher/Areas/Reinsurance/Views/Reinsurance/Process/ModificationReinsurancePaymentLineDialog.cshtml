@@ -1,0 +1,55 @@
+﻿@using System.Web.Mvc.Html
+@using Sistran.Core.Framework.UIF.Web.Resources
+﻿@using System.Web.UI.WebControls
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <b>@Global.Description</b>
+            @Html.TextBox("description", "", new { @readonly = "true", @disabled = "disabled" })
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <b>@Global.SmallDescription</b>
+            @Html.TextBox("smallDescription","", new { @readonly = "true", @disabled = "disabled" })
+        </div>
+        <div class="uif-col-6">
+            <b>@Global.CumulusKey</b>
+            @Html.TextBox("cumulusKey","", new { @readonly = "true", @disabled = "disabled" })
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <b>@Global.LineId</b>
+            @Html.TextBox("lineId","", new { @readonly = "true", @disabled = "disabled" })
+        </div>
+        <div class="uif-col-3">
+            <b>@Global.LayerNumber</b>
+            @Html.TextBox("layerNumber","", new { @readonly = "true", @disabled = "disabled" })
+        </div>
+        <div class="uif-col-3">
+            <b>@Global.LevelNumber</b>
+            @Html.TextBox("levelNumber", "",new { @readonly = "true", @disabled = "disabled" })
+        </div>
+        <div class="uif-col-3">
+            <b>@Global.Amount</b>
+            @Html.TextBox("newAmount", "",new
+           {
+               @onkeypress = "return OnlyDecimalNumber(event, this)",
+               @required = ""
+           })
+        </div>
+        @Html.TextBox("sourceAmount", "", new { @hidden = "true" })
+        @Html.TextBox("variance", "", new { @hidden = "true" })
+        @Html.TextBox("tempPaymentReinsSourceId", "",new { @hidden = "true" })
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-9">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+</div>
+
+
+

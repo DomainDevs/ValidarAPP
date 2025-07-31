@@ -1,0 +1,36 @@
+<map version="2.0" type="class" name="BrokerBalance" namespace="Sistran.Core.Application.AccountingServices.EEProvider" file-version="1.0" description="BROKER_BALANCE_ENTITY">
+	<properties>
+		<property name="BrokerBalanceCode" type="Integer" key="true" description="BROKER_BALANCE_CODE_PROPERTY" nullable="false" autonumber="Identity" />
+		<property name="AgentTypeCode" type="Integer" nullable="true" description="AGENT_TYPE_CODE_PROPERTY" />
+		<property name="AgentId" type="Integer" nullable="true" description="AGENT_ID_PROPERTY" />
+		<property name="BalanceDate" type="DateTime" nullable="true" description="BALANCE_DATE_PROPERTY" />
+		<property name="CurrencyCode" type="Integer" nullable="true" description="CURRENCY_CODE_PROPERTY" />
+		<property name="LastBalanceDate" type="DateTime" nullable="true" description="LAST_BALANCE_DATE_PROPERTY" />
+		<property name="PartialBalanceAmount" type="Decimal" precision="18" scale="2" nullable="true" description="PARTIAL_BALANCE_AMOUNT_PROPERTY" />
+		<property name="PartialBalanceIncomeAmount" type="Decimal" precision="18" scale="2" nullable="true" description="PARTIAL_BALANCE_INCOME_AMOUNT_PROPERTY" />
+		<property name="TaxPartialSum" type="Decimal" precision="18" scale="2" nullable="true" description="TAX_PARTIAL_SUM_PROPERTY" />
+		<property name="TaxPartialSubtraction" type="Decimal" precision="18" scale="2" nullable="true" description="TAX_PARTIAL_SUBTRACTION_PROPERTY" />
+		<property name="TaxSum" type="Decimal" precision="18" scale="2" nullable="true" description="TAX_SUM_PROPERTY" />
+		<property name="TaxSubtraction" type="Decimal" precision="18" scale="2" nullable="true" description="TAX_SUBTRACTION_PROPERTY" />
+		<property name="NumSheet" type="Decimal" precision="18" scale="2" nullable="true" description="NUM_SHEET_PROPERTY" />
+	</properties>
+	<tables>
+		<table name="BROKER_BALANCE" schema="ACC" alias="BROKER_BALANCE" update="true">
+			<columns>
+				<column name="BROKER_BALANCE_CD" type="Int32" property="BrokerBalanceCode" key="true" identity ="true" />
+				<column name="AGENT_TYPE_CD" type="Int32" property="AgentTypeCode" />
+				<column name="AGENT_ID" type="Int32" property="AgentId" />
+				<column name="BALANCE_DATE" type="DateTime" property="BalanceDate" />
+				<column name="CURRENCY_CD" type="Int32" property="CurrencyCode" />
+				<column name="LAST_BALANCE_DATE" type="DateTime" property="LastBalanceDate" />
+				<column name="PARTIAL_BALANCE_AMOUNT" type="Decimal" property="PartialBalanceAmount" size="19" precision="18" scale="2" />
+				<column name="PARTIAL_BALANCE_INCOME_AMOUNT" type="Decimal" property="PartialBalanceIncomeAmount" size="19" precision="18" scale="2" />
+				<column name="TAX_PARTIAL_SUM" type="Decimal" property="TaxPartialSum" size="19" precision="18" scale="2" />
+				<column name="TAX_PARTIAL_SUBTRACTION" type="Decimal" property="TaxPartialSubtraction" size="19" precision="18" scale="2" />
+				<column name="TAX_SUM" type="Decimal" property="TaxSum" size="19" precision="18" scale="2" />
+				<column name="TAX_SUBTRACTION" type="Decimal" property="TaxSubtraction" size="19" precision="18" scale="2" />
+				<column name="NUM_SHEET" type="Decimal" property="NumSheet" size="19" precision="18" scale="2" />
+			</columns>
+		</table>
+	</tables>
+</map>

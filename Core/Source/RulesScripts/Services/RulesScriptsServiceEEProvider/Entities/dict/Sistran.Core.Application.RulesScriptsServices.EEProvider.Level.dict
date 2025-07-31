@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<map version="2.0" type="class" name="Level" namespace="Sistran.Core.Application.RulesScriptsServices.EEProvider" file-version="1.0" description="LEVEL_ENTITY">
+  <properties>
+    <property name="PackageId" type="Integer" key="true" description="PACKAGE_ID_PROPERTY" />
+    <property name="LevelId" type="Integer" key="true" autonumber="40" description="LEVEL_ID_PROPERTY" />
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="LEVELS" schema="PARAM" alias="LEVEL" update="true">
+      <columns>
+        <column name="LEVEL_ID" type="Decimal" property="LevelId" key="true" />
+        <column name="PACKAGE_ID" type="Decimal" property="PackageId" key="true" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="40" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Decimal" value="40" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

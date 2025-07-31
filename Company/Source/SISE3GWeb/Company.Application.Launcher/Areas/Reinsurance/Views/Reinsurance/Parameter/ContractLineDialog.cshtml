@@ -1,0 +1,74 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@*@model Sistran.Core.Application.ReinsuranceServices.Models.Line*@
+
+@model Sistran.Core.Application.ReinsuranceServices.DTOs.LineDTO
+
+<form id="formContractLine" onsubmit="return false" class="form">
+    <div class="uif-modalbody">
+        <div class="uif-row">
+            <div class="uif-col-4">
+                @Global.ContractYear
+                <select class="uif-select form-control" id="selectContractYear"
+                        data-source='@Url.Content("~/Reinsurance/Parameter/GetContractYearContractLine")'
+                        data-id="Id" data-name="Name"
+                        data-selectedid="@Model.ContractLines[0].Contract.Year"></select>
+            </div>
+            <div class="uif-col-4">
+                @Global.ContractType
+                <select class="uif-select form-control" id="selectContractType"
+                        data-source='@Url.Content("~/Reinsurance/Parameter/GetContractTypeEnabled")'
+                        data-id="ContractTypeId" data-name="Description"
+                        data-selectedid="@Model.ContractLines[0].Contract.ContractType.ContractTypeId"></select>
+            </div>
+            <div class="uif-col-4">
+            </div>
+        </div>
+
+        <div class="active" id="tabSingle">
+            <table class="uif-table" id="tableContract" data-title="@Global.Contracts">
+                <thead>
+                    <tr>
+                        <th data-property="ContractId" data-visible="false">@Global.Id</th>
+                        <th data-property="Description">@Global.Description</th>
+                        <th data-property="Year" data-visible="false">@Global.Year</th>
+                        <th data-property="Currency.Description">@Global.Currency</th>
+                        <th data-property="ContractType.ContractFunctionality.ContractFunctionalityId" data-visible="false"></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="uif-row">
+            <div class="uif-col-2">
+                <b>@Global.Priority:</b>
+
+                @Html.Label(@Model.ContractLines[0].Priority.ToString())
+                @Html.HiddenFor(model => model.ContractLines[0].Priority, new { id = "Priority" })
+                @Html.HiddenFor(model => model.ContractLines[0].ContractLineId, new { id = "ContractLineId" })
+                @Html.HiddenFor(model => model.LineId, new { id = "LineDialogId" })
+                @Html.HiddenFor(model => model.ContractLines[0].Contract.ContractId, new { id = "ContractId" })
+                @Html.HiddenFor(model => model.ContractLines[0].Contract.Year, new { id = "ContractYear" })
+                @Html.HiddenFor(model => model.ContractLines[0].Contract.ContractType.ContractTypeId, new { id = "ContractTypeId" })
+
+            </div>
+            <div class="uif-col-10">
+            </div>
+        </div>
+        <div class="uif-alert" id="msgNoEditContract">
+
+        </div>
+        <div class="uif-alert" id="msgSelectOneContract">
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0363") || Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0365"))
+        {
+            <button type="submit" class="btn btn-primary" id="btnSaveContractLine">@Global.Save</button>
+        }
+
+    </div>
+</form>

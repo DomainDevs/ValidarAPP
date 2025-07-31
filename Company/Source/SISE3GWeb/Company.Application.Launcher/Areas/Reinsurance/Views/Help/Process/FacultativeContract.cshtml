@@ -1,0 +1,117 @@
+﻿@*@{
+    Layout = "~/Views/Shared/_UIFLayout-r2.cshtml";
+}*@
+ <div id="endorsement" class="uif-row">
+    <div class="uif-col-9">
+    <h2>Contrato Facultativo</h2>
+    <p>
+        La sección de Contrato Facultativo consta de una cabcera de tres campos los mismo que deben 
+        ser ingresados, para poder lanzar el proceso en sí del facultativo, estos campos son :
+    </p>
+    <p>
+        Descripción:  un texto con identificativo al contrato 
+        % Participación:  un valor comprendido entre 1 y 100 ,
+        % Prima: tambièn un valor comprendido entre 1 y 100 
+    </p>
+    <p>
+        Una vez que se ingresen estos porcentajes se calcularán automáticamente los valores
+        tanto de Suma como de Prima :
+    </p>
+    <br/>
+    <div style="text-align: center">
+        <img src='@Url.Content("~/Content/Reinsurance/help/images/Process/Facultative.png")'  >  
+    </div>
+    <br/>
+        <p>
+            El siguiente paso es ejecutar el proceso del facultativo mediante el botón Agregar de la grilla de Compañías,
+        </p>
+    <div style="text-align: center">
+        <img src='@Url.Content("~/Content/Reinsurance/help/images/Process/FacultativeAdd.png")'>      
+    </div>
+    <br/>
+        <p>
+            se despliega un formulario para agregar una nueva Compañía, se ingresan los campos solicitados :
+        </p>
+        <ol>
+            <li>
+                <p>
+                    Broker (Intermediario/Agente): es un campo autocomplete y hace referencia al intermediario del contrato facultativo, es un campo no obligatorio de ingresar
+                </p>
+            </li>
+            <li>
+                <p>
+                    Compañía Reaseguradora: es un campo autocomplete y hace referencia a la compañía que va a tomar el rol de reaseguradora y es un campo obligatorio.   
+                </p>
+            </li>
+            <li>
+                <p>
+                    % Participación: es un valor comprendido entre 1 y 100.
+                </p> 
+            </li>
+            <li>
+                <p>
+                    Importe de Participación: es un campo solo de lectura y el sistema lo calcula automáticamente 
+                </p>
+            </li>
+            <li>
+                <p>
+                    % Prima: es un valor comprendido entre 1 y 100 
+                </p>
+            </li>
+            <li>
+                <p>
+                    Importe de Prima: es un campo solo de lectura y el sistema lo calcula automáticamente .
+                </p>
+            </li>
+            <li>
+                <p>
+                    % Comisión: hace referencia a  la comisión que tendrá la compañía reaseguradora y es un valor comprendido entre 1 y 100.
+                </p>
+            </li>
+        </ol>
+        <p>
+        Una vez completado el formulario presionar el botón Guardar y el nuevo registro se añadirá en la 
+        grilla como se muestra a continuación :
+        </p>
+    <br/>
+    <div style="text-align: center">
+        <img src='@Url.Content("~/Content/Reinsurance/help/images/Process/CompanyGrid.png")'  >      
+    </div>
+    <br/>
+    <p>
+        Para poder agregar una nueva Compañía, los porcentajes tanto de Prima como de Participación deberían ser menores que el 100% 
+        caso contrario el sistema emitirá la alerta respectiva. Esta validación sucede en el momento de intentar guardar el formulario
+    </p>  
+    <br/>
+    <p>
+        Para poder editar una Compañía de contrato facultativo, seleccione el registro deseado y presione
+        el botón de Edición, se mostrará la misma pantalla para agregar, con la diferencia de que ya trae
+        cargados los campos propios del registro como se muestra a continuación:
+    </p>
+    <br/>
+    <div style="text-align: center">
+        <img src='@Url.Content("~/Content/Reinsurance/help/images/Process/FacultativeUpdate.png")' >      
+    </div>
+    <br/>
+    <p>
+        modificar los campos deseados al igual que cuando se está creando un nuevo registro,
+        presionar el botón Grabar y se refresca la grilla de Compañías con el registro modificado,
+        como se muestra a continuación:
+    </p>
+    <br/>
+        <div style="text-align: center">
+            <img src='@Url.Content("~/Content/Reinsurance/help/images/Process/FacultativeGridUpdate.png")' >      
+        </div>
+    <br/>
+        <p>
+            Como último paso presionamos el botón Grabar Reaseguro, si aceptamos la confirmación del diálogo
+            el reaseguro se guarda en las tablas definitivas y el sistema muestra el siguiente mensaje de confirmación 
+            con el Id generado
+        </p>
+    <br/>
+        <div style="text-align: center">
+            <img src='@Url.Content("~/Content/Reinsurance/help/images/Process/SaveReinsuranceAlert.png")' >      
+        </div>
+    <br/>
+ </div>
+</div>

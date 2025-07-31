@@ -1,0 +1,26 @@
+<div class="container">
+  <sise-tabs>
+    <sise-tab title="Intermediarios">
+      	<div class="section rows primary">
+      	  <table class="table">
+      		<tr>
+      		  <th style="text-align: center">Tipo Agente</th>
+      		  <th style="text-align: center">Código</th>
+      		  <th style="text-align: center">Agente</th>
+      		  <th style="text-align: center">% Partic.</th>
+      		  <th style="text-align: center">Comision</th>
+      		</tr>
+      		{{#each agents}}
+      		  <tr class="client__row" data-agentid={{AGENT_ID}} style="cursor:pointer;">
+      			<td>{{AGENT_TYPE}}</td>
+      			<td style="text-align: left">{{AGENT_CD}}</td>
+      			<td style="text-align: left">{{AGENT_NAME}}</td>
+      			<td style="text-align: right">{{formatNumber AGENT_PART_PCT minimumFractionDigits="2" maximumFractionDigits="3"}}</td>
+      			<td style="text-align: right">{{formatNumber COMISSION_AGENT minimumFractionDigits="2" maximumFractionDigits="5"}}</td>
+      		  <tr>
+      		{{/each}}
+      	  </table>
+      	</div>
+      </sise-tab>
+  </sise-tabs>
+</div>

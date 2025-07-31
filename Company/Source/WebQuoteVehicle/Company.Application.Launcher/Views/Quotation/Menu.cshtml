@@ -1,0 +1,344 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Models.QuotationModelsView
+
+@section Title{
+    <div class="uif-row main-title">
+        <div class="uif-col-6">
+            <div id="globalTitle"></div>
+        </div>
+        <div class="uif-col-3">
+            <div class="date important col-xs-12">
+                <i class="fa fa-calendar"></i>@Resources.Language.QuotationDate <span id="inputIssueDate"> </span>
+            </div>
+        </div>
+        <div class="uif-col-3 even">
+            @Html.TextBoxFor(model => model.QuotationId, new { id = "inputQuotationId", @maxlength = "10", @class = "uif-input-search", placeholder = @Resources.Language.QuotationNumberSearch })
+        </div>
+    </div>
+}
+
+@section toolbar
+{
+    <footer>
+        <div>
+            <span id="panelGetQuotation">
+                <button class="btn btn-default" id="btnDownloadPDF">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                    <span class="text">@Resources.Language.LabelDownloadPDF</span>
+                </button>
+                <button type="button" class="btn btn-default" id="btnSendToEmail">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <span class="text">@Resources.Language.LabelSendToEmail</span>
+                </button>
+            </span>
+            <button class="btn btn-primary" id="btnNewQuotation">
+                <i class="fa fa-file" aria-hidden="true"></i>
+                <span class="text">@Resources.Language.LabelNewQuotation</span>
+            </button>
+        </div>
+    </footer>
+}
+
+<script id="coverageTemplate" type="text/template">
+    <div>
+        <label class="wrap"><strong>{{Description}}</strong></label>
+    </div>
+    <div>
+        <label class="wrap">@Resources.Language.LabelPremium</label>:
+        <strong class="warning">{{PremiumAmount}}</strong>
+    </div>
+    <div>
+        <label class="wrap">{{DeductibleDescription}}</label>
+    </div>
+</script>
+
+<div class="uif-alert" id="alert"></div>
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formQuotation" autocomplete="off" class="form without-space">
+    @Html.HiddenFor(model => model.Title, new { id = "hiddenTitle" })
+    @Html.HiddenFor(model => model.Id, new { id = "hiddenId" })
+    @Html.HiddenFor(model => model.TemporalId, new { id = "hiddenTemporalId" })
+    @Html.HiddenFor(model => model.QuotationVersion, new { id = "hiddenQuotationVersion" })
+    @Html.HiddenFor(model => model.CustomerId, new { id = "hiddenCustomerId" })
+    @Html.HiddenFor(model => model.CustomerType, new { id = "hiddenCustomerType" })
+    @Html.HiddenFor(model => model.UrlPDF, new { id = "hiddenUrlPDF" })
+    <div id="modalUnderwriting">
+        <div class="uif-row">
+            <div class="uif-col-7">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <h5><strong>@Resources.Language.TitleVehicleData</strong></h5>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.LabelPlate</label>
+                        @Html.TextBoxFor(model => model.Plate, new { id = "inputPlate", @maxlength = "15" })
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelFasecoldaCode</label>
+                        @Html.TextBoxFor(model => model.FasecoldaCode, new { id = "inputFasecoldaCode", @maxlength = "8", @class = "rightAlign" })
+                    </div>
+                    <div class="uif-col-4">
+                        <div class="without-label">
+                            <input type="button" value="@Resources.Language.LabelSearchVehicle" class="btn btn-default secondary-Colombia" id="btnSearchVehicle" />
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelMake</label>
+                        <select class="uif-select form-control" id="selectMake" data-id="Id" data-name="Description" name="MakeId"
+                                data-val="true" data-val-required="@Resources.Language.ErrorSelectMake"
+                                data-source='@Url.Content("~/Quotation/GetMakes")'></select>
+                        @Html.ValidationMessageFor(model => model.MakeId)
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelModel</label>
+                        <select class="uif-select form-control" id="selectModel" data-id="Id" data-name="Description" name="ModelId"
+                                data-val="true" data-val-required="@Resources.Language.ErrorSelectModel"></select>
+                        @Html.ValidationMessageFor(model => model.ModelId)
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelVersion</label>
+                        <select class="uif-select form-control" id="selectVersion" data-id="Id" data-name="Description" name="VersionId"
+                                data-val="true" data-val-required="@Resources.Language.ErrorSelectVersion"></select>
+                        @Html.ValidationMessageFor(model => model.VersionId)
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelUse</label>
+                        <select class="uif-select form-control" id="selectUse" data-id="Id" data-name="Description" name="Use"
+                                data-val="true" data-val-required="@Resources.Language.ErrorSelectUse"
+                                data-source='@Url.Content("~/Quotation/GetUses")'></select>
+                        @Html.ValidationMessageFor(model => model.Use)
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelType</label>
+                        <select class="uif-select form-control" id="selectType" data-id="Id" data-name="Description" name="Type"
+                                data-val="true" data-val-required="@Resources.Language.ErrorSelectType"></select>
+                        @Html.ValidationMessageFor(model => model.Type)
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelYear</label>
+                        <select class="uif-select form-control" id="selectYear" data-id="Description" data-name="Description" name="Year"
+                                data-val="true" data-val-required="@Resources.Language.ErrorSelectYear"></select>
+                        @Html.ValidationMessageFor(model => model.Year)
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelInsuredAmount</label>
+                        @Html.TextBoxFor(model => model.InsuredAmount, new { id = "inputInsuredAmount", @maxlength = "19", @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.InsuredAmount)
+                    </div>
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.LabelAmountAccesories</label>
+                        @Html.TextBoxFor(model => model.AmountAccesories, new { id = "inputAmountAccesories", @maxlength = "19", @class = "rightAlign" })
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelRatingZone</label>
+                        <select class="uif-select form-control" id="selectRatingZone" data-id="Id" data-name="Description" name="RatingZone"
+                                data-val="true" data-val-required="@Resources.Language.ErrorSelectRatingZone"
+                                data-source='@Url.Content("~/Quotation/GetRatingZones")'></select>
+                        @Html.ValidationMessageFor(model => model.RatingZone)
+                    </div>
+
+                    <div class="uif-col-4">
+                        <br />
+                        <input type="checkbox" name="radioReplacementVehicle" id="radioReplacementVehicle" />
+                        <label for="radioReplacementVehicle">@Resources.Language.LabelReplacementVehicle</label>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <h5><strong>@Resources.Language.TitlePersonData</strong></h5>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-2">
+                        <input type="radio" name="radioIndividualType" id="radioIndividualTypePerson" value="1" checked="checked" />
+                        <label for="radioIndividualTypePerson">@Resources.Language.LabelSmallPerson</label>
+                        <br />
+                        <input type="radio" name="radioIndividualType" id="radioIndividualTypeCompany" value="2" />
+                        <label for="radioIndividualTypeCompany">@Resources.Language.LabelSmallCompany</label>
+                    </div>
+                    <div class="uif-col-2">
+                        <label>@Resources.Language.LabelDocument</label>
+                        <select class="uif-select form-control" id="selectDocumentType" data-id="Id" data-name="Description" name="DocumentType"></select>
+                    </div>
+                    <div class="uif-col-3">
+                        <label class="field-required">@Resources.Language.NumberDocument</label>
+                        @Html.TextBoxFor(model => model.Document, new { id = "inputDocument", @maxlength = "14", @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.Document)
+                    </div>
+                    <div class="uif-col-1">
+                        <div class="without-label">
+                            @Html.TextBoxFor(model => model.VerifyDigit, new { id = "inputVerifyDigit", @maxlength = "1", @class = "rightAlign", disabled = "disabled", placeholder = @Resources.Language.VerificationDigit })
+                        </div>
+                    </div>
+                    <div class="uif-col-2">
+                        <div class="without-label">
+                            <input type="button" value="@Resources.Language.LabelSearchCustomer" class="btn btn-default secondary-Colombia" id="btnSearchCustomer" />
+                        </div>
+                    </div>
+                </div>
+                <div class="panelPerson">
+                    <div class="uif-row">
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.LabelNames</label>
+                            @Html.TextBoxFor(model => model.Names, new { id = "inputNames", @maxlength = "30" })
+                            @Html.ValidationMessageFor(model => model.Names)
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.LabelSurname</label>
+                            @Html.TextBoxFor(model => model.Surname, new { id = "inputSurname", @maxlength = "20" })
+                            @Html.ValidationMessageFor(model => model.Surname)
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.LabelSecondSurname</label>
+                            @Html.TextBoxFor(model => model.SecondSurname, new { id = "inputSecondSurname", @maxlength = "20" })
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-4">
+                            <input type="radio" name="radioGender" id="radioGenderFemale" value="F" checked="checked" />
+                            <label for="radioGenderFemale">@Resources.Language.LabelFemale</label>
+                            <br />
+                            <input type="radio" name="radioGender" id="radioGenderMale" value="M" />
+                            <label for="radioGenderMale">@Resources.Language.LabelMale</label>
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.LabelBirthDate</label>
+                            @Html.TextBoxFor(model => model.BirthDate, new { id = "inputBirthDate", @class = "uif-datepicker" })
+                            @Html.ValidationMessageFor(model => model.BirthDate)
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.LabelAddress</label>
+                            @Html.TextBoxFor(model => model.Address, new { id = "inputPersonAddress", @maxlength = "180" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panelCompany">
+                    <div class="uif-row">
+                        <div class="uif-col-8">
+                            <label class="field-required">@Resources.Language.LabelTradeName</label>
+                            @Html.TextBoxFor(model => model.TradeName, new { id = "inputTradeName", @maxlength = "120" })
+                            @Html.ValidationMessageFor(model => model.TradeName)
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.LabelAddress</label>
+                            @Html.TextBoxFor(model => model.Address, new { id = "inputCompanyAddress", @maxlength = "180" })
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-4 panelPerson">
+                        <label>@Resources.Language.LabelPhone</label>
+                        @Html.TextBoxFor(model => model.Phone, new { id = "inputPersonPhone", @maxlength = "10", @class = "rightAlign" })
+                    </div>
+                    <div class="uif-col-4 panelCompany">
+                        <label>@Resources.Language.LabelPhone</label>
+                        @Html.TextBoxFor(model => model.Phone, new { id = "inputCompanyPhone", @maxlength = "10", @class = "rightAlign" })
+                    </div>
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.LabelEmail</label>
+                        @Html.TextBoxFor(model => model.Email, new { id = "inputEmail", @maxlength = "60" })
+                    </div>
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.LabelDiscount</label>
+                        <select class="uif-select form-control" id="selectDiscount" data-id="ListValueCode" data-name="ListValue" name="Discount"
+                                data-source='@Url.Content("~/Quotation/GetDiscounts")'></select>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelProduct</label>
+                        <select class="uif-select form-control" id="selectProduct" data-id="Id" data-name="Description" name="Product"
+                                data-val="true" data-val-required="@Resources.Language.ErrorSelectProduct"
+                                data-source='@Url.Content("~/Quotation/GetProducts")'></select>
+                        @Html.ValidationMessageFor(model => model.Product)
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">@Resources.Language.LabelGroupCoverages</label>
+                        <select class="uif-select form-control" id="selectGroupCoverage" data-id="Id" data-name="Description" name="GroupCoverage"
+                                data-val="true" data-val-required="@Resources.Language.ErrorSelectGroupCoverage"></select>
+                        @Html.ValidationMessageFor(model => model.GroupCoverage)
+                    </div>
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.LabelLimitRC</label>
+                        <select class="uif-select form-control" id="selectLimitRC" data-id="Id" data-name="Description" name="LimitRC"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="uif-col-5 fit-col-secondary">
+                <div class="main-container">
+                    <div id="listCoverages" class="uif-listview"></div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-row lineDividing">
+            <div class="uif-col-7">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary btn-calculate" id="btnQuote">
+                        <div>
+                            <i class="fa fa-calculator"></i>
+                            <div>
+                                @Resources.Language.LabelQuote
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="uif-col-5">
+                <div id="panelSummary">
+
+                    <div class="uif-summary">
+                        <div class="items">
+                            <div class="item">
+                                <div>
+                                    <div>@Resources.Language.LabelPremium</div>
+                                    <div id="labelPremium">0</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div>
+                                    <div>@Resources.Language.LabelTax</div>
+                                    <div id="labelTax">0</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div>
+                                    <div>@Resources.Language.LabelExpenses</div>
+                                    <div id="labelExpenses">0</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div>
+                                    <div>@Resources.Language.LabelTotal</div>
+                                    <div id="labelTotal">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/Quotation/Vehicle.js")"></script>
+    <script>
+        $.ajaxSetup({ async: false });
+    </script>
+}

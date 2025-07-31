@@ -1,0 +1,18 @@
+<map version="2.0" type="class" name="AccountingRule" namespace="Sistran.Core.Application.GeneralLedger" file-version="1.0" description="ACCOUNTING_RULE_ENTITY">
+  <properties>
+    <property name="AccountingRuleId" type="Integer" key="true" description="ACCOUNTING_RULE_ID_PROPERTY" nullable = "false" autonumber="Identity"/>
+    <property name="ModuleCode" type="Decimal" precision="4" scale="2" nullable="true" description="MODULE_CODE_PROPERTY" />
+    <property name="Description" type="String" size="200" nullable="true" description="DESCRIPTION_PROPERTY" />
+    <property name="Observations" type="String" size="200" nullable="true" description="OBSERVATIONS_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="ACCOUNTING_RULE" schema="GL" alias="ACCOUNTING_RULE" update="true">
+      <columns>
+        <column name="ACCOUNTING_RULE_ID" type="Int32" property="AccountingRuleId" key="true" identity ="true"/>
+        <column name="MODULE_CD" type="Decimal" property="ModuleCode" size="19" precision="4" scale="2" />
+        <column name="DESCRIPTION" type="String" property="Description" size="200" />
+        <column name="OBSERVATIONS" type="String" property="Observations" size="200" />
+      </columns>
+    </table>
+  </tables>
+</map>

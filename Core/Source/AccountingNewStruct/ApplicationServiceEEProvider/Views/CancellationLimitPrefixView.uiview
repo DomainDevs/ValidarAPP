@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CancellationLimitPrefixView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CancellationLimitId">
+          <Column table-alias="CancellationLimit" name="CancellationLimitId" />
+        </SelectValue>
+        <SelectValue alias="PrefixCode">
+          <Column table-alias="CancellationLimit" name="PrefixCode" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="Prefix" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CancellationLimitDays">
+          <Column table-alias="CancellationLimit" name="CancellationLimitDays" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CancellationLimit, Core.Accounting.Entities" alias="CancellationLimit" />
+          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Prefix, Core.Common.Entities" alias="Prefix" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Prefix" name="PrefixCode" />
+              <Column table-alias="CancellationLimit" name="PrefixCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

@@ -1,0 +1,40 @@
+<map version="2.0" type="class" name="AccountingReclassification" namespace="Sistran.Core.Application.GeneralLedgerServices.EEProvider" file-version="1.0" description="ACCOUNTING_RECLASSIFICATION_ENTITY">
+  <properties>
+    <property name="AccountingReclassificationId" type="Integer" key="true" description="ACCOUNTING_RECLASSIFICATION_ID_PROPERTY" nullable ="false" autonumber="Identity" />
+    <property name="ProcessYear" type="Integer" description="PROCESS_YEAR_PROPERTY" />
+    <property name="ProcessMonth" type="Integer" description="PROCESS_MONTH_PROPERTY" />
+    <property name="BranchCode" type="Integer" description="BRANCH_CODE_PROPERTY" />
+    <property name="AccountingNature" type="Integer" description="ACCOUNTING_NATURE_PROPERTY" />
+    <property name="CurrencyCode" type="Integer" description="CURRENCY_CODE_PROPERTY" />
+    <property name="IncomeAmount" type="Decimal" precision="18" scale="2" description="INCOME_AMOUNT_PROPERTY" />
+    <property name="Amount" type="Decimal" precision="18" scale="2" description="AMOUNT_PROPERTY" />
+    <property name="ExchangeRate" type="Decimal" precision="12" scale="6" description="EXCHANGE_RATE_PROPERTY" />
+    <property name="AccountingAccountId" type="Integer" nullable="true" description="ACCOUNTING_ACCOUNT_ID_PROPERTY" />
+    <property name="SourceAccountingAccountId" type="Integer" nullable="true" description="SOURCE_ACCOUNTING_ACCOUNT_ID_PROPERTY" />
+    <property name="AnalysisCode" type="Integer" nullable="true" description="ANALYSIS_CODE_PROPERTY" />
+    <property name="AnalysisConceptCode" type="Integer" nullable="true" description="ANALYSIS_CONCEPT_CODE_PROPERTY" />
+    <property name="ConceptKey" type="String" size="50" nullable="true" description="CONCEPT_KEY_PROPERTY" />
+    <property name="CostCenterCode" type="Integer" nullable="true" description="COST_CENTER_CODE_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="ACCOUNTING_RECLASSIFICATION" schema="GL" alias="ACCOUNTING_RECLASSIFICATION" update="true">
+      <columns>
+        <column name="ACCOUNTING_RECLASSIFICATION_ID" type="Int32" property="AccountingReclassificationId" key="true" identity ="true" />
+        <column name="PROCESS_YEAR" type="Int32" property="ProcessYear" allowNull="false" />
+        <column name="PROCESS_MONTH" type="Int32" property="ProcessMonth" allowNull="false" />
+        <column name="BRANCH_CD" type="Int32" property="BranchCode" allowNull="false" />
+        <column name="ACCOUNTING_NATURE" type="Int32" property="AccountingNature" allowNull="false" />
+        <column name="CURRENCY_CD" type="Int32" property="CurrencyCode" allowNull="false" />
+        <column name="INCOME_AMOUNT" type="Decimal" property="IncomeAmount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="AMOUNT" type="Decimal" property="Amount" allowNull="false" size="19" precision="18" scale="2" />
+        <column name="EXCHANGE_RATE" type="Decimal" property="ExchangeRate" allowNull="false" size="19" precision="12" scale="6" />
+        <column name="ACCOUNTING_ACCOUNT_ID" type="Int32" property="AccountingAccountId" />
+        <column name="SOURCE_ACCOUNTING_ACCOUNT_ID" type="Int32" property="SourceAccountingAccountId" />
+        <column name="ANALYSIS_CD" type="Int32" property="AnalysisCode" />
+        <column name="ANALYSIS_CONCEPT_CD" type="Int32" property="AnalysisConceptCode" />
+        <column name="CONCEPT_KEY" type="String" property="ConceptKey" size="50" />
+        <column name="COST_CENTER_CD" type="Int32" property="CostCenterCode" />
+      </columns>
+    </table>
+  </tables>
+</map>

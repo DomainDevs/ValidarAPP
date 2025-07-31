@@ -1,0 +1,76 @@
+﻿<form id="formPaymentPlan" class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelPaymentPlan</label>
+            <select class="uif-select form-control" id="selectPaymentPlan" data-native="false" data-id="Id" data-name="Description"></select>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="uif-col-12">
+            <ul class="nav nav-tabs uif-tab-pc" id="tabsAgent">
+                <li class="active" id="tabPayment" >
+                    <a href="#tabAgent" id="linkPaymentPlan" data-toggle="tab" class="" aria-expanded="true">@Resources.Language.QuantityQuota</a>
+                </li>
+                <li class="" id="tabPremiumFinance" >
+                    <a href="#tabAgency" id="linkPayment" data-toggle="tab"  class="" aria-expanded="false">@Resources.Language.InformationPay</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tabContentPayment" class="tab-pane active">
+                    <div class="uif-col-12">
+                        <div>
+                            <div class="uif-row">
+                                <div class="uif-col-12">
+                                    <div class="row">
+                                        <div class="uif-col-12">
+                                            <div class="active">
+                                                <table class="uif-table" data-title="@Resources.Language.LabelQuotas" data-selectiontype="none" id="tableQuotas" data-filter="false" data-paginate="true">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-property="Number">@Resources.Language.LabelNro</th>
+                                                            <th data-property="Detail">@Resources.Language.LabelDetailPayment</th>
+                                                            <th data-property="ExpirationDate" data-visible="false"></th>
+                                                            <th data-property="Amount" data-visible="false"></th>
+                                                            <th data-property="Percentage" data-visible="false"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="tabContentFinance" class="tab-pane">
+                    @Html.Partial("~/Areas/Underwriting/Views/Underwriting/Promissory.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.PolicyModelsView())
+                </div>
+            </div>
+
+            <div class="uif-col-12">
+                <div class="uif-summary">
+                    <div class="items">
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.Total</div>
+                                <div id="Total">0</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div>@Resources.Language.Balance</div>
+                                <div id="Saldo">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,62 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Massive.Models.AgentViewModel
+<form id="formAgents" class="form modal-Colombia">
+   <script id="agencyTemplate" type="text/template">
+        <div><strong>{{Agency.Agent.FullName}} </strong></div>
+        <div><strong id="participation-{{Agency.Agent.IndividualId}}">{{Agency.Participation}}% </strong></div>
+    </script>
+    @Html.HiddenFor(model => model.IsPrincipal, new { id="hiddenIsPrincipal" })
+    @Html.HiddenFor(model => model.LineBusinessId, new { id="hiddenLineBusinessId" })
+    @Html.HiddenFor(model => model.SubLineBusinessId, new { id="hiddenSubLineBusinessId" })
+
+    <div class="row">
+        <div class="uif-col-6">
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label>@Resources.Language.LabelAgent</label>
+                        @Html.TextBoxFor(model => model.AgentName, new { id = "inputAgentsAgent", @class = "uif-input-search", placeholder=@Resources.Language.PlaceHolderKeyName  })
+                        @Html.ValidationMessageFor(model => model.AgentName)
+                    </div>                    
+                </div>
+                <div class="row">         
+                    <div class="uif-col-8">
+                        <label>@Resources.Language.LabelAgentAgency</label>
+                        <select class="uif-select form-control" id="selectAgentsAgency" data-id="Id" data-name="FullName" name="AgencyId"
+                            data-val-required="@Resources.Language.ErrorDocumentControlAgency" data-val="true">
+                        </select>
+                        @Html.ValidationMessageFor(model => model.AgencyId)                      
+                    </div>           
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.LabelParticipation</label>
+                        @Html.TextBoxFor(model => model.Participation, new { id = "inputAgentsParticipation", @class = "rightAlign" })
+                        @Html.ValidationMessageFor(model => model.Participation)    
+                    </div>
+                </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listAgencies" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnAgentsCancel">@Resources.Language.NewForm</button>
+                <button type="button" class="btn btn-primary" id="btnAgentsAccept">@Resources.Language.AddForm</button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                    <div class="item">
+                        <div>
+                            <div>
+                                @Resources.Language.LabelTotalParticipation
+                            </div>
+                            <div id="lblAgentsTotalParticipation">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</form>

@@ -1,0 +1,73 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+<div id="SearchReversion">
+    <div class="uif-row">
+        <div class="uif-col-5">
+            <label class="control-label">@Global.Branch</label>
+            <br />
+            <select class="uif-select form-control" id="BranchRevSearch" data-id="Id" data-name="Description"></select>
+        </div>
+        <div class="uif-col-7">
+            <label class="control-label">@Global.Prefix</label>
+            <br />
+            <select class="uif-select form-control" id="PrefixRevSearch" data-id="Id" data-name="Description"></select>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.PolicyNumber</label>
+            <input class="uif-autocomplete" type="text" data-displaykey="Id" data-minLenght="2"
+                   maxlength="30" placeholder="@Global.Policies" id="PolicyRevNumber"
+                   data-source="@Url.Action("GetPoliciesByQuery", "ReverseApplicationPremium", new { Area = "Accounting" })" name="PolicyRevNumber" data_val="true" data_val_required=@Global.RequiredField />
+        </div>
+        <div class="uif-col-3">
+            <label class="control-label">@Global.Endorsement</label>
+            <br />
+            <select class="uif-select form-control" id="searchRevEndorsementNumber" data-id="Id" data-name="DocumentNum"
+                    data-val-required='@Global.RequiredField'
+                    data-source="null"
+                    data-native="true"
+                    data-val="true" name="searchRevEndorsementNumber"></select>
+        </div>
+        <div class="uif-col-3">
+            <div class="without-label">
+                <button type="button" name="name" id="SearchPoliciesReversionButton" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="ApplicationPremiumTable"
+               data-edit="false" data-delete="false"
+               data-filter="false"
+               data-paginate="true"
+               data-title="@Resources.Language.PremiumApplication"
+               data-serverside="false">
+            <thead>
+                <tr>
+                    <th data-visible="false" data-property="Id">@Global.Id</th>
+                    <th data-visible="false" data-property="PayerId">@Global.Id</th>                    
+                    <th data-property="TechnicalTransaction">@Global.Transaction</th>
+                    <th data-property="Number">@Global.Number</th>
+                    <th data-property="AccountingDate">@Global.AccountingDate</th>
+                    <th data-property="LocalAmount">@Global.Amount</th>
+                    <th data-property="LocalAmountCommis">@Global.DialogCommissionRetainedCommissionGranted</th>
+                    <th data-property="TotalAmount">@Global.TotalAmount</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertReversionView"></div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12 text-right">      
+        <button id="AddPremiumReversionButton" class="btn btn-primary" role="button">
+            <i class="fa fa-search"></i> @Global.Add
+        </button>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<map version="2.0" type="class" name="PaymentVoucherConcept" namespace="Sistran.Core.Application.Claims" file-version="1.0" description="PAYMENT_VOUCHER_CONCEPT_ENTITY">
+  <properties>
+    <property name="PaymentVoucherConceptCode" type="Integer" key="true" description="PAYMENT_VOUCHER_CONCEPT_CODE_PROPERTY" autonumber="Identity" />
+    <property name="PaymentConceptCode" type="Integer" nullable="true" description="PAYMENT_CONCEPT_CODE_PROPERTY" />
+    <property name="PaymentVoucherCode" type="Integer" nullable="true" description="PAYMENT_VOUCHER_CODE_PROPERTY" />
+    <property name="Value" type="Decimal" precision="18" scale="2" nullable="true" description="VALUE_PROPERTY" />
+    <property name="TaxValue" type="Decimal" precision="18" scale="2" nullable="true" description="TAX_VALUE_PROPERTY" />
+    <property name="Retention" type="Decimal" precision="18" scale="2" nullable="true" description="RETENTION_PROPERTY" />
+    <property name="CostCenter" type="Integer" nullable="true" description="COST_CENTER_PROPERTY" />
+  </properties>
+  <tables>
+    <table name="PAYMENT_VOUCHER_CONCEPT" schema="PAYM" alias="PAYMENT_VOUCHER_CONCEPT" update="true">
+      <columns>
+        <column name="PAYMENT_VOUCHER_CONCEPT_CD" type="Int32" property="PaymentVoucherConceptCode" key="true" identity="true" />
+        <column name="PAYMENT_CONCEPT_CD" type="Int32" property="PaymentConceptCode" />
+        <column name="PAYMENT_VOUCHER_CD" type="Int32" property="PaymentVoucherCode" />
+        <column name="VALUE" type="Decimal" property="Value" size="19" precision="18" scale="2" />
+        <column name="TAX_VALUE" type="Decimal" property="TaxValue" size="19" precision="18" scale="2" />
+        <column name="RETENTION" type="Decimal" property="Retention" size="19" precision="18" scale="2" />
+        <column name="COST_CENTER" type="Int32" property="CostCenter" />
+      </columns>
+    </table>
+  </tables>
+</map>

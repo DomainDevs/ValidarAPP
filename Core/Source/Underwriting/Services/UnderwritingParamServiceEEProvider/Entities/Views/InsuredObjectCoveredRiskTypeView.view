@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="InsuredObjectCoveredRiskTypeView">
+  <collections>    
+	<collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, 
+                Core.Quotation.Entities"></collection>
+    <collection name="LbInsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsObjLineBusiness, 
+                Core.Quotation.Entities"></collection>
+	<collection name="LineBusinessCoveredRiskType" type="Sistran.Core.Application.Common.Entities.LineBusinessCoveredRiskType, 
+                 Core.Common.Entities"></collection>
+	<collection name="CoveredRiskType" type="Sistran.Core.Application.Parameters.Entities.CoveredRiskType, 
+                Core.Parameters.Entities"></collection>    
+  </collections>
+  <relations>
+    <relation source="InsuredObject" destination="LbInsuredObject" name="InsuredObjectLineBusiness" type="Inner">
+      <property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+    </relation>
+    <relation source="LbInsuredObject" destination="LineBusinessCoveredRiskType" name="LineBusinessRiskType" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="LineBusinessCoveredRiskType" destination="CoveredRiskType" name="RiskType" type="Inner">
+      <property left="CoveredRiskTypeCode" type="Equal" right="CoveredRiskTypeCode"></property>
+    </relation>    
+  </relations>
+</view>

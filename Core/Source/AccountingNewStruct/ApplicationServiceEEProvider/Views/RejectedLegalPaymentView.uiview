@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="RejectedLegalPaymentView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PaymentCode">
+          <Column table-alias="RejectedPayment" name="PaymentCode" />
+        </SelectValue>
+        <SelectValue alias="LegalDate">
+          <Column table-alias="LegalPayment" name="LegalDate" />
+        </SelectValue>
+        <SelectValue alias="LegalPaymentCode">
+          <Column table-alias="LegalPayment" name="LegalPaymentCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.RejectedPayment,  Core.Accounting.Entities" alias="RejectedPayment" />
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.LegalPayment,  Core.Accounting.Entities" alias="LegalPayment" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="LegalPayment" name="RejectedPaymentCode" />
+              <Column table-alias="RejectedPayment" name="RejectedPaymentCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

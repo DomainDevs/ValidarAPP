@@ -1,0 +1,94 @@
+﻿@{
+    Layout = null;
+}
+@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.EstimationTypeStatusViewModel
+
+
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.EstimationTypeStatus
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0351"))
+    {
+        <button class="btn btn-primary new" id="btnNew">
+            <span class="" aria-hidden="true">@Resources.Language.New</span>
+        </button>
+    }
+
+</script>
+
+<form id="formEstimationType" autocomplete="off" class="form form-space-adjusted">
+
+    <div class="uif-col-9" fit-col-main id="columnMain">
+        <div class="row">
+            <div class="uif-col-4">
+                <label class="field-required" style="padding-top: 10px;"><b>@Resources.Language.EstimationType</b></label>
+                <select class="uif-select form-control" id="selectEstimationTypes" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="EstimationTypeCode"
+                        data-filter="true" data-native="false" required></select>
+                <span class="text-danger" data-valmsg-for="EstimationTypeCode" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-12">
+                <table id="tableStatuses" class="uif-table"
+                       data-edit="false" data-delete="true" data-add="false" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="Id" data-visible="false">Id</th>
+                            <th data-property="Description">@Resources.Language.Description</th>
+                            <th data-property="InternalStatus.Description">@Resources.Language.InternalCode</th>
+                            <th data-property="Enabled">@Resources.Language.Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="uif-col-3" fit-col-main>
+        <div class="uif-col-12 fit-col-secondary">
+            <div class="uif-right-bar" id="panelButtonsRight">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0347"))
+                {
+                    <ul>
+                        <li><a href="#" id="btnReasons">@Resources.Language.LabelReasons</a></li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="uif-modal" id="modalEstimationTypeStatus">
+    <div class="uif-modalbody">
+        <input type="hidden" id="hdnModalPolicieIndex" />
+        <form class="form" id="formModalEstimationtypeStatus">
+            <div class="uif-row">
+                <div class="uif-col-4">
+                </div>
+                <div class="uif-col-4">
+                    <label id="lblId" name="lblId" hidden></label>
+                    <label class="field-required">@Resources.Language.EstimationTypeStatus</label>
+                    <select class="uif-select form-control" id="selectEstimationTypeStatus" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                            data-id="Id" data-name="Description" name="EstimationTypeStatusCode"
+                            data-filter="true" data-native="false" required></select>
+                    <span class="text-danger" data-valmsg-for="EstimationTypeStatusCode" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-primary" id="btnSendStatus">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalReason">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/EstimationTypeStatus/ModalEstimationTypeStatusReason.cshtml")
+    </div>
+</div>

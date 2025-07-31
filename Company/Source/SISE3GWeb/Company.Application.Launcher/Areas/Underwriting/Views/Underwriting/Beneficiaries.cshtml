@@ -1,0 +1,95 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.BeneficiaryModelsView
+
+<script id="beneficiaryTemplate" type="text/template">
+    <div><strong>{{IdentificationDocument.Number}} {{Name}}</strong></div>
+    <div>{{BeneficiaryTypeDescription}}</div>
+    <div>{{Participation}}%</div>
+</script>
+
+<form id="formBeneficiaries" class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="radio-inline">
+                        <input type="radio" name="chkBeneficiaryRol" value="insured" id="chkBeneficiaryInsured" checked="checked">
+                        @Resources.Language.InsuredName
+                    </label>
+                </div>
+                <div class="uif-col-4">
+                    <label class="radio-inline">
+                        <input type="radio" name="chkBeneficiaryRol" value="holder" id="chkBeneficiaryHolder">
+                        @Resources.Language.LabelHolder
+                    </label>
+                </div>
+                <div class="uif-col-4">
+                    <label class="radio-inline">
+                        <input type="radio" name="chkBeneficiaryRol" value="other" id="chkBeneficiaryOther">
+                        @Resources.Language.LabelOther
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.LabelBeneficiary</label>
+                    <div class="input-with-buttons">
+                        @Html.TextBoxFor(model => model.Name, new { id = "inputBeneficiaryName", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+                        @Html.ValidationMessageFor(model => model.Name)
+                        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0187"))
+                        {
+                            <button type="button" class="btn btn-default secondary-Colombia" id="btnDetailBeneficiary">
+                                @Resources.Language.ButtonDetail
+                            </button>
+                        }
+                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-8">
+                    <label>@Resources.Language.LabelBeneficiaryType</label>
+                    <select class="uif-select form-control" id="selectBeneficiaryType" data-native="false" data-id="Id" data-name="SmallDescription"
+                            name="BeneficiaryType" data-val="true" data-val-required="@Resources.Language.ErrorDocumentType"></select>
+                    @Html.ValidationMessageFor(model => model.BeneficiaryType)
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.LabelParticipation</label>
+                    @Html.TextBoxFor(model => model.Participation, new { id = "inputBeneficiaryParticipation", @class = "rightAlign" })
+                    @Html.ValidationMessageFor(model => model.Participation)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div id="listBeneficiaries" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right ">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0188"))
+                {
+                    <button type="button" class="btn btn-default" id="btnBeneficiaryCancel">
+                        @Resources.Language.NewForm
+                    </button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0189"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnBeneficiaryAccept">
+                        @Resources.Language.AddForm
+                    </button>
+                }
+                </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                    <div class="item">
+                        <div>
+                            <div>@Resources.Language.LabelTotalParticipationBeneficiaries</div>
+                            <div id="labelTotalParticipation"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

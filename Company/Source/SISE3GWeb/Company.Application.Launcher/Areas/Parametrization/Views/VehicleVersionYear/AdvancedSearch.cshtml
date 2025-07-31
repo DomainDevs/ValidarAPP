@@ -1,0 +1,80 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.VehicleVersionYearViewModel
+@{
+    Layout = null;
+}
+
+<script id="searchAdvTemplate" type="text/template">
+    <div>       
+        <div>
+            @Resources.Language.LabelMake: <strong>{{VehicleMakeServiceQueryModel.Description}} ({{VehicleMakeServiceQueryModel.Id}})</strong>
+        </div>
+        <div>
+            @Resources.Language.LabelModel: <strong>{{VehicleModelServiceQueryModel.Description}} ({{VehicleModelServiceQueryModel.Id}})</strong>
+        </div>
+        <div>
+            @Resources.Language.LabelVersion: <strong>{{VehicleVersionServiceQueryModel.Description}} ({{VehicleVersionServiceQueryModel.Id}})</strong>
+        </div>
+        <div>
+            @Resources.Language.LabelYear: <strong>{{Year}} </strong> 
+        </div>
+        <div>
+            @Resources.Language.LabelPrecio: <strong>{{Price}} </strong>
+        </div>
+    </div>
+</script>
+
+<form id="formSearchAdv">
+    <div class="row">
+        <div class="uif-col-12">
+            <h4>@Resources.Language.AdvancedSearch</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelMake</label>
+            <select class="uif-select" data-filter="true" data-native="false" data-val-required="true"
+                    data-val="true" data-id="Id" data-name="Description" id="MakeIdAdv" name="MakeId"></select>
+            @Html.ValidationMessage("MakeId", Resources.Language.FieldRequired)
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelModel</label>
+            <select class="uif-select" data-filter="true" data-native="false" data-val-required="true"
+                    data-val="true" data-id="Id" data-name="Description" id="ModelIdAdv" name="ModelId"></select>
+            @Html.ValidationMessage("ModelId", Resources.Language.FieldRequired)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelVersion</label>
+            <select class="uif-select" data-filter="true" data-native="false" data-val-required="true"
+                    data-val="true" data-id="Id" data-name="Description" id="VersionIdAdv" name="VersionId"></select>
+            @Html.ValidationMessage("VersionId", Resources.Language.FieldRequired)
+        </div>
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelFasecoldaCode</label>
+            @Html.TextBoxFor(model => model.FasecoldaCode, new { @maxlength = 8 })
+            @Html.ValidationMessageFor(model => model.FasecoldaCode)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <button class="btn btn-primary-Co width-container" id="btnSearchAdv" type="button">
+                <span aria-hidden="true">@Resources.Language.ButtonSearch</span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="uif-listview" id="lsvSearchAdvanced"></div>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="uif-col-12">
+        <div class="pull-right width-save">
+            <button class="btn btn-default" id="btnCancelSearchAdv" data-dismiss="modal" type="button">@Resources.Language.Close</button>
+            <button class="btn btn-primary" id="btnAcceptSearchAdv" type="button">@Resources.Language.Accept</button>
+        </div>
+    </div>
+</div>

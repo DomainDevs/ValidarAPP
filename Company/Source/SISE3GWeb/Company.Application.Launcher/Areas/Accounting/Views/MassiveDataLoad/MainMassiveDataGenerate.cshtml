@@ -1,0 +1,110 @@
+﻿@using NPOI.HPSF
+
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @ViewBag.MassiveDataGenerate;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        
+        <li class="active">@Global.Billing</li>
+        <li class="active">@Global.MassiveDataGenerate</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-primary" id="ExportExcelPoliciesButton">
+            <i class="fa fa-check"></i> @Global.ExportToExcel
+        </button>
+    </footer>
+}
+
+<form id="DataGenerateForm" onsubmit=" return false ">
+    <div class="uif-row">
+        <div class="uif-col-8">
+            <label class="control-label">@Global.Branch</label>
+            @Html.DropDownList("DataGenerateBranch", Enumerable.Empty<SelectListItem>(), new
+             {
+                  @class = "uif-select form-control",
+                  data_source = @Url.Content("~/BillSearch/LoadBranch"),
+                  data_id = "Id",
+                  data_name = "Description",
+                  data_selectedid = @ViewBag.BranchDefault,
+                  data_native = "true",
+                  data_val = "true",
+                  data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="DataGenerateBranch" data-valmsg-replace="true">
+            </span>
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.DateFrom</label>
+            @Html.TextBox("DataGenerateDate", "", new
+             {
+                  id = "DataGenerateDate",
+                  @class = "uif-datepicker",
+                  data_mask = "99/99/9999",
+                  data_val = "true",
+                  //data_max_date = @ViewBag.CurrentDate,
+                  data_val_required = @Global.ValidationRequired
+             })
+
+            <span class="text-danger" data-valmsg-for="DataGenerateDate" data-valmsg-replace="true" />
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="form-footer">
+            <button id="DataCancel" class="btn btn-default" role="button">
+                <i class="glyphicon glyphicon-erase"></i> @Global.Clean
+            </button>
+            <button type="submit" id="DataSearch" class="btn btn-primary" role="button" onclick="return false">
+                <i class="fa fa-search"></i> @Global.Search
+            </button>
+        </div>
+    </div>
+</div>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertDataGeneration"></div>
+    </div>
+</div>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="MassiveDataTable" data-exporttocsv="false"
+               data-edit="false" data-delete="false" data-selectiontype="none" data-filter="false" data-paginate="true"
+               data-title="@Global.MassiveDataGeneratedTitle">
+            <thead>
+                <tr>
+                    <th data-visible="false" data-property="PayerId">@Global.PayerId</th>
+                    <th data-property="PolicyNumber">@Global.Policy</th>
+                    <th data-property="EndorsementNumber">@Global.Endorsement</th>
+                    <th data-property="AgentId">@Global.Agent</th>
+                    <th data-property="AgentName">@Global.AgentName</th>
+                    <th data-property="BeneficiaryDocumentNumber">@Global.Beneficiary</th>
+                    <th data-property="BeneficiaryName">@Global.BeneficiaryName</th>
+                    <th data-property="Amount">@Global.Amount</th>
+                    <th data-visible="false" data-property="IssueDate">IssueDate</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainMassiveDataGenerate")
+}
+

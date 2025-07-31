@@ -1,0 +1,121 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.AssistanceTypeModel
+@{
+    Layout = null;
+}
+<script id="AssistanceTemplate" type="text/template">
+    <div>
+        {{#ifCond Status "==" 2}}        
+            <strong class="success">{{Description }}</strong> 
+        {{else ifCond Status "==" 3}}
+            <strong class="warning">{{Description}}</strong> (<strong>{{AssistanceCode}}</strong>)
+        {{else}}
+            <strong>{{Description}}</strong> (<strong>{{AssistanceCode}}</strong>)
+        {{/ifCond}}
+    </div>
+    <div>        
+        Ramo Comercial: <strong>{{PrefixDescription}}</strong>
+    </div>
+    <div>        
+        <strong>{{EnabledDescription}}</strong>
+    </div>
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.TitleAssistanceType
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputAssistanceTypeSearch", @placeholder = @Resources.Language.LabelPlaceHolderSearchAssistanceType })
+        <button type="button" class="btn btn-default" id="btnShowAdvanced"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+<form id="formAssistanceType" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.AssistanceCode</label>
+                    @Html.TextBoxFor(model => model.AssistanceCode, new { id = "inputAssistanceCode", placeholder = @Resources.Language.AssistanceCode })
+                    @Html.ValidationMessageFor(model => model.AssistanceCode)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPrefixType</label>
+                    <select class="uif-select form-control" id="ddlBusinessType" data-id="Id" data-native="false" data-name="Description" name="BusinessType"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial" data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.PrefixCode)
+                </div>
+            </div><div class="row">
+
+                <div class="uif-col-7">
+                    <label class="field-required">@Resources.Language.Description</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", placeholder = @Resources.Language.Description })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <input type="checkbox" id="rdEnabled" />
+                        <label for="rdEnabled">@Resources.Language.Enabled</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-7">
+                    <button class="btn btn-default " id="btnTexts" onclick="return false">@Resources.Language.LabelText</button>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listViewAssistanceType" class="uif-listview"></div>
+        </div>
+    </div>
+
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsModule">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewAssistanceType">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAcceptAssistanceType">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div id="modalTexts" class="uif-modal">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Parametrization/Views/AssistanceType/TextsAssistance.cshtml", new Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.AssistanceTextModel())
+    </div>
+    <div class="uif-modalbuttons width-save" id="btnBottomAddress">
+        <button type="button" class="btn btn-default" id="btnCloseText">@Resources.Language.Close</button>
+        <button type="button" class="btn btn-primary btn-main" id="btnAcceptText">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+@section scripts{
+@Scripts.Render("~/bundle/js/AssistanceType");
+    }

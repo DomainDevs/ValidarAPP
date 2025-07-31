@@ -1,0 +1,41 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<form id="formDailyCash" class="form">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label><b>@Global.Branch</b></label>
+            <input type="text" id="branchName" disabled="disabled" style="background: none" />
+            <input type="hidden" id="branchCode" style="border: none" />
+            <input type="hidden" id="billCode" style="border: none" />
+        </div>
+        <div class="uif-col-4">
+            <label><b>@Global.BalanceCashier</b></label>
+            <input type="text" id="userNick" disabled="disabled" style="background: none" />
+
+        </div>
+        <div class="uif-col-4">
+            <label><b>@Global.Date</b></label>
+            <input type="text" id="currentDate" disabled="disabled" style="background: none" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" id="tblDailyClosure" data-exporttocsv="false" data-edit="false" data-delete="false"
+                   data-source="null" data-filter="false" data-paginate="false" data-selectiontype="none"
+                   data-title="@Global.PaymentType">
+                <thead>
+                    <tr>
+                        <th data-visible="false" data-property="Id">Id</th>
+                        <th data-visible="false" data-property="IdPaymentMethod">IdPaymentMethod</th>
+                        <th data-property="PaymentMethods">@Global.PaymentType</th>
+                        <th data-visible="false" data-property="TotalAdmitted">@Global.BillingTotalAdmitted</th>
+                        <th data-property="TotalReceived">@Global.BillingTotalReceived</th>
+                        <th data-visible="false" data-property="TotalDifference">@Global.BillingTotalDifference</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+
+
+@*Titulo*@
+<script id="title-template" type="text/template">
+    <div class="column column-100">
+         @Resources.Language.LabelFinalBeneficiary
+    </div>
+</script>
+
+<form class="form" id="formFinalBeneficiary">
+    <div>
+        <div class="row">
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.LabelTypeDocument</label>
+                <select class="uif-select form-control" id="selectDocumentTypeFb" data-native="false" data-id="Id" data-name="DescriptionLong" required="required"></select>
+            </div>
+            <div class="uif-col-3">
+                <label class="field-required">@Resources.Language.LabelNumberDocument</label>
+                <input type="text" value="" id="DocumentNumberFb" name="DocumentNumber" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" required="required" class="rightAlign" />
+            </div>
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.LabelName</label>
+                <input type="text" value="" id="nameFinalBeneficiary" name="name" data-displaykey="Description" data-minlenght="3" data-maxlenght="100" required="required" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-8">
+            </div>
+            <div class="uif-col-4">
+                <div class="text-right mb-3">
+                    <button type="button" class="btn btn-default" id="btnFinalBeneficiaryAdd">
+                        <span class="glyphicon glyphicon-plus"></span>  @Resources.Language.Add
+                    </button>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="active">
+                        <table class="uif-table" data-title="@Resources.Language.BeneficiaryList" data-edit="true" data-delete="true" id="tableParticipants" data-filter="false" data-paginate="true">
+                            <thead>
+                                <tr>
+                                    <th data-property="DocumentTypeId">@Resources.Language.LabelTypeDocument</th>
+                                    <th data-property="IdCardNumero">@Resources.Language.LabelNumberDocument</th>
+                                    <th data-property="TradeName">@Resources.Language.LabelName</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+<div class="uif-modalbuttons">
+    <button type="button" class="btn btn-default" id="btnFinalBeneficiaryCancel" data-dismiss="modal">@Resources.Language.ButtonClose</button>
+    <button type="button" class="btn btn-primary" id="btnFinalBeneficiarySave" onclick="return false">@Resources.Language.ButtonSave</button>
+</div>

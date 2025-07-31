@@ -1,0 +1,86 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = Global.AccountingRulePackage;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.CentralAccounting</li>
+        <li>@Global.Parameter</li>
+        <li>@Global.Dynamic</li>
+        <li>@Global.AccountingRulePackage</li>
+    </ol>
+}
+
+@section modals
+{
+    <div class="form">
+        <div class="uif-modal" id="accountingRulePackageModal">
+            <div class="uif-modalbody">
+                <div class="uif-row">
+                    <input type="hidden" id="AccountingRulePackageId" name="AccountingRulePackageId" />
+                    <div class="uif-col-6">
+                        <label>@Global.Description</label>
+                        <input type="text" id="AccountingRulePackageDescription" name="AccountingRulePackageDescription" onblur=" this.value=this.value.toUpperCase(); " />
+                    </div>
+                    <div class="uif-col-6">
+                        <label>@Global.RelatedRules</label>
+                        <select class="uif-multiselect form-control" id="accountingRules" data-source="null" data-id="AccountingRuleId" data-name="AccountingRuleDescription" multiple="multiple" data-all="true"></select>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-6">
+                        <label>@Global.LabelCodeRuleSet</label>
+                        <input type="text" id="rulePackageId" name="rulePackageId" />
+                    </div>
+                </div>
+                <div class="uif-modalbuttons">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelAccountingRulePackage">@Global.Cancel</button>
+                    @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0781"))
+                    {
+                        <button type="submit" class="btn btn-primary" id="addAccountingRulePackage">@Global.Accept</button>
+                    }
+                </div>
+            </div>
+    </div>
+}
+
+<script id="accountingRulePackageTemplate" type="text/template">
+    <span>
+        <strong>@Global.Description:</strong>
+        {{AccountingRulePackageDescription}}
+    </span>
+</script>
+
+<div class="uif-row">
+    <div class="uif-col-4">
+        <label class="control-label">@Global.Module</label>
+        <select class="uif-select form-control required"
+                data-source="@Url.Content("~/GeneralLedger/Base/GetModuleDates")"
+                id="Module" name="Module"
+                data-id="Id" data-name="Description" data-val="true"
+                data-val-required='@Global.RequiredField' data-native="true"></select>
+        <span class="text-danger" data-valmsg-for="Module" data-valmsg-replace="true" />
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="accountingRulePackageAlert"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="uif-col-12">
+        <div class="uif-listview" id="accountingRulePackageView">
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/generalLedger/bundles/AccountingRulePackage")
+}

@@ -1,0 +1,121 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.PaymentMethodViewModel
+@{
+    Layout = null;
+}
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column">
+        @Resources.Language.PaymentMethods
+    </div>
+    <div class="column column-30">
+        @Html.TextBox("inputPaymentMethod", null, new { @class = "uif-input-search", id = "inputPaymentMethod", @placeholder = @Resources.Language.SearchPaymentMethod })
+    </div>
+</script>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+
+
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnCreatePaymentMethod">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+<script type="text/template" id="templatePaymentMethod">
+    {{# ifCond StatusTypeService "==" 2}}
+    <div>@Resources.Language.LabelDescription: <strong class="success">{{Description}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div>@Resources.Language.LabelDescription: <strong class="warning">{{Description}} ({{Id}})</strong></div>
+    {{else ifCond StatusTypeService "==" 4}}
+    <div>@Resources.Language.LabelDescription: <strong class="danger">{{Description}} ({{Id}})</strong></div>
+    {{else}}
+    <div>@Resources.Language.LabelDescription: <strong>{{Description}} ({{Id}})</strong></div>
+    {{/ifCond}}
+    <div>@Resources.Language.LabelSmallDescription: {{SmallDescription}}</div>
+    <div>@Resources.Language.LabelPaymentMethodType: {{PaymentMethodType.Description}}</div>
+</script>
+
+<form class="form without-space" id="formPaymentMethod">
+    
+    <div>
+        <div class="row">
+            <div class="uif-col-6">
+                <br />
+                @Html.HiddenFor(model => model.Id)
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label class="field-required">@Resources.Language.Description</label>
+                        @Html.TextBoxFor(model => model.Description)
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+                <div class="row">
+                    @*<div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelAbbreviation</label>
+                        @Html.TextBoxFor(model => model.TinyDescription)
+                        @Html.ValidationMessageFor(model => model.TinyDescription)
+                    </div>*@
+                    <div class="uif-col-6">
+                        <label class="field-required">@Resources.Language.LabelSmallDescription</label>
+                        @Html.TextBoxFor(model => model.SmallDescription)
+                        @Html.ValidationMessageFor(model => model.SmallDescription)
+                    </div>
+
+                    <div class="uif-col-6">
+                        <label class="field-required">@Html.LabelFor(model => model.PaymentMethodType.Description, htmlAttributes: new { @class = "control-label" })</label>
+                        <select class="uif-select form-control" id="PaymentMethodTypeId_Id" name="PaymentMethodTypeId_Id"
+                                data-source='@Url.Content("~/Parametrization/PaymentMethod/GetPaymentMethodTypes")'
+                                data-id="Id" data-name="Description"
+                                data-val="true"
+                                data-val-required="Campo requerido"
+                                data-filter="true" data-native="false"></select>
+                        <span class="text-danger" data-valmsg-for="PaymentMethodTypeId_Id" data-valmsg-replace="true"></span>
+
+                        @*@Html.HiddenFor(model => model.PaymentMethodType.Id, new { @id = "PaymentMethodTypeId" })
+            @Html.HiddenFor(model => model.PaymentMethodType.Description)*@
+
+                    </div>
+                </div>
+
+
+                </div>
+            <div class="uif-col-6 fit-col-secondary">
+                <div id="listPaymentMethods" class="uif-listview"></div>
+            </div>
+        </div>
+        <div class="row lineDividing">
+            <div class="uif-col-6 center-col-right">
+                <div class="pull-right width-save">
+                    <button type="button" class="btn btn-default" id="btnNewPaymentMethod">
+                        @Resources.Language.NewForm
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnAddPaymentMethod">
+                        @Resources.Language.AddForm
+                    </button>
+                </div>
+            </div>
+            <div class="uif-col-6" id="summaryAgent">
+                <div class="uif-summary">
+                    <div class="items">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PaymentScheduleDistributionView">
+  <collections>
+    <collection name="PaymentSchedule" type="Sistran.Core.Application.Product.Entities.PaymentSchedule, 
+                Core.Product.Entities"></collection>
+    <collection name="PaymentDistribution" type="Sistran.Core.Application.Product.Entities.PaymentDistribution, 
+                Core.Product.Entities"></collection>    
+  <collection name="PaymentDistributionComponent" type="Sistran.Core.Application.Product.Entities.CoPaymentDistributionComponent, 
+                Core.Product.Entities"></collection> 
+  </collections>
+  <relations>
+    <relation source="PaymentSchedule" destination="PaymentDistribution" name="PaymentSchedulePaymentDistribution" type="Left">
+      <property left="PaymentScheduleId" type="Equal" right="PaymentScheduleId"></property>
+    </relation>    
+    <relation source="PaymentDistribution" destination="PaymentDistributionComponent" name="PaymentDistributionPaymentDistributionComponent" type="Left">
+      <property left="PaymentScheduleId" type="Equal" right="PaymentScheduleId"></property>
+      <property left="PaymentNumber" type="Equal" right="PaymentNumber"></property>
+    </relation> 
+  </relations>
+</view>

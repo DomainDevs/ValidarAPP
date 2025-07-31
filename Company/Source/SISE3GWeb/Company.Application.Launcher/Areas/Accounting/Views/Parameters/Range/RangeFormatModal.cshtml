@@ -1,0 +1,54 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.Models.AutomaticDebits.Field
+
+
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Description</label>
+            <br />
+            <input type="text" id="Description" name="Description"
+                   data-val="true" onblur="this.value = this.value.toUpperCase();" data-val-required='@Global.RequiredField' maxlength="50">
+            <span class="text-danger" data-valmsg-for="Description" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6" id="checkDefaultDiv">
+            <br />
+            @*<label id="lblIsDefault">@Global.Default</label>
+                <input type="checkbox" id="checkDefault">*@
+            <span class="glyphicon glyphicon-unchecked" id="checkDefault"></span><input type="checkbox" id="defaultCheck"> @Global.Default
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label id="lblOrden">@Global.Order</label>
+            <br />
+            <input type="text" data-pattern="000" class="uif-mask" id="ColumnNumber" name="ColumnNumber"
+                   data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="ColumnNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label id="lblDiasDesde">@Global.DaysFrom</label>
+            <br />
+            <input type="text" data-pattern="000000" class="uif-mask" id="InitialDay" name="InitialDay"
+                   data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="InitialDay" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label id="lblDiasHasta">@Global.DaysTo</label>
+            <br />
+            <input type="text" data-pattern="000000" class="uif-mask" id="EndDay" name="EndDay"
+                   data-val="true" data-val-required='@Global.RequiredField'>
+            <span class="text-danger" data-valmsg-for="EndDay" data-valmsg-replace="true" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertRange"></div>
+        </div>
+    </div>    
+</div>
+

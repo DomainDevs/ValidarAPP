@@ -1,0 +1,237 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = "CreditCardModal";
+}
+
+<script id="card-display-template" type="text/template">
+    <div>
+        <strong>{{CardTypeName}}</strong> | @Global.CreditCardNumber: {{CardNumber}} | @Global.Amount: {{Amount}} <br>
+        {{CardsName}}
+    </div>
+    <div class="text-right vertical-center">
+        <div class="number">@Global.TotalLocalCurrency: {{LocalAmount}}</div>
+    </div>
+</script>
+
+<form id="addCardForm" onsubmit="return false" class="form">
+    <div class="main-content">
+        <div class="uif-row">
+            <!--left col-->
+            <div class="uif-col-6">
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Currency</label>
+                        @Html.DropDownList("selectCreditCardCurrency", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetCurrencies"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="selectCreditCardCurrency" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.AmountExchange</label>
+                        <br />
+                        @Html.TextBox("CreditCardExchangeRate", "", new
+                         {
+                             @onkeypress = "return OnlyDecimalNumber(event,this)",
+                             style = "text-align: right;",
+                             required = "",
+                             disabled = "disable",
+                             maxlength ="26"
+                         })
+                        <span class="text-danger" data-valmsg-for="CreditCardExchangeRate" data-valmsg-replace="true" />                        
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.Amount</label>
+                        <br />
+                        @Html.TextBox("CreditCardAmount", "", new
+                   {
+                       @onkeypress = "return OnlyDecimalNumber(event,this)",
+                       style = "text-align: right",
+                       data_val = "true",
+                       maxlength = "26",
+                       data_val_required = @Global.RequiredField
+                   })
+                        <span class="text-danger" data-valmsg-for="CreditCardAmount" data-valmsg-replace="true" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.TotalLocalCurrency</label>
+                        <br />
+                        <input type="text" id="CreditCardLocalAmount" disabled="disabled" style="text-align: right" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-12">
+                        <label>@Global.Conduit</label>
+                        <br />
+                        @Html.DropDownList("selectCreditCardType", Enumerable.Empty<SelectListItem>(), new
+                        {
+                            @class = "uif-select form-control",
+                            data_source = @Url.Content("~/Accounting/Common/GetCreditCardTypes"),
+                            data_id = "Id",
+                            data_name = "Description",
+                            data_native = "true",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="selectCreditCardType" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-12">
+                        <label>@Global.IssuingBank</label>
+                        <br />
+                        <input class="uif-autocomplete" type="text" data-source="@Url.Action("GetBanks", "Billing")" data-displaykey="Value" placeholder='@Global.EnterIssuingBank'
+                               id="inputCreditCardIssuingBank" name="inputCreditCardIssuingBank" data-val="true" data-val-required='@Global.RequiredField'>
+                        <span class="text-danger" data-valmsg-for="inputCreditCardIssuingBank" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.CreditCardNumber</label>
+                        <br />
+                        @Html.TextBox("CreditCardNumber", "", new
+                        {
+                            @class = "uif-mask",
+                            data_pattern = "0000000000000000",
+                            maxlength = "16",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="CreditCardNumber" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenCreditCardNumber" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.AuthorizationNumber</label>
+                        <br />
+                        @Html.TextBox("CreditCardAuthorizationNumber", "", new
+                        {
+                            @class = "uif-mask",
+                            data_pattern = "0000000000",
+                            maxlength = "10",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="CreditCardAuthorizationNumber" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-6">
+                        <label>@Global.VoucherNumber</label>
+                        <br />
+                        @Html.TextBox("CreditCardVoucherNumber", "", new
+                        {
+                            @class = "uif-mask",
+                            data_pattern = "000000000000000",
+                            maxlength = "15",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="CreditCardVoucherNumber" data-valmsg-replace="true" />
+                        <input type="hidden" id="HiddenCreditCardVoucherNumber" />
+                    </div>
+                    <div class="uif-col-xs-6">
+                        <label>@Global.TaxBase</label>
+                        <br />
+                        @Html.TextBox("CreditCardTaxBase", "", new
+                        {
+                            @onkeypress = "return OnlyDecimalNumber(event,this)",
+                            style = "text-align: right",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="CreditCardTaxBase" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-12">
+                        <label>@Global.PayCreditCardName</label>
+                        <br />
+                        @Html.TextBox("CreditCardHolderName", "", new
+                        {
+                            maxlength = "40",
+                            style = "text-align: left",
+                            @onblur = "this.value = this.value.toUpperCase();",
+                            data_val = "true",
+                            data_val_required = @Global.RequiredField
+                        })
+                        <span class="text-danger" data-valmsg-for="CreditCardHolderName" data-valmsg-replace="true" />
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-12">
+                        <label>@Global.ExpirationMonthYear</label>
+                        <div class="uif-row">
+                            <div class="uif-col-xs-6">
+                                @Html.DropDownList("selectCreditCardValidThruMonth", Enumerable.Empty<SelectListItem>(), new
+                                {
+                                    @class = "uif-select form-control",
+                                    data_source = @Url.Content("~/Accounting/Common/GetValidMonths"),
+                                    data_id = "Id",
+                                    data_name = "Description",
+                                    data_native = "true",
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                <span class="text-danger" data-valmsg-for="selectCreditCardValidThruMonth" data-valmsg-replace="true" />
+                            </div>
+                            <div class="uif-col-xs-6">
+                                @Html.TextBox("CreditCardValidThruYear", "", new
+                                {
+                                    @class = "uif-mask",
+                                    data_pattern = "0000",
+                                    maxlength = "4",
+                                    style = "text-align: left",
+                                    data_val = "true",
+                                    data_val_required = @Global.RequiredField
+                                })
+                                <span class="text-danger" data-valmsg-for="CreditCardValidThruYear" data-valmsg-replace="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        <div class="uif-col-xs-6">
+                            <span class="glyphicon glyphicon-check" id="checkCreditableCard"></span><input type="checkbox" id="CreditableCardCheck"> @Global.Creditable
+                        </div>
+                    </div>
+                </div>
+                <div class="uif-row">
+                    <div class="uif-col-xs-12">
+                        <div class="uif-alert" id="alertForm"></div>
+                    </div>
+                </div>
+            </div>
+            <!--End left col-->
+            <!--right col-->
+            <div class="uif-col-6">
+                <div class="uif-listview" id="cardsListView">
+                    <div class="footer">
+                        <div class="uif-col-xs-6">
+                            @Global.Total
+                        </div>
+                        <div class="uif-col-xs-6 text-right">
+                            <b id="TotalCard">$ 0.00</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End right col-->
+
+        </div>
+    </div>
+</form>
+
+

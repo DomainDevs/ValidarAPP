@@ -1,0 +1,85 @@
+﻿@section Title{
+    <div class="row main-title">
+        <div class="column-80">
+            @Resources.Language.TemporalUserAdminModify
+        </div>
+        <div class="column-20 even">
+            <input type="text" class="uif-input-search" placeholder="@Resources.Language.SearchTemporal" id="inputSearchTemporal" required="required" maxlength="12" />
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="row">
+            <div class="uif-col-12">
+                <div class="pull-right">
+                    <button class="btn btn-default cancel" id="closeWindow">
+                        <span class="" aria-hidden="true"></span>
+                        @Resources.Language.Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+}
+
+
+<div class="uif-alert" id="alert"></div>
+
+@*<div class="uif-panel" data-title="Temporario:" id="panel">*@
+<form id="formAuthorizeUser" class="form">
+    <div class="row">
+        <div class="uif-col-5">
+            <label class="text-hide" id="temporalId"></label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="uif-col-5">
+            <label>@Resources.Language.UserAuthorizationCode</label>
+            <label class="text-hide" id="codeUser">0</label>
+            <input type="text" class="uif-input-search" placeholder="@Resources.Language.EnterUserCodeAuthorize" id="inputSearchUser" required="required" maxlength="30" />
+        </div>
+        <div class="uif-col-5">
+            <label>@Resources.Language.AuthorizedUsername</label>
+            <input type="text" id="nameUser" />
+        </div>
+        <div class="uif-col-2">
+            <div class="without-label">
+                <button type="button" class="btn btn-primary width-container" id="addUser">@Resources.Language.Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div id="tabUser">
+                <table class="uif-table" id="tableUser" data-paginate="true" data-filter="false" data-title="" data-selectiontype="none">
+                    <thead>
+                        <tr>
+                            <th data-property="AccountAuthorize">@Resources.Language.CodeCreatorUser</th>
+                            <th data-property="NameUserAuthorize">@Resources.Language.NameUser</th>
+                            <th data-property="DateUpdate" data-type="date">@Resources.Language.CreationModificationDate</th>
+                            <th data-property="Account">@Resources.Language.CodeAuthorizedUser</th>
+                            <th data-property="NameUser">@Resources.Language.NameUser</th>
+                        </tr>
+
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/AuthorizeUser");
+}
+
+

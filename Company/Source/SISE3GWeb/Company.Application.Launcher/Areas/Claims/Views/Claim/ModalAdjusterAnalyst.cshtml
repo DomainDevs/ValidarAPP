@@ -1,0 +1,47 @@
+﻿<form id="formAdjusterAnalyst" class="form">
+    <div class="row">
+        <div class="uif-col-12 fit-col-main">
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.Analyst</label>
+                    <select class="uif-select form-control" id="selectAnalyst" data-val="true" data-val-required="@Resources.Language.ErrorAnalystIsRequired"
+                            data-id="Id" data-name="Description" name="Analyst" 
+                            data-filter="true" data-native="false" required></select>
+                    <span class="text-danger" data-valmsg-for="Analyst" data-valmsg-replace="true"></span>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.Ajuster</label>
+                    <select class="uif-select form-control" id="selectAjuster" data-val="true"
+                            data-id="Id" data-name="Description" name="DamageResponsibility"
+                            data-filter="true" data-native="false"></select>
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.Investigator</label>
+                    <select class="uif-select form-control" id="selectInvestigator" data-val="true"
+                            data-id="Id" data-name="Description" name="DamageResponsibility"
+                            data-filter="true" data-native="false"></select>
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-4">
+                    <label>@Resources.Language.DateInspection</label>
+                    <input id="InputInspectionDate" type="text" class="uif-datepicker" />
+                </div>
+                <div class="uif-col-4">
+                    <label>@Resources.Language.CoverageInspectionHour</label>
+                    <input type="text" class="uif-Timepicker" id="selectHour" autocomplete="on" required />             
+                </div>
+            </div>
+            <div class="uif-modalbuttons width-save">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0295"))
+                {
+                    <button type="button" class="btn btn-default" id="btnCancelAdjusterAnalyst" data-dismiss="modal">@Resources.Language.Close</button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0296"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnSaveAdjusterAnalyst">@Resources.Language.Save</button>
+                }
+            </div>
+        </div>
+    </div>
+</form>

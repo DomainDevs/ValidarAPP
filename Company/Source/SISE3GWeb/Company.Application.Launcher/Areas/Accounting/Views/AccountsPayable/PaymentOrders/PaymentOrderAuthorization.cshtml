@@ -1,0 +1,126 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.Authorization;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------*@
+@*																		 CODIGO HTML																		*@
+@*----------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.MenuCashOtuflows</li>
+        <li>@Global.AuthorizationChecks</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+
+        <button id="AutorizePaymentOrderAuthorization" class="btn btn-primary" role="button" type="submit">
+            <i class="fa fa-thumbs-o-up"></i>@Global.Authorize
+        </button>
+
+        <button id="CancelPaymentOrderAuthorization" class="btn btn-primary" role="button">
+            <i class="fa fa-remove"></i>@Global.Cancel
+        </button>
+
+    </footer>
+}
+
+<div id="accSearchPaymentOrders">
+    <form id="PaymentOrdersAuthorization">
+        <div class="uif-row filterRow">
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.Branch:
+                </label>
+                <br />
+                <select class="uif-select form-control " id="BranchPaymentOrderAuthorization" name="BranchPaymentOrderAuthorization"
+                        data-source='@Url.Content("~/Accounting/Common/GetBranchs")' data-id="Id"
+                        data-name="Description" data-selectedid="@ViewBag.BranchDefault" data-native="true"
+                        data-val="true" data-val-required='@Global.RequiredField'></select>
+                <span class="text-danger" data-valmsg-for="BranchPaymentOrderAuthorization" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.PaymentMethod:
+                </label>
+                <br />
+                <select class="uif-select form-control " id="PaymentMethodAuthorization" name="PaymentMethodAuthorization"
+                        data-source='@Url.Content("~/Accounting/PaymentOrders/GetEnabledPaymentMethodTypesSelect")'
+                        data-id="Id" data-name="Description" data-native="true"
+                        data-val="true" data-val-required='@Global.RequiredField'></select>
+                <span class="text-danger" data-valmsg-for="PaymentMethodAuthorization" data-valmsg-replace="true"></span>
+            </div>
+            <div class="uif-col-4">
+                <label class="control-label">
+                    @Global.EstimatedPaymentDate:
+                </label>
+                <input type="text" id="PaymentOrderEstimatedDateAuthorization" name="PaymentOrderEstimatedDateAuthorization" maxlength="10" 
+                       class="uif-datepicker" data-mask="99/99/9999" 
+                       data-val="true" data-val-required='@Global.RequiredField' />
+                <span class="text-danger" data-valmsg-for="PaymentOrderEstimatedDateAuthorization" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </form>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+
+    <!-- BOTONES-->
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="form-footer">
+                <button id="SearchPaymentOrderAutorization" class="btn btn-primary" role="button" type="submit">
+                    <i class="fa fa-search"></i>@Global.Search
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <table class="uif-table" data-title="@Global.PaymentOrders @Global.To @Global.Authorize"
+                   data-source="" id="SearchPaymentOrdersAutorizationTable" data-selectiontype="multiple" data-filter="false" data-paginate="true" data-exporttocsv="false" data-exportname="cultura">
+                <thead>
+                    <tr>
+                        <th data-property="PaymentOrderCode">@Global.PaymentOrderNumber</th>
+                        <th data-property="PersonType">@Global.BeneficiaryType</th>
+                        <th data-property="BeneficiaryName">@Global.BeneficiaryName</th>
+                        <th data-property="Branch">@Global.Branch</th>
+                        <th data-property="PaymentMethod">@Global.PaymentMethod</th>
+                        <th data-property="EstimatedPaymentDate">@Global.EstimatedPaymentDate</th>
+                        <th data-property="Currencies">@Global.Currency</th>
+                        <th data-property="Sarlaft" data-visible="false">@Global.ValidSARLAFT</th>
+                        <th data-property="UserId" data-visible="false">User</th>
+                        <th data-property="UserName">@Global.User</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagBranchUserDefaultPayment" value="@ViewBag.BranchUserDefault" />
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/PaymentOrderAuthorization")
+}

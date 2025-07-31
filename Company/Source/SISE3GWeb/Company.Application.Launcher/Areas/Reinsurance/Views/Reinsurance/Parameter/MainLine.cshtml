@@ -1,0 +1,203 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@{
+    ViewBag.Title = @Global.Lines;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Parameter</li>
+        <li>@Global.Line</li>
+    </ol>
+}
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+
+        <ul class="uif-tab">
+            <li class="active"><a href="#tabLine">@Global.Lines</a></li>
+            <li><a href="#tabContractLine">@Global.ContractLine</a></li>
+        </ul>
+
+        <div class="uif-tab-content">
+
+
+            @*TAB LINEA*@
+            <div class="active" id="tabLine">
+                <div class="uif-alert" id="alertLine"></div>
+                <div class="active" id="tabLines">
+                    <table class="uif-table" data-source='@Url.Content("~/Reinsurance/Parameter/GetLineCumulusType")'
+                           id="tableLine" data-add="true" data-edit="true" data-filter="true" data-delete="true">
+                        <thead>
+                            <tr>
+                                <th data-visible="false" data-property="LineId">@Global.Id</th>
+                                <th data-visible="true" data-property="Description">@Global.Description</th>
+                                <th data-visible="false" data-property="CumulusTypeId">CumulusTypeId</th>
+                                <th data-visible="true" data-property="CumulusTypeDescription">@Global.CumulusType</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            @*CONTRACT LINE*@
+            <div id="tabContractLine">
+                <div class="uif-alert" id="alertMainLineContract"></div>
+                <b id="pnlContractLine"> </b>
+                <div class="active" id="tabContractLines">
+                    <table class="uif-table" id="tableContractLine"
+                           data-add="true" data-edit="true" data-delete="true">
+
+                        <thead>
+                            <tr>
+                                <th data-visible="false" data-property="ContractLineId">ContractLineId</th>
+                                <th data-visible="false" data-property="LineId">LineId</th>
+                                <th data-visible="false" data-property="LineDescription">@Global.Lines</th>
+                                <th data-visible="false" data-property="ContractId">ContractId</th>
+                                <th data-property="ContractDescription">@Global.Contract</th>
+                                <th data-property="Priority">@Global.Priority</th>
+
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            @*ASOCIACION DE LINEAS*@
+            <div id="tabAssociationLine">
+                <div class="active" id="tabAssociationLines">
+                    <table data-title="<b>@Global.AssociationOfLines</b>" class="uif-table" id="tableAssociationLine"
+                           data-add="true" data-delete="true">
+                        <thead>
+                            <tr>
+                                <th data-visible="false" data-property="AssociationLineId">AssociationLineId</th>
+                                <th data-visible="false" data-property="LineId">LineId</th>
+                                <th data-property="AssociationTypeDescription">@Global.AssociationType</th>
+                                <th data-visible="false" data-property="TableName">TableName</th>
+                                <th data-visible="false" data-property="AssociationColumnId">AssociationColumnId</th>
+                                <th data-visible="false" data-property="AssociationColumnValueId">AssociationColumnValueId</th>
+                                <th data-property="ValueFrom">@Global.ValueFrom</th>
+                                <th data-property="ValueTo">@Global.ValueTo</th>
+                                <th data-property="DateFrom">@Global.DateFrom</th>
+                                <th data-property="DateTo">@Global.DateTo</th>
+                                <th data-visible="false" data-property="AssociationTypeId">AssociationTypeId</th>
+                                <th data-visible="false" data-property="ColumnDescription">ColumnDescription</th>
+                                <th data-property="ColumnIdName">@Global.Column</th>
+                                <th data-visible="false" data-property="IsBetweenRange">IsBetweenRange</th>
+                                <th data-property="Order">Order</th>
+                                <th data-visible="false" data-property="Parameter">@Global.Parameter</th>
+
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div id="msgValidLineAssociationLine" class="alert alert-warning alert-dismissable">@Global.LineSelect</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section modals{
+    <div class="uif-modal" id="modalLine"></div>
+    <div class="uif-modal" id="modalContractLine"></div>
+    <div class="uif-modal" id="modalAssociationLine"></div>
+
+
+    @*LINEA*@
+    <div class="uif-modal" id="modalDeleteLine">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Global.DeleteConfirmationMessage
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0359"))
+            {
+                <button type="submit" class="btn btn-primary" id="btnDelete">@Global.Yes</button>
+            }
+        </div>
+    </div>
+
+
+    @*CONTRATO POR LINEA*@
+    <div class="uif-modal" id="modalDeleteContractLine">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Global.DeleteConfirmationMessage
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0365"))
+            {
+                <button type="submit" class="btn btn-primary" id="btnDeleteContractLine">@Global.Yes</button>
+            }
+
+        </div>
+    </div>
+
+
+    <!-- Modal Validación-->
+    <div class="modal fade" id="modalValidLine" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.Lines</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.LineSelect
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Accept</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal Confirmacion-->
+    <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.Lines</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.ConfirmaData
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Accept</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Modal Delete -->
+    <div class="modal fade" id="modalDeleteAssociationLine" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>@Global.ContractType</b></h4>
+                </div>
+                <div class="modal-body">
+                    @Global.DeleteConfirmationMessage
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                    <button type="button" class="btn btn-primary" id="btnDeleteAssociationLine">@Global.Yes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+
+@section scripts{
+    @Scripts.Render("~/reinsurance/bundles/MainLine")
+}

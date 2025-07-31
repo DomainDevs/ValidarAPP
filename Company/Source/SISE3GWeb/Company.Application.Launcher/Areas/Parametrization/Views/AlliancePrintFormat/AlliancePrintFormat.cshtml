@@ -1,0 +1,134 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.AlliancePrintFormatViewModel
+
+<script id="AlliancePrintFormatTemplate" type="text/template">
+    {{#ifCond Status "==" 2}}
+    <div><strong class="success">{{Format}}</strong></div>
+    {{else ifCond Status "==" 3}}
+    <div><strong class="warning">{{Format}}</strong></div>
+    {{else ifCond Status "==" 4}}
+    <div><strong class="danger">{{Format}}</strong></div>
+    {{else}}
+    <div><strong>{{Format}}</strong></div>
+    {{/ifCond}}
+    <div>Ramo: {{PrefixDescription}}</div>
+    <div>Tipo de Endoso: {{EndorsementDescription}}</div>
+    <div>
+        {{#if Enable}}
+        {{else}}
+        <div><strong>Deshabilitado</strong></div>
+        {{/if}}
+    </div>
+</script>
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.LabelTabAlliancePrintFormats            
+        </div>
+        <div class="column-30 even">
+            <input type="text" name="Id" id="inputSearchAlliancePrintFormat" class="uif-input-search" placeholder="@Resources.Language.EnterTextAlliancePrintFormatToSearch" />
+            <button class="btn btn-default" id="btnSearchAdvAlliancePrintFormat"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExport
+            </button>
+
+            <button class="btn btn-primary" id="btnSaveAlliancePrintFormat">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonSave
+            </button>
+
+        </div>
+
+    </footer>
+}
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formAlliancePrintFormat" autocomplete="off" class="form without-space">
+    <div class="row">
+        <input type="hidden" id="inputId" />
+        <div class="uif-col-6">
+            <br />
+			<div class="row">
+				<div class="uif-col-6" hidden="hidden">
+					<label>@Resources.Language.LabelAlliancePrintFormatCode</label>					
+					@Html.TextBoxFor(model => model.Id, new { id = "inputIdAlliancePrintFormat", placeholder = "Id Formato" })
+					@Html.ValidationMessageFor(model => model.Id)
+				</div>
+				<div class="uif-col-6">
+					<label class="field-required">@Resources.Language.LabelAlliancePrintFormatPrefix</label>
+					<select class="uif-select form-control"  data-filter="true" data-native="false" id="selectPrefixs" data-id="PrefixCode" data-name="PrefixDescription"></select>
+					@Html.HiddenFor(model => model.PrefixCd, new { id = "inputPrefixCd" })
+				</div>
+				<div class="uif-col-6">
+					<label class="field-required">@Resources.Language.LabelAlliancePrintFormatEndorsementType</label>
+					<select class="uif-select form-control"  data-filter="true" data-native="false" id="selectEndorsementTypes" data-id="Id" data-name="Description"></select>
+					@Html.HiddenFor(model => model.EndoTypeCd, new { id = "inputEndoTypeCd" })
+				</div>				
+			</div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelAlliancePrintFormat</label>                    
+                    @Html.TextBoxFor(model => model.Format, new { id = "inputFormat", placeholder = "Formato" })
+                    @Html.ValidationMessageFor(model => model.Format)
+                </div>
+                <div class="uif-col-6">
+                    <div class="without-label">
+                        <input type="checkbox" id="chkIsEnable" name="chkIsEnable" />
+                        <label for="chkIsEnable">@Resources.Language.LabelAlliancePrintFormatIsEnable</label>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary" id="panelAlliancePrintFormat">
+            <div id="listAlliancePrintFormat" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsAlliancePrintFormat">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewAlliancePrintFormat">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAlliancePrintFormatAccept">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/bundle/js/AlliancePrintFormat")"></script>
+}
+
+
+
+
+
+
+

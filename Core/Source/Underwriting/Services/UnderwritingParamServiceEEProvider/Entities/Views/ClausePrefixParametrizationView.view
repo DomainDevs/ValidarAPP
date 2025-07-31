@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ClausePrefixParametrizationView">
+  <collections>
+    <collection name="Clause" type="Sistran.Core.Application.Quotation.Entities.Clause, 
+                Core.Quotation.Entities"></collection>
+    <collection name="ClauseLevel" type="Sistran.Core.Application.Quotation.Entities.ClauseLevel, 
+                Core.Quotation.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                Core.Common.Entities"></collection>
+     
+  </collections>
+  <relations>
+    <relation source="Clause" destination="ClauseLevel" name="ClauseClauseLevel" type="Inner">
+      <property left="ClauseId" type="Equal" right="ClauseId"></property>
+    </relation>
+    <relation source="Prefix" destination="ClauseLevel" name="PrefixClauseLevel" type="Inner">
+      <property left="PrefixCode" type="Equal" right="ConditionLevelId"></property>
+    </relation>
+  </relations>
+</view>

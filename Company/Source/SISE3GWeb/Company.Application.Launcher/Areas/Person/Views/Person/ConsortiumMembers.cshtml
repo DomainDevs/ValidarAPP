@@ -1,0 +1,84 @@
+﻿<script id="ConsortiumMembersTemplate" type="text/template">
+
+    <div>{{FullName}}</div>
+    <div>{{PersonIdentificationNumber}}</div>
+
+    {{#if Enabled}}
+    {{#if IsMain}}
+    <div class="primary"><b>@Resources.LanguagePerson.LabelPrincipalCheckBox - {{ParticipationRate}}%</b></div>
+    {{else}}
+    <div>{{ParticipationRate}}%</div>
+    {{/if}}
+    {{else}}
+    <div class="warning">Deshabilitado</div>
+    {{/if}}
+
+</script>
+<form id="ConsortiumMembersId" class="modal-Colombia">
+    <div class="uif-alert" id="alert"></div>
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.LanguagePerson.LabelConsortiumMembers</label>
+                    <input type="text" class="uif-input-search" placeholder="@Resources.LanguagePerson.PlaceHolderDocumentName" id="inputConsortiumMembersId" required="required" maxlength="80" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <div class="checkbox without-label">
+                        <input type="checkbox" id="chkPrincipalConsortiumMembers" />
+                        <label for="chkPrincipalConsortiumMembers">@Resources.LanguagePerson.LabelPrincipalCheckBox</label>
+                    </div>
+                </div>
+                <div class="uif-col-6">
+                    <label>@Resources.LanguagePerson.Percent</label>
+                    <input type="text" id="InputPercentConsortium" maxlength="5" />
+                </div>
+            </div>
+
+            <div class="uif-row">
+                <div class="uif-col-6">
+                    <div class="checkbox without-label">
+                        <input type="checkbox" id="chkDisabledConsortiumMembers" />
+                        <label for="chkDisabledConsortiumMembers">@Resources.LanguagePerson.DisabledConsortium</label>
+                    </div>
+                </div>
+                <div class="uif-col-6">
+                    <label for="dateConsortiumMembers">@Resources.LanguagePerson.DateDisabledConsortium</label>
+                    <input class="uif-datepicker" id="dateConsortiumMembers" />
+                </div>
+            </div>
+
+        </div>
+        <div class="uif-col-6">
+            <div id="listConsortiumMembers" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="pull-right">
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0120"))
+                {
+                    <button type="button" class="btn btn-default" id="btnClearConsortiumMembers">
+                        <span class="" aria-hidden="true">
+                            @Resources.LanguagePerson.NewForm
+                    </button>
+                }
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0121"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnAddConsortiumMembers">
+                        <span class="" aria-hidden="true"></span>
+                        @Resources.LanguagePerson.AddForm
+                    </button>
+                }
+                </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

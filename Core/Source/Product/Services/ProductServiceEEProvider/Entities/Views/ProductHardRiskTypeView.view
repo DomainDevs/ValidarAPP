@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ProductHardRiskTypeView">
+  <collections>
+    <collection name="Product" type="Sistran.Core.Application.Product.Entities.Product, 
+                Core.Product.Entities"></collection>
+    <collection name="ProductCoverRiskType" type="Sistran.Core.Application.Product.Entities.ProductCoverRiskType, 
+                Core.Product.Entities"></collection>
+    <collection name="HardRiskType" type="Sistran.Core.Application.Parameters.Entities.HardRiskType, 
+                Core.Parameters.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Product" destination="ProductCoverRiskType" name="ProductProductCoverRiskType" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="ProductCoverRiskType" destination="HardRiskType" name="ProductCoverRiskTypeHardRiskType" type="Inner">
+      <property left="CoveredRiskTypeCode" type="Equal" right="CoveredRiskTypeCode"></property>
+    </relation>
+  </relations>
+</view>

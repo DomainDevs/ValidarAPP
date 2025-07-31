@@ -1,0 +1,104 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Endorsement.Models.ModificationViewModel
+
+@section Title{
+<div class="row main-title">
+    <div class="column">
+        @Resources.Language.EndorsementChangePaymentPlan
+    </div>
+    <div class="column-30">
+        <div class="important">
+            <div class="date">
+                <i class="fa fa-calendar"></i>@Resources.Language.LabelDateIssuance <span id="inputIssueDate"> 16/02/2016</span>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@section Toolbar
+{
+<footer>
+    <button type="button" class="btn btn-default" id="btnCancel">@Resources.Language.Close</button>
+    <button type="button" class="btn btn-primary" id="btnSave">@Resources.Language.ModificationSave</button>
+</footer>
+}
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+<form id="formPaymentPlan" class="form">
+    @Html.HiddenFor(model => model.BranchId, new { id="hiddenBranchId" })
+    @Html.HiddenFor(model => model.PrefixId, new { id="hiddenPrefixId" })
+    @Html.HiddenFor(model => model.PolicyId, new { id="hiddenPolicyId" })
+    @Html.HiddenFor(model => model.PolicyNumber, new { id="hiddenPolicyNumber" })
+    @Html.HiddenFor(model => model.EndorsementId, new { id="hiddenEndorsementId" })
+    @Html.HiddenFor(model => model.TemporalId, new { id="hiddenTemporalId" })
+    @Html.HiddenFor(model => model.Title, new { id="hiddenTitle" })
+    @Html.HiddenFor(model => model.EndorsementController, new { id="hiddenEndorsementController" })
+    @Html.HiddenFor(model => model.EndorsementFrom, new { id = "hiddenEndorsementFrom" })
+    @Html.HiddenFor(model => model.EndorsementTo, new { id = "hiddenEndorsementTo" })
+    @Html.HiddenFor(model => model.Message, new { id = "hiddenMessage" })
+    @Html.HiddenFor(model => model.HasEvent, new { id = "hiddenHasEvent" })
+    <div class="row">
+        <div class="uif-col-12">
+            <h5><strong id="globalTitle"></strong></h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <h5><strong>@Resources.Language.EndorsementdDataChangePaymentPlan</strong> </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <label>@Resources.Language.LabelPaymentPlan</label>
+            <select class="uif-select form-control" id="selectPaymentPlan" data-native="false" data-id="Id" data-name="Description">
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="active">
+                <table class="uif-table" data-title="@Resources.Language.LabelQuotas" data-selectiontype="none" id="tableQuotas" data-filter="false" data-paginate="true">
+                    <thead>
+                        <tr>
+                            <th data-property="Number">@Resources.Language.LabelNro</th>
+                            <th data-property="Detail">@Resources.Language.LabelDetailPayment</th>
+                            <th data-property="ExpirationDate" data-visible="false" ></th>
+                            <th data-property="Amount" data-visible="false" ></th>
+                            <th data-property="Percentage" data-visible="false" ></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/EndorsementPaymentPlan");   
+    @Scripts.Render("~/bundle/js/Printer");   
+}
+
+@section Modals
+{
+<div class="uif-modal" id="modalChangePaymentPlan">
+    <div class="uif-modalbody">        
+        <div class="row">
+            <div class="uif-col-12">
+                <span id="alert"></span>
+            </div>
+        </div>  
+    </div>
+    <div class="uif-modalbuttons" id="buttons">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnModalClose">@Resources.Language.ButtonClose</button>
+    </div>
+</div>
+}

@@ -1,0 +1,84 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.Month</label>
+            <input type="text" id="ReclassificationMonth" name="ReclassificationMonth" disabled="disabled" style="height:34px" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.Year</label>
+            <input type="text" id="ReclassificationYear" name="ReclassificationYear" disabled="disabled" style="height:34px" />
+        </div>
+    </div>
+
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.AccountingAccountOrigin</label>
+            <input class="uif-autocomplete" type="text"
+                   data-source="@Url.Action("GetAccountingAccountByNumber", "AccountReclassification")"
+                   data-displaykey="AccountingNumber" placeholder='@Global.EnterNumberAccount' id="AccountingAccountOrigin"
+                   name="AccountingAccountOrigin" onkeypress="return JustNumbers(event, this);"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="AccountingAccountOrigin" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.AccountingAccountName</label>
+            <input type="text" id="AccountingAccountOriginName" name="AccountingAccountOriginName" disabled="disabled" style="height:34px" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.AccountingAccountDestination</label>
+            <input class="uif-autocomplete" type="text"
+                   data-source="@Url.Action("GetAccountingAccountByNumber", "AccountReclassification")"
+                   data-displaykey="AccountingNumber" placeholder='@Global.EnterNumberAccount' id="AccountingAccountDestination"
+                   name="AccountingAccountDestination" onkeypress="return JustNumbers(event, this);"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="AccountingAccountDestination" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.AccountingAccountName</label>
+            <input type="text" id="AccountingAccountDestinationName" name="AccountingAccountDestinationName" disabled="disabled" style="height:34px" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-6">
+            <label>@Global.PrefixOpening</label>
+            @Html.DropDownList("selectPrefixOpening", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/GeneralLedger/AccountReclassification/GetOpeningSelect"),
+           data_id = "Id",
+           data_name = "Description",
+           data_val = "true",
+           data_val_required = @Global.RequiredField,
+           data_native = "true"
+       })
+            <span class="text-danger" data-valmsg-for="selectPrefixOpening" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-6">
+            <label>@Global.BranchOpening</label>
+            @Html.DropDownList("selectBranchOpening", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_source = @Url.Content("~/GeneralLedger/AccountReclassification/GetOpeningSelect"),
+           data_id = "Id",
+           data_name = "Description",
+           data_val = "true",
+           data_val_required = @Global.RequiredField,
+           data_native = "true"
+       })
+            <span class="text-danger" data-valmsg-for="selectBranchOpening" data-valmsg-replace="true" />
+        </div>
+
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertForm"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.InsuredSegmentViewModel
+
+<script id="InsuredSegmentTemplate" type="text/template">
+	{{#ifCond StatusTypeService "==" 2}}
+	<div><strong class="success">{{LongDescription}}</strong></div>
+	{{else ifCond StatusTypeService "==" 3}}
+	<div><strong class="warning">{{LongDescription}} ({{Id}})</strong></div>
+	{{else ifCond StatusTypeService "==" 4}}
+	<div><strong class="danger">{{LongDescription}}</strong></div>
+	{{else}}
+	<div><strong>{{LongDescription}} ({{Id}})</strong></div>
+	{{/ifCond }}
+	<div>{{ShortDescription}}</div>
+	<div class="hidden">
+		{{StatusType}}
+	</div>
+</script>
+@section Title{
+    <div class="row main-title">
+        <div class="column-70">
+            @Resources.Language.LabelTabInsuredSegments
+        </div>
+        <div class="column-30 even">
+            <input type="text" name="Id" id="inputSearchInsuredSegment" maxlength="15" class="uif-input-search" placeholder="@Resources.Language.EnterTextInsuredSegmentToSearch" />
+            <button class="btn btn-default" id="btnSearchAdvInsuredSegment"><i class="fa fa-angle-down"></i></button>
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExport
+            </button>
+
+            <button class="btn btn-primary" id="btnSaveInsuredSegment" @*style="display: none"*@>
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonSave
+            </button>
+
+        </div>
+
+    </footer>
+}
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formInsuredSegment" autocomplete="off" class="form without-space">
+    <div class="row">
+        <input type="hidden" id="inputId" />
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6" hidden="hidden">
+                    <label>@Resources.Language.LabelSegmentCode</label>
+                    @Html.TextBoxFor(model => model.Id, new { id = "inputIdInsuredSegment" })
+                    @Html.ValidationMessageFor(model => model.Id)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDescriptionLong</label>
+                    @Html.TextBoxFor(model => model.LongDescription, new { id = "inputLongDescription", placeholder = @Resources.Language.LabelDescriptionLong })
+                    @Html.ValidationMessageFor(model => model.LongDescription)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelDescriptionShort</label>
+                    @Html.TextBoxFor(model => model.ShortDescription, new { id = "inputShortDescription", placeholder = @Resources.Language.LabelDescriptionShort })
+                    @Html.ValidationMessageFor(model => model.ShortDescription)
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="uif-col-6  fit-col-secondary" id="panelInsuredSegment">
+            <div id="listInsuredSegment" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsInsuredSegment">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewInsuredSegment">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnInsuredSegmentAccept">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/bundle/js/InsuredSegment")"></script>
+}

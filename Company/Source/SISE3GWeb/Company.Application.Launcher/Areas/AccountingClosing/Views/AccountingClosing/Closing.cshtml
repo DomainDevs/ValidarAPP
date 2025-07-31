@@ -1,0 +1,68 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+@model Sistran.Core.Framework.UIF.Web.Areas.AccountingClosing.Models.ClosingModel
+
+@{
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+    ViewBag.Title = @Global.ClosingExercises;
+}
+
+@section breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li class="active">@Global.ClosingExercises</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>        
+        <button class="btn btn-default" role="button" id="clearClosing">
+            <i class="fa fa-times"></i>
+            @Global.Clean
+        </button>
+        <button class="btn btn-primary" role="button" id="processClosing" onclick="return false">
+            <i class="fa fa-cog"></i>@Global.Generate
+        </button>
+    </footer>
+}
+
+<form id="closingForm">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            @Html.LabelFor(model => model.ClosingTypeId)
+            @Html.DropDownListFor(model => model.ClosingTypeId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/AccountingClosing/AccountingClosing/GetClosings"), data_id = "ClosingTypeId", data_name = "Description" })
+            @Html.ValidationMessageFor(model => model.ClosingTypeId)
+        </div>
+        <div class="uif-col-4">
+            @Html.LabelFor(model => model.Year)
+            @Html.TextBoxFor(model => model.Year, new { disabled = "disabled", @id = "YearClosing" })
+            @Html.ValidationMessageFor(model => model.Year)
+        </div>
+        <div class="uif-panel" id="monthPanel">
+            <div class="uif-col-4">
+                @Html.LabelFor(model => model.Month)
+                @Html.DropDownListFor(model => model.Month, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/AccountingClosing/Base/GetMonths"), data_id = "Id", data_name = "Description", id = "entryMonth" })
+                @Html.ValidationMessageFor(model => model.Month)
+            </div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertClosing"></div>
+        </div>
+    </div>
+    <div class="uif-row" id="printPanel">
+    </div>
+</form>
+<div class="progress progress-striped active" id="progressBarPanel">
+    <div class="progress-bar" role="progressbar" id="progressBar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+         style="width: 100%">
+        <span class="sr-only">45% completado</span>
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/accountingClosing/bundles/Closing")
+}

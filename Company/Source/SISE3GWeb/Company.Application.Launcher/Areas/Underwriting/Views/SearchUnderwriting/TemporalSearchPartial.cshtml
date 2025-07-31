@@ -1,0 +1,59 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.SubscriptionSearchViewModel
+@{
+    Layout = null;
+}
+
+<form id="formSearchTemporary" class="form without-peripheral">
+    <div class="row">
+        <div class="uif-col-6">
+            <label>@Resources.Language.LabelInsured</label>
+            @Html.TextBoxFor(model => model.Insured, new { id = "inputInsuredTemporary", autocomplete = "off", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+            @Html.TextBoxFor(model => model.InsuredId, new { id = "inputInsuredIdTemporary", hidden = "hidden" })
+            @Html.ValidationMessageFor(model => model.Insured)
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelNumberTemporary</label>
+            @Html.TextBoxFor(model => model.TemporaryNumber, new { id = "inputTemporaryNumber", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.TemporaryNumber)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelUser</label>
+            @Html.TextBoxFor(model => model.User, new { id = "inputUserTemporary", autocomplete = "off", @class = "uif-input-search", placeholder = @Resources.Language.PlaceHolderDocumentName })
+            @Html.TextBoxFor(model => model.UserId, new { id = "inputUserIdTemporary", hidden = "hidden" })
+            @Html.ValidationMessageFor(model => model.User)
+        </div>
+        <div class="uif-col-3">
+            <label>@Resources.Language.LabelIssuanceDate</label>
+            @Html.TextBoxFor(model => model.IssueDate, new { id = "inputIssueDateTemporary", autocomplete = "off", @class = "uif-datepicker" })
+            @Html.ValidationMessageFor(model => model.IssueDate)
+        </div>
+        <div class="uif-col-3 without-label">
+            <button type="button" class="btn btn-primary" id="btnSearchTemporary">@Resources.Language.ButtonSearch</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" data-title="" data-selectiontype="none" id="tableTemporal" data-filter="false" data-paginate="true">
+            <thead>
+                <tr>
+                    <th data-property="NumberTemporary">@Resources.Language.LabelNumberTemporary</th>
+                    <th data-property="PolicyNumber">@Resources.Language.LabelPolicyNumber</th>
+                    <th data-property="PrefixCommercial">@Resources.Language.LabelPrefixCommercial</th>
+                    <th data-property="Insured">@Resources.Language.LabelInsured</th>
+                    <th data-property="Branch">@Resources.Language.Branch</th>
+                    <th data-property="User">@Resources.Language.LabelUser</th>
+                    <th data-property="ConsultationDate" data-type="date">@Resources.Language.LabelDateconsultation</th>
+                    <th data-property="Days">@Resources.Language.LabelDays</th>
+                    <th data-property="AgentPrincipal">@Resources.Language.LabelAgentPrincipal</th>
+                    <th data-property="TypeTransaction">@Resources.Language.TypeTransaction</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>

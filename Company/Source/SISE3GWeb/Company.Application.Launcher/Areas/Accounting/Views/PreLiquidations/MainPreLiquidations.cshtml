@@ -1,0 +1,243 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.Preliquidation;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.Preliquidation</li>
+        <li>@Global.Generation</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-default" id="PreLiquidationCancel">
+            <i class="fa fa-remove"></i> @Global.Cancel
+        </button>
+        <button type="submit" onclick="return false" class="btn btn-primary" id="PreLiquidationAccept">
+            <i class="fa fa-check"></i> @Global.Accept
+        </button>
+    </footer>
+}
+
+@section Modals
+{
+
+    <!-- Agent -->
+    <form id="addAgentForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalAgent">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Application/CheckingAccountBrokers/AgentMovements.cshtml")
+            </div>
+        </div>
+    </form>
+
+    <!-- Accounting -->
+    <div class="uif-modal" id="AccountingMovementModal">
+        <div class="uif-modalbody">
+            @Html.Partial("~/Areas/Accounting/Views/Application/Accounting/Accounting.cshtml")
+        </div>
+    </div>
+    <!-- End Accounting -->
+    <!-- Reinsurance -->
+    <form id="addReinsuranceForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalReinsurance">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Application/CheckingAccountReinsurances/ReinsuranceMovements.cshtml")
+            </div>
+        </div>
+    </form>
+
+    <!-- Success -->
+    <div class="uif-modal" id="modalSuccess">
+        <div class="uif-modalbody">
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label id="receiptApplicationMessage"></label>
+                </div>
+            </div>
+
+            <div id="accountingApplicationLabelDiv">
+                <div class="uif-row">
+                    <div class="uif-col-12">
+                        @Global.AccountingIntegration
+
+                        <label id="receiptApplicationAccountingIntegrationMessage"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="uif-modalbuttons">
+
+            <button type="button" class="btn btn-primary" id="AcceptSuccess">@Global.Accept</button>
+        </div>
+    </div>
+
+    <!-- Coinsurance -->
+    <form id="addCoinsuranceForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalCoinsurance">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Application/CheckingAccountCoinsurances/CoinsuranceMovements.cshtml")
+            </div>
+        </div>
+    </form>
+
+    @*MODAL DE PRIMAS POR COBRAR*@
+    <div class="uif-modal" id="ModalPremiums">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Application/PremiumsReceivable/DialogSearchPolicies.cshtml")
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="submit" class="btn btn-primary" id="SaveSearchPoliciesButton" onclick="return false">@Global.Accept</button>
+        </div>
+    </div>
+
+
+
+    <!-- Payment Request Various -->
+    <form id="addVariousForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalVarious">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Application/PaymentVarious/PaymentRequestVariousMovements.cshtml")
+            </div>
+        </div>
+    </form>
+
+    <!-- Payment Request Claims -->
+    <form id="addClaimsForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalClaims">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Application/PaymentClaims/PaymentRequestClaimsMovements.cshtml")
+            </div>
+        </div>
+    </form>
+    <!-- End Payment Request Claims -->
+    <!-- InsuredLoan -->
+    <form id="addInsuredLoanForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="modalInsuredLoan">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/Application/InsuredLoans/InsuredLoans.cshtml")
+            </div>
+        </div>
+    </form>
+    <!-- End InsuredLoan -->
+}
+
+<style>
+    .ptitle {
+        text-align: center;
+    }
+</style>
+
+<script id="display-aplication-receipt-template" type="text/template">
+    <div class="row">
+        <div class="column">
+            <strong>@Global.Concept: </strong>{{MovementType}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <strong>@Global.Debit: </strong><div class="number">{{Debits}}</div>
+        </div>
+        <div class="column">
+            <strong>@Global.Credit: </strong><div class="number">{{Credits}}</div>
+        </div>
+    </div>
+</script>
+
+
+<div class="row height-100 flex">
+    <div class="col-xs-12 col-md-6 no-padding-right col-left">
+        <div class="uif-panel" data-title="@Global.Preliquidation">
+
+            @Html.Partial("~/Areas/Accounting/Views/PreLiquidations/PreLiquidationInformationPartial.cshtml")
+
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Global.TotalControl</label>
+                    <input type="text" id="TotalControl" name="TotalControl" disabled="disabled" style="text-align: right" />
+                </div>
+            </div>
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <div class="uif-alert" id="alertPreliquidation"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 no-padding-left col-right">
+        <div class="uif-panel" data-title="@Global.MovementSummary">
+            <div id="listViewAplicationReceipt" class="uif-listview">
+                <div class="footer">
+                    <div class="col-xs-6 text-left col-number">
+                        <b>@Global.Total @Global.Debit</b>
+                        <b id="TotalDebit">$0.00</b><br>
+                    </div>
+                    <div class="col-xs-6 text-left col-number">
+                        <b>@Global.Total @Global.Credit</b>
+                        <b id="TotalCredit">$0.00</b><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<script src="@Url.Content("~/Scripts/common-validations.js")"></script>*@
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagAccountingCompanyDefault" value="@ViewBag.AccountingCompanyDefault" />
+<input type="hidden" id="ViewBagBranchUserDefault" value="@ViewBag.BranchUserDefault" />
+<input type="hidden" id="ViewBagSalePointBranchUserDefault" value="@ViewBag.SalePointBranchUserDefault" />
+<input type="hidden" id="ViewBagDateAccounting" value="@ViewBag.DateAccounting" />
+<input type="hidden" id="ViewBagPointSalesPreliquidation" value="@ViewBag.PointSalesPreliquidation" />
+<input type="hidden" id="ViewBagIsEdition" value="@ViewBag.IsEdition" />
+<input type="hidden" id="ViewBagSupplierCode" value="@ViewBag.SupplierCode" />
+<input type="hidden" id="ViewBagInsuredCode" value="@ViewBag.InsuredCode" />
+<input type="hidden" id="ViewBagCoinsurerCode" value="@ViewBag.CoinsurerCode" />
+<input type="hidden" id="ViewBagThirdPartyCode" value="@ViewBag.ThirdPartyCode" />
+<input type="hidden" id="ViewBagProducerCode" value="@ViewBag.ProducerCode" />
+<input type="hidden" id="ViewBagEmployeeCode" value="@ViewBag.EmployeeCode" />
+<input type="hidden" id="ViewBagReinsurerCode" value="@ViewBag.ReinsurerCode" />
+<input type="hidden" id="ViewBagTradeConsultant" value="@ViewBag.TradeConsultant" />
+<input type="hidden" id="ViewBagAgentCode" value="@ViewBag.AgentCode" />
+<input type="hidden" id="ViewBagIsPreliquidation" value="@ViewBag.IsPreliquidation" />
+<input type="hidden" id="ViewBagImputationType" value="@ViewBag.ImputationType" />
+<input type="hidden" id="ViewBagTempImputationId" value="@ViewBag.TempImputationId" />
+<input type="hidden" id="ViewBagPreliquidationId" value="@ViewBag.PreliquidationId" />
+<input type="hidden" id="ViewBagBranchId" value="@ViewBag.BranchId" />
+<input type="hidden" id="ViewBagSalePointId" value="@ViewBag.SalePointId" />
+<input type="hidden" id="ViewBagCompanyId" value="@ViewBag.CompanyId" />
+<input type="hidden" id="ViewBagGenerationDate" value="@ViewBag.GenerationDate" />
+<input type="hidden" id="ViewBagPersonTypeId" value="@ViewBag.PersonTypeId" />
+<input type="hidden" id="ViewBagDocumentNumber" value="@ViewBag.DocumentNumber" />
+<input type="hidden" id="ViewBagName" value="@ViewBag.Name" />
+<input type="hidden" id="ViewBagDescription" value="@ViewBag.Description" />
+<input type="hidden" id="ViewBagBeneficiaryId" value="@ViewBag.BeneficiaryId" />
+<input type="hidden" id="ViewBagAmount" value="@ViewBag.Amount" />
+<input type="hidden" id="ViewBagParameterMulticompany" value="@ViewBag.ParameterMulticompany" />
+<input type="hidden" id="ViewBagUserId" value="@ViewBag.UserId" />
+<input type="hidden" id="ViewBagUserNick" value="@ViewBag.UserNick" />
+<input type="hidden" id="ViewBagReceiptNumber" value="@ViewBag.ReceiptNumber" />
+<input type="hidden" id="ViewBagLoadPreliquidationSearchLink" value="@Url.Content(Global.LoadPreliquidationSearchLink)" />
+<input type="hidden" id="ViewBagLoadTempPreliquidationSearchLink" value="@Url.Content(Global.LoadTempPreliquidationSearchLink)" />
+<input type="hidden" id="ViewBagMainBillSearchLink" value="@Url.Content(Global.MainBillSearchLink)" />
+<input type="hidden" id="ViewBagThirdAccountingUsed" value="@ViewBag.ThirdAccountingUsed" />
+<input type="hidden" id="ViewBagThirdAccountingUsed" value="@ViewBag.ThirdAccountingUsed" />
+<input type="hidden" id="ViewBagApplyCollecId" value="@ViewBag.ApplyCollecId" />
+<input type="hidden" id="ViewBagDepositPrimes" value="@ViewBag.DepositPrimes" />
+
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/ApplicationPreliquidation")
+}

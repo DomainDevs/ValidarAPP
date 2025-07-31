@@ -1,0 +1,57 @@
+﻿@using System.Web.Mvc.Html
+@using Sistran.Core.Framework.UIF.Web.Resources
+﻿@using System.Web.UI.WebControls
+
+
+<div class="uif-panel">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <b>@Global.LayerNumber</b>
+            <input type="text" value="" id="layerNumber" placeholder="" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <b>@Global.LineId</b>
+            <input type="text" value="" id="lineId" placeholder="" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <b>@Global.CumulusKey</b>
+            <input type="text" value="" id="cumulusKey" placeholder="" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <b>@Global.Contract</b>
+            <input type="text" value="" id="contract" placeholder="" disabled="disabled" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <b>@Global.LevelNumber</b>
+            <input type="text" value="" id="levelNumber" placeholder="" disabled="disabled" />
+        </div>
+        <div class="uif-col-6">
+            <b>@Global.MovementSource</b>
+            <input type="text" value="" id="movementSource" placeholder="" disabled="disabled" />
+        </div>
+        <div class="uif-col-3">
+            <b>@Global.Amount</b>
+            <input class="form-control" id="newAmount" name="newAmount" type="text"
+                   data-val="true" data-val-required="@Global.ValidationRequired" onkeypress="return OnlyDecimalNumber(event, this)" />
+            <span class="text-danger" data-valmsg-for="newAmount" data-valmsg-replace="true"></span>
+        </div>
+        @Html.TextBox("sourceAmount", new { @hidden = "true" })
+        @Html.TextBox("variance",  new { @hidden = "true" })
+        @Html.TextBox("tempReinsuranceProcessId", new { @hidden = "true" })
+        @Html.TextBox("tempClaimReinsSourceId",  new { @hidden = "true" })
+
+
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-9">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

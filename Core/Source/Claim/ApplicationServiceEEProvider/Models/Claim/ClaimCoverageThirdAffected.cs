@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sistran.Core.Application.ClaimServices.EEProvider.Models.Claim
+{
+    [DataContract]
+    public class ClaimCoverageThirdAffected
+    {
+        [DataMember]
+        public int Id { get; set; }
+
+        [DataMember]
+        public string Description { get; set; }
+
+        [DataMember]
+        public int ClaimCoverageId { get; set; }
+
+        [DataMember]
+        public string DocumentNumber { get; set; }
+
+        [DataMember]
+        public string Fullname { get; set; }
+    }
+}

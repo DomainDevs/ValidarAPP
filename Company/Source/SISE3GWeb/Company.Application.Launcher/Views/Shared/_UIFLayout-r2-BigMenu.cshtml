@@ -1,0 +1,321 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>SISE ENTERPRISE EDITION</title>
+    <link href="~/favicon-16x16.png" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google" content="notranslate" />
+
+    <link href="@Url.Content("~/Lib/framework/build/vendors/css/vendors-4.7.14.css")" rel="stylesheet" />
+    @*@Styles.Render("~/bundle/css/vendors-4.6.9")*@
+    <link href="@Url.Content("~/Content/unidaddenegocio.css")" rel="stylesheet" type="text/css" />
+    @*@Styles.Render("~/bundle/css/unidaddenegocio")*@
+    <link href="@Url.Content("~/Lib/framework/build/uif-touch-4.7.16.min.css")" rel="stylesheet" />
+    @*@Styles.Render("~/bundle/css/uif-touch-4.6.9")*@
+
+    @*@Styles.Render("~/bundle/app-style")*@
+
+    @*<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">*@
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">*@
+    @*<link href="~/Content/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css" rel="stylesheet" />*@
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />*@
+    <link href="~/Content/fonts/font-awesome/web-fonts-with-css/css/fontawesome.min.css" rel="stylesheet" />
+    @*@Styles.Render("~/bundle/css/fontawesome")*@
+    @RenderSection("styles", required: false)
+    <style>
+        .blockUI {
+            z-index: 1999 !important;
+        }
+    </style>
+</head>
+<body class="notranslate">
+    <div class="loader main-loader">
+        <div class="spinner spinner-three-bounce">
+            <i class="fa fa-circle-o-notch fa-spin fa-4x"></i>
+        </div>
+    </div>
+    @if (Request.IsAuthenticated)
+    {
+        <nav class="uif-nav">
+
+            @if (!(Request.Params["type"] == "9" && Request.Params["Cause"] != null))
+            {
+                <a class="logo" href="@Url.Content("~/")" style="justify-content:space-around">
+                    <img style="width:80px" src="@Url.Content("~/Content/images/LogoBlancoSise.png")" alt="" />
+                    <span style="border: 1px solid gray;background:gray; height:53px"></span>
+                    <img src="@Url.Content("~/Content/images/LogoSmall01.png")" style="width:118px !important;" alt="" />
+                </a>
+                <div id="main-menu" class="uif-main-menu"></div>
+            }
+            else
+            {
+                <a class="logo" href="#" style="justify-content:space-around">
+                    <img style="width:80px" src="@Url.Content("~/Content/images/LogoBlancoSise.png")" alt="" />
+                    <span style="border: 1px solid gray;background:gray; height:53px"></span>
+                    <img src="@Url.Content("~/Content/images/LogoSmall01.png")" style="width:118px !important;" alt="" />
+                </a>
+            }
+        </nav>
+        <div class="page">
+            <header>
+                <div class="breadcrumb-wrapper">
+                    <a class="btn-toggle-main-menu" href="#">
+                        <i class="fa fa-bars"></i>
+                    </a>
+
+                    @RenderSection("breadcrumb", required: false)
+                    <ol class="breadcrumb"></ol>
+                </div>
+
+                <div class="notifications">
+					<div class="">
+						<div class="btn global-header-notification-button" id="qsise">
+							<a class="btn" target="_blank" href="@Url.Action("AuthenticationQsise", "Account", new {@Area = ""})"><i class="fa">Q</i></a>
+						</div>
+					</div>
+                    <div class="dropdown">
+                        <div class="btn dropdown-toggle global-header-notification-button" data-toggle="dropdown" id="notificate1">
+                            <i class="fa fa-bell"></i>
+                            <div class="notification-counter" id="countNotificate1"></div>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <div class="btn dropdown-toggle global-header-notification-button" data-toggle="dropdown">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a>@User.Identity.Name</a></li>
+                            <li><a href="@Url.Action("LogOff", "Account", new {@Area = ""})">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            @RenderSection("title", required: false)
+
+            <div class="main-container">
+                <div class="main-container-wrapper">
+                    <div class="row">
+                        <div class="col-xs-12 main-content">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @RenderSection("toolbar", required: false)
+        </div>
+    }
+    else
+    {
+        @RenderBody()
+    }
+
+    @RenderSection("modals", required: false)
+    <script>
+        rootPath = '@Url.Content("~/")';
+        var Resources = {};
+        CKEDITOR_BASEPATH = "@Url.Content("~/Scripts/CKEditor/")";
+    </script>
+    @*<script src="@Url.Content("~/Scripts/es6-promise.auto.min.js")"></script>*@
+    @Scripts.Render("~/bundle/js/es6-promise.auto")
+    <script src="@Url.Content("~/Lib/framework/build/vendors/js/vendors-4.7.14.js")"></script>
+    @*@Scripts.Render("~/bundle/js/vendors469")*@
+    <script src="@Url.Content("~/Lib/framework/build/uif-touch-4.7.16.min.js")"></script>
+    @*@Scripts.Render("~/bundle/js/touch-4.6.9")*@
+    @*<script src="@Url.Content("~/Lib/framework/build/uif-touch-4.0.0-alpha.es.js")"></script>*@
+    @Scripts.Render("~/bundle/js/touch-4.0.0")
+    @*<script src="@Url.Content("~/Lib/framework/build/polyfills.js")"></script>*@
+    @Scripts.Render("~/bundle/js/polyfills")
+    @*<script src="@Url.Content("~/Scripts/Menu.js")"></script>*@
+    @*@Scripts.Render("~/bundle/js/Menu")*@
+    @* UNEC *@
+    <script src="@Url.Content("~/Scripts/common-validations.js")" type="text/javascript"></script>
+    @*@Scripts.Render("~/bundle/js/common-validations")*@
+    @*<script src="@Url.Content("~/Scripts/jquery.center.min.js")" type="text/javascript"></script>*@
+    @Scripts.Render("~/bundle/js/jquery.center")
+    @*<script src="@Url.Content("~/Scripts/jquery.msg.min.js")" type="text/javascript"></script>*@
+    @Scripts.Render("~/bundle/js/jquery.msg")
+    @*<script src="@Url.Content("~/Scripts/blockUI-2.7.0.js")" type="text/javascript"></script>*@
+    @Scripts.Render("~/bundle/js/blockUI-2.7.0")
+    @* Fin UNEC *@
+
+    @Scripts.Render("~/bundle/js/Enums")
+    @Scripts.Render("~/uifr2/theme")
+    @*<script src="@Url.Content("~/Scripts/app/start.js")"></script>*@
+    @Scripts.Render("~/bundle/js/start")
+    @Scripts.Render("~/bundle/js/SignalR")
+    <script src="~/signalr/hubs"></script>
+    @Scripts.Render("~/bundle/js/Notification")
+    @Scripts.Render("~/bundle/js/CKEditor")
+
+    @* UNEC *@
+    <script src="@Url.Content("~/Accounting/Resource/Index")"></script>
+    <script src="@Url.Content("~/GeneralLedger/Resource/Index")"></script>
+    <script src="@Url.Content("~/AccountingClosing/Resource/Index")"></script>
+    <script src="@Url.Content("~/Reinsurance/Resource/Index")"></script>
+    <script type="text/javascript">
+         var ACC_ROOT = '@Url.Content("~/Accounting/")';
+         var GL_ROOT = '@Url.Content("~/GeneralLedger/")';
+         var ACL_ROOT = '@Url.Content("~/AccountingClosing/")';
+        var REINS_ROOT = '@Url.Content("~/Reinsurance/")';
+        var _URL_ROOT = '@Url.Content("~/")';
+    </script>
+    @* Fin UNEC *@
+
+
+
+    <script>
+        var AppResources;
+        var resourceManager = uif2.resourceManager({ path: rootPath + "Layout/GetResources" });
+        resourceManager.getResources().then(function (resources) {
+            AppResources = resources;
+
+        });
+        var GetQueryParameter = function (parameterName) {
+            var queryParameters = window.location.search.substring(1);
+            var parameters = queryParameters.split("&");
+            for (var i = 0; i < parameters.length; i++) {
+                var parameter = parameters[i].split("=");
+                if (parameter[0] == parameterName) {
+                    return parameter[1];
+                }
+            }
+        }
+
+        var AppResourcesPerson;
+        $.ajax({
+            type: "GET",
+            url: rootPath + "Layout/GetResources",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            async: false
+        }).done(function (data) {
+            Resources.Language = data;
+            if (GetQueryParameter("daysToExpite") > 0) {
+                $.UifNotify('show', { 'type': 'danger', 'message': Resources.Language.PasswordDaysToExpire.format(GetQueryParameter("daysToExpite")), 'autoclose': true });
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: rootPath + "Layout/GetGlobalResources",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            async: false
+        }).done(function (data) {
+            Resources.Global = data;
+            if (GetQueryParameter("daysToExpite") > 0) {
+                $.UifNotify('show', { 'type': 'danger', 'message': Resources.Language.PasswordDaysToExpire.format(GetQueryParameter("daysToExpite")), 'autoclose': true });
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: rootPath + "Layout/GetResourcesPerson",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            async: false
+        }).done(function (data) {
+            AppResourcesPerson = data;
+            if (GetQueryParameter("daysToExpite") > 0) {
+                $.UifNotify('show', { 'type': 'danger', 'message': Resources.Language.PasswordDaysToExpire.format(GetQueryParameter("daysToExpite")), 'autoclose': true });
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: rootPath + "Layout/GetModules",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            async: false
+        }).done(function (data) {
+            const dropdown = uif2.menu({
+                container: '#main-menu',
+                sourceData: data,
+                pathBase: rootPath,
+                searchCallBack: function () {
+                    console.log('Console CallBack Menu')
+                },
+                styleOptions: {
+                    primaryColor: '#E5EFFA',
+                    secondColor: '#f5f5f5',
+                    searchColor: '#f5f5f5',
+                    titleColor: '#09427c',
+                    searchTitleColor: '#09427c',
+                    labelColorLeft: '#09427c',
+                    labelColorRight: '#09427c',
+                    labelColorSearch: '#09427c',
+                }
+            });
+        });
+        window.onerror = function () { $.unblockUI(); }
+    </script>
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundle/js/fileupload")
+    @*<script src="@Url.Content("~/Scripts/JSLINQ.js")"></script>*@
+    @Scripts.Render("~/bundle/js/JSLINQ")
+    @*<script src="@Url.Content("~/Scripts/ValidateSession.js")"></script>*@
+    @Scripts.Render("~/bundle/js/ValidateSession")
+
+    <div>
+        @{ Html.RenderPartial("~/Areas/AuthorizationPolicies/Views/Summary/Index.cshtml");}
+        @Scripts.Render("~/bundle/js/LaunchPolicies")
+    </div>
+
+    <!-- UNEC -->
+    <!-- /.Modal de Eliminación Genérico-->
+    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p class="text-primary">@Global.DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-times"></i> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnDeleteModal">
+                        <i class="fa fa-check"></i> @Global.Accept
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- /.Modal de Elección -->
+    <div class="modal fade" id="modalChoose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h5 class="modal-title"><label id="chooseMessageTitle">@Global.Warning</label></h5>
+                </div>
+                <div class="modal-body" id="chooseMessageModal">
+
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnChoose">@Global.Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnNoChoose">@Global.No</button>
+                    <button type="button" class="btn btn-default " data-dismiss="modal" id="btnCancelChoose">@Global.Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Fin UNEC -->
+</body>
+</html>

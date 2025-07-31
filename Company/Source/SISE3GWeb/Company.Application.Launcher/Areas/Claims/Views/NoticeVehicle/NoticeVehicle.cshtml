@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+<form id="frmNoticeVehicle" autocomplete="off" class="form form-space-adjusted">
+    <div class="row">
+        <div class="uif-col-12">
+            <div>
+                <h5>
+                    <strong>@Resources.Language.ContactInformation</strong>
+                </h5>
+                @Html.Partial("../Notice/ContactInformationPartial")
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12">
+            <div>
+                <div>
+                    <h5>
+                        <strong>@Resources.Language.TypeInjuredVehicleData</strong>
+                    </h5>
+                    <div class="row">
+                        <div class="uif-col-4">
+                            <label class="field-required"> @Resources.Language.VehiclePlate</label>
+                            <input class="uif-input-search" data-displaykey="LicensePlate" type="text" placeholder="Tipee la Placa." maxlength="10" 
+                                   id="inputRiskPlate" name="inputRiskPlate" data-val="true" data-val-required="@Resources.Language.RequiredField" required>
+                            <span class="text-danger" data-valmsg-for="inputRiskPlate" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.VehicleMake</label>
+                            <select class="uif-select form-control" id="ddlVehicleMake" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="vehicleMake" data-filter="true" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="vehicleMake" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label class="field-required">@Resources.Language.VehicleModel</label>
+                            <select class="uif-select form-control" id="ddlVehicleModel" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                                    data-id="Id" data-name="Description" name="vehicleModel" data-filter="true" data-native="false" required></select>
+                            <span class="text-danger" data-valmsg-for="vehicleModel" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.LabelVersion</label>
+                            <select class="uif-select form-control" id="ddlVehicleVersion" data-val="true" 
+                                    data-id="Id" data-name="Description" name="vehicleVersion" data-filter="true" data-native="false" ></select>
+                            <span class="text-danger" data-valmsg-for="vehicleVersion" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.Year</label>
+                            <select class="uif-select form-control" id="ddlVehicleVersionYear" data-val="true" 
+                                    data-id="Id" data-name="Description" name="vehicleVersionYear" data-filter="true" data-native="false"></select>
+                            <span class="text-danger" data-valmsg-for="vehicleVersionYear" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.Color</label>
+                            <select class="uif-select form-control" id="ddlColors" data-val="true"
+                                    data-id="Id" data-name="Description" name="colors" data-filter="true" data-native="false"></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.DamageClassification</label>
+                            <select class="uif-select form-control" id="ddlDamageType" data-val="true"
+                                    data-id="Id" data-name="Description" name="damageType" data-filter="true" data-native="false"></select>
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.DamageResponsibility</label>
+                            <select class="uif-select form-control" id="ddlDamageResponsibility" data-val="true"
+                                    data-id="Id" data-name="Description" name="damageResponsibility" data-filter="true" data-native="false"></select>
+                        </div>
+                        <div class="uif-col-4">
+                            <label>@Resources.Language.AdditionalVehicleInformation</label>
+                            <input type="text" id="_aditionalInformation" name="_aditionalInformation" maxlength="100"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="uif-col-12">
+        <div id="accPolicy">
+            @Html.Partial("../Notice/PolicyInformationPartial")
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-12">
+        <div>
+            @Html.Partial("../Notice/ClaimNotice")
+        </div>
+    </div>
+</div>
+@*<div class="row">
+        <div class="uif-col-12">
+            <div id="coveragespanel">
+                <h5>
+                    <strong>@Resources.Language.AffectedCoverages</strong>
+                </h5>
+                @Html.Partial("CoveragesPartial")
+            </div>
+        </div>
+    </div>*@
+@* // -- // Modales // -- // *@
+
+<div class="uif-modal" id="modalSearchbyInsured">
+    <div class="uif-modalbody">
+        @Html.Partial("../NoticeVehicle/SearchPoliciesVehicleDialog")
+    </div>
+</div>

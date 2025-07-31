@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="TempBrokerCheckingAccTransView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="TempBrokerCheckingAccTransCode">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="TempBrokerCheckingAccTransCode" />
+        </SelectValue>
+        <SelectValue alias="TempApplicationCode">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="TempApplicationCode" />
+        </SelectValue>
+        <SelectValue alias="TempBrokerParentCode">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="TempBrokerParentCode" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="BranchName">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+        <SelectValue alias="SalePointCode">
+          <Column table-alias="SalePoint" name="SalePointCode" />
+        </SelectValue>
+        <SelectValue alias="SalePointName">
+          <Column table-alias="SalePoint" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CompanyId">
+          <Column table-alias="Company" name="CompanyId" />
+        </SelectValue>
+        <SelectValue alias="AccountingCompanyName">
+          <Column table-alias="Company" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AgentCode">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="AgentId" />
+        </SelectValue>
+        <SelectValue alias="DocumentNumber">
+          <Column table-alias="ListPersons" name="DocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="AgentName">
+          <Column table-alias="ListPersons" name="Name" />
+        </SelectValue>
+        <SelectValue alias="AccountingNature">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="AccountingNature" />
+        </SelectValue>
+        <SelectValue alias="CheckingAccountConceptCode">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="CheckingAccountConceptCode" />
+        </SelectValue>
+        <SelectValue alias="BranchAccountingConceptId">
+          <Column table-alias="BranchAccountingConcept" name="BranchAccountingConceptId" />
+        </SelectValue>
+        <SelectValue alias="PaymentConceptName">
+          <Column table-alias="AccountingConcept" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="Currency" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="CurrencyName">
+          <Column table-alias="Currency" name="Description" />
+        </SelectValue>
+        <SelectValue alias="TinyDescription">
+          <Column table-alias="Currency" name="TinyDescription" />
+        </SelectValue>
+        <SelectValue alias="IncomeAmount">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="IncomeAmount" />
+        </SelectValue>
+        <SelectValue alias="ExchangeRate">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="ExchangeRate" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AgentTypeCode">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="AgentTypeCode" />
+        </SelectValue>
+        <SelectValue alias="AgentAgencyCode">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="AgentAgencyId" />
+        </SelectValue>
+        <SelectValue alias="AccountingDate">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="AccountingDate" />
+        </SelectValue>
+        <SelectValue alias="TransactionNumber">
+          <Column table-alias="TempBrokerCheckingAccTrans" name="TransactionNumber" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <Join>
+                <Join>
+                  <Join>
+                    <Join>
+                      <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.TempBrokerCheckingAccTrans,  Core.Accounting.Entities" alias="TempBrokerCheckingAccTrans" />
+                      <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.AccountingConcept, Core.GeneralLedger.Entities" alias="AccountingConcept" />
+                      <criteria>
+                        <BinaryCriterion type="Equal">
+                          <Column table-alias="AccountingConcept" name="AccountingConceptCode" />
+                          <Column table-alias="TempBrokerCheckingAccTrans" name="CheckingAccountConceptCode" />
+                        </BinaryCriterion>
+                      </criteria>
+                    </Join>
+                    <ClassNameTable name="Sistran.Core.Application.GeneralLedger.Entities.BranchAccountingConcept, Core.GeneralLedger.Entities" alias="BranchAccountingConcept" />
+                    <criteria>
+                      <BinaryPredicate type="And">
+                        <BinaryCriterion type="Equal">
+                          <Column table-alias="BranchAccountingConcept" name="AccountingConceptCode" />
+                          <Column table-alias="AccountingConcept" name="AccountingConceptCode" />
+                        </BinaryCriterion>
+                        <BinaryCriterion type="Equal">
+                          <Column table-alias="BranchAccountingConcept" name="BranchCode" />
+                          <Column table-alias="TempBrokerCheckingAccTrans" name="BranchCode" />
+                        </BinaryCriterion>
+                      </BinaryPredicate>
+                    </criteria>
+                  </Join>
+                  <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Company,  Core.Accounting.Entities" alias="Company" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="Company" name="CompanyId" />
+                      <Column table-alias="TempBrokerCheckingAccTrans" name="AccountingCompanyCode" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Branch" name="BranchCode" />
+                    <Column table-alias="TempBrokerCheckingAccTrans" name="BranchCode" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Common.Entities.SalePoint, Core.Common.Entities" alias="SalePoint" />
+              <criteria>
+                <BinaryPredicate type="And">
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="SalePoint" name="SalePointCode" />
+                    <Column table-alias="TempBrokerCheckingAccTrans" name="SalePointCode" />
+                  </BinaryCriterion>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="SalePoint" name="BranchCode" />
+                    <Column table-alias="TempBrokerCheckingAccTrans" name="BranchCode" />
+                  </BinaryCriterion>
+                </BinaryPredicate>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.ListPersons,  Core.Accounting.Entities" alias="ListPersons" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="ListPersons" name="IndividualId" />
+                <Column table-alias="TempBrokerCheckingAccTrans" name="AgentId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Currency, Core.Common.Entities" alias="Currency" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Currency" name="CurrencyCode" />
+              <Column table-alias="TempBrokerCheckingAccTrans" name="CurrencyCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

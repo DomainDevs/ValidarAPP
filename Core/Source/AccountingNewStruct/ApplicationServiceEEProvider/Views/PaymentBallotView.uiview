@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="PaymentBallotView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PaymentBallotCode">
+          <Column table-alias="PaymentBallot" name="PaymentBallotCode" />
+        </SelectValue>
+        <SelectValue alias="Status">
+          <Column table-alias="PaymentBallot" name="Status" />
+        </SelectValue>
+        <SelectValue alias="UserId">
+          <Column table-alias="PaymentBallot" name="UserId" />
+        </SelectValue>
+        <SelectValue alias="CurrencyCode">
+          <Column table-alias="PaymentBallot" name="CurrencyCode" />
+        </SelectValue>
+        <SelectValue alias="RegisterDate">
+          <Column table-alias="PaymentTicket" name="RegisterDate" />
+        </SelectValue>
+        <SelectValue alias="PaymentTicketCode">
+          <Column table-alias="PaymentTicket" name="PaymentTicketCode" />
+        </SelectValue>
+        <SelectValue alias="CashAmount">
+          <Column table-alias="PaymentTicket" name="CashAmount" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="PaymentTicket" name="BranchCode" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentBallot, Core.Accounting.Entities" alias="PaymentBallot" />
+            <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentTicketBallot, Core.Accounting.Entities" alias="PaymentTicketBallot" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="PaymentTicketBallot" name="PaymentBallotCode" />
+                <Column table-alias="PaymentBallot" name="PaymentBallotCode" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PaymentTicket, Core.Accounting.Entities" alias="PaymentTicket" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="PaymentTicket" name="PaymentTicketCode" />
+              <Column table-alias="PaymentTicketBallot" name="PaymentTicketCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

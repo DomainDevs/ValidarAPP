@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace Sistran.Core.Framework.UIF.Web.Areas.Reports.Incentive.Models
+{
+    public class IncentiveViewModel
+    {
+        [Display(Name = "LabelDateStart", ResourceType = typeof(App_GlobalResources.Language))]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime labelInitialDateOfSelection { get; set; }
+
+        [Display(Name = "DateUntil", ResourceType = typeof(App_GlobalResources.Language))]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime labelFinalyDateOfSelection { get; set; }
+
+        [MaxLength(50)]
+        [Display(ResourceType = typeof(App_GlobalResources.Language), Name = "LabelPolicyNumber")]
+        public string Description { get; set; }
+    }
+}

@@ -1,0 +1,266 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Massive.Models.MassiveViewModel
+
+@{
+    Layout = null;
+}
+
+<script id="title-template" type="text/template">
+    <div class="column-70" id="titleMain">
+        @Resources.Language.LoadMassive
+    </div>
+    <div class="column-30 even" id="documentSearch">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputLoadId", @placeholder = @Resources.Language.PlaceHolderLoadSearch, })
+        <button class="btn btn-default" id="btnAdvancedSearch"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button type="button" class="btn btn-default" id="btnPrint">
+            <i class="fa fa-print" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.LabelPrinter
+        </button>
+        <button class="btn btn-default" id="btnErrors">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonErrors
+        </button>
+        <button class="btn btn-default" id="btnReport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonReport
+        </button>
+        <button class="btn btn-default" id="btnExclude">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExclude
+        </button>
+        <button class="btn btn-default" id="btnDeleteLoad">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonDeleteLoad
+        </button>
+        <button type="button" class="btn btn-primary" id="btnNewLoad">
+            <i class="fa fa-file-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonNew
+        </button>
+        <button class="btn btn-primary" id="btnThirdParty">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonThirdParty
+        </button>
+        <button class="btn btn-primary" id="btnTariff">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonTariff
+        </button>
+        <button class="btn btn-primary" id="btnIssue">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonEmit
+        </button>
+    </div>
+</script>
+
+
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formMassive" autocomplete="off" class="form">
+    <div class="row">
+        <div class="uif-col-12">
+            <div class="row">
+                <div class="uif-col-4">
+                    <label class="field-required">@Resources.Language.LabelProcessType</label>
+                    <select class="uif-select form-control" id="selectProcessType" data-id="Value" data-name="Text" name="ProcessTypeId"
+                            data-val="true" data-val-required="@Resources.Language.ProcessTypeObligatory"></select>
+                    @Html.ValidationMessageFor(model => model.ProcessTypeId)
+                </div>
+                <div class="uif-col-4" id="divLoadType">
+                    <label class="field-required">@Resources.Language.LabelTypeLoad</label>
+                    <select class="uif-select form-control" id="selectLoadType" data-id="Id" data-name="Description" name="LoadTypeId"
+                            data-val="true" data-val-required="@Resources.Language.UploadTypeObligatory"></select>
+                    @Html.ValidationMessageFor(model => model.LoadTypeId)
+                </div>
+                <div class="uif-col-4" id="divPrefixCommercial">
+                    <label class="field-required">@Resources.Language.LabelPrefixCommercial</label>
+                    <select class="uif-select form-control" id="selectPrefix" data-id="Id" data-name="Description" name="PrefixId"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"></select>
+                    @Html.ValidationMessageFor(model => model.PrefixId)
+                </div>
+            </div>
+            <div id="divMassive">
+
+                <div class="row">
+                    <div class="uif-col-4">
+                        <label>@Resources.Language.FileType</label>
+                        <select class="uif-select form-control" id="selectFileType" data-id="Value" data-name="Text" name="FileTypeId" disabled="disabled"></select>
+                    </div>
+                    <div class="uif-col-8">
+                        <label class="field-required">@Resources.Language.LabelNameLoad</label>
+                        @Html.TextBoxFor(model => model.LoadName, new { id = "inputLoadName", maxlength = "60" })
+                        @Html.ValidationMessageFor(model => model.LoadName)
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="uif-col-10">
+                    <label class="field-required">@Resources.Language.LabelExcelFile</label>
+                    @Html.TextBoxFor(model => model.FileName,
+                        new Dictionary<string, Object>
+                        {
+                            {"input,","false"},
+                            { "id","inputFile"},
+                            { "class", "uif-inputfile"},
+                            { "type","file"},
+                            {"data-text",Resources.Language.ChooseFile},
+                            {"accept",".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"}
+                        })
+                </div>
+                <div class="uif-col-2">
+                    <div class="without-label" style="float: right">
+                        <button type="button" class="btn btn-default secondary-Colombia" id="btnAddLoad">
+                            @Resources.Language.ButtonLoad
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-10 withOutMargin">
+                    <div class="progress" style="height: 35px">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">0% complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="uif-col-12" id="divCollectivePolicies">
+            <table data-paginate="false" data-selectiontype="none" class="uif-table" id="TableCollectiveIssue" data-title="" data-filter="false">
+                <thead>
+                    <tr>
+                        <th data-property="DocumentNumber" class="input-money">@Resources.Language.LabelPolicy</th>
+                        <th data-property="Premium">@Resources.Language.LabelTotalPremium</th>
+                        <th data-property="Commiss">@Resources.Language.LabelCommission</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="wizard" class="uif-wizard">
+        <div class="uif-step" id="step1" data-title="@Resources.Language.LabelChargue">
+            @*<span class="" aria-hidden="false">oricesihdhhdd</span>
+                <div class="row" id="labelStatusChargue">
+                    <span  class="" aria-hidden="false">oricesihdhhdd</span>
+                </div>*@
+
+        </div>
+        <div class="uif-step" id="step2" data-title=@Resources.Language.ButtonThirdParty>
+            @*<div class="row" id="labelStatusThirdParty">
+                    <span  class="" aria-hidden="false">llgllglg</span>
+                </div>*@
+
+
+        </div>
+        <div class="uif-step" id="step3" data-title=@Resources.Language.ButtonTariff>
+            @*<div class="row" id="labelStatusTariff">
+                    <span  class="" aria-hidden="false">hjghjgjg</span>
+                </div>*@
+
+
+        </div>
+        <div class="uif-step" id="step4" data-title=@Resources.Language.ButtonEmit>
+            @*<div class="row" id="labelStatusEmit" >
+                    <span class="" aria-hidden="false"></span>
+                </div>*@
+
+
+        </div>
+
+    </div>
+    <div class="row" id="stepsGeneral">
+        @*<div class="uif-col-2">
+                <label>@Resources.Language.LabelStateLoad</label>
+                @Html.TextBoxFor(model => model.StateDescription, new { id = "inputStateDescription", disabled = "disabled" })
+            </div>*@
+        <div class="uif-col-2">
+            <label>@Resources.Language.TotalRecords</label>
+            @Html.TextBoxFor(model => model.RecordsTotal, new { id = "inputRecordsTotal", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelCorrectRecords</label>
+            @Html.TextBoxFor(model => model.RecordsProcessed, new { id = "inputRecordsProcessed", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.Pendings</label>
+            @Html.TextBoxFor(model => model.RecordsPendings, new { id = "inputRecordsPendings", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelTariffed</label>
+            @Html.TextBoxFor(model => model.RecordsTariffed, new { id = "inputRecordsTariffed", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelForRate</label>
+            @Html.TextBoxFor(model => model.RecordsForRate, new { id = "inputRecordsForRate", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelIssued</label>
+            @Html.TextBoxFor(model => model.RecordsIssued, new { id = "inputRecordsIssued", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.LabelForIssue</label>
+            @Html.TextBoxFor(model => model.RecordsForIssue, new { id = "inputRecordsForIssue", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.WithEvents</label>
+            @Html.TextBoxFor(model => model.RecordsEvents, new { id = "inputRecordsEvents", disabled = "disabled" })
+        </div>
+        <div class="uif-col-2">
+            <label>@Resources.Language.WithErrors</label>
+            @Html.TextBoxFor(model => model.RecordsErrors, new { id = "inputRecordsErrors", disabled = "disabled" })
+        </div>
+    </div>
+
+
+</form>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundle/js/Massive");
+}
+
+
+<div class="uif-modal" id="modalDefaultSearch">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Underwriting/Views/Underwriting/DefaultResults.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalPrinting">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Massive/Views/Printing/Printing.cshtml")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalExclude">
+    <div class="uif-modalbody">
+        @Html.Partial("~/Areas/Massive/Views/Exclude/Exclude.cshtml")
+    </div>
+</div>

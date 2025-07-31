@@ -1,0 +1,126 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+<script id="paymentDisplayTemplate" type="text/template">
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <strong>@Global.NumberPayment:</strong>
+        </div>
+        <div class="uif-col-5">
+            <span class="label label-success">{{Number}} </span>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <strong>@Global.PaymentDate:</strong>
+        </div>
+        <div class="uif-col-5">
+            &nbsp;{{Date}}
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <strong>@Global.Amount:</strong>
+        </div>
+        <div class="uif-col-5">
+            {{Amount.Value}}
+        </div>
+    </div>
+
+</script>
+
+<form id="formLevelPayment" onsubmit="return false" class="form">
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertLevelPayment"></div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+
+        <div class="uif-col-7">
+            <div class="row">
+                <div class="uif-col-7">
+                    <b>@Global.NumberPayment</b>
+                    <input type="text"
+                           id="noPayment"
+                           readonly="readonly"
+                           name="noPayment"
+                           style="text-align: left" />
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-7">
+                    <b>@Global.PaymentDate</b>
+                    <input type="text" class="uif-datepicker"
+                           data-mask="99/99/9999"
+                           id="paymentDate"
+                           name="paymentDate"
+                           data-val="true"
+                           maxlength="10"
+                           data-val-required='@Global.RequiredField' />
+                    <span class="text-danger" data-valmsg-for="paymentDate" data-valmsg-replace="true" />
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="uif-col-7">
+                    <b>@Global.Amount</b>
+                    <input type="text"
+                           id="paymentAmount"
+                           name="paymentAmount"
+                           maxlength="16"
+                           style="text-align: right"
+                           onkeypress="return OnlyDecimalNumber(event, this)"
+                           data-val="true"
+                           data-val-required='@Global.RequiredField'
+                           required />
+                    <span class="text-danger" data-valmsg-for="paymentAmount" data-valmsg-replace="true" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-7">
+                    <b>@Global.TotalPayments</b> <p id="totalPayments"></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="uif-col-7">
+                    <b>@Global.DepositPremiumPayments</b> <p id="depositPremiumPayments"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-5">
+                    <br />
+                    <button type="submit" class="btn btn-primary" id="SaveAddLevelPayment">@Global.Save</button>
+                    <button type="button" class="btn btn-default" id="CancelLevelPayment">@Global.Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="uif-col-5">
+            <div class="uif-listview" id="levelPaymentListView">
+                <div class="footer">
+                    <div class="uif-summary col-xs-12">
+                        <div class="items">
+                            <div class="item">
+                                <div>
+                                    <div><strong>@Global.TotalAmount</strong></div>
+                                    <div><b id="totalLevelPaymentAmount">$0.00</b></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</form>

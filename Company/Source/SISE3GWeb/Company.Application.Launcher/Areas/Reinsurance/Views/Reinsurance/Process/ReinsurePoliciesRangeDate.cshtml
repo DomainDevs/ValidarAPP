@@ -1,0 +1,181 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.ReinsureProcessMassive;    
+}
+
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.ReinsureProcessMassive</li>
+        <li>@Global.Process  @Global.ReinsureProcessMassive</li>
+    </ol>
+}
+
+
+
+@*BOTONES DE LA BARRA INFERIOR*@
+@section Toolbar
+{
+    <footer>
+        <button id="btnReinsuranceMassive" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-play"></span>  @Global.btnPlay
+        </button>
+        <button id="btnCancel" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-remove"></span>  @Global.Clean
+        </button>
+
+        <button id="btnRefresh" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-refresh"></span>  @Global.btnRefresh
+        </button>
+    </footer>
+}
+<form id="formReinsuranceMassive" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <b> @Global.ProcessType</b>
+            <select class="uif-select form-control" id="selectTypeProcess" name="selectTypeProcess"
+                    data-source='@Url.Content("~/Reinsurance/Process/GetTypeProcessMassive")'
+                    data-id="Id"
+                    data-native="true"
+                    data-val="true"
+                    data-name="Description"
+                    data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="selectTypeProcess" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <b> @Global.DateFrom :</b>
+            <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="dateFrom" name="dateFrom"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="dateFrom" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <b> @Global.DateTo :</b>
+            <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="dateTo" name="dateTo"
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="dateTo" data-valmsg-replace="true" />
+        </div>
+
+    </div>
+</form>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertMassivePrefix"></div>
+    </div>
+</div>
+<form>
+    <div class="uif-row">
+        @*POR TABLA RAMO*@
+        <div class="panel panel-defauxlt" id="home">
+            <div id="accResultados" class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#bitacorashome" href="#panelPrefix">
+                        <label>...........</label>
+                    </a>
+                </h4>
+            </div>
+            <div id="panelPrefix" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="uif-col-12" id="SelectPrefixMassive">
+                        <table data-title="@Global.Prefix" class=" uif-table" id="TablePrefixMassive"
+                               data-add="false"
+                               data-delete="false"
+                               data-filter="false"
+                               data-edit="false"
+                               data-selectiontype="multiple"
+                               data-paginate="true"
+                               data-source='@Url.Content("~/Reinsurance/Process/GetPrefix")'
+                               data-selection>
+                            <thead>
+                                <tr>
+                                    <th data-visible="false" data-property="Id">Id</th>
+                                    <th data-property="Description">@Global.Prefix</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertMassive"></div>
+    </div>
+</div>
+
+    <table data-title="
+    <b>@Global.ReinsuranceProcess</b>" class="uif-table" id="tableReinsuranceProcess"
+    data-selectionType="none" data-paginate="false" data-filter="false">
+    <thead>
+    <tr>
+    <th data-property="TempReinsuranceProcessId">@Global.ProcessId</th>
+    <th data-property="Description">@Global.Description</th>
+    <th data-property="RecordsNumber">@Global.RecordsNumber</th>
+    <th data-property="RecordsProcessed">@Global.ProcessedRecords</th>
+    <th data-property="RecordsFailed">@Global.FailedRecords</th>
+    <th data-property="Progress">@Global.Progress</th>
+    <th data-property="Elapsed">@Global.Elapsed</th>
+    <th data-property="Status" data-visible="false"></th>
+
+
+
+
+
+
+    </tr>
+    </thead>
+    <tbody></tbody>
+    </table>
+
+
+    @section modals{
+
+        @*VENTANAS MODALES DE CONFIRMACION*@
+        <!-- Modal reaseguros -->
+        <div class="modal fade" id="modalReinsuranceMassive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><b>@Global.ReinsureProcessMassive</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        @Global.ConfirmMessageProcess
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnModalReinsuranceMassive">@Global.Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@Global.No</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- Modal Confirma proceso de masivos reaseguros -->
+        <div class="modal fade" id="modalMassiveTotRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><b>@Global.ReinsureProcessMassive</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <b id="pnlModalTotRecords"></b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnModalMassive">@Global.Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalMassiveNo">@Global.No</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    }
+
+    <input type="hidden" id="TempReinsuranceProcessId" value="0" />
+
+    @section scripts{
+        @Scripts.Render("~/reinsurance/bundles/ReinsurePoliciesRangeDate")
+    }

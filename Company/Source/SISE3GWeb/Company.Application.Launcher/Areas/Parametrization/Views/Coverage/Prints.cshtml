@@ -1,0 +1,114 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.CoCoverageViewModel
+<script id="tmpForPrints" type="text/template">
+
+	{{#ifCond Status "==" 2}}
+	<div>
+		<div>
+			@Resources.Language.LabelDescriptionCoverage: <label class="success"> {{Description}}</label> <br />
+			@Resources.Language.LabelDescriptionLimitedNameCoverage:  <label class="success"> {{ImpressionValue}}</label>
+		</div>
+		{{#ifCond IsImpression "==" true}}
+		<div>
+			@Resources.Language.LabelPrinting:<strong class="success"> @Resources.Language.Yes</strong>
+		</div>
+		{{/ifCond}}
+	</div>
+	{{else ifCond Status "==" 3}}
+	<div>
+		<div>
+			@Resources.Language.LabelDescriptionCoverage: <label class="warning"> {{Description}}</label> <br />
+			@Resources.Language.LabelDescriptionLimitedNameCoverage:  <label class="warning"> {{ImpressionValue}}</label>
+		</div>
+		{{#ifCond IsImpression "==" true}}
+		<div>
+			@Resources.Language.LabelPrinting:<strong class="warning"> @Resources.Language.Yes</strong>
+		</div>
+		{{/ifCond}}
+	</div>
+	{{else ifCond Status "==" 4}}
+	<div>
+		<div>
+			@Resources.Language.LabelDescriptionCoverage: <label class="danger"> {{Description}}</label><br />
+			@Resources.Language.LabelDescriptionLimitedNameCoverage:  <label class="danger"> {{ImpressionValue}}</label>
+		</div>
+		{{#ifCond IsImpression "==" true}}
+		<div>
+			@Resources.Language.LabelPrinting:<strong class="danger"> @Resources.Language.Yes</strong>
+		</div>
+		{{/ifCond}}
+	</div>
+	{{else }}
+	<div>
+		<div>
+			@Resources.Language.LabelDescriptionCoverage: {{Description}}<br />
+			@Resources.Language.LabelDescriptionLimitedNameCoverage: {{ImpressionValue}}</>
+		</div>
+		{{#ifCond IsImpression "==" true}}
+		<div>
+			@Resources.Language.LabelPrinting:<strong> @Resources.Language.Yes</strong>
+		</div>
+		{{/ifCond}}
+	</div>
+	{{/ifCond}}
+</script>
+
+<div class="row">
+	<div class="uif-col-6">
+		<form id="formCoCoverage" class="form">
+			<input type="hidden" name="IdPrint" id="IdPrint" />
+
+			<div>
+				@Html.LabelFor(model => model.ImpressionNamePrint, new { @class = "field-required" })
+				@Html.TextBoxFor(model => model.ImpressionNamePrint)
+				@Html.ValidationMessageFor(model => model.ImpressionNamePrint)
+			</div>
+			<br />
+			<div>
+				@Html.LabelFor(model => model.ImpressionValuePrint)
+				@Html.TextBoxFor(model => model.ImpressionValuePrint)
+				@Html.ValidationMessageFor(model => model.ImpressionValuePrint)
+			</div>
+			<br />
+			<div class="row">
+				<div class="uif-col-12">
+					<div class="without-label">
+						<input type="checkbox" id="IsImpressionPrint" name="IsImpressionPrint" />
+						<label for="IsImpressionPrint">@Resources.Language.LabelPrinting</label>
+					</div>
+				</div>
+			</div>
+			@*<div class="row">
+					<div class="uif-col-4">
+						<div class="without-label">
+							<input type="checkbox" id="IsAccMinPremiumPrint" name="IsAccMinPremiumPrint" />
+							<label for="IsAccMinPremiumPrint">@Resources.Language.IncludedMinimumPremium</label>
+						</div>
+					</div>
+					<div class="uif-col-4">
+						<div class="without-label">
+							<input type="checkbox" id="IsImpressionPrint" name="IsImpressionPrint" />
+							<label for="IsImpressionPrint">@Resources.Language.PrintCoverage</label>
+						</div>
+					</div>
+					<div class="uif-col-4">
+						<div class="without-label">
+							<input type="checkbox" id="IsAssistancePrint" name="IsAssistancePrint" />
+							<label for="IsAssistancePrint">@Resources.Language.IsAssistance</label>
+						</div>
+					</div>
+				</div>*@
+		</form>
+	</div>
+	<div class="uif-col-6  fit-col-secondary">
+		<div id="listViewPrintsCoverage" class="uif-listview"></div>
+	</div>
+</div>
+<div class="row">
+	<div class="uif-col-6" id="btnPrintsCoverage">
+		<div class="pull-right">
+			<button type="button" class="btn btn-default" id="btnNewPrint">@Resources.Language.ButtonNew</button>
+			<button type="button" class="btn btn-primary" id="btnSavePrint">@Resources.Language.ButtonAdd</button>
+		</div>
+	</div>
+
+</div>

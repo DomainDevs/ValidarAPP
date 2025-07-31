@@ -1,0 +1,142 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.RatingZoneViewModel
+@{
+    Layout = null;
+}
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column">
+        @Resources.Language.LabelRateZone
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("txtSearch", null, new { @class = "uif-input-search", placeholder = Resources.Language.SearchRatingZone, maxlength = "50" })
+        <button class="btn btn-default" id="btnSearchAdv"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSaveRatingZone">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+<script type="text/template" id="templateRatingZone">
+	{{#ifCond StatusTypeService "==" 2}}
+	<div>
+		@Resources.Language.LabelRateZone: <strong class="success">{{Description}}</strong>
+	</div>
+	{{else ifCond StatusTypeService "==" 3}}
+	<div>
+		@Resources.Language.LabelRateZone: <strong class="warning">{{Description}}({{RatingZoneCode}})</strong>
+	</div>
+	{{else ifCond StatusTypeService "==" 4}}
+	<div>
+		@Resources.Language.LabelRateZone: <strong class="danger">{{Description}}({{RatingZoneCode}})</strong>
+	</div>
+	{{else}}
+	<div>
+		@Resources.Language.LabelRateZone: <strong>{{Description}}({{RatingZoneCode}})</strong>
+	</div>
+	{{/ifCond }}
+	<div><label>{{PrefixDescription}}</label></div>
+	{{#if IsDefault}}
+	<div>
+		<div><strong> @Resources.Language.LabelDefault</strong></div>
+	</div>
+	{{/if}}
+</script>
+
+<form class="form without-space" id="formRatingZone">
+	<input id="hdnIndex" type="hidden" />
+	@Html.HiddenFor(model => model.StatusTypeService)
+	@Html.HiddenFor(model => model.RatingZoneCode)
+	<div class="row">
+		<div class="uif-col-7">
+			<br />
+            <div class="row">
+                <div class="uif-col-4">
+                    @Html.LabelFor(model => model.PrefixCode, new { @class = "field-required" })
+                    <select class="uif-select form-control" id="PrefixCode"
+                            data-id="Id" data-name="Description" name="PrefixCode"
+                            data-val="true" data-val-required="@Resources.Language.ErrorRequired"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.PrefixCode)
+                </div>
+                <div class="uif-col-4">
+                    @Html.LabelFor(model => model.Description, new { @class = "field-required" })
+                    @Html.TextBoxFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+			<div class="row">
+				<div class="uif-col-4">
+					@Html.LabelFor(model => model.SmallDescription, new { @class = "field-required" })
+					@Html.TextBoxFor(model => model.SmallDescription)
+					@Html.ValidationMessageFor(model => model.SmallDescription)
+				</div>
+				<div class="uif-col-4">
+					<br />
+					@Html.CheckBoxFor(model => model.IsDefault)
+					@Html.LabelFor(model => model.IsDefault)
+					@Html.ValidationMessageFor(model => model.IsDefault)
+				</div>
+			</div>
+			<br />
+			<br />
+			<div class="row">
+				<div class="uif-col-6">
+					<button type="button" class="btn btn-default secondary-Colombia" id="btnCities">@Resources.Language.LabelCities</button>
+				</div>
+			</div>
+
+		</div>
+		<div class="uif-col-5 fit-col-secondary">
+			<div id="listRatingZone" class="uif-listview"></div>
+		</div>
+	</div>
+
+	<div class="row lineDividing">
+		<div class="uif-col-7 center-col-right">
+			<div class="pull-right width-save">
+				<button type="button" class="btn btn-default" id="btnNewRatingZone">
+					@Resources.Language.NewForm
+				</button>
+				<button type="button" class="btn btn-primary" id="btnAddRatingZone">
+					@Resources.Language.AddForm
+				</button>
+			</div>
+		</div>
+		<div class="uif-col-5" id="summaryAgent">
+			<div class="uif-summary">
+				<div class="items">
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+@*Modales*@
+<div class="uif-modal" id="modalCities">
+    <div class="uif-modalbody">
+        @Html.Partial("Cities")
+    </div>
+    <div id="buttonsModalCities" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalCitiesClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnModalCitiesAccept">@Resources.Language.ButtonSave</button>
+    </div>
+</div>

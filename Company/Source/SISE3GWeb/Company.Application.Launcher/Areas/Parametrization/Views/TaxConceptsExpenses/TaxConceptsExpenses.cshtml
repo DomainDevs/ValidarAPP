@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.TaxConceptsExpenses
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="btnBottomMain">
+        <button type="button" class="btn btn-default" id="btnClose">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            @Resources.Language.Close
+        </button>
+        <button type="button" class="btn btn-primary" id="btnSave">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            @Resources.Language.Save
+        </button>
+
+    </div>
+</script>
+<script id="templateAccounting" type="text/templateAccounting">
+    <div>Impuesto: <strong>{{TaxDescription}}</strong></div>
+    <div>Categoria: <strong>{{TaxCategoryDescription}}</strong></div>
+    {{#ifCond EnableAddExpense "==" 1}}
+    <div>Automatico: <strong class="success">SI</strong></div>
+    {{else}}
+    <div>Automatico: <strong class="danger">NO</strong></div>
+    {{/ifCond}}
+    {{#ifCond EnableAutomatic "==" 1}}
+    <div>Suma al Gasto: <strong class="success">SI</strong></div>
+    {{else}}
+    <div>Suma al Gasto: <strong class="danger">NO</strong></div>
+    {{/ifCond}}
+</script>
+<br />
+<form id="formConceptsExpenses">
+    <div class="row">
+        <div class="uif-col-6 fit-col-main">
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelBranch</label>
+                    <select class="uif-select form-control" id="selectBranch" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" name="selectBranch" required></select>
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelExistConcept</label>
+                    <select class="uif-select form-control" id="selectConcept" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" name="selectConcept" required></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelTaxes</label>
+                    <select class="uif-select form-control" id="selectTax" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" name="selectTax" required></select>
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelCategory</label>
+                    <select class="uif-select form-control" id="selectCategory" data-val="true" data-val-required="@Resources.Language.RequiredField"
+                            data-id="Id" data-name="Description" data-native="false" data-filter="true" name="selectCategory" required></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-3">
+                    <div class="without-label">
+                        <input type="checkbox" id="chkAutomatic" name="chkAuthorized" />
+                        <label for="chkAutomatic">@Resources.Language.LabelAutomatic</label>
+                    </div>
+                </div>
+                <div class="uif-col-4">
+                    <div class="without-label">
+                        <input type="checkbox" id="chkExpense" name="chkAuthorize" />
+                        <label for="chkExpense">@Resources.Language.Addtotheexpense</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" id="btnNew">
+                            <span aria-hidden="true"></span>
+                            @Resources.LanguagePerson.New
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btnAccept">
+                            <span aria-hidden="true"></span>
+                            @Resources.LanguagePerson.Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-5 fit-col-secondary">
+            <div id="listText" class="uif-listview"></div>
+        </div>
+    </div>
+</form>

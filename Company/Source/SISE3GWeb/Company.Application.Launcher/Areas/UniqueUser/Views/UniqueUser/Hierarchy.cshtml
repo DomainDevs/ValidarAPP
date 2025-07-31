@@ -1,0 +1,84 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.HierarchyModelsView
+@using Sistran.Core.Framework.UIF.Web.Helpers;
+
+<script id="hierarchyTemplate" type="text/template">
+
+    {{#ifCond StatusTypeService "==" 2}}
+    <div><strong class="success">{{Module}}</strong></div>
+    {{else ifCond StatusTypeService "==" 3}}
+    <div><strong class="warning">{{Module}}</strong></div>
+    {{else}}
+    <div><strong>{{Module}}</strong></div>
+    {{/ifCond }}
+    <div><br>{{SubModule}}</div>
+    <div><br> <strong>{{Hierarchy}}</strong></div>
+   
+</script>
+
+<form id="formHierarchy" class="form modal-Colombia">
+    <div class="row">
+        <div class="uif-col-6">
+            <div class="row panelAssigned">
+                <div class="uif-col-12">
+                    <div class="uif-row">
+                        <div class="uif-col-6">
+                            <label class="field-required">@Resources.Language.LabelModule</label>
+                            <select class="uif-select form-control" id="selectModule" data-val="true" 
+                                data-val-required="@Resources.Language.ErrorDocumentControlModule"
+                                        data-id="Id" data-name="Description" name="ModuleId"
+                                    data-filter="true" data-native="false">
+                            </select>
+                            @Html.ValidationMessageFor(model => model.ModuleId)
+                        </div>
+                        <div class="uif-col-6">
+                            <label class="field-required">@Resources.Language.LabelSubmodule</label>
+                            <select class="uif-select form-control" id="selectSubModule" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlSubModule"
+                                        data-id="Id" data-name="Description" name="SubModuleId"
+                                    data-filter="true" data-native="false">
+                            </select>
+                            @Html.ValidationMessageFor(model => model.SubModuleId)
+                        </div>
+                    </div>
+                    <div class="uif-row">
+                        <div class="uif-col-6">
+                            <label class="field-required">@Resources.Language.Hierarchy</label>
+                            <select class="uif-select form-control" id="selectHierarchy" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlHierarchy"
+                                        data-id="Id" data-name="Description" name="HierarchyId"
+                                    data-filter="true" data-native="false">
+                            </select>
+                            @Html.ValidationMessageFor(model => model.HierarchyId)
+                        </div>
+                        <div class="uif-col-6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="uif-col-6" id="panelHierarchy">
+            <div id="listHierarchy" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6" id="btnsHierarchy">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewHierarchy">
+                    @Resources.Language.New
+                </button>
+                @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0684"))
+                {
+                    <button type="button" class="btn btn-primary" id="btnHierarchyAccept">
+                        @Resources.Language.Add
+                    </button>
+                }
+
+            </div>
+        </div>      
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>   
+    </div>
+</form>

@@ -1,0 +1,51 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Guarantees.Models.ActionsViewModel
+
+<form id="AddActions" name="AddActions">
+    @Html.AntiForgeryToken()
+
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelCountry</label>
+            <input class="uif-input-search"
+                   data-val="true" id="inputCountry-Actions" name="inputCountry-Actions" placeholder="@Resources.Language.NameCountry" type="text">
+            @Html.ValidationMessageFor(model => model.Country)
+        </div>
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelState</label>
+            <input class="uif-input-search"
+                   data-val="true" id="inputState-Actions" name="inputState-Actions" placeholder="@Resources.Language.NameDepartment" type="text">
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelCity</label>
+            <input class="uif-input-search"
+                   data-val="true" id="inputCity-Actions" name="inputCity-Actions" placeholder="@Resources.Language.NameCity" type="text">
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+    </div>
+    <div class="row uif-row-pc">
+        <div class="uif-col col-md-4">
+            <label>@Resources.Language.LabelNroPolicy</label>
+            @Html.TextBoxFor(model => model.NumberPolicy, new { id = "Actions-NumberPolicy" })
+            @Html.ValidationMessageFor(model => model.NumberPolicy)
+        </div>
+        <div class="uif-col col-md-4">
+            <label>@Resources.Language.LabelCoin </label>
+            <select class="uif-select form-control" id="Actions-Currency" data-val="true" data-native="false" data-source="@Url.Content("~/Guarantees/Guarantees/GetCurrencies")" data-val-required="@Resources.Language.ErrorDocumentControlCurrency" data-id="Id" data-name="Description" name="Currency"></select>
+            @Html.ValidationMessageFor(model => model.Currency)
+        </div>
+
+        <div class="uif-col col-md-4">
+            <label class="field-required">@Resources.Language.LabelNominalValue </label>
+            @Html.TextBoxFor(model => model.NominalValue, new { id = "Actions-NominalValue", @class = "numberWithCommas rightAlign" })
+            @Html.ValidationMessageFor(model => model.NominalValue)
+        </div>
+    </div>
+    <div class="uif-row">
+            <div class="uif-col-12">
+                <label>@Resources.Language.LabelObservations</label>
+                @Html.TextAreaFor(model => model.Observations, new { id = "Actions-Observations", cols = "12", rows = "2", style = "resize: none", @class = "changeToUpper" })
+                @Html.ValidationMessageFor(model => model.Observations)
+            </div>
+        </div>
+</form>

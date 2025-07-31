@@ -1,0 +1,196 @@
+﻿@using System.Configuration
+@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.FileSendingAdministration;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AutomaticDebit</li>
+        <li>@Global.FileSendingAdministration</li>
+    </ol>
+}
+
+@section Toolbar
+{
+    <footer>
+        <button id="btnSendingCancel" class="btn btn-default" role="button">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        <button id="btnReverseCollections" class="btn btn-primary" role="button">
+            <i class="fa fa-repeat"></i> @Global.ReverseCollections
+        </button>
+
+        <button id="btnNotification" class="btn btn-primary" role="button">
+            <i class="fa fa-tag"></i>  @Global.PreNotifications
+        </button>
+        <button id="btnGenerateTXT" class="btn btn-primary" role="button">
+            <i class="fa fa-text-height"></i>  @Global.GenerateTXT
+        </button>
+        <button id="btnSendingExcel" class="btn btn-primary" role="button">
+            <i class="fa fa-calendar"></i>  @Global.Excel
+        </button>
+        <button id="btnApply" class="btn btn-primary" role="button">
+            <i class="fa fa-save"></i>  @Global.Apply
+        </button>
+    </footer>
+}
+
+@section Modals
+{
+    @* Modal de Ingreso de Conceptos de Pago *@
+    <div class="uif-modal" id="RejetionManual">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Html.Partial("../AutomaticDebit/RejectionManualModal")
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button id="btnApplyRejection" class="btn btn-default" role="button">
+                <i class="glyphicon glyphicon-remove"></i>  @Global.ApplyRejection
+            </button>
+            <button type="submit" class="btn btn-primary" id="btnRejectCoupons" onclick="return false">
+                <i class="fa fa-check"></i>  @Global.RejectCoupons
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modal Rever -->>
+    <div class="uif-modal" id="RevertModal">
+        <div class="form">
+            <div class="uif-modalbody">
+                @Html.Partial("../AutomaticDebit/RevertModal")
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button id="btnReverseAll" class="btn btn-primary">
+                <i class="fa fa-repeat"></i>  @Global.ReverseAll
+            </button>
+            <button id="btnReverse" class="btn btn-primary">
+                <i class="fa fa-repeat"></i>  @Global.Reverse
+            </button>
+        </div>
+    </div>
+
+}
+
+<form id="formSending" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <div id="SendingAdministrationLoadingDiv">
+                <p><img src="@Url.Content("~/Images/loader.gif")" /> @Global.Processing</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertBankStatement"></div>
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-3">
+            <label>@Global.Net</label>
+            <select class="uif-select form-control" id="sendingSelectNet" name="sendingSelectNet" data-val="true" data-val-required='@Global.RequiredField'
+                    data-source='@Url.Content("~/Accounting/Common/GetNets")' data-id="Id" data-name="Description" data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="sendingSelectNet" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.SendDateTime</label>
+            <input type="text" value="@ViewBag.CurrentDate" class="uif-datepicker" data-mask="99/99/9999" id="sendingSendDateTime" disabled="disabled"
+                   name="sendingSendDateTime" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="sendingSendDateTime" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.LotNumber</label>
+            <select class="uif-select form-control" id="sendingLotNumber" data-id="Id" data-name="Description"
+                    name="sendingLotNumber" data-val="true" data-val-required='@Global.RequiredField' data-native="true"></select>
+            <span class="text-danger" data-valmsg-for="sendingLotNumber" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-3">
+            <label>@Global.LotStatus</label>
+            <input type="text" value="" id="LotStatus" placeholder="" readonly="readonly" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alert"></div>
+        </div>
+    </div>
+</form>
+
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <ul class="uif-tab" id="tabMainAdministration">
+            <li class="active"><a href="#tabAdministration">@Global.Summary</a></li>
+            <li><a href="#tablogProces">@Global.PendingProcesses</a></li>
+        </ul>
+        <div class="uif-tab-content">
+            <div class="active" id="tabAdministration">
+                <table class="uif-table" id="tableSummary" data-exporttocsv="false" data-edit="true" data-delete="false" data-selectiontype="multiple" data-filter="false"
+                       data-paginate="true" data-title="@Global.Summary">
+                    <thead>
+                        <tr>
+                            <th data-property="NetId" data-visible="false">Id</th>
+                            <th data-property="Prefix" style="text-align:left">@Global.Prefix</th>
+                            <th data-property="TotalPremium" data-type="currency" style="text-align:left">@Global.TotalPremium</th>
+                            <th data-property="ValueAddedTax" data-type="currency" style="text-align:left">@Global.ValueAddedTax</th>
+                            <th data-property="CouponsNumber" style="text-align:left">@Global.CouponsNumber</th>
+                            <th data-property="AcceptedNumber" style="text-align:left">@Global.AcceptedNumber</th>
+                            <th data-property="ErrorAcceptedNumber" style="text-align:left">@Global.ErrorAcceptedNumber</th>
+                            <th data-property="ErrorAccepted" style="text-align:left">@Global.ErrorAccepted</th>
+                            <th data-property="Rejections" style="text-align:left">@Global.Rejections</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div id="tablogProces">
+                <table class="uif-table" id="tableLogProcess" data-exporttocsv="false" data-edit="true" data-delete="false" data-selectiontype="single" data-filter="true"
+                       data-paginate="true" data-title="@Global.Summary">
+                    <thead>
+                        <tr>
+                            <th data-property="Id">Id</th>
+                            <th data-property="Description">@Global.Description</th>
+                            <th data-property="LotNumber">@Global.LotNumber</th>
+                            <th data-property="RecordsNumber">@Global.RecordsNumber</th>
+                            <th data-property="RecordsProcessed">@Global.ProcessedRecords</th>
+                            <th data-property="RecordsFailed">@Global.FailedRecords</th>
+                            <th data-property="Progress">@Global.Progress</th>
+                            <th data-property="Elapsed">@Global.Elapsed</th>
+                            <th data-property="processTypeId" data-visible="false">ProcessType</th>
+                            <th data-property="statusCode" data-visible="false">StatusId</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*ViewBags*@
+<input type="hidden" id="imputationTypeId" value="@ViewBag.ImputationType" />
+<input type="hidden" id="ViewBagCurrentDate" value="@ViewBag.CurrentDate" />
+
+<style>
+    .panel-table .panel-heading, .panel-table.panel-heading-table {
+        display: none;
+    }
+
+    td {
+        white-space: nowrap;
+    }
+</style>
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainSendingAdministration")
+}
+
+

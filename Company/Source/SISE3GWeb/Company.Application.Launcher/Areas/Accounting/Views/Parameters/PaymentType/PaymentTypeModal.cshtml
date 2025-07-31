@@ -1,0 +1,185 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@model Sistran.Core.Application.AccountingServices.DTOs.Search.PaymentMethodTypeDTO
+
+<form id="addPaymentType">
+    <div class="uif-modalbody">
+        @Html.HiddenFor(m => m.Description)
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Label(@Global.Description, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(m => m.Description,
+                        new
+                        {
+                            htmlAttributes = new
+                                             {
+                                                 @class = "form-control",
+                                                 data_val = "true",
+                                                 data_val_required = @Global.RequiredField,
+                                                 disabled = "disabled"
+                                             }
+                        })
+                <br />
+            </div>
+            <div class="col-md-2">
+                @Html.Label(@Global.CashReceipt)
+                <br />
+                <span class="glyphicon glyphicon-unchecked" id="cashReceiptCheck">
+                </span>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(@Global.PaymentOrder)
+                <br />
+                <span class="glyphicon glyphicon-unchecked" id="paymentOrderCheck">
+                </span>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(@Global.InternalBallot)
+                <br />
+                <span class="glyphicon glyphicon-unchecked" id="internalBallotCheck">
+                </span>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(@Global.VariousPaymentRequest)
+                <br />
+                <span class="glyphicon glyphicon-unchecked" id="variousPaymentRequestCheck">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="cancelButton" data-dismiss="modal" data-role="button">
+            <i class="fa fa-remove"></i> @Global.Cancel
+        </button>
+        <button type="submit" class="btn btn-primary" id="saveButton" onclick=" return false " data-role="button">
+            <i class="fa fa-save"></i> @Global.Save
+        </button>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+
+    function ClearCkeck() {
+        if ($('#internalBallotCheck').hasClass('glyphicon glyphicon-check')) {
+            $('#internalBallotCheck').removeClass('glyphicon glyphicon-check').addClass('glyphicon glyphicon-unchecked');
+        }
+        if ($('#cashReceiptCheck').hasClass('glyphicon glyphicon-check')) {
+            $('#cashReceiptCheck').removeClass('glyphicon glyphicon-check').addClass('glyphicon glyphicon-unchecked');
+        }
+        if ($('#paymentOrderCheck').hasClass('glyphicon glyphicon-check')) {
+            $('#paymentOrderCheck').removeClass('glyphicon glyphicon-check').addClass('glyphicon glyphicon-unchecked');
+        }
+        if ($('#variousPaymentRequestCheck').hasClass('glyphicon glyphicon-check')) {
+            $('#variousPaymentRequestCheck').removeClass('glyphicon glyphicon-check').addClass('glyphicon glyphicon-unchecked');
+        }
+
+    }
+
+    function SetChecks(internalBallotCheckValue, paymentOrderCheckValue, cashReceiptCheckValue,paymentRequestCheckValue) {
+        if (internalBallotCheckValue == true) {
+            if (!$('#internalBallotCheck').hasClass('glyphicon glyphicon-check')) {
+                $('#internalBallotCheck').removeClass('glyphicon glyphicon-unchecked').addClass('glyphicon glyphicon-check');
+            }
+        } else {
+            if ($('#internalBallotCheck').hasClass('glyphicon glyphicon-check')) {
+                $('#internalBallotCheck').removeClass('glyphicon glyphicon-check').addClass('glyphicon glyphicon-unchecked');
+            }
+
+        }
+        if (paymentOrderCheckValue == true) {
+            if (!$('#paymentOrderCheck').hasClass('glyphicon glyphicon-check')) {
+                $('#paymentOrderCheck').removeClass('glyphicon glyphicon-unchecked').addClass('glyphicon glyphicon-check');
+            }
+        } else {
+            if ($('#paymentOrderCheck').hasClass('glyphicon glyphicon-check')) {
+                $('#paymentOrderCheck').removeClass('glyphicon glyphicon-check').addClass('glyphicon glyphicon-unchecked');
+            }
+        }
+
+        if (cashReceiptCheckValue == true) {
+            if (!$('#cashReceiptCheck').hasClass('glyphicon glyphicon-check')) {
+                $('#cashReceiptCheck').removeClass('glyphicon glyphicon-unchecked').addClass('glyphicon glyphicon-check');
+            }
+        } else {
+            if ($('#cashReceiptCheck').hasClass('glyphicon glyphicon-check')) {
+                $('#cashReceiptCheck').removeClass('glyphicon glyphicon-check').addClass('glyphicon glyphicon-unchecked');
+            }
+
+        }
+
+        if (paymentRequestCheckValue == true) {
+            if (!$('#variousPaymentRequestCheck').hasClass('glyphicon glyphicon-check')) {
+                $('#variousPaymentRequestCheck').removeClass('glyphicon glyphicon-unchecked').addClass('glyphicon glyphicon-check');
+            }
+        } else {
+            if ($('#variousPaymentRequestCheck').hasClass('glyphicon glyphicon-check')) {
+                $('#variousPaymentRequestCheck').removeClass('glyphicon glyphicon-check').addClass('glyphicon glyphicon-unchecked');
+            }
+
+        }
+    }
+
+    $('span').click(function() {
+        if ($(this).hasClass("glyphicon glyphicon-unchecked")) {
+            $(this).removeClass("glyphicon glyphicon-unchecked");
+            $(this).addClass("glyphicon glyphicon-check");
+        } else if ($(this).hasClass("glyphicon glyphicon-check")) {
+            $(this).removeClass("glyphicon glyphicon-check");
+            $(this).addClass("glyphicon glyphicon-unchecked");
+        }
+    });
+
+    var internalBallotCheckValue = false;
+    var paymentOrderCheckValue = false;
+    var cashReceiptCheckValue = false;
+    var paymentRequestCheckValue = false;
+    var paymentMethodType = false;
+
+    setTimeout(function() {
+
+        internalBallotCheckValue = (@Model.EnabledTicket) ? true : false;
+        paymentOrderCheckValue = (@Model.EnabledPaymentOrder) ? true : false;
+        cashReceiptCheckValue = (@Model.CollectEnabled) ? true : false;
+        paymentRequestCheckValue = (@Model.EnabledPaymentRequest) ? true : false;
+        paymentMethodType = @Model.PaymentTypeCode;
+        SetChecks(internalBallotCheckValue, paymentOrderCheckValue, cashReceiptCheckValue,paymentRequestCheckValue);
+
+    }, 300);
+
+    var paymentMethodTypeModel = {
+        PaymentMethodTypeCode: 0,
+        PaymentMethodTypeDescription: "",
+        CollectEnabled: 0,
+        EnabledPaymentOrder: 0,
+        EnabledTicket: 0,
+        EnabledPaymentRequest: 0
+    };
+
+    $("#saveButton").click(function () {
+
+        paymentMethodTypeModel.PaymentTypeCode = paymentMethodType;
+        paymentMethodTypeModel.PaymentMethodTypeDescription = $("#PaymentMethodTypeDescription").val();
+        paymentMethodTypeModel.CollectEnabled = ($('#cashReceiptCheck').hasClass('glyphicon glyphicon-check'))
+            ? 1 : 0;
+        paymentMethodTypeModel.EnabledPaymentOrder = ($('#paymentOrderCheck').hasClass('glyphicon glyphicon-check'))  ? 1 : 0;
+        paymentMethodTypeModel.EnabledTicket = ($('#internalBallotCheck').hasClass('glyphicon glyphicon-check'))? 1 : 0;
+        paymentMethodTypeModel.EnabledPaymentRequest = ($('#variousPaymentRequestCheck').hasClass('glyphicon glyphicon-check'))? 1 : 0;
+
+        $.ajax({
+            type: "POST",
+            url:  '@Url.Content("~/Parameters/UpdatePaymentMethodType")',
+            data: JSON.stringify({ "model": paymentMethodTypeModel }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#addPaymentType").formReset();
+                $('#modalPaymentType').UifModal('hide');
+                $('#tblPaymentType').UifDataTable();
+
+                $("#alertPaymentType").UifAlert('show', '@Global.EditSuccessfully', "success");
+            }
+        });
+    });
+
+</script>

@@ -1,0 +1,93 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.Product2GModel
+@{
+    Layout = null;
+}
+<script id="Product2gTemplate" type="text/template">
+
+    {{#ifCond Status "==" "Add"}}
+    <div><strong class="success">{{Description}}</strong></div>
+    {{else ifCond Status "==" "Modified"}}
+    <div class="warning"><strong>{{Description}}</strong><strong>({{ProductId}})</strong></div>
+    {{else ifCond Status "==" "Delete"}}
+        <div class="danger"><strong>{{Description}}</strong><strong class="danger">({{ProductId}})</strong></div>    
+    {{else}}
+    <div><strong>{{Description}}</strong><strong>({{ProductId}})</strong></div>
+    {{/ifCond}}
+    <div>
+        {{PrefixDescription}}
+    </div>
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column-70">
+        @Resources.Language.TitleProduct2G
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("Id", null, new { @class = "uif-input-search", id = "inputProduct2gSearch", maxlength = "15", @placeholder = @Resources.Language.LabelPlaceHolderSearchProduct2G })
+      
+    </div>
+</script>
+<script id="footer-template" type="text/template">
+    <div id="buttonsProduct2G" class="footerProduct2G">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+<form id="formProduct2g" class="form without-space" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelPrefix</label>
+                    <select class="uif-select form-control" id="ddlBusinessType" data-id="Id" data-name="Description" name="PrefixCode"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixCommercial"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.PrefixCode)
+                </div>
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.CodeProductId</label>
+                    @Html.TextBoxFor(model => model.ProductId, new { id = "inputProductId" })
+                    @Html.ValidationMessageFor(model => model.ProductId)
+                </div>
+                <div class="uif-col-7">
+                    <label class="field-required">@Resources.Language.ProductName2G</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary">
+            <div id="listViewProduct2g" class="uif-listview"></div>
+        </div>
+    </div>
+
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsProduct2g">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNewProduct2g">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAcceptProduct2g">@Resources.Language.Add </button>
+            </div>
+        </div>
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

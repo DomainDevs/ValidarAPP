@@ -1,0 +1,166 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="uif-modal" id="modalActionRule">
+    <div class="uif-modalbody">
+        <form class="form" id="formModalActionRule">
+            <input type="hidden" id="hdnIndexActionRule" />
+            <div class="uif-row">
+                <div class="uif-col-12">
+                    <label>@Resources.Language.So</label>
+                    <select class="uif-select form-control"
+                            id="ddlActionType"
+                            data-id="Id"
+                            data-name="Description"
+                            required data-native="false"></select>
+                </div>
+            </div>
+
+            <!--Asignar concepto-->
+            <div>
+                <div class="uif-row" id="panelAssignConcept">
+                    <div class="uif-col-12">
+                        <select class="uif-select form-control"
+                                id="ddlActionConcept"
+                                data-filter="true"
+                                data-native="false"
+                                data-id="ConceptIdFacadeId"
+                                data-name="DescriptionFacade"
+                                required></select>
+
+
+                    </div>
+                </div>
+                <div class="uif-row" id="panelAssignConceptOperator">
+                    <div class="uif-col-12">
+                        <select class="uif-select form-control"
+                                id="ddlConceptOperatorType"
+                                data-id="Id"
+                                data-name="Description"
+                                data-native="false"></select>
+                    </div>
+                </div>
+                <div class="uif-row" id="panelAssignConceptType">
+                    <div class="uif-col-12">
+                        <select class="uif-select form-control"
+                                id="ddlActionComparatorType"
+                                data-id="Id"
+                                data-name="Description"
+                                required
+                                data-native="false"></select>
+                    </div>
+                </div>
+                <div class="uif-row" id="panelActionConceptExpression">
+                    <div class="uif-col-12" id="panelConceptExpressionText">
+                        <input type="text" class="form-control" id="txtConceptExpressionText" required />
+                    </div>
+                    <div class="uif-col-12" id="panelConceptExpressionNumber">
+                        <input type="number" class="form-control" id="txtConceptExpressionNumber" step="1" required />
+                    </div>
+                    <div class="uif-col-12" id="panelConceptExpressionDecimal">
+                        <input type="number" class="form-control" id="txtConceptExpressionDecimal" step="0.00001" required />
+                    </div>
+                    <div class="uif-col-12" id="panelConceptExpressionDate">
+                        <input type="text" class="uif-datepicker" id="txtConceptExpressionDate" required />
+                    </div>
+                    <div class="uif-col-12" id="panelConceptExpressionList">
+                        <select class="uif-select form-control" id="dllConceptExpressionList" data-native="false" required></select>
+                    </div>
+                    <div class="uif-col-12" id="panelConceptExpressionSearch">
+                        <input class="uif-input-search" type="text" id="txtConceptExpressionSearch" required/>
+                    </div>
+                </div>
+            </div>
+
+            <!--Invocar-->
+            <div>
+                <div class="uif-row" id="panelAssignInvoke">
+                    <div class="uif-col-12">
+                        <select class="uif-select form-control"
+                                id="ddlInvokeType"
+                                data-id="Id"
+                                data-name="Description"
+                                data-native="false"
+                                required></select>
+                    </div>
+                </div>
+                <div class="uif-row" id="panelAssignInvokeTxt">
+                    <div class="uif-col-12">
+                        <input type="text" id="txtAssignInvoke" required>
+                    </div>
+                </div>
+                <div class="uif-row" id="panelAssignInvokeRuleSet">
+                    <div class="uif-col-12">
+                        <label>@Resources.Language.LabelInitialRulesPackage</label>
+                        <input class="uif-input-search" type="text" id="inputModalRiskInitialRulesPackage" required>
+                    </div>                   
+                </div>
+                <div class="uif-row" id="panelAssignInvokeFunction">
+                    <div class="uif-col-12">
+                        <select class="uif-select form-control"
+                                id="ddlAssignInvokeFunction"
+                                data-id="RuleFunctionId"
+                                data-name="Description"
+                                data-filter="true"
+                                data-native="false"
+                                required></select>
+                    </div>
+                </div>
+            </div>
+
+            <!--Asignar valor temporal-->
+            <div>
+                <div class="uif-row" id="panelAssignTemp">
+                    <div class="uif-col-12">
+                        <input type="text" id="txtActionTemp" />
+                    </div>
+                </div>
+                <div class="uif-row" id="panelAssignTempOperator">
+                    <div class="uif-col-12">
+                        <select class="uif-select form-control"
+                                id="ddlTempValueOperatorType"
+                                data-id="Id"
+                                data-name="Description"
+                                data-native="false"></select>
+                    </div>
+                </div>
+                <div class="uif-row" id="panelAssignTempExpression">
+                    <div class="uif-col-12">
+                        <select class="uif-select form-control"
+                                id="ddlTempValueExpressionType"
+                                data-id="Id"
+                                data-name="Description"
+                                data-native="false"></select>
+                    </div>
+                </div>
+
+                <div class="uif-row" id="panelAssignTempExpressionValue">
+                    <div class="uif-col-12" id="panelTempExpressionValueText">
+                        <input type="text" class="form-control" id="txtTempExpressionValue" required />
+                    </div>
+                    <div class="uif-col-12" id="panelTempExpressionValueDecimal">
+                        <input type="number" class="form-control" id="txtTempExpressionValueNum" step="0.0001" required />
+                    </div>
+                    <div class="uif-col-12" id="panelTempExpressionValueList">
+                        <select class="uif-select form-control"
+                                id="ddlTempExpressionValue"
+                                data-filter="true"
+                                data-native="false"
+                                data-id="ConceptIdFacadeId"
+                                data-name="DescriptionFacade"
+                                required></select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Close</button>
+        
+            <button type="button" class="btn btn-primary" id="btnSaveActionRule">@Resources.Language.ButtonSave</button>
+        
+
+    </div>
+</div>

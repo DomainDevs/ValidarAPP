@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="GetReinsuranceLayers">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="PaymentRequestCode">
+          <Column table-alias="PaymentReinsurance" name="PaymentRequestCode" />
+        </SelectValue>
+        <SelectValue alias="PaymentLayerId">
+          <Column table-alias="PaymentLayer" name="PaymentLayerId" />
+        </SelectValue>
+        <SelectValue alias="ReinsuranceNumber">
+          <Column table-alias="PaymentReinsurance" name="ReinsuranceNumber" />
+        </SelectValue>
+        <SelectValue alias="MovementType">
+          <Column table-alias="MovementType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="ProcessDate">
+          <Column table-alias="PaymentReinsurance" name="ProcessDate" />
+        </SelectValue>
+        <SelectValue alias="RegistrationDate">
+          <Column table-alias="PaymentReinsurance" name="RegistrationDate" />
+        </SelectValue>
+        <SelectValue alias="IsAutomatic">
+          <Column table-alias="PaymentReinsurance" name="IsAutomatic" />
+        </SelectValue>
+        <SelectValue alias="UserName">
+          <Column table-alias="UniqueUsers" name="AccountName" />
+        </SelectValue>
+        <SelectValue alias="LayerNumber">
+          <Column table-alias="PaymentLayer" name="LayerNumber" />
+        </SelectValue>
+        <SelectValue alias="Amount">
+          <Column table-alias="PaymentAllocation" name="Amount" />
+        </SelectValue>
+        <SelectValue alias="ClaimCoverageCd">
+          <Column table-alias="PaymentReinsurance" name="ClaimCoverageCd" />
+        </SelectValue>
+        <SelectValue alias="VoucherConceptCd">
+          <Column table-alias="PaymentReinsurance" name="VoucherConceptCd" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join>
+            <Join>
+              <Join>
+                <Join>
+                  <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.PaymentReinsurance, 
+                              Core.Reinsurance.Entities" alias="PaymentReinsurance" />
+                  <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.PaymentLayer, 
+                              Core.Reinsurance.Entities" alias="PaymentLayer" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="PaymentReinsurance" name="PaymentReinsuranceId" />
+                      <Column table-alias="PaymentLayer" name="PaymentReinsuranceId" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.PaymentCumulus, 
+                            Core.Reinsurance.Entities" alias="PaymentCumulus" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="PaymentLayer" name="PaymentLayerId" />
+                    <Column table-alias="PaymentCumulus" name="PaymentLayerId" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.PaymentAllocation, 
+                            Core.Reinsurance.Entities" alias="PaymentAllocation" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="PaymentCumulus" name="PaymentCumulusId" />
+                  <Column table-alias="PaymentAllocation" name="PaymentCumulusId" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Reinsurance.Entities.MovementType,
+                          Core.Reinsurance.Entities" alias="MovementType" />
+            <criteria>
+              <BinaryCriterion type="Equal">
+                <Column table-alias="PaymentReinsurance" name="MovementTypeId" />
+                <Column table-alias="MovementType" name="MovementTypeId" />
+              </BinaryCriterion>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers,
+                          Core.UniqueUser.Entities" alias="UniqueUsers" />
+				 
+		  <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="PaymentReinsurance" name="UserId" />
+              <Column table-alias="UniqueUsers" name="UserId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

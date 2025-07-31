@@ -1,0 +1,31 @@
+﻿<view xmlns="sistran:views/1.0/view.xsd" name="DeclarationCoverageView">
+  <collections>
+    <collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, 
+                Core.Issuance.Entities"></collection>
+    <collection name="EndorsementType" type="Sistran.Core.Application.Issuance.Entities.EndorsementType, 
+                Core.Issuance.Entities"></collection>
+   <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="EndorsementRiskCoverage" type="Sistran.Core.Application.Issuance.Entities.EndorsementRiskCoverage, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskCoverage" type="Sistran.Core.Application.Issuance.Entities.RiskCoverage, 
+                Core.Issuance.Entities"></collection>
+  </collections>
+  
+  <relations>
+    <relation source="Endorsement" destination="EndorsementType" name="EndorsementTypeEndorsement" type="Inner">
+      <property left="EndoTypeCode" type="Equal" right="EndoTypeCode"></property>
+    </relation>
+    <relation source="Endorsement" destination="EndorsementRisk" name="EndorsementRiskendorsement" type="Inner">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+   <relation source="EndorsementRisk" destination="EndorsementRiskCoverage" name="EndorsementRiskEndorsementRiskCoverage" type="Inner">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="EndorsementRiskCoverage" destination="RiskCoverage" name="EndorsementRiskCoverageRiskCoverage" type="Inner">
+      <property left="RiskCoverId" type="Equal" right="RiskCoverId"></property>
+    </relation>
+  </relations>
+</view>

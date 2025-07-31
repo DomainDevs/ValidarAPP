@@ -1,0 +1,58 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+<div id="DepositPremiumsDialog">    
+    <div id="DepositPremiumsDiv">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <table class="uif-table" id="DepositPremiumsTable" data-exporttocsv="false" data-edit="true"
+                       data-delete="false" data-filter="false" data-selectiontype="none" data-paginate="true"
+                       data-title="@Global.Premium">
+                    <thead>
+                    <tr>
+                        <th data-visible="false" data-property="DepositPremiumTransactionId">ExcessPaymentId</th>
+                        <th data-visible="false" data-property="BillId">@Global.VoucherNumber</th>
+                        <th data-property="RegisterDate">@Global.Date</th>
+                        <th data-visible="false" data-property="CurrencyId">CurrencyId</th>
+                        <th data-property="CurrencyDescription">@Global.Currency</th>
+                        <th data-property="TotalAmount">@Global.Amount</th>
+                        <th data-property="UsedAmount">@Global.UsedAmount</th>
+                    </tr>
+
+                    </thead>
+                    <tbody></tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertDepositPremiumsDialog"></div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="pull-right">
+                <button id="AcceptDepositPrimeDialog" class="btn btn-primary" role="button">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>  @Global.Accept
+
+                </button>
+                <button id="CancelDepositPrimeDialog" class="btn btn-default" role="button">
+                    <span class="glyphicon glyphicon-remove"></span>  @Global.Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="editForm">
+    <div class="uif-inline" id="editAction">
+        <div class="uif-row">
+            <div class="uif-col-3">
+                @Global.UsedAmount
+                <input type="text" id="UsedAmountForm" name="UsedAmountForm" maxlength="12"
+                       style="text-align: right" onkeypress="return OnlyDecimalNumber(event, this);" />
+            </div>
+        </div>
+    </div>
+</form>   

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ProfileAccessView">
+  <collections>
+    <collection name="AccessProfile" type="Sistran.Core.Application.UniqueUser.Entities.AccessProfiles, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Access" type="Sistran.Core.Application.UniqueUser.Entities.Accesses, 
+                Core.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="AccessProfile" destination="Access" name="OperationProfileOperation" type="inner">
+      <property left="AccessId" type="Equal" right="AccessId"></property>
+    </relation>
+  </relations>
+</view>

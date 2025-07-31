@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CollectMassiveProcessView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CollectMassiveProcessId">
+          <Column table-alias="CollectMassiveProcess" name="CollectMassiveProcessId" />
+        </SelectValue>
+        <SelectValue alias="BeginDate">
+          <Column table-alias="CollectMassiveProcess" name="BeginDate" />
+        </SelectValue>
+        <SelectValue alias="EndDate">
+          <Column table-alias="CollectMassiveProcess" name="EndDate" />
+        </SelectValue>
+        <SelectValue alias="FailedRecords">
+          <Column table-alias="CollectMassiveProcess" name="FailedRecords" />
+        </SelectValue>
+        <SelectValue alias="Status">
+          <Column table-alias="CollectMassiveProcess" name="Status" />
+        </SelectValue>
+        <SelectValue alias="SuccessfulRecords">
+          <Column table-alias="CollectMassiveProcess" name="SuccessfulRecords" />
+        </SelectValue>
+        <SelectValue alias="TotalRecords">
+          <Column table-alias="CollectMassiveProcess" name="TotalRecords" />
+        </SelectValue>
+        <SelectValue alias="UserId">
+          <Column table-alias="CollectMassiveProcess" name="UserId" />
+        </SelectValue>
+        <SelectValue alias="UserName">
+          <Column table-alias="UniqueUsers" name="AccountName" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.CollectMassiveProcess, Core.Accounting.Entities" alias="CollectMassiveProcess" />
+          <ClassNameTable name="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, Core.UniqueUser.Entities" alias="UniqueUsers" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="UniqueUsers" name="UserId" />
+              <Column table-alias="CollectMassiveProcess" name="UserId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

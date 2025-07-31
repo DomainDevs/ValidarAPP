@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E50945BB-1CAA-4996-86E3-FA8674F436CD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.ClaimServices.EEProvider</RootNamespace>
+    <AssemblyName>Core.ClaimServices.EEProvider</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core.AirCraftIntegrationService">
+      <HintPath>..\..\..\Bin\Services\Core\Aircrafts\Aircraft\AircraftIntegrationService\Core.AirCraftIntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.AuthorizationPoliciesServices">
+      <HintPath>..\..\..\Bin\Services\Core\AuthorizationPolicies\AuthorizationPoliciesService\Core.AuthorizationPoliciesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Claims.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Claims\Core.Claims.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ClaimServices">
+      <HintPath>..\..\..\Bin\Services\Core\Claims\ApplicationService\Core.ClaimServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ClaimServices.Resources">
+      <HintPath>..\..\..\Bin\Services\Core\Claims\Resources\Core.ClaimServices.Resources.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ClaimsGeneralLedgerWorkerIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\ClaimsGeneralLedgerWorker\IntegrationService\Core.ClaimsGeneralLedgerWorkerIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ClaimsIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\Integration\ClaimsIntegrationServices\Core.ClaimsIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.ClaimsReinsuranceWorkerIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\ClaimsReinsuranceWorker\IntegrationService\Core.ClaimsReinsuranceWorkerIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Common.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Common\Core.Common.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices">
+      <HintPath>..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions">
+      <HintPath>..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.FidelityIntegrationService">
+      <HintPath>..\..\..\Bin\Services\Core\Finances\Fidelity\FidelityIntegrationService\Core.FidelityIntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.GeneralLedgerServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Services\Core\GeneralLedger\ApplicationService\Core.GeneralLedgerServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Integration.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Integration\Core.Integration.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Issuance.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Issuance\Core.Issuance.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.MarineIntegrationService">
+      <HintPath>..\..\..\Bin\Services\Core\Marines\Marine\IntegrationService\Core.MarineIntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.OperationQuotaServices">
+      <HintPath>..\..\..\Bin\Services\Core\OperationQuota\ApplicationService\Core.OperationQuotaServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Parameters.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Parameters\Core.Parameters.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.PropertyIntegrationService">
+      <HintPath>..\..\..\Bin\Services\Core\Location\Property\PropertyIntegrationService\Core.PropertyIntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Quotation.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Quotation\Core.Quotation.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.RulesScriptsServices">
+      <HintPath>..\..\..\Bin\Services\Core\RulesScripts\RulesScriptsService\Core.RulesScriptsServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Script.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Script\Core.Script.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.SuretyIntegrationService">
+      <HintPath>..\..\..\Bin\Services\Core\Sureties\Surety\SuretyIntegrationService\Core.SuretyIntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Tax.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\Tax\Core.Tax.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.TaxServices">
+      <HintPath>..\..\..\Bin\Services\Core\Tax\TaxServices\Core.TaxServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.TechnicalTransactionGeneratorIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\TechnicalTransaction\IntegrationService\Core.TechnicalTransactionGeneratorIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.TransportIntegrationService">
+      <HintPath>..\..\..\Bin\Services\Core\Transports\Transport\IntegrationService\Core.TransportIntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UndewritingIntegrationServices">
+      <HintPath>..\..\..\Bin\Services\Core\Integration\UndewritingIntegrationServices\Core.UndewritingIntegrationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePerson.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\UniquePerson\Core.UniquePerson.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePersonListRiskApplicationServices">
+      <HintPath>..\..\..\Bin\Services\Core\UniquePerson\UniquePersonListRiskApplication\Core.UniquePersonListRiskApplicationServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePersonServices.V1">
+      <HintPath>..\..\..\Bin\Services\Core\UniquePerson\UniquePersonService\Core.UniquePersonServices.V1.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePersonV1.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\UniquePersonV1\Core.UniquePersonV1.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniqueUser.Entities">
+      <HintPath>..\..\..\Bin\Application\Core\Entities\UniqueUser\Core.UniqueUser.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniqueUserServices">
+      <HintPath>..\..\..\Bin\Services\Core\UniqueUser\UniqueUserServices\Core.UniqueUserServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Utilities">
+      <HintPath>..\..\..\Bin\Application\Core\Utilities\Core.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UtilitiesServices">
+      <HintPath>..\..\..\Bin\Services\Core\Utilities\UtilitiesServices\Core.UtilitiesServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.VehicleIntegrationService">
+      <HintPath>..\..\..\Bin\Services\Core\Vehicles\Vehicle\VehicleIntegrationService\Core.VehicleIntegrationService.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Co.Application.Data">
+      <HintPath>..\..\..\..\Company\Bin\lib\Sistran.Co.Application.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.BAF">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.BAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF.Engine">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Queries">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Queries">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Rules">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Rules.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Rules">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Rules.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.SAF">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.SAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.ServiceModel">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.ServiceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Views">
+      <HintPath>..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assemblers\DTOAssembler.cs" />
+    <Compile Include="Assemblers\EntityAssembler.cs" />
+    <Compile Include="Assemblers\ModelAssembler.cs" />
+    <Compile Include="Business\Claims\AffectedBusiness.cs" />
+    <Compile Include="Business\Claims\CancellationReasonBusiness.cs" />
+    <Compile Include="Business\Claims\CatastrophicEventBusiness.cs" />
+    <Compile Include="Business\Claims\CauseBusiness.cs" />
+    <Compile Include="Business\Claims\CauseCoverageBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimAirCraftBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimCoverageActivePanelBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimDocumentationBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimFidelityBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimLocationBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimSuretyBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimTransportBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimVehicleBusiness.cs" />
+    <Compile Include="Business\Claims\DamageBusiness.cs" />
+    <Compile Include="Business\Claims\DebtorBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimEndorsementBusiness.cs" />
+    <Compile Include="Business\Claims\EstimationTypeBusiness.cs" />
+    <Compile Include="Business\Claims\NoticeBusiness.cs" />
+    <Compile Include="Business\Claims\NoticeTypeBusiness.cs" />
+    <Compile Include="Business\Claims\ParticipantBusiness.cs" />
+    <Compile Include="Business\Claims\PendingOperationsBusiness.cs" />
+    <Compile Include="Business\Claims\RecuperatorBusiness.cs" />
+    <Compile Include="Business\Claims\SubCauseBusiness.cs" />
+    <Compile Include="Business\Claims\ClaimSupplierBusiness.cs" />
+    <Compile Include="Business\Salvage\BuyerBusiness.cs" />
+    <Compile Include="Business\PaymentRequest\AccountBankBusiness.cs" />
+    <Compile Include="Business\PaymentRequest\VoucherBusiness.cs" />
+    <Compile Include="Business\PaymentRequest\VoucherConceptBusiness.cs" />
+    <Compile Include="Business\PaymentRequest\PaymentPlanBusiness.cs" />
+    <Compile Include="Business\PaymentRequest\PaymentConceptBusiness.cs" />
+    <Compile Include="Business\PaymentRequest\MovementTypeBusiness.cs" />
+    <Compile Include="Business\PaymentRequest\PaymentRequestBusiness.cs" />
+    <Compile Include="Business\Recovery\RecoveryBusiness.cs" />
+    <Compile Include="Business\Salvage\SaleBusiness.cs" />
+    <Compile Include="Business\Salvage\SalvageBusiness.cs" />
+    <Compile Include="ClaimRuleEngineCompatibilityServiceEEProvider.cs" />
+    <Compile Include="DAOs\Claims\AffectedDAO.cs" />
+    <Compile Include="DAOs\Claims\CancellationReasonDAO.cs" />
+    <Compile Include="DAOs\Claims\CatastrophicEventDAO.cs" />
+    <Compile Include="DAOs\Claims\CauseCoverageDAO.cs" />
+    <Compile Include="DAOs\Claims\CauseDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimAirCraftDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimCoverageActivePanelDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimDoumentationDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimFidelityDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimLocationDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimSupplierDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimSuretyDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimTransportDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimVehicleDAO.cs" />
+    <Compile Include="DAOs\Claims\DamageDAO.cs" />
+    <Compile Include="DAOs\Claims\DebtorDAO.cs" />
+    <Compile Include="DAOs\Claims\ClaimEndorsementDAO.cs" />
+    <Compile Include="DAOs\Claims\EstimationTypeDAO.cs" />
+    <Compile Include="DAOs\Claims\NoticeDAO.cs" />
+    <Compile Include="DAOs\Claims\NoticeTypeDAO.cs" />
+    <Compile Include="DAOs\Claims\ParticipantDAO.cs" />
+    <Compile Include="DAOs\Claims\PendingOperationsDAO.cs" />
+    <Compile Include="DAOs\Claims\RecuperatorDAO.cs" />
+    <Compile Include="DAOs\Claims\SubCauseDAO.cs" />
+    <Compile Include="DAOs\PaymentRequest\AccountBankDAO.cs" />
+    <Compile Include="DAOs\PaymentRequest\PaymentPlanDAO.cs" />
+    <Compile Include="DAOs\PaymentRequest\PaymentRequestDAO.cs" />
+    <Compile Include="DAOs\PaymentRequest\VoucherConceptDAO.cs" />
+    <Compile Include="DAOs\PaymentRequest\VoucherDAO.cs" />
+    <Compile Include="DAOs\Recovery\RecoveryDAO.cs" />
+    <Compile Include="DAOs\Salvage\BuyerDAO.cs" />
+    <Compile Include="DAOs\Salvage\SaleDAO.cs" />
+    <Compile Include="DAOs\Salvage\SalvageDAO.cs" />
+    <Compile Include="DelegateService.cs" />
+    <Compile Include="Enums\NoticeState.cs" />
+    <Compile Include="Enums\ClaimsKeys.cs" />
+    <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Models\Claim\Affected.cs" />
+    <Compile Include="Models\Claim\AmountType.cs" />
+    <Compile Include="Models\Claim\Catastrophe.cs" />
+    <Compile Include="Models\Claim\CatastrophicEvent.cs" />
+    <Compile Include="Models\Claim\Cause.cs" />
+    <Compile Include="Models\Claim\CauseCoverage.cs" />
+    <Compile Include="Models\Claim\ClaimControl.cs" />
+    <Compile Include="Models\Claim\Claim.cs" />
+    <Compile Include="Models\Claim\ClaimAirCraft.cs" />
+    <Compile Include="Models\Claim\ClaimCancellationReason.cs" />
+    <Compile Include="Models\Claim\ClaimCoverage.cs" />
+    <Compile Include="Models\Claim\ClaimCoverageActivePanel.cs" />
+    <Compile Include="Models\Claim\ClaimCoverageCoInsurance.cs" />
+    <Compile Include="Models\Claim\ClaimCoverageThirdAffected.cs" />
+    <Compile Include="Models\Claim\ClaimDocumentation.cs" />
+    <Compile Include="Models\Claim\ClaimEndorsement.cs" />
+    <Compile Include="Models\Claim\ClaimFidelity.cs" />
+    <Compile Include="Models\Claim\ClaimLocation.cs" />
+    <Compile Include="Models\Claim\ClaimModify.cs" />
+    <Compile Include="Models\Claim\ClaimReserve.cs" />
+    <Compile Include="Models\Claim\ClaimSupplier.cs" />
+    <Compile Include="Models\Claim\ClaimSurety.cs" />
+    <Compile Include="Models\Claim\ClaimTransport.cs" />
+    <Compile Include="Models\Claim\ClaimVehicle.cs" />
+    <Compile Include="Models\Claim\CoInsuranceAssigned.cs" />
+    <Compile Include="Models\Claim\ContactInformation.cs" />
+    <Compile Include="Models\Claim\CoveragePaymentConcept.cs" />
+    <Compile Include="Models\Claim\DamageResponsibility.cs" />
+    <Compile Include="Models\Claim\DamageType.cs" />
+    <Compile Include="Models\Claim\Debtor.cs" />
+    <Compile Include="Models\Claim\Documentation.cs" />
+    <Compile Include="Models\Claim\Driver.cs" />
+    <Compile Include="Models\Claim\Estimation.cs" />
+    <Compile Include="Models\Claim\EstimationTypeEstatus.cs" />
+    <Compile Include="Models\Claim\EstimationType.cs" />
+    <Compile Include="Models\Claim\Inspection.cs" />
+    <Compile Include="Models\Claim\InternalStatus.cs" />
+    <Compile Include="Models\Claim\Limit.cs" />
+    <Compile Include="Models\Claim\MinimumSalary.cs" />
+    <Compile Include="Models\Claim\Notice.cs" />
+    <Compile Include="Models\Claim\NoticeAirCraft.cs" />
+    <Compile Include="Models\Claim\NoticeCoverage.cs" />
+    <Compile Include="Models\Claim\NoticeFidelity.cs" />
+    <Compile Include="Models\Claim\NoticeLocation.cs" />
+    <Compile Include="Models\Claim\NoticeReason.cs" />
+    <Compile Include="Models\Claim\NoticeState.cs" />
+    <Compile Include="Models\Claim\NoticeSurety.cs" />
+    <Compile Include="Models\Claim\NoticeTransport.cs" />
+    <Compile Include="Models\Claim\NoticeType.cs" />
+    <Compile Include="Models\Claim\NoticeVehicle.cs" />
+    <Compile Include="Models\Claim\Participant.cs" />
+    <Compile Include="Models\Claim\PendingOperation.cs" />
+    <Compile Include="Models\Claim\Policy.cs" />
+    <Compile Include="Models\Claim\Reason.cs" />
+    <Compile Include="Models\Claim\Recuperator.cs" />
+    <Compile Include="Models\Claim\Risk.cs" />
+    <Compile Include="Models\Claim\SearchClaim.cs" />
+    <Compile Include="Models\Claim\SearchClaimNotice.cs" />
+    <Compile Include="Models\Claim\Status.cs" />
+    <Compile Include="Models\Claim\SubCause.cs" />
+    <Compile Include="Models\Claim\TextOperation.cs" />
+    <Compile Include="Models\Claim\ThirdAffected.cs" />
+    <Compile Include="Models\Claim\ThirdPartyVehicle.cs" />
+    <Compile Include="IntegrationProviders\ClaimIntegrationServiceProvider.cs" />
+    <Compile Include="IntegrationProviders\PaymentRequestIntegrationServiceProvider.cs" />
+    <Compile Include="IntegrationProviders\RecoveryIntegrationServiceProvider.cs" />
+    <Compile Include="Models\PaymentRequest\AccountBank.cs" />
+    <Compile Include="Models\PaymentRequest\AccountingCoInsuranceAssigned.cs" />
+    <Compile Include="Models\PaymentRequest\AccountingConcept.cs" />
+    <Compile Include="Models\PaymentRequest\AccountingPaymentRequest.cs" />
+    <Compile Include="Models\PaymentRequest\AccountingTax.cs" />
+    <Compile Include="Models\PaymentRequest\AccountingVoucher.cs" />
+    <Compile Include="Models\PaymentRequest\ChargeRequest.cs" />
+    <Compile Include="Models\PaymentRequest\ClaimPaymentMethod.cs" />
+    <Compile Include="Models\PaymentRequest\ClaimPersonType.cs" />
+    <Compile Include="Models\PaymentRequest\ClaimSearchPersonType.cs" />
+    <Compile Include="Models\PaymentRequest\MovementType.cs" />
+    <Compile Include="Models\PaymentRequest\PaymentPlan.cs" />
+    <Compile Include="Models\PaymentRequest\PaymentQuota.cs" />
+    <Compile Include="Models\PaymentRequest\PaymentRequestControl.cs" />
+    <Compile Include="Models\PaymentRequest\PaymentRequest.cs" />
+    <Compile Include="Models\PaymentRequest\PaymentRequestCoInsurance.cs" />
+    <Compile Include="Models\PaymentRequest\PaymentRequestType.cs" />
+    <Compile Include="Models\PaymentRequest\ConceptSource.cs" />
+    <Compile Include="Models\PaymentRequest\Role.cs" />
+    <Compile Include="Models\PaymentRequest\Voucher.cs" />
+    <Compile Include="Models\PaymentRequest\VoucherConcept.cs" />
+    <Compile Include="Models\PaymentRequest\VoucherConceptTax.cs" />
+    <Compile Include="Models\PaymentRequest\VoucherType.cs" />
+    <Compile Include="Models\Recovery\Recovery.cs" />
+    <Compile Include="Models\Recovery\RecoveryControl.cs" />
+    <Compile Include="Models\Recovery\RecoveryType.cs" />
+    <Compile Include="Models\Salvage\Buyer.cs" />
+    <Compile Include="Models\Salvage\Sale.cs" />
+    <Compile Include="Models\Salvage\Salvage.cs" />
+    <Compile Include="PaymentRequestApplicationServiceProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ClaimApplicationServiceProvider.cs" />
+    <Compile Include="RecoveryApplicationServiceProvider.cs" />
+    <Compile Include="SalvageApplicationServiceProvider.cs" />
+    <Compile Include="Views\Claims\ClaimCoverageActivePanelView.cs" />
+    <Compile Include="Views\Claims\ClaimCoverageThirdAffectedView.cs" />
+    <Compile Include="Views\Claims\ClaimCoverageView.cs" />
+    <Compile Include="Views\Claims\ClaimInsuredAmountView.cs" />
+    <Compile Include="Views\Claims\ClaimNoticeView.cs" />
+    <Compile Include="Views\PaymentRequest\SalvageRecoveryView.cs" />
+    <Compile Include="Views\PaymentRequest\ClaimPaymentsView.cs" />
+    <Compile Include="Views\Claims\ClaimCoverageModifiesView.cs" />
+    <Compile Include="Views\Claims\ClaimsModifiesView.cs" />
+    <Compile Include="Views\Claims\ClaimsByPolicyView.cs" />
+    <Compile Include="Views\Claims\CoveragePaymentConceptsView.cs" />
+    <Compile Include="Views\Claims\EstimationTypesClaimView.cs" />
+    <Compile Include="Views\Claims\EstimationTypesView.cs" />
+    <Compile Include="Views\Claims\PolicyEndorsementView.cs" />
+    <Compile Include="Views\Claims\RiskTransportView.cs" />
+    <Compile Include="Views\Claims\SupplierView.cs" />
+    <Compile Include="Views\PaymentRequest\AccountBankView.cs" />
+    <Compile Include="Views\PaymentRequest\PaymentConceptBranchView.cs" />
+    <Compile Include="Views\PaymentRequest\PaymentRecoveryView.cs" />
+    <Compile Include="Views\PaymentRequest\PaymentRequestClaimReportView.cs" />
+    <Compile Include="Views\PaymentRequest\ChargeRequestSummaryView.cs" />
+    <Compile Include="Views\PaymentRequest\ChargeRequestClaimView.cs" />
+    <Compile Include="Views\PaymentRequest\PaymentVoucherView.cs" />
+    <Compile Include="Views\PaymentRequest\PaymentVoucherConceptTaxesView.cs" />
+    <Compile Include="Views\PaymentRequest\SearchPersonTypeView.cs" />
+    <Compile Include="Views\PaymentRequest\PaymentPersonTypeView.cs" />
+    <Compile Include="Views\PaymentRequest\PaymentRequestClaimCoverageView.cs" />
+    <Compile Include="Views\PaymentRequest\PaymentRequestClaimView.cs" />
+    <Compile Include="Views\PaymentRequest\PaymentRequestModificationView.cs" />
+    <Compile Include="Views\PaymentRequest\PaymentRequestSummaryView.cs" />
+    <Compile Include="Views\Recovery\RecoveryPaymentPlanView.cs" />
+    <Compile Include="Views\Recovery\RecoveryView.cs" />
+    <Compile Include="Views\Salvage\SaleView.cs" />
+    <Compile Include="Views\Salvage\SalvageSaleView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Claims\ClaimCoverageActivePanelView.view" />
+    <None Include="Views\Claims\ClaimCoverageThirdAffectedView.view" />
+    <None Include="Views\Claims\ClaimCoverageView.view" />
+    <None Include="Views\Claims\ClaimInsuredAmountView.view" />
+    <None Include="Views\Claims\ClaimNoticeView.view" />
+    <None Include="Views\PaymentRequest\SalvageRecoveryView.view" />
+    <None Include="Views\PaymentRequest\ClaimPaymentsView.view" />
+    <None Include="Views\Claims\ClaimCoverageModifiesView.view" />
+    <None Include="Views\Claims\ClaimsModifiesView.view" />
+    <None Include="Views\Claims\ClaimsByPolicyView.view" />
+    <None Include="Views\Claims\CoveragePaymentConceptsView.view" />
+    <None Include="Views\Claims\EstimationTypesClaimView.view" />
+    <None Include="Views\Claims\EstimationTypesView.view" />
+    <None Include="Views\Claims\PolicyEndorsementView.view" />
+    <None Include="Views\Claims\RiskTransportView.view" />
+    <None Include="Views\Claims\SupplierView.view" />
+    <None Include="Views\PaymentRequest\AccountBankView.view" />
+    <None Include="Views\PaymentRequest\PaymentConceptBranchView.view" />
+    <None Include="Views\PaymentRequest\PaymentRecoveryView.view" />
+    <None Include="Views\PaymentRequest\PaymentRequestClaimReportView.view" />
+    <None Include="Views\PaymentRequest\ChargeRequestSummaryView.view" />
+    <None Include="Views\PaymentRequest\ChargeRequestClaimView.view" />
+    <None Include="Views\PaymentRequest\PaymentVoucherView.view" />
+    <None Include="Views\PaymentRequest\PaymentVoucherConceptTaxesView.view" />
+    <None Include="Views\PaymentRequest\SearchPersonTypeView.view" />
+    <None Include="Views\PaymentRequest\PaymentPersonTypeView.view" />
+    <None Include="Views\PaymentRequest\PaymentRequestClaimCoverageView.view" />
+    <None Include="Views\PaymentRequest\PaymentRequestClaimView.view" />
+    <None Include="Views\PaymentRequest\PaymentRequestModificationView.view" />
+    <None Include="Views\PaymentRequest\PaymentRequestSummaryView.view" />
+    <None Include="Views\Recovery\RecoveryPaymentPlanView.view" />
+    <None Include="Views\Recovery\RecoveryView.view" />
+    <None Include="Views\Salvage\SaleView.view" />
+    <None Include="Views\Salvage\SalvageSaleView.view" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Condition="'$(BuildingInsideVisualStudio)' == 'true'" Include="..\packages\Sistran.Core.Analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\Claims\ApplicationServiceEEProvider\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\ProjectDeployBranch.msbuild" />
+</Project>

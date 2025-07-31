@@ -1,0 +1,226 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.CardPaymentBallot;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.AccountingAdministrative</li>
+        <li>@Global.BallotsAdministration</li>
+        <li>@Global.DepositSlip </li>
+    </ol>
+}
+@section Toolbar
+{
+    <footer>
+        <button class="btn btn-default" id="CancelDepositSlipt">
+            <i class="fa fa-remove"></i>  @Global.Cancel
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0548"))
+        {
+            <button class="btn btn-primary" id="AceptDepositSlipt">
+                <i class="fa fa-save"></i> @Global.Accept
+            </button>
+        }
+    </footer>
+}
+
+@section Modals
+{
+    <div class="uif-modal" id="DepositSlipSaveSuccessModal">
+        <div class="uif-modalbody">
+            @Html.Partial("DepositSlipSaveSuccessDialog")
+        </div>
+    </div>
+}
+
+
+<form id="formCardDepositSlip" onsubmit="return false">
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Branch</label>
+            @Html.DropDownList("BranchDepositSlipt", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/Common/GetListBranchesbyUserName"),
+                data_id = "Id",
+                data_name = "Description",
+                data_native = "true",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="BranchDepositSlipt" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Conduit</label>
+            @Html.DropDownList("CreditCardTypeDepositSlipt", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                data_source = @Url.Content("~/Accounting/Common/GetCreditCardTypes"),
+                data_id = "Id",
+                data_name = "Description",
+                data_native = "true",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="CreditCardTypeDepositSlipt" data-valmsg-replace="true" />
+
+        </div>
+        <div class="uif-col-4">
+
+            <label class="control-label">@Global.InternalBallotNumber</label>
+            <input type="text" value="" id="InternalBallotNumber" 
+                   maxlength="10"
+                   placeholder="" onkeypress="return JustNumbers(event, this)" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.ReceivingBank</label>
+            @Html.DropDownList("ReceivingBankDepositSlipt", Enumerable.Empty<SelectListItem>(), new
+            {
+                @class = "uif-select form-control",
+                
+                data_id = "Id",
+                data_name = "Description",
+                data_native = "true",
+                data_val = "true",
+                data_val_required = @Global.RequiredField
+            })
+            <span class="text-danger" data-valmsg-for="ReceivingBankDepositSlipt" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+
+            <label class="control-label">@Global.AccountNumber</label>
+            @Html.DropDownList("AccountNumberDepositSlipt", Enumerable.Empty<SelectListItem>(), new
+       {
+           @class = "uif-select form-control",
+           data_id = "Id",
+           data_name = "Number",           
+           data_native = "true",
+           data_val = "true",
+           data_val_required = @Global.RequiredField
+       })
+            <span class="text-danger" data-valmsg-for="AccountNumberDepositSlipt" data-valmsg-replace="true" />
+
+
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.AccountCurrency</label>
+            <input type="text" value="" id="AccountCurrencyDepositSlipt" style="text-align: left" disabled="disabled" />
+        </div>
+    </div>
+</form>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="form-footer">
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0546"))
+            {
+                <button id="CleanDepositSlipt" class="btn btn-default" role="button">
+                    <i class="fa fa-paint-brush"></i>  @Global.Clean
+                </button>
+            }
+
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0547"))
+            {
+                <button id="SearchDepositSlipt" class="btn btn-primary" role="button">
+                    <i class="fa fa-search"></i>  @Global.Search
+                </button>
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <div class="uif-alert" id="alertDepositList"></div>
+    </div>
+</div>        
+<div class="uif-row">
+
+</div>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="InternalBallotDepositSlipt" data-exporttocsv="false" data-exportname="cultura" data-add="false" data-edit="false"
+                       data-delete="false" data-filter="true" data-selectiontype="multiple" data-title="@Global.NotDepositCardInternalBallot">
+            <thead>
+                <tr>
+                    <th data-property="CreditCardDescription">@Global.Conduit</th>
+                    <th data-property="BankCode" data-visible="false">BankCode</th>
+                    <th data-property="BankDescription">@Global.ReceivingBank</th>
+                    <th data-property="AccountNumber" >@Global.BankAccountNumber</th>
+                    <th data-property="PaymentTicketCode">@Global.BallotNumber</th>
+                    <th data-property="CurrencyDescription">@Global.Currency</th>
+                    <th data-property="AmountDeposit">@Global.Amount</th>
+                    <th data-property="Taxes">@Global.TotalTaxes</th>
+                    <th data-property="Commission">@Global.Commission</th>
+                    <th data-property="BranchDescription">@Global.Branch</th>
+                    <th data-property="CurrencyCode" data-visible="false">CurrencyCode</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<form id="formSaveDepositSlipt" onsubmit="return false">
+    <div class="uif-row">
+        <h4><b> &nbsp;&nbsp;&nbsp;@Global.BankBallot</b></h4>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.BankNumberBallot</label>
+            <input type="text" id="BankBallotNumberDepositSlipt" name="BankBallotNumberDepositSlipt" class="required"
+                   onkeypress="return JustNumbers(event, this)" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="BankBallotNumberDepositSlipt" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.BankDate</label>
+            <input type="text" class="uif-datepicker" data-mask="99/99/9999" id="BankDateDepositSlipt" name="BankDateDepositSlipt" 
+                   data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="BankDateDepositSlipt" data-valmsg-replace="true" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.BankTotalAmount</label>
+            <input type="text" id="BankTotalDepositSlipt" name="BankTotalDepositSlipt" class="required" style="text-align: right"
+                   onkeypress="return OnlyDecimalNumber(event,this)" data-val="true" data-val-required='@Global.RequiredField' />
+            <span class="text-danger" data-valmsg-for="BankTotalDepositSlipt" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <div class="uif-row">
+        <div class="uif-col-4">
+            <label class="control-label">@Global.AmountBallot</label>
+            <input type="text" value="" id="AmountBallotDepositSlipt" placeholder="" disabled="disabled" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.Commission</label>
+            <input type="text" value="" id="CommissionDepositSlipt" placeholder="" disabled="disabled" />
+        </div>
+        <div class="uif-col-4">
+            <label class="control-label">@Global.BallotTotalAmount</label>
+            <input type="text" value="" id="TotalBallotDepositSlipt" placeholder="" disabled="disabled" />
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="alertBanBallot"></div>
+        </div>
+    </div>
+</form>
+
+
+@*VIEWBAGS*@
+<input type="hidden" id="ViewBagPercentageParameter" value="@ViewBag.PercentageParameter" />
+<input type="hidden" id="ViewBagUserId" value="@ViewBag.userId" />
+<input type="hidden" id="ViewBagBranchDisable" value="@ViewBag.BranchDisable" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainCardDepositSlip")
+}

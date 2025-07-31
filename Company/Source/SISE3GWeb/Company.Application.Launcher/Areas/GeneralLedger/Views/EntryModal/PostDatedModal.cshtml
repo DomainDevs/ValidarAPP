@@ -1,0 +1,40 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.GeneralLedger.Models.PostDatedModel
+
+@{
+    ViewBag.Title = "PostDatedModal";
+}
+
+<div class="form">
+    <div class="uif-alert" id="postdatedAlert"></div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            @Html.LabelFor(m => m.PostDateTypeId)
+            @Html.DropDownListFor(m => m.PostDateTypeId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetPostDatedTypes"), data_id = "Id", data_name = "Description", data_selectedid = "@Model.PostDateTypeId" })
+            @Html.ValidationMessageFor(m => m.PostDateTypeId)
+        </div>
+        <div class="uif-col-4">
+            @Html.LabelFor(m => m.CurrencyId)
+            @Html.DropDownListFor(m => m.CurrencyId, Enumerable.Empty<SelectListItem>(), new { @class = "uif-select", data_source = @Url.Content("~/GeneralLedger/Base/GetCurrencies"), data_id = "Id", data_name = "Description", data_selectedid = "@Model.CurrencyId" })
+            @Html.ValidationMessageFor(m => m.CurrencyId)
+        </div>
+        <div class="uif-col-4">
+            @Html.LabelFor(m => m.DocumentNumber)
+            @Html.TextBoxFor(m => m.DocumentNumber)
+            @Html.ValidationMessageFor(m => m.DocumentNumber)
+        </div>
+    </div>
+    <div class="uif-row">
+        <div class="uif-col-4">
+            @Html.LabelFor(m => m.IssueAmount)
+            @Html.TextBoxFor(m => m.IssueAmount, new { onkeypress = "return OnlyDecimalNumber(event, this);", style = "text-align: right" })
+            @Html.ValidationMessageFor(m => m.IssueAmount)
+        </div>
+        <div class="uif-col-4">
+            @Html.LabelFor(m => m.LocalAmount)
+            @Html.TextBoxFor(m => m.LocalAmount, new { disabled = "disabled", style = "text-align: right" })
+        </div>
+        <div class="uif-col-4">
+        </div>
+    </div>
+</div>
+

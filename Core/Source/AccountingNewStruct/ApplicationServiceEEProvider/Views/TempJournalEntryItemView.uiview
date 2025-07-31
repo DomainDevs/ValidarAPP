@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="TempJournalEntryItemView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="TempJournalEntryCode">
+          <Column table-alias="TempJournalEntry" name="TempJournalEntryCode" />
+        </SelectValue>
+        <SelectValue alias="BranchCode">
+          <Column table-alias="TempJournalEntry" name="BranchCode" />
+        </SelectValue>
+        <SelectValue alias="BranchName">
+          <Column table-alias="Branch" name="Description" />
+        </SelectValue>
+        <SelectValue alias="SalesPointCode">
+          <Column table-alias="TempJournalEntry" name="SalesPointCode" />
+        </SelectValue>
+        <SelectValue alias="SalesPointName">
+          <Column table-alias="SalePoint" name="Description" />
+        </SelectValue>
+        <SelectValue alias="CompanyCode">
+          <Column table-alias="TempJournalEntry" name="CompanyCode" />
+        </SelectValue>
+        <SelectValue alias="CompanyName">
+          <Column table-alias="Company" name="Description" />
+        </SelectValue>
+        <SelectValue alias="PersonTypeCode">
+          <Column table-alias="TempJournalEntry" name="PersonTypeCode" />
+        </SelectValue>
+        <SelectValue alias="PersonTypeName">
+          <Column table-alias="PersonType" name="Description" />
+        </SelectValue>
+        <SelectValue alias="IndividualId">
+          <Column table-alias="TempJournalEntry" name="IndividualId" />
+        </SelectValue>
+        <SelectValue alias="Description">
+          <Column table-alias="TempJournalEntry" name="Description" />
+        </SelectValue>
+        <SelectValue alias="Status">
+          <Column table-alias="TempJournalEntry" name="Status" />
+        </SelectValue>
+        <SelectValue alias="AccountingDate">
+          <Column table-alias="TempJournalEntry" name="AccountingDate" />
+        </SelectValue>
+        <SelectValue alias="Comments">
+          <Column table-alias="TempJournalEntry" name="Comments" />
+        </SelectValue>
+        <SelectValue alias="DocumentNumber">
+          <Column table-alias="ListPersons" name="DocumentNumber" />
+        </SelectValue>
+        <SelectValue alias="PayerName">
+          <Column table-alias="ListPersons" name="Name" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <Join type="Left">
+            <Join>
+              <Join type="Left">
+                <Join>
+                  <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.TempJournalEntry,  Core.Accounting.Entities" alias="TempJournalEntry" />
+                  <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.ListPersons,  Core.Accounting.Entities" alias="ListPersons" />
+                  <criteria>
+                    <BinaryCriterion type="Equal">
+                      <Column table-alias="ListPersons" name="IndividualId" />
+                      <Column table-alias="TempJournalEntry" name="IndividualId" />
+                    </BinaryCriterion>
+                  </criteria>
+                </Join>
+                <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Company,  Core.Accounting.Entities" alias="Company" />
+                <criteria>
+                  <BinaryCriterion type="Equal">
+                    <Column table-alias="Company" name="CompanyId" />
+                    <Column table-alias="TempJournalEntry" name="CompanyCode" />
+                  </BinaryCriterion>
+                </criteria>
+              </Join>
+              <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.PersonType,  Core.Accounting.Entities" alias="PersonType" />
+              <criteria>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="PersonType" name="PersonTypeCode" />
+                  <Column table-alias="TempJournalEntry" name="PersonTypeCode" />
+                </BinaryCriterion>
+              </criteria>
+            </Join>
+            <ClassNameTable name="Sistran.Core.Application.Common.Entities.SalePoint, Core.Common.Entities" alias="SalePoint" />
+            <criteria>
+              <BinaryPredicate type="And">
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="SalePoint" name="SalePointCode" />
+                  <Column table-alias="TempJournalEntry" name="SalesPointCode" />
+                </BinaryCriterion>
+                <BinaryCriterion type="Equal">
+                  <Column table-alias="SalePoint" name="BranchCode" />
+                  <Column table-alias="TempJournalEntry" name="BranchCode" />
+                </BinaryCriterion>
+              </BinaryPredicate>
+            </criteria>
+          </Join>
+          <ClassNameTable name="Sistran.Core.Application.Common.Entities.Branch, Core.Common.Entities" alias="Branch" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="Branch" name="BranchCode" />
+              <Column table-alias="TempJournalEntry" name="BranchCode" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

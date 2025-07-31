@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uiview name="CompaniesUserView">
+  <selection>
+    <SelectQuery>
+      <values>
+        <SelectValue alias="CompanyDescription">
+          <Column table-alias="Company" name="Description" />
+        </SelectValue>
+        <SelectValue alias="AccountingCompanyCode">
+          <Column table-alias="UserAccountingCompany" name="AccountingCompanyCode" />
+        </SelectValue>
+        <SelectValue alias="UserId">
+          <Column table-alias="UserAccountingCompany" name="UserId" />
+        </SelectValue>
+      </values>
+      <table>
+        <Join>
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.Company, Core.Accounting.Entities" alias="Company" />
+          <ClassNameTable name="Sistran.Core.Application.Accounting.Entities.UserAccountingCompany, Core.Accounting.Entities" alias="UserAccountingCompany" />
+          <criteria>
+            <BinaryCriterion type="Equal">
+              <Column table-alias="UserAccountingCompany" name="AccountingCompanyCode" />
+              <Column table-alias="Company" name="CompanyId" />
+            </BinaryCriterion>
+          </criteria>
+        </Join>
+      </table>
+    </SelectQuery>
+  </selection>
+</uiview>

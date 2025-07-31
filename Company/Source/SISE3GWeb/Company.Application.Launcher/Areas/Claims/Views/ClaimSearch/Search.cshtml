@@ -1,0 +1,372 @@
+﻿@{
+    Layout = null;
+}
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.SearchCriteria
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div id="buttonsRescue" class="footerUnderwriting">
+        <!-- Notice -->
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0323"))
+        {
+            <button class="btn btn-default secondary-Colombia notice" type="button" id="btnConvertToClaim" onclick="return false">
+                <i class="fa fa-comment" aria-hidden="true"></i>@Resources.Language.ConvertToClaim
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0322"))
+        {
+            <button class="btn btn-default secondary-Colombia notice" type="button" id="btnEditNotice" onclick="return false">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> @Resources.Language.EditNotice
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0321"))
+        {
+            <button class="btn btn-default secondary-Colombia notice" type="button" id="btnScheduleNotice" onclick="return false">
+                <i class="fa fa-calendar" aria-hidden="true"></i> @Resources.Language.Schedule
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0320"))
+        {
+            <button class="btn btn-default secondary-Colombia notice" type="button" onclick="return false" id="btnObjected">
+                <i class="fa fa-info-circle" aria-hidden="true"></i> @Resources.Language.ToObject
+            </button>
+        }
+
+        <!-- Claim -->
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0317"))
+        {
+            <button type="button" onclick="return false" id="btnEditClaim" class="btn btn-default secondary-Colombia">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> @Resources.Language.LabelEdit
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0316"))
+        {
+            <button type="button" onclick="return false" id="btnSetClaimReserve" class="btn btn-default secondary-Colombia">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> @Resources.Language.Reserve
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0315"))
+        {
+            <button type="button" onclick="return false" id="btnPay" class="btn btn-default secondary-Colombia">
+                <i class="fa fa-usd" aria-hidden="true"></i> @Resources.Language.ToPay
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0314"))
+        {
+            <button type="button" onclick="return false" id="btnSalvage" class="btn btn-default secondary-Colombia">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> @Resources.Language.Salvages
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0313"))
+        {
+            <button type="button" onclick="return false" id="btnRecovery" class="btn btn-default secondary-Colombia">
+                <i class="fa fa-credit-card-alt" aria-hidden="true"></i> @Resources.Language.Recoveries
+            </button>
+        }
+
+        <!-- Policy -->
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0319"))
+        {
+            <button class="btn btn-default secondary-Colombia policy" type="button" onclick="return false" id="btnNewNotice">                    
+                <i class="fa fa-file" aria-hidden="true"></i> @Resources.Language.NewNotice
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0318"))
+        {
+            <button class="btn btn-default secondary-Colombia policy" type="button" onclick="return false" id="btnNewClaim">
+                <i class="fa fa-file" aria-hidden="true"></i> @Resources.Language.NewClaim
+            </button>
+        }
+
+        <!-- Payment -->
+        <button type="button" onclick="return false" id="btnPrint" class="btn btn-default secondary-Colombia pay">
+            <i class="fa fa-print" aria-hidden="true"></i> @Resources.Language.LabelPrinter
+        </button>
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0324"))
+        {
+            <button type="button" onclick="return false" id="btnEditPay" class="btn btn-default secondary-Colombia pay">
+                <i class="fa fa-search" aria-hidden="true"></i> @Resources.Language.Consult
+            </button>
+        }
+        @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0325"))
+        {
+            <button type="button" onclick="return false" id="btnCancelPay" class="btn btn-default secondary-Colombia pay">
+                <i class="fa fa-times" aria-hidden="true"></i> @Resources.Language.NullifyRegister
+            </button>
+        }
+
+        <!-- Charge -->
+        <button type="button" onclick="return false" id="btnConsulCharge" class="btn btn-default secondary-Colombia pay">
+            <i class="fa fa-search" aria-hidden="true"></i> @Resources.Language.Consult
+        </button>
+
+        <button type="button" onclick="return false" id="btnCancelCharge" class="btn btn-default secondary-Colombia pay">
+            <i class="fa fa-times" aria-hidden="true"></i> @Resources.Language.NullifyRegister
+        </button>
+
+    </div>
+</script>
+
+
+<form id="claimBranchForm" class="form">
+    <div class="uif-modal" id="modalClaimBranch" data-size="sm">
+        <div class="uif-modalbody">
+            <div class="form">
+                <div class="row">
+                    <div class="uif-col-12">
+                        <label class="field-required">@Resources.Language.LabelBranchClaim</label>
+                        <select class="uif-select form-control" id="selectClaimBranchSearch" data-val="true" data-id="Id"
+                                data-name="Description" data-val-required="@Resources.Language.RequiredField"
+                                name="ClaimBranchSearch" data-native="false" data-filter="true"></select>
+                        <span class="text-danger" data-valmsg-for="ClaimBranchSearch" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-modalbuttons">
+            <button type="button" class="btn btn-default" id="btnClaimNoticeNo" data-dismiss="modal">@Resources.Language.Cancel</button>
+            <button type="button" class="btn btn-primary" id="btnClaimNoticeYes" onclick="return false">@Resources.Language.Accept</button>
+        </div>
+    </div>
+</form>
+
+<div class="uif-modal" id="modalSchedule">
+    <div class="uif-modalbody">
+        @Html.Partial("../Notice/ScheduleDialog")
+    </div>
+
+    <div class="uif-modalbuttons">
+        <button id="btnCancelSchedule" class="btn btn-default" data-dismiss="modal"> @Resources.Language.Cancel</button>
+        <button id="btnSchedule" class="btn btn-primary"> @Resources.Language.Schedule </button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalObjected">
+    <div class="uif-modalbody">
+        @Html.Partial("../Notice/ClaimNoticeObjectedPartial")
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnObjectedNo" data-dismiss="modal">@Resources.Language.No</button>
+        <button type="button" class="btn btn-primary" id="btnObjectedYes" onclick="return false">@Resources.Language.Yes</button>
+    </div>
+</div>
+
+
+<div id="searchParameters">
+    <div class="row">
+        <div class="uif-col-3">
+            <label>@Resources.Language.SearchType</label>
+            <br />
+            <select class="uif-select form-control" required="required" name="selectSearchType" id="selectSearchType"
+                    data-id="Id" data-name="Description" data-val="true" data-native="false" data-filter="true"></select>
+        </div>
+    </div>
+</div>
+
+
+<div id="noticeSearchPartial">
+    @Html.Partial("NoticeSearchPartial")
+</div>
+
+<div id="claimSearchPartial">
+    @Html.Partial("ClaimSearchPartial")
+</div>
+
+<div id="policySearchPartial">
+    @Html.Partial("PolicySearchPartial")
+</div>
+
+<div id="paymentSearchPartial">
+    @Html.Partial("PaymentRequestSearchPartial")
+</div>
+
+<div id="chargeSearchPartial">
+    @Html.Partial("ChargeRequestPartial")
+</div>
+
+
+<div>
+    <div id="policyVehicleSearchPartial">
+        <h5>
+            <strong>@Resources.Language.StipulatedVehicleSearch</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-2">
+                <label>@Resources.Language.Plate</label>
+                <input class="uif-input-search" data-displaykey="LicensePlate" type="text" id="inputPlate" name="Plate">
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.Make</label>
+                <select class="uif-select form-control" id="selectVehicleMake" data-val="true" data-id="Id" data-name="Description" name="VehicleMake" data-native="false" data-filter="true"></select>
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.Model</label>
+                <select class="uif-select form-control" id="selectVehicleModel" data-val="true" data-id="Id" data-name="Description" name="VehicleModel" data-native="false" data-filter="true"></select>
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.VehicleVersion</label>
+                <select class="uif-select form-control" id="selectVehicleVersion" data-val="true" data-id="Id" data-name="Description" name="VehicleVersion" data-native="false" data-filter="true"></select>
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.Year</label>
+                <select class="uif-select form-control" id="selectVehicleVersionYear" data-val="true" data-id="Id" data-name="Description" name="VehicleVersionYear" data-native="false" data-filter="true"></select>
+            </div>
+        </div>
+    </div>
+
+    <div id="policySuretySearchPartial">
+        <h5>
+            <strong>@Resources.Language.StipulateSuretySearch</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-6">
+                <label>@Resources.Language.SuretyName</label>
+                <input class="uif-input-search" data-displaykey="FullName" type="text" placeholder="Tipee el documento o nombre." id="inputSuretyName" name="inputSuretyName" data-val="true">
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.ContractNumberAbbreviation</label>
+                <input type="text" id="inputBidNumber" name="BidNumber">
+            </div>
+            <div class="uif-col-3">
+                <label>@Resources.Language.TrialNumberAbbreviation</label>
+                <input type="text" id="inputCourtNumber" name="CourtNumber">
+            </div>
+        </div>
+    </div>
+
+    <div id="policyLocationSearchPartial">
+        <h5>
+            <strong>@Resources.Language.StipulatedLocationSearch</strong>
+        </h5>
+        <div class="row">
+            <div class="uif-col-6">
+                <label>@Resources.Language.Address</label>
+                <input class="uif-input-search" data-displaykey="FullAddress" type="text" placeholder="Tipee la dirección." id="inputAddress" name="inputAddress" data-val="true">
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.Country</label>
+                <select class="uif-select form-control" id="selectCountryLocation" data-val="true" data-id="Id" data-name="Description"
+                        name="CountryLocation" data-native="false" data-filter="true"></select>
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.State</label>
+                <select class="uif-select form-control" id="selectStateLocation" data-val="true" data-id="Id" data-name="Description"
+                        name="StateLocation" data-native="false" data-filter="true"></select>
+            </div>
+            <div class="uif-col-2">
+                <label>@Resources.Language.City</label>
+                <select class="uif-select form-control" id="selectCityLocation" data-val="true" data-id="Id" data-name="Description"
+                        name="CityLocation" data-native="false" data-filter="true"></select>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* Grillas de  Busqueda *@
+<div id="toolbar" class="row">
+    <div class="uif-col-12">
+        <div class="pull-right width-report"> 
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0327"))
+            {           
+                <button class="btn btn-default general" type="button" id="btnClean" onclick="return false">
+                    <i class="fa fa-eraser" aria-hidden="true"></i> @Resources.Language.Clean
+                </button>
+            }
+            @if (Sistran.Core.Framework.UIF.Web.Helpers.SessionHelper.IsAuthorize("0326"))
+            {
+                <button class="btn btn-primary general" type="button" id="btnSearch" onclick="return false">
+                    <i class="fa fa-search" aria-hidden="true"></i> @Resources.Language.search
+                </button>
+            }                       
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="uif-col-12">
+        @Html.Partial("NoticeGridPartial")
+        @Html.Partial("ClaimGridPartial")
+        @Html.Partial("PolicyGridPartial")
+        @Html.Partial("PaymentGridPartial")
+        @Html.Partial("ChargeGridPartial")
+    </div>
+</div>
+
+<div class="uif-modal" id="modalVehicles">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-12">
+                <table id="tblVehicles" class="uif-table" data-filter="false" data-paginate="10" data-selectiontype="single">
+                    <thead>
+                        <tr>
+                            <th data-property="DocumentNumber"><b>@Resources.Language.PolicyNumberAbbreviation</b></th>
+                            <th data-property="Plate"><b>@Resources.Language.VehiclePlate</b></th>
+                            <th data-property="Make"><b>@Resources.Language.VehicleMake</b></th>
+                            <th data-property="Model"><b>@Resources.Language.VehicleModel</b></th>
+                            <th data-property="Year"><b>@Resources.Language.Year</b></th>
+                            <th data-property="Color"><b>@Resources.Language.Color</b></th>
+                            <th data-property="Chasis"><b>@Resources.Language.Chassis</b></th>
+                            <th data-property="Motor"><b>@Resources.Language.VehicleEngine</b></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnCloseModalVehicles" data-dismiss="modal">@Resources.Language.Close</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalLocations">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-12">
+                <table id="tblLocation" class="uif-table" data-filter="false" data-paginate="10" data-selectiontype="single">
+                    <thead>
+                        <tr>
+                            <th data-property="DocumentNum"><b>@Resources.Language.Policy</b></th>
+                            <th data-property="Country"><b>@Resources.Language.Country</b></th>
+                            <th data-property="State"><b>@Resources.Language.State</b></th>
+                            <th data-property="City"><b>@Resources.Language.City</b></th>
+                            <th data-property="FullAddress"><b>@Resources.Language.Street</b></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnCloseModalLocation" data-dismiss="modal">@Resources.Language.Close</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalSureties">
+    <div class="uif-modalbody">
+        <div class="row">
+            <div class="uif-col-12">
+                <table id="tblSurety" class="uif-table" data-filter="false" data-paginate="10" data-selectiontype="single">
+                    <thead>
+                        <tr>
+                            <th data-property="DocumentNum"><b>@Resources.Language.PolicyNumberAbbreviation</b></th>
+                            <th data-property="BondedFullName"><b>@Resources.Language.Bonded</b></th>
+                            <th data-property="BidNumber"><b>@Resources.Language.ContractNumber</b></th>
+                            <th data-property="CourtNum"><b>@Resources.Language.JudgmentNumber</b></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" id="btnCloseModalLocation" data-dismiss="modal">@Resources.Language.Close</button>
+    </div>
+</div>
+

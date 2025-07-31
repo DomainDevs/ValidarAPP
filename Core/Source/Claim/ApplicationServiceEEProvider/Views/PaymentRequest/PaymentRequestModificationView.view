@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PaymentRequestModificationView">
+  <collections>
+    <collection name="ClaimCoverage" type="Sistran.Core.Application.Claims.Entities.ClaimCoverage, 
+                Core.Claims.Entities"></collection>
+    <collection name="ClaimCoverageAmount" type="Sistran.Core.Application.Claims.Entities.ClaimCoverageAmount, 
+                Core.Claims.Entities"></collection>
+    <collection name="EstimationType" type="Sistran.Core.Application.Parameters.Entities.EstimationType, 
+                Core.Parameters.Entities"></collection>
+    <collection name="Coverage" type="Sistran.Core.Application.Quotation.Entities.Coverage, 
+                Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="ClaimCoverage" destination="ClaimCoverageAmount" name="ClaimCoverageClaimCoverageAmount" type="Inner">
+      <property left="ClaimCoverageCode" type="Equal" right="ClaimCoverageCode"></property>
+    </relation>
+    <relation source="ClaimCoverageAmount" destination="EstimationType" name="ClaimCoverageAmountEstimationType" type="Inner">
+      <property left="EstimationTypeCode" type="Equal" right="EstimateTypeCode"></property>
+    </relation>
+    <relation source="ClaimCoverage" destination="Coverage" name="ClaimCoverageCoverage" type="Inner">
+      <property left="CoverageId" type="Equal" right="CoverageId"></property>
+    </relation>
+  </relations>
+</view>

@@ -1,0 +1,98 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.CoverageGroupViewModel
+@{
+    Layout = null;
+}
+<script id="CoverGroupTemplate" type="text/template">
+    <div>
+        {{#ifCond Status "==" 2}}
+        <div><strong class="success">{{Description}}</strong></div>
+        {{else ifCond Status "==" 3}}
+        <div><strong class="warning">{{Description}} ({{CoverageGroupCode}})</strong></div>
+        {{else ifCond Status "==" 4}}
+        <div><strong class="danger">{{Description}} ({{CoverageGroupCode}})</strong></div>
+        {{else}}
+        <div><strong>{{Description}} ({{CoverageGroupCode}})</strong></div>
+        {{/ifCond}}
+    </div>
+    <div>@Resources.Language.CoveredRiskType: {{RiskTypeCoverageDescription}}</div>
+    {{#if EnabledDescription}}
+    <div>@Resources.Language.Disabled: <strong>{{EnabledDescription}}</strong></div>
+    {{/if}}
+</script>
+
+<script id="title-template" type="text/template">
+    <div class="column">
+        @Resources.Language.LabelGroupCoverages
+    </div>
+</script>
+
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+
+        <button class="btn btn-primary" id="btnSave">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+<form id="formGroup" autocomplete="off" class="form without-space">
+    <div class="row">
+        <input type="hidden" id="IdCoverGroupRisk" value="0" />
+        <input type="hidden" id="CoverageGroupCode" value="0" />
+        <div class="uif-col-6">
+            <br />
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.RiskTypeCoverage</label>
+                    <select class="uif-select form-control" id="selectRiskType"
+                            data-id="Id" data-name="ShortDescription" name="CoveredRiskTypeCode"
+                            data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlRiskTypeCovered"
+                            data-filter="true" data-native="false"></select>
+                    @Html.ValidationMessageFor(model => model.CoveredRiskTypeCode)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-12">
+                    <label class="field-required">@Resources.Language.Description</label>
+                    @Html.TextBoxFor(model => model.Description, new { id = "inputDescription", maxlength = 50 })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="row">
+                <div class="uif-col-6">
+                    <label class="field-required">@Resources.Language.LabelAbbreviation</label>
+                    @Html.TextBoxFor(model => model.SmallDescription, new { id = "inputShortDescription", maxlength = 30 })
+                    @Html.ValidationMessageFor(model => model.SmallDescription)
+                </div>
+                <div class="without-label">
+                    <div class="uif-col-6">
+                        <input type="checkbox" id="chkEnabled" name="Enabled" />
+                        <label for="chkEnabled">@Resources.Language.Enabled</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uif-col-6 fit-col-secondary" id="panelList">
+            <div id="listCoverGroup" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6 center-col-right" id="btnsCover">
+            <div class="pull-right width-save">
+                <button type="button" class="btn btn-default" id="btnNew">@Resources.Language.New</button>
+                <button type="button" class="btn btn-primary" id="btnAccept">@Resources.Language.Add</button>
+            </div>
+        </div>
+    </div>
+</form>

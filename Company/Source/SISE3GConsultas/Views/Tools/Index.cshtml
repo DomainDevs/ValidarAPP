@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Detector de resolución";
+}
+
+<div class="info"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script>
+
+    function browserTest(){
+      var
+        info = document.querySelector('.info'),
+        w = window,
+        d = document,
+        e = d.documentElement,
+        g = d.getElementsByTagName('body')[0],
+        x = w.innerWidth || e.clientWidth || g.clientWidth,
+        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+        info.innerHTML = "";
+        info.innerHTML += '<strong>window size:</strong> ' + x + ' × ' + y + '<br>';
+        info.innerHTML += '<strong>user agent:</strong> ' + navigator.userAgent + '<br>';
+        for (var i in Modernizr) {
+            if (Modernizr.hasOwnProperty(i) && typeof Modernizr[i] === 'boolean') {
+            info.innerHTML +=  i + ": " + Modernizr[i] + "<br>";
+          }
+        }
+    }
+
+    window.onresize = browserTest
+    browserTest()
+</script>

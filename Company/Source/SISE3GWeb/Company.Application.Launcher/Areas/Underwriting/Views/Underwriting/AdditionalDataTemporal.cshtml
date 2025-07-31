@@ -1,0 +1,31 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Underwriting.Models.AdditionalDataTemporalModelsView
+
+<form id="formAdditionalData" class="form">
+    <div class="row">
+        <div class="uif-col-2">
+            <div class="without-label">
+                <input type="checkbox" id="chkCalculateMinimumPremium" name="CalculateMinimumPremium" />
+                <label for="chkCalculateMinimumPremium">@Resources.Language.LabelMinimumPremium</label>
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <div class="without-label">
+                <label class="field-required">@Resources.Language.LabelCorrelationPolicy</label>
+                @Html.TextBoxFor(model => model.CorrelativePolicyNumber, new { id = "inputCorrelationPolicy" })
+                @Html.ValidationMessageFor(model => model.CorrelativePolicyNumber)
+            </div>
+        </div>
+        <div class="uif-col-4">
+            <div class="without-label">
+                <label>@Resources.Language.LabelBusinessAdditionalData</label>
+                @Html.TextBoxFor(model => model.Bussiness, new { id = "inputBusinessAdditionalData", disabled = "disabled" })
+            </div>
+        </div>
+        <div class="uif-col-3">
+            <div class="without-label">
+                <label>@Resources.Language.LabelQuotationGroup</label>
+                @Html.TextBoxFor(model => model.GroupQuoteId, new { id = "inputQuotationGroup", disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+</form>

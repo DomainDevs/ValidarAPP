@@ -1,0 +1,99 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Models.LoginModel
+@{
+    Layout = null;
+}
+@{
+    ViewBag.Title = "Ingresar";
+}
+<meta charset="utf-8" />
+<title>SISE ENTERPRISE EDITION</title>
+<link href="~/favicon-16x16.png" rel="shortcut icon" type="image/x-icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="@Url.Content("~/Content/login.css")" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<link href="@Url.Content("~/Lib/framework/build/vendors/css/vendors-4.7.9.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Lib/framework/build/uif-touch-4.7.9.min.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Lib/framework/build/vendors/js/vendors-4.7.9.js")"></script>
+<div class="loader main-loader">
+    <div class="spinner spinner-three-bounce">
+        <i class="fa fa-circle-o-notch fa-spin fa-4x"></i>
+    </div>
+</div>
+
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+<div class="uif-login">
+    <div class="login-background">
+        <img class="imagen-background" alt="IMG V1" src="~/Content/login/imagenFondoLogin1.jpg" />
+        <div class="background">
+            <div class="top"></div>
+            <div class="bottom"></div>
+        </div>
+    </div>
+
+
+    <div class="main-logo">
+        <img src="@Url.Content("~/Content/images/SISTRAN_SISE_2018_Blanco.png")" alt="" />
+        <div class="main-version">
+            <p>Enterprise Edition</p>
+        </div>
+    </div>
+
+    <div class="main-logo-company">
+        <img src="@Url.Content("~/Content/login/Logo_SISTRAN.png")" alt="" />
+
+        <div class="description">
+            <p>Software Solutions for Insurance Companies</p>
+            <p>www.sistran.com</p>
+        </div>
+    </div>
+
+    <div class="login-wrapper">
+        <div class="form-wrapper">
+            <div class="login-header">
+                <p class="welcome">Bienvenido</p>
+                <p class="login">Iniciar Sesión</p>
+            </div>
+            @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "noAlert" })
+                @Html.AntiForgeryToken()
+                <div class="container-inputs">
+                    <div class="input-group">
+                        <span class="input-group-addon login-icon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.TextBoxFor(m => m.UserName, new { placeholder = Resources.Language.LabelUser, @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div><!-- /form-group -->
+                    <br />
+                    <div class="input-group">
+                        <span class="input-group-addon login-icon"><i class="glyphicon glyphicon-lock"></i></span>
+                        @Html.PasswordFor(m => m.Password, new { placeholder = Resources.Language.Password, @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div><!-- /form-group -->
+                    <div class="forgot-password">
+                        <a></a>
+                    </div>
+                </div>
+                if (Model == null || Model.LockPassword < Model.SessionAttempts)
+                {
+                    <input type="submit" class="btn btn-primary btn-main" value="@Resources.Language.LabelEnter">
+                }
+                else
+                {
+                    <script>setTimeout(function () { $("#btnLogin").removeAttr('disabled'); }, 5000);</script>
+                    <input type="submit" class="btn btn-primary btn-main" value="@Resources.Language.LabelEnter" disabled id="btnLogin">
+                }
+
+            }
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")
+
+
+<script src="@Url.Content("~/Lib/framework/build/uif-touch-4.7.9.min.js")"></script>
+
+<script src="@Url.Content("~/Scripts/Login.js")"></script>

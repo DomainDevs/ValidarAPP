@@ -1,0 +1,121 @@
+﻿@using Sistran.Core.Framework.UIF.Web.Resources
+
+@{
+    ViewBag.Title = @Global.EquivalencesBetweenBankCodes;
+    Layout = "~/Views/Shared/_UIFLayout-r2-BigMenu.cshtml";
+}
+
+@section Breadcrumb
+{
+    <ol class="breadcrumb global-header-breadcrumb">
+        <li>@Global.BankConciliation</li>
+        <li>@Global.Parameters</li>
+        <li>@Global.EquivalencesBetweenBankCodes</li>
+    </ol>
+}
+
+@section Modals
+{
+    <form id="MainBankCodesAddForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="MainBankCodesModalAdd">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/BankMovement/BankCodesModal.cshtml")
+            </div>
+
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="MainBankCodesSaveAdd" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form id="MainBankCodesEditForm" onsubmit="return false" class="form">
+        <div class="uif-modal" id="MainBankCodesModalEdit">
+            <div class="uif-modalbody">
+                @Html.Partial("~/Areas/Accounting/Views/BankMovement/BankCodesModal.cshtml")
+            </div>
+            <div class="uif-modalbuttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Global.Cancel</button>
+                <button type="submit" class="btn btn-primary" id="MainBankCodesSaveEdit" onclick="return false">@Global.Save</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="uif-modal" id="modalBankCodes"></div>
+
+    <!-- /.Modal de Eliminación -->
+    <div class="modal fade" id="modalDeleteBankCodes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times-circle">
+                        </i>
+                    </button>
+                    <h4 class="modal-title"><label id="deleteMessageTitle">@Global.Delete</label></h4>
+                </div>
+                <div class="modal-body" id="deleteMessageModal">
+                    <p>@Global.DeleteConfirmationMessage</p>
+                    <br />
+                    <p id="selectedMessageDelete"></p>
+                </div>
+                <div class="modal-footer" style="padding: 10px 20px 10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> @Global.Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="MainBankCodesDeleteModal">
+                        <span class="glyphicon glyphicon-ok"></span> @Global.Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<br />
+
+<form id="formBankCodes" onsubmit="return false" class="form">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <label>@Global.Bank</label>
+            <select class="uif-select form-control" id="selectBank" name="selectBank" data-native="true"
+                    data-source='@Url.Content("~/BankStatement/GetBanks")' data-id="Id" data-name="Description"
+                    data-val="true" data-val-required='@Global.RequiredField'></select>
+            <span class="text-danger" data-valmsg-for="selectBank" data-valmsg-replace="true" />
+        </div>
+    </div>
+
+    <br />
+
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="uif-alert" id="MainBankCodesAlert"></div>
+        </div>
+    </div>
+</form>
+
+<div class="uif-row">
+    <div class="uif-col-12">
+        <table class="uif-table" id="tableBankCodes" data-exporttocsv="false" data-add="true" data-edit="true"
+               data-delete="true" data-selectiontype="none" data-filter="true" data-source=""
+               data-paginate="true" data-title="@Global.BankMovements">
+            <thead>
+                <tr>
+                    <th data-property="Id" style="text-align:left">Id</th>
+                    <th data-property="Description" style="text-align:left">@Global.Description</th>
+                    <th data-property="BankMovementCode" style="text-align:left">@Global.BankCode</th>
+                    <th data-property="HasVoucher" style="text-align:left" data-type="boolean">@Global.VoucherNumber</th>
+                    <th data-property="BankId" data-visible="false">BankId</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<input type="hidden" id="ViewBagControlSpanEquivalence" value="true" />
+
+@section scripts
+{
+    @Scripts.Render("~/accounting/bundles/MainBankCodeEquivalence")
+}

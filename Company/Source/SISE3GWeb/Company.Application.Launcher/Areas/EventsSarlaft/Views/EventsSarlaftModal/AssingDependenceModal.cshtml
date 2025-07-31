@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+<script id="display-template-AssingDependence" type="text/template">
+    <div>
+        <div><b>{{EntityDescription}}</b> @Resources.Language.LabelDependsTo <b>{{DependsDescription}}</b></div>
+        <br />
+        <div>{{Column}}</div>
+    </div>
+</script>
+<div class="row">
+    <div class="uif-col-12 fit-col-main">
+        <div class="row">
+            <div class="uif-col-4">
+                <h5><label>@Resources.Language.LabelTabGroupConditions</label></h5>
+                <h5><label id="inputGrupConditions" style="font-weight: bold;"></label></h5>
+            </div>
+            <div class="uif-col-9">
+                <div class="uif-listview" id="listViewAssingDependence"></div>
+            </div>
+        </div>
+        <div class="uif-modalbuttons width-save">
+            <button type="button" class="btn btn-default" id="btnCancelDependence" data-dismiss="modal">@Resources.Language.ButtonExit</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="uif-col-12">
+        <form id="formAssingDependence">
+            <div class="uif-inline" id="editFormDependence">
+                <input type="text" id="indexDependence" name="Index" hidden />
+                <input type="text" id="conditionId" name="ConditionsId" hidden />
+                <input type="text" id="dependesId" name="DependsDescription" hidden />
+                <input type="text" id="entityId" name="EntityDescription" hidden />
+                <div class="row">
+                    <div class="uif-col-4">
+                        <label class="field-required">Entidad Dependiente (Hija)</label>
+                        <select class="uif-select form-control" id="selectEntityDepend" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                        data-id="Id" data-name="EntityDescription" name="DependesId" data-native="false" required></select>
+                        @*<input class="text" type="text" id="inputDependes" name="DependsDescription" data-val="true" disabled>*@
+                        <span class="text-danger" data-valmsg-for="selectEntityDepend" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">Entidad Principal (Padre)</label>
+                        <select class="uif-select form-control" id="selectEntityPrincipal" data-val="true" data-val-required="@Resources.Language.ErrorEmptyRequiredFields"
+                        data-id="Id" data-name="EntityDescription" name="EntityId" data-native="false" required></select>
+                        @*<input class="text" type="text" id="inputEntity" name="EntityDescription" data-val="true" disabled>*@
+                        <span class="text-danger" data-valmsg-for="selectEntityPrincipal" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="uif-col-4">
+                        <label class="field-required">Campo Entidad Principal</label>
+                        <input class="text" type="text" id="inputGroupConditions" name="Column" data-val="true">
+                        <span class="text-danger" data-valmsg-for="inputGroupConditions" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="uif-modalbuttons width-save">
+            
+        </div>
+    </div>
+</div>

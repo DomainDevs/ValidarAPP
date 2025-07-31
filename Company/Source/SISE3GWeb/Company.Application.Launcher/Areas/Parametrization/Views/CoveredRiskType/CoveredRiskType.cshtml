@@ -1,0 +1,66 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.CoveredRiskTypeViewModel
+
+<script id="CoveredRiskTypeTemplate" type="text/template">
+    <div><br />Tipo de Riesgo:<strong> {{ShortDescription}} ({{Id}})</strong></div>
+</script>
+@section Title{
+    <div class="row main-title">
+        <div style="width:100%">
+            @Resources.Language.LabelTabCoveredRiskTypes
+        </div>
+    </div>
+}
+@section Toolbar
+{
+    <footer>
+        <div class="pull-right">
+            <button class="btn btn-default cancel" id="btnExit">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExit
+            </button>
+            <button class="btn btn-default" id="btnExport">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span class="" aria-hidden="true"></span>
+                @Resources.Language.ButtonExport
+            </button>
+        </div>
+    </footer>
+}
+<div id="uif-spinner-loading" hidden="hidden">
+    <div class="spinner spinner-three-bounce">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<form id="formCoveredRiskType" autocomplete="off" class="form without-space">
+    <div class="row">
+        <input type="hidden" id="inputId" />
+        <div class="uif-col-6  fit-col-secondary" id="panelCoveredRiskType">
+            <div id="listCoveredRiskType" class="uif-listview"></div>
+        </div>
+    </div>
+    <div class="row lineDividing">
+        <div class="uif-col-6">
+            <div class="uif-summary">
+                <div class="items">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/bundle/js/CoveredRiskType")"></script>
+}
+
+
+
+
+
+
+

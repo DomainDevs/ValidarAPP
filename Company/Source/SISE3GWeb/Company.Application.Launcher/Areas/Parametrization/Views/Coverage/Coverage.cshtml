@@ -1,0 +1,222 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.Parametrization.Models.CoverageViewModel
+@{
+    Layout = null;
+}
+
+@*Titulo - Busqueda*@
+<script id="title-template" type="text/template">
+    <div id="title" class="column-40">
+        @Resources.Language.LabelTitleCoverages
+    </div>
+    <div class="column-30 no-padding">
+        <select class="uif-select" id="selectSearchTechnicalBranch" data-id="Id" data-native="false" data-name="Description"></select>
+    </div>
+    <div class="column-30 even">
+        @Html.TextBox("CoverageSearch", null, new { @class = "uif-input-search", id = "inputCoverageSearch", placeholder = Resources.Language.FindCoverage })
+        <button class="btn btn-default" id="btnShowAdvancedCoverage"><i class="fa fa-angle-down"></i></button>
+    </div>
+</script>
+
+@*Footer Botones*@
+<script id="footer-template" type="text/template">
+    <div class="pull-right">
+        <button class="btn btn-default cancel" id="btnExit">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <span class="" aria-hidden="true"></span>
+            @Resources.Language.ButtonExit
+        </button>
+        <button class="btn btn-default" id="btnDeleteCoverage">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonDelete
+        </button>
+        <button class="btn btn-default" id="btnNewCoverage">
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonNew
+        </button>
+        <button class="btn btn-default" id="btnExport">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonExport
+        </button>
+        <button class="btn btn-primary" id="btnSaveCoverage">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span aria-hidden="true"></span>
+            @Resources.Language.ButtonSave
+        </button>
+    </div>
+</script>
+
+@*Formulario Principal*@
+<form id="formCoverage" class="form">
+    <input type="hidden" name="Id" id="Id" />
+    <input type="hidden" name="Status" value="" id="Status" />
+	<input type="hidden" name="Coverage2GId" id="Coverage2GId" />
+	<input type="hidden" name="InsuredObject2GId" id="InsuredObject2GId" />
+	<input type="hidden" name="LineBusiness2GId" id="LineBusiness2GId" />
+	<input type="hidden" name="SubLineBusiness2GId" id="SubLineBusiness2GId" />
+
+    <div class="uif-col-9 fit-col-main">
+        
+        <div class="row">
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.LabelLineBusiness</label>
+                <select class="uif-select form-control" id="selectLineBusiness" data-val="true" data-val-required="@Resources.Language.ErrorDocumentControlPrefixTechnical"
+                        data-id="Id" data-name="Description" name="LineBusinessId" data-filter="true" data-native="false"></select>
+                @Html.ValidationMessageFor(model => model.LineBusinessId)
+            </div>
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.LabelSubLineBusiness</label>
+                <select class="uif-select form-control" id="selectSubLineBusiness" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="SubLineBusinessId" data-filter="true" data-native="false"></select>
+                @Html.ValidationMessageFor(model => model.SubLineBusinessId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.LabelProtection</label>
+                <select class="uif-select form-control" id="selectPeril" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="PerilId" data-filter="true" data-native="false"></select>
+                @Html.ValidationMessageFor(model => model.PerilId)
+            </div>
+            <div class="uif-col-6">
+                <label class="field-required">@Resources.Language.LabelInsuranceObject</label>
+                <select class="uif-select form-control" id="selectInsuranceObject" data-val="true" data-val-required="@Resources.Language.FieldRequired"
+                        data-id="Id" data-name="Description" name="InsuredObjectId" data-filter="true" data-native="false"></select>
+                @Html.ValidationMessageFor(model => model.InsuredObjectId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="uif-col-6">
+                @Html.LabelFor(model => model.Description, new { @class = "field-required" })
+                @Html.TextBoxFor(model => model.Description, new { id = "inputCoverageName", placeholder = @Resources.Language.NameCoverage })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="uif-col-6">
+                <div class="uif-col-6 without-label">
+                    <input type="checkbox" id="principalIndicator" name="IsPrimary" />
+                    <label for="principalIndicator">@Resources.Language.LabelPrincipalCheckBox</label>
+                </div>
+                <div class="uif-col-6 without-label">
+                    <input type="checkbox" id="IsPost" name="IsPost" />
+                    <label for="IsPost">Post Contractual</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="uif-col-6">
+                <div class="without-label">
+                    <input type="checkbox" id="IsAccMinPremium" name="IsAccMinPremium" />
+                    <label for="IsAccMinPremium">@Resources.Language.IncludedMinimumPremium</label>
+                </div>
+            </div>
+            <div class="uif-col-3">
+                <div class="without-label">
+                    <input type="checkbox" id="IsImpression" name="IsImpression" />
+                    <label for="IsImpression">@Resources.Language.PrintCoverage</label>
+                </div>
+            </div>
+            <div class="uif-col-3">
+                <div class="without-label">
+                    <input type="checkbox" id="IsSeriousOffer" name="IsSeriousOffer" />
+                    <label for="IsSeriousOffer">@Resources.Language.LabelSeriousOffer</label>
+                </div>
+            </div>
+            @*<div class="uif-col-3">
+            <div class="without-label">
+                <input type="checkbox" id="IsAssistance" name="IsAssistance"/>
+                <label for="IsAssistance">@Resources.Language.IsAssistance</label>
+            </div>
+        </div>*@
+        </div>
+        <br />
+        <div class="row">
+            <div class="uif-col-6">
+                @Html.LabelFor(model => model.ImpressionName, new { @class = "field-required" })                
+                @Html.TextBoxFor(model => model.ImpressionName)
+                @Html.ValidationMessageFor(model => model.ImpressionName)                
+            </div>
+            <div class="uif-col-6">
+                @Html.LabelFor(model => model.ImpressionValue)                
+                @Html.TextBoxFor(model => model.ImpressionValue)
+                @Html.ValidationMessageFor(model => model.ImpressionValue)
+            </div>
+        </div>
+    </div>
+    @*Menu Parcial*@
+    <div class="uif-col-3 fit-col-secondary">
+        <div id="modalCoverage">
+            <div class="uif-right-bar" id="panelButtonsRight">
+				<ul>
+					<li>
+						<a href="#" id="btnClauses">@Resources.Language.LabelClauses</a> <p id="selectedClauses"></p>
+					</li>
+					<li>
+						<a href="#" id="btnDeductibles">@Resources.Language.LabelDeductibles</a> <p id="selectedDeductibles"></p>
+					</li>
+					<li>
+						<a href="#" id="btnDetailTypes">@Resources.Language.LabelAccessoriesGoods</a> <p id="selectedDetailTypes"></p>
+					</li>
+					@*<li>
+						<a href="#" id="btnCoverage2G">@Resources.Language.CoverageHomologate2G</a> <p id="selectCoverage2G"></p>
+					</li>
+					<li>
+						<a href="#" id="btnPrints">@Resources.Language.LabelAdditionalImpressionsCoverage</a> <p id="selectPrints"></p>
+					</li>*@
+				</ul>
+            </div>
+        </div>
+    </div>
+</form>
+
+@*Modales*@
+<div class="uif-modal" id="modalClauses">
+    <div class="uif-modalbody">
+        @Html.Partial("Clauses")
+    </div>
+    <div id="buttonsClauses" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalClausesClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnModalClausesSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalDeductibles">
+    <div class="uif-modalbody">
+        @Html.Partial("Deductibles")
+    </div>
+    <div id="buttonsDeductibles" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalDeductiblesClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnModalDeductiblesSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modalDetailTypes">
+    <div class="uif-modalbody">
+        @Html.Partial("DetailTypes")
+    </div>
+    <div id="buttonsDetailTypes" class="uif-modalbuttons width-save">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalDetailTypesClose">@Resources.Language.ButtonClose</button>
+        <button type="button" class="btn btn-primary" id="btnModalDetailTypesSave">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+
+<div class="uif-modal" id="modelCoverage2G">
+	<div class="uif-modalbody">
+		@Html.Partial("Coverage2G")
+	</div>
+	<div id="buttonsCoverage2G" class="uif-modalbuttons width-save">
+		<button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalCoverage2GClose">@Resources.Language.ButtonClose</button>
+		<button type="button" class="btn btn-primary" id="btnModalCoverage2GSave">@Resources.Language.ButtonSave</button>
+	</div>
+</div>
+<div class="uif-modal" id="modalPrints">
+	<div class="uif-modalbody">
+		@Html.Partial("Prints")
+	</div>
+	<div id="buttonsPrints" class="uif-modalbuttons width-save">
+		<button type="button" class="btn btn-default" data-dismiss="modal" id="btnModalPrintsClose">@Resources.Language.ButtonClose</button>
+		<button type="button" class="btn btn-primary" id="btnModalPrintsSave">@Resources.Language.ButtonSave</button>
+	</div>
+</div>

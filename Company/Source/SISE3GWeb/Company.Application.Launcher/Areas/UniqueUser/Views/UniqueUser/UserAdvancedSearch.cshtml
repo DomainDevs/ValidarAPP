@@ -1,0 +1,73 @@
+﻿@model Sistran.Core.Framework.UIF.Web.Areas.UniqueUser.Models.UniqueUserAdvancedSearch
+<script id="advancedSearchTemplat" type="text/template">
+	<div>{{AccountName}} <strong>({{UserId}})</strong> </div>
+	<div>{{Name}}</div>
+	<div><strong>{{StatusDescription}}</strong></div>
+</script>
+
+<div class="uif-alert" id="alertAdvanced"></div>
+<form class="form" id="formUserAdvancedSearch">
+	<div class="row">
+		<div class="uif-col-12">
+			<h4>@Resources.Language.AdvancedSearch</h4>
+		</div>
+	</div>
+	<div class="row">   
+		<div class="uif-col-6">
+			<label>@Resources.Language.UserName</label>
+			<input type="text" name="AccountName" value="" id="inputName" />
+			@Html.ValidationMessageFor(model => model.AccountName)
+		</div>
+		<div class="uif-col-6">
+			<label>@Resources.Language.LabelUserId</label>
+			@Html.TextBoxFor(model => model.UserId, new { id = "inputUserId" })
+			@Html.ValidationMessageFor(model => model.UserId)
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-6">
+			<label>@Resources.Language.LabelIdentificationNumber</label>
+			@Html.TextBoxFor(model => model.IdentificationNumber, new { id = "inputIdentificationNumber" })
+			@Html.ValidationMessageFor(model => model.IdentificationNumber)
+		</div>
+		<div class="uif-col-6">
+			<label>@Resources.Language.CreationDate</label>
+			@Html.TextBoxFor(model => model.CreationDate, new { id = "inputAdvCreationDate", @class = "uif-datepicker" })
+			@Html.ValidationMessageFor(model => model.CreationDate)
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-6">
+			<label>@Resources.Language.EnabledDisabled</label>
+			<select class="uif-select form-control" id="selectAdvEnabled" data-val="true" data-val-required="@Resources.Language.ErrorUniqueUserAdvStatusRequired"
+					data-id="Value" data-name="Text" name="StatusId"
+                    data-filter="true" data-native="false"></select>
+		</div>
+		<div class="uif-col-6">
+			<label>@Resources.Language.DateLastModified</label>
+			@Html.TextBoxFor(model => model.LastModificationDate, new { id = "inputAdvLastModificationDate", @class = "uif-datepicker" })
+			@Html.ValidationMessageFor(model => model.LastModificationDate)
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+			<button name="name" type="button" id="btnAdvancedSearch" class="btn btn-primary-Co width-container">@Resources.Language.search</button>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="uif-col-12">
+			<div class="uif-listview" id="listViewSearchAdvance">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="uif-col-12">
+			<div class="pull-right width-save">
+				<button class="btn btn-default" id="btnCancelUserAdv" type="button" data-dismiss="modal">@Resources.Language.Close</button>
+				<button class="btn btn-primary" id="btnLoadUser" type="button">@Resources.Language.Accept</button>
+			</div>
+		</div>
+	</div>
+</form>
+

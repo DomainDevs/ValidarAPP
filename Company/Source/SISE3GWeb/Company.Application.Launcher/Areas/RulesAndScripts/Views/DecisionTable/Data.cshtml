@@ -1,0 +1,108 @@
+﻿@{
+    Layout = null;
+}
+
+@*TITULO*@
+<script id="title-template" type="text/template">
+    <div class="column">
+        <div id="Title"></div>
+    </div>
+</script>
+@**@
+
+@*FOOTER*@
+<script id="footer-template" type="text/template">
+    <div class="uif-row">
+        <div class="uif-col-12">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default btn-sm" id="btnBack">
+                    <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                    <span class="" aria-hidden="true">@Resources.Language.ButtonGoBack</span>
+                </button>
+                <button type="button" class="btn btn-default btn-sm" id="btnPublish">
+                    <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    <span class="" aria-hidden="true">@Resources.Language.Publish</span>
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnSaveDecisionTable">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    <span class="" aria-hidden="true">@Resources.Language.ButtonSave</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</script>
+@**@
+
+@*MODAL*@
+<div class="uif-modal" id="modalTableEditAddData">
+    <div class="uif-modalbody">
+        <input type="hidden" id="hdnRuleId" />
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <h4><strong>@Resources.Language.LabelConditions</strong></h4>
+            </div>
+
+        </div>
+        <div id="divModalConditions" class="uif-row"> </div>
+
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <h4><strong>@Resources.Language.Actions</strong></h4>
+            </div>
+        </div>
+        <div id="divModalActions" class="uif-row"></div>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Cancel</button>
+        <button type="submit" class="btn btn-primary" id="btnSaveRuleDt">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+@**@
+<div class="uif-modal" id="modalTableSearchResult">
+    <div class="uif-modalbody">
+        <div class="uif-row">
+            <div class="uif-col-12">
+                <div class="active">
+                    <table class="uif-table" data-title="" data-selectiontype="none" id="tableSearchResult" data-filter="true" data-paginate="true">
+                        <thead>
+                            <tr>
+                                <th data-property="Id">@Resources.Language.Code</th>
+                                <th data-property="Description">@Resources.Language.LabelDescription</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="hiddenIdConceptTableSearch"/>
+    </div>
+    <div class="uif-modalbuttons">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Language.Cancel</button>
+        <button type="submit" class="btn btn-primary" id="btnSaveTableSearch">@Resources.Language.ButtonSave</button>
+    </div>
+</div>
+@**@
+
+
+<form class="form">
+    <div class="uif-row">
+        <div style="padding-bottom: 50%" class="uif-col-12">
+            <table id="tblDecisionTable"
+                   data-serverside="true"
+                   data-selectiontype="none"
+                   data-order="false"
+                   data-add="true"
+                   data-edit="true"
+                   data-delete="true"
+                   data-filter="true"
+                   data-paginate="true">
+                <thead>
+                    <tr></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
