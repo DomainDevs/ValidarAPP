@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="UserProfileView">
+  <collections>
+    <collection name="UniqueUsers" type="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="ProfileUniqueUser" type="Sistran.Core.Application.UniqueUser.Entities.ProfileUniqueUser, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Profiles" type="Sistran.Core.Application.UniqueUser.Entities.Profiles, 
+                Core.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="UniqueUsers" destination="ProfileUniqueUser" name="UniqueUserProfileUser" type="Left">
+      <property left="UserId" type="Equal" right="UserId"></property>
+    </relation>
+    <relation source="ProfileUniqueUser" destination="Profiles" name="ProfileUniqueUser" type="Left">
+      <property left="ProfileId" type="Equal" right="ProfileId"></property>
+    </relation>
+  </relations>
+</view>

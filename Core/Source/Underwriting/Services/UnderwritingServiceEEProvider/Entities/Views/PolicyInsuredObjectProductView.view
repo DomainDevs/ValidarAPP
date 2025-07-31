@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PolicyInsuredObjectProductView">
+  <collections>
+    <collection name="Product" type="Sistran.Core.Application.Product.Entities.Product, Core.Product.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>    
+    <collection name="ProductGroupCover" type="Sistran.Core.Application.Product.Entities.ProductGroupCover, Core.Product.Entities"></collection>
+    <collection name="GroupInsuredObject" type="Sistran.Core.Application.Product.Entities.GroupInsuredObject,Core.Product.Entities"></collection>    
+  </collections>
+  <relations>
+    <relation source="Product" destination="Policy" name="ProductPolicy" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="Product" destination="ProductGroupCover" name="ProductProductGroupCoverage" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="Product" destination="GroupInsuredObject" name="ProductGroupInsuredObject" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>    
+  </relations>
+</view>

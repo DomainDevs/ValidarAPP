@@ -1,0 +1,36 @@
+﻿<map version="2.0" type="class" name="Entity" namespace="Sistran.Core.Application.Utilities" file-version="1.0" description="ENTITY_ENTITY">
+  <properties>
+    <property name="EntityId" type="Integer" key="true" autonumber="41" description="ENTITY_ID_PROPERTY" />
+    <property name="EntityName" type="String" size="50" description="ENTITY_NAME_PROPERTY" />
+    <property name="LevelId" type="Integer" description="LEVEL_ID_PROPERTY" />
+    <property name="Description" type="String" size="50" description="DESCRIPTION_PROPERTY" />
+    <property name="ConfigFile" type="String" size="50" nullable="true" description="CONFIG_FILE_PROPERTY" />
+    <property name="PackageId" type="Integer" description="PACKAGE_ID_PROPERTY" />
+    <property name="PropertySearch" type="String" size="300" description="PROPERTY_SEARCH_PROPERTY" nullable="true"/>
+    <property name="BusinessView" type="String" size=" 2147483647" description="BUSINESS_VIEW_PROPERTY" nullable="true"/>
+  </properties>
+  <tables>
+    <table name="ENTITY" schema="PARAM" alias="ENTITY" update="true">
+      <columns>
+        <column name="ENTITY_NAME" type="String" property="EntityName" allowNull="false" />
+        <column name="ENTITY_ID" type="Decimal" property="EntityId" key="true" />
+        <column name="CONFIG_FILE" type="String" property="ConfigFile" />
+        <column name="LEVEL_ID" type="Decimal" property="LevelId" allowNull="false" />
+        <column name="PACKAGE_ID" type="Decimal" property="PackageId" allowNull="false" />
+        <column name="DESCRIPTION" type="String" property="Description" allowNull="false" />
+        <column name="PROPERTY_SEARCH" type="String" property="PropertySearch" allowNull="true" />
+        <column name="BUSINESS_VIEW" type="String" property="BusinessView" allowNull="true" />
+      </columns>
+    </table>
+  </tables>
+  <autonumbers>
+    <autonumber name="41" table="PARAMETER" column="NUMBER_PARAMETER" increment="1">
+      <where>
+        <BinaryCriterion type="Equal">
+          <Column name="PARAMETER_ID" />
+          <Constant type="Decimal" value="41" />
+        </BinaryCriterion>
+      </where>
+    </autonumber>
+  </autonumbers>
+</map>

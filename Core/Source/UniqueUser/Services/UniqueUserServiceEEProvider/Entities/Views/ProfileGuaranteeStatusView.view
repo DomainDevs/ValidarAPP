@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ProfileGuaranteeStatusView">
+  <collections>
+    <collection name="ProfileGuaranteeStatus" type="Sistran.Core.Application.UniqueUser.Entities.ProfileGuaranteeStatus, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Profiles" type="Sistran.Core.Application.UniqueUser.Entities.Profiles, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="GuaranteeStatus" type="Sistran.Core.Application.Common.Entities.GuaranteeStatus, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="ProfileGuaranteeStatus" destination="Profiles" name="ProfileRel" type="Inner">
+      <property left="ProfileId" type="Equal" right="ProfileId"></property>
+    </relation>
+    <relation source="ProfileGuaranteeStatus" destination="GuaranteeStatus" name="GuaranteeStatusRel" type="Inner">
+      <property left="GuaranteeStatusCode" type="Equal" right="GuaranteeStatusCode"></property>
+    </relation>
+  </relations>
+</view>

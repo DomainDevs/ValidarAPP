@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="HierarchyAccessView">
+  <collections>
+    <collection name="CoHierarchyAccess" type="Sistran.Core.Application.UniqueUser.Entities.CoHierarchyAccesses, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="CoHierarchyAssociation" type="Sistran.Core.Application.UniqueUser.Entities.CoHierarchyAssociation, 
+                Core.UniqueUser.Entities"></collection>   
+    <collection name="Modules" type="Sistran.Core.Application.UniqueUser.Entities.Modules, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Submodules" type="Sistran.Core.Application.UniqueUser.Entities.Submodules, 
+                Core.UniqueUser.Entities"></collection>   
+  </collections>
+  <relations>
+    <relation source="CoHierarchyAccess" destination="CoHierarchyAssociation" name="CoHierarchyAssociationRel" type="Inner">
+      <property left="ModuleCode" type="Equal" right="ModuleCode"></property>
+      <property left="SubmoduleCode" type="Equal" right="SubmoduleCode"></property>
+      <property left="HierarchyCode" type="Equal" right="HierarchyCode"></property>
+    </relation>
+    <relation source="CoHierarchyAssociation" destination="Modules" name="AccessModuleRel" type="Inner">
+      <property left="ModuleCode" type="Equal" right="ModuleCode"></property>
+    </relation>
+    <relation source="CoHierarchyAssociation" destination="Submodules" name="AccessSubRel" type="Inner">
+      <property left="SubmoduleCode" type="Equal" right="SubmoduleCode"></property>
+      <property left="ModuleCode" type="Equal" right="ModuleCode"></property>
+    </relation>  
+  </relations>
+</view>

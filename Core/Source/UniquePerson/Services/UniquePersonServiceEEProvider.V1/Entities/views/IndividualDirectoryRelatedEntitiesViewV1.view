@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="IndividualDirectoryRelatedEntitiesViewV1">
+	<collections>
+		<collection name="IndividualDirectory" type="Sistran.Core.Application.UniquePersonV1.Entities.IndividualDirectory, Core.UniquePersonV1.Entities"></collection>
+		<collection name="Address" type="Sistran.Core.Application.UniquePersonV1.Entities.Address, Core.UniquePersonV1.Entities"></collection>
+		<collection name="Phone" type="Sistran.Core.Application.UniquePersonV1.Entities.Phone, Core.UniquePersonV1.Entities"></collection>
+		<collection name="Email" type="Sistran.Core.Application.UniquePersonV1.Entities.Email, Core.UniquePersonV1.Entities"></collection>
+<!--
+		<collection name="DirectoryType" type="Sistran.Core.Application.UniquePersonV1.Entities.DirectoryType, Sistran.Core.Application.UniquePersonV1"></collection>
+-->
+	</collections>
+	<relations>
+		<relation source="IndividualDirectory" destination="Address" name="IndividualDirectoryAddress" type="Left">
+			<property left="IndividualId" type="Equal" right="IndividualId"></property>
+			<property left="DataId" type="Equal" right="DataId"></property>
+		</relation>
+		<relation source="IndividualDirectory" destination="Phone" name="IndividualDirectoryPhone" type="Left">
+			<property left="IndividualId" type="Equal" right="IndividualId"></property>
+			<property left="DataId" type="Equal" right="DataId"></property>
+		</relation>
+		<relation source="IndividualDirectory" destination="Email" name="IndividualDirectoryEmail" type="Left">
+			<property left="IndividualId" type="Equal" right="IndividualId"></property>
+			<property left="DataId" type="Equal" right="DataId"></property>
+		</relation>
+<!--
+		<relation source="IndividualDirectory" destination="DirectoryType" name="IndividualDirectoryDirectoryType" type="Inner">
+			<property left="DirectoryTypeCode" type="Equal" right="DirectoryTypeCode"></property>
+		</relation>
+-->
+	</relations>
+</view>

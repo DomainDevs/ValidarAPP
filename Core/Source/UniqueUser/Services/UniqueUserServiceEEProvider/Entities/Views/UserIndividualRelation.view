@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="UserIndividualRelation">
+  <collections>
+    <collection name="UniqueUser" type="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, 
+                Core.UniqueUser.Entities"></collection>    
+    <collection name="IndividualRelationApp" type="Sistran.Core.Application.UniquePerson.Entities.IndividualRelationApp, 
+                Core.UniquePerson.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="UniqueUser" destination="IndividualRelationApp" name="UniqueUserIndividual" type="Left">
+      <property left="PersonId" type="Equal" right="ParentIndividualId"></property>
+    </relation>
+  </relations>
+</view>

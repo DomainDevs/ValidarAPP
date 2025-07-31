@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="TaxIndividualTaxExemptionView">
+  <collections>
+    <collection name="IndividualTax" type="Sistran.Core.Application.UniquePerson.Entities.IndividualTax, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="TaxCondition" type="Sistran.Core.Application.Tax.Entities.TaxCondition, 
+                Core.Tax.Entities"></collection>
+    <collection name="IndividualTaxExemption" type="Sistran.Core.Application.Tax.Entities.IndividualTaxExemption, 
+                Core.Tax.Entities"></collection>
+    <collection name="Tax" type="Sistran.Core.Application.Tax.Entities.Tax, 
+                Core.Tax.Entities"></collection>   
+    <collection name="State" type="Sistran.Core.Application.Common.Entities.State, 
+                Core.Common.Entities"></collection>
+    <collection name="TaxCategory" type="Sistran.Core.Application.Tax.Entities.TaxCategory, 
+                Core.Tax.Entities"></collection>   
+  </collections>
+  <relations>
+    <relation source="IndividualTax" destination="TaxCondition" name="IndividualTaxTaxCondition" type="Inner">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+      <property left="TaxConditionCode" type="Equal" right="TaxConditionCode"></property>
+    </relation>
+     <relation source="IndividualTax" destination="Tax" name="IndividualTaxTax" type="Inner">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+    </relation>
+    <relation source="IndividualTax" destination="IndividualTaxExemption" name="IndividualTaxIndividualTaxExemption" type="Left">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+     </relation>
+    <relation source="IndividualTaxExemption" destination="State" name="IndividualTaxExemptionState" type="Left">
+      <property left="CountryCode" type="Equal" right="CountryCode"></property>
+      <property left="StateCode" type="Equal" right="StateCode"></property>
+    </relation>
+    <relation source="IndividualTaxExemption" destination="TaxCategory" name="IndividualTaxExemptionTaxCategory" type="Left">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+      <property left="TaxCategoryCode" type="Equal" right="TaxCategoryCode"></property>
+    </relation>
+    <relation source="IndividualTaxExemption" destination="Tax" name="IndividualTaxExemptionTax" type="Left">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+    </relation>  
+  </relations>
+</view>
+

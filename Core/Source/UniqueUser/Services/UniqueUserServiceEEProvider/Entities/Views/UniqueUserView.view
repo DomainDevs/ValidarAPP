@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="UniqueUserView">
+  <collections>
+    <collection name="UniqueUsers" type="Sistran.Core.Application.UniqueUser.Entities.UniqueUsers, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="ProfileUniqueUser" type="Sistran.Core.Application.UniqueUser.Entities.ProfileUniqueUser, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Profile" type="Sistran.Core.Application.UniqueUser.Entities.Profiles, 
+                 Core.UniqueUser.Entities"></collection>
+    <collection name="CoHierarchyAccess" type="Sistran.Core.Application.UniqueUser.Entities.CoHierarchyAccesses, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="CoHierarchyAssociation" type="Sistran.Core.Application.UniqueUser.Entities.CoHierarchyAssociation, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Module" type="Sistran.Core.Application.UniqueUser.Entities.Modules, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="SubModule" type="Sistran.Core.Application.UniqueUser.Entities.Submodules, 
+                Core.UniqueUser.Entities"></collection>    
+    <collection name="Person" type="Sistran.Core.Application.UniquePerson.Entities.Person, 
+                Core.UniquePerson.Entities"></collection>  
+    <collection name="UserSalePoint" type="Sistran.Core.Application.UniqueUser.Entities.UserSalePoint, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="UserBranch" type="Sistran.Core.Application.UniqueUser.Entities.UserBranch, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Branch" type="Sistran.Core.Application.Common.Entities.Branch, 
+                Core.Common.Entities"></collection>
+    <collection name="SalePoint" type="Sistran.Core.Application.Common.Entities.SalePoint, 
+                Core.Common.Entities"></collection>
+    <collection name="IndividualRelationApp" type="Sistran.Core.Application.UniquePerson.Entities.IndividualRelationApp, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="AgentAgency" type="Sistran.Core.Application.UniquePerson.Entities.AgentAgency, 
+                Core.UniquePerson.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="UniqueUsers" destination="ProfileUniqueUser" name="UniqueUserProfileUser" type="Left">
+      <property left="UserId" type="Equal" right="UserId"></property>
+    </relation>
+    <relation source="ProfileUniqueUser" destination="Profile" name="ProfileProfileUser" type="Left">
+      <property left="ProfileId" type="Equal" right="ProfileId"></property>
+    </relation>
+    <relation source="UniqueUsers" destination="CoHierarchyAccess" name="UserCoHierarchyAccess" type="Left">
+      <property left="UserId" type="Equal" right="UserId"></property>
+    </relation>
+    <relation source="UniqueUsers" destination="Person" name="UserPerson" type="Left">
+      <property left="PersonId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="UniqueUsers" destination="IndividualRelationApp" name="IndividualRelationUser" type="Left">
+      <property left="PersonId" type="Equal" right="ParentIndividualId"></property>
+    </relation>
+    <relation source="IndividualRelationApp" destination="AgentAgency" name="IndividualRelationAgency" type="Left">
+      <property left="AgentAgencyId" type="Equal" right="AgentAgencyId"></property>
+      <property left="ChildIndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="CoHierarchyAccess" destination="CoHierarchyAssociation" name="CoHierarchyAccessAssociation" type="Left">
+      <property left="HierarchyCode" type="Equal" right="HierarchyCode"></property>
+      <property left="SubmoduleCode" type="Equal" right="SubmoduleCode"></property>
+      <property left="ModuleCode" type="Equal" right="ModuleCode"></property>
+    </relation>
+    <relation source="CoHierarchyAssociation" destination="Module" name="AssociationModule" type="Left">
+      <property left="ModuleCode" type="Equal" right="ModuleCode"></property>
+    </relation>
+    <relation source="CoHierarchyAssociation" destination="SubModule" name="AssociationSubModule" type="Left">
+      <property left="SubmoduleCode" type="Equal" right="SubmoduleCode"></property>
+    </relation>
+
+
+
+    <relation source="UniqueUsers" destination="UserBranch" name="UniqueUserUserBranch" type="Left">
+      <property left="UserId" type="Equal" right="UserId"></property>
+    </relation>
+    <relation source="UniqueUsers" destination="UserSalePoint" name="UniqueUserUserSalePoint" type="Left">
+      <property left="UserId" type="Equal" right="UserId"></property>
+    </relation>
+    <relation source="UserBranch" destination="Branch" name="UserBranchBranch" type="Left">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="UserSalePoint" destination="SalePoint" name="UserSalePointSales" type="Left">
+      <property left="SalePointCode" type="Equal" right="SalePointCode"></property>
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>
+    <relation source="UserSalePoint" destination="Branch" name="UserSalePointBranch" type="Left">
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>    
+  </relations>
+</view>

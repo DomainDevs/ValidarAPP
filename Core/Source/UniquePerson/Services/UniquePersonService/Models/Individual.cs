@@ -1,0 +1,63 @@
+﻿using Sistran.Core.Application.UniquePersonService.Enums;
+using Sistran.Core.Application.UniquePersonService.Models.Base;
+using System;
+using System.Runtime.Serialization;
+
+namespace Sistran.Core.Application.UniquePersonService.Models
+{
+    /// <summary>
+    /// Individuo
+    /// </summary>
+    [DataContract]
+    public class Individual : BaseIndividual
+    {
+        /// <summary>
+        /// Gets or sets the identification document.
+        /// </summary>
+        /// <value>
+        /// The identification document.
+        /// </value>
+        [DataMember]
+        public IdentificationDocument IdentificationDocument { get; set; }
+
+        /// <summary>
+        /// Tipo de individuo
+        /// </summary>
+        [DataMember]
+        public IndividualType IndividualType { get; set; }
+
+        [DataMember]
+        public EconomicActivity EconomicActivity { get; set; }
+
+        /// <summary>
+        /// Tipo de cliente
+        /// </summary>
+        [DataMember]
+        public CustomerType CustomerType { get; set; }
+
+        /// <summary>
+        /// Medio de pago
+        /// </summary>
+        [DataMember]
+        public IndividualPaymentMethod PaymentMethod { get; set; }
+
+
+        /// <summary>
+        /// Fecha de ultima actualización
+        /// </summary>
+        [DataMember]
+        public DateTime? LastUpdate { get; set; }
+
+        /// <summary>
+        /// Usuario de ultima actualización
+        /// </summary>
+        [DataMember]
+        public string UpdateBy { get; set; }
+
+
+        public Individual()
+        {
+            IndividualType = IndividualType.Person;
+        }
+    }
+}

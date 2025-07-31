@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2FF08AFB-3757-4C7C-8B8B-6BEA2C12A6CC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.UniqueUserServices</RootNamespace>
+    <AssemblyName>Core.UniqueUserServices</AssemblyName>
+    <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core.Common.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Common\Core.Common.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.CommonServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Services\Core\Common\CommonService\Core.CommonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Extentions">
+      <HintPath>..\..\..\..\Bin\Application\Core\Extentions\Core.Extentions.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniquePersonServices.V1">
+      <HintPath>..\..\..\..\Bin\Services\Core\UniquePerson\UniquePersonService\Core.UniquePersonServices.V1.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniqueUser.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\UniqueUser\Core.UniqueUser.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.UniqueUserServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Services\Core\UniqueUser\UniqueUserServices\Core.UniqueUserServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constant\InternalConstants.cs" />
+    <Compile Include="Constant\PublicConstants.cs" />
+    <Compile Include="Enums\NotificationTypes.cs" />
+    <Compile Include="Enums\UniqueUserTypes.cs" />
+    <Compile Include="IUniqueUserService.cs" />
+    <Compile Include="Models\ProfileGuaranteeStatus.cs" />
+    <Compile Include="Models\UniqueUserSession.cs" />
+    <Compile Include="Models\AccessObject.cs" />
+    <Compile Include="Models\ContextProfileAccessPermissions.cs" />
+    <Compile Include="Models\SecurityContext.cs" />
+    <Compile Include="Models\AccessPermissions.cs" />
+    <Compile Include="Models\AccessProfile.cs" />
+    <Compile Include="Models\Base\BaseContextPermissions.cs" />
+    <Compile Include="Models\Base\BaseAccessPermissions.cs" />
+    <Compile Include="Models\Base\BaseIndividualRelationApp.cs" />
+    <Compile Include="Models\Base\BaseAccessObject.cs" />
+    <Compile Include="Models\Base\BaseCoHierarchyAssociation.cs" />
+    <Compile Include="Models\Base\BaseModule.cs" />
+    <Compile Include="Models\Base\BaseNotificationType.cs" />
+    <Compile Include="Models\Base\BaseNotificationUser.cs" />
+    <Compile Include="Models\Base\BaseProfile.cs" />
+    <Compile Include="Models\Base\BaseSecurityContext.cs" />
+    <Compile Include="Models\Base\BaseSubModule.cs" />
+    <Compile Include="Models\Base\BaseUser.cs" />
+    <Compile Include="Models\Base\BaseUserAgency.cs" />
+    <Compile Include="Models\Base\BaseUserEmail.cs" />
+    <Compile Include="Models\Base\BaseUserPerson.cs" />
+    <Compile Include="Models\Base\BaseUniqueUserSession.cs" />
+    <Compile Include="Models\CoHierarchyAssociation.cs" />
+    <Compile Include="Models\IndividualRelationApp.cs" />
+    <Compile Include="Models\Module.cs" />
+    <Compile Include="Models\NotificationType.cs" />
+    <Compile Include="Models\NotificationUser.cs" />
+    <Compile Include="Models\PrefixUser.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\ProfileAccesPermissions.cs" />
+    <Compile Include="Models\SubModule.cs" />
+    <Compile Include="Models\UniqueUserLogin.cs" />
+    <Compile Include="Models\UniqueUsersProduct.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserAgency.cs" />
+    <Compile Include="Models\UserAgent.cs" />
+    <Compile Include="Models\UserEmail.cs" />
+    <Compile Include="Models\UserPerson.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{3D9AD99F-2412-4246-B90B-4EAA41C64699}">
+        <WcfProjectProperties>
+          <AutoStart>True</AutoStart>
+        </WcfProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Services\Core\UniqueUser\UniqueUserServices\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+</Project>

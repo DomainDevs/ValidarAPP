@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="ClaimRiskTransportView">
+  <collections>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                 Core.Issuance.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                 Core.Issuance.Entities"></collection>
+    <collection name="Risk" type="Sistran.Core.Application.Issuance.Entities.Risk, 
+                 Core.Issuance.Entities"></collection>
+    <collection name="RiskTransport" type="Sistran.Core.Application.Issuance.Entities.RiskTransport, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskTransportMean" type="Sistran.Core.Application.Issuance.Entities.RiskTransportMean, 
+                Core.Issuance.Entities"></collection>
+    <collection name="TransportMean" type="Sistran.Core.Application.Common.Entities.TransportMean, 
+                Core.Common.Entities"></collection>
+    <collection name="TransportCargoType" type="Sistran.Core.Application.Common.Entities.TransportCargoType, 
+                Core.Common.Entities"></collection>
+    <collection name="TransportPackagingType" type="Sistran.Core.Application.Common.Entities.TransportPackagingType, 
+                Core.Common.Entities"></collection>
+    <collection name="Country" type="Sistran.Core.Application.Common.Entities.Country, 
+                Core.Common.Entities"></collection>
+    <collection name="State" type="Sistran.Core.Application.Common.Entities.State, 
+                Core.Common.Entities"></collection>
+    <collection name="City" type="Sistran.Core.Application.Common.Entities.City, 
+                Core.Common.Entities"></collection>
+    <collection name="TransportViaType" type="Sistran.Core.Application.Common.Entities.TransportViaType, 
+                Core.Common.Entities"></collection>
+    <collection name="HolderType" type="Sistran.Core.Application.Common.Entities.HolderType, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+	  <relation source="EndorsementRisk" destination="RiskTransport" name="EndorsementRiskRiskTransport" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="Policy" name="EndorsementRiskPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="Risk" name="EndorsementRiskRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskTransport" destination="TransportCargoType" name="RiskTransportTransportCargoType" type="Inner">
+      <property left="TransportCargoTypeCode" type="Equal" right="TransportCargoTypeCode"></property>
+    </relation>
+    <relation source="RiskTransportMean" destination="RiskTransport" name="RiskTransportRiskTransportMean" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskTransportMean" destination="TransportMean" name="TransportMeanRiskTransportMean" type="Inner">
+      <property left="TransportMeanCode" type="Equal" right="TransportMeanCode"></property>
+    </relation>
+    <relation source="RiskTransport" destination="TransportPackagingType" name="RiskTransportTransportPackagingType" type="Inner">
+      <property left="TransportPackagingTypeCode" type="Equal" right="TransportPackagingTypeCode"></property>
+    </relation>
+    <relation source="RiskTransport" destination="Country" name="RiskTransportCountry" type="Left">
+      <property left="CountryFromCode" type="Equal" right="CountryCode"></property>
+    </relation>
+    <relation source="RiskTransport" destination="Country" name="CountryRiskTransport" type="Left">
+      <property left="CountryToCode" type="Equal" right="CountryCode"></property>
+    </relation>
+    <relation source="RiskTransport" destination="State" name="RiskTransportState" type="Left">
+      <property left="StateFromCode" type="Equal" right="StateCode"></property>
+    </relation>
+    <relation source="RiskTransport" destination="State" name="StateRiskTransport" type="Left">
+      <property left="StateToCode" type="Equal" right="StateCode"></property>
+    </relation>
+    <relation source="RiskTransport" destination="City" name="RiskTransportCity" type="Left">
+      <property left="CityToCode" type="Equal" right="CityCode"></property>
+    </relation>
+    <relation source="RiskTransport" destination="TransportViaType" name="RiskTransportTransportViaType" type="Left">
+      <property left="TransportViaTypeCode" type="Equal" right="TransportViaTypeCode"></property>
+    </relation>
+    <relation source="RiskTransport" destination="HolderType" name="RiskTransportHolderType" type="Left">
+      <property left="HolderTypeCode" type="Equal" right="HolderTypeCode"></property>
+    </relation>
+  </relations>
+</view>

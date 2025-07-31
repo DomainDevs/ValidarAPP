@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TempSubcriptionView">
+  select * from tmp.TEMP_SUBSCRIPTION t
+  join tmp.TEMP_SUBSCRIPTION_AGENT ta on ta.TEMP_ID = t.TEMP_ID
+  join up.AGENT_AGENCY aa on aa.INDIVIDUAL_ID = ta.AGENT_AGENCY_ID
+  join up.AGENT a on a.INDIVIDUAL_ID = aa.AGENT_CD
+  <collections>
+    <collection name="TempSubscription" type="Sistran.Core.Application.Temporary.Entities.TempSubscription, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempSubscriptionAgent" type="Sistran.Core.Application.Temporary.Entities.TempSubscriptionAgent, 
+                Core.Temporary.Entities"></collection>
+    <collection name="AgentAgency" type="Sistran.Core.Application.UniquePerson.Entities.AgentAgency, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="Agent" type="Sistran.Core.Application.UniquePerson.Entities.Agent, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="TempSubscriptionPayer" type="Sistran.Core.Application.Temporary.Entities.TempSubscriptionPayer, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempPayerPayment" type="Sistran.Core.Application.Temporary.Entities.TempPayerPayment, 
+                Core.Temporary.Entities"></collection>
+  
+  </collections>
+  <relations>
+    <relation source="TempSubscription" destination="TempSubscriptionAgent" name="TempSubscriptionTempSubscriptionAgent" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+    </relation>
+    <relation source="TempSubscriptionAgent" destination="AgentAgency" name="TempSubscriptionAgentAgentAgency" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>     
+      <property left="AgentAgencyId" type="Equal" right="AgentAgencyId"></property>     
+    </relation>
+    <relation source="AgentAgency" destination="Agent" name="AgentAgencyAgent" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>     
+    </relation>
+    <relation source="TempSubscription" destination="TempSubscriptionPayer" name="TempSubscriptionTempSubscriptionPayer" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+    </relation>
+    <relation source="TempSubscription" destination="TempPayerPayment" name="TempSubscriptionTempPayerPayment" type="Left">
+      <property left="TempId" type="Equal" right="TempId"></property>
+    </relation>
+  </relations>
+</view>

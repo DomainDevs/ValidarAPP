@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ProductCoverageGroupRiskView">
+  <collections>    
+    <collection name="ProductGroupCover" type="Sistran.Core.Application.Product.Entities.ProductGroupCover, Core.Product.Entities"></collection>        
+    <collection name="CoverGroupRiskType" type="Sistran.Core.Application.Product.Entities.CoverGroupRiskType, Core.Product.Entities"></collection>
+   
+  </collections>
+  <relations>    
+    <relation source="ProductGroupCover" destination="CoverGroupRiskType" name="ProductGroupCoverGroupRiskType" type="Inner">
+      <property left="CoverGroupId" type="Equal" right="CoverageGroupCode"></property>
+      <property left="CoveredRiskTypeCode" type="Equal" right="CoveredRiskTypeCode"></property>
+    </relation>    
+  
+  </relations>
+</view>

@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DF158579-F8D8-4B93-9333-F2A8412B9C18}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sistran.Core.Application.Utilities</RootNamespace>
+    <AssemblyName>Core.Utilities</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\..\.alm\Analyzer\sistran.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\..\Bin\lib\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Common.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Common\Core.Common.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Script.Entities">
+      <HintPath>..\..\..\..\Bin\Application\Core\Entities\Script\Core.Script.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Co.Application.Data">
+      <HintPath>..\..\..\..\Bin\lib\Sistran.Co.Application.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.BAF">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.BAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF.Engine">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.DAF.Mapping, Version=0.0.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.DAF.Mapping.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Queries">
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Queues, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Queues.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Rules, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Rules.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Rules.Engine, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Rules.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Sistran.Core.Framework.Rules.Integration, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31270997d748aec7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Framework\GAC\Sistran.Core.Framework.Rules.Integration.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cache\CacheType.cs" />
+    <Compile Include="Assemblers\AutoMapperAssembler.cs" />
+    <Compile Include="Assemblers\ModelAssembler.cs" />
+    <Compile Include="Cache\DictionaryCache.cs" />
+    <Compile Include="Cache\InprocCache.cs" />
+    <Compile Include="Cache\MapperCache.cs" />
+    <Compile Include="Cache\RuleCache.cs" />
+    <Compile Include="Constants\CommisionValue.cs" />
+    <Compile Include="Constants\DllValue.cs" />
+    <Compile Include="Constants\FieldPropertyName.cs" />
+    <Compile Include="Configuration\KeySettings.cs" />
+    <Compile Include="Constants\ParameterNumber.cs" />
+    <Compile Include="Constants\PropertyType.cs" />
+    <Compile Include="Constants\RiskPropertyName.cs" />
+    <Compile Include="Constants\TemplatePropertyName.cs" />
+    <Compile Include="Constants\TempType.cs" />
+    <Compile Include="DataFacade\DataFacadeManager.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Enums\ActiverulesetType.cs" />
+    <Compile Include="Enums\ErrorType.cs" />
+    <Compile Include="Enums\FacadeType.cs" />
+    <Compile Include="Enums\Movements.cs" />
+    <Compile Include="Enums\TaxType.cs" />
+    <Compile Include="Error\ErrorModel.cs" />
+    <Compile Include="Error\Result.cs" />
+    <Compile Include="Error\ResultError.cs" />
+    <Compile Include="Error\ResultUnit.cs" />
+    <Compile Include="Error\ResultValue.cs" />
+    <Compile Include="Error\Unit.cs" />
+    <Compile Include="Helper\CollectionHelper.cs" />
+    <Compile Include="Helper\EnumHelper.cs" />
+    <Compile Include="Helper\ExcelFieldHelper.cs" />
+    <Compile Include="Helper\ExcelFilesLoadHelper.cs" />
+    <Compile Include="Helper\IndividualHelper.cs" />
+    <Compile Include="Helper\ExtensionHelper.cs" />
+    <Compile Include="Helper\JsonHelper.cs" />
+    <Compile Include="Helper\NetworkConnection.cs" />
+    <Compile Include="Helper\ObjectHelper.cs" />
+    <Compile Include="Helper\ParallelHelper.cs" />
+    <Compile Include="Helper\QueueHelper.cs" />
+    <Compile Include="Helper\RulesConstant.cs" />
+    <Compile Include="Helper\SelectHelper.cs" />
+    <Compile Include="Helper\StringHelper.cs" />
+    <Compile Include="Managers\EncodingManager.cs" />
+    <Compile Include="Managers\ExceptionManager.cs" />
+    <Compile Include="Managers\LogManager.cs" />
+    <Compile Include="Managers\ManagerDAO.cs" />
+    <Compile Include="Managers\QuoteManager.cs" />
+    <Compile Include="Models\EnumParameter.cs" />
+    <Compile Include="ParametrizationDAO\LoadParametrizationSystemDAO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RulesEngine\RuleConceptAutomaticQuotaBusiness.cs" />
+    <Compile Include="RulesEngine\RuleConceptAutomaticQuotaGeneral.cs" />
+    <Compile Include="RulesEngine\RuleConceptAutomaticQuotaThird.cs" />
+    <Compile Include="RulesEngine\RuleConceptBankTransfers.cs" />
+    <Compile Include="RulesEngine\RuleConceptGeneralBasicInfo.cs" />
+    <Compile Include="RulesEngine\RuleConceptBusinessName.cs" />
+    <Compile Include="RulesEngine\RuleConceptChargeRequest.cs" />
+    <Compile Include="RulesEngine\RuleConceptClaim.cs" />
+    <Compile Include="RulesEngine\RuleConceptCoinsurer.cs" />
+    <Compile Include="RulesEngine\RuleConceptComponent.cs" />
+    <Compile Include="RulesEngine\RuleConceptConsortiates.cs" />
+    <Compile Include="RulesEngine\RuleConceptCoverage.cs" />
+    <Compile Include="RulesEngine\RuleConceptEmployed.cs" />
+    <Compile Include="RulesEngine\RuleConceptEstimation.cs" />
+    <Compile Include="RulesEngine\RuleConceptGeneral.cs" />
+    <Compile Include="RulesEngine\RuleConceptGeneralPerson.cs" />
+    <Compile Include="RulesEngine\RuleConceptGeneralSarlaft.cs" />
+    <Compile Include="RulesEngine\RuleConceptGuarantees.cs" />
+    <Compile Include="RulesEngine\RuleConceptInsured.cs" />
+    <Compile Include="RulesEngine\RuleConceptIntermediary.cs" />
+    <Compile Include="RulesEngine\RuleConceptInternationalOperations.cs" />
+    <Compile Include="RulesEngine\RuleConceptLegalRepresentative.cs" />
+    <Compile Include="RulesEngine\RuleConceptLinks.cs" />
+    <Compile Include="RulesEngine\RuleConceptLog.cs" />
+    <Compile Include="RulesEngine\RuleConceptNotice.cs" />
+    <Compile Include="RulesEngine\RuleConceptOperatingQuota.cs" />
+    <Compile Include="RulesEngine\RuleConceptBeneficiaries.cs" />
+    <Compile Include="RulesEngine\RuleConceptPartners.cs" />
+    <Compile Include="RulesEngine\RuleConceptPaymentMethods.cs" />
+    <Compile Include="RulesEngine\RuleConceptPaymentRequest.cs" />
+    <Compile Include="RulesEngine\RuleConceptPersonalInformation.cs" />
+    <Compile Include="RulesEngine\RuleConceptPolicies.cs" />
+    <Compile Include="RulesEngine\RuleConceptProvider.cs" />
+    <Compile Include="RulesEngine\RuleConceptReinsurer.cs" />
+    <Compile Include="RulesEngine\RuleConceptRisk.cs" />
+    <Compile Include="RulesEngine\RuleConceptTaxes.cs" />
+    <Compile Include="RulesEngine\RuleConceptThird.cs" />
+    <Compile Include="RulesEngine\RuleConceptVoucher.cs" />
+    <Compile Include="RulesEngine\RuleConceptVoucherConcept.cs" />
+    <Compile Include="RulesEngine\RuleEngineDAO.cs" />
+    <Compile Include="RulesEngine\RuleFunctionDelegate.cs" />
+    <Compile Include="RulesEngine\RuleFunctionElement.cs" />
+    <Compile Include="RulesEngine\RuleLog.cs" />
+    <Compile Include="RulesEngine\RuleMessageDelegate.cs" />
+    <Compile Include="RulesEngine\RulesBridgeDelegate.cs" />
+    <Compile Include="RulesEngine\RulesEngineDelegate.cs" />
+    <Compile Include="RulesEngine\RulesFunctionCollection.cs" />
+    <Compile Include="RulesEngine\RulesFunctionSection.cs" />
+    <Compile Include="Utility\Parallel.cs" />
+    <Compile Include="Utility\Task.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\sistran.core.analyzer.1.0.1\analyzers\Sistran.Core.Analyzer.dll" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+    <None Include="Entities\dict\Sistran.Core.Application.Utilities.Entity.dict" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <CleanBeforeBuild>true</CleanBeforeBuild>
+    <DeployPartialPath>Application\Core\Utilities\</DeployPartialPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\ProjectDeployBranch.msbuild" />
+  <PropertyGroup>
+    <PreBuildEvent>"$(TargetFrameworkSDKToolsDirectory)Resgen.exe"  "$(ProjectDir)Properties\Resources.resx" "$(ProjectDir)$(OutDir)Resources.resources"
+"$(TargetFrameworkSDKToolsDirectory)AL.exe" /embed:Resources.resources /out:$(TargetName).resources.dll
+</PreBuildEvent>
+  </PropertyGroup>
+</Project>

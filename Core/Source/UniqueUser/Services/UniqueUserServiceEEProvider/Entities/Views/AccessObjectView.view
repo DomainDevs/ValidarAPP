@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="AccessObjectView">
+  <collections>
+    <collection name="Accesses" type="Sistran.Core.Application.UniqueUser.Entities.Accesses, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="AccessObjects" type="Sistran.Core.Application.UniqueUser.Entities.AccessObjects, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Modules" type="Sistran.Core.Application.UniqueUser.Entities.Modules, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="Submodules" type="Sistran.Core.Application.UniqueUser.Entities.Submodules, 
+                Core.UniqueUser.Entities"></collection>   
+  </collections>
+  <relations>
+    <relation source="Accesses" destination="AccessObjects" name="AccessObjectRel" type="Left">
+      <property left="AccessObjectId" type="Equal" right="AccessObjectId"></property>
+    </relation>
+    <relation source="Accesses" destination="Modules" name="AccessModuleRel" type="Left">
+      <property left="ModuleCode" type="Equal" right="ModuleCode"></property>
+    </relation>
+    <relation source="Accesses" destination="Submodules" name="AccessSubRel" type="Left">
+      <property left="SubmoduleCode" type="Equal" right="SubmoduleCode"></property>
+    </relation>  
+  </relations>
+</view>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="AgencyIndividualRelationViewV1">
+  <collections>
+    <collection name="PersonAccountBank" type="Sistran.Core.Application.UniquePersonV1.Entities.PersonAccountBank, 
+                Core.UniquePersonV1.Entities"></collection>
+    <collection name="Bank" type="Sistran.Core.Application.Common.Entities.Bank, 
+                Core.Common.Entities"></collection>
+    <collection name="AccountType" type="Sistran.Core.Application.Common.Entities.AccountType, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="PersonAccountBank" destination="Bank" name="PersonAccountBankBank" type="Inner">
+      <property left="BankCode" type="Equal" right="BankCode"></property>
+    </relation>
+    <relation source="PersonAccountBank" destination="AccountType" name="PersonAccountBankAccountType" type="Inner">
+      <property left="AccountTypeCode" type="Equal" right="AccountTypeCode"></property>
+    </relation>
+  </relations>
+</view>

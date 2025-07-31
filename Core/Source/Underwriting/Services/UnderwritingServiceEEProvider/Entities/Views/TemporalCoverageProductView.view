@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TemporalCoverageProductView">
+  <collections>
+    <collection name="Product" type="Sistran.Core.Application.Product.Entities.Product, Core.Product.Entities"></collection>
+    <collection name="TempSubscription" type="Sistran.Core.Application.Temporary.Entities.TempSubscription, Core.Temporary.Entities"></collection>
+    <collection name="ProductGroupCover" type="Sistran.Core.Application.Product.Entities.ProductGroupCover, Core.Product.Entities"></collection>
+    <collection name="GroupInsuredObject" type="Sistran.Core.Application.Product.Entities.GroupInsuredObject,Core.Product.Entities"></collection>
+    <collection name="GroupCoverage" type="Sistran.Core.Application.Product.Entities.GroupCoverage, Core.Product.Entities"></collection>
+    <collection name="TempRisks" type="Sistran.Core.Application.Temporary.Entities.TempRisk, Core.Temporary.Entities"></collection>
+    <collection name="TempRiskCoverage" type="Sistran.Core.Application.Temporary.Entities.TempRiskCoverage, Core.Temporary.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Product" destination="TempSubscription" name="ProductTempSubscription" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="Product" destination="ProductGroupCover" name="ProductProductGroupCoverage" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="Product" destination="GroupInsuredObject" name="ProductGroupInsuredObject" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="ProductGroupCover" destination="GroupCoverage" name="ProductGroupCoverageGroupCoverage" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+      <property left="CoverGroupId" type="Equal" right="CoverGroupId"></property>
+    </relation>
+    <relation source="TempRisks" destination="TempSubscription" name="TempRisksTempSubscription" type="Inner">
+      <property left="TempId" type="Equal" right="TempId"></property>
+    </relation>
+    <relation source="TempRiskCoverage" destination="TempRisks" name="TempRiskCoverageTempRisks" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+  </relations>
+</view>

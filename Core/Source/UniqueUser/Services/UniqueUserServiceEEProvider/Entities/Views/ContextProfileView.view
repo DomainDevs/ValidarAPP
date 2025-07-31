@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="ContextProfileView.view">
+  <collections>
+    <collection name="UserContextPermission" type="Sistran.Core.Application.UniqueUser.Entities.UserContextPermission, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="SecurityContext" type="Sistran.Core.Application.UniqueUser.Entities.SecurityContext, 
+                Core.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="UserContextPermission" destination="SecurityContext" name="UserContextPermissionSecurityContext" type="Inner">
+      <property left="UserContextPermissionsCode" type="Equal" right="Id"></property>
+    </relation>
+  </relations>
+</view>

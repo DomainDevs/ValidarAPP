@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="PolicyCoverageProductView">
+  <collections>
+    <collection name="Product" type="Sistran.Core.Application.Product.Entities.Product, Core.Product.Entities"></collection>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>    
+    <collection name="ProductGroupCover" type="Sistran.Core.Application.Product.Entities.ProductGroupCover, Core.Product.Entities"></collection>
+    <collection name="GroupInsuredObject" type="Sistran.Core.Application.Product.Entities.GroupInsuredObject,Core.Product.Entities"></collection>
+    <collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, Core.Issuance.Entities"></collection>
+    <collection name="EndorsementRiskCoverage" type="Sistran.Core.Application.Issuance.Entities.EndorsementRiskCoverage, Core.Issuance.Entities"></collection>
+    <collection name="RiskCoverage" type="Sistran.Core.Application.Issuance.Entities.RiskCoverage, Core.Issuance.Entities"></collection>
+    
+  </collections>
+  <relations>
+    <relation source="Product" destination="Policy" name="ProductPolicy" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="Product" destination="ProductGroupCover" name="ProductProductGroupCoverage" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="Product" destination="GroupInsuredObject" name="ProductGroupInsuredObject" type="Inner">
+      <property left="ProductId" type="Equal" right="ProductId"></property>
+    </relation>
+    <relation source="Endorsement" destination="Policy" name="EndorsementPolicy" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="EndorsementRiskCoverage" destination="Endorsement" name="EndorsementRiskCoverageEndorsement" type="Inner">
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="RiskCoverage" destination="EndorsementRiskCoverage" name="RiskCoverageEndorsementRiskCoverage" type="Inner">
+      <property left="RiskCoverId" type="Equal" right="RiskCoverId"></property>
+    </relation>
+  </relations>
+</view>

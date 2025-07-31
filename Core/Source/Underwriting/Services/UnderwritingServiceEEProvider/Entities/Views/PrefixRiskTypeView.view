@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="PrefixRelatedEntitiesView">
+	<collections>
+		<collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, Core.Common.Entities"></collection>
+		<collection name="PrefixLineBusiness" type="Sistran.Core.Application.Common.Entities.PrefixLineBusiness, Core.Common.Entities"></collection>
+		<collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, Core.Common.Entities"></collection>
+		<collection name="LineBusinessCoveredRiskType" type="Sistran.Core.Application.Common.Entities.LineBusinessCoveredRiskType, Core.Common.Entities"></collection>
+		<collection name="CoveredRiskType" type="Sistran.Core.Application.Parameters.Entities.CoveredRiskType, Core.Parameters.Entities"></collection>
+    <collection name="SubLineBusiness" type="Sistran.Core.Application.Common.Entities.SubLineBusiness, Core.Common.Entities"></collection>
+  </collections>
+	<relations>
+		<relation source="Prefix" destination="PrefixLineBusiness" name="PrefixPrefixLineBusiness" type="Inner">
+			<property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+		</relation>	
+		<relation source="LineBusiness" destination="PrefixLineBusiness" name="LineBusinessPrefixLineBusiness" type="Inner">
+			<property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+		</relation>	
+		<relation source="LineBusiness" destination="LineBusinessCoveredRiskType" name="LineBusinessLineBusinessCoveredRiskType" type="Left">
+			<property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+		</relation>
+    <relation source="LineBusiness" destination="SubLineBusiness" name="LineBusinessSubLineBusiness" type="Left">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="LineBusinessCoveredRiskType" destination="CoveredRiskType" name="LineBusinessCoveredRiskTypeCoveredRiskType" type="Left">
+			<property left="CoveredRiskTypeCode" type="Equal" right="CoveredRiskTypeCode"></property>
+		</relation>	
+	</relations>
+</view>

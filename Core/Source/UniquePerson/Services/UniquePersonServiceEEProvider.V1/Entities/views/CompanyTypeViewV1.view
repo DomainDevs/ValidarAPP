@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="CompanyTypeViewV1">
+  <collections>
+    <collection name="CompanyType" type="Sistran.Core.Application.UniquePersonV1.Entities.CompanyType, 
+                Core.UniquePersonV1.Entities"></collection>
+    <collection name="CoAssociationCompanyType" type="Sistran.Core.Application.UniquePersonV1.Entities.CoAssociationCompanyType, 
+                Core.UniquePersonV1.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="CompanyType" destination="CoAssociationCompanyType" name="CompanyTypeCoAssociationCompanyType" type="Inner">
+      <property left="CompanyTypeCode" type="Equal" right="CompanyTypeCode"></property>
+    </relation>
+  </relations>
+</view>

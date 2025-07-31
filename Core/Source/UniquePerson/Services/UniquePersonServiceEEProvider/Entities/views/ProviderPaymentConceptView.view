@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="ProviderPaymentConceptView">
+  <collections>
+    <collection name="PaymentConcept" type="Sistran.Core.Application.Parameters.Entities.PaymentConcept, 
+                Core.Parameters.Entities"></collection>
+    <collection name="ProviderPaymentConcept" type="Sistran.Core.Application.UniquePerson.Entities.ProviderPaymentConcept, 
+                Core.UniquePerson.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="ProviderPaymentConcept" destination="PaymentConcept" name="ProviderPaymentConceptRelation" type="Inner">
+      <property left="PaymentConceptCode" type="Equal" right="PaymentConceptCode"></property>
+    </relation>
+  </relations>
+</view>

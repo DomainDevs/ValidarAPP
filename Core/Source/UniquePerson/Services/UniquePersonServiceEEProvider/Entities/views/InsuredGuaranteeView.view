@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="InsuredGuaranteeView">
+  <collections>
+    <collection name="GuaranteeClass" type="Sistran.Core.Application.UniquePerson.Entities.GuaranteeClass,  Core.UniquePerson.Entities"></collection>
+    <collection name="GuaranteeType" type="Sistran.Core.Application.UniquePerson.Entities.GuaranteeType, Core.UniquePerson.Entities"></collection>
+    <collection name="Guarantee" type=" Sistran.Core.Application.UniquePerson.Entities.Guarantee,  Core.UniquePerson.Entities"></collection>
+    <collection name="InsuredGuarantee" type="Sistran.Core.Application.UniquePerson.Entities.InsuredGuarantee, Core.UniquePerson.Entities"></collection>
+    <collection name="Currency" type="Sistran.Core.Application.UniquePerson.Entities.Currency, Core.UniquePerson.Entities"></collection>
+    <collection name="PromissoryNoteType" type="Sistran.Core.Application.UniquePerson.Entities.PromissoryNoteType, Core.UniquePerson.Entities"></collection>
+    <collection name="Insured" type="Sistran.Core.Application.UniquePerson.Entities.Insured, Core.UniquePerson.Entities"></collection>
+    <collection name="GuaranteeStatus" type="Sistran.Core.Application.UniquePerson.Entities.GuaranteeStatus, Core.UniquePerson.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="GuaranteeClass" destination="GuaranteeType" name="GuaranteeClassGuaranteeType" type="Inner">
+      <property left="GuaranteeClassCode" type="Equal" right="GuaranteeClassCode"></property>
+    </relation>
+    <relation source="GuaranteeType" destination="Guarantee" name="GuaranteeTypeGuarantee" type="Inner">
+      <property left="GuaranteeTypeCode" type="Equal" right="GuaranteeTypeCode"></property>
+    </relation>
+    <relation source="Guarantee" destination="InsuredGuarantee" name="GuaranteeInsuredGuarantee" type="Inner">
+      <property left="GuaranteeCode" type="Equal" right="GuaranteeCode"></property>
+    </relation>
+    <relation source="InsuredGuarantee" destination="Currency" name="InsuredGuaranteeCurrency" type="Left">
+      <property left="CurrencyCode" type="Equal" right="CurrencyCode"></property>
+    </relation>
+    <relation source="InsuredGuarantee" destination="PromissoryNoteType" name="InsuredGuaranteePromissoryNoteType" type="Left">
+      <property left="PromissoryNoteTypeCode" type="Equal" right="PromissoryNoteTypeCode"></property>
+    </relation>
+    <relation source="InsuredGuarantee" destination="Insured" name="InsuredGuaranteeInsured" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="InsuredGuarantee" destination="GuaranteeStatus" name="InsuredGuaranteeGuaranteeStatus" type="Left">
+      <property left="GuaranteeStatusCode" type="Equal" right="GuaranteeStatusCode"></property>
+    </relation>
+  </relations>
+</view>
+

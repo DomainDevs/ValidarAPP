@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="InsuredObjectPrefixView">
+  <collections>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix,
+                Core.Common.Entities"></collection>
+    <collection name="PrefixLineBusiness" type="Sistran.Core.Application.Common.Entities.PrefixLineBusiness,
+                Core.Common.Entities"></collection>
+    <collection name="InsObjLineBusiness" type="Sistran.Core.Application.Quotation.Entities.InsObjLineBusiness, 
+                Core.Quotation.Entities"></collection>
+    <collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, 
+                Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="PrefixLineBusiness" destination="Prefix" name="PrefixLineBusinessPrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="InsObjLineBusiness" destination="PrefixLineBusiness" name="InsObjLineBusinessPrefixLineBusiness" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="InsuredObject" destination="InsObjLineBusiness" name="InsuredObjectInsObjLineBusiness" type="Inner">
+      <property left="InsuredObjectId" type="Equal" right="InsuredObjectId"></property>
+    </relation>
+  </relations>
+</view>

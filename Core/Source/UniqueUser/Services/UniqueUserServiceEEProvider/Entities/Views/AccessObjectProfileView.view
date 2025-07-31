@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="AccessObjectProfileView">
+  <collections>
+    <collection name="Accesses" type="Sistran.Core.Application.UniqueUser.Entities.Accesses, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="AccessObjects" type="Sistran.Core.Application.UniqueUser.Entities.AccessObjects, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="AccessProfiles" type="Sistran.Core.Application.UniqueUser.Entities.AccessProfiles, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="ProfileUniqueUser" type="Sistran.Core.Application.UniqueUser.Entities.ProfileUniqueUser, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="AccessParent" type="Sistran.Core.Application.UniqueUser.Entities.Accesses, 
+                Core.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Accesses" destination="AccessObjects" name="AccessObjectRel" type="Left">
+      <property left="AccessObjectId" type="Equal" right="AccessObjectId"></property>
+    </relation>
+    <relation source="Accesses" destination="AccessProfiles" name="AccessProfileRel" type="Left">
+      <property left="AccessId" type="Equal" right="AccessId"></property>
+    </relation>
+    <relation source="AccessProfiles" destination="ProfileUniqueUser" name="ProfileuniqueRel" type="Left">
+      <property left="ProfileId" type="Equal" right="ProfileId"></property>
+    </relation>
+    <relation source="Accesses" destination="AccessParent" name="AccessParentRel" type="Left">
+      <property left="ParentAccessId" type="Equal" right="AccessId"></property>
+    </relation>
+  </relations>
+</view>

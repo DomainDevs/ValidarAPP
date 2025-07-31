@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="UserSalePointView">
+  <collections>
+    <collection name="SalePoint" type="Sistran.Core.Application.Common.Entities.SalePoint, 
+                Core.Common.Entities"></collection>
+    <collection name="UserSalePoint" type="Sistran.Core.Application.UniqueUser.Entities.UserSalePoint, 
+                 Core.UniqueUser.Entities"></collection>   
+  </collections>
+  <relations>
+    <relation source="SalePoint" destination="UserSalePoint" name="SalePointUserSalePoint" type="Inner">
+      <property left="SalePointCode" type="Equal" right="SalePointCode"></property>
+      <property left="BranchCode" type="Equal" right="BranchCode"></property>
+    </relation>   
+  </relations>
+</view>

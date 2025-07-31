@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="InsuredObjectView">
+  <collections>
+    <collection name="GroupInsuredObject" type="Sistran.Core.Application.Product.Entities.GroupInsuredObject, 
+                Core.Product.Entities"></collection>
+    <collection name="InsuredObject" type="Sistran.Core.Application.Quotation.Entities.InsuredObject, 
+                Core.Quotation.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="GroupInsuredObject" destination="InsuredObject" name="InsuredObjectGroupInsuredObject" type="Inner">
+      <property left="InsuredObject" type="Equal" right="InsuredObjectId"></property>
+    </relation>
+  </relations>
+</view>

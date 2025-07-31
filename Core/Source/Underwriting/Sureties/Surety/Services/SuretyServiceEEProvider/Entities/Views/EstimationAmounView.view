@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="EstimationAmounView">
+  <collections>
+    <collection name="ClaimCoverageAmount" type="Sistran.Core.Application.Claims.Entities.ClaimCoverageAmount, 
+                Core.Claims.Entities"></collection>
+    
+    <collection name="ClaimCoverage" type="Sistran.Core.Application.Claims.Entities.ClaimCoverage, 
+                Core.Claims.Entities"></collection>
+    
+    <collection name="Claim" type="Sistran.Core.Application.Claims.Entities.Claim, 
+                Core.Claims.Entities"></collection>
+   
+  </collections>  
+  <relations>
+    <relation source="ClaimCoverageAmount" destination="ClaimCoverage" name="ccacc" type="Inner">
+      <property left="ClaimCoverageCode" type="Equal" right="ClaimCoverageCode"></property>
+    </relation>
+    
+    <relation source="ClaimCoverage" destination="Claim" name="ccac" type="Inner">
+      <property left="ClaimCode" type="Equal" right="ClaimCode"></property>
+    </relation>
+  
+  </relations>
+</view>

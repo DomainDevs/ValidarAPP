@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="InsuredView">
+  <collections>
+    <collection name="Individual" type="Sistran.Core.Application.UniquePerson.Entities.Individual, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="Person" type="Sistran.Core.Application.UniquePerson.Entities.Person, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="Company" type="Sistran.Core.Application.UniquePerson.Entities.Company, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="Insured" type="Sistran.Core.Application.UniquePerson.Entities.Insured, 
+                Core.UniquePerson.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Individual" destination="Person" name="IndividualPerson" type="Left">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="Individual" destination="Company" name="IndividualCompany" type="Left">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="Individual" destination="Insured" name="IndividualInsured" type="Left">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+  </relations>
+</view>

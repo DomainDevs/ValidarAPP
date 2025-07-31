@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="PersonTaxIndividualTaxView">
+  <collections>
+    <collection name="IndividualTax" type="Sistran.Core.Application.UniquePerson.Entities.IndividualTax, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="Tax" type="Sistran.Core.Application.Tax.Entities.Tax, 
+                Core.Tax.Entities"></collection>
+    <collection name="TaxCondition" type="Sistran.Core.Application.Tax.Entities.TaxCondition, 
+                Core.Tax.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="IndividualTax" destination="Tax" name="TaxIndividualTaxRelation" type="Inner">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+    </relation>
+    <relation source="IndividualTax" destination="TaxCondition" name="TaxConditionIndividualTaxRelation" type="Inner">
+      <property left="TaxCode" type="Equal" right="TaxCode"></property>
+      <property left="TaxConditionCode" type="Equal" right="TaxConditionCode"></property>
+    </relation>
+  </relations>
+</view>

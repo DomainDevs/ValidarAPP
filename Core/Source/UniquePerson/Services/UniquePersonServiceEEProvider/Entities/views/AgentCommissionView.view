@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="AgentCommissionView">
+  <collections>
+    <collection name="AgencyCommissRate" type="Sistran.Core.Application.Product.Entities.AgencyCommissRate, 
+                Core.Product.Entities"></collection>
+    <collection name="AgentAgency" type="Sistran.Core.Application.UniquePerson.Entities.AgentAgency, 
+                Core.UniquePerson.Entities"></collection>
+    <collection name="Prefix" type="Sistran.Core.Application.Common.Entities.Prefix, 
+                Core.Common.Entities"></collection>
+    <collection name="LineBusiness" type="Sistran.Core.Application.Common.Entities.LineBusiness, 
+                Core.Common.Entities"></collection>
+    <collection name="SubLineBusiness" type="Sistran.Core.Application.Common.Entities.SubLineBusiness, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="AgencyCommissRate" destination="AgentAgency" name="AgentCommissionAgentAgency" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+    <relation source="AgencyCommissRate" destination="Prefix" name="AgentCommissionPrefix" type="Inner">
+      <property left="PrefixCode" type="Equal" right="PrefixCode"></property>
+    </relation>
+    <relation source="AgencyCommissRate" destination="LineBusiness" name="AgentCommissionLineBusiness" type="Inner">
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    <relation source="AgencyCommissRate" destination="SubLineBusiness" name="AgentCommissionSubLineBusiness" type="Inner">
+      <property left="SubLineBusinessCode" type="Equal" right="SubLineBusinessCode"></property>
+      <property left="LineBusinessCode" type="Equal" right="LineBusinessCode"></property>
+    </relation>
+    
+   </relations>
+</view>

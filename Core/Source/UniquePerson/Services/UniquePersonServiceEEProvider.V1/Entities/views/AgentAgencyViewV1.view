@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="AgentPrefixViewV1">
+  <collections>
+    <collection name="Agent" type="Sistran.Core.Application.UniquePersonV1.Entities.Agent, 
+                Core.UniquePersonV1.Entities"></collection>
+    <collection name="AgentAgency" type="Sistran.Core.Application.UniquePersonV1.Entities.AgentAgency, 
+                Core.UniquePersonV1.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="Agent" destination="AgentAgency" name="AgentAgentAgency" type="Inner">
+      <property left="IndividualId" type="Equal" right="IndividualId"></property>
+    </relation>
+  </relations>
+</view>

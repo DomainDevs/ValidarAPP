@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ConsorcioViewCo">
+	<collections>
+		<collection name="Company" type=" Sistran.Core.Application.UniquePerson.Entities.Company,  Core.UniquePerson.Entities"></collection>
+		<collection name="Insured" type="Sistran.Core.Application.UniquePerson.Entities.Insured,  Core.UniquePerson.Entities"></collection>
+		<collection name="CoCompany" type="Sistran.Core.Application.UniquePerson.Entities.CoCompany,  Core.UniquePerson.Entities"></collection>
+		<collection name="CoAssociationType" type="Sistran.Core.Application.UniquePerson.Entities.CoAssociationType,  Core.UniquePerson.Entities"></collection>
+    <collection name="CoConsortium" type="Sistran.Core.Application.UniquePerson.Entities.CoConsortium, Core.UniquePerson.Entities"></collection>
+	</collections>
+	<relations>
+			<relation source="Company" destination="Insured" name="CompanyInsured" type="Left">
+				<property left="IndividualId" type="Equal" right="IndividualId"></property>				
+			</relation>
+			<relation source="Company" destination="CoCompany" name="CompanyCoCompany" type="Left">
+				<property left="IndividualId" type="Equal" right="IndividualId"></property>				
+			</relation>
+			<relation source="CoCompany" destination="CoAssociationType" name="CoCompanyCoAssociationType" type="Left">
+			  <property left="AssociationTypeCode" type="Equal" right="AssociationTypeCode"></property>		
+			</relation>
+    <relation source="Insured" destination="CoConsortium" name="CoInsuredCoConsortium" type="Left">
+      <property left="InsuredCode" type="Equal" right="InsuredCode"></property>
+    </relation>
+	</relations>
+</view>
+

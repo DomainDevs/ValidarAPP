@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="TemporalRiskCoverageView">
+  <collections>
+    <collection name="TempRisk" type="Sistran.Core.Application.Temporary.Entities.TempRisk, 
+                Core.Temporary.Entities"></collection>
+    <collection name="TempRiskCoverage" type="Sistran.Core.Application.Temporary.Entities.TempRiskCoverage, 
+                Core.Temporary.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="TempRisk" destination="TempRiskCoverage" name="TempRiskTempRiskCoverage" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>   
+  </relations>
+</view>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="FileFieldView">
+  <collections>
+    <collection name="File" type="Sistran.Core.Application.Common.Entities.File, 
+                Core.Common.Entities"></collection>
+    <collection name="FileTemplate" type="Sistran.Core.Application.Common.Entities.FileTemplate, 
+                Core.Common.Entities"></collection>
+    <collection name="FileTemplateField" type="Sistran.Core.Application.Common.Entities.FileTemplateField, 
+                Core.Common.Entities"></collection>
+    <collection name="Field" type="Sistran.Core.Application.Common.Entities.Field, 
+                Core.Common.Entities"></collection>
+    <collection name="FieldType" type="Sistran.Core.Application.Common.Entities.FieldType, 
+                Core.Common.Entities"></collection>
+    <collection name="Template" type="Sistran.Core.Application.Common.Entities.Template, 
+                Core.Common.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="File" destination="FileTemplate" name="FileFileTemplate" type="Inner">
+      <property left="Id" type="Equal" right="FileId"></property>
+    </relation>
+    <relation source="FileTemplate" destination="FileTemplateField" name="FileTemplateFileTemplateField" type="Inner">
+      <property left="Id" type="Equal" right="FileTemplateId"></property>
+    </relation>
+    <relation source="FileTemplateField" destination="Field" name="FileTemplateFieldField" type="Inner">
+      <property left="FieldId" type="Equal" right="Id"></property>
+    </relation>
+    <relation source="Field" destination="FieldType" name="FieldFieldType" type="Inner">
+      <property left="FieldTypeId" type="Equal" right="Id"></property>
+    </relation>
+    <relation source="FileTemplate" destination="Template" name="FileTemplateTemplate" type="Inner">
+      <property left="TemplateId" type="Equal" right="Id"></property>
+    </relation>
+  </relations>
+</view>

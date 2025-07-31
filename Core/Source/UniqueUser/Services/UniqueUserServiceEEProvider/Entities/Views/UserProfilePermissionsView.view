@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="UserProfilePermissionsView">
+  <collections>
+    <collection name="ProfileUniqueUser" type="Sistran.Core.Application.UniqueUser.Entities.ProfileUniqueUser, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="ProfileAccessPermissions" type="Sistran.Core.Application.UniqueUser.Entities.ProfileAccessPermissions, 
+                Core.UniqueUser.Entities"></collection>
+    <collection name="AccessPermissions" type="Sistran.Core.Application.UniqueUser.Entities.AccessPermissions, 
+                Core.UniqueUser.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="ProfileUniqueUser" destination="ProfileAccessPermissions" name="ProfileUniqueUserProfileAccessPermissions" type="Inner">
+      <property left="ProfileId" type="Equal" right="ProfileCode"></property>
+    </relation>
+    <relation source="ProfileAccessPermissions" destination="AccessPermissions" name="ProfileAccessPermissionsAccessPermissions" type="Inner">
+      <property left="AccessPermissionsCode" type="Equal" right="Id"></property>
+    </relation>
+  </relations>
+</view>

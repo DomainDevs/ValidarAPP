@@ -1,0 +1,89 @@
+<<<<<<< HEAD
+﻿using Sistran.Core.Application.UniquePerson.Entities;
+using Sistran.Core.Application.UniquePersonService.V1.Assemblers;
+using Sistran.Core.Application.Utilities.DataFacade;
+using Sistran.Core.Framework.DAF;
+using System.Collections.Generic;
+using System.Diagnostics;
+using MOUP = Sistran.Core.Application.UniquePersonService.V1.Models;
+=======
+﻿using Sistran.Core.Application.UniquePersonService.V1.Enums;
+using MOUP= Sistran.Core.Application.UniquePersonService.V1.Models;
+using Sistran.Core.Application.Utilities.DataFacade;
+using Sistran.Core.Framework.Queries;
+using System.Collections.Generic;
+using Sistran.Core.Application.UniquePerson.Entities;
+using Sistran.Core.Framework.DAF;
+using Sistran.Core.Application.UniquePersonService.V1.Assemblers;
+using System.Diagnostics;
+using System.Linq;
+>>>>>>> origin/person
+
+namespace Sistran.Core.Application.UniquePersonService.V1.Business
+{
+    public class DocumentTypeBusiness
+    {
+        /// <summary>
+        /// Obtener los tipos de documentos
+        /// </summary>
+        /// <param name="typeDocument">tipo de documento
+        /// 1. persona natural
+        /// 2. persona juridica
+        /// 3. todos</param>
+        /// <returns></returns>
+<<<<<<< HEAD
+        public List<MOUP.DocumentType> GetDocumentTypes(int typeDocument)
+=======
+        public List<Models.DocumentType> GetDocumentTypes(int typeDocument)
+>>>>>>> origin/person
+        {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+<<<<<<< HEAD
+            List<MOUP.DocumentType> documentTypes = new List<MOUP.DocumentType>();
+=======
+            List<Models.DocumentType> documentTypes = new List<Models.DocumentType>();
+>>>>>>> origin/person
+
+            switch (typeDocument)
+            {
+                case 1:
+<<<<<<< HEAD
+                    BusinessCollection businessCollection1 = new BusinessCollection(DataFacadeManager.Instance.GetDataFacade().SelectObjects(typeof(IdentityCardType)));
+                    documentTypes = ModelAssembler.CreateIdentityCardTypes(businessCollection1);
+                    break;
+                case 2:
+                    BusinessCollection businessCollection2 = new BusinessCollection(DataFacadeManager.Instance.GetDataFacade().SelectObjects(typeof(TributaryIdentityType)));
+                    documentTypes = ModelAssembler.CreateTributaryIdentityTypes(businessCollection2);
+                    break;
+                case 3:
+                    BusinessCollection businessCollection3 = new BusinessCollection(DataFacadeManager.Instance.GetDataFacade().SelectObjects(typeof(DocumentType)));
+                    documentTypes = ModelAssembler.CreateDocumentTypes(businessCollection3);
+=======
+                    documentTypes = ModelAssembler.CreateIdentityCardTypes(DataFacadeManager.GetObjects(typeof(IdentityCardType)));
+                    break;
+                case 2:
+                    documentTypes = ModelAssembler.CreateTributaryIdentityTypes(DataFacadeManager.GetObjects(typeof(TributaryIdentityType)));
+                    break;
+                case 3:
+                    documentTypes = ModelAssembler.CreateDocumentTypes(DataFacadeManager.GetObjects(typeof(DocumentType)));
+>>>>>>> origin/person
+                    break;
+            }
+
+            stopWatch.Stop();
+<<<<<<< HEAD
+            Debug.WriteLine(stopWatch.Elapsed.ToString(), "Sistran.Core.Application.UniquePersonService.V1.DAOs.GetDocumentTypes");
+            return documentTypes;
+        }
+    }
+}
+=======
+            Debug.WriteLine(stopWatch.Elapsed.ToString(), "Sistran.Core.Application.UniquePersonService.V1.Business.GetDocumentTypes");
+            return documentTypes;
+        }
+        
+    }
+}
+>>>>>>> origin/person

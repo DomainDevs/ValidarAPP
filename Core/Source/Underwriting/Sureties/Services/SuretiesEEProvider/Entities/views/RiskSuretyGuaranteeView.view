@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<view xmlns="sistran:views/1.0/view.xsd" name="RiskSuretyGuaranteeView">
+  <collections>
+    <collection name="RiskSuretyGuarantee" type="Sistran.Core.Application.Issuance.Entities.RiskSuretyGuarantee, 
+                Core.Issuance.Entities"></collection>
+    <collection name="InsuredGuarantee" type="Sistran.Core.Application.UniquePersonV1.Entities.InsuredGuarantee, 
+                Core.UniquePersonV1.Entities"></collection>
+  </collections>
+  <relations>
+    <relation source="RiskSuretyGuarantee" destination="InsuredGuarantee" name="RiskSuretyGuaranteeInsuredGuarantee" type="Inner">
+      <property left="GuaranteeId" type="Equal" right="GuaranteeId"></property>
+    </relation>
+  </relations>
+</view>

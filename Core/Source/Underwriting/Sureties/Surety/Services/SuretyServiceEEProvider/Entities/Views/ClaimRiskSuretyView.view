@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view xmlns="sistran:views/1.0/view.xsd" name="ClaimRiskSuretyView">
+  <collections>
+    <collection name="Policy" type="Sistran.Core.Application.Issuance.Entities.Policy, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Endorsement" type="Sistran.Core.Application.Issuance.Entities.Endorsement, 
+                Core.Issuance.Entities"></collection>
+    <collection name="EndorsementRisk" type="Sistran.Core.Application.Issuance.Entities.EndorsementRisk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="Risk" type="Sistran.Core.Application.Issuance.Entities.Risk, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskSurety" type="Sistran.Core.Application.Issuance.Entities.RiskSurety, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskPayer" type="Sistran.Core.Application.Issuance.Entities.RiskPayer, 
+                Core.Issuance.Entities"></collection>
+    <collection name="RiskBeneficiary" type="Sistran.Core.Application.Issuance.Entities.RiskBeneficiary, 
+                Core.Issuance.Entities"></collection>
+  </collections>  
+  <relations>
+    <relation source="Policy" destination="Endorsement" name="PolicyEndorsement" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="Endorsement" name="EndorsementRiskEndorsement" type="Inner">
+      <property left="PolicyId" type="Equal" right="PolicyId"></property>
+      <property left="EndorsementId" type="Equal" right="EndorsementId"></property>
+    </relation>
+    <relation source="EndorsementRisk" destination="Risk" name="EndorsementRiskRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskSurety" destination="Risk" name="RiskSuretyRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+    <relation source="RiskPayer" destination="Risk" name="RiskPayerRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>    
+    <relation source="RiskBeneficiary" destination="Risk" name="RiskBeneficiaryRisk" type="Inner">
+      <property left="RiskId" type="Equal" right="RiskId"></property>
+    </relation>
+  </relations>
+</view>
